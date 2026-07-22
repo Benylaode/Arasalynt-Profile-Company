@@ -1,0 +1,121 @@
+.section {
+  background-color: var(--color-white);
+  padding: var(--space-12) 0;
+  overflow: hidden;
+}
+
+.inner {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding-x);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-10);
+}
+
+.labelWrap {
+  text-align: center;
+}
+
+/* ── Marquee Track ── */
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee::before,
+.marquee::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-white), transparent);
+}
+
+.marquee::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-white), transparent);
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ── Logo Item ── */
+.logoItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 122px;
+  height: 48px;
+  flex-shrink: 0;
+  opacity: 0.5;
+  filter: grayscale(100%);
+  transition:
+    opacity var(--transition-base),
+    filter var(--transition-base);
+}
+
+.logoItem:hover {
+  opacity: 0.8;
+  filter: grayscale(0%);
+}
+
+.logoImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .section {
+    padding: var(--space-10) 0;
+  }
+
+  .inner {
+    gap: var(--space-7);
+  }
+
+  .track {
+    gap: 32px;
+    animation-duration: 20s;
+  }
+
+  .logoItem {
+    width: 100px;
+    height: 40px;
+  }
+
+  .marquee::before,
+  .marquee::after {
+    width: 40px;
+  }
+}

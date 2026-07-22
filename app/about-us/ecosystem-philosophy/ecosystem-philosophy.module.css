@@ -1,0 +1,383 @@
+/* ==========================================================================
+   ECOSYSTEM PHILOSOPHY PAGE — Module CSS
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  position: relative;
+  background-color: #fafafa;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   HERO HEADER SECTION
+   ========================================================= */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 480px;
+  background-color: #020617;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backgroundImage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.backgroundImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+  filter: brightness(0.6) contrast(1.1);
+}
+
+.networkOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+.gradientBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(to top, #fafafa 0%, transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  max-width: 720px;
+  padding: 0 24px;
+  margin-top: 40px;
+}
+
+.heroLabel {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  color: var(--color-lime-yellow);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1.1;
+  letter-spacing: var(--ls-tight);
+  color: var(--color-white);
+}
+
+.scrollBtn {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  animation: bounce 2s infinite;
+}
+
+.scrollBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-10px); }
+  60% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* =========================================================
+   COMMON LAYOUT WRAPPER
+   ========================================================= */
+.inner {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding-x);
+}
+
+.sectionLabel {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: #2563eb;
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+  letter-spacing: var(--ls-tight);
+  margin-bottom: 20px;
+}
+
+.sectionDesc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: #64748b;
+  margin-top: 20px;
+}
+
+/* =========================================================
+   SPECIALIZED INDUSTRY
+   ========================================================= */
+.specializedSection {
+  padding: 100px 0;
+  background: #fafafa;
+}
+
+.specializedGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.specializedText {
+  max-width: 500px;
+}
+
+.specializedText .sectionTitle {
+  font-size: 44px;
+}
+
+.specializedImage {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+.specializedImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* =========================================================
+   CROSS-BRAND ECOSYSTEM
+   ========================================================= */
+.ecosystemSection {
+  position: relative;
+  padding: 120px 0;
+  background-color: #0f172a;
+  overflow: hidden;
+}
+
+.ecosystemBg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+  z-index: 1;
+}
+
+.ecosystemGridOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ecosystemHeader {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 60px;
+}
+
+.ecoLabel {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--color-lime-yellow);
+  margin-bottom: 24px;
+}
+
+.ecoTitle {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-white);
+  line-height: 1.5;
+  letter-spacing: var(--ls-normal);
+}
+
+.pillarsGrid {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.pillarCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 32px 24px;
+  transition: transform var(--transition-base), background var(--transition-base);
+}
+
+.pillarCard:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-5px);
+}
+
+.pillarLabel {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 16px;
+  letter-spacing: 0.1em;
+}
+
+.pillarTitle {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-lime-yellow);
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.bullet {
+  color: var(--color-lime-yellow);
+}
+
+.pillarDesc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.8);
+}
+
+/* =========================================================
+   EXPLORE OTHER INFORMATION
+   ========================================================= */
+.exploreSection {
+  padding: 100px 0;
+  background-color: #fafafa;
+}
+
+.exploreHeading {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.exploreGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.exploreCard {
+  position: relative;
+  height: 240px;
+  border-radius: 20px;
+  overflow: hidden;
+  display: block;
+}
+
+.exploreCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.exploreCard:hover img {
+  transform: scale(1.05);
+}
+
+.exploreMask {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
+  z-index: 1;
+}
+
+.exploreTitle {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  z-index: 2;
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 1024px) {
+  .heroTitle { font-size: 44px; }
+  .sectionTitle, .specializedText .sectionTitle { font-size: 36px; }
+  .ecoTitle { font-size: 20px; }
+  .pillarsGrid { grid-template-columns: repeat(2, 1fr); }
+  .specializedGrid { gap: 40px; }
+}
+
+@media (max-width: 768px) {
+  .heroTitle { font-size: 36px; }
+  .exploreGrid { grid-template-columns: 1fr; }
+  .specializedGrid { grid-template-columns: 1fr; }
+  .specializedText { max-width: 100%; }
+  .pillarsGrid { grid-template-columns: 1fr; }
+}

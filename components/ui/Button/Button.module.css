@@ -1,0 +1,89 @@
+.button {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  height: 64px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: var(--text-body-lg);
+  line-height: var(--lh-normal);
+  letter-spacing: var(--ls-wide);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-fast),
+    box-shadow var(--transition-base);
+  white-space: nowrap;
+  border: none;
+  text-decoration: none;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-lime-yellow);
+  outline-offset: 3px;
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+/* ── Primary (Lime Yellow) ── */
+.primary {
+  background-color: var(--color-lime-yellow);
+  color: var(--color-dark);
+}
+
+.primary:hover {
+  background-color: #D4EC26;
+  box-shadow: 0 4px 20px rgba(230, 255, 42, 0.25);
+}
+
+/* ── Secondary (Outline) ── */
+.secondary {
+  background-color: transparent;
+  border: 1px solid var(--color-lime-yellow);
+  color: var(--color-white);
+}
+
+.secondary:hover {
+  background-color: rgba(230, 255, 42, 0.08);
+  box-shadow: 0 4px 20px rgba(230, 255, 42, 0.1);
+}
+
+/* ── Ghost ── */
+.ghost {
+  background-color: transparent;
+  color: var(--color-white);
+}
+
+.ghost:hover {
+  background-color: rgba(247, 247, 247, 0.08);
+}
+
+/* ── Size: Small ── */
+.small {
+  height: 48px;
+  padding: 12px 24px;
+  font-size: var(--text-body-md);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .button {
+    height: 52px;
+    padding: 14px 24px;
+    font-size: var(--text-body-md);
+  }
+
+  .small {
+    height: 44px;
+    padding: 10px 20px;
+    font-size: var(--text-body-sm);
+  }
+}

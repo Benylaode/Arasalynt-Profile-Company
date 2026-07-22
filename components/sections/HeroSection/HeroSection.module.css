@@ -1,0 +1,234 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+  max-height: 970px;
+  background-color: var(--color-dark);
+  overflow: hidden;
+}
+
+/* ── Background Image Layer ── */
+.backgroundImage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.backgroundImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Placeholder background (until real image is provided) ── */
+.backgroundPlaceholder {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(26, 62, 158, 0.3) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 30%, rgba(85, 131, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(230, 255, 42, 0.05) 0%, transparent 40%),
+    var(--color-dark);
+}
+
+/* ── Gradient Overlays ── */
+.gradientOverlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 2;
+}
+
+.gradientMain {
+  height: 615px;
+  background: linear-gradient(180deg, rgba(16, 16, 16, 0) 9.62%, #101010 100%);
+  opacity: 0.65;
+}
+
+.gradientBottom {
+  height: 232px;
+  background: linear-gradient(180deg, rgba(16, 16, 16, 0) 0%, #101010 100%);
+}
+
+/* ── Content Container ── */
+.content {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-9);
+  width: 100%;
+  max-width: var(--container-narrow);
+  padding: 0 var(--container-padding-x);
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ── Headline ── */
+.headline {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: var(--text-display);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--color-white);
+}
+
+/* ── Body ── */
+.body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-body-xl);
+  line-height: var(--lh-loose);
+  letter-spacing: var(--ls-wide);
+  color: var(--color-white);
+  max-width: 802px;
+  opacity: 0.85;
+}
+
+/* ── Button Group ── */
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Slider Navigation ── */
+.sliderNav {
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  transform: translateY(-50%);
+  left: var(--container-padding-x);
+  right: var(--container-padding-x);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.sliderNav button {
+  pointer-events: all;
+}
+
+/* ── Slide Counter ── */
+.counter {
+  position: absolute;
+  z-index: 6;
+  bottom: 70px;
+  left: var(--container-padding-x);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.counterActive {
+  width: 54px;
+  height: 10px;
+  background-color: var(--color-lime-500);
+  border-radius: var(--radius-xs);
+  position: relative;
+  overflow: hidden;
+}
+
+.counterProgress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: var(--color-lime-yellow);
+  border-radius: var(--radius-xs);
+  transition: width 0.1s linear;
+}
+
+.counterDot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-grey-500);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+}
+
+.counterDot:hover {
+  background-color: var(--color-grey-400);
+}
+
+.counterDot.active {
+  width: 54px;
+  background-color: var(--color-lime-500);
+}
+
+/* ── Slide Transitions ── */
+.slideContent {
+  opacity: 0;
+  transform: translate(-50%, calc(-50% + 20px));
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease;
+}
+
+.slideContent.active {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .hero {
+    max-height: 850px;
+  }
+
+  .content {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    max-height: none;
+    min-height: 600px;
+    height: 100svh;
+  }
+
+  .content {
+    gap: var(--space-6);
+    margin-top: 0;
+  }
+
+  .buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .buttons a,
+  .buttons button {
+    width: 100%;
+  }
+
+  .sliderNav {
+    display: none;
+  }
+
+  .counter {
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .gradientMain {
+    height: 400px;
+  }
+
+  .gradientBottom {
+    height: 150px;
+  }
+}

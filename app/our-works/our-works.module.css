@@ -1,0 +1,629 @@
+.container {
+  width: 100%;
+  position: relative;
+  background-color: #fafafa;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   HERO HEADER SECTION
+   ========================================================= */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 480px;
+  background-color: #020617;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backgroundImage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.backgroundImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+  filter: brightness(0.6) contrast(1.1);
+}
+
+.networkOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center;
+  pointer-events: none;
+}
+
+.gradientBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(to top, #fafafa 0%, transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  max-width: 720px;
+  padding: 0 24px;
+  margin-top: 40px;
+}
+
+.heroLabel {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  color: var(--color-lime-yellow);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1.1;
+  letter-spacing: var(--ls-tight);
+  color: var(--color-white);
+  margin-bottom: 20px;
+}
+
+.heroDesc {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  line-height: var(--lh-relaxed);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.scrollBtn {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  animation: bounce 2s infinite;
+}
+
+.scrollBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* =========================================================
+   FEATURED WORKS CAROUSEL SECTION
+   ========================================================= */
+.featuredSection {
+  background-color: #fafafa;
+  padding: 80px 0 40px;
+  position: relative;
+  z-index: 4;
+}
+
+.inner {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding-x);
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.accentLabel {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 800;
+  color: #2563eb;
+  letter-spacing: 0.1em;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.carouselTitle {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.2;
+  color: #0f172a;
+  letter-spacing: var(--ls-tight);
+}
+
+/* ── Slider Layout ── */
+.sliderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  position: relative;
+  width: 100%;
+}
+
+.sliderCard {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 24px;
+  overflow: hidden;
+  transition: transform var(--transition-slow), opacity var(--transition-slow);
+}
+
+.sideCard {
+  width: 20%;
+  opacity: 0.35;
+  filter: blur(2px) grayscale(0.5);
+  cursor: pointer;
+}
+
+.mainCard {
+  width: 60%;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
+  z-index: 2;
+}
+
+.cardBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%);
+  z-index: 1;
+}
+
+.cardInfo {
+  position: relative;
+  z-index: 2;
+  padding: 40px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.cardTitleText {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--color-white);
+  margin-bottom: 8px;
+  letter-spacing: var(--ls-tight);
+}
+
+.cardTagText {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--color-lime-yellow);
+  letter-spacing: 0.05em;
+}
+
+/* ── Navigation Arrows ── */
+.navArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: #0f172a;
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.navArrow:hover {
+  background-color: var(--color-white);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.leftArrow {
+  left: 17%;
+}
+
+.rightArrow {
+  right: 17%;
+}
+
+/* =========================================================
+   EXPLORE BEST WORKS GRID SECTION
+   ========================================================= */
+.exploreSection {
+  background-color: #fafafa;
+  padding: 60px 0 100px;
+  position: relative;
+  z-index: 4;
+}
+
+.exploreHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.exploreTitle {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #0f172a;
+  letter-spacing: var(--ls-tight);
+}
+
+/* Tabs Bar */
+.tabs {
+  display: flex;
+  gap: 8px;
+  background-color: #f1f5f9;
+  padding: 6px;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.tabBtn {
+  background: none;
+  border: none;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: #64748b;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.tabBtn:hover {
+  color: #0f172a;
+}
+
+.activeTab {
+  background-color: #2563eb;
+  color: var(--color-white) !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+/* ── 2-Column Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.gridCard {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  cursor: pointer;
+  transition: transform var(--transition-slow);
+}
+
+.gridCard:hover {
+  transform: translateY(-4px);
+}
+
+.gridCardBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.gridCard:hover .gridCardBg {
+  transform: scale(1.04);
+}
+
+.gridCardMask {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%);
+  z-index: 1;
+}
+
+.gridCardContent {
+  position: relative;
+  z-index: 2;
+  padding: 28px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.gridCardText {
+  max-width: 80%;
+}
+
+.gridCardTitle {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--color-white);
+  line-height: 1.25;
+  margin-bottom: 6px;
+  letter-spacing: var(--ls-tight);
+}
+
+.gridCardTag {
+  font-family: var(--font-heading);
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--color-lime-yellow);
+  letter-spacing: 0.05em;
+}
+
+/* Circle panah button */
+.circleBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.gridCard:hover .circleBtn {
+  background-color: var(--color-lime-yellow);
+  border-color: var(--color-lime-yellow);
+  color: #050b18;
+  transform: scale(1.05);
+}
+
+/* ── Load More ── */
+.loadMoreWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 56px;
+}
+
+.loadMoreBtn {
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #0f172a;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 14px 28px;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.loadMoreBtn:hover {
+  background-color: #f1f5f9;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================================
+   BOTTOM CTA SECTION
+   ========================================================= */
+.ctaSection {
+  background-color: #050b18;
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+  z-index: 4;
+  text-align: center;
+}
+
+.ctaGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ctaContent {
+  position: relative;
+  z-index: 2;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.ctaHeading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 1.15;
+  color: var(--color-white);
+  margin-bottom: 16px;
+  letter-spacing: var(--ls-tight);
+}
+
+.ctaDesc {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: #94a3b8;
+  margin-bottom: 36px;
+}
+
+.ctaButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.ctaPillBtn {
+  background-color: var(--color-lime-yellow);
+  color: #050b18 !important;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(230, 255, 42, 0.15);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.ctaPillBtn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(230, 255, 42, 0.25);
+}
+
+.ctaOutlineBtn {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: 9999px;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.ctaOutlineBtn:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 1024px) {
+  .heroTitle {
+    font-size: 44px;
+  }
+  .carouselTitle {
+    font-size: 32px;
+  }
+  .sliderCard {
+    aspect-ratio: 1.4 / 1;
+  }
+  .leftArrow {
+    left: 8%;
+  }
+  .rightArrow {
+    right: 8%;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 50vh;
+  }
+  .heroTitle {
+    font-size: 36px;
+  }
+  .carouselTitle {
+    font-size: 28px;
+  }
+  .sideCard {
+    display: none;
+  }
+  .mainCard {
+    width: 100%;
+  }
+  .leftArrow {
+    left: 4%;
+  }
+  .rightArrow {
+    right: 4%;
+  }
+  .exploreHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .tabs {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .gridCardContent {
+    padding: 20px;
+  }
+  .gridCardTitle {
+    font-size: 16px;
+  }
+  .ctaHeading {
+    font-size: 32px;
+  }
+}

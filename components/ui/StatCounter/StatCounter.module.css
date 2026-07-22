@@ -1,0 +1,29 @@
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.value {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: var(--text-h1);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--color-lime-yellow);
+}
+
+.label {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-body-sm);
+  line-height: var(--lh-loose);
+  letter-spacing: var(--ls-wide);
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+  .value {
+    font-size: var(--text-h2);
+  }
+}
