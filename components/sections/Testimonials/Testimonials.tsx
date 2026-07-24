@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import styles from './Testimonials.module.css';
 import SectionLabel from '@/components/ui/SectionLabel/SectionLabel';
 
 /* ── Pure SVG Icons ── */
@@ -29,7 +28,7 @@ const MOCK_TESTIMONIALS = [
     name: "NINA PRATIWI",
     role: "IT Director",
     company: "Sinar Mas",
-    text: "Sangat puas dengan layanan IT Solution dari Arsalynk. Sistem kami sekarang jauh lebih stabil dan cepat. Tim support-nya juga sangat responsif dan professional. Sangat direkomendasikan untuk enterprise!",
+    text: "Sangat puas dengan layanan IT Solution dari Arsalynt. Sistem kami sekarang jauh lebih stabil dan cepat. Tim support-nya juga sangat responsif dan professional. Sangat direkomendasikan untuk enterprise!",
     avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=120&auto=format&fit=crop",
   },
   {
@@ -37,7 +36,7 @@ const MOCK_TESTIMONIALS = [
     name: "BUDI SETIAWAN",
     role: "Chief Technology Officer",
     company: "GOTO Logistics",
-    text: "Arsalynk membantu kami melakukan integrasi sistem logistik nasional secara mulus. Arsitektur cloud mereka sangat tangguh dan andal untuk menangani beban transaksi dengan volume sangat tinggi.",
+    text: "Arsalynt membantu kami melakukan integrasi sistem logistik nasional secara mulus. Arsitektur cloud mereka sangat tangguh dan andal untuk menangani beban transaksi dengan volume sangat tinggi.",
     avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=120&auto=format&fit=crop",
   },
 ];
@@ -56,30 +55,30 @@ export default function Testimonials() {
   const active = MOCK_TESTIMONIALS[activeIndex];
 
   return (
-    <section className={styles.section} id="testimonials" aria-label="Client Testimonials">
-      <div className={styles.inner}>
+    <section className="relative bg-white py-[120px] max-[1024px]:py-[96px] max-[768px]:py-[72px] text-center" id="testimonials" aria-label="Client Testimonials">
+      <div className="w-full max-w-[921px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px] flex flex-col items-center">
         
         {/* Quote Icon */}
-        <div className={styles.quoteIcon} aria-hidden="true">
+        <div className="w-[56px] h-[56px] rounded-full bg-[#eff6ff] text-blue-600 flex items-center justify-center mb-6" aria-hidden="true">
           <IconQuote />
         </div>
 
         {/* Section Label */}
-        <div className={styles.labelWrap}>
+        <div className="mb-8">
           <SectionLabel text="TESTIMONIALS" />
         </div>
 
         {/* Testimonial Quote Slider */}
-        <div className={styles.sliderContainer}>
+        <div className="w-full min-h-[140px]">
           {MOCK_TESTIMONIALS.map((t, idx) => (
             <div
               key={t.id}
-              className={`${styles.slide} ${idx === activeIndex ? styles.activeSlide : ''}`}
+              className="animate-fade-in"
               style={{
                 display: idx === activeIndex ? 'block' : 'none',
               }}
             >
-              <blockquote className={styles.quoteText}>
+              <blockquote className="font-heading font-bold text-[24px] md:text-[32px] leading-relaxed text-[#101010] italic max-w-[680px] mx-auto">
                 "{t.text}"
               </blockquote>
             </div>
@@ -87,24 +86,36 @@ export default function Testimonials() {
         </div>
 
         {/* Author Bio Row */}
-        <div className={styles.authorRow}>
+        <div className="flex items-center gap-4 mt-8 pt-6 border-t border-[#E5E5E5]">
           <img
             src={active.avatar}
             alt={active.name}
-            className={styles.avatar}
+            className="w-[56px] h-[56px] rounded-full object-cover border-2 border-[#E5E5E5]"
           />
-          <div className={styles.bio}>
-            <div className={styles.authorName}>{active.name}</div>
-            <div className={styles.authorTitle}>{active.role} at {active.company}</div>
+          <div className="text-left">
+            <div className="font-heading font-extrabold text-[13px] tracking-[0.05em] text-[#101010] uppercase">
+              {active.name}
+            </div>
+            <div className="font-body text-[11px] font-semibold text-[#717171] mt-0.5">
+              {active.role} at {active.company}
+            </div>
           </div>
         </div>
 
         {/* Control Buttons */}
-        <div className={styles.controls}>
-          <button onClick={handlePrev} className={styles.controlBtn} aria-label="Previous testimonial">
+        <div className="flex gap-3 mt-8">
+          <button 
+            onClick={handlePrev} 
+            className="w-9 h-9 rounded-full border border-[#E5E5E5] bg-white text-[#4C4C4C] flex items-center justify-center cursor-pointer transition-all duration-250 hover:bg-slate-100 hover:border-[#D9D9D9] hover:text-[#101010]" 
+            aria-label="Previous testimonial"
+          >
             <IconChevronLeft size={16} />
           </button>
-          <button onClick={handleNext} className={styles.controlBtn} aria-label="Next testimonial">
+          <button 
+            onClick={handleNext} 
+            className="w-9 h-9 rounded-full border border-[#E5E5E5] bg-white text-[#4C4C4C] flex items-center justify-center cursor-pointer transition-all duration-250 hover:bg-slate-100 hover:border-[#D9D9D9] hover:text-[#101010]" 
+            aria-label="Next testimonial"
+          >
             <IconChevronRight size={16} />
           </button>
         </div>

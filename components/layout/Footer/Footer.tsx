@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import styles from './Footer.module.css';
 
 /* ── Pure SVG Icons ── */
 const IconInstagram = () => (
@@ -58,37 +57,44 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className={styles.footer} role="contentinfo">
-      <div className={styles.inner}>
+    <footer className="bg-[#080C14] py-20 pb-10 border-t border-white/10" role="contentinfo">
+      <div className="w-full max-w-[1700px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
         
         {/* Top: 4 columns */}
-        <div className={styles.top}>
+        <div className="grid grid-cols-[1.2fr_repeat(3,1fr)] max-[1024px]:grid-cols-2 max-[768px]:grid-cols-1 gap-12 max-[1024px]:gap-10 max-[768px]:gap-8 pb-14 border-b border-white/10">
           
           {/* Brand and Description */}
-          <div className={styles.brand}>
-            <Link href="/" className={styles.logo}>
-              <div className={styles.logoBox}>
-                <span className={styles.logoLetter}>A</span>
+          <div className="flex flex-col gap-5 max-[1024px]:col-span-full">
+            <Link href="/" className="flex items-center gap-3 no-underline cursor-pointer">
+              <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center relative shadow-[0_4px_16px_rgba(37,99,235,0.4)]">
+                <span className="font-heading font-black text-[22px] text-white">
+                  A
+                </span>
+                <span className="absolute bottom-1 right-1 w-2 h-2 rounded-full bg-[#E6FF2A]" />
               </div>
               <div>
-                <div className={styles.logoText}>
-                  Arsa<span className={styles.logoHighlight}>lynk</span>
+                <div className="font-heading font-black text-[22px] text-white leading-none">
+                  Arsa<span className="text-[#E6FF2A]">lynt</span>
                 </div>
-                <div className={styles.logoSub}>ENTERPRISE</div>
+                <div className="font-heading text-[8px] font-extrabold tracking-[0.2em] text-[#94A3B8] uppercase mt-0.5">
+                  ENTERPRISE ECOSYSTEM
+                </div>
               </div>
             </Link>
-            <p className={styles.brandDesc}>
+            <p className="font-body text-[13px] leading-[1.6] text-[#94A3B8] max-w-[340px]">
               We design, build, and integrate intelligent software systems that drive operational efficiency and long-term growth.
             </p>
           </div>
 
           {/* Services Column */}
-          <div className={styles.column}>
-            <h3 className={styles.columnTitle}>Our Services</h3>
-            <ul className={styles.list}>
+          <div className="flex flex-col gap-4">
+            <h3 className="font-heading font-bold text-[13px] tracking-[0.08em] text-white uppercase mb-1">
+              Our Services
+            </h3>
+            <ul className="flex flex-col gap-3">
               {SERVICES.map((s, idx) => (
                 <li key={idx}>
-                  <Link href={s.href} className={styles.link}>
+                  <Link href={s.href} className="font-body text-[13px] text-[#94A3B8] no-underline transition-colors duration-150 hover:text-[#E6FF2A]">
                     {s.name}
                   </Link>
                 </li>
@@ -97,14 +103,18 @@ export default function Footer() {
           </div>
 
           {/* Company Column */}
-          <div className={styles.column}>
-            <h3 className={styles.columnTitle}>Company</h3>
-            <ul className={styles.list}>
+          <div className="flex flex-col gap-4">
+            <h3 className="font-heading font-bold text-[13px] tracking-[0.08em] text-white uppercase mb-1">
+              Company
+            </h3>
+            <ul className="flex flex-col gap-3">
               {COMPANY.map((c, idx) => (
                 <li key={idx}>
                   <Link
                     href={c.href}
-                    className={`${styles.link} ${c.highlight ? styles.highlightLink : ''}`}
+                    className={`font-body text-[13px] no-underline transition-colors duration-150 ${
+                      c.highlight ? '!text-[#E6FF2A] font-bold hover:underline' : 'text-[#94A3B8] hover:text-[#E6FF2A]'
+                    }`}
                   >
                     {c.name}
                   </Link>
@@ -114,10 +124,12 @@ export default function Footer() {
           </div>
 
           {/* Office Column */}
-          <div className={styles.column}>
-            <h3 className={styles.columnTitle}>Visit Our Office</h3>
-            <p className={styles.officeText}>
-              PT Arsalynk Sinergi Enterprise
+          <div className="flex flex-col gap-4">
+            <h3 className="font-heading font-bold text-[13px] tracking-[0.08em] text-white uppercase mb-1">
+              Visit Our Office
+            </h3>
+            <p className="font-body text-[13px] leading-[1.6] text-[#94A3B8]">
+              PT Arsalynt Sinergi Enterprise
               <br />
               Menara Rajawali, 26th Floor
               <br />
@@ -125,7 +137,7 @@ export default function Footer() {
               <br />
               South Jakarta, Indonesia
             </p>
-            <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className={styles.mapsLink}>
+            <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="font-body text-[13px] font-bold text-[#E6FF2A] no-underline hover:underline">
               Open in Google Maps →
             </a>
           </div>
@@ -133,37 +145,37 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar: Copyright and Contacts */}
-        <div className={styles.bottom}>
+        <div className="flex flex-col lg:flex-row gap-6 pt-8 items-center lg:justify-between">
           
           {/* Copyright */}
-          <p className={styles.copyright}>
-            © {currentYear} PT Arsalynk Sinergi Enterprise. All Rights Reserved.
+          <p className="font-body text-[12px] text-[#64748B] font-semibold">
+            © {currentYear} PT Arsalynt Sinergi Enterprise. All Rights Reserved.
           </p>
 
           {/* Contact Support & Social Links */}
-          <div className={styles.bottomActions}>
+          <div className="flex flex-wrap max-[768px]:flex-col gap-3 items-center justify-center max-[768px]:w-full">
             
             {/* Social Icons */}
-            <div className={styles.socials}>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Instagram">
+            <div className="flex gap-2 justify-center">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-[36px] h-[36px] rounded-full bg-white/5 border border-white/10 text-[#94A3B8] flex items-center justify-center transition-all duration-150 hover:bg-[#E6FF2A] hover:text-[#0B0F19] hover:border-[#E6FF2A]" aria-label="Instagram">
                 <IconInstagram />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="YouTube">
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="w-[36px] h-[36px] rounded-full bg-white/5 border border-white/10 text-[#94A3B8] flex items-center justify-center transition-all duration-150 hover:bg-[#E6FF2A] hover:text-[#0B0F19] hover:border-[#E6FF2A]" aria-label="YouTube">
                 <IconYoutube />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="LinkedIn">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-[36px] h-[36px] rounded-full bg-white/5 border border-white/10 text-[#94A3B8] flex items-center justify-center transition-all duration-150 hover:bg-[#E6FF2A] hover:text-[#0B0F19] hover:border-[#E6FF2A]" aria-label="LinkedIn">
                 <IconLinkedin />
               </a>
             </div>
 
             {/* Email link */}
-            <a href="mailto:corporate@arsalynk.com" className={styles.actionBtn}>
-              <IconMail /> corporate@arsalynk.com
+            <a href="mailto:corporate@arsalynt.com" className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full font-body text-[12px] font-bold text-white no-underline transition-all duration-150 hover:bg-white/10 hover:border-white/20 max-[768px]:w-full max-[768px]:justify-center">
+              <span className="text-[#E6FF2A]"><IconMail /></span> corporate@arsalynt.com
             </a>
 
             {/* Support link */}
-            <a href="https://wa.me/628213939569" target="_blank" rel="noopener noreferrer" className={styles.actionBtn}>
-              <IconPhone /> Chat Support
+            <a href="https://wa.me/628213939569" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full font-body text-[12px] font-bold text-white no-underline transition-all duration-150 hover:bg-white/10 hover:border-white/20 max-[768px]:w-full max-[768px]:justify-center">
+              <span className="text-[#E6FF2A]"><IconPhone /></span> Chat Support
             </a>
 
           </div>

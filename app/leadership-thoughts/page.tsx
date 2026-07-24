@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import styles from './leadership-thoughts.module.css';
 
 /* ── Pure SVG Icons ── */
 const IconChevronDown = ({ size = 20 }: { size?: number }) => (
@@ -162,60 +161,73 @@ export default function LeadershipThoughtsPage() {
   const featured = FEATURED_ARTICLES[activeSlide];
 
   return (
-    <div className={styles.container}>
+    <div className="w-full relative bg-[#fafafa] min-h-screen">
 
-      {/* ===================================================
-          HERO HEADER SECTION
-          =================================================== */}
-      <section className={styles.hero} id="hero" aria-label="Leadership Thoughts Hero">
-        <div className={styles.backgroundImage} aria-hidden="true">
+      {/* HERO HEADER SECTION */}
+      <section className="relative w-full h-[60vh] min-h-[480px] max-[768px]:h-[50vh] bg-[#020617] overflow-hidden flex items-center justify-center" id="hero" aria-label="Leadership Thoughts Hero">
+        <div className="absolute inset-0 z-[1]" aria-hidden="true">
           <img
             src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&auto=format&fit=crop"
             alt="Leadership team discussion"
+            className="w-full h-full object-cover opacity-40 brightness-55 contrast-110 saturate-80"
           />
         </div>
-        <div className={styles.networkOverlay} aria-hidden="true" />
-        <div className={styles.gradientBottom} aria-hidden="true" />
+        <div 
+          className="absolute inset-0 z-[2] pointer-events-none" 
+          aria-hidden="true"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px)',
+            backgroundSize: '50px 50px'
+          }}
+        />
+        <div className="absolute bottom-0 left-0 right-0 h-[160px] bg-gradient-to-t from-[#fafafa] to-transparent z-[3] pointer-events-none" aria-hidden="true" />
 
-        <div className={styles.heroContent}>
-          <span className={styles.heroLabel}>ARSALYNT PERSPECTIVE</span>
-          <h1 className={styles.heroTitle}>Leadership Thoughts</h1>
-          <p className={styles.heroDesc}>
+        <div className="relative z-[5] text-center max-w-[760px] px-6 mt-10">
+          <span className="inline-block font-heading text-[10px] font-extrabold tracking-[0.25em] text-lime-yellow uppercase mb-4">
+            ARSALYNT PERSPECTIVE
+          </span>
+          <h1 className="font-heading font-bold text-[56px] max-[1024px]:text-[44px] max-[768px]:text-[36px] max-[480px]:text-[30px] leading-tight tracking-tight text-white mb-5">
+            Leadership Thoughts
+          </h1>
+          <p className="font-body text-lg leading-relaxed text-[#A0A0A0] max-w-[620px] mx-auto">
             Perspectives, principles, and insights from the Arsalynt leadership team —
             shaping the way we think about business, technology, and human potential.
           </p>
-          <button onClick={handleScrollDown} className={styles.scrollBtn} aria-label="Scroll down">
+          <button 
+            onClick={handleScrollDown} 
+            className="absolute bottom-[30px] left-1/2 -translate-x-1/2 w-[44px] h-[44px] rounded-full bg-white/8 border border-white/15 text-white flex items-center justify-center cursor-pointer z-[5] transition-colors duration-150 hover:bg-white/15 animate-bounce-slow" 
+            aria-label="Scroll down"
+          >
             <IconChevronDown />
           </button>
         </div>
       </section>
 
-      {/* ===================================================
-          FEATURED ARTICLE SLIDER
-          =================================================== */}
-      <section className={styles.featuredSection} aria-label="Featured Thought">
-        <div className={styles.inner}>
-          <div className={styles.featuredCard}>
-            {/* Background image */}
+      {/* FEATURED ARTICLE SLIDER */}
+      <section className="bg-[#fafafa] pt-10 pb-5 relative z-[4]" aria-label="Featured Thought">
+        <div className="w-full max-w-[1700px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
+          <div className="group relative w-full aspect-[2.4/1] min-h-[380px] max-[1024px]:aspect-[1.8/1] max-[768px]:aspect-[1.4/1] max-[480px]:aspect-[1.2/1] max-[480px]:min-h-[280px] rounded-[24px] overflow-hidden shadow-[0_12px_48px_rgba(0,0,0,0.08)] flex flex-col justify-end">
             <img
               src={featured.image}
               alt={featured.title}
-              className={styles.featuredBg}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-600 group-hover:scale-102"
             />
-            <div className={styles.featuredMask} />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/55 to-black/10 z-[1]" />
 
-            <div className={styles.featuredContent}>
-              <span className={styles.featuredTag}>{featured.category}</span>
-              <h2 className={styles.featuredTitle}>{featured.title}</h2>
-              <p className={styles.featuredDesc}>{featured.desc}</p>
+            <div className="relative z-[2] p-12 max-[768px]:p-6 flex flex-col justify-end gap-3">
+              <span className="font-heading text-[11px] font-extrabold text-lime-yellow tracking-[0.12em] uppercase">{featured.category}</span>
+              <h2 className="font-heading font-bold text-[32px] max-[1024px]:text-[28px] max-[768px]:text-[22px] leading-tight text-white max-w-[720px] tracking-tight">{featured.title}</h2>
+              <p className="hidden md:block font-body text-[15px] leading-relaxed text-white/72 max-w-[620px]">{featured.desc}</p>
 
-              <div className={styles.featuredFooter}>
+              <div className="flex justify-between items-center mt-5 w-full">
                 {/* Pagination Dots */}
-                <div className={styles.paginationDots}>
+                <div className="flex gap-2 items-center">
                   {FEATURED_ARTICLES.map((_, i) => (
                     <button
                       key={i}
-                      className={`${styles.dot} ${i === activeSlide ? styles.activeDot : ''}`}
+                      className={`w-1.5 h-1.5 rounded-full border-none cursor-pointer p-0 transition-all duration-150 ${
+                        i === activeSlide ? 'bg-lime-yellow scale-140 shadow-[0_0_8px_#E6FF2A]' : 'bg-white/35'
+                      }`}
                       onClick={() => setActiveSlide(i)}
                       aria-label={`Go to slide ${i + 1}`}
                     />
@@ -223,11 +235,11 @@ export default function LeadershipThoughtsPage() {
                 </div>
 
                 {/* Arrow Controls */}
-                <div className={styles.paginationArrows}>
-                  <button className={styles.arrowBtn} onClick={handlePrev} aria-label="Previous article">
+                <div className="flex gap-2.5">
+                  <button className="w-[38px] h-[38px] rounded-full border border-white/20 bg-white/7 text-white flex items-center justify-center cursor-pointer transition-colors duration-150 hover:bg-white/14 hover:border-white/40" onClick={handlePrev} aria-label="Previous article">
                     <IconChevronLeft />
                   </button>
-                  <button className={styles.arrowBtn} onClick={handleNext} aria-label="Next article">
+                  <button className="w-[38px] h-[38px] rounded-full border border-white/20 bg-white/7 text-white flex items-center justify-center cursor-pointer transition-colors duration-150 hover:bg-white/14 hover:border-white/40" onClick={handleNext} aria-label="Next article">
                     <IconChevronRight />
                   </button>
                 </div>
@@ -237,23 +249,25 @@ export default function LeadershipThoughtsPage() {
         </div>
       </section>
 
-      {/* ===================================================
-          EXPLORE THOUGHTS GRID
-          =================================================== */}
-      <section id="explore-thoughts" className={styles.exploreSection} aria-label="Explore Leadership Thoughts">
-        <div className={styles.inner}>
+      {/* EXPLORE THOUGHTS GRID */}
+      <section id="explore-thoughts" className="bg-[#fafafa] pt-[60px] pb-[100px] relative z-[4]" aria-label="Explore Leadership Thoughts">
+        <div className="w-full max-w-[1700px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
 
           {/* Header Row with Category Tabs + Sort */}
-          <div className={styles.exploreHeader}>
-            <h2 className={styles.exploreTitle}>Explore Our Thoughts</h2>
+          <div className="flex justify-between items-center mb-11 flex-wrap gap-5 max-[768px]:flex-col max-[768px]:items-start">
+            <h2 className="font-heading text-[32px] font-bold tracking-tight text-slate-900">Explore Our Thoughts</h2>
 
-            <div className={styles.filterControls}>
+            <div className="flex items-center gap-4 flex-wrap max-[768px]:w-full max-[768px]:flex-col max-[768px]:items-start">
               {/* Category Filter Pills */}
-              <div className={styles.categoryPills}>
+              <div className="flex gap-2 flex-wrap max-[768px]:w-full">
                 {ALL_CATEGORIES.map((cat) => (
                   <button
                     key={cat}
-                    className={`${styles.pill} ${selectedCategory === cat ? styles.pillActive : ''}`}
+                    className={`font-heading text-[10px] font-extrabold tracking-[0.08em] uppercase px-4 py-2 rounded-full border transition-all duration-150 whitespace-nowrap cursor-pointer ${
+                      selectedCategory === cat
+                        ? 'bg-slate-900 text-lime-yellow border-slate-900 hover:bg-slate-800'
+                        : 'bg-white text-slate-500 border-black/8 hover:border-black/20 hover:text-slate-900'
+                    }`}
                     onClick={() => { setSelectedCategory(cat); setVisibleCount(PAGE_SIZE); }}
                   >
                     {cat === 'All' ? 'All Topics' : cat}
@@ -262,7 +276,7 @@ export default function LeadershipThoughtsPage() {
               </div>
 
               {/* Sort Label */}
-              <div className={styles.sortLabel}>
+              <div className="flex items-center gap-1 font-heading text-[11px] font-bold text-slate-500 tracking-wider cursor-pointer px-3 py-2 rounded-lg border border-black/6 bg-white hover:bg-slate-100 select-none">
                 <span>Latest</span>
                 <IconChevronDown size={12} />
               </div>
@@ -270,29 +284,29 @@ export default function LeadershipThoughtsPage() {
           </div>
 
           {/* 3-Column Grid */}
-          <div className={styles.grid}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[28px]">
             {visibleArticles.map((article) => (
-              <article key={article.id} className={styles.card}>
-                <div className={styles.cardImageWrapper}>
-                  <img src={article.image} alt={article.title} className={styles.cardImg} />
+              <article key={article.id} className="group bg-white rounded-[20px] overflow-hidden shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col border border-black/4 transition-all duration-400 hover:-translate-y-1.2 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
+                <div className="w-full aspect-[16/10] overflow-hidden relative">
+                  <img src={article.image} alt={article.title} className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-105" />
                   <span
-                    className={styles.cardCategoryBadge}
+                    className="absolute bottom-3 left-[14px] font-heading text-[9px] font-extrabold tracking-[0.1em] uppercase text-white px-2.5 py-1 rounded-full pointer-events-none"
                     style={{ backgroundColor: CATEGORY_COLORS[article.category] ?? '#2563EB' }}
                   >
                     {article.category}
                   </span>
                 </div>
 
-                <div className={styles.cardInfo}>
-                  <div className={styles.cardMeta}>
-                    <span className={styles.cardAuthor}>{article.author}</span>
-                    <span className={styles.cardDate}>{article.date}</span>
+                <div className="p-6 flex flex-col flex-grow gap-2">
+                  <div className="flex justify-between items-center">
+                    <span className="font-heading text-[10px] font-extrabold text-blue-600 uppercase tracking-[0.06em]">{article.author}</span>
+                    <span className="font-body text-[11px] text-slate-400">{article.date}</span>
                   </div>
-                  <h3 className={styles.cardTitle}>{article.title}</h3>
-                  <p className={styles.cardDesc}>{article.desc}</p>
-                  <div className={styles.cardFooter}>
-                    <span className={styles.cardReadTime}>{article.readTime}</span>
-                    <button className={styles.cardReadMore} aria-label={`Read ${article.title}`}>
+                  <h3 className="font-heading font-bold text-[17px] leading-snug text-slate-900 tracking-tight mt-0.5">{article.title}</h3>
+                  <p className="font-body text-[13px] leading-relaxed text-slate-500 flex-grow">{article.desc}</p>
+                  <div className="flex justify-between items-center mt-3 pt-3.5 border-t border-black/5">
+                    <span className="font-body text-[11px] text-slate-400">{article.readTime}</span>
+                    <button className="group/btn inline-flex items-center gap-1 font-heading text-[10px] font-extrabold tracking-[0.05em] text-slate-900 cursor-pointer bg-transparent border-none p-0 transition-all duration-150 hover:text-blue-600 hover:gap-2" aria-label={`Read ${article.title}`}>
                       Read More <IconChevronRight size={11} />
                     </button>
                   </div>
@@ -303,9 +317,9 @@ export default function LeadershipThoughtsPage() {
 
           {/* Load More */}
           {hasMore && (
-            <div className={styles.loadMoreWrapper}>
+            <div className="flex justify-center mt-[60px]">
               <button
-                className={styles.loadMoreBtn}
+                className="bg-transparent border border-black/10 text-slate-900 font-heading font-extrabold text-[10px] tracking-[0.12em] px-8 py-[15px] rounded-full cursor-pointer inline-flex items-center gap-2 transition-all duration-150 hover:bg-slate-100 hover:border-black/18 hover:-translate-y-0.5"
                 onClick={() => setVisibleCount((v) => v + PAGE_SIZE)}
               >
                 LOAD MORE <IconChevronRight size={12} />

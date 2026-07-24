@@ -42,6 +42,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={manrope.variable}>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=switzer@100,200,300,400,500,600,700,800,900&display=swap"
+        />
+      </head>
       <body>
         <Navbar />
         {children}

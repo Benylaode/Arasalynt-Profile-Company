@@ -1,134 +1,155 @@
 'use client';
 
-import styles from './BridgePossibility.module.css';
-import Button from '@/components/ui/Button/Button';
-import SectionLabel from '@/components/ui/SectionLabel/SectionLabel';
+const PILLARS_DATA = [
+  {
+    id: 0,
+    number: "01",
+    category: "TECHNOLOGY",
+    action: "WE BUILD",
+    description: "Building resilient enterprise infrastructure",
+  },
+  {
+    id: 1,
+    number: "02",
+    category: "DATA & SURVEY",
+    action: "WE UNDERSTAND",
+    description: "Turning data into strategic decisions",
+  },
+  {
+    id: 2,
+    number: "03",
+    category: "MEDIA",
+    action: "WE AMPLIFY",
+    description: "Delivering ideas with measurable impact",
+  },
+];
 
 export default function BridgePossibility() {
   return (
-    <section className={styles.section} id="bridge" aria-label="Bridge Every Possibility">
-      {/* Decorative Glow */}
-      <div className={styles.glow} aria-hidden="true" />
+    <section
+      id="about-us"
+      className="relative isolate w-full min-h-[900px] overflow-hidden text-white bg-bridge-radial py-[100px] max-[1024px]:py-[80px]"
+      aria-labelledby="bridge-possibility-heading"
+    >
+      {/* Background radial glow */}
+      <div 
+        className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full pointer-events-none filter blur-[60px] opacity-60 z-0"
+        style={{
+          background: 'radial-gradient(ellipse at center, rgba(0, 110, 255, 0.45) 0%, rgba(0, 90, 255, 0.15) 40%, transparent 75%)'
+        }}
+      />
 
-      {/* Orbital Decoration */}
-      <div className={styles.orbitalWrap} aria-hidden="true">
-        <div className={styles.orbitOuter} />
-        <div className={styles.orbitInner} />
-      </div>
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px] grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
+        {/* Left Side: Interactive Globe Visual & Glass Cards */}
+        <div className="relative w-full max-w-[720px] aspect-[720/640] mx-auto flex items-center justify-center">
+          {/* Globe Image */}
+          <img
+            src="/images/componen/globe.svg"
+            alt="Global Network"
+            className="absolute z-[1] w-[65%] h-auto object-contain pointer-events-none opacity-90 select-none animate-float-y"
+            style={{
+              filter: 'drop-shadow(0 0 30px rgba(62, 136, 255, 0.4))'
+            }}
+          />
 
-      <div className={styles.inner}>
-        {/* Left: Floating Nodes Illustration */}
-        <div className={styles.visual}>
-          {/* Background Giant Numbers */}
-          <div className={`${styles.bgNumber} ${styles.numOne}`}>01</div>
-          <div className={`${styles.bgNumber} ${styles.numTwo}`}>02</div>
-          <div className={`${styles.bgNumber} ${styles.numThree}`}>03</div>
+          {/* Animated Arrow GIF */}
+          <img
+            src="/images/gif/Arrow%20GIF.gif"
+            alt="Connecting Arrow"
+            className="absolute z-[2] w-[85%] h-auto object-contain pointer-events-none select-none opacity-80"
+          />
 
-          {/* Central Globe & Arrows */}
-          <div className={styles.globeWrapper}>
-            <svg viewBox="0 0 400 400" className={styles.globeSvg}>
-              <defs>
-                <linearGradient id="arrowGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.1" />
-                  <stop offset="100%" stopColor="#2563EB" stopOpacity="0.8" />
-                </linearGradient>
-                <linearGradient id="arrowGrad2" x1="100%" y1="100%" x2="0%" y2="0%">
-                  <stop offset="0%" stopColor="#1E3A8A" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.1" />
-                </linearGradient>
-              </defs>
-              
-              {/* Globe grid lines */}
-              <circle cx="200" cy="200" r="140" fill="none" stroke="rgba(96, 165, 250, 0.15)" strokeWidth="1.5" />
-              <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(96, 165, 250, 0.1)" strokeWidth="1" />
-              <ellipse cx="200" cy="200" rx="140" ry="50" fill="none" stroke="rgba(96, 165, 250, 0.12)" strokeWidth="1.2" />
-              <ellipse cx="200" cy="200" rx="140" ry="90" fill="none" stroke="rgba(96, 165, 250, 0.12)" strokeWidth="1.2" />
-              <ellipse cx="200" cy="200" rx="50" ry="140" fill="none" stroke="rgba(96, 165, 250, 0.12)" strokeWidth="1.2" />
-              <ellipse cx="200" cy="200" rx="90" ry="140" fill="none" stroke="rgba(96, 165, 250, 0.12)" strokeWidth="1.2" />
-              <line x1="60" y1="200" x2="340" y2="200" stroke="rgba(96, 165, 250, 0.15)" strokeWidth="1.5" />
-              <line x1="200" y1="60" x2="200" y2="340" stroke="rgba(96, 165, 250, 0.15)" strokeWidth="1.5" />
-
-              {/* Dotted map elements */}
-              <circle cx="260" cy="130" r="2" fill="rgba(96, 165, 250, 0.4)" />
-              <circle cx="280" cy="140" r="3" fill="rgba(96, 165, 250, 0.6)" />
-              <circle cx="290" cy="150" r="2" fill="rgba(96, 165, 250, 0.5)" />
-              <circle cx="270" cy="160" r="3.5" fill="rgba(96, 165, 250, 0.7)" />
-              <circle cx="250" cy="150" r="2.5" fill="rgba(96, 165, 250, 0.5)" />
-              
-              <circle cx="130" cy="160" r="3" fill="rgba(96, 165, 250, 0.6)" />
-              <circle cx="140" cy="180" r="2.5" fill="rgba(96, 165, 250, 0.5)" />
-              <circle cx="120" cy="190" r="3.5" fill="rgba(96, 165, 250, 0.7)" />
-              <circle cx="150" cy="200" r="2" fill="rgba(96, 165, 250, 0.4)" />
-              <circle cx="130" cy="220" r="3" fill="rgba(96, 165, 250, 0.5)" />
-              
-              <circle cx="210" cy="220" r="3" fill="rgba(96, 165, 250, 0.6)" />
-              <circle cx="220" cy="240" r="2.5" fill="rgba(96, 165, 250, 0.5)" />
-              <circle cx="200" cy="250" r="3.5" fill="rgba(96, 165, 250, 0.7)" />
-
-              {/* Curving Arrows */}
-              <path d="M 100 130 C 120 60, 280 60, 300 130" fill="none" stroke="url(#arrowGrad1)" strokeWidth="6" strokeLinecap="round" />
-              <path d="M 300 270 C 280 340, 120 340, 100 270" fill="none" stroke="url(#arrowGrad2)" strokeWidth="6" strokeLinecap="round" />
-            </svg>
-          </div>
-
-          {/* Node 1 */}
-          <div className={`${styles.nodeCard} ${styles.cardOne}`}>
-            <div className={styles.nodeCardLabel}>TECHNOLOGY</div>
-            <div className={styles.nodeCardTitleWrap}>
-              <span className={styles.starIconYellow}>■</span>
-              <span className={styles.nodeCardTitleYellow}>WE BUILD</span>
+          {/* Floating Glass Pillar Cards Layout */}
+          <div className="relative z-[5] w-full h-full flex flex-col justify-between p-4 max-[640px]:gap-4">
+            
+            {/* Pillar 01 Card - Top Left */}
+            <div className="relative self-start w-[270px] max-[640px]:w-full p-5 rounded-[16px] border border-white/30 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md shadow-[0_16px_40px_rgba(0,0,0,0.3)] transition-transform duration-300 hover:scale-105">
+              <div className="absolute -top-10 left-4 font-heading font-black text-[72px] leading-none text-transparent text-stroke-lime pointer-events-none opacity-90">
+                01
+              </div>
+              <span className="block text-white/80 font-body text-[11px] font-bold uppercase tracking-wider">
+                {PILLARS_DATA[0].category}
+              </span>
+              <div className="flex items-center gap-2 mt-2 text-[#E6FF2A] font-body text-[14px] font-extrabold uppercase">
+                <span className="w-2 h-2 bg-[#E6FF2A] rounded-xs" />
+                <span>{PILLARS_DATA[0].action}</span>
+              </div>
+              <p className="mt-2 text-white/90 font-body text-[13px] leading-relaxed">
+                {PILLARS_DATA[0].description}
+              </p>
             </div>
-            <p className={styles.nodeText}>
-              Building resilient enterprise infrastructure
-            </p>
-          </div>
 
-          {/* Node 2 */}
-          <div className={`${styles.nodeCard} ${styles.cardTwo}`}>
-            <div className={styles.nodeCardLabel}>DATA & SURVEY</div>
-            <div className={styles.nodeCardTitleWrap}>
-              <span className={styles.starIconYellow}>■</span>
-              <span className={styles.nodeCardTitleYellow}>WE UNDERSTAND</span>
+            {/* Pillar 02 Card - Center Right */}
+            <div className="relative self-end w-[270px] max-[640px]:w-full p-5 rounded-[16px] border border-white/30 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md shadow-[0_16px_40px_rgba(0,0,0,0.3)] transition-transform duration-300 hover:scale-105">
+              <div className="absolute -top-10 left-4 font-heading font-black text-[72px] leading-none text-transparent text-stroke-lime pointer-events-none opacity-90">
+                02
+              </div>
+              <span className="block text-white/80 font-body text-[11px] font-bold uppercase tracking-wider">
+                {PILLARS_DATA[1].category}
+              </span>
+              <div className="flex items-center gap-2 mt-2 text-[#E6FF2A] font-body text-[14px] font-extrabold uppercase">
+                <span className="w-2 h-2 bg-[#E6FF2A] rounded-xs" />
+                <span>{PILLARS_DATA[1].action}</span>
+              </div>
+              <p className="mt-2 text-white/90 font-body text-[13px] leading-relaxed">
+                {PILLARS_DATA[1].description}
+              </p>
             </div>
-            <p className={styles.nodeText}>
-              Turning data into strategic decisions
-            </p>
-          </div>
 
-          {/* Node 3 */}
-          <div className={`${styles.nodeCard} ${styles.cardThree}`}>
-            <div className={styles.nodeCardLabel}>MEDIA</div>
-            <div className={styles.nodeCardTitleWrap}>
-              <span className={styles.starIconYellow}>■</span>
-              <span className={styles.nodeCardTitleYellow}>WE AMPLIFY</span>
+            {/* Pillar 03 Card - Bottom Left */}
+            <div className="relative self-start w-[270px] max-[640px]:w-full p-5 rounded-[16px] border border-white/30 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md shadow-[0_16px_40px_rgba(0,0,0,0.3)] transition-transform duration-300 hover:scale-105">
+              <div className="absolute -top-10 left-4 font-heading font-black text-[72px] leading-none text-transparent text-stroke-lime pointer-events-none opacity-90">
+                03
+              </div>
+              <span className="block text-white/80 font-body text-[11px] font-bold uppercase tracking-wider">
+                {PILLARS_DATA[2].category}
+              </span>
+              <div className="flex items-center gap-2 mt-2 text-[#E6FF2A] font-body text-[14px] font-extrabold uppercase">
+                <span className="w-2 h-2 bg-[#E6FF2A] rounded-xs" />
+                <span>{PILLARS_DATA[2].action}</span>
+              </div>
+              <p className="mt-2 text-white/90 font-body text-[13px] leading-relaxed">
+                {PILLARS_DATA[2].description}
+              </p>
             </div>
-            <p className={styles.nodeText}>
-              Delivering ideas with measurable impact
-            </p>
+
           </div>
         </div>
 
-        {/* Right: Content */}
-        <div className={styles.content}>
-          <SectionLabel text="PLATFORM" variant="light" />
+        {/* Right Side: Headline & Narrative Content */}
+        <div className="flex flex-col gap-6 max-w-[620px]">
+          <div className="flex items-center gap-2.5 text-[#E6FF2A] font-body text-[13px] font-bold uppercase tracking-wider">
+            <span className="w-2 h-2 bg-[#E6FF2A]" />
+            <span>ABOUT US</span>
+          </div>
 
-          <h2 className={styles.heading}>
+          <h2
+            id="bridge-possibility-heading"
+            className="font-heading text-[64px] max-[1280px]:text-[52px] max-[1024px]:text-[42px] max-[640px]:text-[32px] font-normal leading-[1.02] tracking-tight text-white"
+          >
             Bridge Every
             <br />
             Possibility
           </h2>
-          <p className={styles.description}>
-            Connect disparate systems and bridge the gap between technology and business outcomes. 
-            Our solutions create seamless integrations that unlock new possibilities for growth 
-            and operational efficiency.
+
+          <p className="font-body text-[18px] max-[1280px]:text-[16px] font-normal leading-relaxed text-white/85">
+            Arsalynt was built on a singular belief: the greatest challenge
+            facing modern organizations isn&apos;t ambition — it&apos;s
+            fragmentation. As complexity grows, disconnected capabilities
+            weaken execution and limit long-term value.
           </p>
 
-          <div className={styles.cta}>
-            <Button variant="primary" href="#contact">
-              Get Started
-            </Button>
+          <div className="pt-4">
+            <a 
+              href="#about-us" 
+              className="inline-flex items-center justify-center px-8 py-4 bg-[#E6FF2A] text-[#101010] font-body text-[14px] font-extrabold uppercase tracking-wider rounded-full no-underline transition-all duration-200 hover:bg-[#d8f21d] hover:shadow-[0_8px_25px_rgba(230,255,42,0.3)] hover:-translate-y-0.5"
+            >
+              LEARN ABOUT US
+            </a>
           </div>
         </div>
+
       </div>
     </section>
   );
