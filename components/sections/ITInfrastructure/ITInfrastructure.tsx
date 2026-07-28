@@ -10,7 +10,7 @@ const SERVICES_DATA = [
     label: "ONE ECOSYSTEM, THREE PILLARS",
     title: <>Information<br />Technology<br />Infrastructure</>,
     desc: "We build resilient technology infrastructure that connects your business systems into a unified, intelligent ecosystem — enabling seamless operations, scalability, and long-term growth.",
-    tags: ['NETWORK & SECURITY', 'CLOUD', 'MANAGED SERVICES', 'More...']
+    tags: ['SOFTWARE DEVELOPMENT', 'CLOUD', 'INFRASTRUCTURE', 'More...']
   },
   {
     id: 1,
@@ -44,7 +44,7 @@ export default function ITInfrastructure() {
   const current = SERVICES_DATA[activeTab];
 
   return (
-    <section className="relative bg-white py-[120px] max-[1024px]:py-[96px] max-[768px]:py-[72px] overflow-hidden" id="services" aria-label="Services Platform">
+    <section className="relative bg-[#F0F2F8] py-[120px] max-[1024px]:py-[96px] max-[768px]:py-[72px] overflow-hidden" id="services" aria-label="Services Platform">
       {/* Background halo effect */}
       <div 
         className="hidden md:block absolute w-[1074px] h-[1074px] -right-[200px] -top-[100px] pointer-events-none z-0" 

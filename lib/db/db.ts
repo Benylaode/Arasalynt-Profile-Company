@@ -6,7 +6,7 @@
 import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
-import { BUSINESS_DUMMY_DATA } from './dummy';
+import { BUSINESS_DUMMY_DATA, HERO_SLIDES_DUMMY_DATA } from './dummy';
 
 /* ── Resolve path ke file database (di project root / .next tidak masuk) ── */
 const DB_DIR = path.join(process.cwd(), '.db');
@@ -57,6 +57,20 @@ function initSchema(db: Database.Database): void {
       works            TEXT    NOT NULL DEFAULT '[]',  -- JSON array
       other_businesses TEXT    NOT NULL DEFAULT '[]'   -- JSON array
     );
+
+    CREATE TABLE IF NOT EXISTS hero_slides (
+      id                      TEXT    PRIMARY KEY,
+      headline                TEXT    NOT NULL,
+      body                    TEXT    NOT NULL,
+      background_image        TEXT    NOT NULL,
+      mobile_background_image TEXT,
+      background_position     TEXT    DEFAULT 'center center',
+      primary_cta_label       TEXT    NOT NULL,
+      primary_cta_href        TEXT    NOT NULL,
+      secondary_cta_label     TEXT    NOT NULL,
+      secondary_cta_href      TEXT    NOT NULL,
+      sort_order              INTEGER DEFAULT 0
+    );
   `);
 }
 
@@ -66,44 +80,80 @@ function seedIfEmpty(db: Database.Database): void {
     db.prepare('SELECT COUNT(*) as cnt FROM businesses').get() as { cnt: number }
   ).cnt;
 
-  if (count > 0) return; // sudah ada data, skip
+  if (count === 0) {
+    const insert = db.prepare(`
+      INSERT INTO businesses
+        (id, slug, name, category, tagline, hero_img, about_desc, about_img,
+         brand_color, vision_quote, cta_title, cta_desc,
+         pain_points, services, works, other_businesses)
+      VALUES
+        (@id, @slug, @name, @category, @tagline, @hero_img, @about_desc, @about_img,
+         @brand_color, @vision_quote, @cta_title, @cta_desc,
+         @pain_points, @services, @works, @other_businesses)
+    `);
 
-  const insert = db.prepare(`
-    INSERT INTO businesses
-      (id, slug, name, category, tagline, hero_img, about_desc, about_img,
-       brand_color, vision_quote, cta_title, cta_desc,
-       pain_points, services, works, other_businesses)
-    VALUES
-      (@id, @slug, @name, @category, @tagline, @hero_img, @about_desc, @about_img,
-       @brand_color, @vision_quote, @cta_title, @cta_desc,
-       @pain_points, @services, @works, @other_businesses)
-  `);
+    const insertMany = db.transaction(() => {
+      for (const biz of BUSINESS_DUMMY_DATA) {
+        insert.run({
+          id: biz.id,
+          slug: biz.slug,
+          name: biz.name,
+          category: biz.category,
+          tagline: biz.tagline,
+          hero_img: biz.heroImg,
+          about_desc: biz.aboutDesc,
+          about_img: biz.aboutImg,
+          brand_color: biz.brandColor,
+          vision_quote: biz.visionQuote,
+          cta_title: biz.ctaTitle,
+          cta_desc: biz.ctaDesc,
+          pain_points: JSON.stringify(biz.painPoints),
+          services: JSON.stringify(biz.services),
+          works: JSON.stringify(biz.works),
+          other_businesses: JSON.stringify(biz.otherBusinesses),
+        });
+      }
+    });
 
-  const insertMany = db.transaction(() => {
-    for (const biz of BUSINESS_DUMMY_DATA) {
-      insert.run({
-        id: biz.id,
-        slug: biz.slug,
-        name: biz.name,
-        category: biz.category,
-        tagline: biz.tagline,
-        hero_img: biz.heroImg,
-        about_desc: biz.aboutDesc,
-        about_img: biz.aboutImg,
-        brand_color: biz.brandColor,
-        vision_quote: biz.visionQuote,
-        cta_title: biz.ctaTitle,
-        cta_desc: biz.ctaDesc,
-        pain_points: JSON.stringify(biz.painPoints),
-        services: JSON.stringify(biz.services),
-        works: JSON.stringify(biz.works),
-        other_businesses: JSON.stringify(biz.otherBusinesses),
+    insertMany();
+    console.log(`[db] Seeded ${BUSINESS_DUMMY_DATA.length} businesses into SQLite.`);
+  }
+
+  const heroCount = (
+    db.prepare('SELECT COUNT(*) as cnt FROM hero_slides').get() as { cnt: number }
+  ).cnt;
+
+  if (heroCount < HERO_SLIDES_DUMMY_DATA.length) {
+    const insertHero = db.prepare(`
+      INSERT OR REPLACE INTO hero_slides
+        (id, headline, body, background_image, mobile_background_image, background_position,
+         primary_cta_label, primary_cta_href, secondary_cta_label, secondary_cta_href, sort_order)
+      VALUES
+        (@id, @headline, @body, @background_image, @mobile_background_image, @background_position,
+         @primary_cta_label, @primary_cta_href, @secondary_cta_label, @secondary_cta_href, @sort_order)
+    `);
+
+    const insertManyHero = db.transaction(() => {
+      HERO_SLIDES_DUMMY_DATA.forEach((slide, idx) => {
+        insertHero.run({
+          id: String(slide.id),
+          headline: slide.headline,
+          body: slide.body,
+          background_image: slide.backgroundImage,
+          mobile_background_image: slide.mobileBackgroundImage || null,
+          background_position: slide.backgroundPosition || 'center center',
+          primary_cta_label: slide.primaryCta.label,
+          primary_cta_href: slide.primaryCta.href,
+          secondary_cta_label: slide.secondaryCta.label,
+          secondary_cta_href: slide.secondaryCta.href,
+          sort_order: idx,
+        });
       });
-    }
-  });
+    });
 
-  insertMany();
-  console.log(`[db] Seeded ${BUSINESS_DUMMY_DATA.length} businesses into SQLite.`);
+    insertManyHero();
+    console.log(`[db] Seeded ${HERO_SLIDES_DUMMY_DATA.length} hero slides into SQLite.`);
+  }
 }
 
 export { getDb };

@@ -77,3 +77,40 @@ export function getOtherBusinesses(
 
   return rows.map((r) => ({ slug: r.slug, name: r.name, img: r.img }));
 }
+
+/* ── Get hero slides from SQLite DB (dengan fallback ke dummy) ── */
+import type { HeroSlide } from '@/types';
+import type { HeroSlideRow } from '@/lib/business.types';
+import { HERO_SLIDES_DUMMY_DATA } from './dummy';
+
+export function getHeroSlides(): HeroSlide[] {
+  try {
+    const db = getDb();
+    const rows = db
+      .prepare('SELECT * FROM hero_slides ORDER BY sort_order ASC')
+      .all() as HeroSlideRow[];
+
+    if (!rows || rows.length === 0) return HERO_SLIDES_DUMMY_DATA;
+
+    return rows.map((r) => ({
+      id: r.id,
+      headline: r.headline,
+      body: r.body,
+      backgroundImage: r.background_image,
+      mobileBackgroundImage: r.mobile_background_image || undefined,
+      backgroundPosition: r.background_position || 'center center',
+      primaryCta: {
+        label: r.primary_cta_label,
+        href: r.primary_cta_href,
+      },
+      secondaryCta: {
+        label: r.secondary_cta_label,
+        href: r.secondary_cta_href,
+      },
+    }));
+  } catch (error) {
+    console.error('[db] Error fetching hero slides:', error);
+    return HERO_SLIDES_DUMMY_DATA;
+  }
+}
+

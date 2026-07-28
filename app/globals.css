@@ -29,6 +29,32 @@
   --color-lime-yellow: #E6FF2A;
   --color-cobalt-blue: #1A3E9E;
   --color-bright-blue: #2563EB;
+
+  /* --------------------------------------------------------------------------
+     MV PADDING — Horizontal page padding (6.3% of viewport width)
+     Applies consistently across all desktop screen sizes.
+     On mobile: slightly tighter (5vw) for comfort.
+     -------------------------------------------------------------------------- */
+  --container-padding-x: 5vw;
+
+  /* Container width tokens */
+  --container-max:     1700px;
+  --container-content: 1315px;
+  --container-narrow:  921px;
+}
+
+/* Desktop (≥1024px): MV Padding = 6.3vw — berlaku untuk semua ukuran desktop */
+@media (min-width: 1024px) {
+  :root {
+    --container-padding-x: 6.3vw;
+  }
+}
+
+/* Ultra-wide (≥1920px): clamp agar padding tidak berlebihan di layar sangat lebar */
+@media (min-width: 1920px) {
+  :root {
+    --container-padding-x: clamp(80px, 6.3vw, 140px);
+  }
 }
 
 /* --------------------------------------------------------------------------

@@ -4,6 +4,78 @@
    ========================================================================== */
 
 import type { BusinessPage } from '@/lib/business.types';
+import type { HeroSlide } from '@/types';
+
+export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
+  {
+    id: 'unified-enterprise-ecosystem',
+    headline: 'The Unified\nEnterprise Ecosystem',
+    body:
+      'Arsalynk connects technology, data, and media into one synchronized ecosystem\nthat helps enterprises solve complex business challenges.',
+    backgroundImage: '/images/hero/slide-01.webp',
+    mobileBackgroundImage: '/images/hero/slide-01-mobile.webp',
+    backgroundPosition: 'center center',
+    primaryCta: {
+      label: 'OUR BUSINESS',
+      href: '#our-business',
+    },
+    secondaryCta: {
+      label: 'EXPLORE WORKS',
+      href: '/our-works',
+    },
+  },
+  {
+    id: 'tia-hendi-campaign',
+    headline: 'The Road of Tia Hendi, How\nWe Won The Council for Her',
+    body:
+      "Beginning with Tia Hendi's campaign as a candidate, we joined forces to win the trust of Semarang's citizens to win a seat in the Semarang City Council District.",
+    backgroundImage: '/images/hero/slide-02.webp',
+    mobileBackgroundImage: '/images/hero/slide-02-mobile.webp',
+    backgroundPosition: 'center center',
+    primaryCta: {
+      label: 'READ MORE',
+      href: '/insight-programs',
+    },
+    secondaryCta: {
+      label: 'EXPLORE OTHER WORKS',
+      href: '/our-works',
+    },
+  },
+  {
+    id: 'intelligent-technology',
+    headline: 'Intelligent Technology for\nConnected Businesses',
+    body:
+      'Build a connected digital ecosystem that links physical devices with business applications.\nStreamline operations, automate workflows, and make faster decisions through real-time data.',
+    backgroundImage: '/images/hero/slide-03.webp',
+    mobileBackgroundImage: '/images/hero/slide-03-mobile.webp',
+    backgroundPosition: 'center center',
+    primaryCta: {
+      label: 'LEARN MORE',
+      href: '#services',
+    },
+    secondaryCta: {
+      label: 'EXPLORE WORKS',
+      href: '/our-works',
+    },
+  },
+  {
+    id: 'strategic-intelligence',
+    headline: 'From Raw Data to\nStrategic Intelligence',
+    body:
+      'Collect, analyze, and transform continuous business information to uncover trends,\npredict outcomes, and support long-term organizational growth.',
+    backgroundImage: '/images/hero/slide-04.webp',
+    mobileBackgroundImage: '/images/hero/slide-04-mobile.webp',
+    backgroundPosition: 'center center',
+    primaryCta: {
+      label: 'LEARN MORE',
+      href: '#services',
+    },
+    secondaryCta: {
+      label: 'EXPLORE WORKS',
+      href: '/our-works',
+    },
+  },
+];
 
 export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   /* ─────────────────────────────────────────────────────────────────────────

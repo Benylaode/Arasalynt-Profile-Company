@@ -1,166 +1,274 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import Button from '@/components/ui/Button/Button';
-import SliderArrow from '@/components/ui/SliderArrow/SliderArrow';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { HERO_SLIDES } from '@/lib/constants';
 
-const SLIDE_DURATION = 6000; // 6 seconds per slide
+const SLIDE_DURATION = 6000;
+const CONTENT_FADE_DURATION = 280;
 
-/**
- * HeroSection — Full-viewport hero slider/carousel.
- *
- * Features:
- * - Auto-advancing slides with progress bar
- * - Manual navigation (arrows + dots)
- * - Gradient overlays on background
- * - Centered content with headline, body, and CTA buttons
- */
+type ArrowDirection = 'left' | 'right';
+
+function ArrowIcon({ direction }: { direction: ArrowDirection }) {
+  return (
+    <svg
+      width="8"
+      height="14"
+      viewBox="0 0 12 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      {direction === 'left' ? (
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M0 10L10.065 20L11.915 18.166L3.694 10L11.915 1.837L10.065 0L0 10Z"
+          fill="currentColor"
+        />
+      ) : (
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M11.92 10L1.85 0L0 1.834L8.22 10L0 18.163L1.85 20L11.92 10Z"
+          fill="currentColor"
+        />
+      )}
+    </svg>
+  );
+}
+
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isContentVisible, setIsContentVisible] = useState(true);
+
+  const transitionTimerRef = useRef<number | null>(null);
+  const transitionLockRef = useRef(false);
 
   const totalSlides = HERO_SLIDES.length;
 
   const goToSlide = useCallback(
-    (index: number) => {
-      if (isTransitioning) return;
-      setIsTransitioning(true);
+    (requestedIndex: number) => {
+      if (totalSlides <= 1 || transitionLockRef.current) return;
 
-      setTimeout(() => {
-        setCurrentSlide(index);
-        setProgress(0);
-        setTimeout(() => setIsTransitioning(false), 100);
-      }, 300);
+      const nextIndex = (requestedIndex + totalSlides) % totalSlides;
+      if (nextIndex === currentSlide) return;
+
+      transitionLockRef.current = true;
+      setIsContentVisible(false);
+      setProgress(0);
+
+      transitionTimerRef.current = window.setTimeout(() => {
+        setCurrentSlide(nextIndex);
+
+        window.requestAnimationFrame(() => {
+          setIsContentVisible(true);
+          transitionLockRef.current = false;
+        });
+      }, CONTENT_FADE_DURATION);
     },
-    [isTransitioning]
+    [currentSlide, totalSlides]
   );
 
   const nextSlide = useCallback(() => {
-    goToSlide((currentSlide + 1) % totalSlides);
-  }, [currentSlide, totalSlides, goToSlide]);
+    goToSlide(currentSlide + 1);
+  }, [currentSlide, goToSlide]);
 
   const prevSlide = useCallback(() => {
-    goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
-  }, [currentSlide, totalSlides, goToSlide]);
+    goToSlide(currentSlide - 1);
+  }, [currentSlide, goToSlide]);
 
-  // Auto-advance and progress interval setup
   useEffect(() => {
-    const step = 100 / (SLIDE_DURATION / 50); // Update every 50ms
-    const progressInterval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) return 100;
-        return prev + step;
-      });
-    }, 50);
+    if (totalSlides <= 1) return undefined;
 
-    const slideTimeout = setTimeout(() => {
-      setCurrentSlide((prev) => (prev + 1) % totalSlides);
-      setProgress(0);
+    const tickDuration = 50;
+    const progressStep = 100 / (SLIDE_DURATION / tickDuration);
+
+    const progressInterval = window.setInterval(() => {
+      setProgress((previousProgress) =>
+        Math.min(previousProgress + progressStep, 100)
+      );
+    }, tickDuration);
+
+    const slideTimeout = window.setTimeout(() => {
+      goToSlide(currentSlide + 1);
     }, SLIDE_DURATION);
 
     return () => {
-      clearInterval(progressInterval);
-      clearTimeout(slideTimeout);
+      window.clearInterval(progressInterval);
+      window.clearTimeout(slideTimeout);
     };
-  }, [currentSlide, totalSlides]);
+  }, [currentSlide, goToSlide, totalSlides]);
+
+  useEffect(() => {
+    return () => {
+      if (transitionTimerRef.current !== null) {
+        window.clearTimeout(transitionTimerRef.current);
+      }
+    };
+  }, []);
+
+  if (totalSlides === 0) return null;
 
   const slide = HERO_SLIDES[currentSlide];
 
   return (
-    <section className="relative w-full h-screen min-h-[700px] max-h-[970px] bg-[#0B0F19] overflow-hidden max-[1024px]:max-h-[850px] max-[768px]:max-h-none max-[768px]:min-h-[600px] max-[768px]:h-[100svh]" id="hero" aria-label="Hero">
-      {/* Background — high-tech earth globe image */}
-      <div className="absolute inset-0 z-[1]" aria-hidden="true">
-        <img
-          src="/images/earth_globe.png"
-          alt="Earth Globe"
-          className="w-full h-full object-cover"
-          style={{
-            opacity: 0.55,
-            mixBlendMode: "screen",
-            transform: "scale(1.05)",
-            animation: "pulse-glow 8s ease-in-out infinite",
-          }}
-        />
+    <section
+      id="hero"
+      aria-label="Hero"
+      className="relative h-[710px] min-h-[520px] w-full overflow-hidden bg-[#101010] max-[1024px]:h-[630px] max-[768px]:h-[570px] max-[768px]:min-h-[480px]"
+    >
+      {/*
+       * ONE BACKGROUND PER SLIDE.
+       * All images are mounted so the browser can preload them, but only the
+       * active slide is visible. Do not put one shared hero image here.
+       */}
+      <div className="absolute inset-0 z-0" aria-hidden="true">
+        {HERO_SLIDES.map((item, index) => (
+          <picture
+            key={`hero-background-${item.id ?? index}`}
+            className={`absolute inset-0 block transition-opacity duration-[900ms] ease-in-out ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            {item.mobileBackgroundImage && (
+              <source
+                media="(max-width: 767px)"
+                srcSet={item.mobileBackgroundImage}
+              />
+            )}
+
+            <img
+              src={item.backgroundImage}
+              alt=""
+              className="h-full w-full object-cover"
+              style={{
+                objectPosition: item.backgroundPosition ?? 'center center',
+              }}
+              draggable={false}
+            />
+          </picture>
+        ))}
       </div>
 
-      {/* Grid Overlay */}
+      {/* Shared overlays taken from the SVG geometry. */}
       <div
-        className="absolute inset-0 pointer-events-none z-[2]"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-[37.732%] z-[1] h-[63.402%] opacity-[0.65]"
         style={{
-          backgroundImage:
-            "linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-          backgroundPosition: "center",
+          background:
+            'linear-gradient(180deg, rgba(16,16,16,0) 9.61538%, #101010 100%)',
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-[37.732%] z-[1] h-[63.402%] opacity-[0.65]"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(16,16,16,0) 9.61538%, #101010 100%)',
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-[77.216%] z-[2] h-[23.918%]"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(16,16,16,0) 0%, #101010 100%)',
         }}
       />
 
-      {/* Gradient overlays */}
-      <div className="absolute left-0 right-0 -bottom-[1px] z-[2] h-[615px] max-[768px]:h-[400px] bg-gradient-to-b from-transparent via-[#0B0F19]/60 to-[#0B0F19]" aria-hidden="true" />
-      <div className="absolute left-0 right-0 -bottom-[1px] z-[2] h-[232px] max-[768px]:h-[150px] bg-gradient-to-b from-transparent to-[#0B0F19]" aria-hidden="true" />
+      {/* Text and CTA belonging to the active slide - 60% from top (40% from bottom) */}
+      <div className="absolute inset-x-0 top-[60%] -translate-y-1/2 z-[5] px-6 max-[480px]:px-4">
+        <div
+          className={`mx-auto flex w-full flex-col items-center text-center transition-all duration-[280ms] ease-out ${
+            isContentVisible
+              ? 'translate-y-0 opacity-100'
+              : '-translate-y-3 opacity-0'
+          }`}
+        >
+          <h1 className="m-0 max-w-[1150px] whitespace-pre-line font-heading text-[clamp(42px,5vw,84px)] font-normal leading-[1.03] tracking-[-0.015em] text-[#F7F7F7] max-[768px]:max-w-[680px] max-[768px]:text-[clamp(34px,8.5vw,52px)]">
+            {slide.headline}
+          </h1>
 
-      {/* Content */}
-      <div
-        className={`absolute z-[5] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-8 max-[768px]:gap-6 w-full max-w-[960px] px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px] text-center mt-[30px] max-[1024px]:mt-[10px] max-[768px]:mt-0 transition-all duration-600 ease-in-out ${
-          !isTransitioning ? 'opacity-100 translate-y-[-50%]' : 'opacity-0 translate-y-[-45%]'
-        }`}
-      >
-        {/* Floating Category Pill */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.2)]">
-          <span className="w-2 h-2 rounded-full bg-[#E6FF2A] animate-pulse" />
-          <span className="font-heading font-extrabold text-[11px] tracking-[0.2em] uppercase text-white/90">
-            Arsalynt Enterprise Platform
-          </span>
-        </div>
+          <p className="mx-auto mb-0 mt-6 max-w-[800px] whitespace-pre-line font-body text-[18px] font-normal leading-[26px] text-[#F7F7F7] max-[1024px]:mt-5 max-[1024px]:max-w-[700px] max-[1024px]:text-[16px] max-[768px]:mt-4 max-[768px]:max-w-[560px] max-[768px]:text-[15px] max-[768px]:leading-6 max-[480px]:text-[14px]">
+            {slide.body}
+          </p>
 
-        <h1 className="font-heading font-bold text-[84px] max-[1280px]:text-[64px] max-[1024px]:text-[48px] max-[768px]:text-[36px] max-[480px]:text-[28px] leading-[1.05] tracking-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
-          {slide.headline}
-        </h1>
+          <div className="mt-8 flex items-center justify-center gap-3 max-[768px]:mt-6 max-[600px]:w-full max-[600px]:flex-col max-[600px]:gap-3">
+            <a
+              href={slide.primaryCta.href}
+              className="inline-flex h-11 w-[160px] items-center justify-center rounded-full bg-[#E6FF2A] px-4 font-body text-[14px] font-extrabold tracking-[0.04em] uppercase text-[#101010] no-underline transition-transform duration-200 hover:scale-[1.025] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A] max-[768px]:h-10 max-[768px]:text-[13px] max-[600px]:w-full max-[600px]:max-w-[300px]"
+            >
+              {slide.primaryCta.label}
+            </a>
 
-        <p className="font-body font-normal text-[20px] max-[1280px]:text-[18px] max-[1024px]:text-[16px] max-[480px]:text-[14px] leading-relaxed tracking-wide text-[#94A3B8] max-w-[780px]">
-          {slide.body}
-        </p>
-
-        <div className="flex flex-row max-[768px]:flex-col items-center gap-4 max-[768px]:w-full [&_a]:max-[768px]:w-full [&_button]:max-[768px]:w-full mt-2">
-          <Button variant="primary" href={slide.primaryCta.href}>
-            {slide.primaryCta.label}
-          </Button>
-          <Button variant="secondary" href={slide.secondaryCta.href}>
-            {slide.secondaryCta.label}
-          </Button>
+            <a
+              href={slide.secondaryCta.href}
+              className="inline-flex h-11 w-[175px] items-center justify-center rounded-full border border-[#E6FF2A] bg-transparent px-4 font-body text-[14px] font-extrabold tracking-[0.04em] uppercase text-[#F7F7F7] no-underline transition-colors duration-200 hover:bg-[#E6FF2A]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A] max-[768px]:h-10 max-[768px]:text-[13px] max-[600px]:w-full max-[600px]:max-w-[300px]"
+            >
+              {slide.secondaryCta.label}
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* Slider Arrow Navigation */}
-      <div className="absolute z-[6] top-1/2 -translate-y-1/2 left-[110px] right-[110px] max-[1280px]:left-[64px] max-[1280px]:right-[64px] max-[1024px]:left-[40px] max-[1024px]:right-[40px] hidden md:flex justify-between pointer-events-none [&_button]:pointer-events-auto" aria-hidden="true">
-        <SliderArrow direction="left" onClick={prevSlide} />
-        <SliderArrow direction="right" onClick={nextSlide} />
-      </div>
-
-      {/* Slide Counter */}
-      <div className="absolute z-[6] bottom-[70px] max-[768px]:bottom-[40px] left-[110px] max-[1280px]:left-[64px] max-[1024px]:left-[40px] max-[768px]:left-1/2 max-[768px]:-translate-x-1/2 flex items-center gap-2.5" role="tablist" aria-label="Slide indicators">
-        {HERO_SLIDES.map((_, i) => (
+      {totalSlides > 1 && (
+        <div className="pointer-events-none absolute inset-x-[5.755%] top-1/2 z-[6] hidden -translate-y-1/2 items-center justify-between md:flex">
           <button
-            key={i}
             type="button"
-            className={`h-[6px] rounded-full border-none cursor-pointer transition-all duration-300 ${
-              i === currentSlide ? 'w-[48px] bg-white/20 relative overflow-hidden' : 'w-[10px] bg-white/30 hover:bg-white/60'
-            }`}
-            onClick={() => goToSlide(i)}
-            role="tab"
-            aria-selected={i === currentSlide}
-            aria-label={`Go to slide ${i + 1}`}
+            onClick={prevSlide}
+            aria-label="Previous slide"
+            className="pointer-events-auto inline-flex h-[36px] w-[36px] items-center justify-center rounded-[5px] border border-[#4C4C4C] bg-transparent text-[#D9D9D9] transition-colors duration-200 hover:border-[#D9D9D9] hover:bg-white/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A]"
           >
-            {i === currentSlide && (
-              <span
-                className="absolute top-0 left-0 h-full bg-[#E6FF2A] rounded-full transition-[width] duration-100 linear shadow-[0_0_12px_#E6FF2A]"
-                style={{ width: `${progress}%` }}
-              />
-            )}
+            <ArrowIcon direction="left" />
           </button>
-        ))}
-      </div>
+
+          <button
+            type="button"
+            onClick={nextSlide}
+            aria-label="Next slide"
+            className="pointer-events-auto inline-flex h-[36px] w-[36px] items-center justify-center rounded-[5px] border border-[#4C4C4C] bg-transparent text-[#D9D9D9] transition-colors duration-200 hover:border-[#D9D9D9] hover:bg-white/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A]"
+          >
+            <ArrowIcon direction="right" />
+          </button>
+        </div>
+      )}
+
+      {totalSlides > 1 && (
+        <div
+          className="absolute bottom-[60px] left-[5.729%] z-[6] flex h-[10px] items-center gap-2 max-[768px]:bottom-8 max-[768px]:left-1/2 max-[768px]:-translate-x-1/2"
+          role="tablist"
+          aria-label="Hero slides"
+        >
+          {HERO_SLIDES.map((item, index) => {
+            const isActive = index === currentSlide;
+
+            return (
+              <button
+                key={`hero-indicator-${item.id ?? index}`}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                aria-label={`Go to slide ${index + 1}`}
+                onClick={() => goToSlide(index)}
+                className={`relative h-[10px] overflow-hidden rounded-[1px] border-0 p-0 transition-[width,background-color] duration-300 ${
+                  isActive
+                    ? 'w-[54px] bg-[#717171]/45'
+                    : 'w-[10px] bg-[#717171] hover:bg-[#929292]'
+                }`}
+              >
+                {isActive && (
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-y-0 left-0 rounded-[1px] bg-[#BDC22E] transition-[width] duration-100 ease-linear"
+                    style={{ width: `${progress}%` }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 }

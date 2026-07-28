@@ -6,9 +6,12 @@ export interface NavItem {
 }
 
 export interface HeroSlide {
-  id: number;
+  id: string | number;
   headline: string;
   body: string;
+  backgroundImage: string;
+  mobileBackgroundImage?: string;
+  backgroundPosition?: string;
   primaryCta: {
     label: string;
     href: string;

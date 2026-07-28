@@ -17,31 +17,10 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Contact', href: '#contact' },
 ];
 
-/* ─── Hero Slides ─── */
+import { HERO_SLIDES_DUMMY_DATA } from '@/lib/db/dummy';
 
-export const HERO_SLIDES: HeroSlide[] = [
-  {
-    id: 1,
-    headline: 'The Unified Enterprise Ecosystem',
-    body: 'We create integrated technology solutions that connect every part of your business into one seamless, intelligent ecosystem.',
-    primaryCta: { label: 'Explore More', href: '#services' },
-    secondaryCta: { label: 'Discover Our Services', href: '#portfolio' },
-  },
-  {
-    id: 2,
-    headline: 'Building Digital Infrastructure',
-    body: 'Enterprise-grade technology infrastructure designed for resilience, scalability, and long-term business growth.',
-    primaryCta: { label: 'Get Started', href: '#contact' },
-    secondaryCta: { label: 'View Our Work', href: '#portfolio' },
-  },
-  {
-    id: 3,
-    headline: 'Transforming Business Operations',
-    body: 'Strategic technology consulting and implementation that drives measurable results across your entire organization.',
-    primaryCta: { label: 'Learn More', href: '#about' },
-    secondaryCta: { label: 'See Case Studies', href: '#portfolio' },
-  },
-];
+export const HERO_SLIDES: HeroSlide[] = HERO_SLIDES_DUMMY_DATA;
+
 
 /* ─── Client Logos ─── */
 /* Placeholder data — replace src with actual logo paths when provided */
@@ -161,7 +140,8 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
 
 /* ─── Metadata ─── */
 
-export const SITE_NAME = 'Arsalynt';
+export const SITE_NAME = 'Arsalynk';
 export const SITE_DESCRIPTION =
-  'Arsalynt builds unified enterprise ecosystems — integrated technology solutions for resilient, scalable, and intelligent business operations.';
-export const SITE_URL = 'https://arsalynt.com';
+  'Arsalynk builds unified enterprise ecosystems — integrated technology solutions for resilient, scalable, and intelligent business operations.';
+export const SITE_URL = 'https://arsalynk.com';
+

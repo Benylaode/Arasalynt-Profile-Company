@@ -63,3 +63,18 @@ export interface BusinessRow {
   works: string;       // JSON
   other_businesses: string; // JSON
 }
+
+export interface HeroSlideRow {
+  id: string;
+  headline: string;
+  body: string;
+  background_image: string;
+  mobile_background_image?: string;
+  background_position?: string;
+  primary_cta_label: string;
+  primary_cta_href: string;
+  secondary_cta_label: string;
+  secondary_cta_href: string;
+  sort_order: number;
+}
+
