@@ -50,16 +50,107 @@ export default function BridgePossibility() {
         {/* Left Side (55%): Interactive Globe Visual & Floating Glass Cards */}
         <div className="relative w-full max-w-[755px] aspect-[755/640] mx-auto flex items-center justify-center">
           
-          {/* Globe Image */}
-          <img
-            src="/images/componen/globe.svg"
-            alt="Global Network"
-            className="absolute z-[1] w-[68%] h-auto object-contain pointer-events-none opacity-90 select-none animate-float-y"
-            style={{
-              filter: 'drop-shadow(0 0 30px rgba(62, 136, 255, 0.4))',
-              WebkitFilter: 'drop-shadow(0 0 30px rgba(62, 136, 255, 0.4))',
-            }}
-          />
+{/* Globe + Geometric X */}
+<div
+  className="
+    absolute
+    z-[1]
+    aspect-square
+    w-[54.4%]
+    pointer-events-none
+    select-none
+    animate-float-y
+  "
+>
+  {/* Globe — 20% lebih kecil dan opacity 50% */}
+  <img
+    src="/images/componen/globe.svg"
+    alt="Global Network"
+    className="
+      absolute
+      inset-0
+      z-[1]
+      h-full
+      w-full
+      object-contain
+      opacity-50
+    "
+    style={{
+      filter: 'drop-shadow(0 0 30px rgba(62, 136, 255, 0.25))',
+      WebkitFilter:
+        'drop-shadow(0 0 30px rgba(62, 136, 255, 0.25))',
+    }}
+  />
+
+  {/* Area pemotong X */}
+  <div
+    className="
+      absolute
+      left-1/2
+      top-[51%]
+      z-[2]
+      aspect-square
+      w-[112%]
+      -translate-x-1/2
+      -translate-y-1/2
+      overflow-hidden
+    "
+    aria-hidden="true"
+  >
+    {/* Geometric X — tipis, besar, dan ujungnya terpotong */}
+    <div
+      className="
+        absolute
+        left-1/2
+        top-1/2
+        aspect-square
+        w-[138%]
+        -translate-x-1/2
+        -translate-y-1/2
+      "
+      style={{
+        background:
+          'linear-gradient(135deg, rgba(51,112,220,0.28) 0%, rgba(19,73,180,0.18) 100%)',
+
+        clipPath: `
+          polygon(
+            0% 7%,
+            7% 0%,
+            50% 43%,
+            93% 0%,
+            100% 7%,
+            57% 50%,
+            100% 93%,
+            93% 100%,
+            50% 57%,
+            7% 100%,
+            0% 93%,
+            43% 50%
+          )
+        `,
+
+        WebkitClipPath: `
+          polygon(
+            0% 7%,
+            7% 0%,
+            50% 43%,
+            93% 0%,
+            100% 7%,
+            57% 50%,
+            100% 93%,
+            93% 100%,
+            50% 57%,
+            7% 100%,
+            0% 93%,
+            43% 50%
+          )
+        `,
+      }}
+    />
+  </div>
+</div>
+
+
 
           {/* Animated Arrow GIF */}
           <img
@@ -69,13 +160,13 @@ export default function BridgePossibility() {
           />
 
           {/* Floating Glass Pillar Cards Layout */}
-          <div className="relative z-[5] w-full h-full flex flex-col justify-between p-4 max-[640px]:gap-10">
+          <div className="relative z-[5] mx-auto flex h-full w-full max-h-[520px] max-w-[600px] flex-col justify-between px-4 py-4 max-[500px]:gap-10">
             
             {/* Pillar 01 Card Container - Top Left */}
             <div className="relative self-start w-[242px] max-[640px]:w-full mt-6">
               {/* Anchored Slender Outline 01 Number */}
               <div 
-                className="absolute -top-24 left-12 max-[640px]:left-6 font-heading font-semibold text-[180px] max-[1280px]:text-[145px] max-[640px]:text-[105px] leading-none text-transparent opacity-85 pointer-events-none z-[1] select-none"
+                className="absolute -top-25 left-17 max-[640px]:left-6 font-heading font-semibold text-[180px] max-[1280px]:text-[145px] max-[640px]:text-[105px] leading-none text-transparent opacity-85 pointer-events-none z-[1] select-none"
                 style={{ WebkitTextStroke: '1px #E6FF2A' }}
               >
                 01
@@ -113,10 +204,10 @@ export default function BridgePossibility() {
             </div>
 
             {/* Pillar 02 Card Container - Center Right */}
-            <div className="relative self-end w-[242px] max-[640px]:w-full">
+            <div className="relative self-end w-[242px] translate-y-[30px] max-[640px]:w-full max-[640px]:translate-y-0">
               {/* Anchored Slender Outline 02 Number */}
               <div 
-                className="absolute -top-24 left-6 max-[640px]:left-4 font-heading font-semibold text-[180px] max-[1280px]:text-[145px] max-[640px]:text-[105px] leading-none text-transparent opacity-85 pointer-events-none z-[1] select-none"
+                className="absolute -top-32 left-10 max-[640px]:left-4 font-heading font-semibold text-[180px] max-[1280px]:text-[145px] max-[640px]:text-[105px] leading-none text-transparent opacity-85 pointer-events-none z-[1] select-none"
                 style={{ WebkitTextStroke: '1px #E6FF2A' }}
               >
                 02
@@ -157,7 +248,7 @@ export default function BridgePossibility() {
             <div className="relative self-start w-[242px] max-[640px]:w-full mb-6">
               {/* Anchored Slender Outline 03 Number */}
               <div 
-                className="absolute -top-22 left-3 font-heading font-semibold text-[180px] max-[1280px]:text-[145px] max-[640px]:text-[105px] leading-none text-transparent opacity-85 pointer-events-none z-[1] select-none"
+                className="absolute -top-29 left-0 font-heading font-semibold text-[180px] max-[1280px]:text-[145px] max-[640px]:text-[105px] leading-none text-transparent opacity-85 pointer-events-none z-[1] select-none"
                 style={{ WebkitTextStroke: '1px #E6FF2A' }}
               >
                 03
@@ -198,22 +289,22 @@ export default function BridgePossibility() {
         </div>
 
         {/* Right Side (45%): Headline & Narrative Content */}
-        <div className="flex flex-col gap-6 max-w-[620px]">
+        <div className="flex w-full max-w-[470px] flex-col gap-4">
           <div className="flex items-center gap-2.5 text-[#E6FF2A] font-body text-[13px] font-bold uppercase tracking-wider">
             <span className="w-2 h-2 bg-[#E6FF2A] shrink-0" />
-            <span>ABOUT US</span>
+            <span className="font-normal text-[10px]">ABOUT US</span>
           </div>
 
           <h2
             id="bridge-possibility-heading"
-            className="font-heading text-[64px] max-[1280px]:text-[52px] max-[1024px]:text-[42px] max-[640px]:text-[32px] font-semibold leading-[1.02] tracking-tight text-white"
+            className="font-heading text-[72px] max-[1280px]:text-[68px] max-[1024px]:text-[64px] max-[640px]:text-[60px] font-normal leading-[1.02] tracking-tight text-white"
           >
             Bridge Every
             <br />
             Possibility
           </h2>
 
-          <p className="font-body text-[18px] max-[1280px]:text-[16px] font-normal leading-relaxed text-white/85">
+          <p className="w-full font-body text-[14px] font-normal leading-relaxed text-white/85 max-w-[400px] max-[100px]:text-[11px]">
             Arsalynt was built on a singular belief: the greatest challenge
             facing modern organizations isn&apos;t ambition — it&apos;s
             fragmentation. As complexity grows, disconnected capabilities
