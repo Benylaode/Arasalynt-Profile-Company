@@ -4,12 +4,13 @@ Dengan asumsi **hari ini adalah 29 Juli 2026**, proyek dimulai **2 hari yang lal
 | ------------------ | ------- | -------------------------------------------------------------------------- | ----------- |
 | **27 Juli 2026**   | Hari 1  | Penyelesaian pengembangan sistem (Backend, Frontend, Database, API)        | ✅ Selesai   |
 | **28 Juli 2026**   | Hari 2  | Finalisasi seluruh fungsi sistem dan validasi fitur                        | ✅ Selesai   |
-| **29 Juli 2026**   | Hari 3  | Penyesuaian UI Homepage (selesai) dan mulai penyesuaian halaman Who We Are | 🔄 Berjalan |
-| **30 Juli 2026**   | Hari 4  | Penyesuaian UI Our Services dan Problem We Solve                           | ⏳           |
-| **31 Juli 2026**   | Hari 5  | Penyesuaian UI Our Works dan Portfolio                                     | ⏳           |
-| **1 Agustus 2026** | Hari 6  | Penyesuaian UI Detail Project dan Contact                                  | ⏳           |
-| **2 Agustus 2026** | Hari 7  | Penyempurnaan UI Footer, Responsive Layout, dan Animasi                    | ⏳           |
-| **3 Agustus 2026** | Hari 8  | Integrasi tautan Social Media dan tombol Contact Us                        | ⏳           |
+| **29 Juli 2026**   | Hari 3  | Penyesuaian UI Homepage  dan navbar animasi card section Bridge Every
+Possibility navbar dan hero | ✅ Selesai |
+| **30 Juli 2026**   | Hari 4  | Penyesuaian UI Homepage why arsalynt sampai navbar                           | ⏳           |
+| **31 Juli 2026**   | Hari 5  | Penyesuaian UI about us dan Portfolio                                     | ⏳           |
+| **1 Agustus 2026** | Hari 6  | Penyesuaian UI business dan Contact                                  | ⏳           |
+| **2 Agustus 2026** | Hari 7  | Penyempurnaan insight dan program, case studi, dan leadership thought                    | ⏳           |
+| **3 Agustus 2026** | Hari 8  | Integrasi tautan Social Media dan tombol Contact Us dan penyempurnaan ui our work                    | ⏳           |
 | **4 Agustus 2026** | Hari 9  | Quality Assurance (QA), Bug Fixing, dan Cross Browser Testing              | ⏳           |
 | **5 Agustus 2026** | Hari 10 | Final Review, Deployment, dan Dokumentasi                                  | ⏳           |
 
