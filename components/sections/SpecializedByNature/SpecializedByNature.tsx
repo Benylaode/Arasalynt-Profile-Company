@@ -1,144 +1,142 @@
 'use client';
 
-/* ── Pure SVG Isometric Components ── */
-const Iso3DCube = () => (
-  <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
-    <polygon points="100,30 160,65 100,100 40,65" fill="#2563eb" fillOpacity="0.85" />
-    <polygon points="40,65 100,100 100,160 40,125" fill="#1d4ed8" />
-    <polygon points="160,65 100,100 100,160 160,125" fill="#1e3a8a" />
-    <g transform="translate(85,15)">
-      <rect x="0" y="0" width="30" height="30" rx="4" fill="#050b18" stroke="#E6FF2A" strokeWidth="1.5" />
-      <rect x="4" y="4" width="22" height="22" rx="2" fill="#1d4ed8" fillOpacity="0.5" />
-      <rect x="8" y="8" width="14" height="14" rx="2" fill="#E6FF2A" />
-    </g>
-    <ellipse cx="100" cy="155" rx="55" ry="15" fill="#2563eb" fillOpacity="0.15" />
-  </svg>
-);
+import Image from 'next/image';
+import type { CSSProperties } from 'react';
+import styles from './SpecializedByNature.module.css';
 
-const IsoBarChart = () => (
-  <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
-    <polygon points="30,130 60,115 60,145 30,160" fill="#E6FF2A" fillOpacity="0.8" />
-    <polygon points="60,115 80,125 80,155 60,145" fill="#a3d900" />
-    <polygon points="30,130 60,115 80,125 50,140" fill="#e2f122" />
-    <polygon points="75,110 105,95 105,145 75,160" fill="#E6FF2A" fillOpacity="0.85" />
-    <polygon points="105,95 125,105 125,155 105,145" fill="#a3d900" />
-    <polygon points="75,110 105,95 125,105 95,120" fill="#e2f122" />
-    <polygon points="120,80 150,65 150,145 120,160" fill="#E6FF2A" />
-    <polygon points="150,65 170,75 170,155 150,145" fill="#a3d900" />
-    <polygon points="120,80 150,65 170,75 140,90" fill="#e2f122" />
-    <polyline points="35,145 70,120 110,110 145,80" stroke="#E6FF2A" strokeWidth="2" fill="none" strokeDasharray="4 2" />
-    <ellipse cx="100" cy="150" rx="60" ry="12" fill="#E6FF2A" fillOpacity="0.08" />
-  </svg>
-);
+type CardItem = {
+  id: number;
+  image: string;
+  imageAlt: string;
+  title: [string, string];
+  description: string;
+  label: string;
+  mediaSide: 'left' | 'right';
+  imageClass: string;
+};
 
-const IsoFolder = () => (
-  <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
-    <polygon points="25,120 100,85 175,120 100,155" fill="#1d4ed8" fillOpacity="0.7" />
-    <polygon points="25,70 25,120 100,155 100,105" fill="#2563eb" />
-    <polygon points="175,70 175,120 100,155 100,105" fill="#1e3a8a" />
-    <polygon points="25,70 100,35 175,70 100,105" fill="#3b82f6" />
-    <g transform="translate(70, 20) rotate(-8, 30, 40)">
-      <rect x="0" y="0" width="55" height="75" rx="4" fill="white" fillOpacity="0.95" />
-      <rect x="8" y="12" width="39" height="3" rx="1" fill="#94a3b8" />
-      <rect x="8" y="22" width="31" height="3" rx="1" fill="#94a3b8" />
-      <rect x="8" y="32" width="35" height="3" rx="1" fill="#94a3b8" />
-    </g>
-    <ellipse cx="100" cy="148" rx="60" ry="12" fill="#2563eb" fillOpacity="0.1" />
-  </svg>
-);
+const CARDS: CardItem[] = [
+  {
+    id: 1,
+    image: '/images/specialized/specialized-technology.webp',
+    imageAlt: 'Isometric technology infrastructure illustration',
+    title: ['Flexible Resilients', 'Technology Infrastructure'],
+    description:
+      'We build resilient systems, optimize infrastructure, and uncover insights that strengthen our business partner',
+    label: 'FLEXIBLE TECH COVERING',
+    mediaSide: 'left',
+    imageClass: styles.technologyImage,
+  },
+  {
+    id: 2,
+    image: '/images/specialized/specialized-intelligence.webp',
+    imageAlt: 'Isometric strategic intelligence dashboard illustration',
+    title: ['Driven by Strategic', 'Intelligence'],
+    description:
+      'Our ecosystem contributes to a shared intelligence network, allowing knowledge, experience, and innovation to compound across every engagement.',
+    label: 'DATA-DRIVEN DECISION MAKING',
+    mediaSide: 'right',
+    imageClass: styles.intelligenceImage,
+  },
+  {
+    id: 3,
+    image: '/images/specialized/specialized-impact.webp',
+    imageAlt: 'Isometric media and long-term impact illustration',
+    title: ['Designed for Long', 'Lasting Impact'],
+    description:
+      'Transform strategy into influence, delivering creative execution and enterprise communications with precision, consistency, and measurable impact.',
+    label: 'MEASURABLE BUSINESS OUTCOMES',
+    mediaSide: 'left',
+    imageClass: styles.impactImage,
+  },
+];
 
 export default function SpecializedByNature() {
   return (
-    <section className="relative bg-[#F0F2F8] py-[120px] max-[1024px]:py-[96px] max-[768px]:py-[72px]" id="services" aria-label="Specialized By Nature, Unified By Design">
-      <div className="w-full max-w-[1700px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
-        
-        {/* Section Heading */}
-        <div className="text-center mb-[64px]">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <span className="w-[6px] h-[6px] bg-blue-600" />
-            <span className="font-heading text-[10px] font-extrabold tracking-[0.25em] text-blue-600 uppercase">
-              WHY ARSALYNK
-            </span>
+    <section
+      id="services"
+      className={styles.section}
+      aria-labelledby="specialized-by-nature-heading"
+    >
+      {/* Background dipisah agar overflow tidak merusak sticky */}
+      <div className={styles.backgroundClip} aria-hidden="true">
+        <div className={styles.networkBackground} />
+      </div>
+
+      <div className={styles.inner}>
+        <header className={styles.header}>
+          <div className={styles.eyebrow}>
+            <span className={styles.eyebrowDot} aria-hidden="true" />
+            <span>WHY ARSALYNK</span>
           </div>
-          <h2 className="font-heading font-bold text-[48px] max-[1280px]:text-[40px] max-[1024px]:text-[36px] max-[768px]:text-[28px] max-[480px]:text-[24px] leading-snug tracking-tight text-[#101010]">
+
+          <h2
+            id="specialized-by-nature-heading"
+            className={styles.heading}
+          >
             Specialized By Nature,
             <br />
             Unified By Design
           </h2>
-        </div>
+        </header>
 
-        {/* Bento Cards List */}
-        <div className="flex flex-col gap-8 max-w-[960px] mx-auto">
-          
-          {/* Card 1: Flexible Resilient Infrastructure */}
-          <div className="group grid grid-cols-1 md:grid-cols-[5fr_7fr] rounded-[24px] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.08)] transition-transform duration-400 ease-in-out hover:-translate-y-[6px]">
-            <div className="flex items-center justify-center p-[40px] relative overflow-hidden min-h-[240px] bg-[#E8EEF8]">
-              <div className="w-[160px] h-[160px] flex items-center justify-center animate-float-y">
-                <Iso3DCube />
-              </div>
-            </div>
-            <div className="flex flex-col justify-center p-[40px_48px] bg-[#2D5BE3]">
-              <h3 className="font-heading font-bold text-[28px] max-[1280px]:text-[24px] max-[1024px]:text-[22px] max-[768px]:text-[20px] leading-snug tracking-tight text-white mb-3">
-                Flexible Resilients
-                <br />
-                Technology Infrastructure
-              </h3>
-              <p className="font-body text-sm leading-relaxed text-white/80 mb-6 max-w-[480px]">
-                We build resilient systems, optimize infrastructure, and uncover insights that strengthen our business partner
-              </p>
-              <div className="inline-flex items-center gap-2">
-                <span className="w-[6px] h-[6px] bg-[#E6FF2A]" />
-                <span className="font-body font-extrabold text-[11px] tracking-[0.2em] uppercase text-[#E6FF2A]">FLEXIBLE TECH COVERING</span>
-              </div>
-            </div>
-          </div>
+        <div className={styles.cards}>
+          {CARDS.map((item, index) => {
+            const cardStyle = {
+              '--card-index': index,
+              '--card-z-index': 10 + index,
+            } as CSSProperties;
 
-          {/* Card 2: Strategic Intelligence */}
-          <div className="group grid grid-cols-1 md:grid-cols-[7fr_5fr] rounded-[24px] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.08)] transition-transform duration-400 ease-in-out hover:-translate-y-[6px]">
-            <div className="flex flex-col justify-center p-[40px_48px] bg-[#2D5BE3]">
-              <h3 className="font-heading font-bold text-[28px] max-[1280px]:text-[24px] max-[1024px]:text-[22px] max-[768px]:text-[20px] leading-snug tracking-tight text-white mb-3">
-                Driven by Strategic
-                <br />
-                Intelligence
-              </h3>
-              <p className="font-body text-sm leading-relaxed text-white/80 mb-6 max-w-[480px]">
-                Our ecosystem contributes to a shared intelligence network, allowing knowledge, experience, and innovation to compound across every engagement.
-              </p>
-              <div className="inline-flex items-center gap-2">
-                <span className="w-[6px] h-[6px] bg-[#E6FF2A]" />
-                <span className="font-body font-extrabold text-[11px] tracking-[0.2em] uppercase text-[#E6FF2A]">DATA-DRIVEN DECISION MAKING</span>
-              </div>
-            </div>
-            <div className="flex items-center justify-center p-[40px] relative overflow-hidden min-h-[240px] bg-[#E8EEF8]">
-              <div className="w-[160px] h-[160px] flex items-center justify-center animate-float-y">
-                <IsoBarChart />
-              </div>
-            </div>
-          </div>
+            return (
+              <article
+                key={item.id}
+                className={`${styles.card} ${
+                  item.mediaSide === 'right'
+                    ? styles.mediaRight
+                    : styles.mediaLeft
+                }`}
+                style={cardStyle}
+              >
+                <div className={styles.cardSurface}>
+                  <div className={styles.mediaPanel}>
+                    <div
+                      className={`${styles.imageFrame} ${item.imageClass}`}
+                    >
+                      <Image
+                        src={item.image}
+                        alt={item.imageAlt}
+                        fill
+                        sizes="(max-width: 767px) 100vw, (max-width: 1024px) 37vw, 520px"
+                        className={styles.image}
+                        priority={index === 0}
+                        unoptimized
+                      />
+                    </div>
+                  </div>
 
-          {/* Card 3: Long Lasting Impact */}
-          <div className="group grid grid-cols-1 md:grid-cols-[5fr_7fr] rounded-[24px] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.08)] transition-transform duration-400 ease-in-out hover:-translate-y-[6px]">
-            <div className="flex items-center justify-center p-[40px] relative overflow-hidden min-h-[240px] bg-[#E8EEF8]">
-              <div className="w-[160px] h-[160px] flex items-center justify-center animate-float-y">
-                <IsoFolder />
-              </div>
-            </div>
-            <div className="flex flex-col justify-center p-[40px_48px] bg-[#2D5BE3]">
-              <h3 className="font-heading font-bold text-[28px] max-[1280px]:text-[24px] max-[1024px]:text-[22px] max-[768px]:text-[20px] leading-snug tracking-tight text-white mb-3">
-                Designed for Long
-                <br />
-                Lasting Impact
-              </h3>
-              <p className="font-body text-sm leading-relaxed text-white/80 mb-6 max-w-[480px]">
-                Transform strategy into influence, delivering creative execution and enterprise communications with precision, consistency, and measurable impact.
-              </p>
-              <div className="inline-flex items-center gap-2">
-                <span className="w-[6px] h-[6px] bg-[#E6FF2A]" />
-                <span className="font-body font-extrabold text-[11px] tracking-[0.2em] uppercase text-[#E6FF2A]">MEASUREABLE BUSINESS OUTCOMES</span>
-              </div>
-            </div>
-          </div>
+                  <div className={styles.content}>
+                    <h3 className={styles.cardTitle}>
+                      {item.title[0]}
+                      <br />
+                      {item.title[1]}
+                    </h3>
 
+                    <p className={styles.description}>
+                      {item.description}
+                    </p>
+
+                    <div className={styles.label}>
+                      <span
+                        className={styles.labelDot}
+                        aria-hidden="true"
+                      />
+                      <span>{item.label}</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

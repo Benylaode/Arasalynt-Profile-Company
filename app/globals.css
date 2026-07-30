@@ -100,9 +100,22 @@ body {
 
 .bg-bridge-radial {
   background:
-    radial-gradient(circle at 28% 53%, rgba(0, 103, 255, 0.28) 0%, rgba(0, 103, 255, 0.1) 24%, rgba(0, 103, 255, 0) 47%),
-    radial-gradient(circle at 98% 12%, rgba(34, 101, 255, 0.28) 0%, rgba(34, 101, 255, 0) 39%),
-    linear-gradient(180deg, #2348a7 0%, #183d96 47%, #102f7d 100%);
+    /* Gradient glow — bottom-left (opacity 0.17, blurred via large spread) */
+    radial-gradient(
+      ellipse 67% 73% at 17% 54%,
+      rgba(0, 126, 255, 0.17) 0%,
+      rgba(0, 126, 255, 0.06) 45%,
+      transparent 79%
+    ),
+    /* Gradient glow — top-right (opacity 0.25, blurred via large spread) */
+    radial-gradient(
+      ellipse 67% 73% at 101% -5%,
+      rgba(0, 126, 255, 0.25) 0%,
+      rgba(0, 126, 255, 0.08) 45%,
+      transparent 79%
+    ),
+    /* Primary section gradient: #1A3E9E → #0C2875 */
+    linear-gradient(180deg, #1A3E9E 10%, #0C2875 93%);
 }
 
 .text-stroke-lime {

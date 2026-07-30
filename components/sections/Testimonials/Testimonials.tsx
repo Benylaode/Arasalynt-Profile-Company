@@ -1,125 +1,287 @@
 'use client';
 
-import { useState } from 'react';
-import SectionLabel from '@/components/ui/SectionLabel/SectionLabel';
+import { useEffect, useState } from 'react';
+import { TESTIMONIALS_DUMMY_DATA } from '@/lib/db/dummy';
 
-/* ── Pure SVG Icons ── */
-const IconQuote = () => (
-  <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
+const SLIDE_DURATION = 6000;
+
+/* Quote icon mengikuti bentuk SVG referensi */
+const QuoteIcon = () => (
+  <svg viewBox="0 0 45 35" fill="none" aria-hidden="true" className="block h-full w-full">
+    <path
+      d="M45 18.695V35H27.173V24.317C27.173 13.916 29.473 7.731 34.073 0H42.556C39.681 6.747 37.812 11.807 37.812 18.695H45ZM17.827 18.695V35H0V24.317C0 13.916 2.444 7.731 6.901 0H15.383C12.508 6.747 10.783 11.807 10.783 18.695H17.827Z"
+      fill="#3248B4"
+    />
   </svg>
 );
 
-const IconChevronLeft = ({ size = 18 }: { size?: number }) => (
-  <svg width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-    <path d="M15 18l-6-6 6-6" />
+const ChevronLeft = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-[18px] w-[18px]">
+    <path d="m15 18-6-6 6-6" />
   </svg>
 );
 
-const IconChevronRight = ({ size = 18 }: { size?: number }) => (
-  <svg width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-    <path d="M9 18l6-6-6-6" />
+const ChevronRight = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-[18px] w-[18px]">
+    <path d="m9 18 6-6-6-6" />
   </svg>
 );
-
-const MOCK_TESTIMONIALS = [
-  {
-    id: 1,
-    name: "NINA PRATIWI",
-    role: "IT Director",
-    company: "Sinar Mas",
-    text: "Sangat puas dengan layanan IT Solution dari Arsalynt. Sistem kami sekarang jauh lebih stabil dan cepat. Tim support-nya juga sangat responsif dan professional. Sangat direkomendasikan untuk enterprise!",
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=120&auto=format&fit=crop",
-  },
-  {
-    id: 2,
-    name: "BUDI SETIAWAN",
-    role: "Chief Technology Officer",
-    company: "GOTO Logistics",
-    text: "Arsalynt membantu kami melakukan integrasi sistem logistik nasional secara mulus. Arsitektur cloud mereka sangat tangguh dan andal untuk menangani beban transaksi dengan volume sangat tinggi.",
-    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=120&auto=format&fit=crop",
-  },
-];
 
 export default function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % MOCK_TESTIMONIALS.length);
+  const testimonials = TESTIMONIALS_DUMMY_DATA;
+  const totalSlides = testimonials.length;
+  const active = testimonials[activeIndex];
+
+  const nextSlide = () => {
+    setActiveIndex((prev) => (prev + 1) % totalSlides);
   };
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + MOCK_TESTIMONIALS.length) % MOCK_TESTIMONIALS.length);
+  const previousSlide = () => {
+    setActiveIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
   };
 
-  const active = MOCK_TESTIMONIALS[activeIndex];
+  // Autoplay otomatis tanpa hambatan ref lock
+  useEffect(() => {
+    if (isPaused || totalSlides <= 1) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % totalSlides);
+    }, SLIDE_DURATION);
+
+    return () => clearInterval(interval);
+  }, [isPaused, totalSlides]);
 
   return (
-    <section className="relative bg-white py-[120px] max-[1024px]:py-[96px] max-[768px]:py-[72px] text-center" id="testimonials" aria-label="Client Testimonials">
-      <div className="w-full max-w-[921px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px] flex flex-col items-center">
-        
-        {/* Quote Icon */}
-        <div className="w-[56px] h-[56px] rounded-full bg-[#eff6ff] text-blue-600 flex items-center justify-center mb-6" aria-hidden="true">
-          <IconQuote />
-        </div>
+    <section
+      id="testimonials"
+      aria-label="Client testimonials"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      className="relative w-full overflow-hidden bg-[#F7F7F7]"
+    >
+      <style>{`
+        @keyframes testiProgressFill {
+          0% { transform: scaleX(0); }
+          100% { transform: scaleX(1); }
+        }
+      `}</style>
 
-        {/* Section Label */}
-        <div className="mb-8">
-          <SectionLabel text="TESTIMONIALS" />
-        </div>
+      {/* DESKTOP: Kanvas 1920 × 842 */}
+      <div className="relative mx-auto hidden aspect-[1920/842] w-full max-w-[1920px] overflow-hidden bg-[#F7F7F7] min-[1025px]:block">
+        {/* Background logo - Ukuran dikurangi ~15% */}
+        <img
+          src="/images/componen/testi_bg.svg"
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[105%] w-auto max-w-none -translate-x-1/2 -translate-y-1/2 select-none opacity-100"
+        />
 
-        {/* Testimonial Quote Slider */}
-        <div className="w-full min-h-[140px]">
-          {MOCK_TESTIMONIALS.map((t, idx) => (
-            <div
-              key={t.id}
-              className="animate-fade-in"
-              style={{
-                display: idx === activeIndex ? 'block' : 'none',
-              }}
-            >
-              <blockquote className="font-heading font-bold text-[24px] md:text-[32px] leading-relaxed text-[#101010] italic max-w-[680px] mx-auto">
-                "{t.text}"
-              </blockquote>
+        {/* Content Slide */}
+        <div className="absolute inset-0 z-10 transition-opacity duration-500 ease-in-out">
+          {/* Quote icon: x 254, y 132 */}
+          <div className="absolute left-[13.2291667%] top-[15.6769596%] h-[4.1567696%] w-[2.34375%]">
+            <QuoteIcon />
+          </div>
+
+          {/* Author Info */}
+          <div className="absolute left-[13.2291667%] top-[34.6793349%]">
+            <div className="flex items-center gap-[18px]">
+              <span aria-hidden="true" className="h-[8px] w-[8px] shrink-0 bg-[#1A3E9E]" />
+              <h3 className="m-0 font-body text-[28px] font-bold leading-[1.2] tracking-[-0.025em] text-[#1A3E9E]">
+                {active.name}
+              </h3>
             </div>
-          ))}
+
+            <p className="mt-[6px] font-body text-[20px] font-normal leading-[1.25] tracking-[-0.025em] text-[#101010]">
+              {active.role}
+            </p>
+          </div>
+
+          {/* Avatar */}
+          <div className="absolute left-[81.5625%] top-[31.8289786%] aspect-square w-[5.2083333%] overflow-hidden rounded-[12px] bg-[#D9D9D9]">
+            <img
+              key={active.avatar}
+              src={active.avatar}
+              alt={active.name}
+              draggable={false}
+              className="h-full w-full object-cover grayscale scale-x-[-1]"
+              style={{ objectPosition: '50% 60%' }}
+            />
+          </div>
+
+          {/* Main Quote */}
+          <blockquote className="absolute left-[13.28125%] right-[13.2291667%] top-[50.8313539%] m-0 font-body text-[clamp(28px,2.083333vw,36px)] font-medium leading-[1.2] tracking-[-0.035em] text-[#101010]">
+            {active.text}
+          </blockquote>
         </div>
 
-        {/* Author Bio Row */}
-        <div className="flex items-center gap-4 mt-8 pt-6 border-t border-[#E5E5E5]">
-          <img
-            src={active.avatar}
-            alt={active.name}
-            className="w-[56px] h-[56px] rounded-full object-cover border-2 border-[#E5E5E5]"
-          />
-          <div className="text-left">
-            <div className="font-heading font-extrabold text-[13px] tracking-[0.05em] text-[#101010] uppercase">
-              {active.name}
+        {/* Navigation Buttons — Ukuran dikurangi 10% (48px) */}
+        <div className="absolute left-[13.2291667%] top-[75.5344418%] z-20 flex gap-[8px]">
+          <button
+            type="button"
+            onClick={previousSlide}
+            aria-label="Previous testimonial"
+            className="flex h-[48px] w-[48px] items-center justify-center rounded-[10px] border border-[#D9D9D9] bg-transparent text-[#999999] transition-colors duration-200 hover:border-[#1A3E9E] hover:bg-[#1A3E9E]/[0.04] hover:text-[#1A3E9E] focus-visible:border-[#1A3E9E] focus-visible:text-[#1A3E9E] focus-visible:outline-none"
+          >
+            <ChevronLeft />
+          </button>
+
+          <button
+            type="button"
+            onClick={nextSlide}
+            aria-label="Next testimonial"
+            className="flex h-[48px] w-[48px] items-center justify-center rounded-[10px] border border-[#D9D9D9] bg-transparent text-[#999999] transition-colors duration-200 hover:border-[#1A3E9E] hover:bg-[#1A3E9E]/[0.04] hover:text-[#1A3E9E] focus-visible:border-[#1A3E9E] focus-visible:text-[#1A3E9E] focus-visible:outline-none"
+          >
+            <ChevronRight />
+          </button>
+        </div>
+
+        {/* Indicators dengan Progress Bar Animasi Bergerak di Kanan Bawah */}
+        <div
+          role="tablist"
+          aria-label="Testimonial slides"
+          className="absolute right-[13.2291667%] top-[80.760095%] z-20 flex h-[8px] items-center gap-[8px]"
+        >
+          {testimonials.map((t, index) => {
+            const selected = index === activeIndex;
+
+            return (
+              <button
+                key={t.id}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                aria-label={`Show testimonial ${index + 1}`}
+                onClick={() => setActiveIndex(index)}
+                className={`relative h-[8px] shrink-0 overflow-hidden rounded-[2px] border-0 p-0 transition-all duration-300 ${
+                  selected ? 'w-[48px] bg-[#D9D9D9]' : 'w-[8px] bg-[#D9D9D9] hover:bg-[#BFC3CF]'
+                }`}
+              >
+                {selected && (
+                  <span
+                    key={`${activeIndex}-${isPaused}`}
+                    className="absolute inset-0 bg-[#99A6E7]"
+                    style={{
+                      transformOrigin: 'left center',
+                      animationName: 'testiProgressFill',
+                      animationDuration: `${SLIDE_DURATION}ms`,
+                      animationTimingFunction: 'linear',
+                      animationFillMode: 'forwards',
+                      animationPlayState: isPaused ? 'paused' : 'running',
+                    }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* MOBILE & TABLET */}
+      <div className="relative mx-auto min-h-[700px] w-full overflow-hidden px-[clamp(1rem,5.6vw,6.75rem)] pb-[112px] pt-[72px] min-[1025px]:hidden max-[640px]:min-h-[720px] max-[640px]:px-[16px] max-[640px]:pt-[52px]">
+        {/* Background logo mobile */}
+        <img
+          src="/images/componen/testi_bg.svg"
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[90%] w-auto max-w-none -translate-x-1/2 -translate-y-1/2 select-none opacity-100"
+        />
+
+        <div className="relative z-10 mx-auto max-w-[760px] transition-opacity duration-500 ease-in-out">
+          <div className="h-[35px] w-[45px]">
+            <QuoteIcon />
+          </div>
+
+          <div className="mt-[72px] flex items-center justify-between gap-[24px] max-[640px]:mt-[54px] max-[640px]:items-start">
+            <div>
+              <div className="flex items-center gap-[12px]">
+                <span aria-hidden="true" className="h-[7px] w-[7px] shrink-0 bg-[#1A3E9E]" />
+                <h3 className="font-body text-[22px] font-bold leading-[1.2] tracking-[-0.025em] text-[#1A3E9E] max-[640px]:text-[17px]">
+                  {active.name}
+                </h3>
+              </div>
+
+              <p className="mt-[6px] font-body text-[16px] font-normal leading-[1.4] tracking-[-0.02em] text-[#101010] max-[640px]:max-w-[210px] max-[640px]:text-[13px]">
+                {active.role}
+              </p>
             </div>
-            <div className="font-body text-[11px] font-semibold text-[#717171] mt-0.5">
-              {active.role} at {active.company}
+
+            <div className="h-[88px] w-[88px] shrink-0 overflow-hidden rounded-[12px] bg-[#D9D9D9] max-[640px]:h-[72px] max-[640px]:w-[72px]">
+              <img
+                key={active.avatar}
+                src={active.avatar}
+                alt={active.name}
+                draggable={false}
+                className="h-full w-full object-cover grayscale scale-x-[-1]"
+                style={{ objectPosition: '50% 60%' }}
+              />
             </div>
           </div>
+
+          <blockquote className="mt-[56px] font-body text-[clamp(22px,5vw,36px)] font-medium leading-[1.2] tracking-[-0.035em] text-[#101010] max-[640px]:mt-[44px]">
+            {active.text}
+          </blockquote>
         </div>
 
-        {/* Control Buttons */}
-        <div className="flex gap-3 mt-8">
-          <button 
-            onClick={handlePrev} 
-            className="w-9 h-9 rounded-full border border-[#E5E5E5] bg-white text-[#4C4C4C] flex items-center justify-center cursor-pointer transition-all duration-250 hover:bg-slate-100 hover:border-[#D9D9D9] hover:text-[#101010]" 
+        {/* Mobile navigation buttons */}
+        <div className="absolute bottom-[34px] left-[clamp(1rem,5.6vw,6.75rem)] z-20 flex gap-[8px] max-[640px]:bottom-[26px] max-[640px]:left-[16px]">
+          <button
+            type="button"
+            onClick={previousSlide}
             aria-label="Previous testimonial"
+            className="flex h-[48px] w-[48px] items-center justify-center rounded-[10px] border border-[#D9D9D9] bg-transparent text-[#999999] transition-colors hover:border-[#1A3E9E] hover:text-[#1A3E9E]"
           >
-            <IconChevronLeft size={16} />
+            <ChevronLeft />
           </button>
-          <button 
-            onClick={handleNext} 
-            className="w-9 h-9 rounded-full border border-[#E5E5E5] bg-white text-[#4C4C4C] flex items-center justify-center cursor-pointer transition-all duration-250 hover:bg-slate-100 hover:border-[#D9D9D9] hover:text-[#101010]" 
+
+          <button
+            type="button"
+            onClick={nextSlide}
             aria-label="Next testimonial"
+            className="flex h-[48px] w-[48px] items-center justify-center rounded-[10px] border border-[#D9D9D9] bg-transparent text-[#999999] transition-colors hover:border-[#1A3E9E] hover:text-[#1A3E9E]"
           >
-            <IconChevronRight size={16} />
+            <ChevronRight />
           </button>
         </div>
 
+        {/* Mobile progress indicators di kanan bawah */}
+        <div className="absolute bottom-[56px] right-[clamp(1rem,5.6vw,6.75rem)] z-20 flex h-[8px] items-center gap-[8px] max-[640px]:bottom-[48px] max-[640px]:right-[16px]">
+          {testimonials.map((t, index) => {
+            const selected = index === activeIndex;
+
+            return (
+              <button
+                key={t.id}
+                type="button"
+                aria-label={`Show testimonial ${index + 1}`}
+                onClick={() => setActiveIndex(index)}
+                className={`relative h-[8px] shrink-0 overflow-hidden rounded-[2px] border-0 p-0 transition-all duration-300 ${
+                  selected ? 'w-[48px] bg-[#D9D9D9]' : 'w-[8px] bg-[#D9D9D9]'
+                }`}
+              >
+                {selected && (
+                  <span
+                    key={`${activeIndex}-${isPaused}`}
+                    className="absolute inset-0 bg-[#99A6E7]"
+                    style={{
+                      transformOrigin: 'left center',
+                      animationName: 'testiProgressFill',
+                      animationDuration: `${SLIDE_DURATION}ms`,
+                      animationTimingFunction: 'linear',
+                      animationFillMode: 'forwards',
+                      animationPlayState: isPaused ? 'paused' : 'running',
+                    }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

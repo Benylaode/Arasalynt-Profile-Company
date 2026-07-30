@@ -65,3 +65,12 @@ export interface FooterColumn {
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 export type ButtonSize = 'default' | 'small';
 export type ContainerWidth = 'max' | 'content' | 'narrow';
+
+export interface TestimonialItem {
+  id: number;
+  name: string;
+  role: string;
+  text: string;
+  avatar: string;
+}
+

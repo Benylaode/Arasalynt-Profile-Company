@@ -878,3 +878,28 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     ],
   },
 ];
+
+export const TESTIMONIALS_DUMMY_DATA = [
+  {
+    id: 1,
+    name: "RIZKI SIAHAAN",
+    role: "Chief Executive Operation at Hilden Corp",
+    text: "We’re very satisfied with PT. Kaluna Teknologi Digital’s work. They delivered a professional website that makes online ordering much easier for our customers. The process was smooth, and the final result exceeded our expectations.",
+    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop",
+  },
+  {
+    id: 2,
+    name: "NINA PRATIWI",
+    role: "IT Director at Sinar Mas",
+    text: "Sangat puas dengan layanan IT Solution dari Arsalynt. Sistem kami sekarang jauh lebih stabil dan cepat. Tim support-nya juga sangat responsif dan professional. Sangat direkomendasikan untuk enterprise!",
+    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop",
+  },
+  {
+    id: 3,
+    name: "BUDI SETIAWAN",
+    role: "Chief Technology Officer at GOTO Logistics",
+    text: "Arsalynt membantu kami melakukan integrasi sistem logistik nasional secara mulus. Arsitektur cloud mereka sangat tangguh dan andal untuk menangani beban transaksi dengan volume sangat tinggi.",
+    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop",
+  },
+];
+

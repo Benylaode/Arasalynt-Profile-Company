@@ -35,12 +35,20 @@ export default function BridgePossibility() {
       }}
       aria-labelledby="bridge-possibility-heading"
     >
-      {/* Background radial glow - Safari Optimized: Native Radial Gradient replacing heavy GPU filter:blur */}
+      {/* Background radial glow - Ellipse 1 from Figma design */}
       <div 
-        className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full pointer-events-none opacity-70 z-0"
+        className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] rounded-full pointer-events-none opacity-[0.48] z-0"
         style={{
-          /* Multi-stop native radial gradient: eliminates Safari GPU framebuffer tile allocation failure caused by filter: blur(60px) */
-          background: 'radial-gradient(ellipse at center, rgba(0, 110, 255, 0.45) 0%, rgba(0, 90, 255, 0.20) 40%, rgba(0, 70, 220, 0.08) 60%, transparent 75%)',
+          background: 'radial-gradient(ellipse at center, rgba(32, 132, 233, 0.85) 0%, rgba(32, 132, 233, 0.30) 40%, rgba(32, 132, 233, 0.08) 65%, transparent 79%)',
+          WebkitTransform: 'translate3d(-50%, -50%, 0)',
+        }}
+      />
+      {/* Background radial glow - Ellipse 2 from Figma design */}
+      <div 
+        className="absolute top-[35%] left-[55%] -translate-x-1/2 -translate-y-1/2 w-[525px] h-[338px] rounded-full pointer-events-none opacity-[0.31] z-0"
+        style={{
+          background: 'radial-gradient(ellipse at center, rgba(77, 151, 255, 0.7) 0%, rgba(77, 151, 255, 0.2) 40%, transparent 79%)',
+          mixBlendMode: 'plus-lighter' as React.CSSProperties['mixBlendMode'],
           WebkitTransform: 'translate3d(-50%, -50%, 0)',
         }}
       />
@@ -49,20 +57,23 @@ export default function BridgePossibility() {
         
         {/* Left Side (55%): Interactive Globe Visual & Floating Glass Cards */}
         <div className="relative w-full max-w-[755px] aspect-[755/640] mx-auto flex items-center justify-center">
-          
-{/* Globe + Geometric X */}
+{/* Globe + Inline Logo Symbol */}
 <div
   className="
+    pointer-events-none
     absolute
+    left-1/2
+    top-1/2
     z-[1]
     aspect-square
     w-[54.4%]
-    pointer-events-none
+    -translate-x-1/2
+    -translate-y-1/2
     select-none
     animate-float-y
   "
 >
-  {/* Globe — 20% lebih kecil dan opacity 50% */}
+  {/* Globe */}
   <img
     src="/images/componen/globe.svg"
     alt="Global Network"
@@ -76,79 +87,58 @@ export default function BridgePossibility() {
       opacity-50
     "
     style={{
-      filter: 'drop-shadow(0 0 30px rgba(62, 136, 255, 0.25))',
+      filter: 'drop-shadow(0 0 30px rgba(62,136,255,0.25))',
       WebkitFilter:
-        'drop-shadow(0 0 30px rgba(62, 136, 255, 0.25))',
+        'drop-shadow(0 0 30px rgba(62,136,255,0.25))',
     }}
   />
 
-  {/* Area pemotong X */}
-  <div
+  {/* Inline SVG, bukan file eksternal */}
+  <svg
+    viewBox="0 0 978 978"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    preserveAspectRatio="xMidYMid meet"
     className="
       absolute
       left-1/2
-      top-[51%]
+      top-1/2
       z-[2]
-      aspect-square
-      w-[112%]
+      h-auto
+      w-[120%]
+      max-w-none
       -translate-x-1/2
       -translate-y-1/2
-      overflow-hidden
+      overflow-visible
     "
-    aria-hidden="true"
   >
-    {/* Geometric X — tipis, besar, dan ujungnya terpotong */}
-    <div
-      className="
-        absolute
-        left-1/2
-        top-1/2
-        aspect-square
-        w-[138%]
-        -translate-x-1/2
-        -translate-y-1/2
-      "
-      style={{
-        background:
-          'linear-gradient(135deg, rgba(51,112,220,0.28) 0%, rgba(19,73,180,0.18) 100%)',
-
-        clipPath: `
-          polygon(
-            0% 7%,
-            7% 0%,
-            50% 43%,
-            93% 0%,
-            100% 7%,
-            57% 50%,
-            100% 93%,
-            93% 100%,
-            50% 57%,
-            7% 100%,
-            0% 93%,
-            43% 50%
-          )
-        `,
-
-        WebkitClipPath: `
-          polygon(
-            0% 7%,
-            7% 0%,
-            50% 43%,
-            93% 0%,
-            100% 7%,
-            57% 50%,
-            100% 93%,
-            93% 100%,
-            50% 57%,
-            7% 100%,
-            0% 93%,
-            43% 50%
-          )
-        `,
-      }}
+    <path
+      opacity="0.18"
+      d="M421.443 27.8185C458.413 -9.27277 518.91 -9.27291 556.216 27.8185L666.791 138.755C689.974 162.337 705.136 191.491 711.096 223.249C711.417 224.899 711.714 226.556 711.984 228.218C683.659 229.898 656.009 237.292 631.057 250.4V246.703C629.371 228.554 621.278 211.077 608.127 197.969L497.19 87.7306C492.132 82.6892 484.04 82.6892 478.982 87.7306L368.044 197.969C366.301 199.706 364.655 201.504 363.106 203.356C351.716 217.571 345.486 235.155 345.486 253.739C345.486 275.32 354.224 295.214 369.012 310.388L458.076 399.744L457.461 400.358L462.459 405.339L487.745 430.322L513.86 404.124L607.966 309.372C616.032 301.617 624.099 294.872 633.173 288.803C659.724 271.269 690.982 261.827 723.246 261.827C732.657 261.827 741.732 262.502 750.806 264.188C783.743 269.583 813.992 285.431 838.191 309.372L936.564 408.368L949.701 421.464C967.573 439.277 977.689 463.476 977.689 488.683V489.019C977.689 514.562 967.573 538.425 949.701 556.237L838.764 666.813C814.486 691.348 783.464 706.808 750.081 712.186C750.075 712.084 750.068 711.983 750.062 711.882C749.861 711.915 749.661 711.951 749.46 711.984C747.78 683.659 740.387 656.009 727.28 631.057H730.976C749.125 629.371 766.603 621.278 779.71 608.127L889.948 497.19C894.99 492.132 894.99 484.039 889.948 478.982L808.119 396.634L780.766 369.369C749.407 338.449 698.827 338.449 667.131 369.369L577.438 458.771L576.722 458.062L572.34 462.459L546.421 488.692L572.047 514.235L666.799 608.341L666.462 607.668C674.218 615.734 680.962 623.801 687.032 632.875C698.55 650.317 706.575 669.79 710.727 690.245C713.012 701.168 714.179 712.388 714.179 723.777C714.179 733.218 713.507 742.322 711.826 751.426C706.113 784.471 690.652 814.819 666.789 838.76L556.214 949.697C538.401 967.568 514.202 977.685 488.995 977.685H488.659C463.117 977.685 439.254 967.569 421.441 949.697L354.471 882.508L309.709 837.893C285.431 813.694 269.583 783.109 264.188 749.5C292.849 747.82 319.825 740.425 345.115 727.318V728.52C345.35 728.4 345.585 728.28 345.82 728.159V731.869C347.836 750.078 356.239 767.275 369.01 780.425L398.824 810.428L478.982 890.323C484.04 895.365 492.132 895.365 497.19 890.323L608.127 780.085C618.885 769.478 625.952 756.497 629.328 742.758C635.504 716.568 628.498 687.823 608.309 667.127L595.894 654.671L513.375 572.715L487.994 547.416L463.445 572.047L457.763 577.767L458.079 578.083L412.378 623.462L369.337 666.799L370.01 666.462C361.944 674.217 353.877 680.962 344.803 687.031C330.028 696.788 313.796 704.037 296.744 708.55C282.765 712.305 268.189 714.201 253.402 714.201C243.96 714.201 234.856 713.529 225.752 712.185C193.044 706.471 162.359 691.01 138.418 666.812L27.8186 556.236C-9.27288 519.266 -9.27286 458.77 27.8186 421.463L116.702 332.868L139.786 309.709C163.985 285.431 194.57 269.583 228.179 264.188C229.859 292.849 237.254 319.825 250.362 345.114H248.798C248.983 345.469 249.169 345.824 249.356 346.178H245.984C227.438 348.194 210.578 356.261 197.09 369.368L123.623 442.594L87.3557 478.982C82.3143 484.04 82.3143 492.132 87.3557 497.19L197.594 608.127C228.515 639.486 279.601 639.486 310.858 608.127L404.964 513.375L429.323 488.937L404.124 463.819L309.372 369.713C301.617 361.647 294.872 353.58 288.803 344.506C271.269 317.955 261.827 286.698 261.827 254.433C261.827 245.022 262.502 235.948 264.188 226.873C269.583 193.936 285.431 163.687 309.372 139.488L374.54 74.7297L421.443 27.8185Z"
+      fill="url(#bridge-symbol-gradient)"
     />
-  </div>
+
+    <defs>
+      <radialGradient
+        id="bridge-symbol-gradient"
+        cx="0"
+        cy="0"
+        r="1"
+        gradientUnits="userSpaceOnUse"
+        gradientTransform="translate(488.845 488.843) rotate(-180) scale(462.457 464.025)"
+      >
+        <stop stopColor="#B4B4B4" />
+        <stop
+          offset="1"
+          stopColor="#B4B4B4"
+          stopOpacity="0"
+        />
+      </radialGradient>
+    </defs>
+  </svg>
 </div>
+
 
 
 

@@ -6,7 +6,7 @@
 import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
-import { BUSINESS_DUMMY_DATA, HERO_SLIDES_DUMMY_DATA } from './dummy';
+import { BUSINESS_DUMMY_DATA, HERO_SLIDES_DUMMY_DATA, TESTIMONIALS_DUMMY_DATA } from './dummy';
 
 /* ── Resolve path ke file database (di project root / .next tidak masuk) ── */
 const DB_DIR = path.join(process.cwd(), '.db');
@@ -70,6 +70,14 @@ function initSchema(db: Database.Database): void {
       secondary_cta_label     TEXT    NOT NULL,
       secondary_cta_href      TEXT    NOT NULL,
       sort_order              INTEGER DEFAULT 0
+    );
+
+    CREATE TABLE IF NOT EXISTS testimonials (
+      id      INTEGER PRIMARY KEY,
+      name    TEXT    NOT NULL,
+      role    TEXT    NOT NULL,
+      text    TEXT    NOT NULL,
+      avatar  TEXT    NOT NULL
     );
   `);
 }
@@ -154,6 +162,32 @@ function seedIfEmpty(db: Database.Database): void {
     insertManyHero();
     console.log(`[db] Seeded ${HERO_SLIDES_DUMMY_DATA.length} hero slides into SQLite.`);
   }
+
+  const testiCount = (
+    db.prepare('SELECT COUNT(*) as cnt FROM testimonials').get() as { cnt: number }
+  ).cnt;
+
+  if (testiCount < TESTIMONIALS_DUMMY_DATA.length) {
+    const insertTesti = db.prepare(`
+      INSERT OR REPLACE INTO testimonials (id, name, role, text, avatar)
+      VALUES (@id, @name, @role, @text, @avatar)
+    `);
+
+    const insertManyTesti = db.transaction(() => {
+      TESTIMONIALS_DUMMY_DATA.forEach((item) => {
+        insertTesti.run(item);
+      });
+    });
+
+    insertManyTesti();
+    console.log(`[db] Seeded ${TESTIMONIALS_DUMMY_DATA.length} testimonials into SQLite.`);
+  }
+}
+
+export function getAllTestimonials() {
+  const db = getDb();
+  return db.prepare('SELECT * FROM testimonials ORDER BY id ASC').all();
 }
 
 export { getDb };
+
