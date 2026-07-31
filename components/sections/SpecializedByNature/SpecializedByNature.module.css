@@ -21,7 +21,7 @@
   );
 
   padding-top: clamp(96px, 9.01vw, 173px);
-  padding-bottom: clamp(140px, 16vw, 300px);
+  padding-bottom: clamp(80px, 8vw, 140px);
 }
 
 /* Separate overflow container so it doesn't break sticky positioning */
@@ -132,7 +132,7 @@
    * Extra bottom padding so the last card holds its
    * sticky position before the section scrolls away.
    */
-  padding-bottom: clamp(260px, 42vh, 460px);
+  padding-bottom: clamp(60px, 10vh, 100px);
 }
 
 /* --------------------------------------------------------------------------
@@ -154,7 +154,7 @@
   z-index: var(--card-z-index);
 
   width: 100%;
-  margin-bottom: clamp(180px, 32vh, 320px);
+  margin-bottom: clamp(40px, 7vh, 70px);
 
   /*
    * Sticky wrapper must NOT have overflow, border-radius,
@@ -364,11 +364,11 @@
   .cards {
     width: calc(100vw - 80px);
     max-width: 860px;
-    padding-bottom: 360px;
+    padding-bottom: 80px;
   }
 
   .card {
-    margin-bottom: clamp(170px, 30vh, 260px);
+    margin-bottom: clamp(40px, 7vh, 70px);
   }
 
   .cardSurface {
@@ -430,11 +430,11 @@
 
   .cards {
     width: calc(100vw - 32px);
-    padding-bottom: 300px;
+    padding-bottom: 60px;
   }
 
   .card {
-    margin-bottom: 42vh;
+    margin-bottom: 18vh;
   }
 
   .cardSurface,

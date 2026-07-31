@@ -19,83 +19,88 @@ const CATEGORIES = ["TECHNOLOGY", "SURVEY & DATA", "MEDIA"];
 const MOCK_PROJECTS = [
   {
     id: 1,
-    client: "PADEL 2026",
-    title: "Live Streaming Event for Sirkuit Nasional Padel 2026",
-    category: "LIVE EVENT • EVENT DOCUMENTATION",
-    tabCategory: "MEDIA",
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1600&auto=format&fit=crop",
+    client: "SINAU PRINT",
+    title: "Sinau Print ERP & Marketplace Platform",
+    category: "WEB PLATFORM • ERP SYSTEM",
+    tabCategory: "TECHNOLOGY",
+    image: "/images/projects/sinau-print-erp/1.webp",
   },
   {
     id: 2,
-    client: "X-1 TIRE",
-    title: "Company Profile Revamp for X-1 Tire",
-    category: "WEBSITE DESIGN • COMPANY PROFILE",
+    client: "ARTIC ANALYTICA",
+    title: "Artic Complex Web Architecture & Portal",
+    category: "COMPLEX WEB • DATA PLATFORM",
     tabCategory: "TECHNOLOGY",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop",
+    image: "/images/projects/artic-complex-web/1.webp",
   },
   {
     id: 3,
-    client: "SINAU PRINT",
-    title: "Sinau Print Marketplace Website",
-    category: "BRANDING • SURVEY AND ANALYTICS",
+    client: "MYBOSS",
+    title: "MyBoss Connected IoT Hardware & Control System",
+    category: "IOT SYSTEM • IT INFRASTRUCTURE",
+    tabCategory: "TECHNOLOGY",
+    image: "/images/projects/myboss-iot-system/1.webp",
+  },
+  {
+    id: 4,
+    client: "ALTATIC",
+    title: "Altatic Data Analytics & Intelligence Dashboard",
+    category: "SURVEY & DATA • ANALYTICS PLATFORM",
     tabCategory: "SURVEY & DATA",
-    image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1600&auto=format&fit=crop",
+    image: "/images/projects/altatic-analytic/1.webp",
+  },
+  {
+    id: 5,
+    client: "WEB MEDIA",
+    title: "Web Media Corporate Profile & Digital Presence",
+    category: "MEDIA • CORPORATE PROFILE",
+    tabCategory: "MEDIA",
+    image: "/images/projects/web-media-profile/1.webp",
   },
 ];
 
 export default function ProjectShowcase() {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>('TECHNOLOGY');
 
-  const filteredProjects = activeCategory
-    ? MOCK_PROJECTS.filter(p => p.tabCategory === activeCategory)
-    : MOCK_PROJECTS;
+  const filteredProjects = MOCK_PROJECTS.filter(p => p.tabCategory === activeCategory);
 
   return (
     <section className="relative bg-[#F7F7F7] py-[100px] overflow-x-hidden" id="portfolio" aria-label="We Build It All">
       <div className="w-full max-w-[1920px] mx-auto px-[clamp(1rem,5.6vw,6.75rem)] mb-[48px]">
         <div className="flex flex-col min-[1024px]:flex-row min-[1024px]:items-end justify-between gap-8">
           <div>
-            <div className="flex items-center gap-[10px] mb-4">
-              <span className="w-[8px] h-[8px] bg-[#0055FE] inline-block" />
-              <span className="font-heading font-extrabold text-[12px] tracking-[0.2em] text-[#0055FE] uppercase">
+            <div className="flex items-center gap-[9px] mb-4">
+              <span className="w-[7px] h-[7px] bg-[#1A3E9E] inline-block" />
+              <span className="font-heading text-[9px] md:text-[10px] font-semibold text-[#1A3E9E] uppercase tracking-[0.06em]">
                 FEATURED WORKS
               </span>
             </div>
-            <h2 className="font-heading font-medium text-[clamp(40px,5.2vw,72px)] leading-[1.05] tracking-[-0.03em] text-[#101010] max-w-[800px]">
+            <h2 className="font-heading font-medium text-[clamp(36px,5.2vw,68px)] leading-[1.05] tracking-[-0.03em] text-[#101010] max-w-[800px]">
               We Build It All
             </h2>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="inline-flex p-[4px] bg-white rounded-full border border-[#E5E5E5] shadow-sm">
+          <div className="flex flex-wrap items-center gap-2">
+            {CATEGORIES.map((cat) => (
               <button
-                onClick={() => setActiveCategory(null)}
-                className={`px-[24px] py-[8px] rounded-full text-[13px] font-medium transition-all duration-300 ${
-                  activeCategory === null
-                    ? 'bg-transparent text-[#101010] border border-[#B0B0B0]'
-                    : 'text-[#666666] hover:text-[#101010]'
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`flex h-[38px] md:h-[40px] items-center justify-center gap-1.5 rounded-full border px-4 md:px-5 font-body text-[12px] md:text-[13px] font-medium transition-colors ${
+                  activeCategory === cat
+                    ? 'border-[#1A3E9E] bg-[rgba(153,166,231,0.22)] font-semibold text-[#1A3E9E]'
+                    : 'border-[#D9D9D9] bg-transparent text-[#717171] hover:border-[#1A3E9E] hover:text-[#1A3E9E]'
                 }`}
               >
-                ALL
+                {activeCategory === cat && (
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#1A3E9E]" />
+                )}
+                <span>{cat}</span>
               </button>
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-[24px] py-[8px] rounded-full text-[13px] font-medium transition-all duration-300 ${
-                    activeCategory === cat
-                      ? 'bg-transparent text-[#101010] border border-[#B0B0B0]'
-                      : 'text-[#666666] hover:text-[#101010]'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
+            ))}
 
             <a
               href="/our-works"
-              className="inline-flex items-center gap-2 px-[24px] py-[14px] rounded-full border border-[#E5E5E5] bg-white text-[#101010] font-heading font-bold text-[13px] tracking-[0.05em] uppercase hover:bg-slate-50 transition-all duration-300"
+              className="inline-flex h-[38px] md:h-[40px] items-center justify-center gap-2 px-5 rounded-full border border-[#1A3E9E] bg-[#1A3E9E] text-white font-body text-[11px] md:text-[12px] font-extrabold uppercase tracking-[0.05em] hover:bg-[#152571] transition-all"
             >
               SEE ALL WORKS
             </a>
@@ -103,7 +108,7 @@ export default function ProjectShowcase() {
         </div>
       </div>
 
-      <ProjectCarouselTrack key={activeCategory || 'all'} projects={filteredProjects} />
+      <ProjectCarouselTrack key={activeCategory} projects={filteredProjects} />
     </section>
   );
 }
@@ -182,9 +187,8 @@ function ProjectCarouselTrack({ projects }: { projects: typeof MOCK_PROJECTS }) 
       <div className="absolute left-[clamp(24px,4vw,64px)] top-1/2 -translate-y-1/2 z-20">
         <button
           onClick={prevSlide}
-          className="w-[56px] h-[56px] flex items-center justify-center rounded-[12px] border border-white/20 text-white transition-all duration-300"
+          className="flex h-[46px] w-[46px] md:h-[54px] md:w-[54px] xl:h-[64px] xl:w-[64px] items-center justify-center rounded-[5px] border border-[#4C4C4C] bg-[#101010]/40 text-[#D9D9D9] transition-all duration-300 hover:border-[#D9D9D9] hover:bg-[#101010]/80"
           aria-label="Previous Slide"
-          style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.0))', backdropFilter: 'blur(12px)' }}
         >
           <IconChevronLeft size={24} />
         </button>
@@ -192,9 +196,8 @@ function ProjectCarouselTrack({ projects }: { projects: typeof MOCK_PROJECTS }) 
       <div className="absolute right-[clamp(24px,4vw,64px)] top-1/2 -translate-y-1/2 z-20">
         <button
           onClick={nextSlide}
-          className="w-[56px] h-[56px] flex items-center justify-center rounded-[12px] border border-[#202020]/20 text-white transition-all duration-300"
+          className="flex h-[46px] w-[46px] md:h-[54px] md:w-[54px] xl:h-[64px] xl:w-[64px] items-center justify-center rounded-[5px] border border-[#4C4C4C] bg-[#101010]/40 text-[#D9D9D9] transition-all duration-300 hover:border-[#D9D9D9] hover:bg-[#101010]/80"
           aria-label="Next Slide"
-          style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.0))', backdropFilter: 'blur(12px)' }}
         >
           <IconChevronRight size={24} />
         </button>

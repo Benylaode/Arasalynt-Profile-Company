@@ -2,220 +2,457 @@
 
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-const IconChevronDown = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-    <path d="M6 9l6 6 6-6" />
+const ASSET_BASE = '/images/company-leadership';
+
+const IconChevronDown = ({ size = 32 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 21" fill="none" aria-hidden="true">
+    <path d="M2 2.25 16 16.5 30 2.25" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
+const IconChevron = ({ direction = 'right' }: { direction?: 'left' | 'right' }) => (
+  <svg
+    width="8"
+    height="14"
+    viewBox="0 0 8 14"
+    fill="none"
+    aria-hidden="true"
+    className={direction === 'left' ? 'rotate-180' : ''}
+  >
+    <path
+      d="M1.5 1.5L6.5 7L1.5 12.5"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const PrincipleIcon = ({ type }: { type: 'technical' | 'roi' | 'expertise' | 'leadership' }) => {
+  if (type === 'technical') {
+    return (
+      <svg viewBox="0 0 32 32" fill="none" className="h-6 w-6" aria-hidden="true">
+        <circle cx="16" cy="16" r="11.5" stroke="currentColor" strokeWidth="1.7" />
+        <path d="m10.5 16 3.6 3.6 7.7-8" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  if (type === 'roi') {
+    return (
+      <svg viewBox="0 0 32 32" fill="none" className="h-6 w-6" aria-hidden="true">
+        <path d="M11.1 16V7.6h9.8V2.7l9.1 9.1-9.1 9.1V16h-9.8Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+        <path d="M20.9 24.4V16h-9.8v-4.9L2 20.2l9.1 9.1v-4.9h9.8Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  if (type === 'expertise') {
+    return (
+      <svg viewBox="0 0 32 32" fill="none" className="h-6 w-6" aria-hidden="true">
+        <path d="m16 3 11 6.4v13.2L16 29 5 22.6V9.4L16 3Z" stroke="currentColor" strokeWidth="1.6" />
+        <circle cx="16" cy="16" r="3.1" stroke="currentColor" strokeWidth="1.6" />
+        <path d="m16 12.9-4.8-2.8M16 12.9l4.8-2.8M12.9 17.8l-4.7 2.7M19.1 17.8l4.7 2.7M16 19.1v5.5" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 32 32" fill="none" className="h-6 w-6" aria-hidden="true">
+      <circle cx="16" cy="10.1" r="4.4" stroke="currentColor" strokeWidth="1.7" />
+      <path d="M7.5 27.5v-2.2c0-4.7 3.8-8.4 8.5-8.4s8.5 3.7 8.5 8.4v2.2h-17Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+    </svg>
+  );
+};
+
 const PRINCIPLES = [
   {
-    title: "Technical\nExcellence",
-    desc: "We pursue superiority in every code, architecture, and system we deliver.",
-    icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-      </svg>
-    )
+    title: 'Technical\nExcellence',
+    desc: 'Every decision is grounded in deep technical expertise, engineering precision, and measurable outcomes.',
+    icon: 'technical' as const,
   },
   {
-    title: "ROI-First\nExecution",
-    desc: "Every deployment is designed to generate measurable business value and capital efficiency.",
-    icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        <path d="M12 8v4l3 3"/>
-      </svg>
-    )
+    title: 'ROI-First\nExecution',
+    desc: 'We prioritize transparent attribution, clear operational outcomes, and immediate execution velocity for our partners.',
+    icon: 'roi' as const,
   },
   {
-    title: "Cross-Disciplinary\nExpertise",
-    desc: "Silos are eliminated. We integrate expertise from multiple fields for complete solutions.",
-    icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-        <polyline points="14 2 14 8 20 8"></polyline>
-        <line x1="16" y1="13" x2="8" y2="13"></line>
-        <line x1="16" y1="17" x2="8" y2="17"></line>
-        <polyline points="10 9 9 9 8 9"></polyline>
-      </svg>
-    )
+    title: 'Cross-Disciplinary\nExpertise',
+    desc: 'Bringing together specialists across technology, data science, marketing, and visual production to solve complex business challenges.',
+    icon: 'expertise' as const,
   },
   {
-    title: "Redundant\nLeadership",
-    desc: "Building self-sustaining systems where teams lead and operate without single points of failure.",
-    icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-        <circle cx="12" cy="7" r="4"></circle>
-      </svg>
-    )
-  }
+    title: 'Redundant\nLeadership',
+    desc: 'Cultural leadership ensuring that no project, technical discipline, or operational process has a single point of failure.',
+    icon: 'leadership' as const,
+  },
 ];
 
+const TRUST_SLIDES = [
+  {
+    text: 'By combining technical precision with a commitment to client success, Arsalynk Group delivers reliable, predictable, and results-driven execution.',
+    image: `${ASSET_BASE}/building-trust.png`
+  },
+  {
+    text: 'Long-term client relationships are earned by delivering dependable solutions, maintaining clear communication, and consistently meeting expectations across every engagement.',
+    image: `${ASSET_BASE}/building-trust-2.png` // Sesuaikan dengan nama file gambar slide ke-2 Anda
+  },
+  {
+    text: 'We integrate expertise across technology, data, media, and creative disciplines to build complete solutions.',
+    image: `${ASSET_BASE}/building-trust.png`
+  },
+  {
+    text: 'Our teams are designed to operate sustainably without creating a single point of leadership or operational failure.',
+    image: `${ASSET_BASE}/building-trust-2.png`
+  },
+];
+
+const WideContainer = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+  <div className={`w-full ${className}`}>
+    {children}
+  </div>
+);
+
+const NarrowContainer = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+  <div className={`mx-auto w-full max-w-[1408px] ${className}`}>
+    {children}
+  </div>
+);
+
 export default function CompanyLeadershipPage() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % TRUST_SLIDES.length);
+    }, 6500);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
   const handleScrollDown = () => {
-    const el = document.getElementById("content");
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('leadership-foundation')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const changeSlide = (direction: 'prev' | 'next') => {
+    setActiveSlide((current) => {
+      if (direction === 'prev') return (current - 1 + TRUST_SLIDES.length) % TRUST_SLIDES.length;
+      return (current + 1) % TRUST_SLIDES.length;
+    });
   };
 
   return (
-    <div className="w-full relative bg-[#fafafa] min-h-screen">
-      
-      {/* HERO HEADER SECTION */}
-      <section className="relative w-full h-[60vh] min-h-[480px] max-[768px]:h-[50vh] bg-[#020617] overflow-hidden flex items-center justify-center" id="hero" aria-label="Company Leadership Hero">
-        <div className="absolute inset-0 z-[1]" aria-hidden="true">
-          <img
-            src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1600&auto=format&fit=crop"
-            alt="Executive Abstract"
-            className="w-full h-full object-cover opacity-45 brightness-70 contrast-110"
-          />
-        </div>
-        <div 
-          className="absolute inset-0 z-[2] pointer-events-none" 
+    <main className="company-leadership-page relative w-full overflow-hidden bg-[#F7F7F7] text-[#101010]">
+      {/* HERO */}
+      <section
+        id="hero"
+        aria-label="Company Leadership Hero"
+        className="relative isolate h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#101010] max-[640px]:rounded-b-[24px]"
+      >
+        <img
+          src={`${ASSET_BASE}/hero-core.png`}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-[-341px] h-[2073px] w-[2073px] max-w-none -translate-x-1/2 object-cover max-[1280px]:top-[-250px] max-[1280px]:h-[1600px] max-[1280px]:w-[1600px] max-[768px]:top-[-105px] max-[768px]:h-[920px] max-[768px]:w-[920px]"
+        />
+
+        <img
+          src={`${ASSET_BASE}/network.png`}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-[-445px] left-1/2 h-[997px] w-[2588px] max-w-none -translate-x-1/2 opacity-80 max-[1280px]:bottom-[-310px] max-[1280px]:h-[720px] max-[1280px]:w-[1868px] max-[768px]:bottom-[-120px] max-[768px]:h-[420px] max-[768px]:w-[1090px]"
+          style={{ mixBlendMode: 'plus-lighter' }}
+        />
+
+        <div
+          className="pointer-events-none absolute inset-0"
           aria-hidden="true"
           style={{
-            backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px)',
-            backgroundSize: '50px 50px',
-            backgroundPosition: 'center'
+            background: 'linear-gradient(180deg, #1A3E9E 0%, rgba(26,62,158,0) 71.94%)',
+            mixBlendMode: 'color',
           }}
         />
-        <div className="absolute bottom-0 left-0 right-0 h-[140px] bg-gradient-to-t from-[#fafafa] to-transparent z-[3] pointer-events-none" aria-hidden="true" />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[698px] max-[768px]:h-[420px]"
+          aria-hidden="true"
+          style={{ background: 'linear-gradient(180deg, rgba(16,16,16,0) 9.62%, #101010 100%)' }}
+        />
 
-        <div className="relative z-[5] text-center max-w-[720px] px-6 mt-10">
-          <span className="inline-block font-heading text-[10px] font-extrabold tracking-[0.25em] text-lime-yellow uppercase mb-4">
-            HOME &gt; ABOUT US &gt; COMPANY LEADERSHIP
-          </span>
-          <h1 className="font-heading font-bold text-[56px] max-[1024px]:text-[44px] max-[768px]:text-[36px] leading-tight tracking-tight text-white mb-5">
-            Company Leadership
-          </h1>
-          <button 
-            onClick={handleScrollDown} 
-            className="absolute bottom-[30px] left-1/2 -translate-x-1/2 w-[44px] h-[44px] rounded-full bg-white/8 border border-white/15 text-white flex items-center justify-center cursor-pointer z-[5] transition-colors duration-150 hover:bg-white/15 animate-bounce-slow" 
-            aria-label="Scroll down"
-          >
-            <IconChevronDown />
-          </button>
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
+          <div className="flex flex-col items-center gap-6 max-[768px]:gap-4">
+            <div className="font-body text-[14px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[10px]">
+              Home&nbsp;&nbsp;&gt;&nbsp;&nbsp;About Us&nbsp;&nbsp;&gt;&nbsp;&nbsp;Company Leadership
+            </div>
+            <h1 className="font-heading text-[clamp(56px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
+              Company Leadership
+            </h1>
+          </div>
         </div>
+
+        <button
+          type="button"
+          onClick={handleScrollDown}
+          aria-label="Scroll to leadership foundation"
+          className="absolute bottom-[clamp(34px,4.5vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-[rgba(175,175,175,.25)] text-white backdrop-blur-[4px] transition-transform duration-300 hover:scale-105"
+          style={{ background: 'linear-gradient(230.45deg, rgba(247,247,247,.21) -7.74%, rgba(247,247,247,.105) 81.5%)' }}
+        >
+          <IconChevronDown size={32} />
+        </button>
       </section>
 
-      <div id="content">
-        {/* LEADERSHIP FOUNDATION */}
-        <section className="py-[120px] max-[1024px]:py-[96px] max-[768px]:py-[60px] bg-[#fafafa]">
-          <div className="w-full max-w-[1700px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-[1100px] mx-auto">
-              <div className="flex flex-col gap-4">
-                <span className="font-heading text-[11px] font-extrabold tracking-[0.2em] text-blue-600 uppercase block">
-                  &lt; LEADERSHIP FOUNDATION &gt;
-                </span>
-                <h2 className="font-heading font-bold text-[48px] max-[1280px]:text-[40px] max-[1024px]:text-[36px] max-[768px]:text-[28px] max-[480px]:text-[24px] leading-snug tracking-tight text-dark">
-                  Leading with<br />Expertise and<br />Purpose
-                </h2>
-                <p className="font-body text-lg leading-relaxed text-[#717171]">
-                  Executive officers driving the Arsalynk strategy towards an integrated future. 
-                  We believe that strong leadership requires a delicate balance of deep technical mastery, 
-                  relentless execution, and a clear vision for sustainable business scalability.
-                </p>
+      {/* LEADERSHIP FOUNDATION */}
+      <section
+        id="leadership-foundation"
+        className="w-full scroll-mt-24 bg-[#F7F7F7] px-[clamp(24px,13.333vw,256px)] py-[clamp(80px,6.563vw,110px)]"
+      >
+        <NarrowContainer className="flex items-center justify-between gap-[clamp(32px,2.5vw,48px)] max-[1024px]:flex-col">
+          <div className="flex w-[38.7%] shrink-0 flex-col justify-center max-[1024px]:w-full">
+            <div className="flex flex-col gap-[clamp(24px,2.188vw,42px)]">
+              <div className="flex items-center gap-[10px] font-body text-[14px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] max-[768px]:text-[12px]">
+                <span className="h-2 w-2 shrink-0 bg-[#1A3E9E]" />
+                Leadership Foundation
               </div>
 
-              <div className="rounded-[24px] overflow-hidden aspect-[4/3] shadow-xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=800&auto=format&fit=crop" 
-                  alt="Executive Leader" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              <h2 className="font-heading text-[clamp(40px,3.333vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#101010]">
+                Leading with
+                <br />
+                Expertise and
+                <br />
+                Purpose
+              </h2>
+
+              <p className="font-body text-[clamp(15px,1.042vw,20px)] font-normal leading-[1.6] tracking-[0.02em] text-[#292929]">
+                Leadership at Arsalynk Group is built on technical excellence and deep industry expertise. Our leadership team brings together systems architects, data scientists, performance marketers, and creative directors to ensure every strategic decision is driven by data, engineering precision, and exceptional design.
+              </p>
             </div>
           </div>
-        </section>
 
-        {/* MEETING POINTS SLIDER */}
-        <section className="relative py-[120px] max-[1024px]:py-[96px] max-[768px]:py-[72px] bg-[#050b18] overflow-hidden text-center">
-          <div className="absolute inset-0 z-0" aria-hidden="true">
-            <img 
-              src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1600&auto=format&fit=crop" 
-              alt="Live Event Crowd" 
-              className="w-full h-full object-cover opacity-20"
+          <div className="relative w-[54.3%] shrink-0 overflow-hidden rounded-[24px] bg-[#252A2F] max-[1024px]:w-full aspect-[764/670]">
+            <img
+              src={`${ASSET_BASE}/intro-office.png`}
+              alt="Arsalynk leadership office"
+              className="absolute inset-[-10px] h-[calc(100%+20px)] w-[calc(100%+20px)] object-cover blur-[6.6px]"
             />
+            <div className="absolute inset-0 bg-[#101010]/15" />
+            <img
+              src={`${ASSET_BASE}/leader.png`}
+              alt="Arsalynk Group leadership"
+              className="absolute bottom-0 left-1/2 h-[94.18%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom"
+            />
+            <div className="absolute inset-x-0 bottom-0 h-[54%] bg-gradient-to-b from-transparent to-black/70 opacity-70" />
+            <div className="absolute inset-x-0 bottom-0 h-[91px] bg-gradient-to-b from-transparent to-black/70" />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#050b18]/80 via-transparent to-[#050b18]/80 z-[1]" />
+        </NarrowContainer>
+      </section>
 
-          <div className="w-full max-w-[1700px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px] relative z-[2]">
-            <div className="max-w-[840px] mx-auto flex flex-col items-center">
-              <span className="font-heading text-[11px] font-extrabold tracking-[0.2em] text-lime-yellow uppercase block mb-4">
-                &lt; MEETING POINTS &gt;
-              </span>
-              <h2 className="font-heading font-medium text-[32px] max-[1280px]:text-[28px] max-[768px]:text-[22px] leading-snug text-white mb-10">
-                By combining technical precision with a commitment to client success, 
-                Arsalynk Group delivers reliable, predictable, and results-driven execution.
-              </h2>
+      {/* BUILDING TRUST */}
+      <section className="relative isolate min-h-[clamp(600px,46.875vw,900px)] w-full overflow-hidden bg-[#101010] flex items-end pb-[clamp(72px,5.729vw,110px)]">
+        {TRUST_SLIDES.map((slide, index) => (
+          <img
+            key={`bg-${index}`}
+            src={slide.image}
+            alt=""
+            className={`absolute bottom-[-35px] left-1/2 h-[1045px] w-[2014px] max-w-none -translate-x-1/2 object-cover grayscale transition-opacity duration-700 max-[1024px]:h-full max-[1024px]:w-full max-[1024px]:bottom-0 ${
+              activeSlide === index ? 'opacity-100 z-0' : 'opacity-0 -z-10'
+            }`}
+          />
+        ))}
+        <div className="absolute inset-0 bg-black/50 z-0" />
+        <div className="absolute inset-x-0 bottom-0 h-[394px] bg-gradient-to-b from-transparent to-black z-0" />
 
-              <div className="flex items-center gap-4">
-                <button className="w-9 h-9 rounded-full bg-white/10 text-white border border-white/20 flex items-center justify-center cursor-pointer hover:bg-white/20">&lt;</button>
-                <span className="font-heading text-xs font-bold text-slate-400">1 / 3</span>
-                <button className="w-9 h-9 rounded-full bg-white/10 text-white border border-white/20 flex items-center justify-center cursor-pointer hover:bg-white/20">&gt;</button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* LEADERSHIP PRINCIPLES */}
-        <section className="py-[120px] max-[1024px]:py-[96px] max-[768px]:py-[60px] bg-white">
-          <div className="w-full max-w-[1700px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
-            <div className="text-center max-w-[800px] mx-auto mb-[64px]">
-              <span className="font-heading text-[11px] font-extrabold tracking-[0.2em] text-blue-600 uppercase block mb-3">
-                &lt; LEADERSHIP PRINCIPLES &gt;
-              </span>
-              <h2 className="font-heading font-bold text-[48px] max-[1280px]:text-[40px] max-[1024px]:text-[36px] max-[768px]:text-[28px] max-[480px]:text-[24px] leading-snug tracking-tight text-dark">
-                The Standards That<br />Guide Every Decision
-              </h2>
+        <WideContainer className="relative z-10 w-full px-[clamp(48px,13.542vw,260px)] max-[1024px]:px-10 max-[768px]:px-6">
+          <div className="w-full max-w-[60%] max-[1280px]:max-w-[75%] max-[1024px]:max-w-full">
+            <div className="mb-[clamp(20px,1.667vw,32px)] flex items-center gap-[10px] font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[10px]">
+              <span className="h-1.5 w-1.5 shrink-0 bg-[#E6FF2A]" />
+              Building Trust
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1200px] mx-auto">
-              {PRINCIPLES.map((item, i) => (
-                <div key={i} className="rounded-[20px] bg-[#fafafa] border border-[#E5E5E5] p-6 flex flex-col gap-3 shadow-sm">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-1">
-                    {item.icon}
-                  </div>
-                  <h3 className="font-heading font-bold text-[18px] leading-snug text-dark">
-                    {item.title.split('\n').map((line, idx) => (
-                      <span key={idx}>{line}<br/></span>
-                    ))}
-                  </h3>
-                  <p className="font-body text-xs leading-relaxed text-[#717171]">{item.desc}</p>
-                </div>
+            <div className="relative flex">
+              {TRUST_SLIDES.map((slide, index) => (
+                <h2
+                  key={`text-${index}`}
+                  aria-hidden={activeSlide !== index}
+                  className={`font-heading text-[clamp(30px,2.188vw,42px)] font-medium leading-[1.1] tracking-[-0.01em] text-[#F7F7F7] transition-all duration-500 max-[1280px]:text-[38px] max-[1024px]:text-[32px] max-[768px]:text-[26px] max-[480px]:text-[23px] ${
+                    activeSlide === index
+                      ? 'relative translate-y-0 opacity-100 z-10'
+                      : 'absolute top-0 left-0 pointer-events-none translate-y-3 opacity-0 -z-10'
+                  }`}
+                >
+                  {slide.text}
+                </h2>
               ))}
             </div>
           </div>
-        </section>
 
-        {/* EXPLORE OTHER INFORMATION */}
-        <section className="py-[96px] max-[768px]:py-[60px] bg-[#fafafa]">
-          <div className="w-full max-w-[1700px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
-            <h2 className="font-heading font-bold text-[28px] max-[768px]:text-[22px] text-dark text-center mb-10">
-              Explore Other Information
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[900px] mx-auto">
-              <Link href="/about-us/corporate-profile" className="group relative aspect-[16/9] rounded-[24px] overflow-hidden shadow-md flex items-end p-8 no-underline transition-transform duration-400 hover:-translate-y-1">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" alt="Corporate Profile" className="absolute inset-0 w-full h-full object-cover transition-transform duration-400 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-[1]" />
-                <h3 className="relative z-[2] font-heading font-bold text-[24px] text-white">Corporate Profile</h3>
-              </Link>
-              
-              <Link href="/about-us/ecosystem-philosophy" className="group relative aspect-[16/9] rounded-[24px] overflow-hidden shadow-md flex items-end p-8 no-underline transition-transform duration-400 hover:-translate-y-1">
-                <img src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?q=80&w=800&auto=format&fit=crop" alt="Ecosystem Philosophy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-400 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-[1]" />
-                <h3 className="relative z-[2] font-heading font-bold text-[24px] text-white">Ecosystem Philosophy</h3>
-              </Link>
+          <div className="mt-[clamp(20px,2vw,40px)] flex h-[36px] w-full items-end justify-between max-[768px]:mt-4">
+            <div className="flex h-[10px] items-center gap-2" aria-label={`Slide ${activeSlide + 1} of ${TRUST_SLIDES.length}`}>
+              {TRUST_SLIDES.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  aria-label={`Go to slide ${index + 1}`}
+                  onClick={() => setActiveSlide(index)}
+                  className={`relative h-[10px] overflow-hidden rounded-[1px] transition-[width,background-color] duration-500 ${
+                    activeSlide === index ? 'w-[54px] bg-[#BDC22E]' : 'w-[10px] bg-[#717171]'
+                  }`}
+                >
+                  {activeSlide === index && <span className="absolute inset-y-0 left-0 w-full origin-left bg-[#E6FF2A] trust-progress" />}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => changeSlide('prev')}
+                aria-label="Previous slide"
+                className="flex h-[36px] w-[36px] items-center justify-center rounded-[10px] border border-[#D9D9D9] text-[#D9D9D9] transition-colors hover:border-[#E6FF2A] hover:text-[#E6FF2A] max-[768px]:h-8 max-[768px]:w-8"
+              >
+                <IconChevron direction="left" />
+              </button>
+              <button
+                type="button"
+                onClick={() => changeSlide('next')}
+                aria-label="Next slide"
+                className="flex h-[36px] w-[36px] items-center justify-center rounded-[10px] border border-[#D9D9D9] text-[#D9D9D9] transition-colors hover:border-[#E6FF2A] hover:text-[#E6FF2A] max-[768px]:h-8 max-[768px]:w-8"
+              >
+                <IconChevron />
+              </button>
             </div>
           </div>
-        </section>
-      </div>
+        </WideContainer>
+      </section>
 
-      {/* BEYOND EXPECTATIONS */}
+      {/* LEADERSHIP PRINCIPLES */}
+      <section className="relative isolate w-full overflow-hidden bg-[#F7F7F7] px-[clamp(24px,5.729vw,110px)] py-[clamp(100px,8.125vw,156px)]">
+        {/* Layer 1: Lowest Layer - Vector Graphic */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-[clamp(-8px,calc(5.729vw-32px),78px)] right-[clamp(-8px,calc(5.729vw-32px),78px)] top-[-50px] z-0 opacity-100 max-[1024px]:top-0"
+        >
+          <img
+            src={`${ASSET_BASE}/Vector.svg`}
+            alt=""
+            aria-hidden="true"
+            className="h-auto w-full max-w-none"
+          />
+        </div>
+
+        {/* Layer 2: Gradient Fades (above Vector, below content) */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[438px] bg-gradient-to-b from-[#F7F7F7] to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[438px] bg-gradient-to-t from-[#F7F7F7] via-[#F7F7F7]/60 to-transparent" />
+
+        {/* Layer 3: Foreground Content */}
+        <WideContainer className="relative z-20">
+          <div className="mb-[clamp(32px,2.5vw,48px)] flex flex-col items-center gap-[clamp(20px,1.667vw,32px)] text-center">
+            <div className="flex items-center justify-center gap-[10px] font-body text-[14px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] max-[768px]:text-[12px]">
+              <span className="h-2 w-2 shrink-0 bg-[#1A3E9E]" />
+              Our Leadership Principles
+            </div>
+            <h2 className="font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
+              The Standards That
+              <br />
+              Guide Every Decision
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-4 gap-[clamp(20px,1.563vw,30px)] max-[1280px]:grid-cols-2 max-[768px]:grid-cols-1">
+            {PRINCIPLES.map((item) => (
+              <article
+                key={item.title}
+                className="group relative flex min-h-[clamp(220px,15vw,290px)] min-w-0 flex-col items-start gap-2.5 overflow-hidden rounded-[16px] border border-transparent px-4 pb-4 pt-4 backdrop-blur-[8px] transition-all duration-300 hover:border-[#99A6E7]/60 hover:bg-[linear-gradient(135deg,rgba(26,62,158,0.15)_0%,rgba(133,166,255,0.25)_100%)] hover:shadow-[0_8px_40px_rgba(26,62,158,0.18)]"
+                style={{
+                  background: 'linear-gradient(79deg, rgba(26,62,158,.0375) 13.31%, rgba(133,166,255,.075) 132.94%)',
+                }}
+              >
+                <div className="relative z-10 flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-lg border border-[#99A6E7] bg-[rgba(153,166,231,.35)] text-[#101010] transition-colors duration-300 group-hover:border-[#99A6E7] group-hover:bg-[rgba(26,62,158,0.35)]">
+                  <PrincipleIcon type={item.icon} />
+                </div>
+                <h3 className="relative z-10 whitespace-pre-line font-heading text-[clamp(23px,2.188vw,41px)] font-medium leading-[1.1] tracking-[-0.01em] text-[#424242]">
+                  {item.title}
+                </h3>
+                <p className="relative z-10 font-body text-[clamp(10px,0.75vw,11.5px)] font-normal leading-[1.5] text-[#424242]">
+                  {item.desc}
+                </p>
+              </article>
+            ))}
+          </div>
+        </WideContainer>
+      </section>
+
+      {/* OTHER INFORMATION */}
+      <section className="w-full bg-[rgba(153,166,231,.10)] px-[clamp(24px,5.729vw,110px)] py-[clamp(80px,6.563vw,126px)]">
+        <WideContainer>
+          <h2 className="mb-[clamp(32px,2.5vw,48px)] text-center font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
+            Explore Other Information
+          </h2>
+
+          <div className="grid grid-cols-2 gap-[clamp(20px,1.563vw,30px)] max-[768px]:grid-cols-1">
+            <Link
+              href="/about-us/corporate-profile"
+              className="group relative overflow-hidden rounded-[24px] bg-[#8C8C8C] no-underline aspect-[835/500]"
+            >
+              <img
+                src={`${ASSET_BASE}/corporate-profile.png`}
+                alt="Corporate Profile"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+              />
+              <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-b from-transparent to-black" />
+              <h3 className="absolute bottom-[34px] left-[clamp(24px,2.5vw,48px)] right-8 font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">
+                Corporate Profile
+              </h3>
+            </Link>
+
+            <Link
+              href="/about-us/ecosystem-philosophy"
+              className="group relative overflow-hidden rounded-[24px] bg-[#8C8C8C] no-underline aspect-[835/500]"
+            >
+              <img
+                src={`${ASSET_BASE}/ecosystem-philosophy.png`}
+                alt="Ecosystem Philosophy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+              />
+              <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-b from-transparent to-black" />
+              <h3 className="absolute bottom-[34px] left-[clamp(24px,2.5vw,48px)] right-8 font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">
+                Ecosystem Philosophy
+              </h3>
+            </Link>
+          </div>
+        </WideContainer>
+      </section>
+
+      {/* Existing CTA component — unchanged */}
       <BeyondExpectations />
-    </div>
+
+      <style jsx global>{`
+        .company-leadership-page,
+        .company-leadership-page * {
+          box-sizing: border-box;
+        }
+
+        @keyframes leadershipTrustProgress {
+          from { transform: scaleX(0); }
+          to { transform: scaleX(1); }
+        }
+
+        .company-leadership-page .trust-progress {
+          animation: leadershipTrustProgress 6.5s linear forwards;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .company-leadership-page *,
+          .company-leadership-page *::before,
+          .company-leadership-page *::after {
+            scroll-behavior: auto !important;
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+        }
+      `}</style>
+    </main>
   );
 }

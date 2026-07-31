@@ -157,18 +157,18 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     ],
     works: [
       {
-        name: 'Sinau Print Marketplace Website',
-        img: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=700&auto=format&fit=crop',
+        name: 'Sinau Print ERP & Marketplace',
+        img: '/images/projects/sinau-print-erp/1.webp',
         tag: 'Web Platform',
       },
       {
-        name: 'Connected IoT Dashboard',
-        img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=700&auto=format&fit=crop',
+        name: 'MyBoss Connected IoT System',
+        img: '/images/projects/myboss-iot-system/1.webp',
         tag: 'IoT System',
       },
       {
-        name: 'Smart Inventory System',
-        img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=700&auto=format&fit=crop',
+        name: 'Artic Complex Web Architecture',
+        img: '/images/projects/artic-complex-web/1.webp',
         tag: 'ERP Solution',
       },
     ],

@@ -1,212 +1,420 @@
-import React from 'react';
 import Link from 'next/link';
+import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 
-const IconCheck = () => (
-  <svg width="16" height="16" fill="none" stroke="#0052FF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-    <path d="M20 6L9 17l-5-5" />
+const IconArrow = ({ direction = 'right', size = 20 }: { direction?: 'left' | 'right'; size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={direction === 'left' ? 'rotate-180' : ''}
+    aria-hidden="true"
+  >
+    <path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
-const IconArrowRight = ({ size = 16 }: { size?: number }) => (
-  <svg width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-    <path d="M5 12h14M12 5l7 7-7 7" />
+const IconOutdated = () => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <circle cx="16" cy="16" r="10.5" stroke="currentColor" strokeWidth="1.5" />
+    <circle cx="16" cy="16" r="5.25" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M16 10.75V16L19.25 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
-const IconDashboard = () => (
-  <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-    <rect x="3" y="3" width="7" height="9" rx="1" />
-    <rect x="14" y="3" width="7" height="5" rx="1" />
-    <rect x="14" y="12" width="7" height="9" rx="1" />
-    <rect x="3" y="16" width="7" height="5" rx="1" />
+const IconTracking = () => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <rect x="6.5" y="6.5" width="19" height="19" rx="4" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M16 10.5V16L20 18.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M11 4.5V8.5M21 4.5V8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
   </svg>
 );
 
-const IconPriceTag = () => (
-  <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
-    <line x1="7" y1="7" x2="7.01" y2="7" />
+const IconVisibility = () => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <path d="M4.5 16C7.4 11.65 11.25 9.5 16 9.5C20.75 9.5 24.6 11.65 27.5 16C24.6 20.35 20.75 22.5 16 22.5C11.25 22.5 7.4 20.35 4.5 16Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+    <circle cx="16" cy="16" r="3.25" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M7 7L25 25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
   </svg>
 );
 
-const IconLayers = () => (
-  <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-    <polygon points="12 2 2 7 12 12 22 7 12 2" />
-    <polyline points="2 12 12 17 22 12" />
-    <polyline points="2 17 12 22 22 17" />
-  </svg>
+const SectionLabel = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex items-center gap-2 font-body text-[11px] font-extrabold uppercase tracking-[0.06em] text-[#1A3E9E] sm:text-[13px] 2xl:text-[16px]">
+    <span className="h-2 w-2 shrink-0 bg-[#1A3E9E]" />
+    <span>{children}</span>
+  </div>
 );
 
-export default function WorkDetailPage({ params }: { params: { slug: string } }) {
-  return (
-    <div className="w-full bg-[#FAFAFA] text-[#111] min-h-screen pt-[100px]">
-      {/* HEADER */}
-      <header className="max-w-[1200px] mx-auto px-5 py-[40px] text-left">
-        <div className="font-heading text-[0.8rem] font-semibold text-[#0052FF] tracking-[1px] mb-5 uppercase">OUR WORK / MARKETPLACE WEB /</div>
-        <h1 className="font-heading text-[2.5rem] font-bold leading-tight mb-6 max-w-[900px]">Manifesting The A-Z Print Solution, Marketplace Website Optimization for Sinau Print Semarang</h1>
-        <div className="flex gap-3 flex-wrap">
-          <span className="bg-[#EBF1FF] text-[#0033A0] px-4 py-1.5 rounded-full text-[0.75rem] font-semibold">SINAU PRINT</span>
-          <span className="bg-[#EBF1FF] text-[#0033A0] px-4 py-1.5 rounded-full text-[0.75rem] font-semibold">WEB SYSTEM</span>
-          <span className="bg-[#EBF1FF] text-[#0033A0] px-4 py-1.5 rounded-full text-[0.75rem] font-semibold">UI/UX</span>
+const Gallery = ({ src, alt }: { src: string; alt: string }) => (
+  <div className="group relative aspect-[1206/600] w-full overflow-hidden rounded-[16px] bg-[#0C2D5B] sm:rounded-[20px] 2xl:rounded-[24px]">
+    <img src={src} alt={alt} className="h-full w-full object-cover" />
+
+    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-black/45 to-transparent" />
+
+    <div className="absolute inset-y-0 left-4 flex items-center sm:left-6 2xl:left-[40px]">
+      <button
+        type="button"
+        aria-label="Previous image"
+        className="flex h-9 w-9 items-center justify-center rounded-[8px] border border-white/40 text-white transition hover:bg-white/10 sm:h-11 sm:w-11 2xl:h-16 2xl:w-16 2xl:rounded-[12px]"
+      >
+        <IconArrow direction="left" size={20} />
+      </button>
+    </div>
+
+    <div className="absolute inset-y-0 right-4 flex items-center sm:right-6 2xl:right-[40px]">
+      <button
+        type="button"
+        aria-label="Next image"
+        className="flex h-9 w-9 items-center justify-center rounded-[8px] border border-white/40 text-white transition hover:bg-white/10 sm:h-11 sm:w-11 2xl:h-16 2xl:w-16 2xl:rounded-[12px]"
+      >
+        <IconArrow size={20} />
+      </button>
+    </div>
+
+    <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full bg-white/45 px-4 py-3 backdrop-blur-[4px] 2xl:bottom-[35px]">
+      <span className="h-2.5 w-[54px] rounded-[1px] bg-[#E6FF2A]" />
+      <span className="h-2.5 w-2.5 rounded-[1px] bg-[#717171]" />
+      <span className="h-2.5 w-2.5 rounded-[1px] bg-[#717171]" />
+    </div>
+  </div>
+);
+
+const ChallengeCard = ({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) => (
+  <article className="flex min-h-[190px] flex-col items-start gap-5 rounded-[18px] bg-[linear-gradient(79deg,rgba(26,62,158,0.0375)_13.31%,rgba(133,166,255,0.075)_132.94%)] p-5 backdrop-blur-[8px] sm:min-h-[215px] sm:p-6 2xl:min-h-[249px] 2xl:gap-6 2xl:rounded-[24px] 2xl:pb-9">
+    <div className="flex h-12 w-12 items-center justify-center rounded-[8px] border border-[#99A6E7] bg-[rgba(153,166,231,0.35)] text-[#101010] 2xl:h-16 2xl:w-16">
+      {icon}
+    </div>
+    <div>
+      <h3 className="font-body text-[18px] font-semibold leading-[1.35] tracking-[-0.02em] text-[#424242] sm:text-[21px] 2xl:text-[28px] 2xl:leading-[1.6]">{title}</h3>
+      <p className="mt-1 font-body text-[13px] leading-[1.6] text-[#424242] sm:text-[14px] 2xl:text-[16px]">{description}</p>
+    </div>
+  </article>
+);
+
+const WorkCard = ({ href, src, title, categories }: { href: string; src: string; title: string; categories: string[] }) => (
+  <Link href={href} className="group relative block aspect-[835/616] overflow-hidden rounded-[18px] bg-[#151515] no-underline sm:rounded-[24px] 2xl:rounded-[32px]">
+    <img src={src} alt={title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]" />
+    <div className="absolute inset-0 bg-black/20" />
+    <div className="absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-t from-black via-black/65 to-transparent" />
+
+    <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4 sm:inset-x-7 sm:bottom-7 2xl:inset-x-[40px] 2xl:bottom-[40px]">
+      <div className="min-w-0 flex-1">
+        <h3 className="max-w-[700px] font-heading text-[23px] font-medium leading-[1.1] tracking-[-0.01em] text-[#F7F7F7] sm:text-[30px] xl:text-[34px] 2xl:text-[42px]">{title}</h3>
+        <div className="mt-4 flex flex-wrap items-center gap-3 font-body text-[10px] font-extrabold uppercase tracking-[0.06em] text-[#C8CC35] sm:text-[12px] 2xl:text-[16px]">
+          {categories.map((category, index) => (
+            <span key={category} className="flex items-center gap-3">
+              {index > 0 && <span className="h-[3px] w-[3px] bg-white" />}
+              {category}
+            </span>
+          ))}
         </div>
-      </header>
-
-      {/* HERO IMAGE */}
-      <div className="max-w-[1200px] mx-auto mb-[60px] px-5">
-        <img 
-          src="https://images.unsplash.com/photo-1547082299-de196ea013d6?q=80&w=1200&auto=format&fit=crop" 
-          alt="Sinau Print Website Mockup on Laptop" 
-          className="w-full rounded-[20px] object-cover block shadow-[0_20px_40px_rgba(0,0,0,0.1)]" 
-        />
       </div>
 
-      {/* MAIN CONTENT SPLIT */}
-      <div className="max-w-[1200px] mx-auto px-5 grid grid-cols-1 min-[900px]:grid-cols-[280px_1fr] gap-[60px]">
-        
-        {/* SIDEBAR */}
-        <aside>
-          <div className="sticky top-[120px] h-fit bg-[#F4F6F9] p-8 rounded-[16px]">
-            <div className="mb-8">
-              <h3 className="font-heading text-[0.85rem] font-bold text-[#0052FF] mb-4 uppercase tracking-[0.5px]">CLIENT GOALS</h3>
-              <ul className="list-none p-0 m-0 flex flex-col gap-3">
-                <li className="text-[0.9rem] text-[#444] flex items-center gap-2"><IconCheck /> Increase brand awareness</li>
-                <li className="text-[0.9rem] text-[#444] flex items-center gap-2"><IconCheck /> UI/UX Revamp</li>
-                <li className="text-[0.9rem] text-[#444] flex items-center gap-2"><IconCheck /> Brand Guidelines</li>
-                <li className="text-[0.9rem] text-[#444] flex items-center gap-2"><IconCheck /> Next.js Tech Stack</li>
-              </ul>
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[6px] border border-[#4C4C4C] text-[#D9D9D9] sm:h-12 sm:w-12 2xl:h-[54px] 2xl:w-[54px]">
+        <IconArrow size={20} />
+      </span>
+    </div>
+  </Link>
+);
+
+const PROJECT_DETAILS_MAP: Record<string, {
+  title: string;
+  corporation: string;
+  tags: string[];
+  heroImage: string;
+  gallery1: string;
+  gallery2: string;
+  features: string[];
+  techStack: string[];
+  liveUrl: string;
+  description: string;
+  challengeDesc: string;
+  challenges: { title: string; desc: string }[];
+}> = {
+  'sinau-print-erp': {
+    title: 'Manifesting The A-Z Print Solution, Marketplace Website Optimization for Sinau Print',
+    corporation: 'Sinau Print',
+    tags: ['Website Marketplace', 'E-Commerce', 'ERP System'],
+    heroImage: '/images/projects/sinau-print-erp/1.webp',
+    gallery1: '/images/projects/sinau-print-erp/2.webp',
+    gallery2: '/images/projects/sinau-print-erp/3.webp',
+    features: [
+      'Comprehensive Online Order System',
+      '70+ Products and Services',
+      'Online Booking & ERP System',
+      'Support 500+ Products Catalog',
+    ],
+    techStack: ['Laravel', 'Next.js', 'MySQL', 'React', 'Midtrans'],
+    liveUrl: 'https://sinauprint.com',
+    description: 'Sinau Print partnered with Arsalynk to develop a custom marketplace website and ERP platform that enables customers to explore printing products, place orders online, and manage transactions seamlessly.',
+    challengeDesc: 'Addressing operational bottlenecks in manual order processing and inventory management for multi-branch printing hubs.',
+    challenges: [
+      { title: 'Outdated Manual Entry', desc: 'Order processing relied heavily on repetitive manual data entry.' },
+      { title: 'No Real-Time Tracking', desc: 'Customers had limited visibility into order and delivery progress.' },
+      { title: 'No Clear Products View', desc: 'Product choices and specifications were difficult to compare.' },
+    ],
+  },
+  'artic-complex-web': {
+    title: 'Artic Complex Web Architecture & High-Performance Data Portal',
+    corporation: 'Artic Analytica',
+    tags: ['Web Platform', 'Data Architecture', 'Complex Analytics'],
+    heroImage: '/images/projects/artic-complex-web/1.webp',
+    gallery1: '/images/projects/artic-complex-web/2.webp',
+    gallery2: '/images/projects/artic-complex-web/3.webp',
+    features: [
+      'High-Performance Query Engine',
+      'Multi-Tenant Dashboard Architecture',
+      'Automated Analytical PDF Reports',
+      'Role-Based Granular Permissions',
+    ],
+    techStack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Tailwind', 'Docker'],
+    liveUrl: 'https://articanalytica.com',
+    description: 'Artic Analytica required a high-performance complex web portal to structure, visualize, and distribute multi-layered business research data with ultra-low latency.',
+    challengeDesc: 'Managing high-volume analytical queries and multi-tenant security architecture.',
+    challenges: [
+      { title: 'Data Query Latency', desc: 'Unoptimized queries caused delays in generating executive analytical reports.' },
+      { title: 'Complex Data Structures', desc: 'Multi-layered data sources lacked a unified visualization interface.' },
+      { title: 'Access Governance', desc: 'Managing secure role-based access for multi-organization clients.' },
+    ],
+  },
+  'myboss-iot-system': {
+    title: 'MyBoss Connected IoT Hardware & Real-Time Control System',
+    corporation: 'MyBoss',
+    tags: ['IoT System', 'IT Infrastructure', 'Hardware Control'],
+    heroImage: '/images/projects/myboss-iot-system/1.webp',
+    gallery1: '/images/projects/myboss-iot-system/2.webp',
+    gallery2: '/images/projects/myboss-iot-system/3.webp',
+    features: [
+      'Low-Latency Sensor Telemetry Engine',
+      'Remote Hardware Switch Control',
+      'Predictive Maintenance Alerts',
+      'Automated Incident Logging',
+    ],
+    techStack: ['Python', 'MQTT', 'React', 'Node.js', 'Redis'],
+    liveUrl: 'https://myboss-iot.com',
+    description: 'MyBoss connected smart devices and hardware sensors into a central cloud dashboard to monitor physical industrial operations in real time.',
+    challengeDesc: 'Eliminating hardware sensor latency and ensuring 99.99% uptime for remote device control.',
+    challenges: [
+      { title: 'Hardware Sensor Disconnects', desc: 'Legacy sensor networks experienced frequent data dropouts.' },
+      { title: 'Manual Switch Operations', desc: 'Physical switches required on-site manual intervention.' },
+      { title: 'Lack of Predictive Alerts', desc: 'Failures were detected only after equipment breakdowns occurred.' },
+    ],
+  },
+  'altatic-analytic': {
+    title: 'Altatic Data Analytics & Intelligence Dashboard Platform',
+    corporation: 'Altatic',
+    tags: ['Survey & Analytics', 'Data Platform', 'Business Intelligence'],
+    heroImage: '/images/projects/altatic-analytic/1.webp',
+    gallery1: '/images/projects/altatic-analytic/2.webp',
+    gallery2: '/images/projects/altatic-analytic/3.webp',
+    features: [
+      'Automated Survey Data Aggregation',
+      'Interactive Chart & Heatmap Visualizer',
+      'Predictive Business Trend Forecasting',
+      'Exportable Executive Presentations',
+    ],
+    techStack: ['React', 'Python', 'D3.js', 'FastAPI', 'PostgreSQL'],
+    liveUrl: 'https://altatic.io',
+    description: 'Altatic built an enterprise data intelligence platform to aggregate survey results, market trends, and predictive business insights into simplified executive charts.',
+    challengeDesc: 'Transforming unstructured survey responses into real-time visual dashboards.',
+    challenges: [
+      { title: 'Unstructured Survey Data', desc: 'Raw survey inputs were scattered across unformatted spreadsheets.' },
+      { title: 'Delayed Reporting', desc: 'Compiling reports manually took weeks instead of minutes.' },
+      { title: 'Inconsistent Data Visuals', desc: 'Executive teams lacked standardized visual charting tools.' },
+    ],
+  },
+  'web-media-profile': {
+    title: 'Web Media Corporate Profile & Interactive Digital Presence',
+    corporation: 'Web Media',
+    tags: ['Media & Creative', 'Corporate Profile', 'Digital Branding'],
+    heroImage: '/images/projects/web-media-profile/1.webp',
+    gallery1: '/images/projects/web-media-profile/2.webp',
+    gallery2: '/images/projects/web-media-profile/3.webp',
+    features: [
+      'Immersive Media Gallery Layout',
+      'High-Speed Asset Streaming',
+      'Interactive Client Portfolio Grid',
+      'Custom Motion & Micro-Animations',
+    ],
+    techStack: ['Next.js', 'Framer Motion', 'Tailwind', 'Vercel', 'CDN'],
+    liveUrl: 'https://webmedia.co.id',
+    description: 'Web Media required a modern digital showcase and corporate profile website to communicate their brand story and showcase creative media portfolios.',
+    challengeDesc: 'Designing an ultra-responsive visual layout that highlights video assets without sacrificing page load speed.',
+    challenges: [
+      { title: 'Slow Asset Loading', desc: 'Heavy media assets caused slow initial page loads.' },
+      { title: 'Outdated Visual Identity', desc: 'The previous corporate website did not reflect modern creative standards.' },
+      { title: 'Mobile Responsiveness', desc: 'Complex media grids broke on mobile viewports.' },
+    ],
+  },
+};
+
+export default async function WorkDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const currentProject = PROJECT_DETAILS_MAP[slug] || PROJECT_DETAILS_MAP['sinau-print-erp'];
+
+  return (
+    <main className="w-full bg-[#F7F7F7] text-[#101010]">
+      {/* INTRO WORKS */}
+      <section className="px-5 pb-14 pt-[130px] sm:px-8 sm:pb-20 sm:pt-[150px] lg:px-14 2xl:px-0 2xl:pb-24 2xl:pt-[186px]">
+        <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-10 2xl:gap-16">
+          <div className="flex flex-col gap-5 sm:gap-7 2xl:gap-8">
+            <div className="flex flex-wrap items-center gap-2 font-body text-[10px] font-bold uppercase tracking-[0.06em] text-[#1A3E9E] sm:text-[12px] 2xl:text-[14px]">
+              <span>Home</span>
+              <span>›</span>
+              <span>Our Works</span>
+              <span>›</span>
+              <span>{currentProject.corporation}</span>
             </div>
-            <div className="mb-8">
-              <h3 className="font-heading text-[0.85rem] font-bold text-[#0052FF] mb-4 uppercase tracking-[0.5px]">TEAM INVOLVED</h3>
-              <ul className="list-none p-0 m-0 flex flex-col gap-3">
-                <li className="text-[0.9rem] text-[#444] flex items-center gap-2"><IconCheck /> UI/UX Designer</li>
-                <li className="text-[0.9rem] text-[#444] flex items-center gap-2"><IconCheck /> Frontend Dev</li>
-                <li className="text-[0.9rem] text-[#444] flex items-center gap-2"><IconCheck /> Backend Dev</li>
-                <li className="text-[0.9rem] text-[#444] flex items-center gap-2"><IconCheck /> Project Manager</li>
-              </ul>
+
+            <h1 className="max-w-[1640px] font-heading text-[36px] font-medium leading-[1.08] tracking-[-0.02em] text-[#101010] sm:text-[48px] lg:text-[58px] 2xl:text-[72px] 2xl:leading-[1.1]">
+              {currentProject.title}
+            </h1>
+
+            <div className="flex flex-wrap items-center gap-2">
+              {currentProject.tags.map((tag) => (
+                <span key={tag} className="rounded-full bg-[rgba(153,166,231,0.15)] px-5 py-3 font-body text-[12px] leading-none tracking-[0.02em] text-[#292929] sm:px-7 sm:py-4 sm:text-[14px] 2xl:px-8 2xl:text-[18px] 2xl:leading-[1.5]">
+                  {tag}
+                </span>
+              ))}
             </div>
-            <button className="inline-flex items-center justify-center gap-2 w-full bg-[#0044FF] text-white p-[14px_20px] rounded-[8px] font-semibold text-[0.9rem] no-underline transition-all duration-300 border-none cursor-pointer hover:bg-[#0033CC] hover:-translate-y-0.5">
-              VISIT WEBSITE <IconArrowRight size={14} />
-            </button>
           </div>
-        </aside>
 
-        {/* MAIN BODY */}
-        <main className="pb-[80px]">
-          <h2 className="font-heading text-[1.8rem] font-bold mb-6 leading-snug">Digitizing Printing Services Through a Scalable Marketplace Platform</h2>
-          <p className="font-body text-[1.05rem] leading-relaxed text-[#555] mb-[40px]">
-            Sinau Print Semarang is an industry leader in custom printing. As the demand for convenient, at-home printing services skyrocketed, Sinau Print recognized the need to transform their traditional manual ordering system into a robust, scalable digital marketplace. We worked closely with their team to architect a seamless, user-centric e-commerce experience that empowers users to order custom prints from anywhere, while streamlining their internal operations and order management systems.
-          </p>
-
-          <img 
-            src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1000&auto=format&fit=crop" 
-            alt="Website Mockups" 
-            className="w-full rounded-[16px] mb-[60px] shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
-          />
-
-          <h2 className="font-heading text-[1.8rem] font-bold mb-6 leading-snug">Addressing Operational Bottlenecks in Manual Order Processing</h2>
-          <p className="font-body text-[1.05rem] leading-relaxed text-[#555] mb-[40px]">
-            The previous workflow required tedious back-and-forth communication for pricing, file uploads, and status checks. By integrating a dynamic pricing calculator, automated pre-flight checks, and real-time order tracking, we drastically reduced operational bottlenecks and improved customer satisfaction.
-          </p>
-
-          {/* KEY FEATURES GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-[60px]">
-            <div className="bg-[#F4F6F9] p-6 rounded-[16px] flex flex-col gap-4">
-              <div className="w-10 h-10 bg-[#EBF1FF] text-[#0052FF] rounded-[10px] flex items-center justify-center"><IconDashboard /></div>
-              <h4 className="font-heading text-[1.1rem] font-bold leading-snug">Dashboard Admin & Envoy</h4>
-              <p className="font-body text-[0.9rem] text-[#666] leading-relaxed">Comprehensive control panel to manage orders, track delivery envoys, and monitor sales analytics in real-time.</p>
-            </div>
-            <div className="bg-[#F4F6F9] p-6 rounded-[16px] flex flex-col gap-4">
-              <div className="w-10 h-10 bg-[#EBF1FF] text-[#0052FF] rounded-[10px] flex items-center justify-center"><IconPriceTag /></div>
-              <h4 className="font-heading text-[1.1rem] font-bold leading-snug">Multiple Print Pricing</h4>
-              <p className="font-body text-[0.9rem] text-[#666] leading-relaxed">Dynamic pricing calculator that instantly adjusts based on material, size, quantity, and finishing options.</p>
-            </div>
-            <div className="bg-[#F4F6F9] p-6 rounded-[16px] flex flex-col gap-4">
-              <div className="w-10 h-10 bg-[#EBF1FF] text-[#0052FF] rounded-[10px] flex items-center justify-center"><IconLayers /></div>
-              <h4 className="font-heading text-[1.1rem] font-bold leading-snug">Multiple Product Variations</h4>
-              <p className="font-body text-[0.9rem] text-[#666] leading-relaxed">Extensive catalogue supporting everything from business cards and banners to custom merchandise.</p>
-            </div>
+          <div className="relative h-[300px] overflow-hidden rounded-[18px] bg-[#2B2B2B] sm:h-[480px] sm:rounded-[24px] lg:h-[650px] 2xl:h-[800px] 2xl:rounded-[32px]">
+            <img
+              src={currentProject.heroImage}
+              alt={currentProject.title}
+              className="h-full w-full object-cover object-[50%_55%]"
+            />
           </div>
+        </div>
+      </section>
 
-          <h3 className="font-heading text-[1.4rem] font-bold mb-4">Subheadline 1</h3>
-          <p className="font-body text-[1.05rem] leading-relaxed text-[#555] mb-[40px]">
-            Through meticulous user research and iterative prototyping, our UI/UX team crafted an interface that simplifies complex configuration options into an intuitive, step-by-step flow. This ensures that even users with no prior printing knowledge can confidently place complex orders without requiring support.
-          </p>
+      {/* DETAIL WORKS */}
+      <section className="px-5 pb-20 pt-4 sm:px-8 sm:pb-24 lg:px-14 lg:pt-20 2xl:px-0 2xl:pb-[132px] 2xl:pt-24">
+        <div className="mx-auto grid w-full max-w-[1700px] grid-cols-1 items-start gap-10 xl:grid-cols-[310px_minmax(0,1fr)] xl:gap-[64px]">
+          <aside className="sticky top-[90px] z-30 self-start xl:top-[96px]">
+            <div className="rounded-[20px] bg-[rgba(153,166,231,0.1)] px-5 py-6 sm:px-6 sm:py-7 2xl:px-6 2xl:py-8">
+              <div className="border-b border-[rgba(200,200,200,0.25)] pb-5">
+                <h2 className="font-body text-[13px] font-extrabold uppercase tracking-[0.06em] text-[#1A3E9E] sm:text-[15px] 2xl:text-[16px]">Key Features</h2>
+                <ul className="mt-3 flex flex-col gap-1.5 font-body text-[13px] leading-[1.5] text-[#292929] 2xl:text-[15px]">
+                  {currentProject.features.map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center pt-0.5">
+                        <span className="h-1.5 w-1.5 bg-[#1A3E9E]" />
+                      </span>
+                      <span className="pt-[1px]">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-          <h3 className="font-heading text-[1.4rem] font-bold mb-4">Subheadline 2</h3>
-          <p className="font-body text-[1.05rem] leading-relaxed text-[#555] mb-[40px]">
-            Built on a modern tech stack utilizing Next.js for lightning-fast performance and a headless CMS architecture, the new platform is highly scalable. It effortlessly handles high traffic volumes during peak promotional seasons while maintaining optimal load times and SEO rankings.
-          </p>
+              <div className="border-b border-[rgba(200,200,200,0.25)] py-5">
+                <h2 className="font-body text-[13px] font-extrabold uppercase tracking-[0.06em] text-[#1A3E9E] sm:text-[15px] 2xl:text-[16px]">Tech Stack</h2>
+                <div className="mt-3 grid grid-cols-2 gap-1.5">
+                  {currentProject.techStack.map((tech) => (
+                    <span key={tech} className="flex min-h-[36px] items-center justify-center rounded-full bg-[rgba(153,166,231,0.15)] px-3 text-center font-body text-[11px] font-medium leading-none text-[#292929] sm:text-[12px] 2xl:min-h-[40px] 2xl:text-[14px]">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
-          <img 
-            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop" 
-            alt="Dashboard View" 
-            className="w-full rounded-[16px] mb-[60px] shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
-          />
+              <a href={currentProject.liveUrl} target="_blank" rel="noreferrer" className="mt-5 flex min-h-[46px] w-full items-center justify-center gap-2.5 rounded-full bg-[#1A3E9E] px-5 font-body text-[12px] font-semibold uppercase tracking-[0.01em] text-[#F7F7F7] transition hover:bg-[#153486] sm:text-[14px] 2xl:min-h-[50px] 2xl:text-[16px]">
+                Visit Live Website
+                <IconArrow size={16} />
+              </a>
+            </div>
+          </aside>
 
-        </main>
-      </div>
+          <div className="flex min-w-0 flex-col gap-16 sm:gap-20 2xl:gap-24">
+            <article className="flex flex-col gap-8 sm:gap-10 2xl:gap-14">
+              <div className="flex flex-col gap-4 2xl:gap-6">
+                <h2 className="font-heading text-[34px] font-medium leading-[1.12] tracking-[-0.02em] text-[#101010] sm:text-[44px] lg:text-[52px] 2xl:text-[64px] 2xl:leading-[1.2]">
+                  {currentProject.title}
+                </h2>
+                <p className="font-body text-[14px] leading-[1.7] tracking-[0.01em] text-[#292929] sm:text-[16px] 2xl:text-[20px] 2xl:leading-[1.6] 2xl:tracking-[0.02em]">
+                  {currentProject.description}
+                </p>
+              </div>
+              <Gallery src={currentProject.gallery1} alt={`${currentProject.title} showcase 1`} />
+            </article>
+
+            <article className="flex flex-col gap-8 2xl:gap-[42px]">
+              <div className="flex flex-col gap-4 2xl:gap-6">
+                <SectionLabel>The Challenge</SectionLabel>
+                <h2 className="font-heading text-[34px] font-medium leading-[1.12] tracking-[-0.02em] text-[#101010] sm:text-[44px] lg:text-[52px] 2xl:text-[64px] 2xl:leading-[1.2]">
+                  {currentProject.challengeDesc}
+                </h2>
+                <p className="font-body text-[14px] leading-[1.7] tracking-[0.01em] text-[#292929] sm:text-[16px] 2xl:text-[20px] 2xl:leading-[1.6] 2xl:tracking-[0.02em]">
+                  {currentProject.description}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3 2xl:gap-[15px]">
+                {currentProject.challenges.map((c, i) => (
+                  <ChallengeCard key={c.title} icon={i === 0 ? <IconOutdated /> : i === 1 ? <IconTracking /> : <IconVisibility />} title={c.title} description={c.desc} />
+                ))}
+              </div>
+            </article>
+
+            <article className="flex flex-col gap-8 sm:gap-10 2xl:gap-14">
+              <div className="flex flex-col gap-8 sm:gap-10 2xl:gap-[54px]">
+                <div className="flex flex-col gap-4 2xl:gap-6">
+                  <SectionLabel>Things We Build</SectionLabel>
+                  <h2 className="font-heading text-[34px] font-medium leading-[1.12] tracking-[-0.02em] text-[#101010] sm:text-[44px] lg:text-[52px] 2xl:text-[64px] 2xl:leading-[1.2]">
+                    Addressing Operational Bottlenecks in Manual Order Processing
+                  </h2>
+                </div>
+
+                <div className="flex flex-col gap-4 2xl:gap-6">
+                  <h3 className="font-heading text-[25px] font-medium leading-[1.1] tracking-[-0.01em] text-[#292929] sm:text-[32px] 2xl:text-[42px]">Subheadline 1</h3>
+                  <p className="font-body text-[14px] leading-[1.7] tracking-[0.01em] text-[#292929] sm:text-[16px] 2xl:text-[20px] 2xl:leading-[1.6] 2xl:tracking-[0.02em]">
+                    {currentProject.description}
+                  </p>
+                </div>
+              </div>
+
+              <Gallery src={currentProject.gallery2} alt={`${currentProject.title} showcase 2`} />
+            </article>
+          </div>
+        </div>
+      </section>
 
       {/* OTHER WORKS */}
-      <section className="bg-[#F4F6F9] py-20 px-5">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="flex justify-between items-center mb-10">
-            <h2 className="font-heading text-[2rem] font-bold">Other Works</h2>
-            <div className="flex gap-3">
-              <button className="w-10 h-10 rounded-full border border-[#DDD] bg-transparent flex items-center justify-center cursor-pointer transition-all hover:bg-white hover:border-[#BBB]" aria-label="Previous">
-                <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      <section className="bg-[rgba(153,166,231,0.1)] px-5 py-16 sm:px-8 sm:py-20 lg:px-14 2xl:px-0 2xl:pb-[110px] 2xl:pt-24">
+        <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-8">
+          <div className="flex items-end justify-between gap-6">
+            <h2 className="font-heading text-[46px] font-medium leading-none tracking-[-0.03em] text-[#101010] sm:text-[60px] 2xl:text-[84px]">Other Works</h2>
+            <div className="flex items-center gap-2">
+              <button type="button" aria-label="Previous works" className="flex h-11 w-11 items-center justify-center rounded-[10px] border border-[#D9D9D9] text-[#717171] transition hover:bg-white sm:h-14 sm:w-14 2xl:h-16 2xl:w-16 2xl:rounded-[12px]">
+                <IconArrow direction="left" size={20} />
               </button>
-              <button className="w-10 h-10 rounded-full border border-[#DDD] bg-transparent flex items-center justify-center cursor-pointer transition-all hover:bg-white hover:border-[#BBB]" aria-label="Next">
-                <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              <button type="button" aria-label="Next works" className="flex h-11 w-11 items-center justify-center rounded-[10px] border border-[#D9D9D9] text-[#717171] transition hover:bg-white sm:h-14 sm:w-14 2xl:h-16 2xl:w-16 2xl:rounded-[12px]">
+                <IconArrow size={20} />
               </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Link href="/our-works" className="group relative rounded-[16px] overflow-hidden block no-underline aspect-[16/9]">
-              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop" alt="X-1 Tire" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/10" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-end">
-                <div>
-                  <h3 className="font-heading text-white text-[1.25rem] font-bold mb-2">Company Profile Revamp for X-1 Tire</h3>
-                  <span className="font-heading text-[#A3FF00] text-[0.75rem] font-semibold uppercase tracking-[1px]">COMPANY PROFILE / CONTENT REVAMP</span>
-                </div>
-                <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white">
-                  <IconArrowRight size={18} />
-                </div>
-              </div>
-            </Link>
-            <Link href="/our-works" className="group relative rounded-[16px] overflow-hidden block no-underline aspect-[16/9]">
-              <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=600&auto=format&fit=crop" alt="Padel 2026" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/10" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-end">
-                <div>
-                  <h3 className="font-heading text-white text-[1.25rem] font-bold mb-2">Live Streaming Event for Sirkuit Nasional Padel 2026</h3>
-                  <span className="font-heading text-[#A3FF00] text-[0.75rem] font-semibold uppercase tracking-[1px]">PADEL NASIONAL / LIVE STREAMING EVENT</span>
-                </div>
-                <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white">
-                  <IconArrowRight size={18} />
-                </div>
-              </div>
-            </Link>
+          <div className="grid grid-cols-1 gap-5 xl:grid-cols-2 2xl:gap-[30px]">
+            <WorkCard href="/our-works/artic-complex-web" src="/images/projects/artic-complex-web/1.webp" title="Artic Complex Web Architecture & Portal" categories={['Web Platform', 'Data Architecture']} />
+            <WorkCard href="/our-works/myboss-iot-system" src="/images/projects/myboss-iot-system/1.webp" title="MyBoss Connected IoT Hardware & Control System" categories={['IoT System', 'IT Infrastructure']} />
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="h-2.5 w-[54px] rounded-[1px] bg-[#1A3E9E]" />
+            <span className="h-2.5 w-2.5 rounded-[1px] bg-[#D9D9D9]" />
+            <span className="h-2.5 w-2.5 rounded-[1px] bg-[#D9D9D9]" />
           </div>
         </div>
       </section>
 
-      {/* CTA SECTION */}
-      <section className="bg-[#0A0F1C] text-white py-[100px] px-5 text-center relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(0,82,255,0.15)_0%,transparent_70%)] pointer-events-none" />
-        <div className="relative z-[1] max-w-[600px] mx-auto">
-          <h2 className="font-heading text-[2.5rem] font-bold mb-10 leading-tight">Build Your Own Digital Marketplace with Us</h2>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <a href="#contact" className="bg-[#D3FF24] text-[#111] px-8 py-3.5 rounded-[30px] font-bold no-underline inline-flex items-center gap-2 transition-all duration-300 hover:bg-[#C4F013] hover:-translate-y-0.5">
-              GET STARTED <IconArrowRight size={14} />
-            </a>
-            <a href="/our-works" className="border border-white/20 text-white px-8 py-3.5 rounded-[30px] font-semibold no-underline inline-flex items-center gap-2 transition-all duration-300 hover:bg-white/10 hover:border-white/40">
-              OTHER WORKS
-            </a>
-          </div>
-        </div>
-      </section>
-    </div>
+      {/* CTA SECTION - BEYOND EXPECTATIONS */}
+      <BeyondExpectations />
+    </main>
   );
 }

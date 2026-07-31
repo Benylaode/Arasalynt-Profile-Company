@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 
 const IconArrowRight = ({ size = 16 }: { size?: number }) => (
   <svg width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
@@ -121,21 +122,8 @@ export default function LeadershipThoughtDetailPage({ params }: { params: { slug
         </div>
       </section>
 
-      {/* CTA SECTION */}
-      <section className="bg-[#0A0F1C] text-white py-[100px] px-5 text-center relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(0,82,255,0.15)_0%,transparent_70%)] pointer-events-none" />
-        <div className="relative z-[1] max-w-[600px] mx-auto">
-          <h2 className="font-heading text-[2.5rem] font-bold mb-10 leading-tight">Build Your Own Digital Marketplace with Us</h2>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <a href="#contact" className="bg-[#D3FF24] text-[#111] px-8 py-3.5 rounded-[30px] font-bold no-underline inline-flex items-center gap-2 transition-all duration-300 hover:bg-[#C4F013] hover:-translate-y-0.5">
-              GET STARTED <IconArrowRight size={14} />
-            </a>
-            <a href="/leadership-thoughts" className="border border-white/20 text-white px-8 py-3.5 rounded-[30px] font-semibold no-underline inline-flex items-center gap-2 transition-all duration-300 hover:bg-white/10 hover:border-white/40">
-              OTHER THOUGHTS
-            </a>
-          </div>
-        </div>
-      </section>
+      {/* CTA SECTION - BEYOND EXPECTATIONS */}
+      <BeyondExpectations />
     </div>
   );
 }

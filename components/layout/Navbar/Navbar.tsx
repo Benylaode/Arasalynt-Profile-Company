@@ -348,11 +348,13 @@ function DropdownCardModal({
   isOpen,
   onClose,
   children,
+  titleHref,
 }: {
   title: string;
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  titleHref?: string;
 }) {
   if (!isOpen) return null;
 
@@ -364,12 +366,10 @@ function DropdownCardModal({
         onClick={onClose}
       />
 
-      {/* Floating Card Modal horizontally centered, top-aligned close to navbar */}
       <div
         className="
-          fixed left-1/2 top-[76px] z-[99]
-          w-[1037px] max-w-[92vw]
-          -translate-x-1/2
+          fixed top-[76px] z-[99]
+          inset-x-[clamp(1rem,5.6vw,6.75rem)]
           transition-all duration-300 ease-out
           animate-in fade-in zoom-in-95
         "
@@ -385,19 +385,40 @@ function DropdownCardModal({
             shadow-[0_20px_65px_rgba(0,0,0,0.14)]
           "
         >
-          <h2
-            className="
-              mb-[38px]
-              font-heading
-              text-[57px]
-              font-semibold
-              leading-none
-              tracking-[-0.02em]
-              text-[#4F4F4F]
-            "
-          >
-            {title}
-          </h2>
+          {titleHref ? (
+            <Link
+              href={titleHref}
+              onClick={onClose}
+              className="
+                mb-[38px]
+                block
+                font-heading
+                text-[57px]
+                font-semibold
+                leading-none
+                tracking-[-0.02em]
+                text-[#4F4F4F]
+                transition-colors
+                hover:text-[#101010]
+              "
+            >
+              {title}
+            </Link>
+          ) : (
+            <h2
+              className="
+                mb-[38px]
+                font-heading
+                text-[57px]
+                font-semibold
+                leading-none
+                tracking-[-0.02em]
+                text-[#4F4F4F]
+              "
+            >
+              {title}
+            </h2>
+          )}
 
           {/* Content area with vertical border line */}
           <div className="flex border-l-[3px] border-[#D6D6D6] pl-[31px]">
@@ -531,6 +552,7 @@ function SimpleDropdown({
 
       <DropdownCardModal
         title={title}
+        titleHref={href}
         isOpen={isOpen}
         onClose={() => setActiveDropdown(null)}
       >
@@ -620,6 +642,7 @@ function BusinessDropdown({
 
       <DropdownCardModal
         title="Our Business"
+        titleHref="/our-business"
         isOpen={isOpen}
         onClose={() => setActiveDropdown(null)}
       >
@@ -800,7 +823,7 @@ export default function Navbar() {
    * Setelah scroll atau pada halaman internal:
    * background putih dan logo_blue.svg.
    */
-  const overlay = pathname === '/' && !isScrolled;
+  const overlay = (pathname === '/' || pathname === '/about-us') && !isScrolled;
 
   const readScrollPosition = useCallback(() => {
     setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
