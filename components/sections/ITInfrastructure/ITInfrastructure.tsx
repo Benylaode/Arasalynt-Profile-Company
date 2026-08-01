@@ -1,285 +1,710 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import SectionLabel from '@/components/ui/SectionLabel/SectionLabel';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import styles from './ITInfrastructure.module.css';
 
-const SERVICES_DATA = [
+type PillarKey = 'it' | 'media' | 'data';
+
+type Scene = {
+  id: number;
+  number: string;
+  title: string;
+  titleLines: ReactNode;
+  tags: string[];
+};
+
+type MotionState = {
+  from: number;
+  to: number;
+  key: number;
+};
+
+type PillarDefinition = {
+  key: PillarKey;
+  baseY: number;
+  sceneY: readonly [number, number, number];
+  centerX: number;
+  zIndex: number;
+  paths: {
+    faceA: string;
+    top: string;
+    faceB: string;
+  };
+  activeGradient: {
+    faceA: readonly [string, string];
+    top: readonly [string, string];
+    faceB: readonly [string, string];
+  };
+  holograms: readonly [string, string];
+};
+
+type PillarStyle = CSSProperties & {
+  '--pillar-shift-y': string;
+  '--pillar-z': number;
+  '--pillar-center-x': string;
+  '--pillar-cluster-top': string;
+};
+
+const AUTO_ROTATE_MS = 6000;
+const MOTION_DURATION_MS = 1180;
+const ASSET_ROOT = '/images/services/it-motion';
+
+const SCENES: Scene[] = [
   {
     id: 0,
-    number: "01",
-    label: "ONE ECOSYSTEM, THREE PILLARS",
-    title: <>Information<br />Technology<br />Infrastructure</>,
-    desc: "We build resilient technology infrastructure that connects your business systems into a unified, intelligent ecosystem — enabling seamless operations, scalability, and long-term growth.",
-    tags: ['SOFTWARE DEVELOPMENT', 'CLOUD', 'INFRASTRUCTURE', 'More...']
+    number: '01',
+    title: 'Information Technology Infrastructure',
+    titleLines: (
+      <>
+        Information<br />Technology<br />Infrastructure
+      </>
+    ),
+    tags: ['SOFTWARE DEVELOPMENT', 'CLOUD', 'INFRASTRUCTURE', 'More...'],
   },
   {
     id: 1,
-    number: "02",
-    label: "DATA & ANALYTICS SYSTEMS",
-    title: <>Data Survey<br />and<br />Analytics</>,
-    desc: "Turning fragmented information into strategic enterprise dashboards, empowering teams with predictive data modeling and deep-dive analytical insights.",
-    tags: ['DATA MODELING', 'SURVEY', 'ANALYTICS', 'More...']
+    number: '02',
+    title: 'Data Survey and Analytics',
+    titleLines: (
+      <>
+        Data Survey<br />and Analytics
+      </>
+    ),
+    tags: ['DATA ANALYTICS', 'COMMUNITY SURVEY', 'CAMPAIGN', 'More...'],
   },
   {
     id: 2,
-    number: "03",
-    label: "ONE ECOSYSTEM, THREE PILLARS",
-    title: <>Digital Media<br />and<br />Impact</>,
-    desc: "Delivering your brand message through high-impact media placements and content strategies designed to maximize modern marketplace engagement.",
-    tags: ['BRANDING', 'ADS/PROMOTION', 'CAMPAIGN MAKING', 'More...']
-  }
+    number: '03',
+    title: 'Digital Media and Impact',
+    titleLines: (
+      <>
+        Digital Media<br />and Impact
+      </>
+    ),
+    tags: ['BRANDING', 'ADS/PROMOTION', 'CAMPAIGN MAKING', 'More...'],
+  },
 ];
 
-export default function ITInfrastructure() {
-  const [activeTab, setActiveTab] = useState(0);
+const ACTIVE_PILLAR: Record<number, PillarKey> = {
+  0: 'it',
+  1: 'data',
+  2: 'media',
+};
 
-  // Auto-rotate tab every 6 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveTab((prev) => (prev + 1) % SERVICES_DATA.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
+/**
+ * These are the original V2 vector paths. The three faces stay mounted for the
+ * lifetime of the component; only their parent transform and active color layer
+ * are animated. This removes the missing-face frames caused by crossfading two
+ * complete SVG files at different Y positions.
+ */
+const PILLARS: readonly PillarDefinition[] = [
+  {
+    key: 'it',
+    baseY: 306,
+    sceneY: [306, 441, 411],
+    centerX: 1061,
+    zIndex: 2,
+    paths: {
+      faceA:
+        'M1316 452.338L1315.28 673.989L1314.75 674.291L1072.73 814.947L1069.84 1500.05L1069.79 1500.08L1072.73 593.716L1315.38 452.705L1316 452.338Z',
+      top:
+        'M819.461 447.368L1062.74 306L1315.52 451.941L1072.25 593.319L819.461 447.368Z',
+      faceB:
+        'M1072.74 593.716L1069.79 1500.08L817 1354.14L819.945 447.764L1072.74 593.716Z',
+    },
+    activeGradient: {
+      faceA: ['#668FFF', '#0629B6'],
+      top: ['#A2BBFF', '#234AB3'],
+      faceB: ['#2B64FF', '#051C5C'],
+    },
+    holograms: [
+      `${ASSET_ROOT}/hologram-it-a.webp`,
+      `${ASSET_ROOT}/hologram-it-b.webp`,
+    ],
+  },
+  {
+    key: 'media',
+    baseY: 380,
+    sceneY: [380, 326, 364],
+    centerX: 1562,
+    zIndex: 3,
+    paths: {
+      faceA:
+        'M1811.61 525.941L1808.66 1578.19L1565.78 1719.35L1565.39 1719.57L1567.1 1111.26L1568.34 667.32L1811.61 525.941Z',
+      top:
+        'M1315.54 521.378L1558.82 380L1811.6 525.952L1568.33 667.319L1315.54 521.378Z',
+      faceB:
+        'M1568.33 667.319L1567.09 1111.26L1315.54 966.029L1314.82 966.45L1314.29 966.752L1314.91 745.165V744.442L1315.54 521.367L1568.33 667.319Z',
+    },
+    activeGradient: {
+      faceA: ['#2B64FF', '#051C5C'],
+      top: ['#A2BBFF', '#2B64FF'],
+      faceB: ['#2B64FF', '#051C5C'],
+    },
+    holograms: [
+      `${ASSET_ROOT}/hologram-media-a.webp`,
+      `${ASSET_ROOT}/hologram-media-b.webp`,
+    ],
+  },
+  {
+    key: 'data',
+    baseY: 620,
+    sceneY: [620, 344, 701],
+    centerX: 1318,
+    zIndex: 4,
+    paths: {
+      faceA:
+        'M1324.7 906.164L1567 765.365L1564.07 1461.39L1321.77 1602.2L1324.7 906.164Z',
+      top:
+        'M1072.93 760.81L1315.22 620L1567 765.365L1324.7 906.164L1072.93 760.81Z',
+      faceB:
+        'M1324.7 906.165L1321.76 1602.2L1070 1456.84L1072.93 760.811L1324.7 906.165Z',
+    },
+    activeGradient: {
+      faceA: ['#2B64FF', '#051C5C'],
+      top: ['#A2BBFF', '#2B64FF'],
+      faceB: ['#051C5C', '#2B64FF'],
+    },
+    holograms: [
+      `${ASSET_ROOT}/hologram-data-a.webp`,
+      `${ASSET_ROOT}/hologram-data-b.webp`,
+    ],
+  },
+];
 
-  const current = SERVICES_DATA[activeTab];
+const HOTSPOTS: Record<
+  number,
+  Array<{ target: number; label: string; style: CSSProperties }>
+> = {
+  0: [
+    {
+      target: 1,
+      label: 'Show Data Survey and Analytics',
+      style: { left: '55%', top: '55%', width: '17%', height: '43%' },
+    },
+    {
+      target: 2,
+      label: 'Show Digital Media and Impact',
+      style: { left: '70%', top: '24%', width: '23%', height: '73%' },
+    },
+  ],
+  1: [
+    {
+      target: 0,
+      label: 'Show Information Technology Infrastructure',
+      style: { left: '42%', top: '31%', width: '18%', height: '67%' },
+    },
+    {
+      target: 2,
+      label: 'Show Digital Media and Impact',
+      style: { left: '72%', top: '24%', width: '21%', height: '73%' },
+    },
+  ],
+  2: [
+    {
+      target: 0,
+      label: 'Show Information Technology Infrastructure',
+      style: { left: '42%', top: '34%', width: '18%', height: '64%' },
+    },
+    {
+      target: 1,
+      label: 'Show Data Survey and Analytics',
+      style: { left: '55%', top: '59%', width: '18%', height: '39%' },
+    },
+  ],
+};
+
+const numberAsset = (scene: number) =>
+  `${ASSET_ROOT}/number-${String(scene + 1).padStart(2, '0')}.svg`;
+
+function stageShift(baseY: number, targetY: number): string {
+  return `${((targetY - baseY) / 971) * 100}%`;
+}
+
+function stageX(value: number): string {
+  return `${(value / 1920) * 100}%`;
+}
+
+function stageY(value: number): string {
+  return `${(value / 971) * 100}%`;
+}
+
+function LayerImage({
+  src,
+  className,
+  priority = false,
+}: {
+  src: string;
+  className: string;
+  priority?: boolean;
+}) {
+  return (
+    <img
+      src={src}
+      alt=""
+      aria-hidden="true"
+      className={className}
+      draggable={false}
+      decoding="async"
+      loading="eager"
+      fetchPriority={priority ? 'high' : 'auto'}
+    />
+  );
+}
+
+function Pillar({
+  definition,
+  targetScene,
+  moving,
+}: {
+  definition: PillarDefinition;
+  targetScene: number;
+  moving: boolean;
+}) {
+  const active = ACTIVE_PILLAR[targetScene] === definition.key;
+  const targetY = definition.sceneY[targetScene];
+  const id = `service-pillar-${definition.key}`;
+
+  const style: PillarStyle = {
+    '--pillar-shift-y': stageShift(definition.baseY, targetY),
+    '--pillar-z': definition.zIndex,
+    '--pillar-center-x': stageX(definition.centerX),
+    '--pillar-cluster-top': stageY(definition.baseY - 196),
+  };
 
   return (
-    <section className="relative bg-[#F0F2F8] py-[120px] max-[1024px]:py-[96px] max-[768px]:py-[72px] overflow-hidden" id="services" aria-label="Services Platform">
-      {/* Background halo effect */}
-      <div 
-        className="hidden md:block absolute w-[1074px] h-[1074px] -right-[200px] -top-[100px] pointer-events-none z-0" 
-        aria-hidden="true"
-        style={{
-          background: 'radial-gradient(ellipse at center, rgba(85, 131, 255, 0.07) 0%, transparent 70%)'
-        }}
+    <div
+      className={styles.pillar}
+      data-pillar={definition.key}
+      data-active={active}
+      data-moving={moving}
+      style={style}
+      aria-hidden="true"
+    >
+      <svg
+        className={styles.pillarVector}
+        viewBox="0 0 1920 971"
+        preserveAspectRatio="none"
+      >
+        <defs>
+          <linearGradient id={`${id}-gray-a`} x1="1" y1="0" x2="0" y2="1">
+            <stop stopColor="#868686" />
+            <stop offset="1" stopColor="#3B3B3B" />
+          </linearGradient>
+          <linearGradient id={`${id}-gray-top`} x1="0.5" y1="1" x2="0.5" y2="0">
+            <stop stopColor="#767676" />
+            <stop offset="1" stopColor="#3C3C3C" />
+          </linearGradient>
+          <linearGradient id={`${id}-gray-b`} x1="1" y1="0" x2="0" y2="1">
+            <stop stopColor="#868686" />
+            <stop offset="1" stopColor="#3B3B3B" />
+          </linearGradient>
+
+          <linearGradient id={`${id}-blue-a`} x1="0" y1="0" x2="1" y2="1">
+            <stop stopColor={definition.activeGradient.faceA[0]} />
+            <stop offset="1" stopColor={definition.activeGradient.faceA[1]} />
+          </linearGradient>
+          <linearGradient id={`${id}-blue-top`} x1="0.5" y1="0" x2="0.5" y2="1">
+            <stop stopColor={definition.activeGradient.top[0]} />
+            <stop offset="1" stopColor={definition.activeGradient.top[1]} />
+          </linearGradient>
+          <linearGradient id={`${id}-blue-b`} x1="0" y1="0" x2="1" y2="1">
+            <stop stopColor={definition.activeGradient.faceB[0]} />
+            <stop offset="1" stopColor={definition.activeGradient.faceB[1]} />
+          </linearGradient>
+
+          <linearGradient id={`${id}-sheen`} x1="0" y1="0" x2="1" y2="1">
+            <stop stopColor="#FFFFFF" stopOpacity="0" />
+            <stop offset="0.47" stopColor="#FFFFFF" stopOpacity="0.56" />
+            <stop offset="0.62" stopColor="#7FA2FF" stopOpacity="0.14" />
+            <stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+
+        <g className={styles.pillarBaseFaces}>
+          <path d={definition.paths.faceA} fill={`url(#${id}-gray-a)`} />
+          <path d={definition.paths.top} fill={`url(#${id}-gray-top)`} />
+          <path d={definition.paths.faceB} fill={`url(#${id}-gray-b)`} />
+        </g>
+
+        <g className={styles.pillarActiveFaces}>
+          <path d={definition.paths.faceA} fill={`url(#${id}-blue-a)`} />
+          <path d={definition.paths.top} fill={`url(#${id}-blue-top)`} />
+          <path d={definition.paths.faceB} fill={`url(#${id}-blue-b)`} />
+        </g>
+
+        <g className={styles.pillarSheenFaces}>
+          <path d={definition.paths.faceA} fill={`url(#${id}-sheen)`} />
+          <path d={definition.paths.top} fill={`url(#${id}-sheen)`} />
+          <path d={definition.paths.faceB} fill={`url(#${id}-sheen)`} />
+        </g>
+
+        <g className={styles.pillarEdges}>
+          <path d={definition.paths.faceA} />
+          <path d={definition.paths.top} />
+          <path d={definition.paths.faceB} />
+        </g>
+      </svg>
+
+      <div className={styles.indicatorCluster}>
+        <div className={styles.indicatorAura} />
+        <div className={styles.indicatorShape} />
+
+        <div className={styles.hologramCardA}>
+          <img src={definition.holograms[0]} alt="" draggable={false} />
+        </div>
+        <div className={styles.hologramCardB}>
+          <img src={definition.holograms[1]} alt="" draggable={false} />
+        </div>
+
+        <div className={styles.pillarShadow} />
+        <div className={styles.pillarGlow} />
+      </div>
+    </div>
+  );
+}
+
+function Artwork({
+  targetScene,
+  moving,
+  mobile = false,
+}: {
+  targetScene: number;
+  moving: boolean;
+  mobile?: boolean;
+}) {
+  const layer = mobile ? styles.mobileArtworkLayer : styles.artworkLayer;
+
+  return (
+    <>
+      <LayerImage
+        src={`${ASSET_ROOT}/globe.svg`}
+        className={`${layer} ${styles.globeLayer}`}
+        priority={!mobile}
       />
 
-      <div className="w-full max-w-[1700px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px] grid grid-cols-2 max-[1024px]:grid-cols-1 gap-[64px] max-[1024px]:gap-12 items-center">
-        {/* ── LEFT SIDE: CONTENT ── */}
-        <div className="flex flex-col gap-6 relative z-[2]">
-          <SectionLabel text={current.label} />
+      {SCENES.map((scene) => (
+        <LayerImage
+          key={scene.id}
+          src={numberAsset(scene.id)}
+          className={`${layer} ${styles.numberLayer} ${styles[`number_${scene.id}`]}`}
+          priority={scene.id === 0 && !mobile}
+        />
+      ))}
 
-          {/* Interactive Tab Indicators */}
-          <div className="flex items-center gap-3 my-1">
-            {SERVICES_DATA.map((item, idx) => (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(idx)}
-                className={`px-4 py-1.5 rounded-full font-heading text-[12px] font-bold transition-all duration-300 cursor-pointer ${
-                  activeTab === idx
-                    ? 'bg-blue-600 text-white shadow-[0_4px_16px_rgba(37,99,235,0.3)]'
-                    : 'bg-slate-100 text-slate-600 border border-slate-200 hover:bg-slate-200 hover:text-slate-900'
-                }`}
-                type="button"
-              >
-                Pillar {item.number}
-              </button>
-            ))}
+
+      <div className={mobile ? styles.mobilePillarCanvas : styles.pillarCanvas}>
+        {PILLARS.map((definition) => (
+          <Pillar
+            key={definition.key}
+            definition={definition}
+            targetScene={targetScene}
+            moving={moving}
+          />
+        ))}
+      </div>
+    </>
+  );
+}
+
+export default function ITInfrastructure() {
+  const [settledScene, setSettledScene] = useState(0);
+  const [motion, setMotion] = useState<MotionState | null>(null);
+
+  const settledRef = useRef(0);
+  const motionRef = useRef<MotionState | null>(null);
+  const queuedSceneRef = useRef<number | null>(null);
+  const autoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const finishTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const motionKeyRef = useRef(0);
+
+  const clearAutoTimer = useCallback(() => {
+    if (autoTimerRef.current) {
+      clearTimeout(autoTimerRef.current);
+      autoTimerRef.current = null;
+    }
+  }, []);
+
+  const clearFinishTimer = useCallback(() => {
+    if (finishTimerRef.current) {
+      clearTimeout(finishTimerRef.current);
+      finishTimerRef.current = null;
+    }
+  }, []);
+
+  const beginTransitionRef = useRef<(nextScene: number) => void>(() => undefined);
+
+  const scheduleAutoRotate = useCallback(() => {
+    clearAutoTimer();
+    autoTimerRef.current = setTimeout(() => {
+      beginTransitionRef.current((settledRef.current + 1) % SCENES.length);
+    }, AUTO_ROTATE_MS);
+  }, [clearAutoTimer]);
+
+  const finishTransition = useCallback(
+    (finishedMotion: MotionState) => {
+      settledRef.current = finishedMotion.to;
+      motionRef.current = null;
+      setSettledScene(finishedMotion.to);
+      setMotion(null);
+
+      const queued = queuedSceneRef.current;
+      queuedSceneRef.current = null;
+
+      if (queued !== null && queued !== finishedMotion.to) {
+        requestAnimationFrame(() => beginTransitionRef.current(queued));
+      } else {
+        scheduleAutoRotate();
+      }
+    },
+    [scheduleAutoRotate],
+  );
+
+  const beginTransition = useCallback(
+    (nextScene: number) => {
+      const normalized = ((nextScene % SCENES.length) + SCENES.length) % SCENES.length;
+
+      if (motionRef.current) {
+        queuedSceneRef.current = normalized;
+        return;
+      }
+
+      const from = settledRef.current;
+      if (normalized === from) {
+        scheduleAutoRotate();
+        return;
+      }
+
+      clearAutoTimer();
+      clearFinishTimer();
+
+      const nextMotion: MotionState = {
+        from,
+        to: normalized,
+        key: ++motionKeyRef.current,
+      };
+
+      motionRef.current = nextMotion;
+      setMotion(nextMotion);
+
+      finishTimerRef.current = setTimeout(
+        () => finishTransition(nextMotion),
+        MOTION_DURATION_MS + 80,
+      );
+    },
+    [clearAutoTimer, clearFinishTimer, finishTransition, scheduleAutoRotate],
+  );
+
+  beginTransitionRef.current = beginTransition;
+
+  useEffect(() => {
+    scheduleAutoRotate();
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        clearAutoTimer();
+      } else if (!motionRef.current) {
+        scheduleAutoRotate();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      clearAutoTimer();
+      clearFinishTimer();
+    };
+  }, [clearAutoTimer, clearFinishTimer, scheduleAutoRotate]);
+
+  const targetScene = motion?.to ?? settledScene;
+  const currentScene = SCENES[targetScene];
+  const hotspotScene = targetScene;
+
+  const preload = useMemo(
+    () => [
+      `${ASSET_ROOT}/globe.svg`,
+      ...SCENES.map((scene) => numberAsset(scene.id)),
+      ...PILLARS.flatMap((pillar) => [...pillar.holograms]),
+    ],
+    [],
+  );
+
+  return (
+    <section
+      id="services"
+      className={styles.section}
+      aria-label="One ecosystem, three pillars"
+    >
+      <div
+        className={styles.desktopStage}
+        data-scene={targetScene}
+        data-moving={Boolean(motion)}
+      >
+        <Artwork targetScene={targetScene} moving={Boolean(motion)} />
+
+        <div className={styles.desktopCopyArea}>
+          <div className={styles.desktopLabel}>
+            <span aria-hidden="true" />
+            ONE ECOSYSTEM, THREE PILLARS
           </div>
 
-          {/* Animated Text Content */}
-          <div className="relative min-h-[260px] max-[768px]:min-h-[220px]">
-            {SERVICES_DATA.map((item) => (
-              <div
-                key={item.id}
-                className={`absolute inset-0 flex flex-col gap-5 transition-all duration-700 ease-in-out ${
-                  activeTab === item.id ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8 pointer-events-none'
-                }`}
-              >
-                <h2 className="font-heading font-bold text-[48px] max-[1280px]:text-[40px] max-[1024px]:text-[36px] max-[768px]:text-[28px] max-[480px]:text-[24px] leading-tight tracking-tight text-slate-900">
-                  {item.title}
-                </h2>
-                <p className="font-body text-[16px] leading-relaxed text-slate-600 max-w-[540px]">
-                  {item.desc}
-                </p>
-                <div className="flex flex-wrap items-center gap-2 text-[12px] font-bold text-slate-500 uppercase tracking-[0.1em]">
-                  {item.tags.map((tag, idx) => (
-                    <span key={idx} className="flex items-center gap-2">
-                      {tag}
-                      {idx < item.tags.length - 1 && <span className="text-slate-300">|</span>}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex mt-6 max-[768px]:flex-col">
-            <a 
-              href="#portfolio" 
-              className="inline-flex items-center gap-3 bg-blue-600 text-white py-3.5 px-8 rounded-full no-underline font-body font-bold text-[13px] shadow-[0_8px_24px_rgba(37,99,235,0.25)] transition-all duration-200 ease-in-out hover:scale-[1.03] hover:bg-blue-700 hover:shadow-[0_10px_30px_rgba(37,99,235,0.35)]"
-            >
-              LEARN MORE →
-            </a>
+          <div className={styles.desktopCopyViewport}>
+            {!motion ? (
+              <SceneCopy scene={SCENES[settledScene]} />
+            ) : (
+              <>
+                <SceneCopy
+                  key={`${motion.key}-copy-out`}
+                  scene={SCENES[motion.from]}
+                  className={styles.copyOutgoing}
+                />
+                <SceneCopy
+                  key={`${motion.key}-copy-in`}
+                  scene={SCENES[motion.to]}
+                  className={styles.copyIncoming}
+                />
+              </>
+            )}
           </div>
         </div>
 
-        {/* ── RIGHT SIDE: VISUAL ISOMETRIC ── */}
-        <div className="relative flex items-center justify-center min-h-[500px] max-[1024px]:min-h-[400px] max-[768px]:min-h-[300px] max-[1024px]:-order-1">
-          {/* Background Giant Numbers */}
-          <div className="absolute inset-0 flex items-center justify-center z-0">
-            {SERVICES_DATA.map((item) => (
-              <span
-                key={item.id}
-                className={`font-heading font-bold text-[250px] max-[1024px]:text-[140px] max-[768px]:text-[100px] leading-none text-transparent pointer-events-none select-none z-0 transition-opacity duration-500 ease-in-out ${
-                  activeTab === item.id ? 'opacity-30' : 'opacity-0'
-                }`}
-                style={{
-                  WebkitTextStroke: '2px #E5E5E5'
-                }}
-              >
-                {item.number}
-              </span>
-            ))}
-          </div>
+        <a
+          href="#portfolio"
+          className={styles.desktopLearnMore}
+          aria-label={`Learn more about ${currentScene.title}`}
+        >
+          LEARN MORE
+        </a>
 
-          {/* Background Wireframe Globe Network */}
-          <div className="absolute -inset-[50px] z-[1] opacity-60 pointer-events-none">
-            <svg viewBox="0 0 400 400" className="w-full h-full">
-              <circle cx="200" cy="200" r="180" fill="none" stroke="rgba(37,99,235,0.05)" strokeWidth="1" />
-              <circle cx="200" cy="200" r="140" fill="none" stroke="rgba(37,99,235,0.1)" strokeWidth="1" strokeDasharray="4 4" />
-              <ellipse cx="200" cy="200" rx="180" ry="80" fill="none" stroke="rgba(37,99,235,0.08)" strokeWidth="1" transform="rotate(30 200 200)" />
-              <ellipse cx="200" cy="200" rx="180" ry="80" fill="none" stroke="rgba(37,99,235,0.08)" strokeWidth="1" transform="rotate(-30 200 200)" />
-              <ellipse cx="200" cy="200" rx="80" ry="180" fill="none" stroke="rgba(37,99,235,0.08)" strokeWidth="1" transform="rotate(30 200 200)" />
-              <circle cx="350" cy="100" r="3" fill="#94a3b8" />
-              <circle cx="280" cy="50" r="2" fill="#94a3b8" />
-              <circle cx="380" cy="250" r="4" fill="#cbd5e1" />
-              <circle cx="100" cy="80" r="2" fill="#cbd5e1" />
-            </svg>
-          </div>
-
-          <div className="w-full max-w-[440px] h-auto flex items-center justify-center relative z-[2]">
-            <svg viewBox="0 0 400 400" className="w-full h-auto" fill="none">
-              <defs>
-                <clipPath id="isoClipLeft">
-                  <polygon points="40,0 80,20 40,40 0,20" />
-                </clipPath>
-                <clipPath id="isoClipRight">
-                  <polygon points="50,0 100,25 50,50 0,25" />
-                </clipPath>
-                <clipPath id="isoClipSmall">
-                  <polygon points="30,0 60,15 30,30 0,15" />
-                </clipPath>
-                <filter id="glowFilter" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="6" result="blur" />
-                  <feComponentTransfer in="blur" result="boost">
-                    <feFuncA type="linear" slope="1.5"/>
-                  </feComponentTransfer>
-                  <feMerge>
-                    <feMergeNode in="boost" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-
-              {/* BACK-LEFT PILLAR (Tab 2: Digital Media) */}
-              <g transform="translate(140, 70)" className="transition-all duration-700 ease-in-out cursor-pointer" onClick={() => setActiveTab(2)}>
-                {activeTab !== 2 && (
-                  <g transform="translate(0, -30)" className="animate-float-lid">
-                    <polygon points="80,0 160,40 80,80 0,40" fill="#9CA3AF" />
-                  </g>
-                )}
-                
-                <polygon points="80,0 160,40 80,80 0,40" fill={activeTab === 2 ? "#3B82F6" : "#E5E7EB"} className="transition-colors duration-500" />
-                {activeTab === 2 && (
-                  <ellipse cx="80" cy="40" rx="35" ry="17.5" fill="#60A5FA" opacity="0.8" filter="url(#glowFilter)" pointerEvents="none" />
-                )}
-                <polygon points="0,40 80,80 80,240 0,200" fill={activeTab === 2 ? "#2563EB" : "#D1D5DB"} className="transition-colors duration-500" />
-                <polygon points="160,40 80,80 80,240 160,200" fill={activeTab === 2 ? "#1D4ED8" : "#9CA3AF"} className="transition-colors duration-500" />
-                
-                {activeTab === 2 && (
-                  <g className="opacity-100 translate-y-0 animate-svg-pulse">
-                    <g transform="translate(-10, -70) skewY(-20) scale(0.9)">
-                      <rect x="0" y="0" width="90" height="65" rx="8" fill="rgba(37, 99, 235, 0.15)" stroke="#60A5FA" strokeWidth="1.5" />
-                      <circle cx="45" cy="30" r="12" fill="rgba(37, 99, 235, 0.3)" stroke="#60A5FA" strokeWidth="1.5" />
-                      <polygon points="42,24 52,30 42,36" fill="#fff" />
-                      <line x1="15" y1="50" x2="75" y2="50" stroke="#60A5FA" strokeWidth="2" />
-                      <circle cx="75" cy="50" r="3" fill="#fff" />
-                      <line x1="15" y1="12" x2="35" y2="12" stroke="#60A5FA" strokeWidth="1.5" />
-                    </g>
-                    <g transform="translate(80, -40) skewY(-20) scale(0.9)">
-                      <rect x="0" y="0" width="90" height="65" rx="8" fill="rgba(37, 99, 235, 0.15)" stroke="#60A5FA" strokeWidth="1.5" />
-                      <rect x="25" y="22" width="40" height="26" rx="4" fill="none" stroke="#60A5FA" strokeWidth="2" />
-                      <path d="M 35 22 L 40 16 L 50 16 L 55 22 Z" fill="none" stroke="#60A5FA" strokeWidth="2" />
-                      <circle cx="45" cy="35" r="8" fill="none" stroke="#fff" strokeWidth="1.5" />
-                      <circle cx="12" cy="12" r="2" fill="#60A5FA" />
-                      <circle cx="78" cy="12" r="2" fill="#60A5FA" />
-                    </g>
-                  </g>
-                )}
-              </g>
-
-              {/* FRONT-CENTER PILLAR (Tab 0: IT Infrastructure) */}
-              <g transform="translate(10, 200)" className="transition-all duration-700 ease-in-out cursor-pointer" onClick={() => setActiveTab(0)}>
-                {activeTab !== 0 && (
-                  <g transform="translate(0, -30)" className="animate-float-lid">
-                    <polygon points="70,0 140,35 70,70 0,35" fill="#9CA3AF" />
-                  </g>
-                )}
-                
-                <polygon points="70,0 140,35 70,70 0,35" fill={activeTab === 0 ? "#3B82F6" : "#E5E7EB"} className="transition-colors duration-500" />
-                {activeTab === 0 && (
-                  <ellipse cx="70" cy="35" rx="30" ry="15" fill="#60A5FA" opacity="0.8" filter="url(#glowFilter)" pointerEvents="none" />
-                )}
-                <polygon points="0,35 70,70 70,250 0,215" fill={activeTab === 0 ? "#2563EB" : "#D1D5DB"} className="transition-colors duration-500" />
-                <polygon points="140,35 70,70 70,250 140,215" fill={activeTab === 0 ? "#1D4ED8" : "#9CA3AF"} className="transition-colors duration-500" />
-                
-                {activeTab === 0 && (
-                  <g className="opacity-100 translate-y-0 animate-svg-pulse">
-                    <g transform="translate(10, -80) skewY(-20) scale(0.9)">
-                      <rect x="0" y="0" width="90" height="65" rx="8" fill="rgba(37, 99, 235, 0.15)" stroke="#60A5FA" strokeWidth="1.5" />
-                      <rect x="15" y="12" width="60" height="10" rx="2" fill="rgba(96, 165, 250, 0.2)" stroke="#60A5FA" strokeWidth="1" />
-                      <circle cx="25" cy="17" r="2" fill="#3B82F6" />
-                      <circle cx="33" cy="17" r="2" fill="#10B981" />
-                      <rect x="15" y="27" width="60" height="10" rx="2" fill="rgba(96, 165, 250, 0.2)" stroke="#60A5FA" strokeWidth="1" />
-                      <circle cx="25" cy="32" r="2" fill="#3B82F6" />
-                      <circle cx="33" cy="32" r="2" fill="#10B981" />
-                      <rect x="15" y="42" width="60" height="10" rx="2" fill="rgba(96, 165, 250, 0.2)" stroke="#60A5FA" strokeWidth="1" />
-                      <circle cx="25" cy="47" r="2" fill="#3B82F6" />
-                      <circle cx="33" cy="47" r="2" fill="#10B981" />
-                    </g>
-                    <g transform="translate(85, -30) skewY(-20) scale(0.9)">
-                      <rect x="0" y="0" width="90" height="65" rx="8" fill="rgba(37, 99, 235, 0.15)" stroke="#60A5FA" strokeWidth="1.5" />
-                      <path d="M 45 42 A 10 10 0 0 1 35 32 A 8 8 0 0 1 45 24 A 12 12 0 0 1 62 28 A 8 8 0 0 1 58 42 Z" fill="none" stroke="#60A5FA" strokeWidth="2" />
-                      <line x1="20" y1="50" x2="70" y2="50" stroke="#60A5FA" strokeWidth="1.5" strokeDasharray="3 3" />
-                    </g>
-                  </g>
-                )}
-              </g>
-
-              {/* RIGHT PILLAR (Tab 1: Data & Survey) */}
-              <g transform="translate(220, 240)" className="transition-all duration-700 ease-in-out cursor-pointer" onClick={() => setActiveTab(1)}>
-                {activeTab !== 1 && (
-                  <g transform="translate(0, -30)" className="animate-float-lid">
-                    <polygon points="60,0 120,30 60,60 0,30" fill="#9CA3AF" />
-                  </g>
-                )}
-                
-                <polygon points="60,0 120,30 60,60 0,30" fill={activeTab === 1 ? "#3B82F6" : "#E5E7EB"} className="transition-colors duration-500" />
-                {activeTab === 1 && (
-                  <ellipse cx="60" cy="30" rx="25" ry="12.5" fill="#60A5FA" opacity="0.8" filter="url(#glowFilter)" pointerEvents="none" />
-                )}
-                <polygon points="0,30 60,60 60,160 0,130" fill={activeTab === 1 ? "#2563EB" : "#D1D5DB"} className="transition-colors duration-500" />
-                <polygon points="120,30 60,60 60,160 120,130" fill={activeTab === 1 ? "#1D4ED8" : "#9CA3AF"} className="transition-colors duration-500" />
-                
-                {activeTab === 1 && (
-                  <g className="opacity-100 translate-y-0 animate-svg-pulse">
-                    <g transform="translate(10, -40) skewY(-20) scale(0.9)">
-                      <rect x="0" y="0" width="90" height="65" rx="8" fill="rgba(37, 99, 235, 0.15)" stroke="#60A5FA" strokeWidth="1.5" />
-                      <path d="M 15 45 L 35 25 L 50 35 L 75 15" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" />
-                      <circle cx="35" cy="25" r="3" fill="#fff" />
-                      <circle cx="50" cy="35" r="3" fill="#fff" />
-                      <circle cx="75" cy="15" r="3" fill="#fff" />
-                      <line x1="15" y1="50" x2="75" y2="50" stroke="rgba(96, 165, 250, 0.5)" strokeWidth="1.5" />
-                    </g>
-                  </g>
-                )}
-              </g>
-
-            </svg>
-          </div>
+        <div
+          className={styles.hotspotLayer}
+          data-disabled={Boolean(motion)}
+          aria-label="Choose service pillar"
+        >
+          {HOTSPOTS[hotspotScene].map((hotspot) => (
+            <button
+              key={`${hotspotScene}-${hotspot.target}`}
+              type="button"
+              aria-label={hotspot.label}
+              className={styles.hotspot}
+              style={hotspot.style}
+              disabled={Boolean(motion)}
+              onClick={() => beginTransition(hotspot.target)}
+            />
+          ))}
         </div>
       </div>
+
+      <div
+        className={styles.mobileStage}
+        data-scene={targetScene}
+        data-moving={Boolean(motion)}
+      >
+        <div className={styles.mobileCopyArea}>
+          <div className={styles.mobileLabel}>
+            <span aria-hidden="true" />
+            ONE ECOSYSTEM, THREE PILLARS
+          </div>
+
+          <div className={styles.mobileCopyViewport}>
+            {!motion ? (
+              <SceneCopy scene={SCENES[settledScene]} mobile />
+            ) : (
+              <>
+                <SceneCopy
+                  key={`${motion.key}-mobile-copy-out`}
+                  scene={SCENES[motion.from]}
+                  className={styles.mobileCopyOutgoing}
+                  mobile
+                />
+                <SceneCopy
+                  key={`${motion.key}-mobile-copy-in`}
+                  scene={SCENES[motion.to]}
+                  className={styles.mobileCopyIncoming}
+                  mobile
+                />
+              </>
+            )}
+          </div>
+
+          <a href="#portfolio" className={styles.mobileLearnMore}>
+            LEARN MORE
+          </a>
+        </div>
+
+        <div className={styles.mobileVisual} aria-hidden="true">
+          <div className={styles.mobileVisualCanvas}>
+            <Artwork targetScene={targetScene} moving={Boolean(motion)} mobile />
+          </div>
+        </div>
+
+        <div className={styles.mobileControls} aria-label="Choose service pillar">
+          {SCENES.map((scene) => (
+            <button
+              key={scene.id}
+              type="button"
+              className={styles.mobileControl}
+              data-active={targetScene === scene.id}
+              disabled={Boolean(motion)}
+              onClick={() => beginTransition(scene.id)}
+              aria-label={`Show ${scene.title}`}
+              aria-current={targetScene === scene.id ? 'true' : undefined}
+            >
+              {scene.number}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.assetPreloader} aria-hidden="true">
+        {preload.map((src) => (
+          <img key={src} src={src} alt="" loading="eager" decoding="async" />
+        ))}
+      </div>
+
+      <p className={styles.srOnly} aria-live="polite">
+        Showing {currentScene.title}
+      </p>
     </section>
+  );
+}
+
+function SceneCopy({
+  scene,
+  className = '',
+  mobile = false,
+}: {
+  scene: Scene;
+  className?: string;
+  mobile?: boolean;
+}) {
+  return (
+    <div
+      className={`${mobile ? styles.mobileCopy : styles.desktopCopy} ${className}`}
+    >
+      <h2 className={mobile ? styles.mobileTitle : styles.desktopTitle}>
+        {scene.titleLines}
+      </h2>
+
+      <div className={mobile ? styles.mobileTags : styles.desktopTags}>
+        {scene.tags.map((tag, index) => (
+          <span
+            key={`${scene.id}-${tag}`}
+            className={mobile ? styles.mobileTag : styles.desktopTag}
+          >
+            {tag}
+            {index < scene.tags.length - 1 && <i aria-hidden="true" />}
+          </span>
+        ))}
+      </div>
+    </div>
   );
 }
