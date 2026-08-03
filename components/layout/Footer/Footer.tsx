@@ -215,13 +215,13 @@ export default function Footer() {
                 <FooterTitle>CONTACT</FooterTitle>
                 <div className="flex h-[47px] flex-col gap-[9px]">
                   <a
-                    href="https://wa.me/6287765647107"
+                    href="https://wa.me/6287855471107"
                     target="_blank"
                     rel="noreferrer"
                     className="flex h-[19px] items-start gap-[9px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline hover:text-white"
                   >
                     <WhatsAppIcon />
-                    <span className="h-[19px]">+62 8776-5647-107</span>
+                    <span className="h-[19px]">+62 878-5547-107</span>
                   </a>
 
                   <a

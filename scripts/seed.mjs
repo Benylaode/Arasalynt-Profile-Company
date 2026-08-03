@@ -23,7 +23,7 @@ const BUSINESS_DUMMY_DATA = [
     id: 1,
     slug: 'kaluna-technology',
     name: 'Kaluna Technology',
-    category: 'IT INFRASTRUCTURE',
+    category: 'IoT & Technology Integration',
     tagline: 'Empowering Smarter Operations',
     heroImg: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop',
     aboutDesc: 'Kaluna Technology delivers end-to-end IT infrastructure solutions designed to modernise, connect, and scale your business operations. From intelligent hardware integration to enterprise software ecosystems, we build the backbone your business needs to thrive in the digital era — reliably, securely, and efficiently.',
@@ -65,7 +65,7 @@ const BUSINESS_DUMMY_DATA = [
     id: 2,
     slug: 'artic-analytica',
     name: 'Artic Analytica',
-    category: 'DATA & ANALYTICS',
+    category: 'Data Survey and Analytics',
     tagline: 'Turning Data into Insights',
     heroImg: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop',
     aboutDesc: 'Artic Analytica transforms raw business data into actionable intelligence. We combine advanced research methodologies, predictive modelling, and market analytics to help organisations make confident, data-driven decisions — from strategy to execution, every step of the way.',
@@ -105,7 +105,7 @@ const BUSINESS_DUMMY_DATA = [
     id: 3,
     slug: 'loxlive',
     name: 'LoxLive',
-    category: 'MEDIA',
+    category: 'Digital Media & Social Impact',
     tagline: 'Broadcast Without Limits',
     heroImg: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1600&auto=format&fit=crop',
     aboutDesc: 'LoxLive is a premium end-to-end live streaming and broadcast production company that brings your events to life, anywhere in the world. From corporate conferences to entertainment events, our team delivers cinematic-quality streaming experiences that captivate your audience and elevate your brand.',
@@ -143,7 +143,7 @@ const BUSINESS_DUMMY_DATA = [
     id: 4,
     slug: 'the-drafroom',
     name: 'The Drafroom',
-    category: 'MEDIA / BRANDING',
+    category: 'Digital Media & Social Impact',
     tagline: 'Elevating Brands Beyond the Ordinary',
     heroImg: 'https://images.unsplash.com/photo-1503387762-592ded58c454?q=80&w=1600&auto=format&fit=crop',
     aboutDesc: 'The Drafroom is a strategic brand studio that crafts bold identities, compelling narratives, and immersive digital experiences. We work with ambitious brands to build distinctive visual languages that resonate deeply with their audiences — from start-ups defining their first look to enterprises transforming their market presence.',
@@ -181,7 +181,7 @@ const BUSINESS_DUMMY_DATA = [
     id: 5,
     slug: 'adsvar',
     name: 'Adsvar',
-    category: 'PERFORMANCE MARKETING',
+    category: 'Digital Media & Social Impact',
     tagline: 'Turning Ad Spend Into Business Growth',
     heroImg: 'https://images.unsplash.com/photo-1543286386-7a395019efd6?q=80&w=1600&auto=format&fit=crop',
     aboutDesc: 'Adsvar is a performance-driven digital advertising agency that turns marketing budgets into measurable business results. Through data-backed strategies, creative storytelling, and multi-channel campaign execution, we help brands reach the right audience at the right moment — and convert attention into revenue.',
@@ -219,7 +219,7 @@ const BUSINESS_DUMMY_DATA = [
     id: 6,
     slug: 'ilusia',
     name: 'Ilusia Studio',
-    category: 'CREATIVE STUDIO',
+    category: 'Digital Media & Social Impact',
     tagline: 'Bringing Your Ideas to Reality',
     heroImg: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1600&auto=format&fit=crop',
     aboutDesc: 'Ilusia Studio is a creative production house specializing in visual storytelling, motion graphics, and digital content creation. We craft compelling narratives that connect brands with their audiences — combining artistic vision with strategic thinking to produce content that inspires action.',
@@ -257,7 +257,7 @@ const BUSINESS_DUMMY_DATA = [
     id: 7,
     slug: 'seveny',
     name: 'Seveny',
-    category: 'EVENT & EXPERIENTIAL',
+    category: 'Digital Media & Social Impact',
     tagline: 'Make Events Leave a Lasting Impression',
     heroImg: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?q=80&w=1600&auto=format&fit=crop',
     aboutDesc: 'Seveny specialises in experiential marketing and event production — creating live brand moments that spark genuine human connection. From intimate product launches to large-scale brand activations, we design experiences that people talk about long after the lights go down.',
@@ -295,7 +295,7 @@ const BUSINESS_DUMMY_DATA = [
     id: 8,
     slug: 'personice',
     name: 'Personice',
-    category: 'PUBLIC RELATIONS',
+    category: 'Digital Media & Social Impact',
     tagline: 'Elevating Brands Through Strategic PR',
     heroImg: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1600&auto=format&fit=crop',
     aboutDesc: 'Personice is a strategic public relations and executive talent firm that helps organisations build powerful reputations, cultivate authentic thought leadership, and forge meaningful brand partnerships. We elevate brands through credible communication, media relations, and talent-driven storytelling.',
@@ -342,15 +342,33 @@ db.exec(`
     id               INTEGER PRIMARY KEY,
     slug             TEXT    NOT NULL UNIQUE,
     name             TEXT    NOT NULL,
+    short_name       TEXT,
     category         TEXT    NOT NULL,
     tagline          TEXT    NOT NULL,
+    logo             TEXT,
+    logo_width       TEXT,
+    logo_max_height  TEXT,
     hero_img         TEXT    NOT NULL,
+    hero_overlay_img TEXT,
     about_desc       TEXT    NOT NULL,
     about_img        TEXT    NOT NULL,
     brand_color      TEXT    NOT NULL DEFAULT '#E6FF2A',
     vision_quote     TEXT    NOT NULL,
     cta_title        TEXT    NOT NULL,
     cta_desc         TEXT    NOT NULL,
+    pain_points_title TEXT,
+    pain_points_label TEXT,
+    services_title   TEXT,
+    services_label   TEXT,
+    vision_label     TEXT,
+    works_label      TEXT,
+    other_businesses_title TEXT,
+    featured_work_index INTEGER DEFAULT 0,
+    featured_other_business_index INTEGER DEFAULT 0,
+    challenge_bg     TEXT,
+    services_bg      TEXT,
+    vision_img       TEXT,
+    cta_img          TEXT,
     pain_points      TEXT    NOT NULL DEFAULT '[]',
     services         TEXT    NOT NULL DEFAULT '[]',
     works            TEXT    NOT NULL DEFAULT '[]',
@@ -358,15 +376,49 @@ db.exec(`
   );
 `);
 
+try { db.exec(`ALTER TABLE businesses ADD COLUMN logo TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN logo_width TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN logo_max_height TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN short_name TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN hero_object_position TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN about_object_position TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN vision_text_size TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN services_columns INTEGER;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN works_title TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN pain_points_title TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN pain_points_label TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN services_title TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN services_label TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN vision_label TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN works_label TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN other_businesses_title TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN featured_work_index INTEGER;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN featured_other_business_index INTEGER;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN cta_primary_label TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN cta_primary_href TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN cta_secondary_label TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN cta_secondary_href TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN hero_overlay_img TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN challenge_bg TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN services_bg TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN vision_img TEXT;`); } catch {}
+try { db.exec(`ALTER TABLE businesses ADD COLUMN cta_img TEXT;`); } catch {}
+
 // Gunakan INSERT OR REPLACE untuk upsert (update jika sudah ada)
 const upsert = db.prepare(`
   INSERT OR REPLACE INTO businesses
-    (id, slug, name, category, tagline, hero_img, about_desc, about_img,
-     brand_color, vision_quote, cta_title, cta_desc,
+    (id, slug, name, short_name, category, tagline, logo, logo_width, logo_max_height, hero_img, hero_object_position, hero_overlay_img, about_desc, about_img, about_object_position,
+     brand_color, vision_quote, vision_text_size, cta_title, cta_desc, cta_primary_label, cta_primary_href, cta_secondary_label, cta_secondary_href,
+     pain_points_title, pain_points_label, services_title, services_label, services_columns,
+     vision_label, works_label, works_title, other_businesses_title, featured_work_index, featured_other_business_index,
+     challenge_bg, services_bg, vision_img, cta_img,
      pain_points, services, works, other_businesses)
   VALUES
-    (@id, @slug, @name, @category, @tagline, @heroImg, @aboutDesc, @aboutImg,
-     @brandColor, @visionQuote, @ctaTitle, @ctaDesc,
+    (@id, @slug, @name, @shortName, @category, @tagline, @logo, @logoWidth, @logoMaxHeight, @heroImg, @heroObjectPosition, @heroOverlayImg, @aboutDesc, @aboutImg, @aboutObjectPosition,
+     @brandColor, @visionQuote, @visionTextSize, @ctaTitle, @ctaDesc, @ctaPrimaryLabel, @ctaPrimaryHref, @ctaSecondaryLabel, @ctaSecondaryHref,
+     @painPointsTitle, @painPointsLabel, @servicesTitle, @servicesLabel, @servicesColumns,
+     @visionLabel, @worksLabel, @worksTitle, @otherBusinessesTitle, @featuredWorkIndex, @featuredOtherBusinessIndex,
+     @challengeBg, @servicesBg, @visionImg, @ctaImg,
      @painPoints, @services, @works, @otherBusinesses)
 `);
 
@@ -376,15 +428,42 @@ const runAll = db.transaction(() => {
       id:              biz.id,
       slug:            biz.slug,
       name:            biz.name,
+      shortName:       biz.shortName || null,
       category:        biz.category,
       tagline:         biz.tagline,
+      logo:            biz.logo || `/images/our-business/${biz.slug}/logo.svg`,
+      logoWidth:       biz.logoWidth ? String(biz.logoWidth) : null,
+      logoMaxHeight:   biz.logoMaxHeight ? String(biz.logoMaxHeight) : null,
       heroImg:         biz.heroImg,
+      heroObjectPosition: biz.heroObjectPosition || null,
+      heroOverlayImg:  biz.heroOverlayImg || null,
       aboutDesc:       biz.aboutDesc,
       aboutImg:        biz.aboutImg,
+      aboutObjectPosition: biz.aboutObjectPosition || null,
       brandColor:      biz.brandColor,
       visionQuote:     biz.visionQuote,
+      visionTextSize:  biz.visionTextSize || null,
       ctaTitle:        biz.ctaTitle,
       ctaDesc:         biz.ctaDesc,
+      ctaPrimaryLabel: biz.ctaPrimaryLabel || null,
+      ctaPrimaryHref:  biz.ctaPrimaryHref || null,
+      ctaSecondaryLabel: biz.ctaSecondaryLabel || null,
+      ctaSecondaryHref: biz.ctaSecondaryHref || null,
+      painPointsTitle: biz.painPointsTitle || null,
+      painPointsLabel: biz.painPointsLabel || null,
+      servicesTitle:   biz.servicesTitle || null,
+      servicesLabel:   biz.servicesLabel || null,
+      servicesColumns: biz.servicesColumns ?? null,
+      visionLabel:     biz.visionLabel || null,
+      worksLabel:      biz.worksLabel || null,
+      worksTitle:      biz.worksTitle || null,
+      otherBusinessesTitle: biz.otherBusinessesTitle || null,
+      featuredWorkIndex: biz.featuredWorkIndex ?? 0,
+      featuredOtherBusinessIndex: biz.featuredOtherBusinessIndex ?? 0,
+      challengeBg:     biz.challengeBg || null,
+      servicesBg:      biz.servicesBg || null,
+      visionImg:       biz.visionImg || null,
+      ctaImg:          biz.ctaImg || null,
       painPoints:      JSON.stringify(biz.painPoints),
       services:        JSON.stringify(biz.services),
       works:           JSON.stringify(biz.works),

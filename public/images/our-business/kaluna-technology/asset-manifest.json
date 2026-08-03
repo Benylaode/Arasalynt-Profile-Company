@@ -1,0 +1,209 @@
+[
+  {
+    "source": "image_00.png",
+    "output": "public/images/our-business/kaluna-technology/hero.webp",
+    "dimensions": [
+      1670,
+      1000
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_01.png",
+    "output": "public/images/our-business/kaluna-technology/hero-network-overlay.webp",
+    "dimensions": [
+      4000,
+      1541
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "source": "image_02.png",
+    "output": "public/images/our-business/kaluna-technology/about.webp",
+    "dimensions": [
+      4096,
+      2731
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_03.png",
+    "output": "public/images/our-business/kaluna-technology/challenge-bg.webp",
+    "dimensions": [
+      3360,
+      2398
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "source": "image_04.png",
+    "output": "public/images/our-business/kaluna-technology/services-bg.webp",
+    "dimensions": [
+      3840,
+      2016
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "source": "image_05.png",
+    "output": "public/images/our-business/kaluna-technology/services/website-development.webp",
+    "dimensions": [
+      1448,
+      1086
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_06.png",
+    "output": "public/images/our-business/kaluna-technology/services/company-profile-website.webp",
+    "dimensions": [
+      1670,
+      938
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "source": "image_07.png",
+    "output": "public/images/our-business/kaluna-technology/services/finance-system.webp",
+    "dimensions": [
+      1060,
+      707
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_08.png",
+    "output": "public/images/our-business/kaluna-technology/services/warehouse-management.webp",
+    "dimensions": [
+      1317,
+      1194
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_09.png",
+    "output": "public/images/our-business/kaluna-technology/services/point-of-sales-system.webp",
+    "dimensions": [
+      4096,
+      2731
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_10.png",
+    "output": "public/images/our-business/kaluna-technology/services/appointment-system.webp",
+    "dimensions": [
+      1448,
+      1086
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_11.png",
+    "output": "public/images/our-business/kaluna-technology/services/e-commerce-website.webp",
+    "dimensions": [
+      4096,
+      2296
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_12.png",
+    "output": "public/images/our-business/kaluna-technology/services/software-development.webp",
+    "dimensions": [
+      4096,
+      2800
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_13.png",
+    "output": "public/images/our-business/kaluna-technology/vision-bg.webp",
+    "dimensions": [
+      4096,
+      2730
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_14.png",
+    "output": "public/images/our-business/kaluna-technology/works/project-01.webp",
+    "dimensions": [
+      1668,
+      960
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "source": "image_15.png",
+    "output": "public/images/our-business/kaluna-technology/works/sinau-print-marketplace.webp",
+    "dimensions": [
+      3000,
+      2250
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_16.png",
+    "output": "public/images/our-business/kaluna-technology/works/x1-tire-website.webp",
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_17.png",
+    "output": "public/images/our-business/kaluna-technology/other-business-previews/preview-01.webp",
+    "dimensions": [
+      1670,
+      1000
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_18.png",
+    "output": "public/images/our-business/kaluna-technology/other-business-previews/loxlive.webp",
+    "dimensions": [
+      1670,
+      1000
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_19.png",
+    "output": "public/images/our-business/kaluna-technology/other-business-previews/adsvar.webp",
+    "dimensions": [
+      1670,
+      1000
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_20.png",
+    "output": "public/images/our-business/kaluna-technology/other-business-previews/preview-04.webp",
+    "dimensions": [
+      1670,
+      1000
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "image_21.png",
+    "output": "public/images/our-business/kaluna-technology/cta-bg.webp",
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "mode": "RGB"
+  },
+  {
+    "source": "vector crop from kaluna.svg",
+    "output": "public/images/our-business/kaluna-technology/logo.svg",
+    "dimensions": [
+      908,
+      260
+    ],
+    "mode": "RGBA"
+  }
+]

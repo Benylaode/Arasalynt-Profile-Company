@@ -368,8 +368,9 @@ function DropdownCardModal({
 
       <div
         className="
-          fixed top-[76px] z-[99]
-          inset-x-[clamp(1rem,5.6vw,6.75rem)]
+          fixed top-[72px] z-[99]
+          left-1/2 w-full max-w-[1920px] -translate-x-1/2
+          px-[110px] max-[1536px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]
           transition-all duration-300 ease-out
           animate-in fade-in zoom-in-95
         "
@@ -683,17 +684,17 @@ function BusinessDropdown({
               {BUSINESS_MEDIA.category}
             </p>
 
-            <div className="grid grid-cols-2 gap-x-5 gap-y-2.5">
+            <div className="flex flex-col gap-1.5">
               {BUSINESS_MEDIA.items.map((item) => (
                 <Link
                   key={`${BUSINESS_MEDIA.category}-${item.name}-${item.href}`}
                   href={item.href}
                   onClick={() => setActiveDropdown(null)}
                   className="
-                    py-[6px]
+                    block py-[6px]
                     font-heading
-                    text-[23px]
-                    font-medium
+                    text-[26px]
+                    font-semibold
                     leading-[1.3]
                     text-[#747474]
                     no-underline
@@ -878,6 +879,11 @@ export default function Navbar() {
     (sectionId: string) => {
       closeMobileMenu();
 
+      if (sectionId === 'contact') {
+        router.push('/contact-us');
+        return;
+      }
+
       if (pathname === '/') {
         const target = document.getElementById(sectionId);
 
@@ -970,11 +976,11 @@ export default function Navbar() {
 
         <div
           className="
-            relative z-10
-            grid h-full w-full
+            relative z-10 mx-auto
+            grid h-full w-full max-w-[1920px]
             grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]
             items-center
-            px-[clamp(1rem,5.6vw,6.75rem)]
+            px-[110px] max-[1536px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]
           "
         >
           {/* Logo */}

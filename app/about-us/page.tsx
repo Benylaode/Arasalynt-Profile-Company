@@ -120,17 +120,6 @@ export default function AboutUsPage() {
         >
           <ChevronDown />
         </button>
-
-        {/* Remove this anchor when the project already mounts its own global WhatsApp tab. */}
-        <a
-          href="https://wa.me/6287765647107"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Contact Arsalynk through WhatsApp"
-          className="absolute bottom-[57px] right-0 z-20 flex h-[84px] w-[84px] items-center justify-center rounded-l-lg bg-[#1A3E9E] text-white transition-colors hover:bg-[#16358A] max-[1024px]:h-[72px] max-[1024px]:w-[72px] max-[768px]:bottom-8 max-[768px]:h-16 max-[768px]:w-16"
-        >
-          <WhatsAppIcon />
-        </a>
       </section>
 
       {/* Exact desktop section: 720px high, 110px padding, 30px gap, cards 546 × 500 */}

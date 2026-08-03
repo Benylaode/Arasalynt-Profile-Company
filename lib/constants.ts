@@ -21,6 +21,12 @@ import { HERO_SLIDES_DUMMY_DATA } from '@/lib/db/dummy';
 
 export const HERO_SLIDES: HeroSlide[] = HERO_SLIDES_DUMMY_DATA;
 
+/* ─── Contact Info ─── */
+
+export const WHATSAPP_PHONE_DISPLAY = '+62 878-5547-107';
+export const WHATSAPP_PHONE_RAW = '6287855471107';
+export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_PHONE_RAW}`;
+
 
 /* ─── Client Logos ─── */
 /* Placeholder data — replace src with actual logo paths when provided */

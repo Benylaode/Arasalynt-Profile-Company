@@ -76,807 +76,1038 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     },
   },
 ];
-
 export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
-  /* ─────────────────────────────────────────────────────────────────────────
-     1. KALUNA TECHNOLOGY — IT Infrastructure
-     ───────────────────────────────────────────────────────────────────────── */
-  {
-    id: 1,
-    slug: 'kaluna-technology',
-    name: 'Kaluna Technology',
-    category: 'IT INFRASTRUCTURE',
-    tagline: 'Empowering Smarter Operations',
-    heroImg:
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop',
-    aboutDesc:
-      'Kaluna Technology delivers end-to-end IT infrastructure solutions designed to modernise, connect, and scale your business operations. From intelligent hardware integration to enterprise software ecosystems, we build the backbone your business needs to thrive in the digital era — reliably, securely, and efficiently.',
-    aboutImg:
-      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop',
-    brandColor: '#E6FF2A',
-    visionQuote:
-      'We believe connected infrastructure is the future — empowering businesses with affordable, predictive insights, and operational excellence.',
-    ctaTitle: 'Explore the Kaluna Ecosystem',
-    ctaDesc:
-      'Build smarter, scale faster, and operate with confidence. Partner with Kaluna Technology to transform your infrastructure into a competitive advantage.',
-    painPoints: [
-      {
-        icon: '🔧',
-        title: 'Legacy Infrastructure',
-        desc: 'Outdated systems that slow down operations and increase maintenance costs.',
-      },
-      {
-        icon: '🔗',
-        title: 'Disconnected Systems',
-        desc: 'Siloed tools and platforms that prevent seamless data flow across departments.',
-      },
-      {
-        icon: '⚡',
-        title: 'Operational Downtime',
-        desc: 'Unplanned outages and inefficiencies that impact productivity and revenue.',
-      },
-      {
-        icon: '📊',
-        title: 'Unexpected Complexity',
-        desc: 'Integration challenges that escalate scope and delay digital transformation goals.',
-      },
-    ],
-    services: [
-      {
-        name: 'Data Enhancement',
-        img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Complex Data Models',
-        img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Process System',
-        img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Governance Management',
-        img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Point-of-Sale System',
-        img: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Decentralized System',
-        img: 'https://images.unsplash.com/photo-1617802690992-15d93263d3a9?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Document System',
-        img: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Software Development',
-        img: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=600&auto=format&fit=crop',
-      },
-    ],
-    works: [
-      {
-        name: 'Sinau Print ERP & Marketplace',
-        img: '/images/projects/sinau-print-erp/1.webp',
-        tag: 'Web Platform',
-      },
-      {
-        name: 'MyBoss Connected IoT System',
-        img: '/images/projects/myboss-iot-system/1.webp',
-        tag: 'IoT System',
-      },
-      {
-        name: 'Artic Complex Web Architecture',
-        img: '/images/projects/artic-complex-web/1.webp',
-        tag: 'ERP Solution',
-      },
-    ],
-    otherBusinesses: [
-      {
-        slug: 'loxlive',
-        name: 'LoxLive',
-        img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'adsvar',
-        name: 'Adsvar',
-        img: 'https://images.unsplash.com/photo-1543286386-7a395019efd6?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'artic-analytica',
-        name: 'Artic Analytica',
-        img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=500&auto=format&fit=crop',
-      },
-    ],
-  },
+{
+  id: 1,
+  slug: 'kaluna-technology',
+  name: 'Kaluna Technology',
+  shortName: 'Kaluna',
+  category: 'IoT & Technology Integration',
+  tagline: 'Empowering Smarter Operations',
+  logo: '/images/our-business/kaluna-technology/logo.svg',
+  brandColor: '#1A3E9E',
 
-  /* ─────────────────────────────────────────────────────────────────────────
-     2. ARTIC ANALYTICA — Data & Analytics
-     ───────────────────────────────────────────────────────────────────────── */
-  {
-    id: 2,
-    slug: 'artic-analytica',
-    name: 'Artic Analytica',
-    category: 'DATA & ANALYTICS',
-    tagline: 'Turning Data into Insights',
-    heroImg:
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop',
-    aboutDesc:
-      'Artic Analytica transforms raw business data into actionable intelligence. We combine advanced research methodologies, predictive modelling, and market analytics to help organisations make confident, data-driven decisions — from strategy to execution, every step of the way.',
-    aboutImg:
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop',
-    brandColor: '#00C4FF',
-    visionQuote:
-      'We envision a future where every business decision is driven by data, predictive insights, and intelligent research.',
-    ctaTitle: 'See What Artic Analytica Can Do',
-    ctaDesc:
-      'Let data be your greatest competitive advantage. Work with Artic Analytica to unlock the full potential of your business intelligence and research capabilities.',
-    painPoints: [
-      {
-        icon: '📉',
-        title: 'Untrapped Business Data',
-        desc: 'Valuable data sits unused in siloed systems, missing opportunities for strategic insight.',
-      },
-      {
-        icon: '🔍',
-        title: 'No Clear Information',
-        desc: 'Lack of unified dashboards makes it impossible to see the full business picture in real time.',
-      },
-      {
-        icon: '❓',
-        title: 'Baseless Decision Making',
-        desc: 'Decisions are driven by gut feeling rather than evidence-backed intelligence.',
-      },
-      {
-        icon: '🌫️',
-        title: 'Market Uncertainty',
-        desc: 'Rapidly shifting market conditions demand adaptive analytics that most businesses lack.',
-      },
-    ],
-    services: [
-      {
-        name: 'Artic Research',
-        img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Artic Data',
-        img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Artic Consulting',
-        img: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Artic Academy',
-        img: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Artic Policy Lab',
-        img: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Artic Insight Hub',
-        img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop',
-      },
-    ],
-    works: [
-      {
-        name: 'Sinau Print Marketplace Website',
-        img: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=700&auto=format&fit=crop',
-        tag: 'Data Platform',
-      },
-      {
-        name: 'Business Intelligence Report',
-        img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=700&auto=format&fit=crop',
-        tag: 'Analytics',
-      },
-      {
-        name: 'Market Research Dashboard',
-        img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=700&auto=format&fit=crop',
-        tag: 'Research',
-      },
-    ],
-    otherBusinesses: [
-      {
-        slug: 'loxlive',
-        name: 'LoxLive',
-        img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'adsvar',
-        name: 'Adsvar',
-        img: 'https://images.unsplash.com/photo-1543286386-7a395019efd6?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'kaluna-technology',
-        name: 'Kaluna Technology',
-        img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=500&auto=format&fit=crop',
-      },
-    ],
-  },
+  heroImg: '/images/our-business/kaluna-technology/hero.webp',
+  aboutDesc:
+    'Kaluna Technology delivers IoT and technology integration solutions that connect physical infrastructure with modern digital systems, helping businesses operate more efficiently through real-time monitoring, automation, and intelligent data.',
+  aboutImg: '/images/our-business/kaluna-technology/about.webp',
 
-  /* ─────────────────────────────────────────────────────────────────────────
-     3. LOXLIVE — Broadcast & Streaming Media
-     ───────────────────────────────────────────────────────────────────────── */
-  {
-    id: 3,
-    slug: 'loxlive',
-    name: 'LoxLive',
-    category: 'MEDIA',
-    tagline: 'Broadcast Without Limits',
-    heroImg:
-      'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1600&auto=format&fit=crop',
-    aboutDesc:
-      'LoxLive is a premium end-to-end live streaming and broadcast production company that brings your events to life, anywhere in the world. From corporate conferences to entertainment events, our team delivers cinematic-quality streaming experiences that captivate your audience and elevate your brand.',
-    aboutImg:
-      'https://images.unsplash.com/photo-1601506521793-dc748fc80b67?q=80&w=800&auto=format&fit=crop',
-    brandColor: '#FF4D4D',
-    visionQuote:
-      'We envision a future where virtual events are as immersive, engaging, and impactful as being there in person.',
-    ctaTitle: "Let's Start Your Quality Streaming Event",
-    ctaDesc:
-      'From concept to broadcast, LoxLive handles every detail so you can focus on what matters most — your audience and your message.',
-    painPoints: [
-      {
-        icon: '📡',
-        title: 'Unreliable Live Streaming',
-        desc: 'Frequent drops and poor quality streaming that frustrates audiences and damages your brand.',
-      },
-      {
-        icon: '🎬',
-        title: 'Limited Production Quality',
-        desc: 'Lack of professional-grade production tools that limit the impact of your broadcast content.',
-      },
-      {
-        icon: '🌍',
-        title: 'Disconnected Global Audience',
-        desc: 'Inability to reach and engage audiences across multiple platforms and geographies simultaneously.',
-      },
-      {
-        icon: '📉',
-        title: 'High Production Costs',
-        desc: 'Expensive broadcast infrastructure that makes high-quality streaming inaccessible for most organisations.',
-      },
-    ],
-    services: [
-      {
-        name: 'Livestream Production',
-        img: 'https://images.unsplash.com/photo-1601506521793-dc748fc80b67?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Multi-Camera Production',
-        img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Broadcast Infrastructure',
-        img: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Interactive Event Experiences',
-        img: 'https://images.unsplash.com/photo-1531058020387-3be344556be6?q=80&w=600&auto=format&fit=crop',
-      },
-    ],
-    works: [
-      {
-        name: 'Sinau Print Marketplace Website',
-        img: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=700&auto=format&fit=crop',
-        tag: 'Live Event',
-      },
-      {
-        name: 'Corporate Event Streaming',
-        img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=700&auto=format&fit=crop',
-        tag: 'Broadcast',
-      },
-      {
-        name: 'Product Launch Livestream',
-        img: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=700&auto=format&fit=crop',
-        tag: 'Production',
-      },
-    ],
-    otherBusinesses: [
-      {
-        slug: 'the-drafroom',
-        name: 'The Drafroom',
-        img: 'https://images.unsplash.com/photo-1503387762-592ded58c454?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'adsvar',
-        name: 'Adsvar',
-        img: 'https://images.unsplash.com/photo-1543286386-7a395019efd6?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'kaluna-technology',
-        name: 'Kaluna Technology',
-        img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=500&auto=format&fit=crop',
-      },
-    ],
-  },
+  painPointsLabel: 'THE CHALLENGE',
+  painPointsTitle: "What's Slowing Your Business Down?",
+  painPoints: [
+    {
+      icon: 'legacy-hardware',
+      title: 'Legacy Hardware',
+      desc: 'Outdated systems make expansion, maintenance, and integration increasingly difficult.',
+    },
+    {
+      icon: 'disconnected-software',
+      title: 'Disconnected Software',
+      desc: 'Separate tools create fragmented workflows and duplicate operational work.',
+    },
+    {
+      icon: 'operational-blind-spots',
+      title: 'Operational Blind Spots',
+      desc: 'Limited real-time visibility makes it harder to identify issues and act quickly.',
+    },
+    {
+      icon: 'unexpected-downtime',
+      title: 'Unexpected Downtime',
+      desc: 'Reactive maintenance disrupts productivity and increases operational costs.',
+    },
+  ],
 
-  /* ─────────────────────────────────────────────────────────────────────────
-     4. THE DRAFROOM — Brand Strategy & Design
-     ───────────────────────────────────────────────────────────────────────── */
-  {
-    id: 4,
-    slug: 'the-drafroom',
-    name: 'The Drafroom',
-    category: 'MEDIA / BRANDING',
-    tagline: 'Elevating Brands Beyond the Ordinary',
-    heroImg:
-      'https://images.unsplash.com/photo-1503387762-592ded58c454?q=80&w=1600&auto=format&fit=crop',
-    aboutDesc:
-      'The Drafroom is a strategic brand studio that crafts bold identities, compelling narratives, and immersive digital experiences. We work with ambitious brands to build distinctive visual languages that resonate deeply with their audiences — from start-ups defining their first look to enterprises transforming their market presence.',
-    aboutImg:
-      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop',
-    brandColor: '#F5A623',
-    visionQuote:
-      'Help ambitious brands build iconic value that inspire trust, create lasting value, and stand the test of time.',
-    ctaTitle: 'Discover More with TheDraftroom',
-    ctaDesc:
-      "Ready to build a brand that lasts? Partner with The Drafroom to create a brand identity that truly reflects your vision and resonates with your audience.",
-    painPoints: [
-      {
-        icon: '🎨',
-        title: 'Shallow Brand Presence',
-        desc: 'Brands that lack consistent identity fail to leave a lasting impression on their audience.',
-      },
-      {
-        icon: '🏷️',
-        title: 'Competing in a Noisy Market',
-        desc: 'Generic visuals and messaging make it hard to stand out in increasingly crowded industries.',
-      },
-      {
-        icon: '🖥️',
-        title: 'Inconsistent Brand Experience',
-        desc: 'Disjointed design across platforms erodes trust and dilutes brand equity over time.',
-      },
-      {
-        icon: '📣',
-        title: 'Limited Market Recognition',
-        desc: 'Weak brand storytelling results in low recall and poor differentiation from competitors.',
-      },
-    ],
-    services: [
-      {
-        name: 'Brand Strategy & Positioning',
-        img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Corporate Identity Design',
-        img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Digital Brand Experience',
-        img: 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Corporate Communication',
-        img: 'https://images.unsplash.com/photo-1503387762-592ded58c454?q=80&w=600&auto=format&fit=crop',
-      },
-    ],
-    works: [
-      {
-        name: 'Sinau Print Marketplace Website',
-        img: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=700&auto=format&fit=crop',
-        tag: 'Brand Identity',
-      },
-      {
-        name: 'Corporate Rebranding Campaign',
-        img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=700&auto=format&fit=crop',
-        tag: 'Rebranding',
-      },
-      {
-        name: 'Digital Experience Design',
-        img: 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=700&auto=format&fit=crop',
-        tag: 'UX/UI',
-      },
-    ],
-    otherBusinesses: [
-      {
-        slug: 'loxlive',
-        name: 'LoxLive',
-        img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'adsvar',
-        name: 'Adsvar',
-        img: 'https://images.unsplash.com/photo-1543286386-7a395019efd6?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'kaluna-technology',
-        name: 'Kaluna Technology',
-        img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=500&auto=format&fit=crop',
-      },
-    ],
-  },
+  servicesLabel: 'OUR SOLUTIONS',
+  servicesTitle: 'End-to-End Technology Integration Solutions',
+  services: [
+    {
+      name: 'Website Development',
+      img: '/images/our-business/kaluna-technology/services/website-development.webp',
+    },
+    {
+      name: 'Company Profile Website',
+      img: '/images/our-business/kaluna-technology/services/company-profile-website.webp',
+    },
+    {
+      name: 'Finance System',
+      img: '/images/our-business/kaluna-technology/services/finance-system.webp',
+    },
+    {
+      name: 'Warehouse Management',
+      img: '/images/our-business/kaluna-technology/services/warehouse-management.webp',
+    },
+    {
+      name: 'Point of Sales System',
+      img: '/images/our-business/kaluna-technology/services/point-of-sales-system.webp',
+    },
+    {
+      name: 'Appointment System',
+      img: '/images/our-business/kaluna-technology/services/appointment-system.webp',
+    },
+    {
+      name: 'E-commerce Website',
+      img: '/images/our-business/kaluna-technology/services/e-commerce-website.webp',
+    },
+    {
+      name: 'Software Development',
+      img: '/images/our-business/kaluna-technology/services/software-development.webp',
+    },
+  ],
 
-  /* ─────────────────────────────────────────────────────────────────────────
-     5. ADSVAR — Performance Marketing & Digital Advertising
-     ───────────────────────────────────────────────────────────────────────── */
-  {
-    id: 5,
-    slug: 'adsvar',
-    name: 'Adsvar',
-    category: 'PERFORMANCE MARKETING',
-    tagline: 'Turning Ad Spend Into Business Growth',
-    heroImg:
-      'https://images.unsplash.com/photo-1543286386-7a395019efd6?q=80&w=1600&auto=format&fit=crop',
-    aboutDesc:
-      'Adsvar is a performance-driven digital advertising agency that turns marketing budgets into measurable business results. Through data-backed strategies, creative storytelling, and multi-channel campaign execution, we help brands reach the right audience at the right moment — and convert attention into revenue.',
-    aboutImg:
-      'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?q=80&w=800&auto=format&fit=crop',
-    brandColor: '#7C3AED',
-    visionQuote:
-      'Data-driven advertising that transforms marketing investment into predictable customer acquisition, measurable outcomes, and long-term growth.',
-    ctaTitle: 'Explore More Our Capability with Adsvar',
-    ctaDesc:
-      'Stop guessing and start growing. Partner with Adsvar to build campaigns that deliver real ROI and lasting brand impact.',
-    painPoints: [
-      {
-        icon: '💸',
-        title: 'Wasted Ad Spend to Waste',
-        desc: 'Budgets burned on untargeted campaigns that reach the wrong audiences and deliver zero ROI.',
-      },
-      {
-        icon: '📊',
-        title: 'Limited Production Quality',
-        desc: 'Inability to produce high-quality ad creatives consistently slows down campaign momentum.',
-      },
-      {
-        icon: '🎯',
-        title: 'Bad or Your Marketing Performance',
-        desc: 'Generic targeting means your message reaches people who will never convert into customers.',
-      },
-      {
-        icon: '🔄',
-        title: "Brand That Doesn't Scale",
-        desc: 'Disjointed ad creatives across channels dilute brand messaging and reduce campaign effectiveness.',
-      },
-    ],
-    services: [
-      {
-        name: 'Paid Advertising Strategy',
-        img: 'https://images.unsplash.com/photo-1543286386-7a395019efd6?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Lead Generation & Funnel Optimization',
-        img: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Conversion & Tracking Ads',
-        img: 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Campaign Management',
-        img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=600&auto=format&fit=crop',
-      },
-    ],
-    works: [
-      {
-        name: 'Sinau Print Marketplace Website',
-        img: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=700&auto=format&fit=crop',
-        tag: 'Paid Media',
-      },
-      {
-        name: 'Company for X',
-        img: 'https://images.unsplash.com/photo-1543286386-7a395019efd6?q=80&w=700&auto=format&fit=crop',
-        tag: 'Social Ads',
-      },
-      {
-        name: 'Performance Marketing Dashboard',
-        img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=700&auto=format&fit=crop',
-        tag: 'Analytics',
-      },
-    ],
-    otherBusinesses: [
-      {
-        slug: 'loxlive',
-        name: 'LoxLive',
-        img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'adsvar',
-        name: 'Adsvar',
-        img: 'https://images.unsplash.com/photo-1543286386-7a395019efd6?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'ilusia',
-        name: 'Ilusia Studio',
-        img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=500&auto=format&fit=crop',
-      },
-    ],
-  },
+  visionQuote:
+    'We believe connected infrastructure is the future—empowering businesses with automation, predictive insights, and operational excellence.',
 
-  /* ─────────────────────────────────────────────────────────────────────────
-     6. ILUSIA — Creative Studio & Visual Storytelling
-     ───────────────────────────────────────────────────────────────────────── */
-  {
-    id: 6,
-    slug: 'ilusia',
-    name: 'Ilusia Studio',
-    category: 'CREATIVE STUDIO',
-    tagline: 'Bringing Your Ideas to Reality',
-    heroImg:
-      'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1600&auto=format&fit=crop',
-    aboutDesc:
-      'Ilusia Studio is a creative production house specializing in visual storytelling, motion graphics, and digital content creation. We craft compelling narratives that connect brands with their audiences — combining artistic vision with strategic thinking to produce content that inspires action.',
-    aboutImg:
-      'https://images.unsplash.com/photo-1500099817043-86d46000d58f?q=80&w=800&auto=format&fit=crop',
-    brandColor: '#EC4899',
-    visionQuote:
-      'Powerful visual storytelling that transforms technical concepts into clear and engaging experiences.',
-    ctaTitle: 'Discover More with Ilusia Studio',
-    ctaDesc:
-      'Your story deserves to be told brilliantly. Partner with Ilusia Studio to create content that captivates your audience and drives real engagement.',
-    painPoints: [
-      {
-        icon: '🎭',
-        title: 'It Feels Wrong When Complex Ideas',
-        desc: 'Complex concepts that feel impossible to communicate visually to your target audience.',
-      },
-      {
-        icon: '⏱️',
-        title: 'No Attention-Span Messaging',
-        desc: 'Content that fails to capture attention in the first seconds, losing your audience immediately.',
-      },
-      {
-        icon: '🔀',
-        title: 'Unclear or Your Messaging',
-        desc: 'Mismatched visuals across platforms that weaken brand recognition and audience trust.',
-      },
-      {
-        icon: '📱',
-        title: 'Struggles to Fail to Connect',
-        desc: "Content not adapted for each platform's unique format, algorithms, and audience behavior.",
-      },
-    ],
-    services: [
-      {
-        name: 'Motion Graphics',
-        img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: '2D & 3D Animation',
-        img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Explainer Videos',
-        img: 'https://images.unsplash.com/photo-1500099817043-86d46000d58f?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Product Visualization',
-        img: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=600&auto=format&fit=crop',
-      },
-    ],
-    works: [
-      {
-        name: 'Sinau Print Marketplace Website',
-        img: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=700&auto=format&fit=crop',
-        tag: 'Video',
-      },
-      {
-        name: 'Company for X',
-        img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=700&auto=format&fit=crop',
-        tag: 'Content',
-      },
-      {
-        name: 'Product Photography Series',
-        img: 'https://images.unsplash.com/photo-1500099817043-86d46000d58f?q=80&w=700&auto=format&fit=crop',
-        tag: 'Photography',
-      },
-    ],
-    otherBusinesses: [
-      {
-        slug: 'loxlive',
-        name: 'LoxLive',
-        img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'adsvar',
-        name: 'Adsvar',
-        img: 'https://images.unsplash.com/photo-1543286386-7a395019efd6?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'the-drafroom',
-        name: 'The Drafroom',
-        img: 'https://images.unsplash.com/photo-1503387762-592ded58c454?q=80&w=500&auto=format&fit=crop',
-      },
-    ],
-  },
+  works: [
+    {
+      name: 'Digital Platform Development',
+      tag: 'Website Development',
+      img: '/images/our-business/kaluna-technology/works/project-01.webp',
+    },
+    {
+      name: 'Sinau Print Marketplace Website',
+      tag: 'Marketplace Website',
+      img: '/images/our-business/kaluna-technology/works/sinau-print-marketplace.webp',
+    },
+    {
+      name: 'X-1 Tire Company Profile Website',
+      tag: 'Company Profile Website',
+      img: '/images/our-business/kaluna-technology/works/x1-tire-website.webp',
+    },
+  ],
 
-  /* ─────────────────────────────────────────────────────────────────────────
-     7. SEVENY — Event & Experiential Marketing
-     ───────────────────────────────────────────────────────────────────────── */
-  {
-    id: 7,
-    slug: 'seveny',
-    name: 'Seveny',
-    category: 'EVENT & EXPERIENTIAL',
-    tagline: 'Make Events Leave a Lasting Impression',
-    heroImg:
-      'https://images.unsplash.com/photo-1508672019048-805c876b67e2?q=80&w=1600&auto=format&fit=crop',
-    aboutDesc:
-      'Seveny specialises in experiential marketing and event production — creating live brand moments that spark genuine human connection. From intimate product launches to large-scale brand activations, we design experiences that people talk about long after the lights go down.',
-    aboutImg:
-      'https://images.unsplash.com/photo-1531058020387-3be344556be6?q=80&w=800&auto=format&fit=crop',
-    brandColor: '#10B981',
-    visionQuote:
-      'Corporate events that combine immersive experiences, intelligent technology, and meaningful engagement to create lasting business impact.',
-    ctaTitle: "Let's Create Your Next Signature Event",
-    ctaDesc:
-      'From concept to execution, Seveny delivers events that amplify your brand and create memories that drive lasting loyalty.',
-    painPoints: [
-      {
-        icon: '🎪',
-        title: 'Ineffective Event Hospitality',
-        desc: 'Events that fail to create lasting impressions or drive meaningful action from attendees.',
-      },
-      {
-        icon: '🗓️',
-        title: 'Low Audience Engagement',
-        desc: 'Passive event formats that fail to activate audiences or create shareable brand moments.',
-      },
-      {
-        icon: '🔇',
-        title: 'Lack of Attendee Insights',
-        desc: 'No data or analytics to measure event success, attendee behaviour, or ROI.',
-      },
-      {
-        icon: '📈',
-        title: 'Suboptimal Event Operations',
-        desc: 'Disorganised execution leads to technical failures, poor guest experience, and brand damage.',
-      },
-    ],
-    services: [
-      {
-        name: 'Corporate Event Management',
-        img: 'https://images.unsplash.com/photo-1531058020387-3be344556be6?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Interactive Event Technology',
-        img: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Guest Experience Solutions',
-        img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Event Analytics & Integration',
-        img: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=600&auto=format&fit=crop',
-      },
-    ],
-    works: [
-      {
-        name: 'Sinau Print Marketplace Website',
-        img: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=700&auto=format&fit=crop',
-        tag: 'Corporate Event',
-      },
-      {
-        name: 'Company for X',
-        img: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?q=80&w=700&auto=format&fit=crop',
-        tag: 'Brand Activation',
-      },
-      {
-        name: 'Retail Pop-Up Experience',
-        img: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=700&auto=format&fit=crop',
-        tag: 'Experiential',
-      },
-    ],
-    otherBusinesses: [
-      {
-        slug: 'loxlive',
-        name: 'LoxLive',
-        img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'ilusia',
-        name: 'Ilusia Studio',
-        img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'adsvar',
-        name: 'Adsvar',
-        img: 'https://images.unsplash.com/photo-1543286386-7a395019efd6?q=80&w=500&auto=format&fit=crop',
-      },
-    ],
-  },
+  otherBusinesses: [
+    {
+      slug: 'artic-analytica',
+      name: 'Artic Analytica',
+      img: '/images/our-business/kaluna-technology/other-business-previews/preview-01.webp',
+    },
+    {
+      slug: 'loxlive',
+      name: 'LoxLive',
+      img: '/images/our-business/kaluna-technology/other-business-previews/loxlive.webp',
+    },
+    {
+      slug: 'adsvar',
+      name: 'Adsvar',
+      img: '/images/our-business/kaluna-technology/other-business-previews/adsvar.webp',
+    },
+    {
+      slug: 'seveny',
+      name: 'Seveny',
+      img: '/images/our-business/kaluna-technology/other-business-previews/preview-04.webp',
+    },
+  ],
 
+  ctaTitle: 'Explore the Kaluna Ecosystem',
+  ctaDesc:
+    'Transform your operations with connected technology, intelligent systems, and scalable digital solutions designed around your business.',
+},
+
+ {
+  id: 2,
+  slug: 'artic-analytica',
+  name: 'Artic Analytica',
+  shortName: 'Artic Analytica',
+  category: 'Data, Survey & Analytics',
+  tagline: 'Turning Data into Insights',
+  logo: '/images/our-business/artic-analytica/logo.svg',
+  brandColor: '#2020D3',
+
+  heroImg: '/images/our-business/artic-analytica/hero.webp',
+  heroOverlayImg: '/images/our-business/artic-analytica/hero-network-overlay.webp',
+  aboutDesc:
+    'Artic Analytica helps businesses unlock the full value of their data through advanced analytics, predictive modeling, and market research—turning complex information into actionable insights for smarter decision-making.',
+  aboutImg: '/images/our-business/artic-analytica/about.webp',
+
+  painPointsLabel: 'THE CHALLENGE',
+  painPointsTitle: 'Is This Your Challenge?',
+  painPoints: [
+    {
+      icon: '/images/our-business/artic-analytica/icons/untapped-business-data.svg',
+      title: 'Untapped Business Data',
+      desc: 'Valuable operational and customer data exists, but is not yet structured into useful intelligence.',
+    },
+    {
+      icon: '/images/our-business/artic-analytica/icons/siloed-information.svg',
+      title: 'Siloed Information',
+      desc: 'Disconnected sources make it difficult to build one reliable view of business performance.',
+    },
+    {
+      icon: '/images/our-business/artic-analytica/icons/reactive-decision-making.svg',
+      title: 'Reactive Decision-Making',
+      desc: 'Decisions are made after problems appear instead of being guided by predictive insights.',
+    },
+    {
+      icon: '/images/our-business/artic-analytica/icons/market-uncertainty.svg',
+      title: 'Market Uncertainty',
+      desc: 'Limited research and fragmented signals make market direction harder to understand.',
+    },
+  ],
+
+  servicesLabel: 'ARTIC ANALYTICA SERVICE',
+  servicesTitle: 'We Do Data-Driven Business Intelligence',
+  services: [
+    {
+      name: 'Artic Research',
+      img: '/images/our-business/artic-analytica/services/artic-research.webp',
+    },
+    {
+      name: 'Artic Data',
+      img: '/images/our-business/artic-analytica/services/artic-data.webp',
+    },
+    {
+      name: 'Artic Consulting',
+      img: '/images/our-business/artic-analytica/services/artic-consulting.webp',
+    },
+    {
+      name: 'Artic Academy',
+      img: '/images/our-business/artic-analytica/services/artic-academy.webp',
+    },
+    {
+      name: 'Artic Policy Lab',
+      img: '/images/our-business/artic-analytica/services/artic-policy-lab.webp',
+    },
+    {
+      name: 'Artic Insight Hub',
+      img: '/images/our-business/artic-analytica/services/artic-insight-hub.webp',
+    },
+  ],
+  servicesBg: '/images/our-business/artic-analytica/services-bg.webp',
+
+  visionLabel: 'OUR VISION',
+  visionQuote:
+    'We envision a future where every business decision is driven by data, predictive insights, and intelligent research.',
+  visionImg: '/images/our-business/artic-analytica/vision-bg.webp',
+
+  worksLabel: 'OUR PROJECTS',
+  featuredWorkIndex: 1,
+  works: [
+    {
+      name: 'Digital Media Production Platform',
+      tag: 'Digital Platform',
+      img: '/images/our-business/artic-analytica/works/digital-media-platform.webp',
+    },
+    {
+      name: 'Sinau Print Marketplace Website',
+      tag: 'Marketplace Website',
+      img: '/images/our-business/artic-analytica/works/sinau-print-marketplace.webp',
+    },
+    {
+      name: 'X-1 Tire Company Profile Website',
+      tag: 'Company Profile Website',
+      img: '/images/our-business/artic-analytica/works/x1-tire-website.webp',
+    },
+  ],
+
+  otherBusinessesTitle: 'Explore Other Businesses',
+  featuredOtherBusinessIndex: 1,
+  otherBusinesses: [
+    {
+      slug: 'kaluna-technology',
+      name: 'Kaluna Technology',
+      img: '/images/our-business/artic-analytica/other-business-previews/kaluna-technology.webp',
+    },
+    {
+      slug: 'loxlive',
+      name: 'LoxLive',
+      img: '/images/our-business/artic-analytica/other-business-previews/loxlive.webp',
+    },
+    {
+      slug: 'adsvar',
+      name: 'Adsvar',
+      img: '/images/our-business/artic-analytica/other-business-previews/adsvar.webp',
+    },
+    {
+      slug: 'seveny',
+      name: 'Seveny',
+      img: '/images/our-business/artic-analytica/other-business-previews/seveny.webp',
+    },
+  ],
+
+  ctaTitle: 'See What Artic Analytica Can Do',
+  ctaDesc:
+    'Discover how research, analytics, and intelligent data can help your organization make clearer decisions and create measurable impact.',
+  ctaImg: '/images/our-business/artic-analytica/cta-bg.webp',
+},
+{
+  id: 3,
+  slug: 'loxlive',
+  name: 'LoxLive',
+  shortName: 'LoxLive',
+  category: 'Premium Broadcast & Streaming Service',
+  tagline: 'Broadcast Without Limits',
+  logo: '/images/our-business/loxlive/logo.svg',
+  logoWidth: 60,
+  logoMaxHeight: 80,
+  brandColor: '#FF2828',
+
+  heroImg: '/images/our-business/loxlive/hero.webp',
+  heroOverlayImg: '/images/our-business/loxlive/hero-network-overlay.webp',
+  heroObjectPosition: 'center top',
+  aboutDesc:
+    'LoxLive provides premium broadcast and livestreaming solutions that combine studio-grade production, reliable streaming infrastructure, and seamless event execution to deliver exceptional virtual experiences.',
+  aboutImg: '/images/our-business/loxlive/about.webp',
+  aboutObjectPosition: 'center',
+
+  painPointsLabel: 'THE CHALLENGE',
+  painPointsTitle: 'Is This Your Problem?',
+  painPoints: [
+    {
+      icon: '/images/our-business/loxlive/icons/unreliable-live-streams.svg',
+      title: 'Unreliable Live Streams',
+      desc: 'Buffering, dropped connections, and unstable delivery can quickly reduce audience confidence.',
+    },
+    {
+      icon: '/images/our-business/loxlive/icons/limited-production-quality.svg',
+      title: 'Limited Production Quality',
+      desc: 'Basic equipment and fragmented production workflows make virtual events feel less professional.',
+    },
+    {
+      icon: '/images/our-business/loxlive/icons/disconnected-global-audiences.svg',
+      title: 'Disconnected Global Audiences',
+      desc: 'Participants across locations struggle to receive one consistent and engaging event experience.',
+    },
+    {
+      icon: '/images/our-business/loxlive/icons/high-stakes-events-at-risk.svg',
+      title: 'High-Stakes Events at Risk',
+      desc: 'Critical launches, conferences, and broadcasts need dependable technical execution from start to finish.',
+    },
+  ],
+
+  servicesLabel: 'LOXLIVE SERVICE',
+  servicesTitle: 'End-to-End Premium Broadcast Services',
+  servicesColumns: 4,
+  services: [
+    {
+      name: 'Livestream Production',
+      img: '/images/our-business/loxlive/services/livestream-production.webp',
+    },
+    {
+      name: 'Multi-Camera Production',
+      img: '/images/our-business/loxlive/services/multi-camera-production.webp',
+    },
+    {
+      name: 'Broadcast Infrastructure',
+      img: '/images/our-business/loxlive/services/broadcast-infrastructure.webp',
+    },
+    {
+      name: 'Interactive Event Experience',
+      img: '/images/our-business/loxlive/services/interactive-event-experience.webp',
+    },
+  ],
+  servicesBg: '/images/our-business/loxlive/services-bg.webp',
+
+  visionLabel: 'OUR VISION',
+  visionTextSize: 'large',
+  visionQuote:
+    'We envision a future where virtual events are as immersive, engaging, and impactful as being there in person.',
+  visionImg: '/images/our-business/loxlive/vision-bg.webp',
+
+  worksLabel: 'OUR PROJECTS',
+  worksTitle: 'Explore LoxLive’s Work',
+  featuredWorkIndex: 1,
+  works: [
+    {
+      name: 'National Hybrid Event Livestream',
+      tag: 'Broadcast Production',
+      img: '/images/our-business/loxlive/works/broadcast-streaming-platform.webp',
+    },
+    {
+      name: 'Sinau Print Marketplace Website',
+      tag: 'Branding · Survey and Analytics',
+      img: '/images/our-business/loxlive/works/sinau-print-marketplace.webp',
+    },
+    {
+      name: 'X-1 Tire Company Profile Website',
+      tag: 'Website · Digital Experience',
+      img: '/images/our-business/loxlive/works/x1-tire-website.webp',
+    },
+  ],
+
+  otherBusinessesTitle: 'Explore Other Businesses',
+  featuredOtherBusinessIndex: 1,
+  otherBusinesses: [
+    {
+      slug: 'personice',
+      name: 'Personice',
+      img: '/images/our-business/loxlive/other-business-previews/personice.webp',
+    },
+    {
+      slug: 'loxlive',
+      name: 'LoxLive',
+      img: '/images/our-business/loxlive/other-business-previews/loxlive.webp',
+    },
+    {
+      slug: 'adsvar',
+      name: 'Adsvar',
+      img: '/images/our-business/loxlive/other-business-previews/adsvar.webp',
+    },
+    {
+      slug: 'seveny',
+      name: 'Seveny',
+      img: '/images/our-business/loxlive/other-business-previews/seveny.webp',
+    },
+  ],
+
+  ctaTitle: 'Let’s Start Your Quality Streaming Event',
+  ctaDesc:
+    'Bring your next event to life with reliable broadcast production, professional infrastructure, and a seamless livestream experience from preparation to delivery.',
+  ctaImg: '/images/our-business/loxlive/cta-bg.webp',
+  ctaPrimaryLabel: 'GET IN TOUCH',
+  ctaPrimaryHref: '/contact-us',
+  ctaSecondaryLabel: 'EXPLORE WORKS',
+  ctaSecondaryHref: '/our-works',
+},
+{
+  id: 4,
+  slug: 'the-drafroom',
+  name: 'The Drafroom',
+  shortName: 'The Drafroom',
+  category: 'Brand Strategy & Design Consultant',
+  tagline: 'Elevating Brands Beyond the Ordinary',
+  logo: '/images/our-business/the-drafroom/logo.svg',
+  logoWidth: 251,
+  logoMaxHeight: 80,
+  brandColor: '#544D4D',
+
+  heroImg: '/images/our-business/the-drafroom/hero.webp',
+  heroOverlayImg: '/images/our-business/the-drafroom/hero-network-overlay.webp',
+  heroObjectPosition: 'center',
+  aboutDesc:
+    'The Drafroom helps businesses transform their brand identity into a strategic competitive advantage through research-driven branding, premium design, and compelling visual communication.',
+  aboutImg: '/images/our-business/the-drafroom/about.webp',
+  aboutObjectPosition: 'center',
+
+  painPointsLabel: 'THE CHALLENGE',
+  painPointsTitle: 'Is This Your Challenge?',
+  painPoints: [
+    {
+      icon: '/images/our-business/the-drafroom/icons/generic-brand-presence.svg',
+      title: 'Generic Brand Presence',
+      desc: 'A brand that looks and sounds like everyone else struggles to create a memorable position.',
+    },
+    {
+      icon: '/images/our-business/the-drafroom/icons/competing-on-price.svg',
+      title: 'Competing on Price',
+      desc: 'Without clear differentiation, customers compare offers mainly by cost instead of value.',
+    },
+    {
+      icon: '/images/our-business/the-drafroom/icons/inconsistent-brand-experience.svg',
+      title: 'Inconsistent Brand Experience',
+      desc: 'Disconnected messages and visuals weaken recognition across customer touchpoints.',
+    },
+    {
+      icon: '/images/our-business/the-drafroom/icons/limited-market-recognition.svg',
+      title: 'Limited Market Recognition',
+      desc: 'A weak strategic presence makes it harder for the right audience to notice and remember the brand.',
+    },
+  ],
+
+  servicesLabel: 'THE DRAFROOM SERVICE',
+  servicesTitle: 'Your Strategic Brand Solutions',
+  servicesColumns: 4,
+  services: [
+    {
+      name: 'Brand Strategy & Positioning',
+      img: '/images/our-business/the-drafroom/services/brand-strategy-positioning.webp',
+    },
+    {
+      name: 'Corporate Identity Design',
+      img: '/images/our-business/the-drafroom/services/corporate-identity-design.webp',
+    },
+    {
+      name: 'Digital Brand Experience',
+      img: '/images/our-business/the-drafroom/services/digital-brand-experience.webp',
+    },
+    {
+      name: 'Corporate Communication',
+      img: '/images/our-business/the-drafroom/services/corporate-communication.webp',
+    },
+  ],
+  servicesBg: '/images/our-business/the-drafroom/services-bg.webp',
+
+  visionLabel: 'OUR VISION',
+  visionTextSize: 'large',
+  visionQuote:
+    'Help ambitious brands build iconic value that inspire trust, create lasting value, and stand the test of time.',
+  visionImg: '/images/our-business/the-drafroom/vision-bg.webp',
+
+  worksLabel: 'OUR PROJECTS',
+  worksTitle: 'Explore The Drafroom’s Work',
+  featuredWorkIndex: 1,
+  works: [
+    {
+      name: 'Integrated Brand Campaign Platform',
+      tag: 'Brand Strategy · Digital Experience',
+      img: '/images/our-business/the-drafroom/works/brand-campaign-platform.webp',
+    },
+    {
+      name: 'Sinau Print Marketplace Website',
+      tag: 'Branding · Survey and Analytics',
+      img: '/images/our-business/the-drafroom/works/sinau-print-marketplace.webp',
+    },
+    {
+      name: 'X-1 Tire Company Profile Website',
+      tag: 'Corporate Identity · Website',
+      img: '/images/our-business/the-drafroom/works/x1-tire-website.webp',
+    },
+  ],
+
+  otherBusinessesTitle: 'Explore Other Businesses',
+  featuredOtherBusinessIndex: 1,
+  otherBusinesses: [
+    {
+      slug: 'personice',
+      name: 'Personice',
+      img: '/images/our-business/the-drafroom/other-business-previews/personice.webp',
+    },
+    {
+      slug: 'loxlive',
+      name: 'LoxLive',
+      img: '/images/our-business/the-drafroom/other-business-previews/loxlive.webp',
+    },
+    {
+      slug: 'adsvar',
+      name: 'Adsvar',
+      img: '/images/our-business/the-drafroom/other-business-previews/adsvar.webp',
+    },
+    {
+      slug: 'seveny',
+      name: 'Seveny',
+      img: '/images/our-business/the-drafroom/other-business-previews/seveny.webp',
+    },
+  ],
+
+  ctaTitle: 'Discover More with The Drafroom',
+  ctaDesc:
+    'Explore our branding expertise, creative capabilities, and strategic design solutions that help ambitious brands build recognition, relevance, and lasting value.',
+  ctaImg: '/images/our-business/the-drafroom/cta-bg.webp',
+  ctaPrimaryLabel: 'GET IN TOUCH',
+  ctaPrimaryHref: '/contact-us',
+  ctaSecondaryLabel: 'EXPLORE WORKS',
+  ctaSecondaryHref: '/our-works',
+},
+ {
+  id: 5,
+  slug: 'ilusia',
+  name: 'Ilusia Studio',
+  shortName: 'Ilusia Studio',
+  category: 'Motion Graphics & Animation Studio',
+  tagline: 'Bringing Your Ideas to Reality',
+  logo: '/images/our-business/ilusia/logo.svg',
+  logoWidth: 178,
+  logoMaxHeight: 58,
+  brandColor: '#101010',
+
+  heroImg: '/images/our-business/ilusia/hero.webp',
+  heroOverlayImg: '/images/our-business/ilusia/hero-network-overlay.webp',
+  heroObjectPosition: 'center',
+  aboutDesc:
+    'Ilusia transforms complex products, services, and business concepts into engaging motion graphics and cinematic animations that communicate with clarity, impact, and purpose.',
+  aboutImg: '/images/our-business/ilusia/about.webp',
+  aboutObjectPosition: 'center',
+
+  painPointsLabel: 'THE CHALLENGE',
+  painPointsTitle: 'Is This Your Problem?',
+  painPoints: [
+    {
+      icon: '/images/our-business/ilusia/icons/difficult-to-explain-complex-idea.svg',
+      title: 'Difficult to Explain Complex Idea',
+      desc: 'Technical products and abstract ideas are difficult to understand without a clear visual narrative.',
+    },
+    {
+      icon: '/images/our-business/ilusia/icons/short-attention-spans-audience.svg',
+      title: 'Short Attention Spans Audience',
+      desc: 'Static presentations struggle to hold attention and communicate the message quickly.',
+    },
+    {
+      icon: '/images/our-business/ilusia/icons/unclear-brand-messaging.svg',
+      title: 'Unclear Brand Messaging',
+      desc: 'Complex communication makes it harder for audiences to recognize the intended value.',
+    },
+    {
+      icon: '/images/our-business/ilusia/icons/content-that-fails-to-convert.svg',
+      title: 'Content That Fails to Convert',
+      desc: 'Visual content without a focused story may attract views without inspiring meaningful action.',
+    },
+  ],
+
+  servicesLabel: 'ILUSIA STUDIO SERVICE',
+  servicesTitle: 'Your Visual Storytelling Solutions',
+  servicesColumns: 4,
+  services: [
+    {
+      name: 'Motion Graphics',
+      img: '/images/our-business/ilusia/services/motion-graphics.webp',
+    },
+    {
+      name: '2D & 3D Animation',
+      img: '/images/our-business/ilusia/services/2d-3d-animation.webp',
+    },
+    {
+      name: 'Explainer Videos',
+      img: '/images/our-business/ilusia/services/explainer-videos.webp',
+    },
+    {
+      name: 'Product Visualization',
+      img: '/images/our-business/ilusia/services/product-visualization.webp',
+    },
+  ],
+  servicesBg: '/images/our-business/ilusia/services-bg.webp',
+
+  visionLabel: 'OUR VISION',
+  visionTextSize: 'large',
+  visionQuote:
+    'Powerful visual storytelling that transforms technical concepts into clear and engaging experiences.',
+  visionImg: '/images/our-business/ilusia/vision-bg.webp',
+
+  worksLabel: 'OUR PROJECTS',
+  worksTitle: 'Explore Ilusia Studio’s Work',
+  featuredWorkIndex: 1,
+  works: [
+    {
+      name: 'Live Event Motion Package',
+      tag: 'Motion Graphics · Broadcast Visuals',
+      img: '/images/our-business/ilusia/works/live-event-motion-package.webp',
+    },
+    {
+      name: 'Sinau Print Marketplace Website',
+      tag: 'Branding · Survey and Analytics',
+      img: '/images/our-business/ilusia/works/sinau-print-marketplace.webp',
+    },
+    {
+      name: 'X-1 Tire Company Profile Website',
+      tag: 'Product Visualization · Website',
+      img: '/images/our-business/ilusia/works/x1-tire-website.webp',
+    },
+  ],
+
+  otherBusinessesTitle: 'Explore Other Businesses',
+  featuredOtherBusinessIndex: 1,
+  otherBusinesses: [
+    {
+      slug: 'personice',
+      name: 'Personice',
+      img: '/images/our-business/ilusia/other-business-previews/personice.webp',
+    },
+    {
+      slug: 'loxlive',
+      name: 'LoxLive',
+      img: '/images/our-business/ilusia/other-business-previews/loxlive.webp',
+    },
+    {
+      slug: 'adsvar',
+      name: 'Adsvar',
+      img: '/images/our-business/ilusia/other-business-previews/adsvar.webp',
+    },
+    {
+      slug: 'seveny',
+      name: 'Seveny',
+      img: '/images/our-business/ilusia/other-business-previews/seveny.webp',
+    },
+  ],
+
+  ctaTitle: 'Discover More with Ilusia Studio',
+  ctaDesc:
+    'Explore our motion expertise, creative capabilities, and visual storytelling solutions that transform complex ideas into clear and engaging experiences.',
+  ctaImg: '/images/our-business/ilusia/cta-bg.webp',
+  ctaPrimaryLabel: 'GET IN TOUCH',
+  ctaPrimaryHref: '/contact-us',
+  ctaSecondaryLabel: 'EXPLORE WORKS',
+  ctaSecondaryHref: '/our-works',
+}
+,
+  {
+  id: 6,
+  slug: 'adsvar',
+  name: 'Adsvar',
+  shortName: 'Adsvar',
+  category: 'Performance Paid Ads & Pipeline Acceleration',
+  tagline: 'Turning Ad Spend into Business Growth',
+  logo: '/images/our-business/adsvar/logo.svg',
+  logoWidth: 147,
+  logoMaxHeight: 35,
+  brandColor: '#101010',
+
+  heroImg: '/images/our-business/adsvar/hero.webp',
+  heroOverlayImg: '/images/our-business/adsvar/hero-network-overlay.webp',
+  heroObjectPosition: 'center top',
+  aboutDesc:
+    'Adsvar helps businesses maximize advertising performance through data-driven strategies, precision targeting, and measurable campaign optimization that delivers real business outcomes.',
+  aboutImg: '/images/our-business/adsvar/about.webp',
+  aboutObjectPosition: 'center',
+
+  painPointsLabel: 'THE CHALLENGE',
+  painPointsTitle: 'Is This Your Problem?',
+  painPoints: [
+    {
+      icon: '/images/our-business/adsvar/icons/ads-budget-goes-to-waste.svg',
+      title: 'Ads Budget Goes to Waste',
+      desc: 'Low-performing spend and broad targeting make it difficult to turn advertising investment into meaningful results.',
+    },
+    {
+      icon: '/images/our-business/adsvar/icons/limited-production-quality.svg',
+      title: 'Limited Production Quality',
+      desc: 'Weak campaign assets and inconsistent execution reduce attention, credibility, and conversion potential.',
+    },
+    {
+      icon: '/images/our-business/adsvar/icons/unclear-marketing-performance.svg',
+      title: 'Unclear Marketing Performance',
+      desc: 'Disconnected reporting makes it hard to understand which channels and campaigns actually drive growth.',
+    },
+    {
+      icon: '/images/our-business/adsvar/icons/growth-that-doesnt-scale.svg',
+      title: "Growth That Doesn't Scale",
+      desc: 'Marketing may generate short-term activity without building a repeatable acquisition system for long-term growth.',
+    },
+  ],
+
+  servicesLabel: 'ADSVAR SERVICE',
+  servicesTitle: 'Excellence Performance Marketing Solutions',
+  servicesColumns: 4,
+  services: [
+    {
+      name: 'Paid Advertising Strategy',
+      img: '/images/our-business/adsvar/services/paid-advertising-strategy.webp',
+    },
+    {
+      name: 'Lead Generation & Funnel Optimize',
+      img: '/images/our-business/adsvar/services/lead-generation-funnel-optimization.webp',
+    },
+    {
+      name: 'Conversion and Tracking Ads',
+      img: '/images/our-business/adsvar/services/conversion-tracking-ads.webp',
+    },
+    {
+      name: 'Campaign Management',
+      img: '/images/our-business/adsvar/services/campaign-management.webp',
+    },
+  ],
+  servicesBg: '/images/our-business/adsvar/services-bg.webp',
+
+  visionLabel: 'OUR VISION',
+  visionTextSize: 'large',
+  visionQuote:
+    'Data-driven advertising that transforms marketing investment into predictable customer acquisition, measurable outcomes, and long-term growth.',
+  visionImg: '/images/our-business/adsvar/vision-bg.webp',
+
+  worksLabel: 'OUR PROJECTS',
+  worksTitle: 'Explore Adsvar’s Work',
+  featuredWorkIndex: 1,
+  works: [
+    {
+      name: 'Performance Campaign Dashboard',
+      tag: 'Paid Media · Campaign Analytics',
+      img: '/images/our-business/adsvar/works/performance-campaign-dashboard.webp',
+    },
+    {
+      name: 'Sinau Print Marketplace Website',
+      tag: 'Branding · Survey and Analytics',
+      img: '/images/our-business/adsvar/works/sinau-print-marketplace.webp',
+    },
+    {
+      name: 'X-1 Tire Company Profile Website',
+      tag: 'Digital Campaign · Website',
+      img: '/images/our-business/adsvar/works/x1-tire-website.webp',
+    },
+  ],
+
+  otherBusinessesTitle: 'Explore Other Businesses',
+  featuredOtherBusinessIndex: 1,
+  otherBusinesses: [
+    {
+      slug: 'personice',
+      name: 'Personice',
+      img: '/images/our-business/adsvar/other-business-previews/personice.webp',
+    },
+    {
+      slug: 'loxlive',
+      name: 'LoxLive',
+      img: '/images/our-business/adsvar/other-business-previews/loxlive.webp',
+    },
+    {
+      slug: 'adsvar',
+      name: 'Adsvar',
+      img: '/images/our-business/adsvar/other-business-previews/adsvar.webp',
+    },
+    {
+      slug: 'seveny',
+      name: 'Seveny',
+      img: '/images/our-business/adsvar/other-business-previews/seveny.webp',
+    },
+  ],
+
+  ctaTitle: 'Explore More Our Capability with Adsvar',
+  ctaDesc:
+    'Explore our performance marketing expertise, paid advertising solutions, and data-driven campaign capabilities designed to accelerate measurable business growth.',
+  ctaImg: '/images/our-business/adsvar/cta-bg.webp',
+  ctaPrimaryLabel: 'GET IN TOUCH',
+  ctaPrimaryHref: '/contact-us',
+  ctaSecondaryLabel: 'EXPLORE WORKS',
+  ctaSecondaryHref: '/our-works',
+},
+
+ {
+  id: 7,
+  slug: 'personice',
+  name: 'Personice',
+  shortName: 'Personice',
+  category: 'Elite PR & Executive Talent Management',
+  tagline: 'Elevating Brands Through Strategic PR',
+  logo: '/images/our-business/personice/logo.svg',
+  logoWidth: 220,
+  logoMaxHeight: 40,
+  brandColor: '#0E1534',
+
+  heroImg: '/images/our-business/personice/hero.webp',
+  heroOverlayImg: '/images/our-business/personice/hero-network-overlay.webp',
+  heroObjectPosition: 'center 40%',
+  aboutDesc:
+    'Personice helps organizations strengthen their public image, build executive credibility, and foster meaningful relationships through strategic public relations and talent management.',
+  aboutImg: '/images/our-business/personice/about.webp',
+  aboutObjectPosition: 'center 42%',
+
+  painPointsLabel: 'THE CHALLENGE',
+  painPointsTitle: 'Is This Your Challenge?',
+  painPoints: [
+    {
+      icon: '/images/our-business/personice/icons/limited-brand-visibility.svg',
+      title: 'Limited Brand Visibility',
+      desc: 'Inconsistent exposure and unclear positioning make it difficult for the brand to earn attention and recognition.',
+    },
+    {
+      icon: '/images/our-business/personice/icons/limited-production-quality.svg',
+      title: 'Limited Production Quality',
+      desc: 'Weak communication materials and inconsistent execution can reduce credibility across public-facing channels.',
+    },
+    {
+      icon: '/images/our-business/personice/icons/lack-of-executive-presence.svg',
+      title: 'Lack of Executive Presence',
+      desc: 'Leaders may have limited visibility, authority, or a consistent platform for communicating their expertise.',
+    },
+    {
+      icon: '/images/our-business/personice/icons/disconnected-public-relations.svg',
+      title: 'Disconnected Public Relations',
+      desc: 'Fragmented media relations and messaging make reputation management reactive rather than strategic.',
+    },
+  ],
+
+  servicesLabel: 'PERSONICE SERVICE',
+  servicesTitle: 'Your Brand Reputation and Communication Solutions',
+  servicesColumns: 4,
+  services: [
+    {
+      name: 'Public Relations Strategy',
+      img: '/images/our-business/personice/services/public-relations-strategy.webp',
+    },
+    {
+      name: 'Executive Thought Leadership',
+      img: '/images/our-business/personice/services/executive-thought-leadership.webp',
+    },
+    {
+      name: 'Talent & Brand Partnerships',
+      img: '/images/our-business/personice/services/talent-brand-partnerships.webp',
+    },
+    {
+      name: 'Crisis Management',
+      img: '/images/our-business/personice/services/crisis-management.webp',
+    },
+  ],
+  servicesBg: '/images/our-business/personice/services-bg.webp',
+
+  visionLabel: 'OUR VISION',
+  visionTextSize: 'large',
+  visionQuote:
+    'Authentic relationships, credible leadership, and strategic communication that strengthen reputation and create lasting public trust.',
+  visionImg: '/images/our-business/personice/vision-bg.webp',
+
+  worksLabel: 'OUR PROJECTS',
+  worksTitle: 'Explore Personice’s Work',
+  featuredWorkIndex: 1,
+  works: [
+    {
+      name: 'Strategic PR Campaign',
+      tag: 'Public Relations · Brand Reputation',
+      img: '/images/our-business/personice/works/strategic-pr-campaign.webp',
+    },
+    {
+      name: 'Sinau Print Marketplace Website',
+      tag: 'Branding · Survey and Analytics',
+      img: '/images/our-business/personice/works/sinau-print-marketplace.webp',
+    },
+    {
+      name: 'X-1 Tire Company Profile Website',
+      tag: 'Digital Campaign · Website',
+      img: '/images/our-business/personice/works/x1-tire-website.webp',
+    },
+  ],
+
+  otherBusinessesTitle: 'Explore Other Businesses',
+  featuredOtherBusinessIndex: 1,
+  otherBusinesses: [
+    {
+      slug: 'personice',
+      name: 'Personice',
+      img: '/images/our-business/personice/other-business-previews/personice.webp',
+    },
+    {
+      slug: 'loxlive',
+      name: 'LoxLive',
+      img: '/images/our-business/personice/other-business-previews/loxlive.webp',
+    },
+    {
+      slug: 'adsvar',
+      name: 'Adsvar',
+      img: '/images/our-business/personice/other-business-previews/adsvar.webp',
+    },
+    {
+      slug: 'seveny',
+      name: 'Seveny',
+      img: '/images/our-business/personice/other-business-previews/seveny.webp',
+    },
+  ],
+
+  ctaTitle: 'Discover PR & Executive Talent Management with Personice',
+  ctaDesc:
+    'Explore our public relations expertise, executive branding, and talent management solutions designed to build credibility, strengthen reputation, and create lasting public trust.',
+  ctaImg: '/images/our-business/personice/cta-bg.webp',
+  ctaPrimaryLabel: 'GET IN TOUCH',
+  ctaPrimaryHref: '/contact-us',
+  ctaSecondaryLabel: 'EXPLORE WORKS',
+  ctaSecondaryHref: '/our-works',
+},
   /* ─────────────────────────────────────────────────────────────────────────
      8. PERSONICE — Strategic PR & Executive Talent
      ───────────────────────────────────────────────────────────────────────── */
-  {
-    id: 8,
-    slug: 'personice',
-    name: 'Personice',
-    category: 'PUBLIC RELATIONS',
-    tagline: 'Elevating Brands Through Strategic PR',
-    heroImg:
-      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1600&auto=format&fit=crop',
-    aboutDesc:
-      'Personice is a strategic public relations and executive talent firm that helps organisations build powerful reputations, cultivate authentic thought leadership, and forge meaningful brand partnerships. We elevate brands through credible communication, media relations, and talent-driven storytelling.',
-    aboutImg:
-      'https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=800&auto=format&fit=crop',
-    brandColor: '#F59E0B',
-    visionQuote:
-      'Authentic relationships, credible leadership, and strategic communication that strengthen reputation and create lasting public trust.',
-    ctaTitle: 'Discover PR & Executive Talent Management with Personice',
-    ctaDesc:
-      'From reputation building to executive positioning, Personice gives you the strategy and relationships to make your brand impossible to ignore.',
-    painPoints: [
-      {
-        icon: '🧩',
-        title: 'Limited Brand Visibility',
-        desc: 'Brands that struggle to gain media coverage or public recognition miss key growth opportunities.',
-      },
-      {
-        icon: '📋',
-        title: 'Limited Production Quality',
-        desc: 'Inconsistent messaging and poor content quality undermine credibility and media placement.',
-      },
-      {
-        icon: '🔭',
-        title: 'Lack of Executive Presence',
-        desc: 'Leadership without a public voice fails to build authority or influence within the industry.',
-      },
-      {
-        icon: '💔',
-        title: 'Struggles in Public Relations',
-        desc: 'Poorly managed communications during crises can permanently damage brand reputation and trust.',
-      },
-    ],
-    services: [
-      {
-        name: 'Public Relations Strategy',
-        img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Executive Thought Leadership',
-        img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Talent & Brand Partnerships',
-        img: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Crisis Management',
-        img: 'https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=600&auto=format&fit=crop',
-      },
-    ],
-    works: [
-      {
-        name: 'Sinau Print Marketplace Website',
-        img: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=700&auto=format&fit=crop',
-        tag: 'PR Campaign',
-      },
-      {
-        name: 'Company for X',
-        img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=700&auto=format&fit=crop',
-        tag: 'Thought Leadership',
-      },
-      {
-        name: 'Brand Partnership Programme',
-        img: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=700&auto=format&fit=crop',
-        tag: 'Partnerships',
-      },
-    ],
-    otherBusinesses: [
-      {
-        slug: 'loxlive',
-        name: 'LoxLive',
-        img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'adsvar',
-        name: 'Adsvar',
-        img: 'https://images.unsplash.com/photo-1543286386-7a395019efd6?q=80&w=500&auto=format&fit=crop',
-      },
-      {
-        slug: 'artic-analytica',
-        name: 'Artic Analytica',
-        img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=500&auto=format&fit=crop',
-      },
-    ],
-  },
+{
+  id: 8,
+  slug: 'seveny',
+  name: 'Seveny',
+  shortName: 'Seveny',
+  category: 'Premium Tech-Inflected Event Management',
+  tagline: 'Make Events Leaves a Lasting Impression',
+  logo: '/images/our-business/seveny/logo.svg',
+  logoWidth: 173,
+  logoMaxHeight: 48,
+  brandColor: '#101010',
+
+  heroImg: '/images/our-business/seveny/hero.webp',
+  heroOverlayImg: '/images/our-business/seveny/hero-network-overlay.webp',
+  heroObjectPosition: 'center center',
+  aboutDesc:
+    'Seveny creates premium corporate events that combine innovative technology, immersive experiences, and seamless event management to deliver meaningful engagement beyond the venue.',
+  aboutImg: '/images/our-business/seveny/about.webp',
+  aboutObjectPosition: 'center 42%',
+
+  painPointsLabel: 'THE CHALLENGE',
+  painPointsTitle: 'Is This Your Problem?',
+  painPoints: [
+    {
+      icon: '/images/our-business/seveny/icons/events-feel-forgettable.svg',
+      title: 'Events Feel Forgettable',
+      desc: 'Standard formats and predictable execution can make important corporate moments feel ordinary and easy to forget.',
+    },
+    {
+      icon: '/images/our-business/seveny/icons/low-audience-engagement.svg',
+      title: 'Low Audience Engagement',
+      desc: 'Passive event experiences can reduce participation, emotional connection, and meaningful interaction with the audience.',
+    },
+    {
+      icon: '/images/our-business/seveny/icons/limited-event-insights.svg',
+      title: 'Limited Event Insights',
+      desc: 'Without reliable measurement, organizers struggle to understand audience behavior, value, and event performance.',
+    },
+    {
+      icon: '/images/our-business/seveny/icons/complex-event-operations.svg',
+      title: 'Complex Event Operations',
+      desc: 'Multiple vendors, technologies, and production timelines can create avoidable risks and inconsistent execution.',
+    },
+  ],
+
+  servicesLabel: 'SEVENY SERVICE',
+  servicesTitle: 'Modern Experiential Event Solutions',
+  servicesColumns: 4,
+  services: [
+    {
+      name: 'Corporate Event Management',
+      img: '/images/our-business/seveny/services/corporate-event-management.webp',
+    },
+    {
+      name: 'Interactive Event Technology',
+      img: '/images/our-business/seveny/services/interactive-event-technology.webp',
+    },
+    {
+      name: 'Guest Experience Solutions',
+      img: '/images/our-business/seveny/services/guest-experience-solutions.webp',
+    },
+    {
+      name: 'Event Analytics & Insights',
+      img: '/images/our-business/seveny/services/event-analytics-insights.webp',
+    },
+  ],
+  servicesBg: '/images/our-business/seveny/services-bg.webp',
+
+  visionLabel: 'OUR VISION',
+  visionTextSize: 'large',
+  visionQuote:
+    'Corporate events that combine immersive experiences, intelligent technology, and meaningful engagement to create lasting business impact.',
+  visionImg: '/images/our-business/seveny/vision-bg.webp',
+
+  worksLabel: 'OUR PROJECTS',
+  worksTitle: 'Explore Seveny’s Work',
+  featuredWorkIndex: 1,
+  works: [
+    {
+      name: 'Signature Corporate Event Production',
+      tag: 'Event Management · Experiential Production',
+      img: '/images/our-business/seveny/works/signature-event-production.webp',
+    },
+    {
+      name: 'Sinau Print Marketplace Website',
+      tag: 'Branding · Survey and Analytics',
+      img: '/images/our-business/seveny/works/sinau-print-marketplace.webp',
+    },
+    {
+      name: 'X-1 Tire Company Profile Website',
+      tag: 'Digital Campaign · Website',
+      img: '/images/our-business/seveny/works/x1-tire-website.webp',
+    },
+  ],
+
+  otherBusinessesTitle: 'Explore Other Businesses',
+  featuredOtherBusinessIndex: 1,
+  otherBusinesses: [
+    {
+      slug: 'personice',
+      name: 'Personice',
+      img: '/images/our-business/seveny/other-business-previews/personice.webp',
+    },
+    {
+      slug: 'loxlive',
+      name: 'LoxLive',
+      img: '/images/our-business/seveny/other-business-previews/loxlive.webp',
+    },
+    {
+      slug: 'adsvar',
+      name: 'Adsvar',
+      img: '/images/our-business/seveny/other-business-previews/adsvar.webp',
+    },
+    {
+      slug: 'seveny',
+      name: 'Seveny',
+      img: '/images/our-business/seveny/other-business-previews/seveny.webp',
+    },
+  ],
+
+  ctaTitle: "Let's Create Your Next Signature Event",
+  ctaDesc:
+    'From concept and technology to production and guest experience, Seveny helps organizations create memorable events with clear purpose and lasting business impact.',
+  ctaImg: '/images/our-business/seveny/cta-bg.webp',
+  ctaPrimaryLabel: 'GET IN TOUCH',
+  ctaPrimaryHref: '/contact-us',
+  ctaSecondaryLabel: 'EXPLORE WORKS',
+  ctaSecondaryHref: '/our-works',
+},
 ];
 
 export const TESTIMONIALS_DUMMY_DATA = [

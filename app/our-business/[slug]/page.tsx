@@ -1,13 +1,99 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import {
   getBusinessBySlug,
   getAllBusinessSlugs,
 } from '@/lib/db/actions';
 
+type PainPoint = {
+  icon?: string;
+  title: string;
+  desc: string;
+};
+
+type ServiceItem = {
+  name: string;
+  img: string;
+};
+
+type WorkItem = {
+  name: string;
+  tag: string;
+  img: string;
+  slug?: string;
+  href?: string;
+};
+
+type OtherBusinessItem = {
+  slug: string;
+  name: string;
+  img: string;
+};
+
+type BusinessPageData = {
+  id: number;
+  slug: string;
+  name: string;
+  shortName?: string;
+  category: string;
+  tagline: string;
+  logo?: string;
+  logoWidth?: number;
+  logoMaxHeight?: number;
+  brandColor: string;
+  heroImg: string;
+  heroObjectPosition?: string;
+  aboutDesc: string;
+  aboutImg: string;
+  aboutObjectPosition?: string;
+  painPointsTitle: string;
+  painPoints: PainPoint[];
+  servicesTitle: string;
+  services: ServiceItem[];
+  servicesColumns?: 3 | 4;
+  visionQuote: string;
+  visionTextSize?: 'medium' | 'large';
+  works: WorkItem[];
+  otherBusinesses: OtherBusinessItem[];
+  ctaTitle: string;
+  ctaDesc: string;
+
+  /** Required labels for the two primary dynamic business sections. */
+  painPointsLabel: string;
+  servicesLabel: string;
+
+  /** Optional copy controls for the remaining sections. */
+  visionLabel?: string;
+  worksLabel?: string;
+  worksTitle?: string;
+  otherBusinessesTitle?: string;
+
+  /** Optional initial carousel positions. */
+  featuredWorkIndex?: number;
+  featuredOtherBusinessIndex?: number;
+
+  /** Optional. If omitted, the template uses conventional files under the business asset folder. */
+  heroOverlayImg?: string;
+  challengeBg?: string;
+  servicesBg?: string;
+  visionImg?: string;
+  ctaImg?: string;
+  ctaPrimaryLabel?: string;
+  ctaPrimaryHref?: string;
+  ctaSecondaryLabel?: string;
+  ctaSecondaryHref?: string;
+};
+
+const resolveBusiness = async (slug: string) =>
+  (await Promise.resolve(getBusinessBySlug(slug))) as unknown as
+    | BusinessPageData
+    | null
+    | undefined;
+
 export async function generateStaticParams() {
-  const slugs = getAllBusinessSlugs();
+  const slugs = await Promise.resolve(getAllBusinessSlugs());
   return slugs.map((slug) => ({ slug }));
 }
 
@@ -17,7 +103,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const biz = getBusinessBySlug(slug);
+  const biz = await resolveBusiness(slug);
+
   if (!biz) return { title: 'Not Found' };
 
   return {
@@ -31,38 +118,176 @@ export async function generateMetadata({
   };
 }
 
-function IconChevronDown() {
+function ArrowIcon({ direction = 'right' }: { direction?: 'left' | 'right' }) {
   return (
     <svg
-      width={22}
-      height={22}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className={direction === 'left' ? 'rotate-180' : ''}
     >
-      <path d="M6 9l6 6 6-6" />
+      <path
+        d="M5 12h13M13 6l6 6-6 6"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
 
-function IconArrowRight() {
+function DownIcon() {
   return (
-    <svg
-      width={14}
-      height={14}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      viewBox="0 0 24 24"
-    >
-      <path d="M5 12h14M12 5l7 7-7 7" />
+    <svg width="32" height="22" viewBox="0 0 32 22" fill="none" aria-hidden="true">
+      <path
+        d="m4 5 12 12L28 5"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
+}
+
+function PainPointIcon({ icon, index }: { icon?: string; index: number }) {
+  if (icon?.startsWith('/')) {
+    return <img src={icon} alt="" aria-hidden="true" className="h-8 w-8 object-contain" />;
+  }
+
+  const common = {
+    width: 32,
+    height: 32,
+    viewBox: '0 0 32 32',
+    fill: 'none',
+    'aria-hidden': true,
+  } as const;
+
+  const variants = [
+    <svg key="legacy" {...common}>
+      <path d="M6 8h20v16H6z" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M11 13h10M11 18h4M21 18h.01" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M9 5v3M23 5v3M9 24v3M23 24v3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>,
+    <svg key="disconnected" {...common}>
+      <path d="M11.5 20.5 8 24a4 4 0 0 1-5.7-5.6l5-5a4 4 0 0 1 5.7 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="m20.5 11.5 3.5-3.5a4 4 0 1 1 5.7 5.6l-5 5a4 4 0 0 1-5.7 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="m11 21 10-10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>,
+    <svg key="blind-spots" {...common}>
+      <path d="M3.5 16s4.5-7 12.5-7 12.5 7 12.5 7-4.5 7-12.5 7S3.5 16 3.5 16Z" stroke="currentColor" strokeWidth="1.8" />
+      <circle cx="16" cy="16" r="3.5" stroke="currentColor" strokeWidth="1.8" />
+      <path d="m6 5 20 22" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>,
+    <svg key="downtime" {...common}>
+      <path d="M16 4v4M16 24v4M4 16h4M24 16h4M7.5 7.5l2.8 2.8M21.7 21.7l2.8 2.8M24.5 7.5l-2.8 2.8M10.3 21.7l-2.8 2.8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <circle cx="16" cy="16" r="6" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M16 12v4l3 2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>,
+  ];
+
+  return variants[index % variants.length];
+}
+
+function Label({ children, tone = 'blue' }: { children: ReactNode; tone?: 'blue' | 'lime' }) {
+  const color = tone === 'lime' ? 'text-[#E6FF2A]' : 'text-[#1A3E9E]';
+  const dot = tone === 'lime' ? 'bg-[#E6FF2A]' : 'bg-[#1A3E9E]';
+
+  return (
+    <div className={`flex items-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.06em] md:text-[14px] ${color}`}>
+      <span className={`h-2 w-2 shrink-0 ${dot}`} />
+      <span>{children}</span>
+    </div>
+  );
+}
+
+function buildSliderCss(slug: string, workCount: number, otherCount: number) {
+  const safe = slug.replace(/[^a-z0-9_-]/gi, '-');
+  const workRules = Array.from({ length: workCount }, (_, index) => {
+    const workShift = Array.from({ length: index }, () => ' - var(--work-card-w) - 16px').join('');
+    return `
+      #works-slider-${safe}:has(#work-${safe}-${index}:checked) .works-track {
+        transform: translate3d(calc(0px${workShift}), 0, 0);
+      }
+      #works-slider-${safe}:has(#work-${safe}-${index}:checked) .work-card-${index} {
+        opacity: 1;
+        transform: scale(1);
+      }
+      #works-slider-${safe}:has(#work-${safe}-${index}:checked) .work-control-${index} {
+        display: flex;
+      }
+      #works-slider-${safe}:has(#work-${safe}-${index}:checked) .work-progress-${index} {
+        transform: scaleX(1);
+      }
+    `;
+  }).join('\n');
+
+  const otherRules = Array.from({ length: otherCount }, (_, index) => {
+    const otherShift = Array.from({ length: index }, () => ' - var(--other-card-w) - 30px').join('');
+    return `
+      #other-slider-${safe}:has(#other-${safe}-${index}:checked) .other-track {
+        transform: translate3d(calc(0px${otherShift}), 0, 0);
+      }
+      #other-slider-${safe}:has(#other-${safe}-${index}:checked) .other-control-${index} {
+        display: flex;
+      }
+    `;
+  }).join('\n');
+
+  return `
+    #works-slider-${safe} {
+      --work-card-w: min(1413px, 73.59375vw);
+      --work-start: max(calc(50vw - 706.5px), 13.203125vw);
+    }
+    #works-slider-${safe} .works-track {
+      padding-left: var(--work-start);
+      padding-right: var(--work-start);
+      transition: transform 760ms cubic-bezier(.22,1,.36,1);
+      will-change: transform;
+    }
+    #works-slider-${safe} .work-card {
+      width: var(--work-card-w);
+      opacity: .45;
+      transform: scale(.975);
+      transition: opacity 550ms ease, transform 760ms cubic-bezier(.22,1,.36,1);
+    }
+    #works-slider-${safe} .work-control { display: none; }
+    #works-slider-${safe} .work-progress-fill {
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 760ms cubic-bezier(.22,1,.36,1);
+    }
+
+    #other-slider-${safe} {
+      --other-card-w: min(835px, 43.489583vw);
+      --other-start: max(calc(50vw - 850px), 5.729167vw);
+    }
+    #other-slider-${safe} .other-track {
+      padding-left: var(--other-start);
+      padding-right: var(--other-start);
+      transition: transform 760ms cubic-bezier(.22,1,.36,1);
+      will-change: transform;
+    }
+    #other-slider-${safe} .other-card { width: var(--other-card-w); }
+    #other-slider-${safe} .other-control { display: none; }
+
+    ${workRules}
+    ${otherRules}
+
+    @media (max-width: 767px) {
+      #works-slider-${safe} {
+        --work-card-w: calc(100vw - 32px);
+        --work-start: 16px;
+      }
+      #other-slider-${safe} {
+        --other-card-w: calc(100vw - 48px);
+        --other-start: 24px;
+      }
+    }
+  `;
 }
 
 export default async function BusinessSlugPage({
@@ -71,186 +296,465 @@ export default async function BusinessSlugPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const biz = getBusinessBySlug(slug);
+  const biz = await resolveBusiness(slug);
 
   if (!biz) notFound();
 
+  const safeSlug = biz.slug.replace(/[^a-z0-9_-]/gi, '-');
+  const assetBase = `/images/our-business/${biz.slug}`;
+  const shortName = biz.shortName ?? biz.name;
+
+  const heroOverlayImg = biz.heroOverlayImg ?? `${assetBase}/hero-network-overlay.webp`;
+  const servicesBg = biz.servicesBg ?? `${assetBase}/services-bg.webp`;
+  const visionImg = biz.visionImg ?? `${assetBase}/vision-bg.webp`;
+  const ctaImg = biz.ctaImg ?? `${assetBase}/cta-bg.webp`;
+
+  const sliderCss = buildSliderCss(safeSlug, biz.works.length, biz.otherBusinesses.length);
+  const serviceColumns = biz.servicesColumns ?? (biz.services.length === 6 ? 3 : 4);
+  const threeColumnServices = serviceColumns === 3;
+  const featuredWorkIndex = biz.works.length
+    ? Math.min(Math.max(biz.featuredWorkIndex ?? Math.min(1, biz.works.length - 1), 0), biz.works.length - 1)
+    : 0;
+  const featuredOtherBusinessIndex = biz.otherBusinesses.length
+    ? Math.min(Math.max(biz.featuredOtherBusinessIndex ?? 0, 0), biz.otherBusinesses.length - 1)
+    : 0;
+
   return (
-    <div className="w-full relative bg-white overflow-x-hidden">
+    <main className="relative w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
+      <style dangerouslySetInnerHTML={{ __html: sliderCss }} />
 
       {/* HERO */}
-      <section className="relative h-[70vh] min-h-[480px] flex items-end justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img src={biz.heroImg} alt={biz.name} className="w-full h-full object-cover object-center" />
+      <section className="relative flex h-[clamp(520px,41.667vw,800px)] min-h-[520px] items-center justify-center overflow-hidden rounded-b-[24px] bg-[#101010] md:rounded-b-[42px]">
+        <img
+          src={biz.heroImg}
+          alt={biz.name}
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition: biz.heroObjectPosition ?? 'center' }}
+        />
+        <div className="absolute inset-0 bg-black/20" />
+        <div
+          className="absolute inset-x-[-17%] bottom-[-45%] top-[31%] bg-cover bg-center opacity-90 mix-blend-plus-lighter"
+          style={{ backgroundImage: `url(${heroOverlayImg})` }}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A3E9E] via-[#1A3E9E]/25 to-transparent mix-blend-multiply" />
+        <div className="absolute inset-x-0 bottom-0 h-[87%] bg-gradient-to-b from-transparent via-[#101010]/20 to-[#101010]" />
+        <div className="absolute -right-[9%] -top-[14%] h-[150%] w-[64%] rotate-[7deg] bg-gradient-to-b from-transparent via-white/[0.055] to-transparent" />
+
+        <div className="relative z-10 flex max-w-[1100px] flex-col items-center gap-5 px-5 text-center md:gap-6">
+          <div className="flex flex-wrap justify-center gap-2 font-body text-[10px] font-bold uppercase tracking-[0.06em] text-[#E6FF2A] md:text-[14px]">
+            <span>Home</span><span>/</span><span>Our Business</span><span>/</span><span>{biz.name}</span>
+          </div>
+          <h1 className="font-heading text-[clamp(44px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
+            {biz.name}
+          </h1>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050b1c]/30 to-[#050b1c]/75 z-[1]" />
-        <div className="relative z-[2] text-center pb-[60px] flex flex-col items-center gap-3">
-          <span className="font-body text-[11px] font-bold tracking-[0.2em] uppercase text-white/70">{biz.category}</span>
-          <h1 className="font-heading font-bold text-[clamp(40px,6vw,80px)] text-white tracking-tight leading-none">{biz.name}</h1>
-          <a href="#about" className="mt-4 w-[44px] h-[44px] rounded-full border-[1.5px] border-white/40 bg-transparent text-white flex items-center justify-center cursor-pointer transition-all duration-200 hover:border-white/90 hover:bg-white/10 animate-bounce-slow" aria-label="Scroll to about section">
-            <IconChevronDown />
-          </a>
-        </div>
+
+        <a
+          href="#about"
+          aria-label="Scroll to business introduction"
+          className="absolute bottom-[34px] left-1/2 z-20 flex h-[58px] w-[58px] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 bg-white/[0.12] text-white backdrop-blur-[4px] transition hover:bg-white/20 md:bottom-[71px] md:h-20 md:w-20"
+        >
+          <DownIcon />
+        </a>
       </section>
 
-      {/* ABOUT */}
-      <section id="about" className="py-20 bg-white">
-        <div className="w-full max-w-[1315px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="flex flex-col gap-4">
-              <span className="font-body text-[10px] font-bold tracking-[0.18em] uppercase text-slate-400">{biz.category}</span>
-              <h2 className="font-heading font-bold text-[clamp(28px,3.5vw,44px)] text-slate-900 tracking-tight leading-tight">{biz.tagline}</h2>
-              <p className="font-body text-[15px] leading-relaxed text-slate-600 max-w-[500px]">{biz.aboutDesc}</p>
-              <div className="flex items-center gap-[10px] mt-2 font-body text-[13px] font-semibold text-slate-700">
-                <div
-                  className="w-2 h-2 rounded-full shrink-0"
-                  style={{ backgroundColor: biz.brandColor }}
+      {/* INTRODUCTION */}
+      <section
+        id="about"
+        className="w-full bg-[#F7F7F7] px-[clamp(24px,13.333vw,256px)] py-[clamp(80px,6.563vw,110px)]"
+      >
+        <div className="mx-auto flex w-full max-w-[1408px] items-center justify-between gap-[clamp(48px,5vw,96px)] max-[1024px]:flex-col">
+          <div className="flex w-[40%] shrink-0 flex-col justify-center max-[1024px]:w-full">
+            <div className="flex flex-col gap-[clamp(24px,2.188vw,42px)]">
+              <Label>{biz.category}</Label>
+              <h2 className="font-heading text-[clamp(40px,3.333vw,64px)] font-medium leading-[120%] tracking-[-0.02em] text-[#101010]">
+                {biz.tagline}
+              </h2>
+              <p className="font-body text-[clamp(15px,1.042vw,20px)] font-normal leading-[160%] tracking-[0.02em] text-[#292929]">
+                {biz.aboutDesc}
+              </p>
+            </div>
+
+            {biz.logo && (
+              <div className="mt-8 md:mt-12">
+                <img
+                  src={biz.logo}
+                  alt={`${biz.name} logo`}
+                  className="h-auto max-w-full object-contain object-left"
+                  style={{
+                    width: `${biz.logoWidth ?? 227}px`,
+                    maxHeight: biz.logoMaxHeight ? `${biz.logoMaxHeight}px` : undefined,
+                  }}
                 />
-                <span>{biz.name}</span>
               </div>
-            </div>
-            <div className="rounded-[16px] overflow-hidden aspect-[4/3] shadow-2xl">
-              <img src={biz.aboutImg} alt={`${biz.name} team`} className="w-full h-full object-cover" />
-            </div>
+            )}
+          </div>
+
+          <div className="relative aspect-[764/670] w-[53%] shrink-0 overflow-hidden rounded-[24px] bg-[#D9D9D9] max-[1024px]:w-full">
+            <img
+              src={biz.aboutImg}
+              alt={`${biz.name} team and operations`}
+              className="h-full w-full object-cover"
+              style={{ objectPosition: biz.aboutObjectPosition ?? 'center' }}
+            />
+            <div className="absolute inset-x-0 bottom-0 h-[25%] bg-gradient-to-t from-black/35 to-transparent" />
           </div>
         </div>
       </section>
 
-      {/* PAIN POINTS */}
-      <section className="py-[72px] bg-slate-50">
-        <div className="w-full max-w-[1315px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px] flex flex-col gap-8">
-          <span className="font-body text-[10px] font-bold tracking-[0.18em] uppercase text-slate-400">PAIN POINT</span>
-          <h2 className="font-heading font-bold text-[clamp(24px,3vw,38px)] text-slate-900 tracking-tight leading-snug">
-            {biz.painPoints.length === 4 ? 'Is This Your Challenge?' : 'What\'s Slowing Your Business Down?'}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {biz.painPoints.map((p, i) => (
-              <div key={i} className="bg-white border border-slate-200 rounded-[16px] p-[28px_24px] flex flex-col gap-3 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5">
-                <span className="text-[28px] leading-none">{p.icon}</span>
-                <h3 className="font-heading text-[15px] font-bold text-slate-900">{p.title}</h3>
-                <p className="font-body text-[13px] leading-relaxed text-slate-500">{p.desc}</p>
-              </div>
+      {/* TECHNOLOGY / PAIN POINTS — 100% structure from Leadership Principles */}
+      <section className="relative isolate w-full overflow-hidden bg-[#F7F7F7] px-[clamp(24px,5.729vw,110px)] py-[clamp(100px,8.125vw,156px)]">
+        {/* Layer 1: Leadership world/vector background */}
+        <div
+          className="pointer-events-none absolute bottom-0 left-[clamp(-8px,calc(5.729vw-32px),78px)] right-[clamp(-8px,calc(5.729vw-32px),78px)] top-[-50px] z-0 bg-contain bg-center bg-no-repeat opacity-100"
+          style={{
+            backgroundImage: "url('/images/company-leadership/Vector.svg')",
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Layer 2: top and bottom fades */}
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[438px] bg-gradient-to-b from-[#F7F7F7] to-transparent"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[438px] bg-gradient-to-t from-[#F7F7F7] via-[#F7F7F7]/60 to-transparent"
+          aria-hidden="true"
+        />
+
+        {/* Layer 3: foreground content */}
+        <div className="relative z-20 mx-auto flex w-full max-w-[1700px] flex-col items-center gap-[clamp(48px,4.167vw,80px)]">
+          <div className="flex w-full flex-col items-center gap-[clamp(18px,1.25vw,24px)] text-center">
+            <div className="flex items-center justify-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.06em] text-[#1A3E9E] md:text-[14px]">
+              <span className="h-2 w-2 shrink-0 bg-[#1A3E9E]" />
+              <span>{biz.painPointsLabel ?? 'THE CHALLENGE'}</span>
+            </div>
+
+            <h2 className="max-w-[750px] font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-[1.08] tracking-[-0.03em] text-[#101010]">
+              {biz.painPointsTitle ?? 'Technology & Business Challenges'}
+            </h2>
+          </div>
+
+          <div className="grid w-full grid-cols-4 gap-[clamp(20px,1.563vw,30px)] max-[1280px]:grid-cols-2 max-[768px]:grid-cols-1">
+            {biz.painPoints.map((point, index) => (
+              <article
+                key={`${point.title}-${index}`}
+                className="group relative flex min-h-[clamp(220px,15vw,290px)] flex-col items-start overflow-hidden rounded-[16px] border border-transparent px-4 pb-4 pt-4 backdrop-blur-[8px] transition-all duration-300 hover:border-[#99A6E7]/60 hover:bg-[linear-gradient(135deg,rgba(26,62,158,0.15)_0%,rgba(133,166,255,0.25)_100%)] hover:shadow-[0_8px_40px_rgba(26,62,158,0.18)]"
+                style={{
+                  background:
+                    'linear-gradient(79deg, rgba(26,62,158,.0375) 13.31%, rgba(133,166,255,.075) 132.94%)',
+                }}
+              >
+                <div className="relative z-10 flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-lg border border-[#99A6E7] bg-[rgba(153,166,231,.35)] text-[#101010] transition-colors duration-300 group-hover:bg-[rgba(26,62,158,0.35)]">
+                  <PainPointIcon icon={point.icon} index={index} />
+                </div>
+
+                <div className="relative z-10 mt-auto flex w-full flex-col gap-[clamp(8px,0.625vw,12px)] pt-[clamp(24px,2vw,38px)]">
+                  <h3 className="font-heading text-[clamp(23px,2.188vw,41px)] font-medium leading-[1.1] tracking-[-0.01em] text-[#424242]">
+                    {point.title}
+                  </h3>
+                  <p className="font-body text-[clamp(10px,0.75vw,11.5px)] font-normal leading-[1.5] text-[#424242]">
+                    {point.desc}
+                  </p>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* SERVICES */}
-      <section className="py-20 bg-[#0a0f1e]">
-        <div className="w-full max-w-[1315px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px] flex flex-col gap-9">
-          <span className="font-body text-[10px] font-bold tracking-[0.18em] uppercase text-white/45">OUR SOLUTIONS</span>
-          <h2 className="font-heading font-bold text-[clamp(28px,3.5vw,46px)] text-white tracking-tight leading-tight max-w-[700px]">
-            {biz.name === 'Kaluna Technology'
-              ? 'End-to-End Technology Integration Solutions'
-              : biz.name === 'Artic Analytica'
-              ? 'We Do Data-Driven Business Intelligence'
-              : biz.name === 'LoxLive'
-              ? 'End-to-End Premium Broadcast Services'
-              : biz.name === 'The Drafroom'
-              ? 'Your Strategic Brand Solutions'
-              : `${biz.name}'s Core Services`}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {biz.services.map((s, i) => (
-              <div key={i} className="group relative rounded-[12px] overflow-hidden aspect-[4/3] cursor-pointer">
-                <img src={s.img} alt={s.name} className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-106" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
-                <span className="absolute bottom-[14px] left-[14px] right-[14px] font-body text-[13px] font-semibold text-white leading-snug">{s.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section className="relative isolate overflow-hidden bg-[#101010] py-[96px] md:py-[110px] md:pb-[156px]">
+        <div className="pointer-events-none absolute -left-[24%] top-[24%] h-[70%] w-[72%] rounded-full bg-[#007EFF]/15 blur-[90px]" />
+        <div className="pointer-events-none absolute -right-[24%] -top-[10%] h-[70%] w-[72%] rounded-full bg-[#007EFF]/15 blur-[90px]" />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[72%] bg-cover bg-top opacity-70"
+          style={{ backgroundImage: `url(${servicesBg})` }}
+          aria-hidden="true"
+        />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-b from-transparent to-[#101010]" />
 
-      {/* VISION QUOTE */}
-      <section className="relative py-[100px] overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img src={biz.heroImg} alt="" aria-hidden="true" className="w-full h-full object-cover" />
-        </div>
-        <div className="absolute inset-0 bg-[#050b1c]/82 z-[1]" />
-        <div className="relative z-[2] max-w-[1315px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px] flex flex-col items-center gap-6 text-center">
-          <span className="font-body text-[10px] font-bold tracking-[0.18em] uppercase text-white/45">ARSALYNT</span>
-          <p className="font-heading font-semibold text-[clamp(22px,3vw,38px)] text-white tracking-tight leading-snug max-w-[760px]">{biz.visionQuote}</p>
-        </div>
-      </section>
-
-      {/* OUR WORKS */}
-      <section className="py-[72px] bg-white">
-        <div className="w-full max-w-[1315px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px] flex flex-col gap-8">
-          <div className="flex items-center justify-between">
-            <h2 className="font-heading font-bold text-[clamp(24px,3vw,38px)] text-slate-900 tracking-tight leading-snug">
-              Explore {biz.name}&apos;s Work
+        <div className="relative z-10 mx-auto flex w-full max-w-[1920px] flex-col gap-16 px-[110px] max-[1536px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
+          <div className="mx-auto flex max-w-[841px] flex-col items-center gap-4 text-center">
+            <Label tone="lime">{biz.servicesLabel ?? 'OUR SOLUTIONS'}</Label>
+            <h2 className="font-heading text-[clamp(46px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#F7F7F7]">
+              {biz.servicesTitle ?? 'Our Solutions'}
             </h2>
-            <Link href="/our-works" className="inline-flex items-center gap-[6px] font-body text-[13px] font-semibold text-slate-600 no-underline hover:text-slate-900 transition-colors duration-150">
-              See All <IconArrowRight />
-            </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {biz.works.map((w, i) => (
-              <div key={i} className="group relative rounded-[16px] overflow-hidden aspect-[16/10] cursor-pointer">
-                <img src={w.img} alt={w.name} className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" />
-                <div className="absolute bottom-5 left-5 right-5 flex flex-col gap-[6px]">
-                  <span className="font-body text-[10px] font-bold tracking-[0.12em] uppercase text-white/60">{w.tag}</span>
-                  <h3 className="font-heading text-[16px] font-bold text-white leading-snug">{w.name}</h3>
+
+          <div
+            className={`grid grid-cols-1 gap-6 sm:grid-cols-2 ${
+              threeColumnServices ? 'xl:grid-cols-3 xl:gap-[30px]' : 'xl:grid-cols-4 xl:gap-8'
+            }`}
+          >
+            {biz.services.map((service, index) => (
+              <article
+                key={`${service.name}-${index}`}
+                className="group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-[#F5F5F5]/15 bg-gradient-to-b from-[#101010]/5 to-white/[0.05] p-5 pb-6 sm:p-6 sm:pb-7 backdrop-blur-[12.5px] transition duration-500 hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.07]"
+              >
+                <div className={`relative w-full overflow-hidden rounded-lg bg-[#0A2951] ${
+                    threeColumnServices ? 'aspect-[499/265]' : 'aspect-[353/265]'
+                  }`}>
+                  <img
+                    src={service.img}
+                    alt={service.name}
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-black/15" />
                 </div>
-              </div>
+                <h3 className="font-heading text-[clamp(22px,1.8vw,32px)] font-medium leading-[1.2] tracking-[-0.01em] text-[#D9D9D9]">
+                  {service.name}
+                </h3>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* EXPLORE OTHER BUSINESSES */}
-      {biz.otherBusinesses.length > 0 && (
-        <section className="py-[72px] bg-slate-50">
-          <div className="w-full max-w-[1315px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px] flex flex-col gap-8">
-            <div className="flex items-center justify-between">
-              <h2 className="font-heading font-bold text-[clamp(24px,3vw,38px)] text-slate-900 tracking-tight leading-snug">Explore Other Business</h2>
-              <Link href="/our-business" className="inline-flex items-center gap-[6px] font-body text-[13px] font-semibold text-slate-600 no-underline hover:text-slate-900 transition-colors duration-150">
-                View All <IconArrowRight />
-              </Link>
+      {/* VISION */}
+      <section className="relative isolate flex min-h-[580px] items-center overflow-hidden bg-gradient-to-b from-[#101010] to-[#1A3E9E] py-[120px] md:min-h-[753px] md:py-[180px]">
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[96%] bg-cover bg-bottom opacity-55"
+          style={{ backgroundImage: `url(${visionImg})` }}
+          aria-hidden="true"
+        />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[440px] bg-gradient-to-b from-[#101010] via-[#101010]/80 to-transparent" />
+
+        <div className="relative z-10 mx-auto flex w-full max-w-[1920px] flex-col items-center gap-8 px-[110px] text-center max-[1536px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
+          <Label tone="lime">{biz.visionLabel ?? 'OUR VISION'}</Label>
+          <p
+            className={`font-heading font-semibold tracking-[-0.01em] text-[#F7F7F7] ${
+              biz.visionTextSize === 'large'
+                ? 'text-[clamp(36px,3.334vw,64px)] leading-[1.2]'
+                : 'text-[clamp(34px,2.917vw,56px)] leading-[1.1]'
+            }`}
+          >
+            {biz.visionQuote}
+          </p>
+        </div>
+      </section>
+
+      {/* WORKS */}
+      {biz.works.length > 0 && (
+        <section className="overflow-hidden bg-[#F7F7F7] py-[88px] md:py-[110px]">
+          <div className="mx-auto mb-[42px] flex max-w-[1000px] flex-col items-center gap-6 px-6 text-center">
+            <Label>{biz.worksLabel ?? 'OUR PROJECTS'}</Label>
+            <h2 className="font-heading text-[clamp(46px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em]">
+              {biz.worksTitle ?? `Explore ${shortName}’s Work`}
+            </h2>
+          </div>
+
+          <div
+            id={`works-slider-${safeSlug}`}
+            className="relative h-[clamp(440px,39.584vw,760px)] w-full overflow-hidden"
+          >
+            {biz.works.map((_, index) => (
+              <input
+                key={`work-input-${index}`}
+                id={`work-${safeSlug}-${index}`}
+                type="radio"
+                name={`work-slider-${safeSlug}`}
+                defaultChecked={index === featuredWorkIndex}
+                className="sr-only"
+              />
+            ))}
+
+            <div className="works-track flex h-full w-max items-stretch gap-4">
+              {biz.works.map((work, index) => {
+                const href = work.href ?? (work.slug ? `/our-works/${work.slug}` : '/our-works');
+                return (
+                  <Link
+                    key={`${work.name}-${index}`}
+                    href={href}
+                    className={`work-card work-card-${index} relative block h-full shrink-0 overflow-hidden rounded-[18px] bg-[#191919] no-underline md:rounded-[32px]`}
+                  >
+                    <img
+                      src={work.img}
+                      alt={work.name}
+                      className="h-full w-full object-cover transition duration-700 hover:scale-[1.02]"
+                    />
+                    <div className="absolute inset-0 bg-black/20" />
+                    <div className="absolute inset-x-0 bottom-0 h-[43%] bg-gradient-to-t from-black via-black/65 to-transparent" />
+
+                    <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col gap-2 px-7 pb-10 md:px-[65px] md:pb-[58px]">
+                      <h3 className="max-w-[1236px] font-heading text-[clamp(34px,3.334vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#F7F7F7]">
+                        {work.name}
+                      </h3>
+                      <div className="flex items-center gap-3 font-body text-[11px] font-extrabold uppercase tracking-[0.06em] text-[#E6FF2A]/75 md:text-[18px]">
+                        <span>{work.tag}</span>
+                      </div>
+                    </div>
+
+                    <div className="absolute inset-x-0 bottom-0 h-1.5 bg-white/45">
+                      <span className={`work-progress-fill work-progress-${index} block h-full w-full bg-[#E6FF2A]`} />
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-              {biz.otherBusinesses.map((b, i) => (
-                <Link
-                  key={i}
-                  href={`/our-business/${b.slug}`}
-                  className="group relative block rounded-[16px] overflow-hidden aspect-[4/3] no-underline"
+
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-full">
+              <div className="absolute inset-y-0 left-0 w-[13%] bg-gradient-to-r from-[#101010]/90 to-transparent" />
+              <div className="absolute inset-y-0 right-0 w-[13%] bg-gradient-to-l from-[#101010]/90 to-transparent" />
+            </div>
+
+            {biz.works.map((_, index) => {
+              const previous = (index - 1 + biz.works.length) % biz.works.length;
+              const next = (index + 1) % biz.works.length;
+              return (
+                <div
+                  key={`work-control-${index}`}
+                  className={`work-control work-control-${index} pointer-events-none absolute left-1/2 top-1/2 z-20 w-[calc(100%_-_32px)] max-w-[1700px] -translate-x-1/2 -translate-y-1/2 items-center justify-between`}
                 >
-                  <img
-                    src={b.img}
-                    alt={b.name}
-                    className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-106"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/8 to-transparent transition-all duration-300 group-hover:from-black/85 group-hover:via-black/15" />
-                  <span className="absolute bottom-5 left-5 font-heading text-[18px] font-bold text-white">{b.name}</span>
-                </Link>
-              ))}
-            </div>
+                  <label
+                    htmlFor={`work-${safeSlug}-${previous}`}
+                    aria-label="Previous project"
+                    className="pointer-events-auto flex h-12 w-12 cursor-pointer items-center justify-center rounded-md border border-[#4C4C4C] bg-[#101010]/45 text-[#D9D9D9] backdrop-blur md:h-16 md:w-16"
+                  >
+                    <ArrowIcon direction="left" />
+                  </label>
+                  <label
+                    htmlFor={`work-${safeSlug}-${next}`}
+                    aria-label="Next project"
+                    className="pointer-events-auto flex h-12 w-12 cursor-pointer items-center justify-center rounded-md border border-[#4C4C4C] bg-[#101010]/45 text-[#D9D9D9] backdrop-blur md:h-16 md:w-16"
+                  >
+                    <ArrowIcon />
+                  </label>
+                </div>
+              );
+            })}
           </div>
         </section>
       )}
 
-      {/* CTA */}
-      <section className="relative py-[100px] overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img src={biz.aboutImg} alt="" aria-hidden="true" className="w-full h-full object-cover" />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a1946]/92 to-[#1a3e9e]/88 z-[1]" />
-        <div className="relative z-[2] max-w-[1315px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px] flex flex-col items-center gap-5 text-center">
-          <h2 className="font-heading text-[clamp(26px,3.5vw,46px)] font-bold text-white tracking-tight leading-tight max-w-[620px]">{biz.ctaTitle}</h2>
-          <p className="font-body text-[15px] leading-relaxed text-white/75 max-w-[520px]">{biz.ctaDesc}</p>
-          <div className="flex items-center gap-4 mt-2 flex-wrap justify-center">
-            <Link href="/our-works" className="inline-flex items-center px-8 py-3.5 rounded-full bg-lime-yellow text-[#050b18] font-body text-[13px] font-extrabold tracking-wide no-underline transition-all duration-150 hover:scale-[1.04] hover:shadow-[0_6px_24px_rgba(230,255,42,0.3)]">
-              Get Started
+      {/* OTHER BUSINESSES — Header Title aligned with Navbar Logo + Infinite Slider Track */}
+      {biz.otherBusinesses.length > 0 && (
+        <section className="overflow-hidden bg-[rgba(153,166,231,0.10)] py-[88px] md:py-[96px] md:pb-[110px]">
+          <div id={`other-slider-${safeSlug}`} className="relative w-full">
+            {biz.otherBusinesses.map((_, index) => (
+              <input
+                key={`other-input-${index}`}
+                id={`other-${safeSlug}-${index}`}
+                type="radio"
+                name={`other-slider-${safeSlug}`}
+                defaultChecked={index === featuredOtherBusinessIndex}
+                className="sr-only"
+              />
+            ))}
+
+            <div className="mx-auto mb-[42px] flex w-full max-w-[1920px] items-end justify-between gap-8 px-[110px] max-[1536px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
+              <h2 className="font-heading text-[clamp(42px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
+                {biz.otherBusinessesTitle ?? 'Explore Other Business'}
+              </h2>
+
+              <div className="hidden shrink-0 items-center gap-2 md:flex">
+                {biz.otherBusinesses.map((_, index) => {
+                  const previous = (index - 1 + biz.otherBusinesses.length) % biz.otherBusinesses.length;
+                  const next = (index + 1) % biz.otherBusinesses.length;
+                  return (
+                    <div
+                      key={`other-control-header-${index}`}
+                      className={`other-control other-control-${index} items-center gap-2`}
+                    >
+                      <label
+                        htmlFor={`other-${safeSlug}-${previous}`}
+                        aria-label="Previous business"
+                        className="flex h-[54px] w-[54px] cursor-pointer items-center justify-center rounded-xl border border-[#D9D9D9] text-[#717171] transition hover:border-[#1A3E9E] hover:text-[#1A3E9E]"
+                      >
+                        <ArrowIcon direction="left" />
+                      </label>
+                      <label
+                        htmlFor={`other-${safeSlug}-${next}`}
+                        aria-label="Next business"
+                        className="flex h-[54px] w-[54px] cursor-pointer items-center justify-center rounded-xl border border-[#D9D9D9] text-[#717171] transition hover:border-[#1A3E9E] hover:text-[#1A3E9E]"
+                      >
+                        <ArrowIcon />
+                      </label>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="relative h-[clamp(350px,26.042vw,500px)] w-full overflow-hidden">
+              <div className="other-track flex h-full w-max gap-[30px]">
+                {biz.otherBusinesses.map((business, index) => (
+                  <Link
+                    key={`${business.slug}-${index}`}
+                    href={`/our-business/${business.slug}`}
+                    className="other-card group relative block h-full shrink-0 overflow-hidden rounded-[18px] bg-[#8C8C8C] no-underline md:rounded-[24px]"
+                  >
+                    <img
+                      src={business.img}
+                      alt={business.name}
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#101010]/95 via-[#101010]/35 to-transparent transition-opacity duration-500 group-hover:from-[#101010] group-hover:via-[#101010]/55" />
+
+                    <div className="absolute bottom-6 left-6 right-6 z-10 flex flex-col items-start gap-3.5 transition-transform duration-500 group-hover:-translate-y-2 md:bottom-[32px] md:left-[42px] md:right-[42px]">
+                      <h3 className="font-heading text-[clamp(34px,3.334vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#F7F7F7]">
+                        {business.name}
+                      </h3>
+                      <div className="inline-flex h-[44px] items-center justify-center gap-2 rounded-full bg-[#E6FF2A] px-6 font-body text-[13px] font-extrabold uppercase tracking-[0.04em] text-[#101010] shadow-[0_10px_25px_rgba(230,255,42,0.25)] transition-all duration-500 opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0">
+                        <span>LEARN MORE</span>
+                        <ArrowIcon direction="right" />
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 gap-2 md:hidden">
+                {biz.otherBusinesses.map((_, index) => (
+                  <label
+                    key={`other-dot-${index}`}
+                    htmlFor={`other-${safeSlug}-${index}`}
+                    aria-label={`Show business ${index + 1}`}
+                    className="h-2.5 w-2.5 cursor-pointer rounded-full bg-[#1A3E9E]/35"
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+      <section className="relative isolate flex min-h-[500px] items-center justify-center overflow-hidden bg-gradient-to-b from-[#152571] to-[#101010] px-6 py-[110px] md:min-h-[562px] md:px-[110px] md:py-[142px]">
+        <div
+          className="pointer-events-none absolute inset-0 scale-x-[-1] bg-cover bg-center opacity-65 mix-blend-hard-light"
+          style={{ backgroundImage: `url(${ctaImg})` }}
+          aria-hidden="true"
+        />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[60%] bg-gradient-to-b from-[#152571] to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-t from-[#101010] to-transparent" />
+
+        <div className="relative z-10 flex w-full max-w-[1700px] flex-col items-center gap-[42px] text-center">
+          <div className="flex flex-col gap-6">
+            <h2 className="font-heading text-[clamp(46px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#F7F7F7]">
+              {biz.ctaTitle}
+            </h2>
+            <p className="mx-auto max-w-[980px] font-body text-[16px] leading-[1.6] tracking-[0.02em] text-[#D9D9D9] md:text-[20px]">
+              {biz.ctaDesc}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href={biz.ctaPrimaryHref ?? '/contact-us'}
+              className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-[#E6FF2A] px-8 font-body text-[15px] font-extrabold text-[#101010] no-underline transition hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(230,255,42,0.18)] md:min-h-16 md:text-[20px]"
+            >
+              {biz.ctaPrimaryLabel ?? 'Let’s Work Together'} <ArrowIcon />
             </Link>
-            <Link href="/about-us" className="inline-flex items-center px-7 py-3 rounded-full border-[1.5px] border-white/50 text-white bg-transparent font-body text-[13px] font-bold tracking-wide no-underline transition-all duration-150 hover:border-white hover:bg-white/8">
-              Learn More
+            <Link
+              href={biz.ctaSecondaryHref ?? '/our-works'}
+              className="inline-flex min-h-14 items-center justify-center rounded-full border border-[#E6FF2A] px-8 font-body text-[15px] font-extrabold text-[#F7F7F7] no-underline transition hover:bg-[#E6FF2A]/10 md:min-h-16 md:text-[20px]"
+            >
+              {biz.ctaSecondaryLabel ?? 'Explore Our Works'}
             </Link>
           </div>
         </div>
       </section>
-
-    </div>
+    </main>
   );
 }

@@ -1,273 +1,571 @@
 'use client';
 
-import { useState } from 'react';
-import GrowthMetrics from '@/components/sections/GrowthMetrics/GrowthMetrics';
+import { useMemo, useState } from 'react';
 
-/* ── Pure SVG Icons ── */
-const IconChevronDown = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-    <path d="M6 9l6 6 6-6" />
+/* ========================================================================== 
+   CASE STUDIES PAGE
+   - Satu file TSX
+   - Styling menggunakan Tailwind + inline style seperlunya
+   - Navbar dan footer tetap menggunakan komponen/layout global project
+   ========================================================================== */
+
+type SortOption = 'newest' | 'oldest' | 'title';
+
+type CaseStudy = {
+  id: number;
+  title: string;
+  category: 'INSIGHT' | 'PROJECT STORIES';
+  dateLabel: string;
+  dateValue: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+};
+
+type FeaturedStudy = {
+  id: number;
+  eyebrow: string;
+  title: string;
+  image: string;
+  imageAlt: string;
+};
+
+const IconChevronDown = ({ size = 24 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M5 9L12 16L19 9"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
-const IconChevronRight = ({ size = 16 }: { size?: number }) => (
-  <svg width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-    <path d="M9 5l7 7-7 7" />
+const IconChevronLeft = ({ size = 24 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M14.5 5L7.5 12L14.5 19"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
-const IconSearch = ({ size = 16 }: { size?: number }) => (
-  <svg width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-    <circle cx="11" cy="11" r="8" />
-    <path d="M21 21l-4.35-4.35" />
+const IconChevronRight = ({ size = 24 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M9.5 5L16.5 12L9.5 19"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
-const CASE_STUDIES = [
+const IconSearch = ({ size = 24 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+  >
+    <circle
+      cx="10.8"
+      cy="10.8"
+      r="6.8"
+      stroke="currentColor"
+      strokeWidth="1.6"
+    />
+    <path
+      d="M16 16L21 21"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+const FEATURED_STUDIES: FeaturedStudy[] = [
   {
     id: 1,
-    title: "How We Built an Election Data Tracking System",
-    category: "WEB DEVELOPMENT",
-    brand: "Adsvar",
-    desc: "A highly resilient cloud database and tracking system built to handle millions of real-time data inputs securely during national polls.",
-    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=600&auto=format&fit=crop"
+    eyebrow: 'FEATURED STORIES',
+    title: 'Delivering a Seamless National Badminton Championship Experience',
+    image:
+      '/images/insight-programs/case-studies/featured-badminton.png',
+    imageAlt: 'National badminton championship venue',
   },
   {
     id: 2,
-    title: "Modernizing Operations with Enterprise IoT",
-    category: "IOT INTEGRATION",
-    brand: "Kaluna Technology",
-    desc: "Deploying automated telemetry sensors and hardware controllers across high-scale manufacturing factories for real-time asset monitoring.",
-    image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=600&auto=format&fit=crop"
+    eyebrow: 'FEATURED STORIES',
+    title: 'How We Built an Election Data Tracking System',
+    image:
+      '/images/insight-programs/case-studies/case-election-data.png',
+    imageAlt: 'Digital technology and data visualization',
   },
   {
     id: 3,
-    title: "How We Broadcasted PBSI Sirnas Jawa Tengah",
-    category: "LIVE BROADCAST",
-    brand: "LoxLive",
-    desc: "Providing zero-latency live production, multiple angle camera setups, and cloud mixing software for Indonesian national badminton matches.",
-    image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=600&auto=format&fit=crop"
+    eyebrow: 'FEATURED STORIES',
+    title: 'Modernizing Operations with Enterprise IoT',
+    image:
+      '/images/insight-programs/case-studies/case-enterprise-iot.png',
+    imageAlt: 'Team discussing an enterprise technology solution',
+  },
+];
+
+const PRIMARY_CASES: CaseStudy[] = [
+  {
+    id: 1,
+    title: 'How We Built an Election Data Tracking System',
+    category: 'INSIGHT',
+    dateLabel: 'JANUARY 2024',
+    dateValue: '2024-01-15',
+    description:
+      'Discover how real-time data visualization and centralized reporting helped stakeholders monitor election progress with greater accuracy and speed.',
+    image: '/images/insight-programs/case-studies/case-election-data.png',
+    imageAlt: 'Digital handshake surrounded by data visualization',
+  },
+  {
+    id: 2,
+    title: 'Modernizing Operations with Enterprise IoT',
+    category: 'INSIGHT',
+    dateLabel: 'DECEMBER 2025',
+    dateValue: '2025-12-18',
+    description:
+      'See how connected sensors and system integration transformed fragmented infrastructure into a unified real-time operational ecosystem.',
+    image: '/images/insight-programs/case-studies/case-enterprise-iot.png',
+    imageAlt: 'Team presenting an enterprise technology solution',
+  },
+  {
+    id: 3,
+    title: 'How We Broadcasted PBPI Sirnas Jawa Tengah',
+    category: 'PROJECT STORIES',
+    dateLabel: 'DECEMBER 2025',
+    dateValue: '2025-12-12',
+    description:
+      'A behind-the-scenes look at how LOXLive delivered a seamless multi-camera livestream experience for one of Indonesia’s major badminton events.',
+    image: '/images/insight-programs/case-studies/case-live-broadcast.png',
+    imageAlt: 'Live multi-camera badminton broadcast monitor',
   },
   {
     id: 4,
-    title: "Modernizing Operations with Enterprise IoT",
-    category: "IOT INTEGRATION",
-    brand: "Kaluna Technology",
-    desc: "Deploying automated telemetry sensors and hardware controllers across high-scale manufacturing factories for real-time asset monitoring.",
-    image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=600&auto=format&fit=crop"
+    title: 'Modernizing Operations with Enterprise IoT',
+    category: 'INSIGHT',
+    dateLabel: 'DECEMBER 2025',
+    dateValue: '2025-12-10',
+    description:
+      'See how connected sensors and system integration transformed fragmented infrastructure into a unified real-time operational ecosystem.',
+    image: '/images/insight-programs/case-studies/case-enterprise-iot.png',
+    imageAlt: 'Team presenting an enterprise technology solution',
   },
   {
     id: 5,
-    title: "How We Built an Election Data Tracking System",
-    category: "WEB DEVELOPMENT",
-    brand: "Adsvar",
-    desc: "A highly resilient cloud database and tracking system built to handle millions of real-time data inputs securely during national polls.",
-    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=600&auto=format&fit=crop"
+    title: 'How We Built an Election Data Tracking System',
+    category: 'INSIGHT',
+    dateLabel: 'JANUARY 2026',
+    dateValue: '2026-01-20',
+    description:
+      'Discover how real-time data visualization and centralized reporting helped stakeholders monitor election progress with greater accuracy and speed.',
+    image: '/images/insight-programs/case-studies/case-election-data.png',
+    imageAlt: 'Digital handshake surrounded by data visualization',
   },
   {
     id: 6,
-    title: "How We Broadcasted PBSI Sirnas Jawa Tengah",
-    category: "LIVE BROADCAST",
-    brand: "LoxLive",
-    desc: "Providing zero-latency live production, multiple angle camera setups, and cloud mixing software for Indonesian national badminton matches.",
-    image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=600&auto=format&fit=crop"
+    title: 'How We Broadcasted PBPI Sirnas Jawa Tengah',
+    category: 'PROJECT STORIES',
+    dateLabel: 'DECEMBER 2025',
+    dateValue: '2025-12-08',
+    description:
+      'A behind-the-scenes look at how LOXLive delivered a seamless multi-camera livestream experience for one of Indonesia’s major badminton events.',
+    image: '/images/insight-programs/case-studies/case-live-broadcast.png',
+    imageAlt: 'Live multi-camera badminton broadcast monitor',
   },
   {
     id: 7,
-    title: "How We Built an Election Data Tracking System",
-    category: "WEB DEVELOPMENT",
-    brand: "Adsvar",
-    desc: "A highly resilient cloud database and tracking system built to handle millions of real-time data inputs securely during national polls.",
-    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=600&auto=format&fit=crop"
+    title: 'How We Built an Election Data Tracking System',
+    category: 'INSIGHT',
+    dateLabel: 'JANUARY 2024',
+    dateValue: '2024-01-08',
+    description:
+      'Discover how real-time data visualization and centralized reporting helped stakeholders monitor election progress with greater accuracy and speed.',
+    image: '/images/insight-programs/case-studies/case-election-data.png',
+    imageAlt: 'Digital handshake surrounded by data visualization',
   },
   {
     id: 8,
-    title: "Modernizing Operations with Enterprise IoT",
-    category: "IOT INTEGRATION",
-    brand: "Kaluna Technology",
-    desc: "Deploying automated telemetry sensors and hardware controllers across high-scale manufacturing factories for real-time asset monitoring.",
-    image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=600&auto=format&fit=crop"
+    title: 'Modernizing Operations with Enterprise IoT',
+    category: 'INSIGHT',
+    dateLabel: 'DECEMBER 2025',
+    dateValue: '2025-12-05',
+    description:
+      'See how connected sensors and system integration transformed fragmented infrastructure into a unified real-time operational ecosystem.',
+    image: '/images/insight-programs/case-studies/case-enterprise-iot.png',
+    imageAlt: 'Team presenting an enterprise technology solution',
   },
   {
     id: 9,
-    title: "How We Broadcasted PBSI Sirnas Jawa Tengah",
-    category: "LIVE BROADCAST",
-    brand: "LoxLive",
-    desc: "Providing zero-latency live production, multiple angle camera setups, and cloud mixing software for Indonesian national badminton matches.",
-    image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=600&auto=format&fit=crop"
-  }
+    title: 'How We Broadcasted PBPI Sirnas Jawa Tengah',
+    category: 'PROJECT STORIES',
+    dateLabel: 'DECEMBER 2025',
+    dateValue: '2025-12-02',
+    description:
+      'A behind-the-scenes look at how LOXLive delivered a seamless multi-camera livestream experience for one of Indonesia’s major badminton events.',
+    image: '/images/insight-programs/case-studies/case-live-broadcast.png',
+    imageAlt: 'Live multi-camera badminton broadcast monitor',
+  },
+];
+
+/* Data tambahan agar tombol Load More benar-benar berfungsi. */
+const CASE_STUDIES: CaseStudy[] = [
+  ...PRIMARY_CASES,
+  ...PRIMARY_CASES.map((item, index) => ({
+    ...item,
+    id: item.id + 9,
+    dateValue: index % 3 === 0 ? '2023-12-20' : item.dateValue,
+  })),
 ];
 
 export default function InsightProgramsPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedFilter, setSelectedFilter] = useState('All');
+  const [sortBy, setSortBy] = useState<SortOption>('newest');
+  const [visibleCount, setVisibleCount] = useState(9);
+  const [activeFeatured, setActiveFeatured] = useState(0);
 
-  const handleScrollDown = () => {
-    const el = document.getElementById("explore-cases");
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+  const featuredStudy = FEATURED_STUDIES[activeFeatured];
+
+  const filteredCases = useMemo(() => {
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+
+    const result = CASE_STUDIES.filter((item) => {
+      if (!normalizedQuery) return true;
+
+      return (
+        item.title.toLowerCase().includes(normalizedQuery) ||
+        item.category.toLowerCase().includes(normalizedQuery) ||
+        item.description.toLowerCase().includes(normalizedQuery)
+      );
+    });
+
+    return [...result].sort((a, b) => {
+      if (sortBy === 'title') return a.title.localeCompare(b.title);
+
+      const firstDate = new Date(a.dateValue).getTime();
+      const secondDate = new Date(b.dateValue).getTime();
+
+      return sortBy === 'oldest'
+        ? firstDate - secondDate
+        : secondDate - firstDate;
+    });
+  }, [searchQuery, sortBy]);
+
+  const visibleCases = filteredCases.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredCases.length;
+
+  const scrollToCaseStudies = () => {
+    document
+      .getElementById('explore-case-studies')
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const filteredCases = CASE_STUDIES.filter((item) => {
-    const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          item.brand.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesFilter = selectedFilter === 'All' || item.category === selectedFilter;
-    return matchesSearch && matchesFilter;
-  });
+  const showPreviousFeatured = () => {
+    setActiveFeatured((current) =>
+      current === 0 ? FEATURED_STUDIES.length - 1 : current - 1,
+    );
+  };
+
+  const showNextFeatured = () => {
+    setActiveFeatured((current) =>
+      current === FEATURED_STUDIES.length - 1 ? 0 : current + 1,
+    );
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    setVisibleCount(9);
+  };
+
+  const handleSortChange = (value: SortOption) => {
+    setSortBy(value);
+    setVisibleCount(9);
+  };
 
   return (
-    <div className="w-full relative bg-[#fafafa] min-h-screen">
-      
-      {/* HERO HEADER SECTION */}
-      <section className="relative w-full h-[60vh] min-h-[480px] max-[768px]:h-[50vh] bg-[#020617] overflow-hidden flex items-center justify-center" id="hero" aria-label="Insight & Programs Hero">
-        <div className="absolute inset-0 z-[1]" aria-hidden="true">
-          <img
-            src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200&auto=format&fit=crop"
-            alt="Professional Live Recording Gimbal"
-            className="w-full h-full object-cover opacity-45 brightness-60 contrast-110"
-          />
-        </div>
-
-        <div 
-          className="absolute inset-0 z-[2] pointer-events-none" 
-          aria-hidden="true"
-          style={{
-            backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px)',
-            backgroundSize: '50px 50px',
-            backgroundPosition: 'center'
-          }}
+    <main className="relative w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
+      {/* ================================================================== */}
+      {/* HERO                                                               */}
+      {/* ================================================================== */}
+      <section
+        id="case-studies-hero"
+        aria-label="Case Studies Hero"
+        className="relative isolate flex h-[clamp(560px,41.666vw,800px)] w-full items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-[#101010]"
+      >
+        <img
+          src="/images/insight-programs/case-studies/hero-case-studies.png"
+          alt="Digital document management and connected technology network"
+          className="absolute inset-0 h-full w-full object-cover object-center brightness-[0.52] saturate-[0.9]"
         />
-        <div className="absolute bottom-0 left-0 right-0 h-[140px] bg-gradient-to-t from-[#fafafa] to-transparent z-[3] pointer-events-none" aria-hidden="true" />
 
-        <div className="relative z-[5] text-center max-w-[720px] px-6 mt-10">
-          <span className="inline-block font-heading text-[10px] font-extrabold tracking-[0.25em] text-lime-yellow uppercase mb-4">
-            OUR SUCCESS STORIES
-          </span>
-          <h1 className="font-heading font-bold text-[56px] max-[1024px]:text-[44px] max-[768px]:text-[36px] leading-tight tracking-tight text-white mb-5">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(26,62,158,0.82)_0%,rgba(26,62,158,0.14)_54%,rgba(16,16,16,0.16)_64%,#101010_100%)] mix-blend-multiply"
+        />
+
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(25,69,180,0.08)_0%,rgba(5,10,22,0.05)_38%,rgba(0,0,0,0.38)_100%)]"
+        />
+
+        <div className="relative z-10 mx-auto flex w-full max-w-[900px] flex-col items-center px-6 text-center">
+          <div className="mb-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-body text-[10px] font-bold uppercase leading-[1.3] tracking-[0.08em] text-[#E6FF2A] sm:text-xs lg:text-sm">
+            <span>Home</span>
+            <span aria-hidden="true">›</span>
+            <span>Insight &amp; Programs</span>
+            <span aria-hidden="true">›</span>
+            <span>Case Studies</span>
+          </div>
+
+          <h1 className="font-heading text-[clamp(52px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
             Case Studies
           </h1>
-          <p className="font-body text-lg leading-relaxed text-[#A0A0A0] max-w-[600px] mx-auto">
-            Eksplorasi proyek-proyek inovatif yang kami kerjakan untuk mendampingi transformasi digital para mitra industri.
+
+          <p className="mt-6 max-w-[806px] font-body text-[clamp(14px,1.042vw,20px)] font-normal leading-[1.6] tracking-[0.02em] text-white/95">
+            Explore in-depth breakdowns of our projects, from business
+            challenges and solution strategies to implementation &amp;
+            measurable results delivered for our clients.
           </p>
-
-          <button 
-            onClick={handleScrollDown} 
-            className="absolute bottom-[30px] left-1/2 -translate-x-1/2 w-[44px] h-[44px] rounded-full bg-white/8 border border-white/15 text-white flex items-center justify-center cursor-pointer z-[5] transition-colors duration-150 hover:bg-white/15 animate-bounce-slow" 
-            aria-label="Scroll down"
-          >
-            <IconChevronDown />
-          </button>
         </div>
+
+        <button
+          type="button"
+          onClick={scrollToCaseStudies}
+          aria-label="Scroll to featured case study"
+          className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 bg-white/[0.14] text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20"
+        >
+          <IconChevronDown size={32} />
+        </button>
       </section>
 
-      {/* FEATURED CASE STUDY CARD (LARGE BOX) */}
-      <section className="bg-[#fafafa] pt-10 pb-5 relative z-[4]" aria-label="Featured Case Study">
-        <div className="w-full max-w-[1700px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
-          <div className="relative w-full aspect-[2.4/1] min-h-[380px] max-[1024px]:aspect-[1.8/1] max-[768px]:aspect-[1.4/1] rounded-[24px] overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.04)] flex flex-col justify-end">
+      {/* ================================================================== */}
+      {/* FEATURED                                                          */}
+      {/* ================================================================== */}
+      <section
+        aria-label="Featured Case Study"
+        className="relative bg-[#F7F7F7] px-[clamp(16px,5.729vw,110px)] py-[clamp(32px,3.333vw,64px)]"
+      >
+        <div className="mx-auto w-full max-w-[1700px]">
+          <article className="group relative isolate aspect-[17/8] min-h-[430px] w-full overflow-hidden rounded-[clamp(20px,1.667vw,32px)] bg-black sm:min-h-[500px] lg:min-h-0">
             <img
-              src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=1200&auto=format&fit=crop"
-              alt="National Badminton Stadium Court Match"
-              className="absolute inset-0 w-full h-full object-cover"
+              key={featuredStudy.id}
+              src={featuredStudy.image}
+              alt={featuredStudy.imageAlt}
+              className="absolute inset-0 h-full w-full object-cover object-center transition duration-700 group-hover:scale-[1.015]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-[1]" />
 
-            <div className="relative z-[2] p-12 max-[768px]:p-6 flex flex-col justify-end">
-              <span className="font-heading text-[11px] font-extrabold text-lime-yellow tracking-[0.1em] mb-3">LOXLIVE / LIVE BROADCAST</span>
-              <h2 className="font-heading font-bold text-[32px] max-[768px]:text-[24px] leading-snug text-white max-w-[780px] tracking-tight">
-                Delivering a Seamless National Badminton Championship Experience
-              </h2>
-              
-              <div className="flex justify-between items-center mt-8 w-full">
-                <div className="flex gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-lime-yellow shadow-[0_0_8px_#E6FF2A]" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-white opacity-30" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-white opacity-30" />
-                </div>
-                <div className="flex gap-3">
-                  <button className="w-9 h-9 rounded-full border border-white/15 bg-white/5 text-white font-mono text-sm font-bold cursor-pointer flex items-center justify-center hover:bg-white/12 hover:border-white/30" aria-label="Previous featured study">&lt;</button>
-                  <button className="w-9 h-9 rounded-full border border-white/15 bg-white/5 text-white font-mono text-sm font-bold cursor-pointer flex items-center justify-center hover:bg-white/12 hover:border-white/30" aria-label="Next featured study">&gt;</button>
-                </div>
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-black/20"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-b from-transparent via-black/45 to-black"
+            />
+
+            <div className="absolute bottom-[clamp(100px,5.729vw,110px)] left-[clamp(24px,4.323vw,83px)] right-[clamp(24px,12vw,230px)] z-10">
+              <div className="mb-3 flex items-center gap-2.5 font-body text-[clamp(11px,0.938vw,18px)] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A]">
+                <span className="h-2 w-2 shrink-0 bg-[#E6FF2A]" />
+                <span>{featuredStudy.eyebrow}</span>
               </div>
+
+              <h2 className="max-w-[1299px] font-heading text-[clamp(32px,3.333vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#F7F7F7]">
+                {featuredStudy.title}
+              </h2>
             </div>
-          </div>
+
+            <div className="absolute bottom-[clamp(28px,3.125vw,60px)] left-[clamp(24px,4.323vw,83px)] z-20 flex h-2.5 items-center gap-2">
+              {FEATURED_STUDIES.map((item, index) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setActiveFeatured(index)}
+                  aria-label={`Show featured story ${index + 1}`}
+                  aria-current={activeFeatured === index ? 'true' : undefined}
+                  className={
+                    activeFeatured === index
+                      ? 'h-2.5 w-[54px] rounded-[1px] bg-[#E6FF2A] transition-all duration-300'
+                      : 'h-2.5 w-2.5 rounded-[1px] bg-[#717171] transition-all duration-300 hover:bg-white/70'
+                  }
+                />
+              ))}
+            </div>
+
+            <div className="absolute bottom-[clamp(24px,3.125vw,60px)] right-[clamp(24px,4.323vw,83px)] z-20 flex items-center gap-2">
+              <button
+                type="button"
+                onClick={showPreviousFeatured}
+                aria-label="Previous featured story"
+                className="flex h-[clamp(48px,3.333vw,64px)] w-[clamp(48px,3.333vw,64px)] items-center justify-center rounded-[12px] border border-[#D9D9D9] text-[#D9D9D9] transition duration-300 hover:border-white hover:bg-white/10 hover:text-white"
+              >
+                <IconChevronLeft size={24} />
+              </button>
+
+              <button
+                type="button"
+                onClick={showNextFeatured}
+                aria-label="Next featured story"
+                className="flex h-[clamp(48px,3.333vw,64px)] w-[clamp(48px,3.333vw,64px)] items-center justify-center rounded-[12px] border border-[#D9D9D9] text-[#D9D9D9] transition duration-300 hover:border-white hover:bg-white/10 hover:text-white"
+              >
+                <IconChevronRight size={24} />
+              </button>
+            </div>
+          </article>
         </div>
       </section>
 
-      {/* EXPLORE GRID SECTION */}
-      <section id="explore-cases" className="bg-[#fafafa] pt-[60px] pb-[100px] relative z-[4]" aria-label="Explore Case Studies Grid">
-        <div className="w-full max-w-[1700px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
-          
-          <div className="flex justify-between items-center mb-10 flex-wrap gap-5 max-[768px]:flex-col max-[768px]:items-start">
-            <h2 className="font-heading text-[32px] font-bold tracking-tight text-slate-900">Explore Case Studies</h2>
-            
-            <div className="flex items-center gap-4 max-[768px]:w-full max-[768px]:flex-col max-[768px]:items-stretch">
-              <div className="relative w-[240px] max-[768px]:w-full">
-                <input
-                  type="text"
-                  placeholder="Search Case..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full h-[46px] bg-white border border-black/6 rounded-[12px] pl-10 pr-4 font-body text-[13px] text-slate-700 focus:outline-none focus:border-blue-600 focus:ring-3 focus:ring-blue-600/10"
-                />
-                <span className="absolute left-[14px] top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
-                  <IconSearch size={14} />
-                </span>
-              </div>
+      {/* ================================================================== */}
+      {/* CASE STUDIES LIST                                                  */}
+      {/* ================================================================== */}
+      <section
+        id="explore-case-studies"
+        aria-label="Explore Case Studies"
+        className="scroll-mt-24 bg-[rgba(153,166,231,0.10)] px-[clamp(16px,5.729vw,110px)] py-[clamp(72px,5.729vw,110px)]"
+      >
+        <div className="mx-auto w-full max-w-[1700px]">
+          <div className="mb-[clamp(44px,3.333vw,64px)] flex flex-col gap-8 xl:flex-row xl:items-end xl:justify-between">
+            <h2 className="font-heading text-[clamp(42px,3.75vw,72px)] font-medium leading-[1.1] tracking-[-0.02em] text-[#101010]">
+              Explore Case Studies
+            </h2>
 
-              <div className="relative w-[180px] max-[768px]:w-full">
-                <select
-                  value={selectedFilter}
-                  onChange={(e) => setSelectedFilter(e.target.value)}
-                  className="w-full h-[46px] bg-white border border-black/6 rounded-[12px] pl-4 pr-9 font-body text-[13px] text-slate-700 cursor-pointer appearance-none focus:outline-none focus:border-blue-600 focus:ring-3 focus:ring-blue-600/10"
-                >
-                  <option value="All">Filter by Category</option>
-                  <option value="WEB DEVELOPMENT">Web Development</option>
-                  <option value="IOT INTEGRATION">IoT Integration</option>
-                  <option value="LIVE BROADCAST">Live Broadcast</option>
-                </select>
-                <span className="absolute right-[14px] top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
-                  <IconChevronDown size={12} />
+            <div className="flex w-full flex-col gap-2 sm:flex-row xl:w-auto xl:justify-end">
+              <label className="relative block h-[59px] w-full sm:w-[350px]">
+                <span className="sr-only">Search case studies</span>
+                <input
+                  type="search"
+                  value={searchQuery}
+                  onChange={(event) => handleSearchChange(event.target.value)}
+                  placeholder="Search Case..."
+                  className="h-full w-full rounded-full border border-[#D9D9D9] bg-transparent pl-6 pr-14 font-body text-base font-normal tracking-[0.02em] text-[#292929] outline-none transition placeholder:text-[#717171] focus:border-[#1A3E9E] focus:ring-4 focus:ring-[#1A3E9E]/10 lg:text-lg"
+                />
+                <span className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-[#717171]">
+                  <IconSearch size={24} />
                 </span>
-              </div>
+              </label>
+
+              <label className="relative block h-[59px] w-full sm:w-[147px]">
+                <span className="sr-only">Sort case studies</span>
+                <select
+                  value={sortBy}
+                  onChange={(event) =>
+                    handleSortChange(event.target.value as SortOption)
+                  }
+                  className="h-full w-full appearance-none rounded-full border border-[#D9D9D9] bg-transparent px-6 pr-12 font-body text-base font-normal tracking-[0.02em] text-[#717171] outline-none transition focus:border-[#1A3E9E] focus:ring-4 focus:ring-[#1A3E9E]/10 lg:text-lg"
+                >
+                  <option value="newest">Newest</option>
+                  <option value="oldest">Oldest</option>
+                  <option value="title">A–Z</option>
+                </select>
+                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#717171]">
+                  <IconChevronDown size={22} />
+                </span>
+              </label>
             </div>
           </div>
 
-          {/* 3-Column Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCases.map((item) => (
-              <div key={item.id} className="group bg-white rounded-[20px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col transition-transform duration-400 hover:-translate-y-1">
-                <div className="w-full aspect-[16/10] overflow-hidden relative">
-                  <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-[1.04]" />
-                </div>
-                
-                <div className="p-6 flex flex-col flex-grow">
-                  <div className="flex justify-between items-center mb-3">
-                    <span className="font-heading text-[10px] font-extrabold text-blue-600 uppercase tracking-[0.05em]">{item.brand}</span>
-                    <span className="font-heading text-[9px] font-extrabold text-slate-400 tracking-[0.05em]">{item.category}</span>
+          {visibleCases.length > 0 ? (
+            <div className="grid grid-cols-1 gap-x-[30px] gap-y-[60px] md:grid-cols-2 xl:grid-cols-3">
+              {visibleCases.map((item) => (
+                <article
+                  key={item.id}
+                  className="group flex min-w-0 flex-col gap-6"
+                >
+                  <div className="relative aspect-[546/400] w-full overflow-hidden rounded-[clamp(16px,1.25vw,24px)] bg-[#8C8C8C]">
+                    <img
+                      src={item.image}
+                      alt={item.imageAlt}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover object-center transition duration-700 ease-out group-hover:scale-[1.035]"
+                    />
+                    <div className="absolute inset-0 bg-black/10 transition duration-500 group-hover:bg-black/0" />
                   </div>
-                  <h3 className="font-heading font-bold text-[18px] leading-snug text-slate-900 mb-2.5 tracking-tight">{item.title}</h3>
-                  <p className="font-body text-[13px] leading-relaxed text-slate-500">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
 
-          {/* Load More Button */}
-          {filteredCases.length > 0 && (
-            <div className="flex justify-center mt-14">
-              <button className="bg-transparent border border-black/8 text-slate-900 font-heading font-extrabold text-[10px] tracking-[0.1em] px-7 py-[14px] rounded-full cursor-pointer inline-flex items-center gap-2 shadow-sm transition-all duration-150 hover:bg-slate-100 hover:border-black/15 hover:-translate-y-0.5">
-                LOAD MORE <IconChevronRight size={12} />
-              </button>
+                  <div className="flex flex-col gap-4">
+                    <div className="flex min-h-[18px] items-center justify-between gap-4 font-body text-[10px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] sm:text-xs 2xl:text-sm">
+                      <div className="flex min-w-0 items-center gap-2.5">
+                        <span className="h-2 w-2 shrink-0 bg-[#1A3E9E]" />
+                        <span className="truncate">{item.category}</span>
+                      </div>
+                      <time
+                        dateTime={item.dateValue}
+                        className="shrink-0 text-right"
+                      >
+                        {item.dateLabel}
+                      </time>
+                    </div>
+
+                    <h3 className="font-heading text-[clamp(28px,2.188vw,42px)] font-medium leading-[1.1] tracking-[-0.01em] text-[#101010] xl:min-h-[92px]">
+                      {item.title}
+                    </h3>
+
+                    <p
+                      className="font-body text-[clamp(14px,0.833vw,16px)] font-normal leading-[1.6] text-[#292929]"
+                      style={{
+                        display: '-webkit-box',
+                        WebkitBoxOrient: 'vertical',
+                        WebkitLineClamp: 2,
+                        overflow: 'hidden',
+                      }}
+                    >
+                      {item.description}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="flex min-h-[300px] items-center justify-center rounded-[24px] border border-dashed border-[#AFAFAF] px-6 text-center">
+              <p className="font-body text-lg text-[#717171]">
+                No case studies match your search.
+              </p>
             </div>
           )}
 
+          {visibleCases.length > 0 && (
+            <div className="mt-[clamp(56px,4.167vw,80px)] flex justify-center">
+              <button
+                type="button"
+                onClick={() => {
+                  if (hasMore) setVisibleCount((current) => current + 9);
+                }}
+                disabled={!hasMore}
+                className="flex h-14 min-w-[180px] items-center justify-center rounded-full border border-[#152571] px-8 font-body text-[clamp(14px,1.042vw,20px)] font-semibold leading-[1.2] tracking-[0.02em] text-[#101010] transition duration-300 enabled:hover:-translate-y-0.5 enabled:hover:bg-[#152571] enabled:hover:text-white disabled:cursor-default disabled:opacity-100"
+              >
+                LOAD MORE
+              </button>
+            </div>
+          )}
         </div>
       </section>
-
-      {/* Operations Metrics & Advisory Sections */}
-      <GrowthMetrics />
-
-    </div>
+    </main>
   );
 }

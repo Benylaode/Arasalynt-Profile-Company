@@ -28,7 +28,7 @@ export default function BridgePossibility() {
   return (
     <section
       id="about-us"
-      className="relative isolate w-full min-h-[900px] overflow-hidden text-white bg-bridge-radial py-[100px] max-[1024px]:py-[80px]"
+      className="relative isolate w-full min-h-[900px] overflow-hidden text-white bg-bridge-radial pt-[100px] pb-[70px] max-[1024px]:py-[80px]"
       style={{
         /* Safari WebKit Isolation: Force hardware compositing context to prevent tile invalidation on scroll */
         WebkitTransform: 'translate3d(0,0,0)',

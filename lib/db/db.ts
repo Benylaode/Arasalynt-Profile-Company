@@ -43,15 +43,42 @@ function initSchema(db: Database.Database): void {
       id               INTEGER PRIMARY KEY,
       slug             TEXT    NOT NULL UNIQUE,
       name             TEXT    NOT NULL,
+      short_name       TEXT,
       category         TEXT    NOT NULL,
       tagline          TEXT    NOT NULL,
+      logo             TEXT,
+      logo_width       TEXT,
+      logo_max_height  TEXT,
       hero_img         TEXT    NOT NULL,
+      hero_object_position TEXT,
+      hero_overlay_img TEXT,
       about_desc       TEXT    NOT NULL,
       about_img        TEXT    NOT NULL,
+      about_object_position TEXT,
       brand_color      TEXT    NOT NULL DEFAULT '#E6FF2A',
       vision_quote     TEXT    NOT NULL,
+      vision_text_size TEXT,
       cta_title        TEXT    NOT NULL,
       cta_desc         TEXT    NOT NULL,
+      cta_primary_label TEXT,
+      cta_primary_href  TEXT,
+      cta_secondary_label TEXT,
+      cta_secondary_href  TEXT,
+      pain_points_title TEXT,
+      pain_points_label TEXT,
+      services_title   TEXT,
+      services_label   TEXT,
+      services_columns INTEGER,
+      vision_label     TEXT,
+      works_label      TEXT,
+      works_title      TEXT,
+      other_businesses_title TEXT,
+      featured_work_index INTEGER DEFAULT 0,
+      featured_other_business_index INTEGER DEFAULT 0,
+      challenge_bg     TEXT,
+      services_bg      TEXT,
+      vision_img       TEXT,
+      cta_img          TEXT,
       pain_points      TEXT    NOT NULL DEFAULT '[]',  -- JSON array
       services         TEXT    NOT NULL DEFAULT '[]',  -- JSON array
       works            TEXT    NOT NULL DEFAULT '[]',  -- JSON array
@@ -79,52 +106,123 @@ function initSchema(db: Database.Database): void {
       text    TEXT    NOT NULL,
       avatar  TEXT    NOT NULL
     );
+
+    CREATE TABLE IF NOT EXISTS leads (
+      id         INTEGER PRIMARY KEY AUTOINCREMENT,
+      name       TEXT    NOT NULL,
+      company    TEXT,
+      email      TEXT    NOT NULL,
+      phone      TEXT,
+      inquiry    TEXT,
+      message    TEXT    NOT NULL,
+      created_at TEXT    NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
   `);
+
+  /* Ensure columns exist if database was created previously */
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN logo TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN logo_width TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN logo_max_height TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN short_name TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN hero_object_position TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN about_object_position TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN vision_text_size TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN services_columns INTEGER;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN works_title TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN pain_points_title TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN pain_points_label TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN services_title TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN services_label TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN vision_label TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN works_label TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN other_businesses_title TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN featured_work_index INTEGER;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN featured_other_business_index INTEGER;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN cta_primary_label TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN cta_primary_href TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN cta_secondary_label TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN cta_secondary_href TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN hero_overlay_img TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN challenge_bg TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN services_bg TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN vision_img TEXT;`); } catch {}
+  try { db.exec(`ALTER TABLE businesses ADD COLUMN cta_img TEXT;`); } catch {}
 }
 
-/* ── Auto-seed dari dummy.ts jika tabel kosong ── */
+/* ── Auto-sync dari dummy.ts ke SQLite database ── */
 function seedIfEmpty(db: Database.Database): void {
-  const count = (
-    db.prepare('SELECT COUNT(*) as cnt FROM businesses').get() as { cnt: number }
-  ).cnt;
+  const insert = db.prepare(`
+    INSERT OR REPLACE INTO businesses
+      (id, slug, name, short_name, category, tagline, logo, logo_width, logo_max_height, hero_img, hero_object_position, hero_overlay_img, about_desc, about_img, about_object_position,
+       brand_color, vision_quote, vision_text_size, cta_title, cta_desc, cta_primary_label, cta_primary_href, cta_secondary_label, cta_secondary_href,
+       pain_points_title, pain_points_label, services_title, services_label, services_columns,
+       vision_label, works_label, works_title, other_businesses_title, featured_work_index, featured_other_business_index,
+       challenge_bg, services_bg, vision_img, cta_img,
+       pain_points, services, works, other_businesses)
+    VALUES
+      (@id, @slug, @name, @short_name, @category, @tagline, @logo, @logo_width, @logo_max_height, @hero_img, @hero_object_position, @hero_overlay_img, @about_desc, @about_img, @about_object_position,
+       @brand_color, @vision_quote, @vision_text_size, @cta_title, @cta_desc, @cta_primary_label, @cta_primary_href, @cta_secondary_label, @cta_secondary_href,
+       @pain_points_title, @pain_points_label, @services_title, @services_label, @services_columns,
+       @vision_label, @works_label, @works_title, @other_businesses_title, @featured_work_index, @featured_other_business_index,
+       @challenge_bg, @services_bg, @vision_img, @cta_img,
+       @pain_points, @services, @works, @other_businesses)
+  `);
 
-  if (count === 0) {
-    const insert = db.prepare(`
-      INSERT INTO businesses
-        (id, slug, name, category, tagline, hero_img, about_desc, about_img,
-         brand_color, vision_quote, cta_title, cta_desc,
-         pain_points, services, works, other_businesses)
-      VALUES
-        (@id, @slug, @name, @category, @tagline, @hero_img, @about_desc, @about_img,
-         @brand_color, @vision_quote, @cta_title, @cta_desc,
-         @pain_points, @services, @works, @other_businesses)
-    `);
+  const insertMany = db.transaction(() => {
+    for (const biz of BUSINESS_DUMMY_DATA) {
+      insert.run({
+        id: biz.id,
+        slug: biz.slug,
+        name: biz.name,
+        short_name: biz.shortName || null,
+        category: biz.category,
+        tagline: biz.tagline,
+        logo: biz.logo || `/images/our-business/${biz.slug}/logo.svg`,
+        logo_width: biz.logoWidth ? String(biz.logoWidth) : null,
+        logo_max_height: biz.logoMaxHeight ? String(biz.logoMaxHeight) : null,
+        hero_img: biz.heroImg,
+        hero_object_position: biz.heroObjectPosition || null,
+        hero_overlay_img: biz.heroOverlayImg || null,
+        about_desc: biz.aboutDesc,
+        about_img: biz.aboutImg,
+        about_object_position: biz.aboutObjectPosition || null,
+        brand_color: biz.brandColor,
+        vision_quote: biz.visionQuote,
+        vision_text_size: biz.visionTextSize || null,
+        cta_title: biz.ctaTitle,
+        cta_desc: biz.ctaDesc,
+        cta_primary_label: biz.ctaPrimaryLabel || null,
+        cta_primary_href: biz.ctaPrimaryHref || null,
+        cta_secondary_label: biz.ctaSecondaryLabel || null,
+        cta_secondary_href: biz.ctaSecondaryHref || null,
+        pain_points_title: biz.painPointsTitle || null,
+        pain_points_label: biz.painPointsLabel || null,
+        services_title: biz.servicesTitle || null,
+        services_label: biz.servicesLabel || null,
+        services_columns: biz.servicesColumns ?? null,
+        vision_label: biz.visionLabel || null,
+        works_label: biz.worksLabel || null,
+        works_title: biz.worksTitle || null,
+        other_businesses_title: biz.otherBusinessesTitle || null,
+        featured_work_index: biz.featuredWorkIndex ?? 0,
+        featured_other_business_index: biz.featuredOtherBusinessIndex ?? 0,
+        challenge_bg: biz.challengeBg || null,
+        services_bg: biz.servicesBg || null,
+        vision_img: biz.visionImg || null,
+        cta_img: biz.ctaImg || null,
+        pain_points: JSON.stringify(biz.painPoints),
+        services: JSON.stringify(biz.services),
+        works: JSON.stringify(biz.works),
+        other_businesses: JSON.stringify(biz.otherBusinesses),
+      });
+    }
+  });
 
-    const insertMany = db.transaction(() => {
-      for (const biz of BUSINESS_DUMMY_DATA) {
-        insert.run({
-          id: biz.id,
-          slug: biz.slug,
-          name: biz.name,
-          category: biz.category,
-          tagline: biz.tagline,
-          hero_img: biz.heroImg,
-          about_desc: biz.aboutDesc,
-          about_img: biz.aboutImg,
-          brand_color: biz.brandColor,
-          vision_quote: biz.visionQuote,
-          cta_title: biz.ctaTitle,
-          cta_desc: biz.ctaDesc,
-          pain_points: JSON.stringify(biz.painPoints),
-          services: JSON.stringify(biz.services),
-          works: JSON.stringify(biz.works),
-          other_businesses: JSON.stringify(biz.otherBusinesses),
-        });
-      }
-    });
-
+  try {
     insertMany();
     console.log(`[db] Seeded ${BUSINESS_DUMMY_DATA.length} businesses into SQLite.`);
+  } catch (err) {
+    console.error('Failed to sync DB from dummy:', err);
   }
 
   const heroCount = (
