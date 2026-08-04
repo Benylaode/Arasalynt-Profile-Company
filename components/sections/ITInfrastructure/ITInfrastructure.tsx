@@ -32,6 +32,11 @@ type PillarDefinition = {
   sceneY: readonly [number, number, number];
   centerX: number;
   zIndex: number;
+  topBounds: {
+    left: number;
+    width: number;
+    height: number;
+  };
   paths: {
     faceA: string;
     top: string;
@@ -53,7 +58,7 @@ type PillarStyle = CSSProperties & {
 };
 
 const AUTO_ROTATE_MS = 6000;
-const MOTION_DURATION_MS = 1180;
+const MOTION_DURATION_MS = 1280;
 const ASSET_ROOT = '/images/services/it-motion';
 
 const SCENES: Scene[] = [
@@ -98,6 +103,12 @@ const ACTIVE_PILLAR: Record<number, PillarKey> = {
   2: 'media',
 };
 
+const PILLAR_SCENE: Record<PillarKey, number> = {
+  it: 0,
+  data: 1,
+  media: 2,
+};
+
 /**
  * These are the original V2 vector paths. The three faces stay mounted for the
  * lifetime of the component; only their parent transform and active color layer
@@ -111,6 +122,7 @@ const PILLARS: readonly PillarDefinition[] = [
     sceneY: [306, 441, 411],
     centerX: 1061,
     zIndex: 2,
+    topBounds: { left: 819.461, width: 496.059, height: 287.319 },
     paths: {
       faceA:
         'M1316 452.338L1315.28 673.989L1314.75 674.291L1072.73 814.947L1069.84 1500.05L1069.79 1500.08L1072.73 593.716L1315.38 452.705L1316 452.338Z',
@@ -135,6 +147,7 @@ const PILLARS: readonly PillarDefinition[] = [
     sceneY: [380, 326, 364],
     centerX: 1562,
     zIndex: 3,
+    topBounds: { left: 1315.54, width: 496.06, height: 287.319 },
     paths: {
       faceA:
         'M1811.61 525.941L1808.66 1578.19L1565.78 1719.35L1565.39 1719.57L1567.1 1111.26L1568.34 667.32L1811.61 525.941Z',
@@ -159,6 +172,7 @@ const PILLARS: readonly PillarDefinition[] = [
     sceneY: [620, 344, 701],
     centerX: 1318,
     zIndex: 4,
+    topBounds: { left: 1072.93, width: 494.07, height: 286.164 },
     paths: {
       faceA:
         'M1324.7 906.164L1567 765.365L1564.07 1461.39L1321.77 1602.2L1324.7 906.164Z',
@@ -178,48 +192,6 @@ const PILLARS: readonly PillarDefinition[] = [
     ],
   },
 ];
-
-const HOTSPOTS: Record<
-  number,
-  Array<{ target: number; label: string; style: CSSProperties }>
-> = {
-  0: [
-    {
-      target: 1,
-      label: 'Show Data Survey and Analytics',
-      style: { left: '55%', top: '55%', width: '17%', height: '43%' },
-    },
-    {
-      target: 2,
-      label: 'Show Digital Media and Impact',
-      style: { left: '70%', top: '24%', width: '23%', height: '73%' },
-    },
-  ],
-  1: [
-    {
-      target: 0,
-      label: 'Show Information Technology Infrastructure',
-      style: { left: '42%', top: '31%', width: '18%', height: '67%' },
-    },
-    {
-      target: 2,
-      label: 'Show Digital Media and Impact',
-      style: { left: '72%', top: '24%', width: '21%', height: '73%' },
-    },
-  ],
-  2: [
-    {
-      target: 0,
-      label: 'Show Information Technology Infrastructure',
-      style: { left: '42%', top: '34%', width: '18%', height: '64%' },
-    },
-    {
-      target: 1,
-      label: 'Show Data Survey and Analytics',
-      style: { left: '55%', top: '59%', width: '18%', height: '39%' },
-    },
-  ],
-};
 
 const numberAsset = (scene: number) =>
   `${ASSET_ROOT}/number-${String(scene + 1).padStart(2, '0')}.svg`;
@@ -263,10 +235,12 @@ function Pillar({
   definition,
   targetScene,
   moving,
+  hovered,
 }: {
   definition: PillarDefinition;
   targetScene: number;
   moving: boolean;
+  hovered: boolean;
 }) {
   const active = ACTIVE_PILLAR[targetScene] === definition.key;
   const targetY = definition.sceneY[targetScene];
@@ -284,6 +258,7 @@ function Pillar({
       className={styles.pillar}
       data-pillar={definition.key}
       data-active={active}
+      data-hovered={hovered}
       data-moving={moving}
       style={style}
       aria-hidden="true"
@@ -326,12 +301,32 @@ function Pillar({
             <stop offset="0.62" stopColor="#7FA2FF" stopOpacity="0.14" />
             <stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
           </linearGradient>
+
+          <linearGradient id={`${id}-hover-a`} x1="0" y1="0" x2="1" y2="1">
+            <stop stopColor="#DFDFDF" />
+            <stop offset="1" stopColor="#1D43A7" />
+          </linearGradient>
+          <linearGradient id={`${id}-hover-top`} x1="1" y1="0" x2="0" y2="1">
+            <stop stopColor="#1D43A7" />
+            <stop offset="1" stopColor="#DFDFDF" />
+          </linearGradient>
+          <linearGradient id={`${id}-hover-b`} x1="1" y1="0" x2="0" y2="1">
+            <stop stopColor="#1D43A7" />
+            <stop offset="1" stopColor="#DFDFDF" />
+          </linearGradient>
+
         </defs>
 
         <g className={styles.pillarBaseFaces}>
           <path d={definition.paths.faceA} fill={`url(#${id}-gray-a)`} />
           <path d={definition.paths.top} fill={`url(#${id}-gray-top)`} />
           <path d={definition.paths.faceB} fill={`url(#${id}-gray-b)`} />
+        </g>
+
+        <g className={styles.pillarHoverFaces}>
+          <path d={definition.paths.faceA} fill={`url(#${id}-hover-a)`} />
+          <path d={definition.paths.top} fill={`url(#${id}-hover-top)`} />
+          <path d={definition.paths.faceB} fill={`url(#${id}-hover-b)`} />
         </g>
 
         <g className={styles.pillarActiveFaces}>
@@ -355,7 +350,33 @@ function Pillar({
 
       <div className={styles.indicatorCluster}>
         <div className={styles.indicatorAura} />
-        <div className={styles.indicatorShape} />
+        <svg
+          className={styles.indicatorShape}
+          viewBox="0 0 116 135"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id={`${id}-indicator-gray`} x1="0.5" y1="0" x2="0.5" y2="1">
+              <stop stopColor="#7A7A7A" />
+              <stop offset="1" stopColor="#979797" />
+            </linearGradient>
+            <linearGradient id={`${id}-indicator-blue`} x1="0.5" y1="0" x2="0.5" y2="1">
+              <stop stopColor="#081868" />
+              <stop offset="1" stopColor="#6A74FF" />
+            </linearGradient>
+          </defs>
+          <path
+            className={styles.indicatorBaseFill}
+            d="M0.389539 61.8201C0.803762 59.1623 1.41524 56.0728 2.28314 53.16C3.47649 49.1486 5.76458 45.5492 8.80221 42.6658L29.9868 21.187L46.9206 4.40609C52.8972 -1.4687 62.523 -1.4687 68.4996 4.40609L85.4236 21.187L106.608 42.6658C107.003 43.0385 107.397 43.4014 107.792 43.7544L111.677 48.3934C116.589 56.3965 117.319 66.3807 113.847 75.2664C111.983 80.0526 109.35 85.8685 106.47 88.7225L61.1127 133.534C60.7083 133.946 60.2546 134.269 59.7615 134.515C58.4794 135.162 56.9211 135.162 55.6489 134.515C55.1656 134.269 54.7021 133.946 54.2977 133.534L8.94029 88.7225C8.60497 88.3891 8.27951 88.0458 7.95405 87.7026C1.55331 80.7489 -1.06024 71.1374 0.389539 61.8201Z"
+            fill={`url(#${id}-indicator-gray)`}
+          />
+          <path
+            className={styles.indicatorActiveFill}
+            d="M0.389539 61.8201C0.803762 59.1623 1.41524 56.0728 2.28314 53.16C3.47649 49.1486 5.76458 45.5492 8.80221 42.6658L29.9868 21.187L46.9206 4.40609C52.8972 -1.4687 62.523 -1.4687 68.4996 4.40609L85.4236 21.187L106.608 42.6658C107.003 43.0385 107.397 43.4014 107.792 43.7544L111.677 48.3934C116.589 56.3965 117.319 66.3807 113.847 75.2664C111.983 80.0526 109.35 85.8685 106.47 88.7225L61.1127 133.534C60.7083 133.946 60.2546 134.269 59.7615 134.515C58.4794 135.162 56.9211 135.162 55.6489 134.515C55.1656 134.269 54.7021 133.946 54.2977 133.534L8.94029 88.7225C8.60497 88.3891 8.27951 88.0458 7.95405 87.7026C1.55331 80.7489 -1.06024 71.1374 0.389539 61.8201Z"
+            fill={`url(#${id}-indicator-blue)`}
+          />
+        </svg>
 
         <div className={styles.hologramCardA}>
           <img src={definition.holograms[0]} alt="" draggable={false} />
@@ -374,10 +395,12 @@ function Pillar({
 function Artwork({
   targetScene,
   moving,
+  hoveredPillar,
   mobile = false,
 }: {
   targetScene: number;
   moving: boolean;
+  hoveredPillar: PillarKey | null;
   mobile?: boolean;
 }) {
   const layer = mobile ? styles.mobileArtworkLayer : styles.artworkLayer;
@@ -407,6 +430,7 @@ function Artwork({
             definition={definition}
             targetScene={targetScene}
             moving={moving}
+            hovered={hoveredPillar === definition.key}
           />
         ))}
       </div>
@@ -417,6 +441,7 @@ function Artwork({
 export default function ITInfrastructure() {
   const [settledScene, setSettledScene] = useState(0);
   const [motion, setMotion] = useState<MotionState | null>(null);
+  const [hoveredPillar, setHoveredPillar] = useState<PillarKey | null>(null);
 
   const settledRef = useRef(0);
   const motionRef = useRef<MotionState | null>(null);
@@ -502,7 +527,9 @@ export default function ITInfrastructure() {
     [clearAutoTimer, clearFinishTimer, finishTransition, scheduleAutoRotate],
   );
 
-  beginTransitionRef.current = beginTransition;
+  useEffect(() => {
+    beginTransitionRef.current = beginTransition;
+  }, [beginTransition]);
 
   useEffect(() => {
     scheduleAutoRotate();
@@ -526,7 +553,6 @@ export default function ITInfrastructure() {
 
   const targetScene = motion?.to ?? settledScene;
   const currentScene = SCENES[targetScene];
-  const hotspotScene = targetScene;
 
   const preload = useMemo(
     () => [
@@ -548,7 +574,11 @@ export default function ITInfrastructure() {
         data-scene={targetScene}
         data-moving={Boolean(motion)}
       >
-        <Artwork targetScene={targetScene} moving={Boolean(motion)} />
+        <Artwork
+          targetScene={targetScene}
+          moving={Boolean(motion)}
+          hoveredPillar={hoveredPillar}
+        />
 
         <div className={styles.desktopCopyArea}>
           <div className={styles.desktopLabel}>
@@ -589,17 +619,34 @@ export default function ITInfrastructure() {
           data-disabled={Boolean(motion)}
           aria-label="Choose service pillar"
         >
-          {HOTSPOTS[hotspotScene].map((hotspot) => (
-            <button
-              key={`${hotspotScene}-${hotspot.target}`}
-              type="button"
-              aria-label={hotspot.label}
-              className={styles.hotspot}
-              style={hotspot.style}
-              disabled={Boolean(motion)}
-              onClick={() => beginTransition(hotspot.target)}
-            />
-          ))}
+          {PILLARS.filter(
+            (pillar) => ACTIVE_PILLAR[targetScene] !== pillar.key,
+          ).map((pillar) => {
+            const scene = PILLAR_SCENE[pillar.key];
+            const hotspotStyle: CSSProperties = {
+              left: stageX(pillar.topBounds.left),
+              top: stageY(pillar.sceneY[targetScene]),
+              width: stageX(pillar.topBounds.width),
+              height: stageY(pillar.topBounds.height),
+              zIndex: pillar.zIndex,
+            };
+
+            return (
+              <button
+                key={`${targetScene}-${pillar.key}`}
+                type="button"
+                aria-label={`Show ${SCENES[scene].title}`}
+                className={styles.hotspot}
+                style={hotspotStyle}
+                disabled={Boolean(motion)}
+                onPointerEnter={() => setHoveredPillar(pillar.key)}
+                onPointerLeave={() => setHoveredPillar(null)}
+                onFocus={() => setHoveredPillar(pillar.key)}
+                onBlur={() => setHoveredPillar(null)}
+                onClick={() => beginTransition(scene)}
+              />
+            );
+          })}
         </div>
       </div>
 
@@ -642,7 +689,12 @@ export default function ITInfrastructure() {
 
         <div className={styles.mobileVisual} aria-hidden="true">
           <div className={styles.mobileVisualCanvas}>
-            <Artwork targetScene={targetScene} moving={Boolean(motion)} mobile />
+            <Artwork
+              targetScene={targetScene}
+              moving={Boolean(motion)}
+              hoveredPillar={null}
+              mobile
+            />
           </div>
         </div>
 

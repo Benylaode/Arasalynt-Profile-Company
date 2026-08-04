@@ -92,19 +92,11 @@ const BUSINESS_MEDIA = {
 const INSIGHT_LINKS: NavItem[] = [
   {
     name: 'Case Studies',
-    href: '/insight-programs',
+    href: '/insight-programs/Case-Studies',
   },
   {
     name: 'Leadership Thoughts',
-    href: '/leadership-thoughts',
-  },
-  {
-    name: 'Operations Metrics',
-    href: '/insight-programs#growth',
-  },
-  {
-    name: 'Advisory & Consulting',
-    href: '/insight-programs#consulting',
+    href: '/insight-programs/leadership-thoughts',
   },
 ];
 
@@ -311,26 +303,10 @@ function IconInstagram() {
   );
 }
 
-function IconYoutube() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-    </svg>
-  );
-}
-
 function IconLinkedin() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
       <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.74a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z" />
-    </svg>
-  );
-}
-
-function IconX() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z" />
     </svg>
   );
 }
@@ -370,7 +346,7 @@ function DropdownCardModal({
         className="
           fixed top-[72px] z-[99]
           left-1/2 w-full max-w-[1920px] -translate-x-1/2
-          px-[110px] max-[1536px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]
+          px-[clamp(24px,13.333vw,256px)]
           transition-all duration-300 ease-out
           animate-in fade-in zoom-in-95
         "
@@ -434,7 +410,7 @@ function DropdownCardModal({
 
             <div className="flex items-center gap-[23px] text-[#838383] [&_svg]:w-[21px] [&_svg]:h-[21px]">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
@@ -443,16 +419,7 @@ function DropdownCardModal({
                 <IconInstagram />
               </a>
               <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="YouTube"
-                className="transition-colors hover:text-[#101010]"
-              >
-                <IconYoutube />
-              </a>
-              <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/arsalynk-group/"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
@@ -461,16 +428,7 @@ function DropdownCardModal({
                 <IconLinkedin />
               </a>
               <a
-                href="https://x.com"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="X / Twitter"
-                className="transition-colors hover:text-[#101010]"
-              >
-                <IconX />
-              </a>
-              <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/share/1bbYtBuoUd/"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Facebook"
@@ -1093,6 +1051,7 @@ export default function Navbar() {
             className={`
               hidden
               h-[40px]
+              cursor-pointer
               shrink-0
               items-center
               justify-self-end
@@ -1293,13 +1252,7 @@ export default function Navbar() {
           <MobileAccordion
             id="insight"
             label="Insight & Programs"
-            links={[
-              {
-                name: 'View All Insight & Programs',
-                href: '/insight-programs',
-              },
-              ...INSIGHT_LINKS,
-            ]}
+            links={INSIGHT_LINKS}
             activeDropdown={activeDropdown}
             setActiveDropdown={setActiveDropdown}
             closeMenu={closeMobileMenu}

@@ -7,7 +7,7 @@ const ABOUT_CARDS = [
     href: '/about-us/corporate-profile',
     title: <>Corporate<br />Profile</>,
     alt: 'Corporate Profile',
-    image: '/images/about-us/corporate-profile.png',
+    image: '/images/shared/corporate-profile-card.webp',
     imageClassName: 'h-[564px] w-[564px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
     shade: 'bg-black/20',
     gradientClassName: 'inset-0 bg-gradient-to-t from-black to-transparent',
@@ -16,7 +16,7 @@ const ABOUT_CARDS = [
     href: '/about-us/company-leadership',
     title: <>Company<br />Leadership</>,
     alt: 'Company Leadership',
-    image: '/images/about-us/company-leadership.png',
+    image: '/images/shared/leadership-portrait.webp',
     imageClassName: 'h-[659px] w-[659px] left-[-56.5px] top-[-111.5px]',
     shade: 'bg-black/30',
     gradientClassName: 'left-0 right-0 bottom-0 h-[301px] bg-gradient-to-t from-black to-transparent',
@@ -25,7 +25,7 @@ const ABOUT_CARDS = [
     href: '/about-us/ecosystem-philosophy',
     title: <>Ecosystem<br />Philosophy</>,
     alt: 'Ecosystem Philosophy',
-    image: '/images/about-us/ecosystem-philosophy.png',
+    image: '/images/shared/ecosystem-philosophy-card.webp',
     imageClassName: 'h-[670px] w-[670px] left-[-58px] top-[-108px]',
     shade: 'bg-black/20',
     gradientClassName: 'left-0 right-0 bottom-0 h-[301px] bg-gradient-to-t from-black to-transparent',
@@ -64,7 +64,7 @@ export default function AboutUsPage() {
         {/* Primary infinity artwork: Figma rect 2707 × 975 at y = -39.
             Relative to the already-rendered 90px navbar, its top becomes -129px. */}
         <img
-          src="/image/about-us/hero-infinity.png"
+          src="/image/about-us/hero-infinity.webp"
           alt=""
           aria-hidden="true"
           draggable={false}
@@ -73,7 +73,7 @@ export default function AboutUsPage() {
 
         {/* Transparent network dome from the supplied SVG */}
         <img
-          src="/images/about-us/hero-network.png"
+          src="/images/shared/network-overlay.webp"
           alt=""
           aria-hidden="true"
           draggable={false}
@@ -98,7 +98,7 @@ export default function AboutUsPage() {
 
         {/* Hero copy: y = 287px in the 800px master frame, or 197px below navbar */}
         <div className="absolute left-1/2 top-[197px] z-10 flex w-[766px] -translate-x-1/2 flex-col items-center gap-6 text-center max-[1024px]:top-[170px] max-[1024px]:w-[720px] max-[768px]:top-[124px] max-[768px]:w-full max-[768px]:gap-[18px] max-[768px]:px-6">
-          <div className="font-body text-[14px] font-bold leading-[130%] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[12px]">
+          <div className="font-body text-[9px] font-bold leading-[130%] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[8px]">
             HOME&nbsp;&nbsp;&gt;&nbsp;&nbsp;ABOUT US
           </div>
 

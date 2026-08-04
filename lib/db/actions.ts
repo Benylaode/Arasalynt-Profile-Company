@@ -7,6 +7,22 @@ import { getDb } from './db';
 import type { BusinessPage, BusinessRow, OtherBusiness } from '@/lib/business.types';
 import { BUSINESS_DUMMY_DATA } from './dummy';
 
+function optionalText(value: string | null | undefined): string | undefined {
+  const normalized = value?.trim();
+  return normalized || undefined;
+}
+
+function parseJsonArray<T>(value: string, field: string, slug: string): T[] {
+  try {
+    const parsed: unknown = JSON.parse(value);
+    if (Array.isArray(parsed)) return parsed as T[];
+  } catch (error) {
+    console.error(`[db] Invalid ${field} JSON for business "${slug}".`, error);
+  }
+
+  return [];
+}
+
 /* ── Helper: transform DB row → BusinessPage ── */
 function rowToBusinessPage(row: BusinessRow): BusinessPage {
   return {
@@ -30,10 +46,10 @@ function rowToBusinessPage(row: BusinessRow): BusinessPage {
     visionTextSize: row.vision_text_size || undefined,
     ctaTitle: row.cta_title,
     ctaDesc: row.cta_desc,
-    ctaPrimaryLabel: row.cta_primary_label || undefined,
-    ctaPrimaryHref: row.cta_primary_href || undefined,
-    ctaSecondaryLabel: row.cta_secondary_label || undefined,
-    ctaSecondaryHref: row.cta_secondary_href || undefined,
+    ctaPrimaryLabel: optionalText(row.cta_primary_label),
+    ctaPrimaryHref: optionalText(row.cta_primary_href),
+    ctaSecondaryLabel: optionalText(row.cta_secondary_label),
+    ctaSecondaryHref: optionalText(row.cta_secondary_href),
     painPointsTitle: row.pain_points_title || undefined,
     painPointsLabel: row.pain_points_label || undefined,
     servicesTitle: row.services_title || undefined,
@@ -49,18 +65,15 @@ function rowToBusinessPage(row: BusinessRow): BusinessPage {
     servicesBg: row.services_bg || undefined,
     visionImg: row.vision_img || undefined,
     ctaImg: row.cta_img || undefined,
-    painPoints: JSON.parse(row.pain_points),
-    services: JSON.parse(row.services),
-    works: JSON.parse(row.works),
-    otherBusinesses: JSON.parse(row.other_businesses),
+    painPoints: parseJsonArray(row.pain_points, 'pain_points', row.slug),
+    services: parseJsonArray(row.services, 'services', row.slug),
+    works: parseJsonArray(row.works, 'works', row.slug),
+    otherBusinesses: parseJsonArray(row.other_businesses, 'other_businesses', row.slug),
   };
 }
 
 /* ── Get single business by slug ── */
 export function getBusinessBySlug(slug: string): BusinessPage | null {
-  const dummyBiz = BUSINESS_DUMMY_DATA.find((b) => b.slug === slug);
-  if (dummyBiz) return dummyBiz;
-
   try {
     const db = getDb();
     const row = db
@@ -68,19 +81,15 @@ export function getBusinessBySlug(slug: string): BusinessPage | null {
       .get(slug) as BusinessRow | undefined;
 
     if (row) return rowToBusinessPage(row);
-  } catch {
-    // Ignore DB errors
+  } catch (error) {
+    console.error(`[db] Failed to fetch business "${slug}".`, error);
   }
 
-  return null;
+  return BUSINESS_DUMMY_DATA.find((business) => business.slug === slug) ?? null;
 }
 
 /* ── Get all businesses (untuk index page & generateStaticParams) ── */
 export function getAllBusinesses(): BusinessPage[] {
-  if (BUSINESS_DUMMY_DATA && BUSINESS_DUMMY_DATA.length > 0) {
-    return BUSINESS_DUMMY_DATA;
-  }
-
   try {
     const db = getDb();
     const rows = db
@@ -90,19 +99,15 @@ export function getAllBusinesses(): BusinessPage[] {
     if (rows.length > 0) {
       return rows.map(rowToBusinessPage);
     }
-  } catch {
-    // Ignore
+  } catch (error) {
+    console.error('[db] Failed to fetch businesses.', error);
   }
 
-  return [];
+  return BUSINESS_DUMMY_DATA;
 }
 
 /* ── Get all slugs only (lightweight, untuk generateStaticParams) ── */
 export function getAllBusinessSlugs(): string[] {
-  if (BUSINESS_DUMMY_DATA && BUSINESS_DUMMY_DATA.length > 0) {
-    return BUSINESS_DUMMY_DATA.map((b) => b.slug);
-  }
-
   try {
     const db = getDb();
     const rows = db
@@ -110,8 +115,9 @@ export function getAllBusinessSlugs(): string[] {
       .all() as Pick<BusinessRow, 'slug'>[];
 
     return rows.map((r) => r.slug);
-  } catch {
-    return [];
+  } catch (error) {
+    console.error('[db] Failed to fetch business slugs.', error);
+    return BUSINESS_DUMMY_DATA.map((business) => business.slug);
   }
 }
 
@@ -120,24 +126,36 @@ export function getOtherBusinesses(
   currentSlug: string,
   limit = 3,
 ): OtherBusiness[] {
-  const db = getDb();
-  const rows = db
-    .prepare(
-      `SELECT slug, name, hero_img as img
-       FROM businesses
-       WHERE slug != ?
-       ORDER BY RANDOM()
-       LIMIT ?`,
-    )
-    .all(currentSlug, limit) as { slug: string; name: string; img: string }[];
+  try {
+    const db = getDb();
+    const rows = db
+      .prepare(
+        `SELECT slug, name, hero_img as img
+         FROM businesses
+         WHERE slug != ?
+         ORDER BY RANDOM()
+         LIMIT ?`,
+      )
+      .all(currentSlug, limit) as { slug: string; name: string; img: string }[];
 
-  return rows.map((r) => ({ slug: r.slug, name: r.name, img: r.img }));
+    return rows.map((r) => ({ slug: r.slug, name: r.name, img: r.img }));
+  } catch (error) {
+    console.error('[db] Failed to fetch other businesses.', error);
+    return BUSINESS_DUMMY_DATA
+      .filter((business) => business.slug !== currentSlug)
+      .slice(0, limit)
+      .map((business) => ({
+        slug: business.slug,
+        name: business.name,
+        img: business.heroImg,
+      }));
+  }
 }
 
 /* ── Get hero slides from SQLite DB (dengan fallback ke dummy) ── */
-import type { HeroSlide } from '@/types';
+import type { HeroSlide, CaseStudyArticle, LeadershipThoughtArticle } from '@/types';
 import type { HeroSlideRow } from '@/lib/business.types';
-import { HERO_SLIDES_DUMMY_DATA } from './dummy';
+import { HERO_SLIDES_DUMMY_DATA, CASE_STUDIES_DUMMY_DATA, LEADERSHIP_THOUGHTS_DUMMY_DATA } from './dummy';
 
 export function getHeroSlides(): HeroSlide[] {
   try {
@@ -170,3 +188,112 @@ export function getHeroSlides(): HeroSlide[] {
   }
 }
 
+/* ── Case Studies Query Functions ── */
+export function getAllCaseStudies(): CaseStudyArticle[] {
+  try {
+    const db = getDb();
+    const rows = db.prepare('SELECT * FROM case_studies ORDER BY id ASC').all() as any[];
+    if (rows && rows.length > 0) {
+      return rows.map((r) => ({
+        id: r.id,
+        slug: r.slug,
+        title: r.title,
+        category: r.category,
+        tags: JSON.parse(r.tags),
+        dateLabel: r.date_label,
+        dateValue: r.date_value,
+        description: r.description,
+        coverImage: r.cover_image,
+        coverImageAlt: r.cover_image_alt,
+        sections: JSON.parse(r.sections),
+      }));
+    }
+  } catch {
+    // Fallback to dummy data
+  }
+  return CASE_STUDIES_DUMMY_DATA;
+}
+
+export function getCaseStudyBySlug(slug: string): CaseStudyArticle | null {
+  const found = CASE_STUDIES_DUMMY_DATA.find((c) => c.slug === slug);
+  if (found) return found;
+
+  try {
+    const db = getDb();
+    const r = db.prepare('SELECT * FROM case_studies WHERE slug = ?').get(slug) as any;
+    if (r) {
+      return {
+        id: r.id,
+        slug: r.slug,
+        title: r.title,
+        category: r.category,
+        tags: JSON.parse(r.tags),
+        dateLabel: r.date_label,
+        dateValue: r.date_value,
+        description: r.description,
+        coverImage: r.cover_image,
+        coverImageAlt: r.cover_image_alt,
+        sections: JSON.parse(r.sections),
+      };
+    }
+  } catch {
+    // Fallback
+  }
+  return null;
+}
+
+/* ── Leadership Thoughts Query Functions ── */
+export function getAllLeadershipThoughts(): LeadershipThoughtArticle[] {
+  try {
+    const db = getDb();
+    const rows = db.prepare('SELECT * FROM leadership_thoughts ORDER BY id ASC').all() as any[];
+    if (rows && rows.length > 0) {
+      return rows.map((r) => ({
+        id: r.id,
+        slug: r.slug,
+        title: r.title,
+        category: r.category,
+        tags: JSON.parse(r.tags),
+        author: r.author,
+        readTime: r.read_time,
+        date: r.date,
+        description: r.description,
+        coverImage: r.cover_image,
+        coverImageAlt: r.cover_image_alt,
+        sections: JSON.parse(r.sections),
+      }));
+    }
+  } catch {
+    // Fallback to dummy data
+  }
+  return LEADERSHIP_THOUGHTS_DUMMY_DATA;
+}
+
+export function getLeadershipThoughtBySlug(slug: string): LeadershipThoughtArticle | null {
+  const found = LEADERSHIP_THOUGHTS_DUMMY_DATA.find((t) => t.slug === slug);
+  if (found) return found;
+
+  try {
+    const db = getDb();
+    const r = db.prepare('SELECT * FROM leadership_thoughts WHERE slug = ?').get(slug) as any;
+    if (r) {
+      return {
+        id: r.id,
+        slug: r.slug,
+        title: r.title,
+        category: r.category,
+        tags: JSON.parse(r.tags),
+        author: r.author,
+        readTime: r.read_time,
+        date: r.date,
+        description: r.description,
+        coverImage: r.cover_image,
+        coverImageAlt: r.cover_image_alt,
+        sections: JSON.parse(r.sections),
+      };
+    }
+  } catch {
+    // Fallback
+  }
+  return null;
+}

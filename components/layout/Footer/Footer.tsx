@@ -15,8 +15,8 @@ const ABOUT_LINKS = [
 ];
 
 const INSIGHT_LINKS = [
-  { name: 'Thought Leadership', href: '/leadership-thoughts' },
-  { name: 'Case Studies', href: '/insight-programs' },
+  { name: 'Thought Leadership', href: '/insight-programs/leadership-thoughts' },
+  { name: 'Case Studies', href: '/insight-programs/Case-Studies' },
 ];
 
 const MEDIA_LINKS = [
@@ -68,22 +68,10 @@ const InstagramIcon = () => (
   </svg>
 );
 
-const YoutubeIcon = () => (
-  <svg aria-hidden="true" viewBox="1536.913 893.098 26.174 26.174" className="h-[19px] w-[19px]">
-    <path fill="currentColor" d="M1550.08 896.368H1550.23C1551.57 896.373 1558.39 896.422 1560.23 896.916C1560.78 897.066 1561.29 897.36 1561.69 897.768C1562.1 898.176 1562.39 898.683 1562.54 899.239C1562.71 899.86 1562.82 900.683 1562.9 901.532L1562.92 901.702L1562.95 902.128L1562.97 902.298C1563.07 903.793 1563.08 905.193 1563.09 905.499V905.622C1563.08 905.939 1563.07 907.434 1562.95 908.992L1562.94 909.163L1562.92 909.334C1562.84 910.269 1562.72 911.198 1562.54 911.882C1562.39 912.438 1562.1 912.945 1561.69 913.353C1561.29 913.76 1560.78 914.054 1560.23 914.205C1558.33 914.716 1551.11 914.752 1550.12 914.753H1549.88C1549.38 914.753 1547.29 914.743 1545.1 914.668L1544.82 914.658L1544.67 914.652L1544.39 914.64L1544.12 914.629C1542.3 914.549 1540.57 914.419 1539.77 914.204C1539.22 914.053 1538.71 913.759 1538.31 913.352C1537.9 912.945 1537.61 912.438 1537.46 911.882C1537.28 911.2 1537.16 910.269 1537.07 909.334L1537.06 909.162L1537.05 908.992C1536.97 907.883 1536.92 906.772 1536.91 905.661V905.46C1536.92 905.108 1536.93 903.893 1537.02 902.551L1537.03 902.383L1537.04 902.298L1537.05 902.128L1537.08 901.702L1537.1 901.532C1537.18 900.683 1537.3 899.859 1537.46 899.239C1537.61 898.683 1537.9 898.176 1538.31 897.768C1538.71 897.36 1539.22 897.066 1539.78 896.916C1540.57 896.703 1542.3 896.572 1544.12 896.49L1544.39 896.479L1544.68 896.469L1544.82 896.464L1545.1 896.453C1546.65 896.403 1548.21 896.375 1549.77 896.369L1550.08 896.368ZM1547.38 901.619V909.5L1554.18 905.561L1547.38 901.619Z" />
-  </svg>
-);
-
 const LinkedinIcon = () => (
   <svg aria-hidden="true" viewBox="1612.913 893.098 26.174 26.174" className="h-[19px] w-[19px]">
     <path fill="currentColor" d="M1618.35 900.949C1619.66 900.949 1620.73 899.88 1620.73 898.562C1620.73 897.245 1619.66 896.176 1618.35 896.176C1617.03 896.176 1615.96 897.245 1615.96 898.562C1615.96 899.88 1617.03 900.949 1618.35 900.949Z" />
     <path fill="currentColor" d="M1622.99 902.753V915.992H1627.1V909.445C1627.1 907.718 1627.42 906.045 1629.56 906.045C1631.68 906.045 1631.7 908.02 1631.7 909.554V915.993H1635.82V908.733C1635.82 905.167 1635.05 902.426 1630.88 902.426C1628.88 902.426 1627.54 903.524 1626.99 904.564H1626.93V902.753H1622.99ZM1616.29 902.753H1620.41V915.992H1616.29V902.753Z" />
-  </svg>
-);
-
-const XIcon = () => (
-  <svg aria-hidden="true" viewBox="1688.913 893.098 26.174 26.174" className="h-[19px] w-[19px]">
-    <path fill="currentColor" d="M1708.38 895.497H1711.79L1704.35 904.02L1713.1 915.621H1706.25L1700.88 908.586L1694.74 915.621H1691.33L1699.29 906.501L1690.9 895.498H1697.92L1702.77 901.927L1708.38 895.497ZM1707.19 913.578H1709.07L1696.89 897.433H1694.87L1707.19 913.578Z" />
   </svg>
 );
 
@@ -242,12 +230,10 @@ export default function Footer() {
             © 2026 PT Sinergi Muda Arsa
           </p>
 
-          <div className="flex h-[46px] w-[263px] items-center gap-[9px] max-[767px]:h-auto max-[767px]:w-auto max-[767px]:gap-[3px]">
-            <SocialLink href="https://instagram.com" label="Instagram"><InstagramIcon /></SocialLink>
-            <SocialLink href="https://youtube.com" label="YouTube"><YoutubeIcon /></SocialLink>
-            <SocialLink href="https://linkedin.com" label="LinkedIn"><LinkedinIcon /></SocialLink>
-            <SocialLink href="https://x.com" label="X"><XIcon /></SocialLink>
-            <SocialLink href="https://facebook.com" label="Facebook"><FacebookIcon /></SocialLink>
+          <div className="flex h-[46px] w-auto items-center gap-[9px] max-[767px]:h-auto max-[767px]:gap-[3px]">
+            <SocialLink href="https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz" label="Instagram"><InstagramIcon /></SocialLink>
+            <SocialLink href="https://www.linkedin.com/company/arsalynk-group/" label="LinkedIn"><LinkedinIcon /></SocialLink>
+            <SocialLink href="https://www.facebook.com/share/1bbYtBuoUd/" label="Facebook"><FacebookIcon /></SocialLink>
           </div>
         </div>
       </div>

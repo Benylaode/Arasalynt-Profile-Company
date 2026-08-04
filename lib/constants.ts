@@ -53,21 +53,21 @@ export const FEATURE_CARDS: FeatureCard[] = [
     title: 'Flexible Resilient Technology Infrastructure',
     description:
       'Build systems that adapt to changing demands while maintaining peak performance and reliability across all operations.',
-    imageSrc: '/images/sections/feature-infrastructure.png',
+    imageSrc: '/images/sections/feature-infrastructure.webp',
   },
   {
     id: 2,
     title: 'Driven by Strategic Intelligence',
     description:
       'Leverage data-driven insights and strategic analysis to make informed decisions that accelerate business growth.',
-    imageSrc: '/images/sections/feature-intelligence.png',
+    imageSrc: '/images/sections/feature-intelligence.webp',
   },
   {
     id: 3,
     title: 'Designed for Long Lasting Impact',
     description:
       'Create sustainable solutions built to evolve with your business, ensuring long-term value and continuous improvement.',
-    imageSrc: '/images/sections/feature-impact.png',
+    imageSrc: '/images/sections/feature-impact.webp',
   },
 ];
 
@@ -88,28 +88,28 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Sinar Prio Marketplace Website',
     category: 'Web Development',
     description: 'Full-featured marketplace platform with integrated payment system and real-time inventory management.',
-    imageSrc: '/images/projects/project-1.png',
+    imageSrc: '/images/projects/project-1.webp',
   },
   {
     id: 2,
     title: 'Enterprise Dashboard',
     category: 'Web Application',
     description: 'Comprehensive analytics dashboard for enterprise resource management and business intelligence.',
-    imageSrc: '/images/projects/project-2.png',
+    imageSrc: '/images/projects/project-2.webp',
   },
   {
     id: 3,
     title: 'Mobile Commerce App',
     category: 'Mobile Development',
     description: 'Cross-platform mobile commerce application with seamless user experience and secure transactions.',
-    imageSrc: '/images/projects/project-3.png',
+    imageSrc: '/images/projects/project-3.webp',
   },
   {
     id: 4,
     title: 'Corporate Website Redesign',
     category: 'Web Design',
     description: 'Complete brand overhaul and website redesign delivering modern aesthetics with improved conversion.',
-    imageSrc: '/images/projects/project-4.png',
+    imageSrc: '/images/projects/project-4.webp',
   },
 ];
 

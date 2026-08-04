@@ -25,17 +25,17 @@ const IconSliderArrow = ({ direction }: { direction: 'left' | 'right' }) => (
 
 const FOUNDATION_SLIDES = [
   {
-    src: '/images/corporate-profile/team-discussion.png',
+    src: '/images/corporate-profile/team-discussion.webp',
     alt: 'Arsalynk team discussing a project',
     position: 'center 47%',
   },
   {
-    src: '/images/corporate-profile/team-collaboration.png',
+    src: '/images/corporate-profile/team-collaboration.webp',
     alt: 'Arsalynk team collaborating around a laptop',
     position: 'center 56%',
   },
   {
-    src: '/images/corporate-profile/team-event.png',
+    src: '/images/corporate-profile/team-event.webp',
     alt: 'Arsalynk team at a company event',
     position: 'center 52%',
   },
@@ -44,22 +44,22 @@ const FOUNDATION_SLIDES = [
 const SERVICES = [
   {
     title: ['Enterprise Data', '& Intelligence'],
-    image: '/images/corporate-profile/service-data.png',
+    image: '/images/corporate-profile/service-data.webp',
     alt: 'Enterprise data and intelligence illustration',
   },
   {
     title: ['Customer', 'Acquisition'],
-    image: '/images/corporate-profile/service-data.png',
+    image: '/images/corporate-profile/service-data.webp',
     alt: 'Customer acquisition illustration',
   },
   {
     title: ['Mission-Critical', 'Broadcast'],
-    image: '/images/corporate-profile/service-broadcast.png',
+    image: '/images/corporate-profile/service-broadcast.webp',
     alt: 'Mission-critical broadcast illustration',
   },
   {
     title: ['Integrated', 'Execution'],
-    image: '/images/corporate-profile/service-execution.png',
+    image: '/images/corporate-profile/service-execution.webp',
     alt: 'Integrated execution illustration',
   },
 ];
@@ -68,13 +68,13 @@ const OTHER_INFORMATION = [
   {
     href: '/about-us/company-leadership',
     title: 'Company Leadership',
-    image: '/images/corporate-profile/company-leadership.png',
+    image: '/images/shared/leadership-portrait.webp',
     imagePosition: 'center 53%',
   },
   {
     href: '/about-us/ecosystem-philosophy',
     title: 'Ecosystem Philosophy',
-    image: '/images/corporate-profile/ecosystem-philosophy.png',
+    image: '/images/shared/ecosystem-philosophy-card.webp',
     imagePosition: 'center center',
   },
 ];
@@ -142,7 +142,7 @@ export default function CorporateProfilePage() {
         className="relative h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#050914] max-[640px]:rounded-b-[24px]"
       >
         <img
-          src="/images/corporate-profile/hero-globe.png"
+          src="/images/corporate-profile/hero-globe.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-1/2 h-auto w-[127.76vw] max-w-none -translate-x-1/2 -translate-y-[71.4%] select-none max-[768px]:h-full max-[768px]:w-auto max-[768px]:min-w-full max-[768px]:-translate-y-1/2 max-[768px]:object-cover max-[768px]:object-[center_60%]"
@@ -169,7 +169,7 @@ export default function CorporateProfilePage() {
         />
 
         <div className="absolute left-1/2 top-1/2 z-10 flex w-full max-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-6 text-center">
-          <p className="font-body text-[14px] font-bold leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[11px]">
+          <p className="font-body text-[6px] font-bold leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[5px]">
             HOME&nbsp;&nbsp;&gt;&nbsp;&nbsp;ABOUT US&nbsp;&nbsp;&gt;&nbsp;&nbsp;CORPORATE PROFILE
           </p>
           <h1 className="font-heading text-[clamp(56px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
@@ -263,7 +263,7 @@ export default function CorporateProfilePage() {
       {/* VISION & MISSION */}
       <section className="relative w-full overflow-hidden bg-[linear-gradient(180deg,#101010_0%,#1A3E9E_95.29%)] px-[clamp(24px,13.333vw,256px)] py-[clamp(100px,8.54vw,164px)] text-white">
         <img
-          src="/images/corporate-profile/network-mesh.png"
+          src="/images/shared/network-overlay.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute bottom-[-31px] left-1/2 w-[103.02vw] max-w-none -translate-x-1/2 opacity-[0.30] mix-blend-screen"
@@ -291,7 +291,7 @@ export default function CorporateProfilePage() {
       {/* OUR CAPABILITIES */}
       <section className="relative w-full overflow-hidden bg-[#F7F7F7] px-[clamp(24px,5.729vw,110px)] py-[clamp(100px,8.125vw,156px)]">
         <img
-          src="/images/corporate-profile/network-mesh.png"
+          src="/images/shared/network-overlay.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-[-22%] w-[104%] max-w-none -translate-x-1/2 opacity-[0.09] mix-blend-multiply"

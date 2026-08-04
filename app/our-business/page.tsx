@@ -13,9 +13,9 @@ type Business = Awaited<ReturnType<typeof getAllBusinesses>>[number];
 
 /*
  * Simpan file hero hasil ekstraksi dari referensi SVG pada:
- * public/images/our-business/hero-business.png
+ * public/images/our-business/hero-business.webp
  */
-const HERO_IMAGE = '/images/our-business/hero-business.png';
+const HERO_IMAGE = '/images/our-business/hero-business.webp';
 
 const MEDIA_ORDER = [
   'loxlive',
@@ -210,7 +210,7 @@ export default async function OurBusinessPage() {
 
         <div className="absolute inset-0 z-[2] flex items-center justify-center px-6">
           <div className="flex w-full max-w-[766px] flex-col items-center gap-6 text-center max-[768px]:gap-[18px]">
-            <div className="flex items-center justify-center gap-2 font-body text-[14px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[11px]">
+            <div className="flex items-center justify-center gap-2 font-body text-[9px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
               <span>Home</span>
               <span aria-hidden="true">›</span>
               <span>Our Business</span>

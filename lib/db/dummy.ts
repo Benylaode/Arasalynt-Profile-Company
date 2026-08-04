@@ -4,7 +4,7 @@
    ========================================================================== */
 
 import type { BusinessPage } from '@/lib/business.types';
-import type { HeroSlide } from '@/types';
+import type { HeroSlide, CaseStudyArticle, LeadershipThoughtArticle } from '@/types';
 
 export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
   {
@@ -12,8 +12,8 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     headline: 'The Unified\nEnterprise Ecosystem',
     body:
       'Arsalynk connects technology, data, and media into one synchronized ecosystem\nthat helps enterprises solve complex business challenges.',
-    backgroundImage: '/images/hero/slide-01.webp',
-    mobileBackgroundImage: '/images/hero/slide-01-mobile.webp',
+    backgroundImage: '/images/shared/slide-01-mobile-38814c.webp',
+    mobileBackgroundImage: '/images/shared/slide-01-mobile-38814c.webp',
     backgroundPosition: 'center center',
     primaryCta: {
       label: 'OUR BUSINESS',
@@ -29,15 +29,15 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     headline: 'The Road of Tia Hendi, How\nWe Won The Council for Her',
     body:
       "Beginning with Tia Hendi's campaign as a candidate, we joined forces to win the trust of Semarang's citizens to win a seat in the Semarang City Council District.",
-    backgroundImage: '/images/hero/slide-02.webp',
-    mobileBackgroundImage: '/images/hero/slide-02-mobile.webp',
+    backgroundImage: '/images/shared/slide-02-mobile-838ce3.webp',
+    mobileBackgroundImage: '/images/shared/slide-02-mobile-838ce3.webp',
     backgroundPosition: 'center center',
     primaryCta: {
       label: 'READ MORE',
       href: '/insight-programs',
     },
     secondaryCta: {
-      label: 'EXPLORE OTHER WORKS',
+      label: 'EXPLORE WORKS',
       href: '/our-works',
     },
   },
@@ -46,8 +46,8 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     headline: 'Intelligent Technology for\nConnected Businesses',
     body:
       'Build a connected digital ecosystem that links physical devices with business applications.\nStreamline operations, automate workflows, and make faster decisions through real-time data.',
-    backgroundImage: '/images/hero/slide-03.webp',
-    mobileBackgroundImage: '/images/hero/slide-03-mobile.webp',
+    backgroundImage: '/images/shared/slide-03-mobile-2f3b2e.webp',
+    mobileBackgroundImage: '/images/shared/slide-03-mobile-2f3b2e.webp',
     backgroundPosition: 'center center',
     primaryCta: {
       label: 'LEARN MORE',
@@ -63,8 +63,8 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     headline: 'From Raw Data to\nStrategic Intelligence',
     body:
       'Collect, analyze, and transform continuous business information to uncover trends,\npredict outcomes, and support long-term organizational growth.',
-    backgroundImage: '/images/hero/slide-04.webp',
-    mobileBackgroundImage: '/images/hero/slide-04-mobile.webp',
+    backgroundImage: '/images/shared/slide-04-mobile-6f32fe.webp',
+    mobileBackgroundImage: '/images/shared/slide-04-mobile-6f32fe.webp',
     backgroundPosition: 'center center',
     primaryCta: {
       label: 'LEARN MORE',
@@ -201,6 +201,10 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaTitle: 'Explore the Kaluna Ecosystem',
   ctaDesc:
     'Transform your operations with connected technology, intelligent systems, and scalable digital solutions designed around your business.',
+  ctaPrimaryLabel: 'VISIT WEBSITE',
+  ctaPrimaryHref: 'http://www.kalunatechnology.com/',
+  ctaSecondaryLabel: 'EXPLORE WORKS',
+  ctaSecondaryHref: '#works',
 },
 
  {
@@ -214,7 +218,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   brandColor: '#2020D3',
 
   heroImg: '/images/our-business/artic-analytica/hero.webp',
-  heroOverlayImg: '/images/our-business/artic-analytica/hero-network-overlay.webp',
+  heroOverlayImg: '/images/shared/hero-network-overlay-4600c8.webp',
   aboutDesc:
     'Artic Analytica helps businesses unlock the full value of their data through advanced analytics, predictive modeling, and market research—turning complex information into actionable insights for smarter decision-making.',
   aboutImg: '/images/our-business/artic-analytica/about.webp',
@@ -277,7 +281,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   visionLabel: 'OUR VISION',
   visionQuote:
     'We envision a future where every business decision is driven by data, predictive insights, and intelligent research.',
-  visionImg: '/images/our-business/artic-analytica/vision-bg.webp',
+  visionImg: '/images/shared/hero-network-overlay-4600c8.webp',
 
   worksLabel: 'OUR PROJECTS',
   featuredWorkIndex: 1,
@@ -285,17 +289,17 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       name: 'Digital Media Production Platform',
       tag: 'Digital Platform',
-      img: '/images/our-business/artic-analytica/works/digital-media-platform.webp',
+      img: '/images/shared/performance-campaign-dashboard-caf797.webp',
     },
     {
       name: 'Sinau Print Marketplace Website',
       tag: 'Marketplace Website',
-      img: '/images/our-business/artic-analytica/works/sinau-print-marketplace.webp',
+      img: '/images/shared/sinau-print-marketplace.webp',
     },
     {
       name: 'X-1 Tire Company Profile Website',
       tag: 'Company Profile Website',
-      img: '/images/our-business/artic-analytica/works/x1-tire-website.webp',
+      img: '/images/shared/x1-tire-website.webp',
     },
   ],
 
@@ -310,7 +314,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       slug: 'loxlive',
       name: 'LoxLive',
-      img: '/images/our-business/artic-analytica/other-business-previews/loxlive.webp',
+      img: '/images/shared/loxlive-69e358.webp',
     },
     {
       slug: 'adsvar',
@@ -327,6 +331,10 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaTitle: 'See What Artic Analytica Can Do',
   ctaDesc:
     'Discover how research, analytics, and intelligent data can help your organization make clearer decisions and create measurable impact.',
+  ctaPrimaryLabel: 'VISIT WEBSITE',
+  ctaPrimaryHref: 'https://articanalytica.com/',
+  ctaSecondaryLabel: 'EXPLORE WORKS',
+  ctaSecondaryHref: '#works',
   ctaImg: '/images/our-business/artic-analytica/cta-bg.webp',
 },
 {
@@ -341,12 +349,12 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   logoMaxHeight: 80,
   brandColor: '#FF2828',
 
-  heroImg: '/images/our-business/loxlive/hero.webp',
-  heroOverlayImg: '/images/our-business/loxlive/hero-network-overlay.webp',
+  heroImg: '/images/shared/loxlive-69e358.webp',
+  heroOverlayImg: '/images/shared/hero-network-overlay-69f0f9.webp',
   heroObjectPosition: 'center top',
   aboutDesc:
     'LoxLive provides premium broadcast and livestreaming solutions that combine studio-grade production, reliable streaming infrastructure, and seamless event execution to deliver exceptional virtual experiences.',
-  aboutImg: '/images/our-business/loxlive/about.webp',
+  aboutImg: '/images/shared/about.webp',
   aboutObjectPosition: 'center',
 
   painPointsLabel: 'THE CHALLENGE',
@@ -395,13 +403,13 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       img: '/images/our-business/loxlive/services/interactive-event-experience.webp',
     },
   ],
-  servicesBg: '/images/our-business/loxlive/services-bg.webp',
+  servicesBg: '/images/shared/services-bg.webp',
 
   visionLabel: 'OUR VISION',
   visionTextSize: 'large',
   visionQuote:
     'We envision a future where virtual events are as immersive, engaging, and impactful as being there in person.',
-  visionImg: '/images/our-business/loxlive/vision-bg.webp',
+  visionImg: '/images/shared/hero-network-overlay-69f0f9.webp',
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore LoxLive’s Work',
@@ -410,17 +418,17 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       name: 'National Hybrid Event Livestream',
       tag: 'Broadcast Production',
-      img: '/images/our-business/loxlive/works/broadcast-streaming-platform.webp',
+      img: '/images/shared/performance-campaign-dashboard-caf797.webp',
     },
     {
       name: 'Sinau Print Marketplace Website',
       tag: 'Branding · Survey and Analytics',
-      img: '/images/our-business/loxlive/works/sinau-print-marketplace.webp',
+      img: '/images/shared/sinau-print-marketplace.webp',
     },
     {
       name: 'X-1 Tire Company Profile Website',
       tag: 'Website · Digital Experience',
-      img: '/images/our-business/loxlive/works/x1-tire-website.webp',
+      img: '/images/shared/x1-tire-website.webp',
     },
   ],
 
@@ -430,29 +438,29 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       slug: 'personice',
       name: 'Personice',
-      img: '/images/our-business/loxlive/other-business-previews/personice.webp',
+      img: '/images/shared/personice.webp',
     },
     {
       slug: 'loxlive',
       name: 'LoxLive',
-      img: '/images/our-business/loxlive/other-business-previews/loxlive.webp',
+      img: '/images/shared/loxlive.webp',
     },
     {
       slug: 'adsvar',
       name: 'Adsvar',
-      img: '/images/our-business/loxlive/other-business-previews/adsvar.webp',
+      img: '/images/shared/adsvar.webp',
     },
     {
       slug: 'seveny',
       name: 'Seveny',
-      img: '/images/our-business/loxlive/other-business-previews/seveny.webp',
+      img: '/images/shared/seveny.webp',
     },
   ],
 
   ctaTitle: 'Let’s Start Your Quality Streaming Event',
   ctaDesc:
     'Bring your next event to life with reliable broadcast production, professional infrastructure, and a seamless livestream experience from preparation to delivery.',
-  ctaImg: '/images/our-business/loxlive/cta-bg.webp',
+  ctaImg: '/images/shared/cta-bg.webp',
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
@@ -471,7 +479,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   brandColor: '#544D4D',
 
   heroImg: '/images/our-business/the-drafroom/hero.webp',
-  heroOverlayImg: '/images/our-business/the-drafroom/hero-network-overlay.webp',
+  heroOverlayImg: '/images/shared/hero-network-overlay-69f0f9.webp',
   heroObjectPosition: 'center',
   aboutDesc:
     'The Drafroom helps businesses transform their brand identity into a strategic competitive advantage through research-driven branding, premium design, and compelling visual communication.',
@@ -524,13 +532,13 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       img: '/images/our-business/the-drafroom/services/corporate-communication.webp',
     },
   ],
-  servicesBg: '/images/our-business/the-drafroom/services-bg.webp',
+  servicesBg: '/images/shared/services-bg.webp',
 
   visionLabel: 'OUR VISION',
   visionTextSize: 'large',
   visionQuote:
     'Help ambitious brands build iconic value that inspire trust, create lasting value, and stand the test of time.',
-  visionImg: '/images/our-business/the-drafroom/vision-bg.webp',
+  visionImg: '/images/shared/hero-network-overlay-69f0f9.webp',
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore The Drafroom’s Work',
@@ -539,17 +547,17 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       name: 'Integrated Brand Campaign Platform',
       tag: 'Brand Strategy · Digital Experience',
-      img: '/images/our-business/the-drafroom/works/brand-campaign-platform.webp',
+      img: '/images/shared/performance-campaign-dashboard-caf797.webp',
     },
     {
       name: 'Sinau Print Marketplace Website',
       tag: 'Branding · Survey and Analytics',
-      img: '/images/our-business/the-drafroom/works/sinau-print-marketplace.webp',
+      img: '/images/shared/sinau-print-marketplace.webp',
     },
     {
       name: 'X-1 Tire Company Profile Website',
       tag: 'Corporate Identity · Website',
-      img: '/images/our-business/the-drafroom/works/x1-tire-website.webp',
+      img: '/images/shared/x1-tire-website.webp',
     },
   ],
 
@@ -559,29 +567,29 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       slug: 'personice',
       name: 'Personice',
-      img: '/images/our-business/the-drafroom/other-business-previews/personice.webp',
+      img: '/images/shared/personice.webp',
     },
     {
       slug: 'loxlive',
       name: 'LoxLive',
-      img: '/images/our-business/the-drafroom/other-business-previews/loxlive.webp',
+      img: '/images/shared/loxlive.webp',
     },
     {
       slug: 'adsvar',
       name: 'Adsvar',
-      img: '/images/our-business/the-drafroom/other-business-previews/adsvar.webp',
+      img: '/images/shared/adsvar.webp',
     },
     {
       slug: 'seveny',
       name: 'Seveny',
-      img: '/images/our-business/the-drafroom/other-business-previews/seveny.webp',
+      img: '/images/shared/seveny.webp',
     },
   ],
 
   ctaTitle: 'Discover More with The Drafroom',
   ctaDesc:
     'Explore our branding expertise, creative capabilities, and strategic design solutions that help ambitious brands build recognition, relevance, and lasting value.',
-  ctaImg: '/images/our-business/the-drafroom/cta-bg.webp',
+  ctaImg: '/images/shared/cta-bg.webp',
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
@@ -600,7 +608,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   brandColor: '#101010',
 
   heroImg: '/images/our-business/ilusia/hero.webp',
-  heroOverlayImg: '/images/our-business/ilusia/hero-network-overlay.webp',
+  heroOverlayImg: '/images/shared/hero-network-overlay-69f0f9.webp',
   heroObjectPosition: 'center',
   aboutDesc:
     'Ilusia transforms complex products, services, and business concepts into engaging motion graphics and cinematic animations that communicate with clarity, impact, and purpose.',
@@ -659,7 +667,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   visionTextSize: 'large',
   visionQuote:
     'Powerful visual storytelling that transforms technical concepts into clear and engaging experiences.',
-  visionImg: '/images/our-business/ilusia/vision-bg.webp',
+  visionImg: '/images/shared/hero-network-overlay-69f0f9.webp',
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore Ilusia Studio’s Work',
@@ -668,17 +676,17 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       name: 'Live Event Motion Package',
       tag: 'Motion Graphics · Broadcast Visuals',
-      img: '/images/our-business/ilusia/works/live-event-motion-package.webp',
+      img: '/images/shared/performance-campaign-dashboard-caf797.webp',
     },
     {
       name: 'Sinau Print Marketplace Website',
       tag: 'Branding · Survey and Analytics',
-      img: '/images/our-business/ilusia/works/sinau-print-marketplace.webp',
+      img: '/images/shared/sinau-print-marketplace.webp',
     },
     {
       name: 'X-1 Tire Company Profile Website',
       tag: 'Product Visualization · Website',
-      img: '/images/our-business/ilusia/works/x1-tire-website.webp',
+      img: '/images/shared/x1-tire-website.webp',
     },
   ],
 
@@ -688,29 +696,29 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       slug: 'personice',
       name: 'Personice',
-      img: '/images/our-business/ilusia/other-business-previews/personice.webp',
+      img: '/images/shared/personice.webp',
     },
     {
       slug: 'loxlive',
       name: 'LoxLive',
-      img: '/images/our-business/ilusia/other-business-previews/loxlive.webp',
+      img: '/images/shared/loxlive.webp',
     },
     {
       slug: 'adsvar',
       name: 'Adsvar',
-      img: '/images/our-business/ilusia/other-business-previews/adsvar.webp',
+      img: '/images/shared/adsvar.webp',
     },
     {
       slug: 'seveny',
       name: 'Seveny',
-      img: '/images/our-business/ilusia/other-business-previews/seveny.webp',
+      img: '/images/shared/seveny.webp',
     },
   ],
 
   ctaTitle: 'Discover More with Ilusia Studio',
   ctaDesc:
     'Explore our motion expertise, creative capabilities, and visual storytelling solutions that transform complex ideas into clear and engaging experiences.',
-  ctaImg: '/images/our-business/ilusia/cta-bg.webp',
+  ctaImg: '/images/shared/cta-bg.webp',
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
@@ -730,11 +738,11 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   brandColor: '#101010',
 
   heroImg: '/images/our-business/adsvar/hero.webp',
-  heroOverlayImg: '/images/our-business/adsvar/hero-network-overlay.webp',
+  heroOverlayImg: '/images/shared/hero-network-overlay-69f0f9.webp',
   heroObjectPosition: 'center top',
   aboutDesc:
     'Adsvar helps businesses maximize advertising performance through data-driven strategies, precision targeting, and measurable campaign optimization that delivers real business outcomes.',
-  aboutImg: '/images/our-business/adsvar/about.webp',
+  aboutImg: '/images/shared/about.webp',
   aboutObjectPosition: 'center',
 
   painPointsLabel: 'THE CHALLENGE',
@@ -746,7 +754,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       desc: 'Low-performing spend and broad targeting make it difficult to turn advertising investment into meaningful results.',
     },
     {
-      icon: '/images/our-business/adsvar/icons/limited-production-quality.svg',
+      icon: '/images/shared/limited-production-quality.svg',
       title: 'Limited Production Quality',
       desc: 'Weak campaign assets and inconsistent execution reduce attention, credibility, and conversion potential.',
     },
@@ -783,13 +791,13 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       img: '/images/our-business/adsvar/services/campaign-management.webp',
     },
   ],
-  servicesBg: '/images/our-business/adsvar/services-bg.webp',
+  servicesBg: '/images/shared/services-bg.webp',
 
   visionLabel: 'OUR VISION',
   visionTextSize: 'large',
   visionQuote:
     'Data-driven advertising that transforms marketing investment into predictable customer acquisition, measurable outcomes, and long-term growth.',
-  visionImg: '/images/our-business/adsvar/vision-bg.webp',
+  visionImg: '/images/shared/hero-network-overlay-69f0f9.webp',
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore Adsvar’s Work',
@@ -798,17 +806,17 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       name: 'Performance Campaign Dashboard',
       tag: 'Paid Media · Campaign Analytics',
-      img: '/images/our-business/adsvar/works/performance-campaign-dashboard.webp',
+      img: '/images/shared/performance-campaign-dashboard-caf797.webp',
     },
     {
       name: 'Sinau Print Marketplace Website',
       tag: 'Branding · Survey and Analytics',
-      img: '/images/our-business/adsvar/works/sinau-print-marketplace.webp',
+      img: '/images/shared/sinau-print-marketplace.webp',
     },
     {
       name: 'X-1 Tire Company Profile Website',
       tag: 'Digital Campaign · Website',
-      img: '/images/our-business/adsvar/works/x1-tire-website.webp',
+      img: '/images/shared/x1-tire-website.webp',
     },
   ],
 
@@ -818,29 +826,29 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       slug: 'personice',
       name: 'Personice',
-      img: '/images/our-business/adsvar/other-business-previews/personice.webp',
+      img: '/images/shared/personice.webp',
     },
     {
       slug: 'loxlive',
       name: 'LoxLive',
-      img: '/images/our-business/adsvar/other-business-previews/loxlive.webp',
+      img: '/images/shared/loxlive.webp',
     },
     {
       slug: 'adsvar',
       name: 'Adsvar',
-      img: '/images/our-business/adsvar/other-business-previews/adsvar.webp',
+      img: '/images/shared/adsvar.webp',
     },
     {
       slug: 'seveny',
       name: 'Seveny',
-      img: '/images/our-business/adsvar/other-business-previews/seveny.webp',
+      img: '/images/shared/seveny.webp',
     },
   ],
 
   ctaTitle: 'Explore More Our Capability with Adsvar',
   ctaDesc:
     'Explore our performance marketing expertise, paid advertising solutions, and data-driven campaign capabilities designed to accelerate measurable business growth.',
-  ctaImg: '/images/our-business/adsvar/cta-bg.webp',
+  ctaImg: '/images/shared/cta-bg.webp',
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
@@ -860,7 +868,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   brandColor: '#0E1534',
 
   heroImg: '/images/our-business/personice/hero.webp',
-  heroOverlayImg: '/images/our-business/personice/hero-network-overlay.webp',
+  heroOverlayImg: '/images/shared/hero-network-overlay-62360c.webp',
   heroObjectPosition: 'center 40%',
   aboutDesc:
     'Personice helps organizations strengthen their public image, build executive credibility, and foster meaningful relationships through strategic public relations and talent management.',
@@ -876,7 +884,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       desc: 'Inconsistent exposure and unclear positioning make it difficult for the brand to earn attention and recognition.',
     },
     {
-      icon: '/images/our-business/personice/icons/limited-production-quality.svg',
+      icon: '/images/shared/limited-production-quality.svg',
       title: 'Limited Production Quality',
       desc: 'Weak communication materials and inconsistent execution can reduce credibility across public-facing channels.',
     },
@@ -913,13 +921,13 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       img: '/images/our-business/personice/services/crisis-management.webp',
     },
   ],
-  servicesBg: '/images/our-business/personice/services-bg.webp',
+  servicesBg: '/images/shared/services-bg.webp',
 
   visionLabel: 'OUR VISION',
   visionTextSize: 'large',
   visionQuote:
     'Authentic relationships, credible leadership, and strategic communication that strengthen reputation and create lasting public trust.',
-  visionImg: '/images/our-business/personice/vision-bg.webp',
+  visionImg: '/images/shared/hero-network-overlay-62360c.webp',
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore Personice’s Work',
@@ -928,17 +936,17 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       name: 'Strategic PR Campaign',
       tag: 'Public Relations · Brand Reputation',
-      img: '/images/our-business/personice/works/strategic-pr-campaign.webp',
+      img: '/images/shared/strategic-pr-campaign-ccd63a.webp',
     },
     {
       name: 'Sinau Print Marketplace Website',
       tag: 'Branding · Survey and Analytics',
-      img: '/images/our-business/personice/works/sinau-print-marketplace.webp',
+      img: '/images/shared/sinau-print-marketplace-76333edbd7.webp',
     },
     {
       name: 'X-1 Tire Company Profile Website',
       tag: 'Digital Campaign · Website',
-      img: '/images/our-business/personice/works/x1-tire-website.webp',
+      img: '/images/shared/x1-tire-website-c7f44b16ce.webp',
     },
   ],
 
@@ -948,29 +956,29 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       slug: 'personice',
       name: 'Personice',
-      img: '/images/our-business/personice/other-business-previews/personice.webp',
+      img: '/images/shared/personice-a6a6869660.webp',
     },
     {
       slug: 'loxlive',
       name: 'LoxLive',
-      img: '/images/our-business/personice/other-business-previews/loxlive.webp',
+      img: '/images/shared/loxlive-f0a3422706.webp',
     },
     {
       slug: 'adsvar',
       name: 'Adsvar',
-      img: '/images/our-business/personice/other-business-previews/adsvar.webp',
+      img: '/images/shared/adsvar-8828f15721.webp',
     },
     {
       slug: 'seveny',
       name: 'Seveny',
-      img: '/images/our-business/personice/other-business-previews/seveny.webp',
+      img: '/images/shared/seveny-937131ba40.webp',
     },
   ],
 
   ctaTitle: 'Discover PR & Executive Talent Management with Personice',
   ctaDesc:
     'Explore our public relations expertise, executive branding, and talent management solutions designed to build credibility, strengthen reputation, and create lasting public trust.',
-  ctaImg: '/images/our-business/personice/cta-bg.webp',
+  ctaImg: '/images/shared/cta-bg-debfb86c03.webp',
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
@@ -992,7 +1000,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   brandColor: '#101010',
 
   heroImg: '/images/our-business/seveny/hero.webp',
-  heroOverlayImg: '/images/our-business/seveny/hero-network-overlay.webp',
+  heroOverlayImg: '/images/shared/hero-network-overlay-62360c.webp',
   heroObjectPosition: 'center center',
   aboutDesc:
     'Seveny creates premium corporate events that combine innovative technology, immersive experiences, and seamless event management to deliver meaningful engagement beyond the venue.',
@@ -1045,13 +1053,13 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       img: '/images/our-business/seveny/services/event-analytics-insights.webp',
     },
   ],
-  servicesBg: '/images/our-business/seveny/services-bg.webp',
+  servicesBg: '/images/shared/services-bg.webp',
 
   visionLabel: 'OUR VISION',
   visionTextSize: 'large',
   visionQuote:
     'Corporate events that combine immersive experiences, intelligent technology, and meaningful engagement to create lasting business impact.',
-  visionImg: '/images/our-business/seveny/vision-bg.webp',
+  visionImg: '/images/shared/hero-network-overlay-62360c.webp',
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore Seveny’s Work',
@@ -1060,17 +1068,17 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       name: 'Signature Corporate Event Production',
       tag: 'Event Management · Experiential Production',
-      img: '/images/our-business/seveny/works/signature-event-production.webp',
+      img: '/images/shared/strategic-pr-campaign-ccd63a.webp',
     },
     {
       name: 'Sinau Print Marketplace Website',
       tag: 'Branding · Survey and Analytics',
-      img: '/images/our-business/seveny/works/sinau-print-marketplace.webp',
+      img: '/images/shared/sinau-print-marketplace-76333edbd7.webp',
     },
     {
       name: 'X-1 Tire Company Profile Website',
       tag: 'Digital Campaign · Website',
-      img: '/images/our-business/seveny/works/x1-tire-website.webp',
+      img: '/images/shared/x1-tire-website-c7f44b16ce.webp',
     },
   ],
 
@@ -1080,29 +1088,29 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       slug: 'personice',
       name: 'Personice',
-      img: '/images/our-business/seveny/other-business-previews/personice.webp',
+      img: '/images/shared/personice-a6a6869660.webp',
     },
     {
       slug: 'loxlive',
       name: 'LoxLive',
-      img: '/images/our-business/seveny/other-business-previews/loxlive.webp',
+      img: '/images/shared/loxlive-f0a3422706.webp',
     },
     {
       slug: 'adsvar',
       name: 'Adsvar',
-      img: '/images/our-business/seveny/other-business-previews/adsvar.webp',
+      img: '/images/shared/adsvar-8828f15721.webp',
     },
     {
       slug: 'seveny',
       name: 'Seveny',
-      img: '/images/our-business/seveny/other-business-previews/seveny.webp',
+      img: '/images/shared/seveny-937131ba40.webp',
     },
   ],
 
   ctaTitle: "Let's Create Your Next Signature Event",
   ctaDesc:
     'From concept and technology to production and guest experience, Seveny helps organizations create memorable events with clear purpose and lasting business impact.',
-  ctaImg: '/images/our-business/seveny/cta-bg.webp',
+  ctaImg: '/images/shared/cta-bg-debfb86c03.webp',
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
@@ -1134,3 +1142,687 @@ export const TESTIMONIALS_DUMMY_DATA = [
   },
 ];
 
+/* ─────────────────────────────────────────────────────────────────────────
+   CASE STUDIES DUMMY DATA
+   ───────────────────────────────────────────────────────────────────────── */
+const LEGACY_CASE_STUDIES_DUMMY_DATA: CaseStudyArticle[] = [
+  {
+    id: 1,
+    slug: 'delivering-a-seamless-national-badminton-championship-experience',
+    title: 'Delivering a Seamless National Badminton Championship Experience',
+    category: 'PROJECT STORIES',
+    tags: ['PADEL NASIONAL', 'LIVE STREAMING'],
+    dateLabel: 'DECEMBER 2025',
+    dateValue: '2025-12-20',
+    description: 'Organizing a national-scale sporting event requires seamless coordination, high-quality production, and reliable broadcast technology to ensure fans across the country can engage with the tournament.',
+    coverImage: '/images/shared/building-trust.webp',
+    coverImageAlt: 'Badminton Match Venue',
+    sections: [
+      {
+        mainTitle: 'Bringing Every Match to Audiences Nationwide',
+        paragraphs: [
+          'Organizing a national-scale sporting event requires seamless coordination, high-quality production, and reliable broadcast technology to ensure fans across the country can engage with the tournament. We partnered with the organizers to deliver a comprehensive live broadcasting and media production solution.',
+          'From ultra-low latency streaming pipelines to high-definition court coverage, our engineered workflow ensured zero interruptions during peak broadcast hours across mobile and desktop viewers.'
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200&auto=format&fit=crop',
+          alt: 'Broadcast Monitoring'
+        }
+      },
+      {
+        eyebrow: 'THE CHALLENGE',
+        mainTitle: 'Broadcasting Every Match Without Compromise',
+        paragraphs: [
+          'With multiple courts running simultaneously, our challenge was to ensure that not a single moment of action was missed. We deployed a robust, multi-court streaming architecture with centralized mixing and live graphics integration to provide a premium viewing experience comparable to international sports broadcasts.'
+        ]
+      },
+      {
+        eyebrow: 'OUR SOLUTION',
+        mainTitle: 'Professional Production From Court to Screen',
+        paragraphs: [],
+        subsections: [
+          {
+            subtitle: 'Multi-Camera Production',
+            content: 'Each court featured a dedicated multi-camera setup covering wide angles and tight action shots, seamlessly switching to capture player emotions, fast-paced rallies, and crucial referee decisions.'
+          },
+          {
+            subtitle: 'Live Broadcast Direction',
+            content: 'Our technical directors and producers worked in real-time to overlay scores, player statistics, and sponsor graphics, ensuring a continuous and highly professional output for the audience watching from home.'
+          }
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1601506521793-dc748fc80b67?q=80&w=1200&auto=format&fit=crop',
+          alt: 'Live Broadcast System Monitor'
+        }
+      },
+      {
+        eyebrow: 'THE RESULTS',
+        mainTitle: 'A Championship Experienced Beyond the Venue',
+        paragraphs: [
+          'The resulting production achieved record-breaking viewership numbers across online platforms. By delivering a flawless live stream, we helped expand the championship\'s reach far beyond the physical venue, bringing the excitement of national badminton directly to fans\' living rooms.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 2,
+    slug: 'how-we-built-an-election-data-tracking-system',
+    title: 'How We Built an Election Data Tracking System',
+    category: 'INSIGHT',
+    tags: ['DATA VISUALIZATION', 'PUBLIC SECTOR', 'REAL-TIME ANALYTICS'],
+    dateLabel: 'JANUARY 2024',
+    dateValue: '2024-01-15',
+    description: 'Discover how real-time data visualization and centralized reporting helped stakeholders monitor election progress with greater accuracy and speed.',
+    coverImage: '/images/insight-programs/case-studies/case-election-data.webp',
+    coverImageAlt: 'Digital technology and data visualization',
+    sections: [
+      {
+        mainTitle: 'Transforming Public Data Architecture Under High Demand',
+        paragraphs: [
+          'Elections demand total data integrity, ultra-low latency updates, and total transparency for thousands of simultaneous observers. We engineered a resilient data intake platform capable of parsing millions of incoming tally data points in real time.',
+          'By leveraging distributed validation nodes and encrypted sync pipelines, the platform maintained 99.999% uptime during peak transmission windows.'
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop',
+          alt: 'Data analytics dashboard'
+        }
+      },
+      {
+        mainTitle: 'Key Architecture & Security Highlights',
+        subsections: [
+          {
+            subtitle: 'Automated Anomaly Detection',
+            content: 'Machine-learning routines continuously cross-checked regional vote tallies against historical variances to highlight irregularities for human verification.'
+          },
+          {
+            subtitle: 'Interactive Dashboard Web Client',
+            content: 'Media outlets and election officials accessed customizable visualization portals with instant CSV export and live geospatial mapping features.'
+          }
+        ]
+      },
+      {
+        mainTitle: 'Measurable Impact and Public Trust',
+        paragraphs: [
+          'The system provided unprecedented visibility, cutting regional reporting delay from days to minutes while securing public confidence through transparent, audit-ready data tracks.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 3,
+    slug: 'modernizing-operations-with-enterprise-iot',
+    title: 'Modernizing Operations with Enterprise IoT',
+    category: 'INSIGHT',
+    tags: ['ENTERPRISE IOT', 'SMART INFRASTRUCTURE', 'AUTOMATION'],
+    dateLabel: 'DECEMBER 2025',
+    dateValue: '2025-12-18',
+    description: 'See how connected sensors and system integration transformed fragmented infrastructure into a unified real-time operational ecosystem.',
+    coverImage: '/images/insight-programs/case-studies/case-enterprise-iot.webp',
+    coverImageAlt: 'Team presenting an enterprise technology solution',
+    sections: [
+      {
+        mainTitle: 'Bridging Legacy Industrial Hardware with Cloud Intelligence',
+        paragraphs: [
+          'Industrial operations often suffer from operational blind spots caused by disconnected equipment and manual logging. We implemented a unified IoT telemetry network connecting thousands of edge devices to a centralized monitoring system.',
+          'Real-time metrics allow facility operators to anticipate equipment degradation, automate energy distribution, and reduce unplanned downtime.'
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop',
+          alt: 'Enterprise IoT system components'
+        }
+      },
+      {
+        mainTitle: 'Core Engineering Pillars',
+        subsections: [
+          {
+            subtitle: 'Edge Node Processing',
+            content: 'Smart gateway devices process sensor data locally to trigger immediate safety protocols before sending aggregated diagnostics to the cloud.'
+          },
+          {
+            subtitle: 'Predictive Maintenance Models',
+            content: 'By analyzing vibration, temperature, and power consumption trends, maintenance teams receive actionable alerts weeks before potential hardware failures.'
+          }
+        ]
+      },
+      {
+        mainTitle: 'Operational Results',
+        paragraphs: [
+          'Client facilities achieved a 35% reduction in maintenance costs and eliminated emergency operational shutdowns within six months of deployment.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 4,
+    slug: 'how-we-broadcasted-pbpi-sirnas-jawa-tengah',
+    title: 'How We Broadcasted PBPI Sirnas Jawa Tengah',
+    category: 'PROJECT STORIES',
+    tags: ['LIVE STREAMING', 'MULTI-CAMERA', 'SPORTS BROADCAST'],
+    dateLabel: 'DECEMBER 2025',
+    dateValue: '2025-12-12',
+    description: 'A behind-the-scenes look at how LOXLive delivered a seamless multi-camera livestream experience for one of Indonesia’s major badminton events.',
+    coverImage: '/images/insight-programs/case-studies/case-live-broadcast.webp',
+    coverImageAlt: 'Live multi-camera badminton broadcast monitor',
+    sections: [
+      {
+        mainTitle: 'Delivering Regional Tournament Coverage at Scale',
+        paragraphs: [
+          'PBPI Sirnas Jawa Tengah brought together top regional athletes across multiple courts. LOXLive delivered continuous live broadcasting across digital channels, ensuring fans didn\'t miss a single set.',
+          'Custom graphics packages, automated replay systems, and live commentator audio feeds provided a broadcast quality matching national television standards.'
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1599577180579-2470e8ed3233?q=80&w=1200&auto=format&fit=crop',
+          alt: 'Live tournament stream setup'
+        }
+      },
+      {
+        mainTitle: 'Key Broadcast Features',
+        subsections: [
+          {
+            subtitle: 'Dynamic Live Scoreboards',
+            content: 'Integrated with official referee scoring tablets to update court scores instantly on screen without manual operator delays.'
+          },
+          {
+            subtitle: 'Multi-Platform Distribution',
+            content: 'Simulcasted streams to YouTube, Facebook, and custom web portals with adaptive bitrate streaming for low-bandwidth mobile viewers.'
+          }
+        ]
+      }
+    ]
+  }
+];
+
+/* ─────────────────────────────────────────────────────────────────────────
+   LEADERSHIP THOUGHTS DUMMY DATA
+   ───────────────────────────────────────────────────────────────────────── */
+const LEGACY_LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
+  {
+    id: 1,
+    slug: 'building-high-performance-teams-starts-with-trust-not-control',
+    title: 'Building High-Performance Teams Starts with Trust, Not Control',
+    category: 'LEADERSHIP INSIGHTS',
+    tags: ['LEADERSHIP', 'CULTURE', 'MANAGEMENT'],
+    author: 'Arsalynt Executive Team',
+    readTime: '6 min read',
+    date: 'July 2026',
+    description: 'The most effective leaders don\'t manage from a position of authority — they create environments where trust becomes the operating system of performance.',
+    coverImage: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=1600&auto=format&fit=crop',
+    coverImageAlt: 'Silhouette of business people',
+    sections: [
+      {
+        mainTitle: 'Trust Begins with Clarity',
+        paragraphs: [
+          'A high-performance culture is not built on micromanagement or constant surveillance. It is built on trust, which stems from clarity of purpose, alignment of goals, and the empowerment of individuals to make decisions. When leaders focus on defining the "what" and the "why," leaving the "how" to their teams, they unlock unprecedented levels of innovation and ownership.',
+          'Trust is not a passive state; it requires active communication, vulnerability from leadership, and a safe environment where taking calculated risks is encouraged rather than penalized.'
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop',
+          alt: 'Team assembling puzzle'
+        }
+      },
+      {
+        mainTitle: 'Ownership Over Micromanagement',
+        paragraphs: [
+          'When individuals are given autonomy, they naturally assume greater responsibility. Leaders must shift their mindset from controlling outcomes to coaching their teams toward them. Providing regular, constructive feedback and removing roadblocks is far more effective than monitoring every step of the process.'
+        ]
+      },
+      {
+        mainTitle: 'Mistakes Are Opportunities to Improve',
+        subsections: [
+          {
+            subtitle: 'Psychological Safety',
+            content: 'A culture that fears failure is a culture that stagnates. High-performance teams understand that mistakes are an inevitable part of pushing boundaries. By conducting blameless post-mortems and focusing on systemic improvements rather than individual blame, organizations can turn failures into their most valuable learning opportunities.'
+          },
+          {
+            subtitle: 'Building Trust Through Transparency',
+            content: 'Transparency in decision-making, financial health, and company strategy eliminates rumors and builds a cohesive unit. When team members understand the broader context of their work, they are better equipped to make autonomous decisions that align with the organization\'s overarching goals.'
+          }
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1601506521793-dc748fc80b67?q=80&w=1200&auto=format&fit=crop',
+          alt: 'Leadership strategy session'
+        }
+      },
+      {
+        mainTitle: 'Sustaining Excellence Over Time',
+        paragraphs: [
+          'Ultimately, leadership is about serving those you lead. By cultivating a culture rooted in trust, respect, and continuous learning, leaders can build resilient teams capable of navigating uncertainty and achieving sustained excellence.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 2,
+    slug: 'why-we-prioritize-process-before-technology',
+    title: 'Why We Prioritize Process Before Technology',
+    category: 'STRATEGIC THINKING',
+    tags: ['STRATEGY', 'OPERATIONS', 'PROCESS DESIGN'],
+    author: 'Arsalynt Executive Team',
+    readTime: '5 min read',
+    date: 'June 2026',
+    description: 'Investing in technology without a solid operational foundation is like building a skyscraper on sand. Here\'s how we help organisations get the order right.',
+    coverImage: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1600&auto=format&fit=crop',
+    coverImageAlt: 'Strategy and workflow meeting',
+    sections: [
+      {
+        mainTitle: 'The Trap of Technological Automation',
+        paragraphs: [
+          'Organizations frequently fall into the trap of purchasing expensive software tools to solve operational friction. However, automating a flawed process only amplifies inefficiency.',
+          'Before writing a single line of code or deploying complex software architectures, leadership must first audit, streamline, and standardize core business workflows.'
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop',
+          alt: 'Business workflow audit'
+        }
+      },
+      {
+        mainTitle: 'The Three-Step Operational Framework',
+        subsections: [
+          {
+            subtitle: '1. Map the True Workflow',
+            content: 'Document step-by-step how work actually flows through teams, identifying hidden bottlenecks, duplicate approvals, and handoff delays.'
+          },
+          {
+            subtitle: '2. Eliminate Non-Value-Add Steps',
+            content: 'Strip away historical procedures that no longer serve a clear customer or business objective.'
+          },
+          {
+            subtitle: '3. Introduce Targeted Automation',
+            content: 'Only after the workflow is streamlined do we introduce custom technology solutions to automate repetitive manual tasks.'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 3,
+    slug: 'lessons-from-scaling-cross-functional-collaboration',
+    title: 'Lessons from Scaling Cross-Functional Collaboration',
+    category: 'ORGANISATIONAL GROWTH',
+    tags: ['GROWTH', 'COLLABORATION', 'SCALING'],
+    author: 'Arsalynt Executive Team',
+    readTime: '7 min read',
+    date: 'June 2026',
+    description: 'Scaling a business isn\'t just about hiring more people — it\'s about designing systems that allow teams across disciplines to work as one unified force.',
+    coverImage: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1600&auto=format&fit=crop',
+    coverImageAlt: 'Cross functional team collaboration',
+    sections: [
+      {
+        mainTitle: 'Dismantling Departmental Silos',
+        paragraphs: [
+          'As organizations grow, departments naturally tend to isolate themselves into functional silos. Engineering, design, marketing, and sales start measuring success against isolated KPIs rather than unified outcomes.',
+          'True cross-functional alignment requires shared incentives, transparent communication channels, and multidisciplinary project squads.'
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop',
+          alt: 'Team strategy workshop'
+        }
+      },
+      {
+        mainTitle: 'Best Practices for Interdisciplinary Teams',
+        subsections: [
+          {
+            subtitle: 'Shared North Star Metrics',
+            content: 'Align all team members behind singular business objectives rather than localized departmental goals.'
+          },
+          {
+            subtitle: 'Asynchronous Documentation Culture',
+            content: 'Maintain centralized, open-access documentation so information flows freely without requiring endless status meetings.'
+          }
+        ]
+      }
+    ]
+  }
+];
+
+/* Content aligned with the current Arsalynt project portfolio. */
+export const CASE_STUDIES_DUMMY_DATA: CaseStudyArticle[] = [
+  {
+    id: 1,
+    slug: 'producing-a-cinematic-portrait-of-padel-arena',
+    title: 'Producing a Cinematic Portrait of Padel Arena',
+    category: 'MEDIA & CREATIVE',
+    tags: ['VIDEO PRODUCTION', 'SPORTS', 'BRAND STORYTELLING'],
+    dateLabel: 'JULY 2026',
+    dateValue: '2026-07-18',
+    description: 'How a focused production system translated the energy, community, and visual identity of Padel Arena into a campaign-ready brand film.',
+    coverImage: '/images/projects/video-portret-padel-arena/1.webp',
+    coverImageAlt: 'Video portrait production at Padel Arena',
+    sections: [
+      {
+        eyebrow: 'PROJECT CONTEXT',
+        mainTitle: 'A Venue with Energy That Static Documentation Could Not Capture',
+        paragraphs: [
+          'Padel Arena needed a visual asset that could introduce the venue to new audiences while remaining useful across launch communication, social media, and partnership presentations.',
+          'The central challenge was balancing the speed of sport with a controlled premium image. Production also had to work around reflective glass, mixed venue lighting, limited reset time, and the natural rhythm of active players.'
+        ]
+      },
+      {
+        mainTitle: 'Turning a Sporting Venue into a Brand Story',
+        paragraphs: [
+          'The brief was not simply to document a venue. The film needed to communicate movement, atmosphere, and the sense of community that makes the arena distinctive.',
+          'LoxLive developed a visual treatment that combined athlete portraits, architectural details, and live-action sequences within one consistent narrative.'
+        ],
+        image: { src: '/images/projects/video-portret-padel-arena/case-study-angle-02.webp', alt: 'Alternate angle of the Padel Arena video production' }
+      },
+      {
+        eyebrow: 'THE APPROACH',
+        mainTitle: 'A Production Workflow Built Around Authentic Moments',
+        subsections: [
+          { subtitle: 'Visual Direction', content: 'Shot composition, lighting, and camera movement were designed to retain the pace of the sport while keeping the brand visible and premium.' },
+          { subtitle: 'Campaign-Ready Delivery', content: 'The master footage was structured into adaptable edits for website, social media, and short-form campaign placements.' }
+        ]
+      },
+      {
+        eyebrow: 'THE RESULT',
+        mainTitle: 'One Visual System Across Multiple Channels',
+        paragraphs: ['The final content library gave Padel Arena a coherent visual identity and reusable material for ongoing digital communication.', 'A modular shot library also reduced the need for repeated production: wide venue footage, athlete portraits, equipment details, and short action sequences could be recombined for different campaign lengths and placements.']
+      }
+    ]
+  },
+  {
+    id: 2,
+    slug: 'designing-a-scalable-data-architecture-for-artic-analytica',
+    title: 'Designing a Scalable Data Architecture for Artic Analytica',
+    category: 'TECHNOLOGY & DATA',
+    tags: ['COMPLEX WEB', 'DATA ARCHITECTURE', 'ANALYTICS'],
+    dateLabel: 'JUNE 2026',
+    dateValue: '2026-06-24',
+    description: 'A modular web and data platform that turns complex analytical workflows into a clear, reliable, and extensible digital experience.',
+    coverImage: '/images/projects/artic-complex-web/1.webp',
+    coverImageAlt: 'Artic Analytica web and data platform',
+    sections: [
+      {
+        eyebrow: 'THE CHALLENGE',
+        mainTitle: 'One Platform Had to Serve Different Levels of Data Literacy',
+        paragraphs: [
+          'Prospective clients needed to understand Artic Analytica quickly, while technical stakeholders required enough depth to assess its research and analytical capabilities.',
+          'The existing information had different formats, owners, and levels of complexity. Without a structured content model, every new report or service would increase editorial inconsistency and maintenance cost.'
+        ]
+      },
+      {
+        mainTitle: 'Making Complex Information Easier to Use',
+        paragraphs: ['Artic Analytica required more than a corporate website. Its platform needed to organize research, analytical services, and evolving datasets without creating friction for editors or users.'],
+        image: { src: '/images/projects/artic-complex-web/case-study-angle-02.webp', alt: 'Artic analysts reviewing the platform from a collaborative workspace' }
+      },
+      {
+        eyebrow: 'OUR SOLUTION',
+        mainTitle: 'A Modular Foundation for Continuous Growth',
+        subsections: [
+          { subtitle: 'Structured Content Architecture', content: 'Reusable content models keep reports, services, and insights consistent while allowing new formats to be introduced safely.' },
+          { subtitle: 'Performance and Governance', content: 'Clear publishing workflows, scalable components, and deliberate data boundaries improve maintainability as the platform grows.' }
+        ]
+      },
+      {
+        eyebrow: 'THE OUTCOME',
+        mainTitle: 'A Platform Ready for New Services, Reports, and Audiences',
+        paragraphs: ['The modular architecture created a consistent publishing path and made important information easier to find. Artic can now extend the platform without redesigning its foundations for every new analytical offering.', 'The result is a clearer public experience and a more manageable internal system, with content structure, visual components, and governance working as one operating model.']
+      }
+    ]
+  },
+  {
+    id: 3,
+    slug: 'connecting-field-operations-with-myboss-iot',
+    title: 'Connecting Field Operations with the MyBoss IoT Control System',
+    category: 'TECHNOLOGY',
+    tags: ['IOT', 'HARDWARE INTEGRATION', 'OPERATIONS'],
+    dateLabel: 'MAY 2026',
+    dateValue: '2026-05-30',
+    description: 'How integrated hardware, telemetry, and a centralized control layer created clearer operational visibility for MyBoss.',
+    coverImage: '/images/projects/myboss-iot-system/1.webp',
+    coverImageAlt: 'MyBoss connected IoT system',
+    sections: [
+      {
+        eyebrow: 'THE CHALLENGE',
+        mainTitle: 'Operational Decisions Were Moving Faster Than Field Information',
+        paragraphs: ['Location updates, device status, and maintenance information arrived through separate channels. This made it difficult for supervisors to distinguish routine movement from events requiring intervention.', 'The system also needed to remain understandable to daily operators, not only technical administrators, while accommodating unstable connectivity and varied device conditions.']
+      },
+      {
+        mainTitle: 'From Disconnected Devices to Operational Visibility',
+        paragraphs: ['Field information had to move reliably from physical devices into one interface. The architecture therefore treated connectivity, device health, and operator clarity as one system rather than separate deliverables.'],
+        image: { src: '/images/projects/myboss-iot-system/case-study-angle-02.webp', alt: 'Operations team using the connected tracking system' }
+      },
+      {
+        eyebrow: 'ENGINEERING OUTCOME',
+        mainTitle: 'A Control Layer Designed for Real Conditions',
+        subsections: [
+          { subtitle: 'Resilient Device Communication', content: 'The integration accounts for intermittent connections and preserves the status history needed by operators.' },
+          { subtitle: 'Actionable Monitoring', content: 'The dashboard prioritizes alerts and control actions instead of overwhelming users with raw telemetry.' }
+        ]
+      },
+      {
+        eyebrow: 'THE OUTCOME',
+        mainTitle: 'A Shared Operational Picture from Field to Control Room',
+        paragraphs: ['The connected system consolidated location, status, and exception information into one workflow. Supervisors can identify priority events earlier while field teams receive clearer follow-up instructions.', 'Historical records also support maintenance planning and operational review, turning device telemetry into evidence for continuous improvement.']
+      }
+    ]
+  },
+  {
+    id: 4,
+    slug: 'building-an-integrated-erp-and-marketplace-for-sinau-print',
+    title: 'Building an Integrated ERP and Marketplace for Sinau Print',
+    category: 'TECHNOLOGY',
+    tags: ['ERP', 'MARKETPLACE', 'BUSINESS PROCESS'],
+    dateLabel: 'APRIL 2026',
+    dateValue: '2026-04-22',
+    description: 'A unified platform connecting ordering, production, inventory, and customer transactions across Sinau Print operations.',
+    coverImage: '/images/projects/sinau-print-erp/1.webp',
+    coverImageAlt: 'Sinau Print ERP and marketplace platform',
+    sections: [
+      { eyebrow: 'THE CHALLENGE', mainTitle: 'Customer Convenience Had to Connect with Production Reality', paragraphs: ['An online ordering experience could not succeed if pricing, artwork approval, material availability, and production scheduling remained disconnected behind the scenes.', 'The team mapped common products, custom-order exceptions, approval points, and the information required by each role before defining the platform architecture.'] },
+      { mainTitle: 'One Workflow from Order to Production', paragraphs: ['The project began by mapping how customer orders moved through pricing, approval, production, and fulfilment. That operational map became the foundation of the platform.'], image: { src: '/images/projects/sinau-print-erp/case-study-angle-02.webp', alt: 'Sinau Print production staff connecting digital orders with printed output' } },
+      { eyebrow: 'THE SOLUTION', mainTitle: 'Commerce, ERP, and Production Status in One System', subsections: [{ subtitle: 'Guided Ordering', content: 'Product configuration and upload requirements help customers submit more complete orders before production review.' }, { subtitle: 'Role-Based Operations', content: 'Sales, design, production, and fulfilment teams work from shared records while seeing the controls relevant to their responsibilities.' }] },
+      { eyebrow: 'THE RESULT', mainTitle: 'Less Repetition, Better Operational Control', paragraphs: ['Shared records and role-based workflows reduced duplicate entry while giving teams a clearer view of order status, capacity, and inventory.', 'The platform establishes a foundation for measuring turnaround time, recurring exceptions, and product demand as transaction volume grows.'] }
+    ]
+  },
+  {
+    id: 5,
+    slug: 'turning-operational-data-into-decisions-with-altatic',
+    title: 'Turning Operational Data into Decisions with Altatic',
+    category: 'DATA & ANALYTICS',
+    tags: ['BUSINESS INTELLIGENCE', 'DASHBOARD', 'DECISION SUPPORT'],
+    dateLabel: 'MARCH 2026',
+    dateValue: '2026-03-19',
+    description: 'A decision-support dashboard designed around the questions leaders need answered, not around the volume of data available.',
+    coverImage: '/images/projects/altatic-analytic/1.webp',
+    coverImageAlt: 'Altatic analytics and intelligence dashboard',
+    sections: [
+      { eyebrow: 'THE CHALLENGE', mainTitle: 'Different Reports Were Producing Different Versions of Performance', paragraphs: ['Teams had access to data, but definitions, reporting periods, and calculation logic were not always aligned. Leaders spent valuable meeting time reconciling numbers instead of discussing action.', 'The project therefore treated metric governance and decision context as seriously as dashboard design.'] },
+      { mainTitle: 'Designing from Decisions Backward', paragraphs: ['The team first identified recurring management decisions and the indicators behind them. Data modelling and interface design were then organized around those practical needs.'], image: { src: '/images/projects/altatic-analytic/case-study-angle-02.webp', alt: 'Leadership team reviewing the Altatic analytical dashboard' } },
+      { eyebrow: 'THE SOLUTION', mainTitle: 'Governed Metrics with Progressive Detail', subsections: [{ subtitle: 'Shared Definitions', content: 'Each priority metric has an agreed source, calculation, owner, and refresh cadence.' }, { subtitle: 'From Signal to Detail', content: 'Summary indicators lead users into the relevant operational breakdown without placing every chart on one screen.' }] },
+      { eyebrow: 'THE IMPACT', mainTitle: 'A Shared View of Performance', paragraphs: ['Consistent definitions and focused visual hierarchy made the dashboard useful across operational and leadership conversations.', 'Teams can now spend less time validating the report and more time investigating causes, agreeing priorities, and tracking follow-through.'] }
+    ]
+  },
+  {
+    id: 6,
+    slug: 'reframing-web-media-digital-presence',
+    title: 'Reframing Web Media as a Clear and Credible Digital Presence',
+    category: 'MEDIA & CREATIVE',
+    tags: ['CORPORATE PROFILE', 'CONTENT DESIGN', 'DIGITAL BRAND'],
+    dateLabel: 'FEBRUARY 2026',
+    dateValue: '2026-02-26',
+    description: 'A corporate media platform that balances editorial identity, information clarity, and a maintainable publishing experience.',
+    coverImage: '/images/projects/web-media-profile/1.webp',
+    coverImageAlt: 'Web Media corporate profile platform',
+    sections: [
+      { eyebrow: 'THE CHALLENGE', mainTitle: 'Editorial Variety Was Weakening the Overall Identity', paragraphs: ['Different story formats and publishing needs had accumulated without one clear hierarchy. The redesign needed to protect editorial flexibility while giving readers predictable navigation and stronger trust signals.', 'The internal publishing experience was equally important: a visually ambitious front end would not be sustainable if routine updates required technical intervention.'] },
+      { mainTitle: 'Clarity Before Decoration', paragraphs: ['The experience was reorganized around audience questions, editorial priorities, and trust signals so visitors could understand the organization quickly.'], image: { src: '/images/projects/web-media-profile/case-study-angle-02.webp', alt: 'Editorial team reviewing responsive Web Media layouts' } },
+      { eyebrow: 'THE APPROACH', mainTitle: 'Reusable Patterns for Stories, Profiles, and Updates', subsections: [{ subtitle: 'Responsive Story Hierarchy', content: 'Editorial priority remains clear from large desktop displays to compact mobile screens.' }, { subtitle: 'Maintainable Publishing', content: 'Structured fields and reusable components let editors create varied pages without breaking the design system.' }] },
+      { eyebrow: 'DESIGN OUTCOME', mainTitle: 'A Flexible Editorial System', paragraphs: ['Reusable layouts and clear content hierarchy give the internal team room to publish consistently without sacrificing the visual identity.', 'The new system makes the publication feel coherent across story types while keeping future content expansion manageable.'] }
+    ]
+  },
+  {
+    id: 7,
+    slug: 'evaluating-gik-as-a-semarang-creative-tourism-destination',
+    title: 'Evaluating GIK as a Creative Tourism and Local Retail Destination',
+    category: 'DATA & RESEARCH',
+    tags: ['FEASIBILITY STUDY', 'CREATIVE ECONOMY', 'TOURISM'],
+    dateLabel: 'JANUARY 2026',
+    dateValue: '2026-01-28',
+    description: 'A feasibility study combining market evidence, visitor behaviour, spatial potential, and an operating model for Semarang Creative Industry Building.',
+    coverImage: '/images/projects/kajian-kelayakan-gik/1.webp',
+    coverImageAlt: 'Creative industry destination feasibility study',
+    sections: [
+      { eyebrow: 'THE RESEARCH QUESTION', mainTitle: 'Could GIK Become a Destination, Not Only a Building?', paragraphs: ['The study examined whether GIK could attract repeat visits by connecting Semarang creative products, culinary experiences, events, and a distinctive sense of place.', 'A credible answer required more than demand estimation. The team considered visitor segments, tenant readiness, accessibility, surrounding destinations, spatial programming, revenue logic, and institutional capacity.'] },
+      { mainTitle: 'Testing the Opportunity from Multiple Angles', paragraphs: ['The study assessed demand, local product potential, visitor journeys, competitive context, and commercial assumptions instead of relying on one headline indicator.'], image: { src: '/images/projects/kajian-kelayakan-gik/case-study-angle-02.webp', alt: 'GIK research team observing visitor flow in Semarang' } },
+      { eyebrow: 'METHOD', mainTitle: 'Combining Market, Place, and Operating Evidence', subsections: [{ subtitle: 'Demand and Visitor Behaviour', content: 'Field observation and audience perspectives clarified visit triggers, barriers, expected experiences, and likely spending patterns.' }, { subtitle: 'Operating Scenarios', content: 'Alternative tenant mixes, programming models, and management assumptions were compared against practical implementation requirements.' }] },
+      { eyebrow: 'RESEARCH OUTPUT', mainTitle: 'Evidence That Supports the Next Decision', paragraphs: ['The final recommendations translated findings into development priorities, operational scenarios, and measurable considerations for implementation.', 'Instead of presenting one rigid forecast, the study gives decision-makers assumptions to monitor and staged choices that can be adjusted as evidence develops.'] }
+    ]
+  },
+  {
+    id: 8,
+    slug: 'designing-a-behaviour-change-guide-for-stunting-risk-reduction',
+    title: 'Designing a Behaviour Change Guide for Stunting Risk Reduction',
+    category: 'DATA & RESEARCH',
+    tags: ['SOCIAL RESEARCH', 'BEHAVIOUR CHANGE', 'PUBLIC HEALTH'],
+    dateLabel: 'DECEMBER 2025',
+    dateValue: '2025-12-16',
+    description: 'Turning research and field realities into a practical guide for family assistance at neighbourhood level.',
+    coverImage: '/images/projects/panduan-perubahan-perilaku-stunting/1.webp',
+    coverImageAlt: 'Behaviour change assistance guide',
+    sections: [
+      { eyebrow: 'THE CHALLENGE', mainTitle: 'Information Alone Does Not Automatically Change Household Practice', paragraphs: ['Family assistants work with different levels of knowledge, confidence, resources, and support. A useful guide therefore had to help facilitators identify barriers and choose an appropriate conversation, not merely repeat health messages.', 'The content also needed to stay consistent with programme objectives while using examples and language that felt relevant at neighbourhood level.'] },
+      { mainTitle: 'From Policy Language to Daily Practice', paragraphs: ['The guide had to remain evidence-based while being understandable and useful during real conversations with families. Content was structured around specific behaviours, barriers, and supporting actions.'], image: { src: '/images/projects/panduan-perubahan-perilaku-stunting/case-study-angle-02.webp', alt: 'Facilitator demonstrating balanced nutrition in a neighbourhood session' } },
+      { eyebrow: 'CONTENT DESIGN', mainTitle: 'Guidance Built Around Conversation and Follow-Up', subsections: [{ subtitle: 'Behaviour-Based Modules', content: 'Each module connects a desired practice with common barriers, discussion prompts, examples, and realistic next steps.' }, { subtitle: 'Facilitator Support', content: 'Visual cues and simple sequencing make it easier to prepare a session, record commitments, and revisit progress.' }] },
+      { eyebrow: 'THE RESULT', mainTitle: 'A Consistent Tool for Local Assistance', paragraphs: ['Clear prompts, scenarios, and follow-up steps help facilitators communicate consistently while adapting to each family context.', 'The guide creates a shared method for assistance without removing the facilitator judgment needed to respond respectfully to different household conditions.'] }
+    ]
+  },
+  {
+    id: 9,
+    slug: 'designing-a-practical-referee-training-program-for-semarang',
+    title: 'Designing a Practical Referee Training Program for Semarang',
+    category: 'MEDIA & CREATIVE',
+    tags: ['TRAINING DESIGN', 'SPORTS', 'LEARNING EXPERIENCE'],
+    dateLabel: 'NOVEMBER 2025',
+    dateValue: '2025-11-21',
+    description: 'A structured learning experience that connects regulations, match scenarios, assessment, and confident decision-making.',
+    coverImage: '/images/projects/desain-pelatihan-wasit-semarang/1.webp',
+    coverImageAlt: 'Referee training design in Semarang',
+    sections: [
+      { eyebrow: 'THE CHALLENGE', mainTitle: 'Knowing the Rulebook Is Different from Making a Decision in Real Time', paragraphs: ['Referees must interpret movement, positioning, contact, timing, and communication under pressure. A lecture-heavy programme would not reveal whether participants could apply the rules consistently.', 'The training design therefore needed a progressive path from shared interpretation to observed practice and structured feedback.'] },
+      { mainTitle: 'Training for Decisions, Not Memorisation', paragraphs: ['The program was designed around realistic match situations so participants could practise interpretation, communication, and judgment under pressure.'], image: { src: '/images/projects/desain-pelatihan-wasit-semarang/case-study-angle-02.webp', alt: 'Referee trainees reviewing match positioning with an instructor' } },
+      { eyebrow: 'LEARNING DESIGN', mainTitle: 'A Repeatable Path from Theory to Evaluation', subsections: [{ subtitle: 'Scenario-Based Practice', content: 'Participants analyse realistic incidents, select a decision, explain the rule basis, and practise the correct signal.' }, { subtitle: 'Observable Assessment', content: 'Consistent rubrics cover positioning, accuracy, communication, composure, and post-match reflection.' }] },
+      { eyebrow: 'THE OUTCOME', mainTitle: 'More Consistent Decisions and a Reusable Training Format', paragraphs: ['Modular materials, scenario exercises, and consistent assessment criteria created a format that can support future training cohorts.', 'Facilitators can identify specific development needs and give feedback grounded in observable behaviour rather than general impressions.'] }
+    ]
+  }
+];
+
+export const LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
+  {
+    id: 1,
+    slug: 'why-transformation-must-start-with-the-real-workflow',
+    title: 'Why Transformation Must Start with the Real Workflow',
+    category: 'OPERATIONAL LEADERSHIP',
+    tags: ['TRANSFORMATION', 'PROCESS DESIGN', 'TECHNOLOGY'],
+    author: 'Arsalynt Executive Team',
+    readTime: '6 min read',
+    date: 'July 2026',
+    description: 'Lessons from building integrated platforms: sustainable transformation begins by understanding how work truly moves before selecting the technology.',
+    coverImage: '/images/insight-programs/leadership-thoughts/real-workflow.webp',
+    coverImageAlt: 'Cross-functional leaders mapping a real operational workflow',
+    sections: [
+      { eyebrow: 'THE CENTRAL IDEA', mainTitle: 'Technology Cannot Repair an Undefined Process', paragraphs: ['The Sinau Print platform reinforced a recurring lesson: software becomes useful only after teams agree on ownership, handoffs, exceptions, and the meaning of completion.', 'Leaders create momentum by making the real workflow visible, including the informal steps that rarely appear in standard operating procedures. A process map is valuable not because it looks orderly, but because it makes disagreement discussable.'], image: { src: '/images/projects/sinau-print-erp/case-study-angle-02.webp', alt: 'Digital ordering connected with the production workflow' } },
+      { eyebrow: 'WHY TRANSFORMATIONS STALL', mainTitle: 'Organisations Often Automate the Version of Work They Say They Have', paragraphs: ['Formal procedures describe the intended path. Daily work also contains workarounds, judgment calls, missing information, and dependencies carried by experienced individuals.', 'When those realities remain hidden, automation hardens ambiguity into the system. Teams then blame the tool for decisions that leadership never clarified.'] },
+      { eyebrow: 'A PRACTICAL FRAMEWORK', mainTitle: 'Lead with the Operating Model', subsections: [{ subtitle: 'Observe Before Standardising', content: 'Follow real work across roles and include exceptions, rework, waiting time, and informal coordination.' }, { subtitle: 'Clarify Ownership', content: 'Every critical decision and handoff needs an accountable role, an expected response, and a visible escalation path.' }, { subtitle: 'Simplify Before Automating', content: 'Remove redundant approval and duplicate entry before translating the workflow into software.' }, { subtitle: 'Measure Behaviour, Not Installation', content: 'Success is reflected in adoption, cycle time, error reduction, and decision quality—not merely whether the platform launched.' }] },
+      { eyebrow: 'LEADERSHIP QUESTIONS', mainTitle: 'What Leaders Should Ask Before Approving the Build', paragraphs: ['Where does work wait, and what information is usually missing at that point? Which exceptions require judgment rather than automation? Who owns the outcome across departmental boundaries?', 'These questions move transformation from a technology purchase toward an explicit redesign of how the organisation operates.'] }
+    ]
+  },
+  {
+    id: 2,
+    slug: 'data-leadership-is-the-discipline-of-defining-what-matters',
+    title: 'Data Leadership Is the Discipline of Defining What Matters',
+    category: 'DATA LEADERSHIP',
+    tags: ['DATA STRATEGY', 'DECISION MAKING', 'GOVERNANCE'],
+    author: 'Artic Analytica Leadership',
+    readTime: '5 min read',
+    date: 'June 2026',
+    description: 'Dashboards do not create alignment by themselves. Leaders must establish shared definitions and connect every metric to a decision.',
+    coverImage: '/images/insight-programs/leadership-thoughts/data-leadership.webp',
+    coverImageAlt: 'Leadership team debating the meaning of performance metrics',
+    sections: [
+      { eyebrow: 'THE CENTRAL IDEA', mainTitle: 'More Data Is Not the Same as More Clarity', paragraphs: ['The Altatic dashboard work showed that the strongest analytical systems begin with management questions. When indicators have no decision attached, they add noise rather than confidence.', 'A dashboard can display precision while hiding uncertainty in definitions, source quality, or timing. Data leadership begins when executives treat those assumptions as part of the decision.'], image: { src: '/images/projects/altatic-analytic/case-study-angle-02.webp', alt: 'Executive team reviewing governed performance indicators' } },
+      { eyebrow: 'THE LEADERSHIP RISK', mainTitle: 'Metric Proliferation Can Replace Accountability', paragraphs: ['When every team brings its own measure of success, meetings become negotiations about whose number is correct. The discussion moves away from causes, choices, and ownership.', 'Leaders should resist adding indicators until the organisation agrees what a metric means, which decision it supports, and who is responsible for responding.'] },
+      { eyebrow: 'A GOVERNANCE DISCIPLINE', mainTitle: 'Create a Shared Language for Performance', subsections: [{ subtitle: 'Start with Decisions', content: 'Define the recurring decision first, then identify the minimum evidence needed to make it responsibly.' }, { subtitle: 'Assign Metric Owners', content: 'Ownership includes definition, source, quality checks, refresh cadence, and explanation of material changes.' }, { subtitle: 'Show Context and Trade-Offs', content: 'Targets should be read alongside capacity, quality, risk, and customer impact rather than in isolation.' }, { subtitle: 'Review the Metric Itself', content: 'Retire indicators that no longer influence action or that encourage behaviour contrary to the intended outcome.' }] },
+      { eyebrow: 'LEADERSHIP QUESTIONS', mainTitle: 'Can the Team Explain What Happens When This Number Changes?', paragraphs: ['If a metric rises or falls, leaders should know which hypotheses to test, which role investigates, and what range justifies intervention.', 'That clarity is the difference between a dashboard that reports the past and a management system that improves decisions.'] }
+    ]
+  },
+  {
+    id: 3,
+    slug: 'designing-organisations-that-can-operate-through-uncertainty',
+    title: 'Designing Organisations That Can Operate Through Uncertainty',
+    category: 'RESILIENT LEADERSHIP',
+    tags: ['RESILIENCE', 'IOT', 'OPERATIONAL VISIBILITY'],
+    author: 'Kaluna Technology Leadership',
+    readTime: '7 min read',
+    date: 'May 2026',
+    description: 'What connected operations teach leaders about visibility, escalation, and building systems that remain dependable when conditions change.',
+    coverImage: '/images/insight-programs/leadership-thoughts/resilient-organisation.webp',
+    coverImageAlt: 'Operations leader coordinating a calm resilience response',
+    sections: [
+      { eyebrow: 'THE CENTRAL IDEA', mainTitle: 'Visibility Is a Leadership Capability', paragraphs: ['MyBoss demonstrated that resilience depends on timely signals and clear escalation paths. The same principle applies to organisations: people need to know what changed, what matters, and who can act.', 'Visibility is not constant surveillance. It is a deliberately shared picture of current conditions, emerging risk, and decision ownership.'], image: { src: '/images/projects/myboss-iot-system/case-study-angle-02.webp', alt: 'Connected operational visibility from field to control room' } },
+      { eyebrow: 'BEYOND BUSINESS CONTINUITY', mainTitle: 'Resilience Is Built in Ordinary Operating Decisions', paragraphs: ['Organisations often prepare for dramatic incidents while tolerating daily single points of failure: one expert, one spreadsheet, one approval path, or one channel of communication.', 'The strongest resilience work identifies these dependencies before disruption and gives teams a safe way to operate when the preferred process is unavailable.'] },
+      { eyebrow: 'DESIGN PRINCIPLES', mainTitle: 'Design for Degraded Conditions', subsections: [{ subtitle: 'Preserve Critical Context', content: 'Teams should retain enough information to make sound decisions when the ideal data flow is interrupted.' }, { subtitle: 'Make Escalation Explicit', content: 'Visible thresholds for intervention prevent both delayed action and unnecessary executive control.' }, { subtitle: 'Distribute Decision Capability', content: 'People closest to the situation need bounded authority, clear priorities, and access to the same operating picture.' }, { subtitle: 'Practise Recovery', content: 'Simulations reveal unclear roles and hidden dependencies more effectively than documents alone.' }] },
+      { eyebrow: 'LEADERSHIP QUESTIONS', mainTitle: 'What Stops Working When One Person or System Is Unavailable?', paragraphs: ['A useful resilience review traces the effect of absence across customers, operations, information, and authority.', 'The objective is not to eliminate every disruption. It is to ensure the organisation can recognise change, coordinate action, and recover without losing trust.'] }
+    ]
+  },
+  {
+    id: 4,
+    slug: 'credible-strategy-requires-evidence-and-a-path-to-action',
+    title: 'Credible Strategy Requires Evidence and a Path to Action',
+    category: 'STRATEGIC THINKING',
+    tags: ['FEASIBILITY', 'RESEARCH', 'STRATEGY'],
+    author: 'Artic Analytica Leadership',
+    readTime: '6 min read',
+    date: 'April 2026',
+    description: 'A feasibility study is valuable only when evidence, assumptions, and implementation choices are connected in one decision framework.',
+    coverImage: '/images/insight-programs/leadership-thoughts/credible-strategy.webp',
+    coverImageAlt: 'Decision makers comparing evidence and development scenarios',
+    sections: [
+      { eyebrow: 'THE CENTRAL IDEA', mainTitle: 'Move Beyond the Single Forecast', paragraphs: ['The GIK study required market demand, visitor behaviour, spatial opportunity, and operating assumptions to be considered together. Strategy becomes credible when leaders can see how those factors interact.', 'A forecast is one possible expression of assumptions. Leadership responsibility is to understand those assumptions, decide which risks are acceptable, and create a way to learn before committing irreversibly.'], image: { src: '/images/projects/kajian-kelayakan-gik/case-study-angle-02.webp', alt: 'Field evidence supporting a Semarang development strategy' } },
+      { eyebrow: 'THE FALSE COMFORT OF CERTAINTY', mainTitle: 'A Precise Number Can Still Be a Weak Decision', paragraphs: ['Long-term initiatives combine demand uncertainty, institutional capacity, financial constraints, and changing public behaviour. Compressing these into one return figure may hide the choices that matter most.', 'A more useful strategy compares scenarios, names critical assumptions, and identifies what evidence should trigger a different path.'] },
+      { eyebrow: 'FROM STUDY TO ACTION', mainTitle: 'Recommendations Need Owners and Signals', subsections: [{ subtitle: 'Separate Facts from Assumptions', content: 'Make it clear which claims come from observed evidence and which depend on future behaviour.' }, { subtitle: 'Stage Irreversible Commitments', content: 'Use pilots and phased investment to learn before locking in the most expensive decisions.' }, { subtitle: 'Name Decision Owners', content: 'Every recommendation should identify who acts, who provides input, and who resolves disagreement.' }, { subtitle: 'Define Adjustment Signals', content: 'Agree in advance which changes in demand, cost, capacity, or policy require the strategy to be revisited.' }] },
+      { eyebrow: 'LEADERSHIP QUESTIONS', mainTitle: 'What Would Need to Be True for This Strategy to Work?', paragraphs: ['This question exposes dependencies that optimistic plans often leave implicit. It also makes disagreement productive because teams can test assumptions rather than defend preferences.', 'Credible strategy is not a promise that the future will follow the plan. It is a disciplined way to act, learn, and adjust while protecting the intended outcome.'] }
+    ]
+  },
+  {
+    id: 5,
+    slug: 'communication-design-is-part-of-public-impact',
+    title: 'Communication Design Is Part of Public Impact',
+    category: 'SOCIAL IMPACT',
+    tags: ['BEHAVIOUR CHANGE', 'COMMUNICATION', 'PUBLIC SERVICE'],
+    author: 'Artic Analytica Leadership',
+    readTime: '5 min read',
+    date: 'March 2026',
+    description: 'Evidence creates impact only when people can understand it, trust it, and use it within the realities of everyday life.',
+    coverImage: '/images/insight-programs/leadership-thoughts/communication-design.webp',
+    coverImageAlt: 'Frontline facilitators and families co-designing communication material',
+    sections: [
+      { eyebrow: 'THE CENTRAL IDEA', mainTitle: 'Accuracy and Accessibility Must Coexist', paragraphs: ['The stunting risk reduction guide showed why public communication cannot be treated as the final formatting step. Language, sequence, examples, and facilitator prompts shape whether knowledge becomes action.', 'Leaders are accountable not only for whether information is correct, but whether it can be understood and used by people facing different constraints.'], image: { src: '/images/projects/panduan-perubahan-perilaku-stunting/case-study-angle-02.webp', alt: 'Practical family nutrition communication in a neighbourhood setting' } },
+      { eyebrow: 'THE IMPLEMENTATION GAP', mainTitle: 'Messages Fail When They Ignore the Conditions of Action', paragraphs: ['People may understand a recommendation and still be unable to follow it because of cost, time, household dynamics, confidence, or access to support.', 'Communication that assumes knowledge is the only barrier can unintentionally place responsibility on the audience while leaving structural obstacles untouched.'] },
+      { eyebrow: 'A CO-DESIGN PRACTICE', mainTitle: 'Design with the People Who Deliver and Receive the Message', subsections: [{ subtitle: 'Listen for Real Barriers', content: 'Frontline conversations reveal the moments where guidance becomes confusing, impractical, or socially difficult.' }, { subtitle: 'Use Concrete Choices', content: 'Examples, scenarios, and small next steps are easier to apply than abstract instruction.' }, { subtitle: 'Support the Facilitator', content: 'Prompts, visual sequences, and follow-up tools help maintain consistency without scripting every interaction.' }, { subtitle: 'Build Feedback into Delivery', content: 'Leaders need a route for local learning to improve programme content, resources, and policy decisions.' }] },
+      { eyebrow: 'LEADERSHIP QUESTIONS', mainTitle: 'Whose Reality Is Missing from the Message?', paragraphs: ['Before approving public communication, leaders should ask who tested it, under what conditions, and what action the audience is realistically expected to take next.', 'Impact improves when communication is treated as part of service design rather than as a final campaign layer.'] }
+    ]
+  },
+  {
+    id: 6,
+    slug: 'brand-trust-is-built-through-consistent-experience',
+    title: 'Brand Trust Is Built Through Consistent Experience',
+    category: 'BRAND LEADERSHIP',
+    tags: ['BRAND', 'MEDIA', 'EXPERIENCE'],
+    author: 'Arsalynt Executive Team',
+    readTime: '4 min read',
+    date: 'February 2026',
+    description: 'From corporate platforms to sports films, trust grows when every audience touchpoint expresses the same promise with clarity.',
+    coverImage: '/images/insight-programs/leadership-thoughts/brand-trust.webp',
+    coverImageAlt: 'Brand, video, and digital leads reviewing a consistent experience',
+    sections: [
+      { eyebrow: 'THE CENTRAL IDEA', mainTitle: 'Consistency Is More Than Visual Repetition', paragraphs: ['The Padel Arena and Web Media projects demonstrate that brand consistency is the alignment of story, interface, service expectations, and delivery quality.', 'Audiences do not experience a brand guideline. They experience promises across moments: an article, a proposal, a platform, a support interaction, or a delivered event. Trust grows when those moments reinforce one another.'], image: { src: '/images/projects/web-media-profile/case-study-angle-02.webp', alt: 'Editorial team reviewing a consistent responsive brand experience' } },
+      { eyebrow: 'THE LEADERSHIP RESPONSIBILITY', mainTitle: 'Brand Drift Is Often an Operating-System Problem', paragraphs: ['Inconsistency is rarely caused only by poor design judgment. Teams may lack shared priorities, reusable assets, clear approval boundaries, or enough time to interpret abstract guidance.', 'Leadership should make consistency easier to produce by connecting brand principles to everyday tools, roles, and decisions.'] },
+      { eyebrow: 'A SUSTAINABLE SYSTEM', mainTitle: 'Build Governance That Supports Good Judgment', subsections: [{ subtitle: 'Define the Promise', content: 'A small number of clear experience principles helps teams evaluate choices beyond visual appearance.' }, { subtitle: 'Provide Reusable Foundations', content: 'Components, templates, voice guidance, and asset libraries reduce unnecessary reinvention.' }, { subtitle: 'Set Decision Boundaries', content: 'Teams need to know what they may adapt independently and what requires broader review.' }, { subtitle: 'Audit the Full Experience', content: 'Review customer journeys and delivery moments, not only campaign outputs, for alignment with the promise.' }] },
+      { eyebrow: 'LEADERSHIP QUESTIONS', mainTitle: 'Would the Audience Recognise the Same Organisation at Every Touchpoint?', paragraphs: ['The question is not whether every output looks identical. It is whether tone, clarity, quality, and behaviour express a coherent promise.', 'Strong brand leadership creates enough structure for consistency and enough freedom for teams to respond intelligently to context.'] }
+    ]
+  }
+];
+
+void LEGACY_CASE_STUDIES_DUMMY_DATA;
+void LEGACY_LEADERSHIP_THOUGHTS_DUMMY_DATA;

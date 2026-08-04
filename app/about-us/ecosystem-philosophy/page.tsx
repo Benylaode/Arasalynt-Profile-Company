@@ -71,7 +71,7 @@ export default function EcosystemPhilosophyPage() {
         className="relative h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#020714] max-[640px]:rounded-b-[24px]"
       >
         <img
-          src={`${ASSET}/hero-globe.png`}
+          src="/images/shared/ecosystem-philosophy-card.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-[-218px] h-[1827px] w-[2025px] max-w-none -translate-x-1/2 object-fill max-[1024px]:top-[-70px] max-[1024px]:h-[980px] max-[1024px]:w-[1080px] max-[640px]:top-[-10px] max-[640px]:h-[700px] max-[640px]:w-[770px]"
@@ -81,7 +81,7 @@ export default function EcosystemPhilosophyPage() {
         <div className="pointer-events-none absolute inset-0 bg-black/20" aria-hidden="true" />
 
         <img
-          src={`${ASSET}/hero-network.png`}
+          src="/images/shared/network-overlay.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute bottom-[-445px] left-1/2 h-[997px] w-[2588px] max-w-none -translate-x-1/2 object-fill opacity-80 max-[1024px]:bottom-[-220px] max-[1024px]:h-[620px] max-[1024px]:w-[1610px]"
@@ -106,7 +106,7 @@ export default function EcosystemPhilosophyPage() {
         />
 
         <div className="absolute left-1/2 top-1/2 z-10 flex w-full max-w-[948px] -translate-x-1/2 -translate-y-[60%] flex-col items-center gap-6 text-center max-[640px]:px-4 max-[640px]:gap-4">
-          <p className="font-body text-[14px] font-bold uppercase leading-[130%] tracking-[0.06em] text-[#E6FF2A] max-[640px]:text-[10px]">
+          <p className="font-body text-[9px] font-bold uppercase leading-[130%] tracking-[0.06em] text-[#E6FF2A] max-[640px]:text-[7px]">
             HOME&nbsp;&nbsp;&gt;&nbsp;&nbsp;ABOUT US&nbsp;&nbsp;&gt;&nbsp;&nbsp;ECOSYSTEM PHILOSOPHY
           </p>
           <h1 className="font-heading text-[clamp(56px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
@@ -161,7 +161,7 @@ export default function EcosystemPhilosophyPage() {
 
           <div className="relative w-[54.3%] shrink-0 overflow-hidden rounded-[24px] bg-[#071C3D] max-[1024px]:w-full aspect-[764/670]">
             <img
-              src={`${ASSET}/intro-hand.png`}
+              src={`${ASSET}/intro-hand.webp`}
               alt="Integrated digital ecosystem"
               className="absolute left-[-103px] top-[-224px] h-[957px] w-[1068px] max-w-none object-fill max-[1024px]:inset-0 max-[1024px]:h-full max-[1024px]:w-full max-[1024px]:object-cover"
             />
@@ -172,7 +172,7 @@ export default function EcosystemPhilosophyPage() {
       {/* SECTION 02 — ONE UNIFIED ECOSYSTEM */}
       <section className="relative min-h-[833px] w-full overflow-hidden bg-gradient-to-b from-[#1A3E9E] to-[#152571] px-[clamp(24px,13.333vw,256px)] py-[clamp(100px,8.125vw,156px)]">
         <img
-          src={`${ASSET}/ecosystem-network.png`}
+          src={`${ASSET}/ecosystem-network.webp`}
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute left-[32px] top-[-702px] h-[1287px] w-[2746px] max-w-none object-fill opacity-25 max-[1024px]:left-1/2 max-[1024px]:top-[-220px] max-[1024px]:h-[760px] max-[1024px]:w-[1620px] max-[1024px]:-translate-x-1/2"
@@ -250,7 +250,7 @@ export default function EcosystemPhilosophyPage() {
               className="group relative overflow-hidden rounded-[24px] bg-[#8C8C8C] no-underline aspect-[835/500]"
             >
               <img
-                src={`${ASSET}/company-leadership.png`}
+                src="/images/shared/leadership-portrait.webp"
                 alt="Company Leadership"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
@@ -265,7 +265,7 @@ export default function EcosystemPhilosophyPage() {
               className="group relative overflow-hidden rounded-[24px] bg-[#8C8C8C] no-underline aspect-[835/500]"
             >
               <img
-                src={`${ASSET}/corporate-profile.png`}
+                src="/images/shared/corporate-profile-card.webp"
                 alt="Corporate Profile"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />

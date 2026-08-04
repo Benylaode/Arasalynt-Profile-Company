@@ -13,6 +13,6 @@ Semua raster di folder ini diekstrak langsung dari image data yang tertanam di `
 - `services/*`: 8 gambar layanan sesuai urutan desain
 - `works/*`: 3 gambar portfolio slider
 - `other-business-previews/*`: 4 preview unit bisnis lain
-- `logo.svg` dan `logo.png`: logo Kaluna hasil crop presisi dari page export
+- `logo.svg` dan `logo.webp`: logo Kaluna hasil crop presisi dari page export
 
 `preview-01.webp` dan `preview-04.webp` tidak diberi nama bisnis spesifik karena label pada export telah menjadi path vector dan tidak dapat dipastikan hanya dari raster.

@@ -128,6 +128,8 @@ const PROJECT_DETAILS_MAP: Record<string, {
   features: string[];
   techStack: string[];
   liveUrl: string;
+  capabilityLabel?: string;
+  ctaLabel?: string;
   description: string;
   challengeDesc: string;
   challenges: { title: string; desc: string }[];
@@ -247,6 +249,86 @@ const PROJECT_DETAILS_MAP: Record<string, {
       { title: 'Mobile Responsiveness', desc: 'Complex media grids broke on mobile viewports.' },
     ],
   },
+  'kajian-kelayakan-gik': {
+    title: 'Kajian Kelayakan Pengembangan Gedung Industri Kreatif (GIK) sebagai Destinasi Wisata Belanja Oleh-Oleh Khas Kota Semarang',
+    corporation: 'Artic Analytica',
+    tags: ['Data & Research', 'Feasibility Study', 'Tourism Development'],
+    heroImage: '/images/projects/kajian-kelayakan-gik/1.webp',
+    gallery1: '/images/projects/kajian-kelayakan-gik/1.webp',
+    gallery2: '/images/projects/kajian-kelayakan-gik/1.webp',
+    features: ['Market and Visitor Analysis', 'Commercial Feasibility Assessment', 'Destination Development Strategy', 'Actionable Policy Recommendations'],
+    techStack: ['Field Research', 'Market Analysis', 'Stakeholder Mapping', 'Financial Modeling'],
+    capabilityLabel: 'Research Approach',
+    ctaLabel: 'Discuss a Research Project',
+    liveUrl: '/contact-us',
+    description: 'Kajian ini mengevaluasi potensi Gedung Industri Kreatif sebagai destinasi wisata belanja oleh-oleh khas Kota Semarang melalui analisis pasar, perilaku pengunjung, kesiapan ekosistem, dan kelayakan pengembangan usaha.',
+    challengeDesc: 'Menggabungkan kebutuhan pelaku industri kreatif, daya tarik wisata, dan keberlanjutan komersial menjadi rekomendasi pengembangan yang terukur.',
+    challenges: [
+      { title: 'Fragmented Market Evidence', desc: 'Data pasar, wisatawan, dan pelaku usaha perlu disatukan dalam satu kerangka analisis.' },
+      { title: 'Destination Positioning', desc: 'GIK membutuhkan proposisi nilai yang kuat agar berbeda dari pusat oleh-oleh konvensional.' },
+      { title: 'Commercial Sustainability', desc: 'Model pengembangan harus layak secara operasional sekaligus memberi dampak bagi ekosistem kreatif.' },
+    ],
+  },
+  'panduan-perubahan-perilaku-stunting': {
+    title: 'Penyusunan Buku Panduan Perubahan Perilaku Pendampingan Keluarga Dalam Upaya Percepatan Penurunan Risiko Stunting di Tingkat Kelurahan',
+    corporation: 'Artic Analytica',
+    tags: ['Data & Research', 'Social Research', 'Public Health'],
+    heroImage: '/images/projects/panduan-perubahan-perilaku-stunting/1.webp',
+    gallery1: '/images/projects/panduan-perubahan-perilaku-stunting/1.webp',
+    gallery2: '/images/projects/panduan-perubahan-perilaku-stunting/1.webp',
+    features: ['Behavioral Insight Framework', 'Family Assistance Guidelines', 'Kelurahan-Level Implementation', 'Monitoring and Evaluation Indicators'],
+    techStack: ['Qualitative Research', 'Behavior Mapping', 'Co-Creation Workshop', 'Content Validation'],
+    capabilityLabel: 'Research Approach',
+    ctaLabel: 'Discuss a Research Project',
+    liveUrl: '/contact-us',
+    description: 'Panduan disusun untuk membantu pendamping keluarga menerjemahkan temuan perilaku menjadi komunikasi dan intervensi yang mudah diterapkan dalam percepatan penurunan risiko stunting di tingkat kelurahan.',
+    challengeDesc: 'Mengubah kebijakan dan bukti kesehatan masyarakat menjadi panduan praktis yang relevan bagi pendamping serta mudah dipahami keluarga.',
+    challenges: [
+      { title: 'Complex Behavioral Factors', desc: 'Risiko stunting dipengaruhi kebiasaan, akses informasi, lingkungan, dan dinamika keluarga.' },
+      { title: 'Different Local Contexts', desc: 'Pendekatan pendampingan perlu cukup fleksibel untuk kondisi setiap kelurahan.' },
+      { title: 'Practical Field Adoption', desc: 'Materi harus ringkas, empatik, dan dapat digunakan langsung saat pendampingan keluarga.' },
+    ],
+  },
+  'desain-pelatihan-wasit-semarang': {
+    title: 'Desain Pelatihan Wasit Kota Semarang',
+    corporation: 'The Drafroom',
+    tags: ['Media & Creative', 'Training Design', 'Sports Communication'],
+    heroImage: '/images/projects/desain-pelatihan-wasit-semarang/1.webp',
+    gallery1: '/images/projects/desain-pelatihan-wasit-semarang/1.webp',
+    gallery2: '/images/projects/desain-pelatihan-wasit-semarang/1.webp',
+    features: ['Structured Training Journey', 'Practical Referee Simulation', 'Visual Learning Materials', 'Participant Evaluation Design'],
+    techStack: ['Program Design', 'Visual Communication', 'Event Production', 'Documentation'],
+    capabilityLabel: 'Creative Capabilities',
+    ctaLabel: 'Start a Media Project',
+    liveUrl: '/contact-us',
+    description: 'Program pelatihan dirancang untuk menciptakan pengalaman belajar wasit yang terstruktur, komunikatif, dan aplikatif melalui materi visual, simulasi lapangan, serta alur evaluasi peserta.',
+    challengeDesc: 'Menyampaikan aturan dan pengambilan keputusan pertandingan secara menarik tanpa mengurangi ketepatan materi teknis.',
+    challenges: [
+      { title: 'Dense Technical Material', desc: 'Materi perwasitan perlu disederhanakan tanpa kehilangan ketepatan aturan.' },
+      { title: 'Practice Consistency', desc: 'Simulasi harus membangun standar keputusan yang konsisten antarpeserta.' },
+      { title: 'Participant Engagement', desc: 'Format pelatihan membutuhkan ritme visual dan aktivitas yang menjaga fokus peserta.' },
+    ],
+  },
+  'video-portret-padel-arena': {
+    title: 'Produksi Konten Video Portret Padel Arena',
+    corporation: 'LoxLive',
+    tags: ['Media & Creative', 'Video Production', 'Sports Portrait'],
+    heroImage: '/images/projects/video-portret-padel-arena/1.webp',
+    gallery1: '/images/projects/video-portret-padel-arena/1.webp',
+    gallery2: '/images/projects/video-portret-padel-arena/1.webp',
+    features: ['Cinematic Sports Portrait', 'On-Location Production', 'Lighting and Art Direction', 'Social Media Deliverables'],
+    techStack: ['Creative Direction', 'Cinematography', 'Post Production', 'Color Grading'],
+    capabilityLabel: 'Production Capabilities',
+    ctaLabel: 'Start a Video Project',
+    liveUrl: '/contact-us',
+    description: 'Produksi video portret menghadirkan karakter atlet dan atmosfer Padel Arena melalui pendekatan sinematik, tata cahaya terarah, serta visual yang siap digunakan untuk kebutuhan kampanye digital.',
+    challengeDesc: 'Menjaga autentisitas olahraga sekaligus menciptakan visual portret premium dalam kondisi arena yang dinamis dan reflektif.',
+    challenges: [
+      { title: 'Mixed Arena Lighting', desc: 'Pencahayaan lapangan dan produksi harus seimbang tanpa menghilangkan atmosfer arena.' },
+      { title: 'Authentic Athlete Direction', desc: 'Gerak dan ekspresi atlet perlu terlihat natural sekaligus kuat secara visual.' },
+      { title: 'Multi-Platform Delivery', desc: 'Materi harus tetap efektif pada format horizontal maupun potongan konten sosial.' },
+    ],
+  },
 };
 
 export default async function WorkDetailPage({
@@ -271,7 +353,7 @@ export default async function WorkDetailPage({
               <span>{currentProject.corporation}</span>
             </div>
 
-            <h1 className="max-w-[1640px] font-heading text-[36px] font-medium leading-[1.08] tracking-[-0.02em] text-[#101010] sm:text-[48px] lg:text-[58px] 2xl:text-[72px] 2xl:leading-[1.1]">
+            <h1 className={`max-w-[1640px] font-heading font-medium leading-[1.08] tracking-[-0.02em] text-[#101010] 2xl:leading-[1.1] ${currentProject.title.length > 110 ? 'text-[28px] sm:text-[36px] lg:text-[44px] 2xl:text-[52px]' : currentProject.title.length > 70 ? 'text-[32px] sm:text-[42px] lg:text-[50px] 2xl:text-[60px]' : 'text-[36px] sm:text-[48px] lg:text-[58px] 2xl:text-[72px]'}`}>
               {currentProject.title}
             </h1>
 
@@ -314,7 +396,7 @@ export default async function WorkDetailPage({
               </div>
 
               <div className="border-b border-[rgba(200,200,200,0.25)] py-5">
-                <h2 className="font-body text-[13px] font-extrabold uppercase tracking-[0.06em] text-[#1A3E9E] sm:text-[15px] 2xl:text-[16px]">Tech Stack</h2>
+                <h2 className="font-body text-[13px] font-extrabold uppercase tracking-[0.06em] text-[#1A3E9E] sm:text-[15px] 2xl:text-[16px]">{currentProject.capabilityLabel ?? 'Tech Stack'}</h2>
                 <div className="mt-3 grid grid-cols-2 gap-1.5">
                   {currentProject.techStack.map((tech) => (
                     <span key={tech} className="flex min-h-[36px] items-center justify-center rounded-full bg-[rgba(153,166,231,0.15)] px-3 text-center font-body text-[11px] font-medium leading-none text-[#292929] sm:text-[12px] 2xl:min-h-[40px] 2xl:text-[14px]">
@@ -324,8 +406,8 @@ export default async function WorkDetailPage({
                 </div>
               </div>
 
-              <a href={currentProject.liveUrl} target="_blank" rel="noreferrer" className="mt-5 flex min-h-[46px] w-full items-center justify-center gap-2.5 rounded-full bg-[#1A3E9E] px-5 font-body text-[12px] font-semibold uppercase tracking-[0.01em] text-[#F7F7F7] transition hover:bg-[#153486] sm:text-[14px] 2xl:min-h-[50px] 2xl:text-[16px]">
-                Visit Live Website
+              <a href={currentProject.liveUrl} target={currentProject.liveUrl.startsWith('http') ? '_blank' : undefined} rel={currentProject.liveUrl.startsWith('http') ? 'noreferrer' : undefined} className="mt-5 flex min-h-[46px] w-full items-center justify-center gap-2.5 rounded-full bg-[#1A3E9E] px-5 font-body text-[12px] font-semibold uppercase tracking-[0.01em] text-[#F7F7F7] transition hover:bg-[#153486] sm:text-[14px] 2xl:min-h-[50px] 2xl:text-[16px]">
+                {currentProject.ctaLabel ?? 'Visit Live Website'}
                 <IconArrow size={16} />
               </a>
             </div>

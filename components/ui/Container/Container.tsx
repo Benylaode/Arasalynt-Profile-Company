@@ -12,7 +12,7 @@ interface ContainerProps {
  * Container — Consistent width wrapper for page content.
  *
  * Widths:
- * - max:     1700px (widest content)
+ * - max:     1980px (widest MV frame, including responsive gutters)
  * - content: 1315px (standard content, default)
  * - narrow:  921px  (narrow content like hero text)
  */

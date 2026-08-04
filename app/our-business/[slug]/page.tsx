@@ -342,7 +342,7 @@ export default async function BusinessSlugPage({
         <div className="absolute -right-[9%] -top-[14%] h-[150%] w-[64%] rotate-[7deg] bg-gradient-to-b from-transparent via-white/[0.055] to-transparent" />
 
         <div className="relative z-10 flex max-w-[1100px] flex-col items-center gap-5 px-5 text-center md:gap-6">
-          <div className="flex flex-wrap justify-center gap-2 font-body text-[10px] font-bold uppercase tracking-[0.06em] text-[#E6FF2A] md:text-[14px]">
+          <div className="flex flex-wrap justify-center gap-2 font-body text-[7px] font-bold uppercase tracking-[0.06em] text-[#E6FF2A] md:text-[9px]">
             <span>Home</span><span>/</span><span>Our Business</span><span>/</span><span>{biz.name}</span>
           </div>
           <h1 className="font-heading text-[clamp(44px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
@@ -720,7 +720,7 @@ export default async function BusinessSlugPage({
           </div>
         </section>
       )}
-      <section className="relative isolate flex min-h-[500px] items-center justify-center overflow-hidden bg-gradient-to-b from-[#152571] to-[#101010] px-6 py-[110px] md:min-h-[562px] md:px-[110px] md:py-[142px]">
+      <section className="relative isolate flex min-h-[clamp(450px,32vw,615px)] items-center justify-center overflow-hidden bg-gradient-to-b from-[#152571] to-[#101010] py-[clamp(80px,6.563vw,126px)]">
         <div
           className="pointer-events-none absolute inset-0 scale-x-[-1] bg-cover bg-center opacity-65 mix-blend-hard-light"
           style={{ backgroundImage: `url(${ctaImg})` }}
@@ -729,26 +729,28 @@ export default async function BusinessSlugPage({
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[60%] bg-gradient-to-b from-[#152571] to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-t from-[#101010] to-transparent" />
 
-        <div className="relative z-10 flex w-full max-w-[1700px] flex-col items-center gap-[42px] text-center">
-          <div className="flex flex-col gap-6">
-            <h2 className="font-heading text-[clamp(46px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#F7F7F7]">
+        <div className="mv-container relative z-10 flex flex-col items-center text-center">
+          <div className="flex w-full flex-col items-center gap-[clamp(18px,1.25vw,24px)]">
+            <h2 className="max-w-[880px] font-heading text-[clamp(52px,5.729vw,62px)] font-medium leading-[0.96] tracking-[-0.03em] text-[#F7F7F7] max-[480px]:text-[40px]">
               {biz.ctaTitle}
             </h2>
-            <p className="mx-auto max-w-[980px] font-body text-[16px] leading-[1.6] tracking-[0.02em] text-[#D9D9D9] md:text-[20px]">
+            <p className="mx-auto max-w-[580px] font-normal text-[clamp(15px,1.042vw,20px)] leading-[1.6] tracking-[0.02em] text-[#D9D9D9]">
               {biz.ctaDesc}
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-[clamp(24px,1.667vw,32px)] flex w-full flex-wrap items-center justify-center gap-[12px] max-[480px]:flex-col max-[480px]:gap-[10px]">
             <Link
               href={biz.ctaPrimaryHref ?? '/contact-us'}
-              className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-[#E6FF2A] px-8 font-body text-[15px] font-extrabold text-[#101010] no-underline transition hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(230,255,42,0.18)] md:min-h-16 md:text-[20px]"
+              target={biz.ctaPrimaryHref?.startsWith('http') ? '_blank' : undefined}
+              rel={biz.ctaPrimaryHref?.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="inline-flex h-[clamp(47px,3.125vw,60px)] min-w-[clamp(175px,11.979vw,230px)] items-center justify-center gap-[10px] rounded-full bg-[#E6FF2A] px-[clamp(24px,1.667vw,32px)] font-body text-[clamp(14px,0.833vw,16px)] font-extrabold leading-[1.2] text-[#101010] no-underline transition hover:-translate-y-1 max-[480px]:w-full max-[480px]:max-w-[280px]"
             >
-              {biz.ctaPrimaryLabel ?? 'Let’s Work Together'} <ArrowIcon />
+              {biz.ctaPrimaryLabel ?? 'Let’s Work Together'}
             </Link>
             <Link
               href={biz.ctaSecondaryHref ?? '/our-works'}
-              className="inline-flex min-h-14 items-center justify-center rounded-full border border-[#E6FF2A] px-8 font-body text-[15px] font-extrabold text-[#F7F7F7] no-underline transition hover:bg-[#E6FF2A]/10 md:min-h-16 md:text-[20px]"
+              className="inline-flex h-[clamp(47px,3.125vw,60px)] min-w-[clamp(171px,11.719vw,225px)] items-center justify-center rounded-full border border-[#E6FF2A] px-[clamp(24px,1.667vw,32px)] font-body text-[clamp(14px,0.833vw,16px)] font-extrabold leading-[1.2] text-[#F7F7F7] no-underline transition-colors duration-300 hover:bg-[#E6FF2A] hover:text-[#101010] max-[480px]:w-full max-[480px]:max-w-[280px]"
             >
               {biz.ctaSecondaryLabel ?? 'Explore Our Works'}
             </Link>

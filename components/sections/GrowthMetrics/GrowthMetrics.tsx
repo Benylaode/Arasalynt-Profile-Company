@@ -139,7 +139,7 @@ export default function GrowthMetrics() {
                   Discover the leadership philosophy behind resilient enterprise execution.
                 </p>
 
-                <a href="/leadership-thoughts" className="mt-[8px] inline-flex h-[40px] items-center gap-[10px] rounded-full bg-[#E6FF2A] px-[16px] text-[12px] font-bold tracking-[-0.015em] text-[#101010] no-underline">
+                <a href="/insight-programs/leadership-thoughts" className="mt-[8px] inline-flex h-[40px] items-center gap-[10px] rounded-full bg-[#E6FF2A] px-[16px] text-[12px] font-bold tracking-[-0.015em] text-[#101010] no-underline">
                   LEADERSHIP THOUGHTS
                   <ArrowIcon />
                 </a>

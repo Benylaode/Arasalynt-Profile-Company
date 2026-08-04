@@ -6,7 +6,7 @@
 import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
-import { BUSINESS_DUMMY_DATA, HERO_SLIDES_DUMMY_DATA, TESTIMONIALS_DUMMY_DATA } from './dummy';
+import { BUSINESS_DUMMY_DATA, HERO_SLIDES_DUMMY_DATA, TESTIMONIALS_DUMMY_DATA, CASE_STUDIES_DUMMY_DATA, LEADERSHIP_THOUGHTS_DUMMY_DATA } from './dummy';
 
 /* ── Resolve path ke file database (di project root / .next tidak masuk) ── */
 const DB_DIR = path.join(process.cwd(), '.db');
@@ -116,6 +116,35 @@ function initSchema(db: Database.Database): void {
       inquiry    TEXT,
       message    TEXT    NOT NULL,
       created_at TEXT    NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS case_studies (
+      id              INTEGER PRIMARY KEY,
+      slug            TEXT    NOT NULL UNIQUE,
+      title           TEXT    NOT NULL,
+      category        TEXT    NOT NULL,
+      tags            TEXT    NOT NULL DEFAULT '[]',
+      date_label      TEXT    NOT NULL,
+      date_value      TEXT    NOT NULL,
+      description     TEXT    NOT NULL,
+      cover_image     TEXT    NOT NULL,
+      cover_image_alt TEXT    NOT NULL,
+      sections        TEXT    NOT NULL DEFAULT '[]'
+    );
+
+    CREATE TABLE IF NOT EXISTS leadership_thoughts (
+      id              INTEGER PRIMARY KEY,
+      slug            TEXT    NOT NULL UNIQUE,
+      title           TEXT    NOT NULL,
+      category        TEXT    NOT NULL,
+      tags            TEXT    NOT NULL DEFAULT '[]',
+      author          TEXT    NOT NULL,
+      read_time       TEXT    NOT NULL,
+      date            TEXT    NOT NULL,
+      description     TEXT    NOT NULL,
+      cover_image     TEXT    NOT NULL,
+      cover_image_alt TEXT    NOT NULL,
+      sections        TEXT    NOT NULL DEFAULT '[]'
     );
   `);
 
@@ -279,6 +308,75 @@ function seedIfEmpty(db: Database.Database): void {
 
     insertManyTesti();
     console.log(`[db] Seeded ${TESTIMONIALS_DUMMY_DATA.length} testimonials into SQLite.`);
+  }
+
+  const caseStudiesCount = (
+    db.prepare('SELECT COUNT(*) as cnt FROM case_studies').get() as { cnt: number }
+  ).cnt;
+
+  if (caseStudiesCount < CASE_STUDIES_DUMMY_DATA.length) {
+    const insertCase = db.prepare(`
+      INSERT OR REPLACE INTO case_studies
+        (id, slug, title, category, tags, date_label, date_value, description, cover_image, cover_image_alt, sections)
+      VALUES
+        (@id, @slug, @title, @category, @tags, @date_label, @date_value, @description, @cover_image, @cover_image_alt, @sections)
+    `);
+
+    const insertManyCases = db.transaction(() => {
+      CASE_STUDIES_DUMMY_DATA.forEach((item) => {
+        insertCase.run({
+          id: item.id,
+          slug: item.slug,
+          title: item.title,
+          category: item.category,
+          tags: JSON.stringify(item.tags),
+          date_label: item.dateLabel,
+          date_value: item.dateValue,
+          description: item.description,
+          cover_image: item.coverImage,
+          cover_image_alt: item.coverImageAlt,
+          sections: JSON.stringify(item.sections),
+        });
+      });
+    });
+
+    insertManyCases();
+    console.log(`[db] Seeded ${CASE_STUDIES_DUMMY_DATA.length} case studies into SQLite.`);
+  }
+
+  const thoughtsCount = (
+    db.prepare('SELECT COUNT(*) as cnt FROM leadership_thoughts').get() as { cnt: number }
+  ).cnt;
+
+  if (thoughtsCount < LEADERSHIP_THOUGHTS_DUMMY_DATA.length) {
+    const insertThought = db.prepare(`
+      INSERT OR REPLACE INTO leadership_thoughts
+        (id, slug, title, category, tags, author, read_time, date, description, cover_image, cover_image_alt, sections)
+      VALUES
+        (@id, @slug, @title, @category, @tags, @author, @read_time, @date, @description, @cover_image, @cover_image_alt, @sections)
+    `);
+
+    const insertManyThoughts = db.transaction(() => {
+      LEADERSHIP_THOUGHTS_DUMMY_DATA.forEach((item) => {
+        insertThought.run({
+          id: item.id,
+          slug: item.slug,
+          title: item.title,
+          category: item.category,
+          tags: JSON.stringify(item.tags),
+          author: item.author,
+          read_time: item.readTime,
+          date: item.date,
+          description: item.description,
+          cover_image: item.coverImage,
+          cover_image_alt: item.coverImageAlt,
+          sections: JSON.stringify(item.sections),
+        });
+      });
+    });
+
+    insertManyThoughts();
+    console.log(`[db] Seeded ${LEADERSHIP_THOUGHTS_DUMMY_DATA.length} leadership thoughts into SQLite.`);
   }
 }
 

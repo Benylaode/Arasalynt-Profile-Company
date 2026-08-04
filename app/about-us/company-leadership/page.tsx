@@ -94,19 +94,19 @@ const PRINCIPLES = [
 const TRUST_SLIDES = [
   {
     text: 'By combining technical precision with a commitment to client success, Arsalynk Group delivers reliable, predictable, and results-driven execution.',
-    image: `${ASSET_BASE}/building-trust.png`
+    image: `${ASSET_BASE}/building-trust-reference-01.webp`
   },
   {
     text: 'Long-term client relationships are earned by delivering dependable solutions, maintaining clear communication, and consistently meeting expectations across every engagement.',
-    image: `${ASSET_BASE}/building-trust-2.png` // Sesuaikan dengan nama file gambar slide ke-2 Anda
+    image: `${ASSET_BASE}/building-trust-reference-02.webp`
   },
   {
     text: 'We integrate expertise across technology, data, media, and creative disciplines to build complete solutions.',
-    image: `${ASSET_BASE}/building-trust.png`
+    image: '/images/shared/building-trust.webp'
   },
   {
     text: 'Our teams are designed to operate sustainably without creating a single point of leadership or operational failure.',
-    image: `${ASSET_BASE}/building-trust-2.png`
+    image: `${ASSET_BASE}/building-trust-2.webp`
   },
 ];
 
@@ -153,14 +153,14 @@ export default function CompanyLeadershipPage() {
         className="relative isolate h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#101010] max-[640px]:rounded-b-[24px]"
       >
         <img
-          src={`${ASSET_BASE}/hero-core.png`}
+          src="/images/shared/leadership-portrait.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-[-341px] h-[2073px] w-[2073px] max-w-none -translate-x-1/2 object-cover max-[1280px]:top-[-250px] max-[1280px]:h-[1600px] max-[1280px]:w-[1600px] max-[768px]:top-[-105px] max-[768px]:h-[920px] max-[768px]:w-[920px]"
         />
 
         <img
-          src={`${ASSET_BASE}/network.png`}
+          src="/images/shared/network-overlay.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute bottom-[-445px] left-1/2 h-[997px] w-[2588px] max-w-none -translate-x-1/2 opacity-80 max-[1280px]:bottom-[-310px] max-[1280px]:h-[720px] max-[1280px]:w-[1868px] max-[768px]:bottom-[-120px] max-[768px]:h-[420px] max-[768px]:w-[1090px]"
@@ -183,7 +183,7 @@ export default function CompanyLeadershipPage() {
 
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
           <div className="flex flex-col items-center gap-6 max-[768px]:gap-4">
-            <div className="font-body text-[14px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[10px]">
+            <div className="font-body text-[9px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
               Home&nbsp;&nbsp;&gt;&nbsp;&nbsp;About Us&nbsp;&nbsp;&gt;&nbsp;&nbsp;Company Leadership
             </div>
             <h1 className="font-heading text-[clamp(56px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
@@ -232,13 +232,13 @@ export default function CompanyLeadershipPage() {
 
           <div className="relative w-[54.3%] shrink-0 overflow-hidden rounded-[24px] bg-[#252A2F] max-[1024px]:w-full aspect-[764/670]">
             <img
-              src={`${ASSET_BASE}/intro-office.png`}
+              src="/images/shared/leadership-intro-office.webp"
               alt="Arsalynk leadership office"
               className="absolute inset-[-10px] h-[calc(100%+20px)] w-[calc(100%+20px)] object-cover blur-[6.6px]"
             />
             <div className="absolute inset-0 bg-[#101010]/15" />
             <img
-              src={`${ASSET_BASE}/leader.png`}
+              src={`${ASSET_BASE}/leader.webp`}
               alt="Arsalynk Group leadership"
               className="absolute bottom-0 left-1/2 h-[94.18%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom"
             />
@@ -255,7 +255,7 @@ export default function CompanyLeadershipPage() {
             key={`bg-${index}`}
             src={slide.image}
             alt=""
-            className={`absolute bottom-[-35px] left-1/2 h-[1045px] w-[2014px] max-w-none -translate-x-1/2 object-cover grayscale transition-opacity duration-700 max-[1024px]:h-full max-[1024px]:w-full max-[1024px]:bottom-0 ${
+            className={`absolute inset-0 h-full w-full object-cover object-top grayscale transition-opacity duration-700 ${
               activeSlide === index ? 'opacity-100 z-0' : 'opacity-0 -z-10'
             }`}
           />
@@ -396,7 +396,7 @@ export default function CompanyLeadershipPage() {
               className="group relative overflow-hidden rounded-[24px] bg-[#8C8C8C] no-underline aspect-[835/500]"
             >
               <img
-                src={`${ASSET_BASE}/corporate-profile.png`}
+                src="/images/shared/corporate-profile-card.webp"
                 alt="Corporate Profile"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
@@ -411,7 +411,7 @@ export default function CompanyLeadershipPage() {
               className="group relative overflow-hidden rounded-[24px] bg-[#8C8C8C] no-underline aspect-[835/500]"
             >
               <img
-                src={`${ASSET_BASE}/ecosystem-philosophy.png`}
+                src="/images/shared/ecosystem-philosophy-card.webp"
                 alt="Ecosystem Philosophy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />

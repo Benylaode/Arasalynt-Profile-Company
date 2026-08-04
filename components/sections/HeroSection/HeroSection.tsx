@@ -186,11 +186,11 @@ export default function HeroSection() {
               : '-translate-y-3 opacity-0'
           }`}
         >
-          <h1 className="m-0 max-w-[1150px] whitespace-pre-line font-heading text-[clamp(42px,5vw,84px)] font-normal leading-[1.03] tracking-[-0.015em] text-[#F7F7F7] max-[768px]:max-w-[680px] max-[768px]:text-[clamp(34px,8.5vw,52px)]">
+          <h1 className="type-t3 m-0 max-w-[1150px] whitespace-pre-line text-[#F7F7F7] max-[768px]:max-w-[680px] max-[768px]:text-[clamp(34px,8.5vw,52px)]">
             {slide.headline}
           </h1>
 
-          <p className="mx-auto mb-0 mt-6 max-w-[800px] whitespace-pre-line font-body text-[18px] font-normal leading-[26px] text-[#F7F7F7] max-[1024px]:mt-5 max-[1024px]:max-w-[700px] max-[1024px]:text-[16px] max-[768px]:mt-4 max-[768px]:max-w-[560px] max-[768px]:text-[15px] max-[768px]:leading-6 max-[480px]:text-[14px]">
+          <p className="mx-auto max-w-[880px] font-normal text-[clamp(15px,1.042vw,20px)] leading-[1.6] tracking-[0.02em] text-[#D9D9D9]">
             {slide.body}
           </p>
 

@@ -85,6 +85,50 @@ const PROJECTS: Project[] = [
     year: 2025,
     featured: false,
   },
+  {
+    id: 6,
+    title: 'Kajian Kelayakan Pengembangan Gedung Industri Kreatif (GIK) sebagai Destinasi Wisata Belanja Oleh-Oleh Khas Kota Semarang',
+    slug: 'kajian-kelayakan-gik',
+    image: '/images/projects/kajian-kelayakan-gik/1.webp',
+    corporation: 'Artic Analytica',
+    industry: 'Data & Research',
+    service: 'Feasibility Study',
+    year: 2026,
+    featured: false,
+  },
+  {
+    id: 7,
+    title: 'Penyusunan Buku Panduan Perubahan Perilaku Pendampingan Keluarga Dalam Upaya Percepatan Penurunan Risiko Stunting di Tingkat Kelurahan',
+    slug: 'panduan-perubahan-perilaku-stunting',
+    image: '/images/projects/panduan-perubahan-perilaku-stunting/1.webp',
+    corporation: 'Artic Analytica',
+    industry: 'Data & Research',
+    service: 'Social Research',
+    year: 2026,
+    featured: false,
+  },
+  {
+    id: 8,
+    title: 'Desain Pelatihan Wasit Kota Semarang',
+    slug: 'desain-pelatihan-wasit-semarang',
+    image: '/images/projects/desain-pelatihan-wasit-semarang/1.webp',
+    corporation: 'The Drafroom',
+    industry: 'Media & Creative',
+    service: 'Training Design',
+    year: 2026,
+    featured: false,
+  },
+  {
+    id: 9,
+    title: 'Produksi Konten Video Portret Padel Arena',
+    slug: 'video-portret-padel-arena',
+    image: '/images/projects/video-portret-padel-arena/1.webp',
+    corporation: 'LoxLive',
+    industry: 'Media & Creative',
+    service: 'Video Production',
+    year: 2026,
+    featured: false,
+  },
 ];
 
 const CORPORATION_OPTIONS = [
@@ -93,11 +137,14 @@ const CORPORATION_OPTIONS = [
   'MyBoss',
   'Altatic',
   'Web Media',
+  'The Drafroom',
+  'LoxLive',
 ];
 
 const INDUSTRY_OPTIONS = [
   'Web Platform',
   'Data & Analytics',
+  'Data & Research',
   'IT Infrastructure',
   'Media & Creative',
 ];
@@ -160,6 +207,12 @@ function WorkMeta({ project, featured = false }: { project: Project; featured?: 
 }
 
 function ProjectCard({ project }: { project: Project }) {
+  const titleSize = project.title.length > 110
+    ? 'text-[clamp(16px,1.25vw,24px)] leading-[1.2]'
+    : project.title.length > 70
+      ? 'text-[clamp(18px,1.6vw,30px)] leading-[1.15]'
+      : 'text-[clamp(20px,2.19vw,42px)] leading-[1.1]';
+
   return (
     <Link
       href={project.slug ? `/our-works/${project.slug}` : '#'}
@@ -172,7 +225,7 @@ function ProjectCard({ project }: { project: Project }) {
 
       <div className="absolute bottom-[clamp(20px,2.08vw,40px)] left-[clamp(20px,2.03vw,39px)] right-[clamp(20px,2.03vw,39px)] z-10 flex items-end justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <h3 className="max-w-[702px] font-heading text-[clamp(20px,2.19vw,42px)] font-medium leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">
+          <h3 className={`max-w-[702px] font-heading font-medium tracking-[-0.01em] text-[#F7F7F7] ${titleSize}`}>
             {project.title}
           </h3>
           <div className="mt-[clamp(8px,0.84vw,16px)]">
@@ -228,7 +281,7 @@ function EmptyState() {
   return (
     <div className="flex min-h-[440px] w-full flex-col items-center justify-center gap-5 rounded-[20px] bg-[rgba(153,166,231,0.1)] px-5 py-12 text-center md:min-h-[520px] md:gap-6 md:rounded-[24px] xl:min-h-[604px] xl:px-9 xl:pb-[72px] xl:pt-[42px]">
       <img
-        src="/images/our-works/no-results-illustration.png"
+        src="/images/our-works/no-results-illustration.webp"
         alt="No results illustration"
         className="h-[190px] w-[190px] object-contain md:h-[250px] md:w-[250px] xl:h-[319px] xl:w-[319px]"
       />
@@ -378,10 +431,10 @@ export default function OurWorksPage() {
       <section
         id="hero"
         aria-label="Our Works Hero"
-        className="relative isolate h-[560px] w-full overflow-hidden rounded-b-[24px] bg-[#101010] md:h-[680px] md:rounded-b-[34px] xl:h-[800px] xl:rounded-b-[42px]"
+        className="relative isolate h-[710px] w-full overflow-hidden rounded-b-[42px] bg-[#101010] max-[1024px]:h-[620px] max-[768px]:h-[560px] max-[768px]:rounded-b-[28px]"
       >
         <img
-          src="/images/our-works/our-works-hero-bg.png"
+          src="/images/our-works/our-works-hero-bg.webp"
           alt=""
           aria-hidden="true"
           className="absolute left-1/2 top-1/2 z-0 h-auto min-h-[166%] w-[104%] min-w-[1100px] max-w-none object-cover"

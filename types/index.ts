@@ -74,3 +74,51 @@ export interface TestimonialItem {
   avatar: string;
 }
 
+/* ─── Article & Section Types for Case Studies and Leadership Thoughts ─── */
+
+export interface ArticleSubsection {
+  subtitle: string;
+  content: string;
+}
+
+export interface ArticleSection {
+  eyebrow?: string;
+  mainTitle: string;
+  paragraphs?: string[];
+  image?: {
+    src: string;
+    alt: string;
+  };
+  subsections?: ArticleSubsection[];
+}
+
+export interface CaseStudyArticle {
+  id: number | string;
+  slug: string;
+  title: string;
+  category: 'INSIGHT' | 'PROJECT STORIES' | string;
+  tags: string[];
+  dateLabel: string;
+  dateValue: string;
+  description: string;
+  coverImage: string;
+  coverImageAlt: string;
+  sections: ArticleSection[];
+}
+
+export interface LeadershipThoughtArticle {
+  id: number | string;
+  slug: string;
+  title: string;
+  category: string;
+  tags: string[];
+  author: string;
+  readTime: string;
+  date: string;
+  description: string;
+  coverImage: string;
+  coverImageAlt: string;
+  sections: ArticleSection[];
+}
+
+
