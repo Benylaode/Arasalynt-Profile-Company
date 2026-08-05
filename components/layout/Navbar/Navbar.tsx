@@ -977,11 +977,11 @@ export default function Navbar() {
 
         <div
           className="
-            relative z-10 mx-auto
-            grid h-full w-[88%] max-w-[1980px]
+            site-shell relative z-10
+            grid h-full
             grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]
             items-center
-            px-0 max-[1199px]:w-[92%] max-[1199px]:grid-cols-[1fr_auto]
+            px-0 max-[1199px]:grid-cols-[1fr_auto]
           "
         >
           {/* Logo */}

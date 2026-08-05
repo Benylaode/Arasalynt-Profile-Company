@@ -86,6 +86,14 @@
   --container-max:     1980px;
   --container-content: 1315px;
   --container-narrow:  921px;
+  --site-inline-padding: clamp(4vw, calc(8.286vw - 32.9px), 6vw);
+}
+
+/* Shared page edge: 92% on small screens, fluid through laptop widths, 88% on desktop. */
+.site-shell {
+  width: calc(100% - (2 * var(--site-inline-padding)));
+  max-width: var(--container-max);
+  margin-inline: auto;
 }
 
 /* Desktop (≥1024px): MV Padding = 6.3vw — berlaku untuk semua ukuran desktop */

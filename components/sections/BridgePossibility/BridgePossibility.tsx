@@ -49,7 +49,7 @@ export default function BridgePossibility() {
         }}
       />
 
-      <div className="relative z-10 mx-auto grid w-[88%] max-w-[1980px] grid-cols-1 items-center gap-8 px-0 max-[1199px]:w-[92%] lg:grid-cols-[55%_45%] lg:gap-12">
+      <div className="site-shell relative z-10 grid grid-cols-1 items-center gap-8 px-0 lg:grid-cols-[55%_45%] lg:gap-12">
         
         {/* Left Side (55%): Interactive Globe Visual & Floating Glass Cards */}
         <div className={`${styles.visual} relative isolate w-full max-w-[755px] aspect-[755/640] mx-auto flex items-center justify-center`}>

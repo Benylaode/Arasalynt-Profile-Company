@@ -475,7 +475,7 @@ export default async function BusinessSlugPage({
         />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-b from-transparent to-[#101010]" />
 
-        <div className="relative z-10 mx-auto flex w-[88%] max-w-[1980px] flex-col gap-16 px-0 max-[1199px]:w-[92%]">
+        <div className="site-shell relative z-10 flex flex-col gap-16 px-0">
           <div className="mx-auto flex max-w-[841px] flex-col items-center gap-4 text-center">
             <Label tone="lime">{biz.servicesLabel ?? 'OUR SOLUTIONS'}</Label>
             <h2 className="font-heading text-[clamp(46px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#F7F7F7]">
@@ -521,7 +521,7 @@ export default async function BusinessSlugPage({
         />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[440px] bg-gradient-to-b from-[#101010] via-[#101010]/80 to-transparent" />
 
-        <div className="relative z-10 mx-auto flex w-[88%] max-w-[1980px] flex-col items-center gap-8 px-0 text-center max-[1199px]:w-[92%]">
+        <div className="site-shell relative z-10 flex flex-col items-center gap-8 px-0 text-center">
           <Label tone="lime">{biz.visionLabel ?? 'OUR VISION'}</Label>
           <p
             className={`font-heading font-semibold tracking-[-0.01em] text-[#F7F7F7] ${
@@ -643,7 +643,7 @@ export default async function BusinessSlugPage({
               />
             ))}
 
-            <div className="mx-auto mb-[42px] flex w-[88%] max-w-[1980px] items-end justify-between gap-8 px-0 max-[1199px]:w-[92%]">
+            <div className="site-shell mb-[42px] flex items-end justify-between gap-8 px-0">
               <h2 className="font-heading text-[clamp(42px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
                 {biz.otherBusinessesTitle ?? 'Explore Other Business'}
               </h2>

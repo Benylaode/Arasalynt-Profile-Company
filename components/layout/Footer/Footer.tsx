@@ -115,7 +115,7 @@ export default function Footer() {
       className={`${manrope.className} w-full bg-[#101010] text-[#D9D9D9]`}
       style={{ fontSynthesis: 'none', textRendering: 'geometricPrecision' }}
     >
-      <div className="mx-auto w-[88%] max-w-[1980px] px-0 pt-[60px] max-[1199px]:w-[92%] max-[767px]:pt-[40px]">
+      <div className="site-shell px-0 pt-[60px] max-[767px]:pt-[40px]">
         <div className="flex flex-col gap-[40px] max-[767px]:gap-[34px]">
           <div className="flex h-[70px] items-start max-[767px]:h-auto">
             <Link href="/" aria-label="Arsalynk home" className="inline-flex no-underline">

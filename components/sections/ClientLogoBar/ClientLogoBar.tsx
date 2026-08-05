@@ -26,8 +26,11 @@ export default function ClientLogoBar() {
   const doubledBrands = [...BRANDS, ...BRANDS];
 
   return (
-    <section className="bg-[#F7F7F7] py-[48px] max-[768px]:py-[36px] overflow-hidden" aria-label="Trusted by leading companies">
-      <div className="mx-auto flex w-[88%] max-w-[1980px] flex-col items-center gap-[32px] px-0 max-[1199px]:w-[92%] max-[768px]:gap-[24px]">
+    <section
+      className="relative z-[2] -mb-[2px] isolate overflow-hidden border-0 bg-[#F7F7F7] py-[48px] shadow-none outline-none after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:z-20 after:h-[3px] after:bg-[#F7F7F7] after:content-[''] max-[768px]:py-[36px]"
+      aria-label="Trusted by leading companies"
+    >
+      <div className="site-shell flex flex-col items-center gap-[32px] px-0 max-[768px]:gap-[24px]">
         <div className="text-center">
           <div className="inline-flex items-center gap-[5px] text-[#1A3E9E]">
             <span className="h-[7px] w-[7px] shrink-0 bg-[#1A3E9E]" aria-hidden="true" />

@@ -96,13 +96,13 @@ export default function GrowthMetrics() {
         }}
       />
 
-      <div className="relative z-10 mx-auto w-[88%] max-w-[1980px] px-0 pt-[40px] pb-[40px] max-[1199px]:w-[92%] max-[1024px]:pt-[20px] max-[1024px]:pb-[20px]">
+      <div className="site-shell relative z-10 px-0 pb-[40px] pt-[40px] max-[1024px]:pb-[20px] max-[1024px]:pt-[20px]">
         
         {/* Main Grid */}
-        <div className="grid grid-cols-[806px_830px] gap-x-[64px] max-[1440px]:grid-cols-[1fr_1.1fr] max-[1024px]:grid-cols-1 max-[1024px]:gap-y-[64px]">
+        <div className="grid min-w-0 grid-cols-[minmax(0,0.97fr)_minmax(0,1.03fr)] gap-x-[clamp(32px,3.333vw,64px)] max-[1024px]:grid-cols-1 max-[1024px]:gap-y-[64px]">
           
           {/* Left Column: Heading Area */}
-          <div className="pt-[7px] max-[1024px]:pt-0">
+          <div className="min-w-0 pt-[7px] max-[1024px]:pt-0">
             {/* Label */}
             <div className={`flex items-center gap-2 mb-6 ${revealBase} delay-0`}>
               <span className="w-1.5 h-1.5 bg-[#E6FF2A] shrink-0" />
@@ -121,7 +121,7 @@ export default function GrowthMetrics() {
           </div>
 
           {/* Right Column: Cards Area */}
-          <div className="flex flex-col gap-[20px]">
+          <div className="flex min-w-0 flex-col gap-[20px]">
             
             {/* Card 1 */}
             <div className={`group relative h-auto w-full overflow-hidden rounded-[20px] border border-[#F5F5F5]/50 p-[16px] transition-[border-color,box-shadow] duration-500 hover:border-[#E6FF2A]/70 hover:shadow-[0_14px_38px_rgba(0,0,0,0.22)] lg:p-[20px] ${revealBase} delay-[120ms]`} style={{ background: 'linear-gradient(143deg, rgba(16,16,16,0.78) 10%, rgba(41,54,66,0.72) 100%)' }}>

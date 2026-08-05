@@ -66,7 +66,7 @@ export default function ProjectShowcase() {
 
   return (
     <section className="relative overflow-x-hidden bg-[#F7F7F7] py-[100px] max-[767px]:py-[64px]" id="portfolio" aria-label="We Build It All">
-      <div className="mx-auto mb-[48px] w-[88%] max-w-[1980px] px-0 max-[1199px]:w-[92%]">
+      <div className="site-shell mb-[48px] px-0">
         <div className="flex flex-col min-[1024px]:flex-row min-[1024px]:items-end justify-between gap-8">
           <div>
             <div className="flex items-center gap-[9px] mb-4">
@@ -108,7 +108,7 @@ export default function ProjectShowcase() {
         </div>
       </div>
 
-      <div className="mx-auto hidden w-[92%] max-w-[1980px] flex-col gap-[12px] px-0 max-[767px]:flex">
+      <div className="site-shell hidden flex-col gap-[12px] px-0 max-[767px]:flex">
         {filteredProjects.map((project) => (
           <a
             key={project.id}
