@@ -137,7 +137,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: 'Contact',
     links: [
-      { label: 'hello@arsalynt.com', href: 'mailto:hello@arsalynt.com' },
+      { label: 'hello@arsalynk.com', href: 'mailto:hello@arsalynk.com' },
       { label: '+62 812 3456 7890', href: 'tel:+6281234567890' },
       { label: 'Jakarta, Indonesia', href: '#' },
     ],
@@ -150,4 +150,3 @@ export const SITE_NAME = 'Arsalynk';
 export const SITE_DESCRIPTION =
   'Arsalynk builds unified enterprise ecosystems — integrated technology solutions for resilient, scalable, and intelligent business operations.';
 export const SITE_URL = 'https://arsalynk.com';
-

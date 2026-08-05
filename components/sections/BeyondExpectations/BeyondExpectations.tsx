@@ -24,7 +24,7 @@ export default function BeyondExpectations() {
     <section
       id="beyond-expectations"
       aria-label="Beyond Expectations CTA"
-      className="relative isolate flex min-h-[clamp(450px,32vw,615px)] w-full items-center justify-center overflow-hidden bg-[#101010] px-[clamp(24px,5.729vw,110px)] py-[clamp(80px,6.563vw,126px)] text-center max-[480px]:px-[16px]"
+      className="relative isolate flex min-h-[clamp(450px,32vw,615px)] w-full items-center justify-center overflow-hidden bg-[#101010] px-[6vw] py-[clamp(80px,6.563vw,126px)] text-center max-[1199px]:px-[4vw]"
     >
       {/* SVG Background Layer */}
       <div className="absolute inset-0 -z-20 pointer-events-none flex items-center justify-center">

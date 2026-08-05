@@ -1,6 +1,6 @@
 /* ==========================================================================
    DUMMY DATA — Business Pages Seed
-   Semua data bisnis Arsalynt untuk di-seed ke SQLite
+   Semua data bisnis Arsalynk untuk di-seed ke SQLite
    ========================================================================== */
 
 import type { BusinessPage } from '@/lib/business.types';
@@ -1130,14 +1130,14 @@ export const TESTIMONIALS_DUMMY_DATA = [
     id: 2,
     name: "NINA PRATIWI",
     role: "IT Director at Sinar Mas",
-    text: "Sangat puas dengan layanan IT Solution dari Arsalynt. Sistem kami sekarang jauh lebih stabil dan cepat. Tim support-nya juga sangat responsif dan professional. Sangat direkomendasikan untuk enterprise!",
+    text: "Sangat puas dengan layanan IT Solution dari Arsalynk. Sistem kami sekarang jauh lebih stabil dan cepat. Tim support-nya juga sangat responsif dan professional. Sangat direkomendasikan untuk enterprise!",
     avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop",
   },
   {
     id: 3,
     name: "BUDI SETIAWAN",
     role: "Chief Technology Officer at GOTO Logistics",
-    text: "Arsalynt membantu kami melakukan integrasi sistem logistik nasional secara mulus. Arsitektur cloud mereka sangat tangguh dan andal untuk menangani beban transaksi dengan volume sangat tinggi.",
+    text: "Arsalynk membantu kami melakukan integrasi sistem logistik nasional secara mulus. Arsitektur cloud mereka sangat tangguh dan andal untuk menangani beban transaksi dengan volume sangat tinggi.",
     avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop",
   },
 ];
@@ -1342,7 +1342,7 @@ const LEGACY_LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
     title: 'Building High-Performance Teams Starts with Trust, Not Control',
     category: 'LEADERSHIP INSIGHTS',
     tags: ['LEADERSHIP', 'CULTURE', 'MANAGEMENT'],
-    author: 'Arsalynt Executive Team',
+    author: 'Arsalynk Executive Team',
     readTime: '6 min read',
     date: 'July 2026',
     description: 'The most effective leaders don\'t manage from a position of authority — they create environments where trust becomes the operating system of performance.',
@@ -1397,7 +1397,7 @@ const LEGACY_LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
     title: 'Why We Prioritize Process Before Technology',
     category: 'STRATEGIC THINKING',
     tags: ['STRATEGY', 'OPERATIONS', 'PROCESS DESIGN'],
-    author: 'Arsalynt Executive Team',
+    author: 'Arsalynk Executive Team',
     readTime: '5 min read',
     date: 'June 2026',
     description: 'Investing in technology without a solid operational foundation is like building a skyscraper on sand. Here\'s how we help organisations get the order right.',
@@ -1440,7 +1440,7 @@ const LEGACY_LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
     title: 'Lessons from Scaling Cross-Functional Collaboration',
     category: 'ORGANISATIONAL GROWTH',
     tags: ['GROWTH', 'COLLABORATION', 'SCALING'],
-    author: 'Arsalynt Executive Team',
+    author: 'Arsalynk Executive Team',
     readTime: '7 min read',
     date: 'June 2026',
     description: 'Scaling a business isn\'t just about hiring more people — it\'s about designing systems that allow teams across disciplines to work as one unified force.',
@@ -1475,7 +1475,7 @@ const LEGACY_LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
   }
 ];
 
-/* Content aligned with the current Arsalynt project portfolio. */
+/* Content aligned with the current Arsalynk project portfolio. */
 export const CASE_STUDIES_DUMMY_DATA: CaseStudyArticle[] = [
   {
     id: 1,
@@ -1714,7 +1714,7 @@ export const LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
     title: 'Why Transformation Must Start with the Real Workflow',
     category: 'OPERATIONAL LEADERSHIP',
     tags: ['TRANSFORMATION', 'PROCESS DESIGN', 'TECHNOLOGY'],
-    author: 'Arsalynt Executive Team',
+    author: 'Arsalynk Executive Team',
     readTime: '6 min read',
     date: 'July 2026',
     description: 'Lessons from building integrated platforms: sustainable transformation begins by understanding how work truly moves before selecting the technology.',
@@ -1809,7 +1809,7 @@ export const LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
     title: 'Brand Trust Is Built Through Consistent Experience',
     category: 'BRAND LEADERSHIP',
     tags: ['BRAND', 'MEDIA', 'EXPERIENCE'],
-    author: 'Arsalynt Executive Team',
+    author: 'Arsalynk Executive Team',
     readTime: '4 min read',
     date: 'February 2026',
     description: 'From corporate platforms to sports films, trust grows when every audience touchpoint expresses the same promise with clarity.',

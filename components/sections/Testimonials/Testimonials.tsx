@@ -182,7 +182,7 @@ export default function Testimonials() {
       </div>
 
       {/* MOBILE & TABLET */}
-      <div className="relative mx-auto min-h-[700px] w-full overflow-hidden px-[clamp(1rem,5.6vw,6.75rem)] pb-[112px] pt-[72px] min-[1025px]:hidden max-[640px]:min-h-[720px] max-[640px]:px-[16px] max-[640px]:pt-[52px]">
+      <div className="relative mx-auto min-h-[700px] w-[92%] overflow-hidden px-0 pb-[112px] pt-[72px] min-[1025px]:hidden max-[640px]:min-h-[720px] max-[640px]:pt-[52px]">
         {/* Background logo mobile */}
         <img
           src="/images/componen/testi_bg.svg"
@@ -229,7 +229,7 @@ export default function Testimonials() {
         </div>
 
         {/* Mobile navigation buttons */}
-        <div className="absolute bottom-[34px] left-[clamp(1rem,5.6vw,6.75rem)] z-20 flex gap-[8px] max-[640px]:bottom-[26px] max-[640px]:left-[16px]">
+        <div className="absolute bottom-[34px] left-0 z-20 flex gap-[8px] max-[640px]:bottom-[26px]">
           <button
             type="button"
             onClick={previousSlide}
@@ -250,7 +250,7 @@ export default function Testimonials() {
         </div>
 
         {/* Mobile progress indicators di kanan bawah */}
-        <div className="absolute bottom-[56px] right-[clamp(1rem,5.6vw,6.75rem)] z-20 flex h-[8px] items-center gap-[8px] max-[640px]:bottom-[48px] max-[640px]:right-[16px]">
+        <div className="absolute bottom-[56px] right-0 z-20 flex h-[8px] items-center gap-[8px] max-[640px]:bottom-[48px]">
           {testimonials.map((t, index) => {
             const selected = index === activeIndex;
 

@@ -61,7 +61,7 @@ export async function submitLead(data: FormData | Record<string, any>): Promise<
     const notificationEmail =
       process.env.CONTACT_NOTIFICATION_EMAIL ||
       process.env.LEAD_RECIPIENT_EMAIL ||
-      'halo@arsalynt.com';
+      'halo@arsalynk.com';
 
     console.log(`[Lead #${leadId}] New inquiry received from ${name} (${email}). Notification targeted to: ${notificationEmail}`);
 

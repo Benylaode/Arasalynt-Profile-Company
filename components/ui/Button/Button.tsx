@@ -25,7 +25,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const baseClasses =
-    'inline-flex flex-row justify-center items-center gap-[10px] rounded-full font-body font-bold cursor-pointer transition-all duration-250 ease-in-out whitespace-nowrap no-underline active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E6FF2A] focus-visible:outline-offset-[3px]';
+    'inline-flex flex-row justify-center items-center gap-[10px] rounded-full font-body font-bold cursor-pointer transition-[color,background-color,border-color,transform,box-shadow] duration-250 ease-in-out whitespace-nowrap no-underline active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E6FF2A] focus-visible:outline-offset-[3px]';
 
   const variantClasses = {
     primary: 'bg-[#E6FF2A] text-[#0B0F19] font-extrabold hover:bg-[#d8f21d] hover:shadow-[0_8px_25px_rgba(230,255,42,0.3)] hover:-translate-y-[2px]',

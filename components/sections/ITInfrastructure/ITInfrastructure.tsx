@@ -236,15 +236,17 @@ function Pillar({
   targetScene,
   moving,
   hovered,
+  instance,
 }: {
   definition: PillarDefinition;
   targetScene: number;
   moving: boolean;
   hovered: boolean;
+  instance: 'desktop' | 'mobile';
 }) {
   const active = ACTIVE_PILLAR[targetScene] === definition.key;
   const targetY = definition.sceneY[targetScene];
-  const id = `service-pillar-${definition.key}`;
+  const id = `service-pillar-${instance}-${definition.key}`;
 
   const style: PillarStyle = {
     '--pillar-shift-y': stageShift(definition.baseY, targetY),
@@ -431,6 +433,7 @@ function Artwork({
             targetScene={targetScene}
             moving={moving}
             hovered={hoveredPillar === definition.key}
+            instance={mobile ? 'mobile' : 'desktop'}
           />
         ))}
       </div>

@@ -1,5 +1,7 @@
 'use client';
 
+import styles from './BridgePossibility.module.css';
+
 const PILLARS_DATA = [
   {
     id: 0,
@@ -28,11 +30,7 @@ export default function BridgePossibility() {
   return (
     <section
       id="about-us"
-      className="relative isolate w-full min-h-[900px] overflow-hidden text-white bg-bridge-radial pt-[100px] pb-[70px] max-[1024px]:py-[80px]"
-      style={{
-        /* Safari WebKit Isolation: Force hardware compositing context to prevent tile invalidation on scroll */
-        WebkitTransform: 'translate3d(0,0,0)',
-      }}
+      className="safari-paint-section relative isolate w-full min-h-[900px] overflow-hidden text-white bg-bridge-radial pt-[100px] pb-[70px] max-[1024px]:py-[80px]"
       aria-labelledby="bridge-possibility-heading"
     >
       {/* Background radial glow - Ellipse 1 from Figma design */}
@@ -40,7 +38,6 @@ export default function BridgePossibility() {
         className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] rounded-full pointer-events-none opacity-[0.48] z-0"
         style={{
           background: 'radial-gradient(ellipse at center, rgba(32, 132, 233, 0.85) 0%, rgba(32, 132, 233, 0.30) 40%, rgba(32, 132, 233, 0.08) 65%, transparent 79%)',
-          WebkitTransform: 'translate3d(-50%, -50%, 0)',
         }}
       />
       {/* Background radial glow - Ellipse 2 from Figma design */}
@@ -49,14 +46,13 @@ export default function BridgePossibility() {
         style={{
           background: 'radial-gradient(ellipse at center, rgba(77, 151, 255, 0.7) 0%, rgba(77, 151, 255, 0.2) 40%, transparent 79%)',
           mixBlendMode: 'plus-lighter' as React.CSSProperties['mixBlendMode'],
-          WebkitTransform: 'translate3d(-50%, -50%, 0)',
         }}
       />
 
-      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-[110px] max-[1280px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px] grid grid-cols-1 lg:grid-cols-[55%_45%] gap-8 lg:gap-12 items-center">
+      <div className="relative z-10 mx-auto grid w-[88%] max-w-[1980px] grid-cols-1 items-center gap-8 px-0 max-[1199px]:w-[92%] lg:grid-cols-[55%_45%] lg:gap-12">
         
         {/* Left Side (55%): Interactive Globe Visual & Floating Glass Cards */}
-        <div className="relative isolate w-full max-w-[755px] aspect-[755/640] mx-auto flex items-center justify-center">
+        <div className={`${styles.visual} relative isolate w-full max-w-[755px] aspect-[755/640] mx-auto flex items-center justify-center`}>
           {/* Bercak biru #1A3E9E khusus di belakang globe.
               Dibuat sebagai layer terpisah agar terlihat keluar dari tepi globe. */}
           <div
@@ -67,32 +63,28 @@ export default function BridgePossibility() {
               className="absolute left-[17%] top-[20%] h-[24%] w-[30%] rounded-[46%_54%_62%_38%] bg-[#1A3E9E] opacity-95 blur-[34px]"
               style={{
                 boxShadow: '0 0 90px 26px rgba(26,62,158,0.72)',
-                transform: 'rotate(-18deg) translateZ(0)',
-                WebkitTransform: 'rotate(-18deg) translateZ(0)',
+                transform: 'rotate(-18deg)',
               }}
             />
             <span
               className="absolute right-[12%] top-[21%] h-[27%] w-[29%] rounded-[58%_42%_36%_64%] bg-[#1A3E9E] opacity-90 blur-[38px]"
               style={{
                 boxShadow: '0 0 96px 30px rgba(26,62,158,0.68)',
-                transform: 'rotate(22deg) translateZ(0)',
-                WebkitTransform: 'rotate(22deg) translateZ(0)',
+                transform: 'rotate(22deg)',
               }}
             />
             <span
               className="absolute bottom-[13%] left-[18%] h-[25%] w-[28%] rounded-[62%_38%_55%_45%] bg-[#1A3E9E] opacity-85 blur-[36px]"
               style={{
                 boxShadow: '0 0 88px 24px rgba(26,62,158,0.64)',
-                transform: 'rotate(14deg) translateZ(0)',
-                WebkitTransform: 'rotate(14deg) translateZ(0)',
+                transform: 'rotate(14deg)',
               }}
             />
             <span
               className="absolute bottom-[16%] right-[13%] h-[23%] w-[27%] rounded-[38%_62%_48%_52%] bg-[#1A3E9E] opacity-90 blur-[35px]"
               style={{
                 boxShadow: '0 0 90px 26px rgba(26,62,158,0.67)',
-                transform: 'rotate(-16deg) translateZ(0)',
-                WebkitTransform: 'rotate(-16deg) translateZ(0)',
+                transform: 'rotate(-16deg)',
               }}
             />
             <span
@@ -116,7 +108,7 @@ export default function BridgePossibility() {
     -translate-x-1/2
     -translate-y-1/2
     select-none
-    animate-float-y
+    animate-float-y safari-motion-layer
   "
 >
   {/* Globe */}
@@ -213,28 +205,26 @@ export default function BridgePossibility() {
           />
 
           {/* Floating Glass Pillar Cards Layout */}
-          <div className="relative z-[5] mx-auto flex h-full w-full max-h-[520px] max-w-[600px] flex-col justify-between px-4 py-4 max-[500px]:gap-10">
+          <div className={`${styles.cards} relative z-[5] mx-auto flex h-full w-full max-h-[520px] max-w-[600px] flex-col justify-between px-4 py-4 max-[500px]:gap-10`}>
             
             {/* Pillar 01 Card Container - Top Left */}
-            <div className="relative self-start w-[242px] max-[640px]:w-full mt-6">
+            <div className={`${styles.card} ${styles.cardOne} relative self-start w-[242px] max-[640px]:w-full mt-6`}>
               {/* Anchored Slender Outline 01 Number */}
               <div 
-                className="absolute -top-25 left-17 max-[640px]:left-6 font-heading font-semibold text-[180px] max-[1280px]:text-[145px] max-[640px]:text-[105px] leading-none text-transparent opacity-85 pointer-events-none z-[1] select-none"
+                className={`${styles.number} absolute -top-25 left-17 max-[640px]:left-6 font-heading font-semibold text-[180px] max-[1280px]:text-[145px] max-[640px]:text-[105px] leading-none text-transparent opacity-85 pointer-events-none z-[1] select-none`}
                 style={{ WebkitTextStroke: '1px #E6FF2A' }}
               >
                 01
               </div>
 
               {/* SVG Preserved Glass Card Surface (328x164px Scaled 0.74 -> 242x121px) */}
-              <div className="relative h-[121px] w-[242px]">
+              <div className={`${styles.cardViewport} relative h-[121px] w-[242px] overflow-hidden rounded-[12px]`}>
                 <div 
-                  className="relative z-[2] h-[164px] w-[328px] origin-top-left overflow-hidden rounded-[16px] border border-[rgba(198,198,198,0.45)] bg-[rgba(255,255,255,0.15)] px-[24px] py-[24px] backdrop-blur-[12.5px]"
+                  className={`${styles.cardSurface} safari-motion-layer relative z-[2] h-[164px] w-[328px] origin-top-left border border-[rgba(198,198,198,0.45)] bg-[rgba(255,255,255,0.15)] px-[24px] py-[24px] backdrop-blur-[12.5px]`}
                   style={{
-                    transform: 'scale(0.74) translateZ(0)',
+                    transform: 'scale(0.74)',
                     transformOrigin: 'top left',
                     WebkitBackdropFilter: 'blur(12.5px)',
-                    WebkitMaskImage: '-webkit-radial-gradient(white, black)',
-                    WebkitTransform: 'scale(0.74) translateZ(0)',
                   }}
                 >
                   <span className="block font-body text-[14px] font-medium uppercase leading-[17px] tracking-normal text-[#F7F7F7]">
@@ -257,25 +247,23 @@ export default function BridgePossibility() {
             </div>
 
             {/* Pillar 02 Card Container - Center Right */}
-            <div className="relative self-end w-[242px] translate-y-[30px] max-[640px]:w-full max-[640px]:translate-y-0">
+            <div className={`${styles.card} ${styles.cardTwo} relative self-end w-[242px] translate-y-[30px] max-[640px]:w-full max-[640px]:translate-y-0`}>
               {/* Anchored Slender Outline 02 Number */}
               <div 
-                className="absolute -top-32 left-10 max-[640px]:left-4 font-heading font-semibold text-[180px] max-[1280px]:text-[145px] max-[640px]:text-[105px] leading-none text-transparent opacity-85 pointer-events-none z-[1] select-none"
+                className={`${styles.number} absolute -top-32 left-10 max-[640px]:left-4 font-heading font-semibold text-[180px] max-[1280px]:text-[145px] max-[640px]:text-[105px] leading-none text-transparent opacity-85 pointer-events-none z-[1] select-none`}
                 style={{ WebkitTextStroke: '1px #E6FF2A' }}
               >
                 02
               </div>
 
               {/* SVG Preserved Glass Card Surface (328x164px Scaled 0.74 -> 242x121px) */}
-              <div className="relative h-[121px] w-[242px]">
+              <div className={`${styles.cardViewport} relative h-[121px] w-[242px] overflow-hidden rounded-[12px]`}>
                 <div 
-                  className="relative z-[2] h-[164px] w-[328px] origin-top-left overflow-hidden rounded-[16px] border border-[rgba(198,198,198,0.45)] bg-[rgba(255,255,255,0.15)] px-[24px] py-[24px] backdrop-blur-[12.5px]"
+                  className={`${styles.cardSurface} safari-motion-layer relative z-[2] h-[164px] w-[328px] origin-top-left border border-[rgba(198,198,198,0.45)] bg-[rgba(255,255,255,0.15)] px-[24px] py-[24px] backdrop-blur-[12.5px]`}
                   style={{
-                    transform: 'scale(0.74) translateZ(0)',
+                    transform: 'scale(0.74)',
                     transformOrigin: 'top left',
                     WebkitBackdropFilter: 'blur(12.5px)',
-                    WebkitMaskImage: '-webkit-radial-gradient(white, black)',
-                    WebkitTransform: 'scale(0.74) translateZ(0)',
                   }}
                 >
                   <span className="block font-body text-[14px] font-medium uppercase leading-[17px] tracking-normal text-[#F7F7F7]">
@@ -298,25 +286,23 @@ export default function BridgePossibility() {
             </div>
 
             {/* Pillar 03 Card Container - Bottom Left */}
-            <div className="relative self-start w-[242px] max-[640px]:w-full mb-6">
+            <div className={`${styles.card} ${styles.cardThree} relative self-start w-[242px] max-[640px]:w-full mb-6`}>
               {/* Anchored Slender Outline 03 Number */}
               <div 
-                className="absolute -top-29 left-0 font-heading font-semibold text-[180px] max-[1280px]:text-[145px] max-[640px]:text-[105px] leading-none text-transparent opacity-85 pointer-events-none z-[1] select-none"
+                className={`${styles.number} absolute -top-29 left-0 font-heading font-semibold text-[180px] max-[1280px]:text-[145px] max-[640px]:text-[105px] leading-none text-transparent opacity-85 pointer-events-none z-[1] select-none`}
                 style={{ WebkitTextStroke: '1px #E6FF2A' }}
               >
                 03
               </div>
 
               {/* SVG Preserved Glass Card Surface (328x164px Scaled 0.74 -> 242x121px) */}
-              <div className="relative h-[121px] w-[242px]">
+              <div className={`${styles.cardViewport} relative h-[121px] w-[242px] overflow-hidden rounded-[12px]`}>
                 <div 
-                  className="relative z-[2] h-[164px] w-[328px] origin-top-left overflow-hidden rounded-[16px] border border-[rgba(198,198,198,0.45)] bg-[rgba(255,255,255,0.15)] px-[24px] py-[24px] backdrop-blur-[12.5px]"
+                  className={`${styles.cardSurface} safari-motion-layer relative z-[2] h-[164px] w-[328px] origin-top-left border border-[rgba(198,198,198,0.45)] bg-[rgba(255,255,255,0.15)] px-[24px] py-[24px] backdrop-blur-[12.5px]`}
                   style={{
-                    transform: 'scale(0.74) translateZ(0)',
+                    transform: 'scale(0.74)',
                     transformOrigin: 'top left',
                     WebkitBackdropFilter: 'blur(12.5px)',
-                    WebkitMaskImage: '-webkit-radial-gradient(white, black)',
-                    WebkitTransform: 'scale(0.74) translateZ(0)',
                   }}
                 >
                   <span className="block font-body text-[14px] font-medium uppercase leading-[17px] tracking-normal text-[#F7F7F7]">
@@ -358,7 +344,7 @@ export default function BridgePossibility() {
           </h2>
 
           <p className="w-full font-body text-[14px] font-normal leading-relaxed text-white/85 max-w-[400px] max-[100px]:text-[11px]">
-            Arsalynt was built on a singular belief: the greatest challenge
+            Arsalynk was built on a singular belief: the greatest challenge
             facing modern organizations isn&apos;t ambition — it&apos;s
             fragmentation. As complexity grows, disconnected capabilities
             weaken execution and limit long-term value.
@@ -367,7 +353,7 @@ export default function BridgePossibility() {
           <div className="pt-4">
             <a 
               href="#about-us" 
-              className="inline-flex items-center justify-center px-8 py-4 bg-[#E6FF2A] text-[#101010] font-body text-[14px] font-extrabold uppercase tracking-wider rounded-full no-underline transition-all duration-200 hover:bg-[#d8f21d] hover:shadow-[0_8px_25px_rgba(230,255,42,0.35)] hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center px-8 py-4 bg-[#E6FF2A] text-[#101010] font-body text-[14px] font-extrabold uppercase tracking-wider rounded-full no-underline transition-[background-color,transform,box-shadow] duration-200 hover:bg-[#d8f21d] hover:shadow-[0_8px_25px_rgba(230,255,42,0.35)] hover:-translate-y-0.5"
             >
               LEARN ABOUT US
             </a>

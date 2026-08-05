@@ -8,7 +8,7 @@ const ABOUT_CARDS = [
     title: <>Corporate<br />Profile</>,
     alt: 'Corporate Profile',
     image: '/images/shared/corporate-profile-card.webp',
-    imageClassName: 'h-[564px] w-[564px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
+    imageClassName: 'inset-0 h-full w-full object-center',
     shade: 'bg-black/20',
     gradientClassName: 'inset-0 bg-gradient-to-t from-black to-transparent',
   },
@@ -16,19 +16,19 @@ const ABOUT_CARDS = [
     href: '/about-us/company-leadership',
     title: <>Company<br />Leadership</>,
     alt: 'Company Leadership',
-    image: '/images/shared/leadership-portrait.webp',
-    imageClassName: 'h-[659px] w-[659px] left-[-56.5px] top-[-111.5px]',
-    shade: 'bg-black/30',
-    gradientClassName: 'left-0 right-0 bottom-0 h-[301px] bg-gradient-to-t from-black to-transparent',
+    image: '/images/about-us/company-leadership-hero.png',
+    imageClassName: 'inset-0 h-full w-full object-center',
+    shade: 'bg-black/10',
+    gradientClassName: 'left-0 right-0 bottom-0 h-[58%] bg-gradient-to-t from-black via-black/55 to-transparent',
   },
   {
     href: '/about-us/ecosystem-philosophy',
     title: <>Ecosystem<br />Philosophy</>,
     alt: 'Ecosystem Philosophy',
-    image: '/images/shared/ecosystem-philosophy-card.webp',
-    imageClassName: 'h-[670px] w-[670px] left-[-58px] top-[-108px]',
-    shade: 'bg-black/20',
-    gradientClassName: 'left-0 right-0 bottom-0 h-[301px] bg-gradient-to-t from-black to-transparent',
+    image: '/images/about-us/ecosystem-philosophy-hero.png',
+    imageClassName: 'inset-0 h-full w-full object-center',
+    shade: 'bg-black/10',
+    gradientClassName: 'left-0 right-0 bottom-0 h-[58%] bg-gradient-to-t from-black via-black/55 to-transparent',
   },
 ] as const;
 
@@ -59,16 +59,16 @@ export default function AboutUsPage() {
       <section
         id="hero"
         aria-label="About Arsalynk Hero"
-        className="relative h-[710px] w-full overflow-hidden rounded-b-[42px] bg-[#020714] max-[1024px]:h-[620px] max-[768px]:h-[560px] max-[768px]:rounded-b-[28px]"
+        className="relative h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#020714] max-[640px]:rounded-b-[24px]"
       >
         {/* Primary infinity artwork: Figma rect 2707 × 975 at y = -39.
             Relative to the already-rendered 90px navbar, its top becomes -129px. */}
         <img
-          src="/image/about-us/hero-infinity.webp"
+          src="/images/about-us/hero-infinity-new.jpg"
           alt=""
           aria-hidden="true"
           draggable={false}
-          className="pointer-events-none absolute left-1/2 top-[-129px] h-[975px] w-[2707px] max-w-none -translate-x-1/2 select-none object-cover max-[1024px]:top-[-54px] max-[1024px]:h-[760px] max-[1024px]:w-[2110px] max-[768px]:left-[58%] max-[768px]:top-[-10px] max-[768px]:h-[620px] max-[768px]:w-[1700px]"
+          className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-center max-[640px]:object-[52%_center]"
         />
 
         {/* Transparent network dome from the supplied SVG */}
@@ -77,36 +77,36 @@ export default function AboutUsPage() {
           alt=""
           aria-hidden="true"
           draggable={false}
-          className="pointer-events-none absolute left-1/2 top-[158px] h-[997px] w-[2588px] max-w-none -translate-x-1/2 select-none object-contain max-[1024px]:top-[170px] max-[1024px]:h-[780px] max-[1024px]:w-[2020px] max-[768px]:top-[235px] max-[768px]:h-[570px] max-[768px]:w-[1480px]"
+          className="pointer-events-none absolute bottom-[-44%] left-1/2 h-[125%] w-[250%] max-w-none -translate-x-1/2 select-none object-contain opacity-70 max-[640px]:bottom-[-16%] max-[640px]:h-[82%] max-[640px]:w-[220%]"
           style={{ mixBlendMode: 'plus-lighter' }}
         />
 
         {/* Exact hero overlays from the reference */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 top-[12px]"
-          style={{ background: 'linear-gradient(180deg, rgba(16,16,16,0) 9.62%, #101010 100%)' }}
+          className="pointer-events-none absolute inset-0"
+          style={{ background: 'linear-gradient(180deg, rgba(16,16,16,0.52) 0%, rgba(16,16,16,0.62) 48%, rgba(16,16,16,0.86) 100%)' }}
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-[-90px] h-[800px] max-[1024px]:h-[710px] max-[768px]:top-[-72px] max-[768px]:h-[632px]"
+          className="pointer-events-none absolute inset-0"
           style={{
-            background: 'linear-gradient(180deg, #1A3E9E 0%, rgba(26,62,158,0) 71.94%)',
-            mixBlendMode: 'plus-darker',
+            background: 'linear-gradient(180deg, rgba(26,62,158,0.28) 0%, #1A3E9E00 62%)',
+            mixBlendMode: 'color',
           }}
         />
 
         {/* Hero copy: y = 287px in the 800px master frame, or 197px below navbar */}
-        <div className="absolute left-1/2 top-[197px] z-10 flex w-[766px] -translate-x-1/2 flex-col items-center gap-6 text-center max-[1024px]:top-[170px] max-[1024px]:w-[720px] max-[768px]:top-[124px] max-[768px]:w-full max-[768px]:gap-[18px] max-[768px]:px-6">
-          <div className="font-body text-[9px] font-bold leading-[130%] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[8px]">
+        <div className="absolute left-1/2 top-[197px] z-10 flex w-[766px] -translate-x-1/2 flex-col items-center gap-6 text-center max-[1024px]:top-[170px] max-[1024px]:w-[720px] max-[768px]:top-[112px] max-[768px]:w-full max-[768px]:gap-[14px] max-[768px]:px-5">
+          <div className="font-body text-[9px] font-bold leading-[130%] tracking-[0.06em] text-[#E6FF2A] max-[768px]:hidden">
             HOME&nbsp;&nbsp;&gt;&nbsp;&nbsp;ABOUT US
           </div>
 
-          <h1 className="font-heading text-[96px] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7] max-[1280px]:text-[82px] max-[1024px]:text-[72px] max-[768px]:text-[48px] max-[480px]:text-[42px]">
-            About Arsalynk
+          <h1 className="font-heading text-[96px] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7] max-[1280px]:text-[82px] max-[1024px]:text-[72px] max-[768px]:max-w-[250px] max-[768px]:text-[42px] max-[768px]:leading-[0.96] max-[480px]:text-[38px]">
+            <span className="max-[768px]:block">About</span>{' '}Arsalynk
           </h1>
 
-          <p className="font-body w-full text-[20px] font-normal leading-[160%] tracking-[0.02em] text-white max-[1024px]:max-w-[660px] max-[768px]:max-w-[540px] max-[768px]:text-[16px] max-[768px]:leading-[155%]">
+          <p className="font-body w-full text-[20px] font-normal leading-[160%] tracking-[0.02em] text-white max-[1024px]:max-w-[660px] max-[768px]:max-w-[350px] max-[768px]:text-[12px] max-[768px]:leading-[145%]">
             Connecting capabilities across strategy, technology, and execution to solve complex business challenges and deliver lasting value.
           </p>
         </div>
@@ -115,7 +115,7 @@ export default function AboutUsPage() {
           type="button"
           onClick={handleScrollDown}
           aria-label="Scroll to About Us links"
-          className="absolute bottom-[71px] left-1/2 z-20 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full border border-[rgba(175,175,175,0.25)] text-white backdrop-blur-[4px] transition-transform duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6FF2A] max-[768px]:bottom-10 max-[768px]:h-16 max-[768px]:w-16"
+          className="absolute bottom-[71px] left-1/2 z-20 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full border border-[rgba(175,175,175,0.25)] text-white backdrop-blur-[4px] transition-transform duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6FF2A] max-[768px]:bottom-8 max-[768px]:h-14 max-[768px]:w-14"
           style={{ background: 'linear-gradient(230.45deg, rgba(247,247,247,0.21) -7.74%, rgba(247,247,247,0.105) 81.5%)' }}
         >
           <ChevronDown />
@@ -126,7 +126,7 @@ export default function AboutUsPage() {
       <section
         id="about-grid"
         aria-label="About Us Sections"
-        className="relative flex h-[720px] scroll-mt-[90px] items-center justify-center bg-[#F7F7F7] px-[110px] py-[110px] max-[1440px]:h-auto max-[1440px]:px-16 max-[1024px]:px-10 max-[1024px]:py-20 max-[768px]:px-6 max-[768px]:py-16 max-[480px]:px-4"
+        className="relative flex h-[720px] scroll-mt-[90px] items-center justify-center bg-[#F7F7F7] px-[6vw] py-[110px] max-[1440px]:h-auto max-[1199px]:px-[4vw] max-[1024px]:py-20 max-[768px]:py-14"
       >
         <div className="grid w-full max-w-[1700px] grid-cols-3 justify-center gap-[30px] max-[1024px]:grid-cols-2 max-[1024px]:gap-6 max-[700px]:grid-cols-1 min-[1800px]:grid-cols-[repeat(3,546px)]">
           {ABOUT_CARDS.map((card) => (
@@ -134,22 +134,26 @@ export default function AboutUsPage() {
               key={card.href}
               href={card.href}
               aria-label={card.alt}
-              className="group relative h-[500px] min-w-0 overflow-hidden rounded-3xl bg-[#8C8C8C] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#1A3E9E]/40 max-[1440px]:h-[440px] max-[1024px]:h-[460px] max-[700px]:mx-auto max-[700px]:h-[500px] max-[700px]:w-full max-[700px]:max-w-[546px] max-[480px]:h-[410px]"
+              className="group relative h-[500px] min-w-0 overflow-hidden rounded-3xl bg-[#8C8C8C] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#1A3E9E]/40 max-[1440px]:h-[440px] max-[1024px]:h-[460px] max-[700px]:mx-auto max-[700px]:aspect-[1.095] max-[700px]:h-auto max-[700px]:w-full max-[700px]:max-w-[546px] max-[480px]:rounded-[16px]"
             >
               <img
                 src={card.image}
                 alt=""
                 aria-hidden="true"
                 draggable={false}
-                className={`pointer-events-none absolute max-w-none select-none object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025] ${card.imageClassName}`}
+                className={`pointer-events-none absolute max-w-none select-none object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035] ${card.imageClassName}`}
               />
 
               <div aria-hidden="true" className={`pointer-events-none absolute inset-0 ${card.shade}`} />
               <div aria-hidden="true" className={`pointer-events-none absolute ${card.gradientClassName}`} />
 
-              <h2 className="font-heading absolute bottom-[30px] left-[35.5px] z-10 w-[460px] text-[56px] font-semibold leading-[110%] tracking-[-0.01em] text-[#F7F7F7] transition-transform duration-500 group-hover:-translate-y-1 max-[1440px]:bottom-8 max-[1440px]:left-8 max-[1440px]:right-8 max-[1440px]:w-auto max-[1440px]:text-[46px] max-[1024px]:text-[42px] max-[480px]:bottom-6 max-[480px]:left-6 max-[480px]:right-6 max-[480px]:w-auto max-[480px]:text-[38px]">
+              <h2 className="font-heading absolute bottom-[30px] left-[35.5px] z-10 w-[460px] text-[56px] font-semibold leading-[110%] tracking-[-0.01em] text-[#F7F7F7] transition-[bottom,transform] duration-500 group-hover:bottom-[118px] max-[1440px]:bottom-8 max-[1440px]:left-8 max-[1440px]:right-8 max-[1440px]:w-auto max-[1440px]:text-[46px] max-[1440px]:group-hover:bottom-[112px] max-[1024px]:text-[42px] max-[700px]:bottom-[76px] max-[700px]:group-hover:bottom-[76px] max-[480px]:left-5 max-[480px]:right-5 max-[480px]:w-auto max-[480px]:text-[30px]">
                 {card.title}
               </h2>
+
+              <span className="absolute bottom-[40px] left-[35.5px] z-10 flex h-[58px] w-[214px] translate-y-4 items-center justify-center rounded-full bg-[#E6FF2A] font-body text-[16px] font-semibold text-[#101010] opacity-0 transition-all duration-400 group-hover:translate-y-0 group-hover:opacity-100 max-[1440px]:bottom-8 max-[1440px]:left-8 max-[1440px]:h-[52px] max-[1440px]:w-[200px] max-[1440px]:text-[14px] max-[700px]:bottom-4 max-[700px]:left-5 max-[700px]:right-5 max-[700px]:h-11 max-[700px]:w-auto max-[700px]:translate-y-0 max-[700px]:text-[12px] max-[700px]:opacity-100">
+                LEARN MORE <span aria-hidden="true" className="ml-4 text-base">›</span>
+              </span>
             </Link>
           ))}
         </div>

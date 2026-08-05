@@ -4,9 +4,9 @@ import type { ReactNode } from 'react';
 import { getAllBusinesses } from '@/lib/db/actions';
 
 export const metadata: Metadata = {
-  title: 'Our Business — Arsalynt',
+  title: 'Our Business — Arsalynk',
   description:
-    'Explore the Arsalynt ecosystem — from IT infrastructure and data analytics to media, branding, and beyond.',
+    'Explore the Arsalynk ecosystem — from IT infrastructure and data analytics to media, branding, and beyond.',
 };
 
 type Business = Awaited<ReturnType<typeof getAllBusinesses>>[number];
@@ -247,7 +247,7 @@ export default async function OurBusinessPage() {
           aria-label="Technology and analytics businesses"
           className="w-full bg-[#F7F7F7] pb-8 pt-24 max-[1024px]:pt-16 max-[768px]:pb-6 max-[768px]:pt-12"
         >
-          <div className="mx-auto grid w-full max-w-[1920px] grid-cols-2 gap-[30px] px-[110px] max-[1536px]:px-[64px] max-[1024px]:gap-6 max-[1024px]:px-10 max-[768px]:grid-cols-1 max-[768px]:gap-10 max-[768px]:px-6 max-[480px]:px-4">
+          <div className="mx-auto grid w-[88%] max-w-[1980px] grid-cols-2 gap-[30px] px-0 max-[1199px]:w-[92%] max-[1024px]:gap-6 max-[768px]:grid-cols-1 max-[768px]:gap-10">
             {topRow.map((business) => (
               <article key={business.slug} className="flex min-w-0 flex-col gap-4">
                 <SectionLabel>{getTopLabel(business)}</SectionLabel>
@@ -263,7 +263,7 @@ export default async function OurBusinessPage() {
             aria-label="Digital Media and Social Impact"
             className="w-full bg-[#F7F7F7] pb-24 pt-8 max-[768px]:pb-16 max-[768px]:pt-6"
           >
-            <div className="mx-auto w-full max-w-[1920px] px-[110px] max-[1536px]:px-[64px] max-[1024px]:px-10 max-[768px]:px-6 max-[480px]:px-4">
+            <div className="mx-auto w-[88%] max-w-[1980px] px-0 max-[1199px]:w-[92%]">
               <SectionLabel>Digital Media &amp; Social Impact</SectionLabel>
 
               <div className="mt-[22px] grid grid-cols-2 gap-[30px] max-[1024px]:gap-6 max-[768px]:grid-cols-1">

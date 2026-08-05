@@ -17,14 +17,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const article = CASE_STUDIES_DUMMY_DATA.find((item) => item.slug === slug);
 
   if (!article) {
-    return { title: 'Case Study Not Found — Arsalynt' };
+    return { title: 'Case Study Not Found — Arsalynk' };
   }
 
   return {
-    title: `${article.title} — Arsalynt Case Study`,
+    title: `${article.title} — Arsalynk Case Study`,
     description: article.description,
     openGraph: {
-      title: `${article.title} | Arsalynt Case Study`,
+      title: `${article.title} | Arsalynk Case Study`,
       description: article.description,
       images: [{ url: article.coverImage, alt: article.coverImageAlt }],
     },
@@ -79,7 +79,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
-      <header className="px-[clamp(20px,5.729vw,110px)] pb-[clamp(42px,3.333vw,64px)] pt-[clamp(130px,9.688vw,186px)]">
+      <header className="px-[6vw] pb-[clamp(42px,3.333vw,64px)] pt-[clamp(130px,9.688vw,186px)] max-[1199px]:px-[4vw]">
         <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-[clamp(36px,3.333vw,64px)]">
           <div className="flex max-w-[1500px] flex-col gap-[clamp(20px,1.667vw,32px)]">
             <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 font-body text-[10px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] sm:text-xs xl:text-sm">
@@ -154,7 +154,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
         </article>
       </main>
 
-      <section className="bg-[rgba(153,166,231,0.10)] px-[clamp(20px,5.729vw,110px)] py-[clamp(64px,5.729vw,110px)]">
+      <section className="bg-[rgba(153,166,231,0.10)] px-[6vw] py-[clamp(64px,5.729vw,110px)] max-[1199px]:px-[4vw]">
         <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-[clamp(28px,2.5vw,48px)]">
           <div className="flex flex-wrap items-end justify-between gap-5">
             <div className="flex flex-col gap-4">

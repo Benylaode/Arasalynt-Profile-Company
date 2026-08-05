@@ -69,7 +69,7 @@ export default function GrowthMetrics() {
   return (
     <section 
       ref={sectionRef}
-      className={`relative overflow-hidden bg-[#101010] py-[80px] ${inter.className}`}
+      className={`safari-paint-section relative overflow-hidden bg-[#101010] py-[80px] ${inter.className}`}
       id="growth" 
       aria-label="Growth and Insights"
     >
@@ -79,7 +79,6 @@ export default function GrowthMetrics() {
         className="pointer-events-none absolute left-[37.2%] top-[-30px] h-[1096px] w-[1833px] opacity-[0.17]"
         style={{
           background: 'radial-gradient(ellipse at center, rgba(0,126,255,0.8) 0%, rgba(0,126,255,0) 70%)',
-          transform: 'translateZ(0)',
         }}
       />
       <div
@@ -87,7 +86,6 @@ export default function GrowthMetrics() {
         className="pointer-events-none absolute bottom-[-7px] left-[-86px] h-[595px] w-[995px] opacity-[0.17]"
         style={{
           background: 'radial-gradient(ellipse at center, rgba(0,126,255,0.8) 0%, rgba(0,126,255,0) 72%)',
-          transform: 'translateZ(0)',
         }}
       />
       <div
@@ -95,14 +93,13 @@ export default function GrowthMetrics() {
         className="pointer-events-none absolute right-[-288px] top-[27px] h-[681px] w-[401px] opacity-[0.17]"
         style={{
           background: 'radial-gradient(ellipse at center, rgba(0,126,255,0.8) 0%, rgba(0,126,255,0) 72%)',
-          transform: 'translateZ(0)',
         }}
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1920px] px-[clamp(1rem,5.6vw,6.75rem)] pt-[40px] pb-[40px] max-[1024px]:pt-[20px] max-[1024px]:pb-[20px]">
+      <div className="relative z-10 mx-auto w-[88%] max-w-[1980px] px-0 pt-[40px] pb-[40px] max-[1199px]:w-[92%] max-[1024px]:pt-[20px] max-[1024px]:pb-[20px]">
         
         {/* Main Grid */}
-        <div className="grid grid-cols-[881px_755px] gap-x-[64px] max-[1440px]:grid-cols-[1.1fr_1fr] max-[1024px]:grid-cols-1 max-[1024px]:gap-y-[64px]">
+        <div className="grid grid-cols-[806px_830px] gap-x-[64px] max-[1440px]:grid-cols-[1fr_1.1fr] max-[1024px]:grid-cols-1 max-[1024px]:gap-y-[64px]">
           
           {/* Left Column: Heading Area */}
           <div className="pt-[7px] max-[1024px]:pt-0">
@@ -127,11 +124,11 @@ export default function GrowthMetrics() {
           <div className="flex flex-col gap-[20px]">
             
             {/* Card 1 */}
-            <div className={`group relative h-auto w-full overflow-hidden rounded-[20px] border border-[#F5F5F5]/50 hover:border-[#F5F5F5]/70 p-[16px] lg:p-[20px] transition-colors duration-300 ${revealBase} delay-[120ms]`} style={{ background: 'linear-gradient(143deg, rgba(16,16,16,0.78) 10%, rgba(41,54,66,0.72) 100%)' }}>
-              <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,transparent_35%,rgba(255,255,255,0.08)_100%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className={`group relative h-auto w-full overflow-hidden rounded-[20px] border border-[#F5F5F5]/50 p-[16px] transition-[border-color,box-shadow] duration-500 hover:border-[#E6FF2A]/70 hover:shadow-[0_14px_38px_rgba(0,0,0,0.22)] lg:p-[20px] ${revealBase} delay-[120ms]`} style={{ background: 'linear-gradient(143deg, rgba(16,16,16,0.78) 10%, rgba(41,54,66,0.72) 100%)' }}>
+              <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.04)_15%,rgba(171,185,197,0.38)_100%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               
               <div className="relative z-10 flex flex-col items-start pr-[60px] min-[768px]:pr-[70px]">
-                <h3 className="text-[clamp(24px,1.8vw,32px)] font-medium leading-tight tracking-[-0.025em] text-[#F5F5F5]">
+                <h3 className="text-[clamp(24px,1.8vw,32px)] font-medium leading-tight tracking-[-0.025em] text-[#F5F5F5] transition-colors duration-300 group-hover:text-[#E6FF2A]">
                   How We Lead Differently
                 </h3>
 
@@ -139,23 +136,23 @@ export default function GrowthMetrics() {
                   Discover the leadership philosophy behind resilient enterprise execution.
                 </p>
 
-                <a href="/insight-programs/leadership-thoughts" className="mt-[8px] inline-flex h-[40px] items-center gap-[10px] rounded-full bg-[#E6FF2A] px-[16px] text-[12px] font-bold tracking-[-0.015em] text-[#101010] no-underline">
+                <a href="/insight-programs/leadership-thoughts" className="mt-[8px] inline-flex h-[40px] items-center gap-[10px] rounded-full bg-[#E6FF2A] px-[16px] text-[12px] font-bold tracking-[-0.015em] text-[#101010] no-underline transition-[background-color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:bg-[#FBFCDC]">
                   LEADERSHIP THOUGHTS
                   <ArrowIcon />
                 </a>
               </div>
 
-              <div className="absolute right-[16px] lg:right-[20px] top-[16px] lg:top-[20px] flex h-[44px] w-[44px] items-center justify-center rounded-[8px] border border-[#F5F5F5]/50 text-[#F5F5F5]">
+              <div className="absolute right-[16px] top-[16px] flex h-[44px] w-[44px] items-center justify-center rounded-[8px] border border-[#F5F5F5]/50 text-[#F5F5F5] transition-[border-color,background-color,color] duration-300 group-hover:border-[#F5F5F5]/80 group-hover:bg-white/15 group-hover:text-[#E6FF2A] lg:right-[20px] lg:top-[20px]">
                 <BrainIcon />
               </div>
             </div>
 
             {/* Card 2 */}
-            <div className={`group relative h-auto w-full overflow-hidden rounded-[20px] border border-[#F5F5F5]/50 hover:border-[#F5F5F5]/70 p-[16px] lg:p-[20px] transition-colors duration-300 ${revealBase} delay-[220ms]`} style={{ background: 'linear-gradient(143deg, rgba(16,16,16,0.78) 10%, rgba(41,54,66,0.72) 100%)' }}>
-              <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,transparent_35%,rgba(255,255,255,0.08)_100%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className={`group relative h-auto w-full overflow-hidden rounded-[20px] border border-[#F5F5F5]/50 p-[16px] transition-[border-color,box-shadow] duration-500 hover:border-[#E6FF2A]/70 hover:shadow-[0_14px_38px_rgba(0,0,0,0.22)] lg:p-[20px] ${revealBase} delay-[220ms]`} style={{ background: 'linear-gradient(143deg, rgba(16,16,16,0.78) 10%, rgba(41,54,66,0.72) 100%)' }}>
+              <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.04)_15%,rgba(171,185,197,0.38)_100%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               
               <div className="relative z-10 flex flex-col items-start pr-[60px] min-[768px]:pr-[70px]">
-                <h3 className="text-[clamp(24px,1.8vw,32px)] font-medium leading-tight tracking-[-0.025em] text-[#F5F5F5]">
+                <h3 className="text-[clamp(24px,1.8vw,32px)] font-medium leading-tight tracking-[-0.025em] text-[#F5F5F5] transition-colors duration-300 group-hover:text-[#E6FF2A]">
                   Read Our Proven Work
                 </h3>
 
@@ -163,13 +160,13 @@ export default function GrowthMetrics() {
                   Explore proven outcomes across the Arsalynk ecosystem.
                 </p>
 
-                <a href="/insight-programs" className="mt-[8px] inline-flex h-[40px] items-center gap-[10px] rounded-full bg-[#E6FF2A] px-[16px] text-[12px] font-bold tracking-[-0.015em] text-[#101010] no-underline">
+                <a href="/insight-programs" className="mt-[8px] inline-flex h-[40px] items-center gap-[10px] rounded-full bg-[#E6FF2A] px-[16px] text-[12px] font-bold tracking-[-0.015em] text-[#101010] no-underline transition-[background-color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:bg-[#FBFCDC]">
                   CASE STUDIES
                   <ArrowIcon />
                 </a>
               </div>
 
-              <div className="absolute right-[16px] lg:right-[20px] top-[16px] lg:top-[20px] flex h-[44px] w-[44px] items-center justify-center rounded-[8px] border border-[#F5F5F5]/50 text-[#F5F5F5]">
+              <div className="absolute right-[16px] top-[16px] flex h-[44px] w-[44px] items-center justify-center rounded-[8px] border border-[#F5F5F5]/50 text-[#F5F5F5] transition-[border-color,background-color,color] duration-300 group-hover:border-[#F5F5F5]/80 group-hover:bg-white/15 group-hover:text-[#E6FF2A] lg:right-[20px] lg:top-[20px]">
                 <FolderIcon />
               </div>
             </div>
@@ -179,14 +176,14 @@ export default function GrowthMetrics() {
         </div>
 
         {/* Stats Section */}
-        <div className="mt-[48px]">
+        <div className="mt-[48px] max-[639px]:mt-[42px]">
           {/* Label */}
-          <div className={`flex items-center gap-2 mb-[16px] ${revealBase} delay-[280ms]`}>
-            <span className="w-1.5 h-1.5 bg-[#94A3B8] shrink-0" />
-            <span className="text-[#94A3B8] text-[10px] font-bold tracking-widest uppercase">OUR PROVEN RECORDS</span>
+          <div className={`flex items-center gap-2 mb-[16px] max-[639px]:mb-[20px] max-[639px]:justify-center ${revealBase} delay-[280ms]`}>
+            <span className="w-1.5 h-1.5 bg-[#94A3B8] shrink-0 max-[639px]:bg-[#F7F7F7]" />
+            <span className="text-[#94A3B8] text-[10px] font-bold tracking-widest uppercase max-[639px]:text-[14px] max-[639px]:text-[#F7F7F7]">OUR PROVEN RECORDS</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-8 lg:gap-y-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-8 max-[639px]:gap-y-0 lg:gap-y-0">
             {[
               { value: "50+", label: "Enterprise Projects" },
               { value: "10+", label: "Industry Sectors" },
@@ -195,7 +192,7 @@ export default function GrowthMetrics() {
             ].map((stat, index) => (
               <div 
                 key={index} 
-                className={`relative px-[24px] py-[36px] flex flex-col justify-center max-[1024px]:py-4 ${index === 0 ? 'pl-[24px] max-[1024px]:pl-0' : ''} ${revealBase}`}
+                className={`relative px-[24px] py-[36px] flex flex-col justify-center max-[1024px]:py-4 max-[639px]:grid max-[639px]:min-h-[110px] max-[639px]:grid-cols-[46%_54%] max-[639px]:items-center max-[639px]:border-b max-[639px]:border-white/70 max-[639px]:px-0 max-[639px]:py-[18px] ${index === 0 ? 'pl-[24px] max-[1024px]:pl-0' : ''} ${revealBase}`}
                 style={{ transitionDelay: `${350 + (index * 70)}ms` }}
               >
                 {/* Desktop Separator */}
@@ -207,13 +204,13 @@ export default function GrowthMetrics() {
                   <span aria-hidden="true" className="absolute bottom-[0px] left-0 top-[0px] w-px bg-white/[0.18] hidden sm:block lg:hidden" />
                 )}
                 
-                <div className="flex items-center gap-[10px]">
-                  <span className="h-[8px] w-[8px] shrink-0 bg-[#E6FF2A]" />
-                  <span className="text-[clamp(48px,5vw,72px)] font-heading font-normal leading-none tracking-tight text-[#E6FF2A]">
+                <div className="flex items-center gap-[10px] max-[639px]:gap-[14px] max-[639px]:pl-[22px]">
+                  <span className="h-[8px] w-[8px] shrink-0 bg-[#E6FF2A] max-[639px]:h-[6px] max-[639px]:w-[16px]" />
+                  <span className="text-[clamp(48px,5vw,72px)] font-heading font-normal leading-none tracking-tight text-[#E6FF2A] max-[639px]:text-[64px]">
                     {stat.value}
                   </span>
                 </div>
-                <div className="mt-[10px] text-[14px] min-[1440px]:text-[16px] font-extralight leading-relaxed text-[#F7F7F7]">
+                <div className="mt-[10px] text-[14px] min-[1440px]:text-[16px] font-extralight leading-relaxed text-[#F7F7F7] max-[639px]:mt-0 max-[639px]:max-w-[135px] max-[639px]:pr-[12px] max-[639px]:text-[18px] max-[639px]:leading-[1.3]">
                   {stat.label}
                 </div>
               </div>

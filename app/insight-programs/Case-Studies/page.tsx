@@ -269,7 +269,7 @@ export default function CaseStudiesPage() {
       {/* FEATURED */}
       <section
         aria-label="Featured Case Study"
-        className="relative bg-[#F7F7F7] px-[clamp(16px,5.729vw,110px)] py-[clamp(32px,3.333vw,64px)]"
+        className="relative bg-[#F7F7F7] px-[6vw] py-[clamp(32px,3.333vw,64px)] max-[1199px]:px-[4vw]"
       >
         <div className="mx-auto w-full max-w-[1700px]">
           <article className="group relative isolate aspect-[17/8] min-h-[430px] w-full overflow-hidden rounded-[clamp(20px,1.667vw,32px)] bg-black sm:min-h-[500px] lg:min-h-0">
@@ -346,7 +346,7 @@ export default function CaseStudiesPage() {
       <section
         id="explore-case-studies"
         aria-label="Explore Case Studies"
-        className="scroll-mt-24 bg-[rgba(153,166,231,0.10)] px-[clamp(16px,5.729vw,110px)] py-[clamp(72px,5.729vw,110px)]"
+        className="scroll-mt-24 bg-[rgba(153,166,231,0.10)] px-[6vw] py-[clamp(72px,5.729vw,110px)] max-[1199px]:px-[4vw]"
       >
         <div className="mx-auto w-full max-w-[1700px]">
           <div className="mb-[clamp(44px,3.333vw,64px)] flex flex-col gap-8 xl:flex-row xl:items-end xl:justify-between">
@@ -405,7 +405,7 @@ export default function CaseStudiesPage() {
                       className="absolute inset-0 h-full w-full object-contain object-center grayscale contrast-[1.14] brightness-[0.78] transition-[filter,transform] duration-500 ease-out group-hover:scale-[1.012] group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-90"
                     />
                     <div className="absolute inset-0 bg-black/15 transition-colors duration-300 group-hover:bg-black/5" />
-                    <span className="absolute bottom-5 left-5 inline-flex translate-y-2 items-center rounded-full bg-[#1A3E9E] px-5 py-3 font-body text-[12px] font-bold uppercase tracking-[0.03em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:bg-[#132B7A] group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 sm:bottom-6 sm:left-6 sm:text-[14px]">
+                    <span className="absolute bottom-5 left-5 inline-flex translate-y-2 items-center rounded-full bg-[#1A3E9E] px-5 py-3 font-body text-[12px] font-semibold uppercase tracking-[0.03em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:bg-[#132B7A] group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 sm:bottom-6 sm:left-6 sm:text-[14px]">
                       Read case study
                     </span>
                   </div>

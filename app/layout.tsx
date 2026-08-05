@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     'IT consulting',
     'web development',
     'digital transformation',
-    'Arsalynt',
+    'Arsalynk',
   ],
   openGraph: {
     type: 'website',

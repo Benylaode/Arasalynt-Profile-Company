@@ -71,29 +71,26 @@ export default function EcosystemPhilosophyPage() {
         className="relative h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#020714] max-[640px]:rounded-b-[24px]"
       >
         <img
-          src="/images/shared/ecosystem-philosophy-card.webp"
+          src="/images/about-us/ecosystem-philosophy-hero.png"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 top-[-218px] h-[1827px] w-[2025px] max-w-none -translate-x-1/2 object-fill max-[1024px]:top-[-70px] max-[1024px]:h-[980px] max-[1024px]:w-[1080px] max-[640px]:top-[-10px] max-[640px]:h-[700px] max-[640px]:w-[770px]"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
         />
-
-        <div className="pointer-events-none absolute inset-0 bg-black/20" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-0 bg-black/20" aria-hidden="true" />
 
         <img
           src="/images/shared/network-overlay.webp"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-[-445px] left-1/2 h-[997px] w-[2588px] max-w-none -translate-x-1/2 object-fill opacity-80 max-[1024px]:bottom-[-220px] max-[1024px]:h-[620px] max-[1024px]:w-[1610px]"
+          className="pointer-events-none absolute bottom-[-44%] left-1/2 h-[125%] w-[250%] max-w-none -translate-x-1/2 select-none object-contain opacity-70 max-[640px]:bottom-[-16%] max-[640px]:h-[82%] max-[640px]:w-[220%]"
           style={{ mixBlendMode: 'plus-lighter' }}
         />
 
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-[698px]"
+          className="pointer-events-none absolute inset-0"
           style={{
             background:
-              'linear-gradient(180deg, rgba(16,16,16,0) 9.62%, #101010 100%)',
+              'linear-gradient(180deg, #1A3E9E00 0%, rgba(16,16,16,0.34) 42%, rgba(16,16,16,0.8) 100%)',
           }}
         />
         <div
@@ -101,7 +98,7 @@ export default function EcosystemPhilosophyPage() {
           className="pointer-events-none absolute inset-0 mix-blend-color"
           style={{
             background:
-              'linear-gradient(180deg, #1A3E9E 0%, rgba(26,62,158,0) 71.94%)',
+              'linear-gradient(180deg, rgba(26,62,158,0.28) 0%, #1A3E9E00 62%)',
           }}
         />
 
@@ -163,7 +160,7 @@ export default function EcosystemPhilosophyPage() {
             <img
               src={`${ASSET}/intro-hand.webp`}
               alt="Integrated digital ecosystem"
-              className="absolute left-[-103px] top-[-224px] h-[957px] w-[1068px] max-w-none object-fill max-[1024px]:inset-0 max-[1024px]:h-full max-[1024px]:w-full max-[1024px]:object-cover"
+              className="absolute inset-0 h-full w-full object-cover object-[65%_center]"
             />
           </div>
         </NarrowContainer>
@@ -175,7 +172,7 @@ export default function EcosystemPhilosophyPage() {
           src={`${ASSET}/ecosystem-network.webp`}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute left-[32px] top-[-702px] h-[1287px] w-[2746px] max-w-none object-fill opacity-25 max-[1024px]:left-1/2 max-[1024px]:top-[-220px] max-[1024px]:h-[760px] max-[1024px]:w-[1620px] max-[1024px]:-translate-x-1/2"
+          className="pointer-events-none absolute left-[32px] top-[-702px] h-[1287px] w-[2746px] max-w-none object-cover opacity-25 max-[1024px]:left-1/2 max-[1024px]:top-[-220px] max-[1024px]:h-[760px] max-[1024px]:w-[1620px] max-[1024px]:-translate-x-1/2"
           style={{ mixBlendMode: 'plus-lighter' }}
         />
         <div
@@ -238,7 +235,7 @@ export default function EcosystemPhilosophyPage() {
       </section>
 
       {/* EXPLORE OTHER INFORMATION */}
-      <section className="w-full bg-[rgba(153,166,231,.10)] px-[clamp(24px,5.729vw,110px)] py-[clamp(80px,6.563vw,126px)]">
+      <section className="w-full bg-[rgba(153,166,231,.10)] px-[6vw] py-[clamp(80px,6.563vw,126px)] max-[1199px]:px-[4vw]">
         <WideContainer>
           <h2 className="mb-[clamp(32px,2.5vw,48px)] text-center font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
             Explore Other Information
@@ -247,32 +244,36 @@ export default function EcosystemPhilosophyPage() {
           <div className="grid grid-cols-2 gap-[clamp(20px,1.563vw,30px)] max-[768px]:grid-cols-1">
             <Link
               href="/about-us/company-leadership"
-              className="group relative overflow-hidden rounded-[24px] bg-[#8C8C8C] no-underline aspect-[835/500]"
+              className="group relative overflow-hidden rounded-[24px] border border-transparent bg-[#8C8C8C] no-underline aspect-[835/500] transition-all duration-500 hover:border-white/80 hover:shadow-[0_18px_45px_rgba(0,0,0,0.18)] focus-visible:border-white focus-visible:outline-none"
             >
               <img
                 src="/images/shared/leadership-portrait.webp"
                 alt="Company Leadership"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
-              <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-b from-transparent to-black" />
-              <h3 className="absolute bottom-[34px] left-[clamp(24px,2.5vw,48px)] right-8 font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">
-                Company Leadership
-              </h3>
+              <div className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-black/30 group-focus-visible:bg-black/30" />
+              <div className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-b from-transparent to-black" />
+              <div className="absolute inset-x-[clamp(24px,2.5vw,48px)] bottom-[clamp(24px,2vw,38px)] z-10 flex flex-col items-start gap-[18px]">
+                <h3 className="font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">Company Leadership</h3>
+                <span className="flex max-h-0 items-center gap-3 overflow-hidden rounded-full bg-[#E6FF2A] px-0 py-0 font-body text-[clamp(13px,0.938vw,18px)] font-semibold text-[#101010] opacity-0 transition-all duration-500 group-hover:max-h-16 group-hover:px-7 group-hover:py-3 group-hover:opacity-100 group-focus-visible:max-h-16 group-focus-visible:px-7 group-focus-visible:py-3 group-focus-visible:opacity-100">LEARN MORE <span aria-hidden="true">›</span></span>
+              </div>
             </Link>
 
             <Link
               href="/about-us/corporate-profile"
-              className="group relative overflow-hidden rounded-[24px] bg-[#8C8C8C] no-underline aspect-[835/500]"
+              className="group relative overflow-hidden rounded-[24px] border border-transparent bg-[#8C8C8C] no-underline aspect-[835/500] transition-all duration-500 hover:border-white/80 hover:shadow-[0_18px_45px_rgba(0,0,0,0.18)] focus-visible:border-white focus-visible:outline-none"
             >
               <img
                 src="/images/shared/corporate-profile-card.webp"
                 alt="Corporate Profile"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
-              <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-b from-transparent to-black" />
-              <h3 className="absolute bottom-[34px] left-[clamp(24px,2.5vw,48px)] right-8 font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">
-                Corporate Profile
-              </h3>
+              <div className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-black/30 group-focus-visible:bg-black/30" />
+              <div className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-b from-transparent to-black" />
+              <div className="absolute inset-x-[clamp(24px,2.5vw,48px)] bottom-[clamp(24px,2vw,38px)] z-10 flex flex-col items-start gap-[18px]">
+                <h3 className="font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">Corporate Profile</h3>
+                <span className="flex max-h-0 items-center gap-3 overflow-hidden rounded-full bg-[#E6FF2A] px-0 py-0 font-body text-[clamp(13px,0.938vw,18px)] font-semibold text-[#101010] opacity-0 transition-all duration-500 group-hover:max-h-16 group-hover:px-7 group-hover:py-3 group-hover:opacity-100 group-focus-visible:max-h-16 group-focus-visible:px-7 group-focus-visible:py-3 group-focus-visible:opacity-100">LEARN MORE <span aria-hidden="true">›</span></span>
+              </div>
             </Link>
           </div>
         </WideContainer>

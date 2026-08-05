@@ -116,7 +116,7 @@ export default function HeroSection() {
     <section
       id="hero"
       aria-label="Hero"
-      className="relative h-[710px] min-h-[520px] w-full overflow-hidden bg-[#101010] max-[1024px]:h-[630px] max-[768px]:h-[570px] max-[768px]:min-h-[480px]"
+      className="relative h-[710px] min-h-[520px] w-full overflow-hidden bg-[#101010] max-[1199px]:mt-[80px] max-[1024px]:h-[630px] max-[768px]:h-[821px] max-[768px]:min-h-[821px]"
     >
       {/*
        * ONE BACKGROUND PER SLIDE.
@@ -151,6 +151,8 @@ export default function HeroSection() {
         ))}
       </div>
 
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] bg-black/35" />
+
       {/* Shared overlays taken from the SVG geometry. */}
       <div
         aria-hidden="true"
@@ -178,33 +180,35 @@ export default function HeroSection() {
       />
 
       {/* Text and CTA belonging to the active slide - 60% from top (40% from bottom) */}
-      <div className="absolute inset-x-0 top-[60%] -translate-y-1/2 z-[5] px-6 max-[480px]:px-4">
+      <div className="absolute inset-x-0 top-[60%] z-[5] -translate-y-1/2 px-6 max-[480px]:top-1/2 max-[480px]:px-[20px]">
         <div
-          className={`mx-auto flex w-full flex-col items-center text-center transition-all duration-[280ms] ease-out ${
+          className={`mx-auto flex w-full flex-col items-center text-center transition-[opacity,transform] duration-[280ms] ease-out max-[480px]:max-w-[353px] max-[480px]:gap-[32px] ${
             isContentVisible
               ? 'translate-y-0 opacity-100'
               : '-translate-y-3 opacity-0'
           }`}
         >
-          <h1 className="type-t3 m-0 max-w-[1150px] whitespace-pre-line text-[#F7F7F7] max-[768px]:max-w-[680px] max-[768px]:text-[clamp(34px,8.5vw,52px)]">
-            {slide.headline}
-          </h1>
+          <div className="flex w-full flex-col items-center max-[480px]:gap-[12px]">
+            <h1 className="m-0 max-w-[978px] whitespace-pre-line font-heading text-[76px] font-medium leading-none tracking-[-0.03em] text-[#F7F7F7] max-[768px]:max-w-[578px] max-[768px]:text-[clamp(26px,6.48vw,40px)] max-[480px]:w-full max-[480px]:text-[37px] max-[480px]:tracking-[-0.02em]">
+              {slide.headline}
+            </h1>
 
-          <p className="mx-auto max-w-[880px] font-normal text-[clamp(15px,1.042vw,20px)] leading-[1.6] tracking-[0.02em] text-[#D9D9D9]">
-            {slide.body}
-          </p>
+            <p className="mx-auto pt-[30px] max-w-[880px] whitespace-pre-line font-normal text-[clamp(14px,0.938vw,18px)] leading-[1.6] tracking-[0.02em] text-[#D9D9D9] max-[480px]:w-full max-[480px]:text-[13px] max-[480px]:leading-[1.5] max-[480px]:tracking-normal max-[480px]:text-[#F7F7F7]">
+              {slide.body}
+            </p>
+          </div>
 
-          <div className="mt-8 flex items-center justify-center gap-3 max-[768px]:mt-6 max-[600px]:w-full max-[600px]:flex-col max-[600px]:gap-3">
+          <div className="mt-8 flex items-center justify-center gap-3 max-[768px]:mt-6 max-[480px]:mt-0 max-[480px]:w-full max-[480px]:flex-col max-[480px]:gap-[8px]">
             <a
               href={slide.primaryCta.href}
-              className="inline-flex h-11 w-[160px] items-center justify-center rounded-full bg-[#E6FF2A] px-4 font-body text-[14px] font-extrabold tracking-[0.04em] uppercase text-[#101010] no-underline transition-transform duration-200 hover:scale-[1.025] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A] max-[768px]:h-10 max-[768px]:text-[13px] max-[600px]:w-full max-[600px]:max-w-[300px]"
+              className="inline-flex h-11 w-[160px] items-center justify-center rounded-full bg-[#E6FF2A] px-4 font-body text-[14px] font-semibold tracking-[0.04em] uppercase text-[#101010] no-underline transition-transform duration-200 hover:scale-[1.025] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A] max-[768px]:h-10 max-[768px]:text-[13px] max-[480px]:h-[55px] max-[480px]:w-full max-[480px]:px-[32px] max-[480px]:text-[18px] max-[480px]:leading-[1.3] max-[480px]:tracking-normal"
             >
               {slide.primaryCta.label}
             </a>
 
             <a
               href={slide.secondaryCta.href}
-              className="inline-flex h-11 w-[175px] items-center justify-center rounded-full border border-[#E6FF2A] bg-transparent px-4 font-body text-[14px] font-extrabold tracking-[0.04em] uppercase text-[#F7F7F7] no-underline transition-colors duration-200 hover:bg-[#E6FF2A]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A] max-[768px]:h-10 max-[768px]:text-[13px] max-[600px]:w-full max-[600px]:max-w-[300px]"
+              className="inline-flex h-11 w-[175px] items-center justify-center rounded-full border border-[#E6FF2A] bg-transparent px-4 font-body text-[14px] font-semibold tracking-[0.04em] uppercase text-[#F7F7F7] no-underline transition-colors duration-200 hover:bg-[#E6FF2A]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A] max-[768px]:h-10 max-[768px]:text-[13px] max-[480px]:h-[55px] max-[480px]:w-full max-[480px]:px-[32px] max-[480px]:text-[18px] max-[480px]:leading-[1.3] max-[480px]:tracking-normal"
             >
               {slide.secondaryCta.label}
             </a>
@@ -213,12 +217,12 @@ export default function HeroSection() {
       </div>
 
       {totalSlides > 1 && (
-        <div className="pointer-events-none absolute inset-x-[5.755%] top-1/2 z-[6] hidden -translate-y-1/2 items-center justify-between md:flex">
+        <div className="pointer-events-none absolute inset-x-[6%] top-1/2 z-[6] hidden -translate-y-1/2 items-center justify-between md:flex max-[767px]:inset-x-auto max-[767px]:bottom-[100px] max-[767px]:right-[4%] max-[767px]:top-auto max-[767px]:flex max-[767px]:translate-y-0 max-[767px]:gap-[8px]">
           <button
             type="button"
             onClick={prevSlide}
             aria-label="Previous slide"
-            className="pointer-events-auto inline-flex h-[36px] w-[36px] items-center justify-center rounded-[5px] border border-[#4C4C4C] bg-transparent text-[#D9D9D9] transition-colors duration-200 hover:border-[#D9D9D9] hover:bg-white/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A]"
+            className="pointer-events-auto inline-flex h-[36px] w-[36px] items-center justify-center rounded-[5px] border border-[#4C4C4C] bg-transparent text-[#D9D9D9] transition-colors duration-200 hover:border-[#D9D9D9] hover:bg-white/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A] max-[767px]:h-[42px] max-[767px]:w-[42px]"
           >
             <ArrowIcon direction="left" />
           </button>
@@ -227,7 +231,7 @@ export default function HeroSection() {
             type="button"
             onClick={nextSlide}
             aria-label="Next slide"
-            className="pointer-events-auto inline-flex h-[36px] w-[36px] items-center justify-center rounded-[5px] border border-[#4C4C4C] bg-transparent text-[#D9D9D9] transition-colors duration-200 hover:border-[#D9D9D9] hover:bg-white/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A]"
+            className="pointer-events-auto inline-flex h-[36px] w-[36px] items-center justify-center rounded-[5px] border border-[#4C4C4C] bg-transparent text-[#D9D9D9] transition-colors duration-200 hover:border-[#D9D9D9] hover:bg-white/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A] max-[767px]:h-[42px] max-[767px]:w-[42px]"
           >
             <ArrowIcon direction="right" />
           </button>
@@ -236,7 +240,7 @@ export default function HeroSection() {
 
       {totalSlides > 1 && (
         <div
-          className="absolute bottom-[60px] left-[5.729%] z-[6] flex h-[10px] items-center gap-2 max-[768px]:bottom-8 max-[768px]:left-1/2 max-[768px]:-translate-x-1/2"
+          className="absolute bottom-[60px] left-[6%] z-[6] flex h-[10px] items-center gap-2 max-[768px]:bottom-[100px] max-[768px]:left-[4%]"
           role="tablist"
           aria-label="Hero slides"
         >

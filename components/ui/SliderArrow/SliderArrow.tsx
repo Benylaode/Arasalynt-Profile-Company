@@ -27,7 +27,7 @@ export default function SliderArrow({
 
   return (
     <button
-      className={`group box-border flex justify-center items-center w-[53px] h-[53px] max-[768px]:w-[44px] max-[768px]:h-[44px] border border-[#4C4C4C] rounded-[5.5px] bg-transparent cursor-pointer shrink-0 transition-all duration-250 ease-in-out hover:border-[#D9D9D9] hover:bg-[rgba(247,247,247,0.05)] active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-lime-yellow focus-visible:outline-offset-2 ${className}`}
+      className={`group box-border flex justify-center items-center w-[53px] h-[53px] max-[768px]:w-[44px] max-[768px]:h-[44px] border border-[#4C4C4C] rounded-[5.5px] bg-transparent cursor-pointer shrink-0 transition-[color,background-color,border-color,transform] duration-250 ease-in-out hover:border-[#D9D9D9] hover:bg-[rgba(247,247,247,0.05)] active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-lime-yellow focus-visible:outline-offset-2 ${className}`}
       onClick={onClick}
       aria-label={label}
       type="button"
@@ -54,4 +54,3 @@ export default function SliderArrow({
     </button>
   );
 }
-

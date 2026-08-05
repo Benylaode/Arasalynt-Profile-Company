@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   ARSALYNT — DESIGN TOKENS & TAILWIND V4 CONFIGURATION
+   ARSALYNK — DESIGN TOKENS & TAILWIND V4 CONFIGURATION
    ========================================================================== */
 
 @theme {
@@ -131,17 +131,30 @@ html {
   margin: 0;
   padding: 0;
   overflow-x: clip;
+  background-color: #101010;
 }
 
 body {
   min-height: 100vh;
-  background-color: #FFFFFF;
+  background-color: #101010;
   color: #101010;
   font-family: var(--font-body);
   width: 100%;
   margin: 0;
   padding: 0;
   overflow-x: clip;
+}
+
+/* Safari/WebKit: isolate expensive paint regions without promoting a full page. */
+.safari-paint-section {
+  contain: paint;
+  isolation: isolate;
+}
+
+/* Safari/WebKit: apply backface suppression only to elements that actually move. */
+.safari-motion-layer {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 img, svg {
@@ -453,4 +466,34 @@ img, svg {
 :focus-visible {
   outline: 2px solid #E6FF2A;
   outline-offset: 2px;
+}
+
+/* CTA typography: approximately 20% lighter than the former 700-800 weights. */
+:is(button, a)[class~='rounded-full'],
+.btn-guide {
+  font-weight: 600 !important;
+}
+
+/* Shared lime CTA hover states. */
+:is(button, a)[class~='rounded-full'][class~='bg-[#E6FF2A]']:hover,
+:is(button, a)[class~='rounded-full'][class*='border-[#E6FF2A]']:hover,
+.btn-guide-yellow:hover {
+  border-color: #FBFCDC !important;
+  background-color: #FBFCDC !important;
+  color: #101010 !important;
+}
+
+:is(button, a)[class~='rounded-full'] svg {
+  transition: transform 250ms ease;
+}
+
+:is(button, a)[class~='rounded-full']:hover svg {
+  transform: translateX(4px);
+}
+
+/* Shared cobalt CTA hover state. */
+:is(button, a)[class~='rounded-full'][class~='bg-[#1A3E9E]']:hover {
+  border-color: #152571 !important;
+  background-color: #152571 !important;
+  color: #FFFFFF !important;
 }

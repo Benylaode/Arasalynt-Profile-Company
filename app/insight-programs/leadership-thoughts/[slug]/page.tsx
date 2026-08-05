@@ -23,15 +23,15 @@ export async function generateMetadata({
 
   if (!article) {
     return {
-      title: 'Thought Not Found — Arsalynt',
+      title: 'Thought Not Found — Arsalynk',
     };
   }
 
   return {
-    title: `${article.title} — Arsalynt Leadership Thought`,
+    title: `${article.title} — Arsalynk Leadership Thought`,
     description: article.description,
     openGraph: {
-      title: `${article.title} | Arsalynt Leadership Thought`,
+      title: `${article.title} | Arsalynk Leadership Thought`,
       description: article.description,
       images: [article.coverImage],
     },

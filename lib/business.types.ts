@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BUSINESS TYPES — Arsalynt
+   BUSINESS TYPES — Arsalynk
    ========================================================================== */
 
 export interface PainPoint {
@@ -131,4 +131,3 @@ export interface HeroSlideRow {
   secondary_cta_href: string;
   sort_order: number;
 }
-

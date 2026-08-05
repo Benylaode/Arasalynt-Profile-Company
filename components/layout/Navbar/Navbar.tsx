@@ -4,6 +4,7 @@ import {
   type MouseEvent,
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import Link from 'next/link';
@@ -29,7 +30,7 @@ const ABOUT_LINKS: NavItem[] = [
     href: '/about-us/corporate-profile',
   },
   {
-    name: 'Leadership',
+    name: 'Company Leadership',
     href: '/about-us/company-leadership',
   },
   {
@@ -162,9 +163,22 @@ function BrandLogo({
   overlay: boolean;
 }) {
   return (
-    <span className="flex shrink-0 items-center gap-[4px]">
+    <>
+      <span className="hidden h-[46px] w-[170px] shrink-0 items-center gap-[8px] max-[1199px]:flex">
+        <img
+          src="/images/logos/logo_blue.svg"
+          alt=""
+          aria-hidden="true"
+          className="h-[46px] w-[46px] shrink-0 object-contain"
+        />
+        <span className="whitespace-nowrap text-[27px] font-semibold leading-none tracking-[-0.045em] text-[#101010]">
+          Arsalynk
+        </span>
+      </span>
+
+      <span className="flex shrink-0 items-center gap-[4.25px] max-[1199px]:hidden">
       {/* Area simbol logo */}
-      <span className="relative block h-[32px] w-[32px] shrink-0">
+      <span className="relative block h-[34px] w-[34px] shrink-0">
         {/* Simbol lime untuk navbar transparan */}
         <img
           src="/images/logos/logo.svg"
@@ -210,7 +224,7 @@ function BrandLogo({
           relative
           -translate-y-[0.5px]
           whitespace-nowrap
-          text-[18px]
+          text-[19px]
           font-semibold
           leading-none
           tracking-[-0.035em]
@@ -224,7 +238,8 @@ function BrandLogo({
       >
         Arsalynk
       </span>
-    </span>
+      </span>
+    </>
   );
 }
 
@@ -274,8 +289,8 @@ function DesktopNavLink({
         font-normal
         leading-none
         no-underline
-        transition-opacity duration-200
-        hover:opacity-65
+        transition-colors duration-200
+        hover:text-[#1A3E9E]
         focus-visible:outline-none
         focus-visible:ring-2
         focus-visible:ring-[#E6FF2A]
@@ -325,14 +340,19 @@ function DropdownCardModal({
   onClose,
   children,
   titleHref,
+  size = 'about',
 }: {
   title: string;
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
   titleHref?: string;
+  size?: 'about' | 'insight' | 'business';
 }) {
   if (!isOpen) return null;
+
+  const panelPadding = size === 'business' ? '64px 64px 36px' : '80px 64px 28px';
+  const footerSpacing = size === 'business' ? 48 : size === 'insight' ? 96 : 132;
 
   return (
     <>
@@ -344,7 +364,7 @@ function DropdownCardModal({
 
       <div
         className="
-          fixed top-[72px] z-[99]
+          fixed top-[90px] z-[99]
           left-1/2 w-full max-w-[1920px] -translate-x-1/2
           px-[clamp(24px,13.333vw,256px)]
           transition-all duration-300 ease-out
@@ -352,69 +372,75 @@ function DropdownCardModal({
         "
       >
         <div
-          className="
+          className={`
             relative
-            w-full
+            flex h-fit w-full flex-col
+            max-h-[calc(100vh-108px)]
+            overflow-y-auto
             rounded-[14px]
             border border-black/[0.04]
             bg-[#F7F7F7]
-            p-[64px_60px_48px_60px]
             shadow-[0_20px_65px_rgba(0,0,0,0.14)]
-          "
+          `}
+          style={{ padding: panelPadding }}
         >
           {titleHref ? (
             <Link
               href={titleHref}
               onClick={onClose}
               className="
-                mb-[38px]
-                block
+                group flex w-[80%] items-center justify-between
                 font-heading
-                text-[57px]
-                font-semibold
+                text-[clamp(64px,4.167vw,80px)]
+                font-medium
                 leading-none
                 tracking-[-0.02em]
                 text-[#4F4F4F]
                 transition-colors
-                hover:text-[#101010]
+                hover:text-[#1A3E9E]
+                focus-visible:text-[#1A3E9E]
               "
+              style={{ marginBottom: 44 }}
             >
-              {title}
+              <span>{title}</span>
+              <span className="translate-x-[-8px] scale-[1.35] text-[#1A3E9E] opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100">
+                <ButtonChevron />
+              </span>
             </Link>
           ) : (
             <h2
               className="
-                mb-[38px]
                 font-heading
-                text-[57px]
-                font-semibold
+                text-[clamp(64px,4.167vw,80px)]
+                font-medium
                 leading-none
                 tracking-[-0.02em]
                 text-[#4F4F4F]
               "
+              style={{ marginBottom: 44 }}
             >
               {title}
             </h2>
           )}
 
           {/* Content area with vertical border line */}
-          <div className="flex border-l-[3px] border-[#D6D6D6] pl-[31px]">
+          <div className="flex border-l border-[#D6D6D6] pl-[52px]">
             {children}
           </div>
 
           {/* Footer Area matching Figma */}
-          <div className="mt-[68px] flex items-center justify-between border-t border-[#E6E6E6] pt-[25px]">
+          <div className="flex items-center justify-between" style={{ marginTop: footerSpacing }}>
             <span className="font-body text-[15px] font-normal text-[#838383]">
               © 2026 PT Sinergi Muda Arsa
             </span>
 
-            <div className="flex items-center gap-[23px] text-[#838383] [&_svg]:w-[21px] [&_svg]:h-[21px]">
+            <div className="flex items-center gap-[40px] pr-[32px] text-[#838383] [&_svg]:h-[21px] [&_svg]:w-[21px]">
               <a
                 href="https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
-                className="transition-colors hover:text-[#101010]"
+                className="transition-colors hover:text-[#1A3E9E]"
               >
                 <IconInstagram />
               </a>
@@ -423,7 +449,7 @@ function DropdownCardModal({
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
-                className="transition-colors hover:text-[#101010]"
+                className="transition-colors hover:text-[#1A3E9E]"
               >
                 <IconLinkedin />
               </a>
@@ -432,7 +458,7 @@ function DropdownCardModal({
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Facebook"
-                className="transition-colors hover:text-[#101010]"
+                className="transition-colors hover:text-[#1A3E9E]"
               >
                 <IconFacebook />
               </a>
@@ -487,8 +513,8 @@ function SimpleDropdown({
           font-normal
           leading-none
           cursor-pointer
-          transition-opacity duration-200
-          hover:opacity-65
+          transition-colors duration-200
+          hover:text-[#1A3E9E]
           focus-visible:outline-none
           focus-visible:ring-2
           focus-visible:ring-[#E6FF2A]
@@ -514,28 +540,33 @@ function SimpleDropdown({
         titleHref={href}
         isOpen={isOpen}
         onClose={() => setActiveDropdown(null)}
+        size={id === 'insight' ? 'insight' : 'about'}
       >
-        <div className="flex flex-col gap-[22px]">
+        <div className="flex w-full flex-col gap-[22px]">
           {links.map((link) => (
             <Link
               key={`${id}-${link.name}-${link.href}`}
               href={link.href}
               onClick={() => setActiveDropdown(null)}
               className="
+                group flex w-[80%] items-center justify-between
                 font-heading
-                text-[28px]
-                font-semibold
+                text-[32px]
+                font-medium
                 leading-[1.3]
                 text-[#747474]
                 no-underline
                 transition-all duration-200
                 hover:translate-x-1.5
-                hover:text-[#101010]
+                hover:text-[#1A3E9E]
                 focus-visible:outline-none
-                focus-visible:text-[#101010]
+                focus-visible:text-[#1A3E9E]
               "
             >
-              {link.name}
+              <span>{link.name}</span>
+              <span className="translate-x-[-6px] scale-[1.35] text-[#1A3E9E] opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100">
+                <ButtonChevron />
+              </span>
             </Link>
           ))}
         </div>
@@ -577,8 +608,8 @@ function BusinessDropdown({
           font-normal
           leading-none
           cursor-pointer
-          transition-opacity duration-200
-          hover:opacity-65
+          transition-colors duration-200
+          hover:text-[#1A3E9E]
           focus-visible:outline-none
           focus-visible:ring-2
           focus-visible:ring-[#E6FF2A]
@@ -604,12 +635,13 @@ function BusinessDropdown({
         titleHref="/our-business"
         isOpen={isOpen}
         onClose={() => setActiveDropdown(null)}
+        size="business"
       >
-        <div className="grid grid-cols-2 gap-x-[56px] w-full">
+        <div className="grid w-full grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-x-[56px]">
           <div>
             {BUSINESS_COLUMNS.map((column) => (
               <div key={column.category} className="mb-7 last:mb-0">
-                <p className="mb-3 text-[13px] font-bold uppercase tracking-[0.14em] text-[#9A9A9A]">
+                <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.14em] text-[#9A9A9A]">
                   {column.category}
                 </p>
                 {column.items.map((item) => (
@@ -618,19 +650,22 @@ function BusinessDropdown({
                     href={item.href}
                     onClick={() => setActiveDropdown(null)}
                     className="
-                      block py-[6px]
+                      group flex w-[80%] items-center justify-between py-[6px]
                       font-heading
-                      text-[26px]
-                      font-semibold
+                      text-[24px]
+                      font-medium
                       leading-[1.3]
                       text-[#747474]
                       no-underline
                       transition-all duration-200
                       hover:translate-x-1.5
-                      hover:text-[#101010]
+                      hover:text-[#1A3E9E]
                     "
                   >
-                    {item.name}
+                    <span>{item.name}</span>
+                    <span className="translate-x-[-6px] scale-[1.35] text-[#1A3E9E] opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100">
+                      <ButtonChevron />
+                    </span>
                   </Link>
                 ))}
               </div>
@@ -638,7 +673,7 @@ function BusinessDropdown({
           </div>
 
           <div>
-            <p className="mb-3 text-[13px] font-bold uppercase tracking-[0.14em] text-[#9A9A9A]">
+            <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.14em] text-[#9A9A9A]">
               {BUSINESS_MEDIA.category}
             </p>
 
@@ -649,19 +684,22 @@ function BusinessDropdown({
                   href={item.href}
                   onClick={() => setActiveDropdown(null)}
                   className="
-                    block py-[6px]
+                    group flex w-[80%] items-center justify-between py-[6px]
                     font-heading
-                    text-[26px]
-                    font-semibold
+                    text-[24px]
+                    font-medium
                     leading-[1.3]
                     text-[#747474]
                     no-underline
                     transition-all duration-200
                     hover:translate-x-1.5
-                    hover:text-[#101010]
+                    hover:text-[#1A3E9E]
                   "
                 >
-                  {item.name}
+                  <span>{item.name}</span>
+                  <span className="translate-x-[-6px] scale-[1.35] text-[#1A3E9E] opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100">
+                    <ButtonChevron />
+                  </span>
                 </Link>
               ))}
             </div>
@@ -754,7 +792,7 @@ function MobileAccordion({
                   text-white/65
                   no-underline
                   transition-colors
-                  hover:text-[#E6FF2A]
+                  hover:text-[#1A3E9E]
                 "
               >
                 {link.name}
@@ -774,6 +812,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const scrollFrameRef = useRef<number | null>(null);
 
   /*
    * Homepage pada bagian hero:
@@ -782,10 +821,16 @@ export default function Navbar() {
    * Setelah scroll atau pada halaman internal:
    * background putih dan logo_blue.svg.
    */
-  const overlay = (pathname === '/' || pathname === '/about-us') && !isScrolled;
+  const overlay = pathname === '/' && !isScrolled && activeDropdown === null;
 
   const readScrollPosition = useCallback(() => {
-    setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
+    if (scrollFrameRef.current !== null) return;
+
+    scrollFrameRef.current = window.requestAnimationFrame(() => {
+      const nextScrolled = window.scrollY > SCROLL_THRESHOLD;
+      setIsScrolled((current) => current === nextScrolled ? current : nextScrolled);
+      scrollFrameRef.current = null;
+    });
   }, []);
 
   useEffect(() => {
@@ -797,6 +842,10 @@ export default function Navbar() {
 
     return () => {
       window.removeEventListener('scroll', readScrollPosition);
+      if (scrollFrameRef.current !== null) {
+        window.cancelAnimationFrame(scrollFrameRef.current);
+        scrollFrameRef.current = null;
+      }
     };
   }, [readScrollPosition]);
 
@@ -883,7 +932,7 @@ export default function Navbar() {
           ${inter.className}
           fixed inset-x-0 top-0
           z-50
-          h-[64px]
+          h-[64px] max-[1199px]:h-[80px]
         `}
       >
         {/* Background putih */}
@@ -893,11 +942,8 @@ export default function Navbar() {
             absolute inset-0
             bg-[#F7F7F7]
             transition-opacity duration-300
-            ${
-              overlay
-                ? 'opacity-0'
-                : 'opacity-100'
-            }
+            ${overlay ? 'opacity-0' : 'opacity-100'}
+            max-[1199px]:!opacity-100
           `}
         />
 
@@ -908,11 +954,8 @@ export default function Navbar() {
             absolute inset-0
             bg-[linear-gradient(180deg,rgba(10,15,25,0.85)_0%,rgba(10,15,25,0.35)_55%,rgba(10,15,25,0)_100%)]
             transition-opacity duration-300
-            ${
-              overlay
-                ? 'opacity-100'
-                : 'opacity-0'
-            }
+            ${overlay ? 'opacity-100' : 'opacity-0'}
+            max-[1199px]:hidden
           `}
         />
 
@@ -935,10 +978,10 @@ export default function Navbar() {
         <div
           className="
             relative z-10 mx-auto
-            grid h-full w-full max-w-[1920px]
+            grid h-full w-[88%] max-w-[1980px]
             grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]
             items-center
-            px-[110px] max-[1536px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]
+            px-0 max-[1199px]:w-[92%] max-[1199px]:grid-cols-[1fr_auto]
           "
         >
           {/* Logo */}
@@ -987,8 +1030,8 @@ export default function Navbar() {
                 font-normal
                 leading-none
                 no-underline
-                transition-opacity duration-200
-                hover:opacity-65
+                transition-colors duration-200
+                hover:text-[#1A3E9E]
                 focus-visible:outline-none
                 focus-visible:ring-2
                 focus-visible:ring-[#E6FF2A]
@@ -1118,13 +1161,13 @@ export default function Navbar() {
             <span
               className={`
                 absolute
-                h-[2px] w-[23px]
+                h-[2px] w-[23px] max-[1199px]:w-[32px]
                 rounded-full
                 transition-all
                 duration-[250ms]
                 ${
                   overlay
-                    ? 'bg-white'
+                    ? 'bg-white max-[1199px]:bg-[#101010]'
                     : 'bg-[#101010]'
                 }
                 ${
@@ -1138,13 +1181,13 @@ export default function Navbar() {
             <span
               className={`
                 absolute
-                h-[2px] w-[23px]
+                h-[2px] w-[23px] max-[1199px]:w-[32px]
                 rounded-full
                 transition-all
                 duration-[250ms]
                 ${
                   overlay
-                    ? 'bg-white'
+                    ? 'bg-white max-[1199px]:bg-[#101010]'
                     : 'bg-[#101010]'
                 }
                 ${
@@ -1158,13 +1201,13 @@ export default function Navbar() {
             <span
               className={`
                 absolute
-                h-[2px] w-[23px]
+                h-[2px] w-[23px] max-[1199px]:w-[32px]
                 rounded-full
                 transition-all
                 duration-[250ms]
                 ${
                   overlay
-                    ? 'bg-white'
+                    ? 'bg-white max-[1199px]:bg-[#101010]'
                     : 'bg-[#101010]'
                 }
                 ${
@@ -1183,7 +1226,7 @@ export default function Navbar() {
         className={`
           ${inter.className}
           fixed inset-x-0 bottom-0
-          top-[64px]
+          top-[80px]
           z-40
           overflow-y-auto
           bg-[#101010]

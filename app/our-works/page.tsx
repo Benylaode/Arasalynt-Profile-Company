@@ -431,7 +431,7 @@ export default function OurWorksPage() {
       <section
         id="hero"
         aria-label="Our Works Hero"
-        className="relative isolate h-[710px] w-full overflow-hidden rounded-b-[42px] bg-[#101010] max-[1024px]:h-[620px] max-[768px]:h-[560px] max-[768px]:rounded-b-[28px]"
+        className="relative isolate h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#101010] max-[640px]:rounded-b-[24px]"
       >
         <img
           src="/images/our-works/our-works-hero-bg.webp"
@@ -589,7 +589,7 @@ export default function OurWorksPage() {
       <section
         id="explore-section"
         aria-label="Explore Arsalynk Best Works"
-        className="relative w-full scroll-mt-20 bg-[rgba(153,166,231,0.1)] px-[clamp(1rem,5.6vw,6.75rem)] pb-[72px] pt-[72px] md:pb-[90px] md:pt-[80px] xl:pb-[110px] xl:pt-[96px]"
+        className="relative w-full scroll-mt-20 bg-[rgba(153,166,231,0.1)] px-[6vw] pb-[72px] pt-[72px] max-[1199px]:px-[4vw] md:pb-[90px] md:pt-[80px] xl:pb-[110px] xl:pt-[96px]"
       >
         <div className="mx-auto w-full max-w-[1920px]">
           <div className={`flex flex-col items-start justify-between gap-6 xl:flex-row xl:items-end xl:gap-8 ${hasSearched ? 'xl:min-h-[190px]' : 'xl:min-h-[140px]'}`}>
@@ -682,7 +682,7 @@ export default function OurWorksPage() {
 
       {/* OTHER WORKS hanya muncul ketika hasil filter kosong */}
       {noResults && (
-        <section className="w-full bg-[rgba(153,166,231,0.1)] px-4 pb-[80px] pt-[64px] md:px-10 md:pb-[96px] md:pt-[80px] xl:px-[110px] xl:pb-[110px] xl:pt-[96px]">
+        <section className="w-full bg-[rgba(153,166,231,0.1)] px-[4vw] pb-[80px] pt-[64px] md:pb-[96px] md:pt-[80px] xl:px-[6vw] xl:pb-[110px] xl:pt-[96px]">
           <div className="mx-auto w-full max-w-[1700px]">
             <div className="flex items-end justify-between gap-8">
               <h2 className="font-heading text-[clamp(42px,4.38vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">

@@ -142,30 +142,28 @@ export default function CorporateProfilePage() {
         className="relative h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#050914] max-[640px]:rounded-b-[24px]"
       >
         <img
-          src="/images/corporate-profile/hero-globe.webp"
+          src="/images/about-us/corporate-profile-hero.jpg"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 top-1/2 h-auto w-[127.76vw] max-w-none -translate-x-1/2 -translate-y-[71.4%] select-none max-[768px]:h-full max-[768px]:w-auto max-[768px]:min-w-full max-[768px]:-translate-y-1/2 max-[768px]:object-cover max-[768px]:object-[center_60%]"
+          className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-bottom"
         />
 
-        <div className="pointer-events-none absolute inset-0 bg-black/20" aria-hidden="true" />
-        <div
-          className="pointer-events-none absolute inset-0 opacity-90"
+        <img
+          src="/images/shared/network-overlay.webp"
+          alt=""
           aria-hidden="true"
-          style={{ background: 'linear-gradient(180deg, #1A3E9E 0%, rgba(26,62,158,0) 71.94%)', mixBlendMode: 'color' }}
+          className="pointer-events-none absolute bottom-[-44%] left-1/2 h-[125%] w-[250%] max-w-none -translate-x-1/2 select-none object-contain opacity-70 max-[640px]:bottom-[-16%] max-[640px]:h-[82%] max-[640px]:w-[220%]"
+          style={{ mixBlendMode: 'plus-lighter' }}
         />
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-[698px]"
+          className="pointer-events-none absolute inset-0"
           aria-hidden="true"
-          style={{ background: 'linear-gradient(180deg, rgba(16,16,16,0) 9.62%, #101010 100%)' }}
+          style={{ background: 'linear-gradient(180deg, rgba(26,62,158,0.28) 0%, #1A3E9E00 62%)', mixBlendMode: 'color' }}
         />
         <div
-          className="pointer-events-none absolute -right-[8vw] -top-[14%] h-[1120px] w-[64vw] opacity-[0.06]"
+          className="pointer-events-none absolute inset-0"
           aria-hidden="true"
-          style={{
-            background: 'linear-gradient(180deg, rgba(234,234,234,0) 0%, #EAEAEA 29.81%, rgba(234,234,234,0) 100%)',
-            clipPath: 'polygon(22% 0, 100% 0, 78% 100%, 0 100%)',
-          }}
+          style={{ background: 'linear-gradient(180deg, #1A3E9E00 0%, rgba(16,16,16,0.34) 42%, rgba(16,16,16,0.8) 100%)' }}
         />
 
         <div className="absolute left-1/2 top-1/2 z-10 flex w-full max-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-6 text-center">
@@ -289,7 +287,7 @@ export default function CorporateProfilePage() {
       </section>
 
       {/* OUR CAPABILITIES */}
-      <section className="relative w-full overflow-hidden bg-[#F7F7F7] px-[clamp(24px,5.729vw,110px)] py-[clamp(100px,8.125vw,156px)]">
+      <section className="relative w-full overflow-hidden bg-[#F7F7F7] px-[6vw] py-[clamp(100px,8.125vw,156px)] max-[1199px]:px-[4vw]">
         <img
           src="/images/shared/network-overlay.webp"
           alt=""
@@ -340,7 +338,7 @@ export default function CorporateProfilePage() {
       </section>
 
       {/* EXPLORE OTHER INFORMATION */}
-      <section className="w-full bg-[rgba(153,166,231,0.10)] px-[clamp(24px,5.729vw,110px)] py-[clamp(80px,6.563vw,126px)]">
+      <section className="w-full bg-[rgba(153,166,231,0.10)] px-[6vw] py-[clamp(80px,6.563vw,126px)] max-[1199px]:px-[4vw]">
         <WideContainer className="flex flex-col gap-[clamp(32px,2.5vw,48px)]">
           <h2 className="text-center font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
             Explore Other Information
@@ -351,7 +349,7 @@ export default function CorporateProfilePage() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="group relative isolate overflow-hidden rounded-[24px] bg-[#8C8C8C] no-underline aspect-[835/500]"
+                className="group relative isolate overflow-hidden rounded-[24px] border border-transparent bg-[#8C8C8C] no-underline aspect-[835/500] transition-all duration-500 hover:border-white/80 hover:shadow-[0_18px_45px_rgba(0,0,0,0.18)] focus-visible:border-white focus-visible:outline-none"
               >
                 <img
                   src={item.image}
@@ -359,11 +357,16 @@ export default function CorporateProfilePage() {
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
                   style={{ objectPosition: item.imagePosition }}
                 />
-                <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
-                <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-black via-black/70 to-transparent" aria-hidden="true" />
-                <h3 className="absolute bottom-[34px] left-[clamp(24px,2.5vw,48px)] z-10 font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">
-                  {item.title}
-                </h3>
+                <div className="absolute inset-0 bg-black/20 transition-colors duration-500 group-hover:bg-black/35 group-focus-visible:bg-black/35" aria-hidden="true" />
+                <div className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-t from-black via-black/75 to-transparent" aria-hidden="true" />
+                <div className="absolute inset-x-[clamp(24px,2.5vw,48px)] bottom-[clamp(24px,2vw,38px)] z-10 flex flex-col items-start gap-[18px]">
+                  <h3 className="font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7] transition-transform duration-500 group-hover:-translate-y-1 group-focus-visible:-translate-y-1">
+                    {item.title}
+                  </h3>
+                  <span className="flex max-h-0 items-center gap-3 overflow-hidden rounded-full bg-[#E6FF2A] px-0 py-0 font-body text-[clamp(13px,0.938vw,18px)] font-semibold text-[#101010] opacity-0 transition-all duration-500 group-hover:max-h-16 group-hover:px-7 group-hover:py-3 group-hover:opacity-100 group-focus-visible:max-h-16 group-focus-visible:px-7 group-focus-visible:py-3 group-focus-visible:opacity-100">
+                    LEARN MORE <span aria-hidden="true">›</span>
+                  </span>
+                </div>
               </Link>
             ))}
           </div>

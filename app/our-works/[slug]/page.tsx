@@ -379,7 +379,7 @@ export default async function WorkDetailPage({
       {/* DETAIL WORKS */}
       <section className="px-5 pb-20 pt-4 sm:px-8 sm:pb-24 lg:px-14 lg:pt-20 2xl:px-0 2xl:pb-[132px] 2xl:pt-24">
         <div className="mx-auto grid w-full max-w-[1700px] grid-cols-1 items-start gap-10 xl:grid-cols-[310px_minmax(0,1fr)] xl:gap-[64px]">
-          <aside className="sticky top-[90px] z-30 self-start xl:top-[96px]">
+          <aside className="relative z-30 self-start xl:sticky xl:top-[96px]">
             <div className="rounded-[20px] bg-[rgba(153,166,231,0.1)] px-5 py-6 sm:px-6 sm:py-7 2xl:px-6 2xl:py-8">
               <div className="border-b border-[rgba(200,200,200,0.25)] pb-5">
                 <h2 className="font-body text-[13px] font-extrabold uppercase tracking-[0.06em] text-[#1A3E9E] sm:text-[15px] 2xl:text-[16px]">Key Features</h2>

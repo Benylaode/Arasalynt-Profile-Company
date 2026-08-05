@@ -112,7 +112,7 @@ const LEADERSHIP_THOUGHTS = LEADERSHIP_THOUGHTS_DUMMY_DATA.map(
     slug: item.slug,
     title: item.title,
     category: item.category || 'LEADERSHIP THOUGHTS',
-    author: item.author || 'CEO Arsalynt',
+    author: item.author || 'CEO Arsalynk',
     readTime: item.readTime,
     date: item.date,
     description: item.description,
@@ -232,7 +232,7 @@ export default function LeadershipThoughtsPage() {
           </h1>
 
           <p className="mt-6 max-w-[806px] font-body text-[clamp(14px,1.042vw,20px)] font-normal leading-[1.6] tracking-[0.02em] text-white/95">
-            Perspectives, principles, and strategic insights from the Arsalynt leadership team —
+            Perspectives, principles, and strategic insights from the Arsalynk leadership team —
             shaping the way we think about business, technology, and human potential.
           </p>
 
@@ -269,15 +269,15 @@ export default function LeadershipThoughtsPage() {
       <section
         id="featured-thoughts"
         aria-label="Featured Thoughts"
-        className="bg-[#F7F7F7] px-[clamp(20px,5.729vw,110px)] py-16 max-[768px]:py-10"
+        className="bg-[#F7F7F7] px-[6vw] py-16 max-[1199px]:px-[4vw] max-[768px]:py-10"
       >
-        <div className="mx-auto w-full max-w-[1700px]">
-          <article className="group relative aspect-[17/8] w-full overflow-hidden rounded-[32px] bg-black max-[900px]:aspect-[4/3] max-[640px]:aspect-[4/5] max-[480px]:rounded-[22px]">
+        <div className="mx-auto w-full max-w-[1600px]">
+          <article className="group relative aspect-[17/8] w-full overflow-hidden rounded-[28px] bg-black max-[900px]:aspect-[4/3] max-[640px]:aspect-[4/5] max-[480px]:rounded-[22px]">
             <img
               key={`${featured?.id}-${activeSlide}`}
               src={featured?.featuredImage}
               alt={featured?.title ?? 'Featured leadership thought'}
-              className="absolute inset-0 h-full w-full object-contain object-center grayscale contrast-[1.14] brightness-[0.72] transition-[filter] duration-500 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-90"
+              className="absolute inset-0 h-full w-full object-contain object-center grayscale contrast-[1.14] brightness-[0.72] transition-[filter,transform] duration-500 group-hover:scale-[1.012] group-hover:brightness-[0.62]"
             />
 
             <div className="absolute inset-0 bg-black/35" />
@@ -291,13 +291,13 @@ export default function LeadershipThoughtsPage() {
               }}
             />
 
-            <div className="absolute bottom-[132px] left-[83px] right-[318px] z-10 flex flex-col items-start max-[1200px]:bottom-[110px] max-[1200px]:left-[60px] max-[1200px]:right-[240px] max-[768px]:bottom-[112px] max-[768px]:left-7 max-[768px]:right-7">
-              <div className="mb-2.5 flex items-center gap-2.5 font-body text-[18px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[1200px]:text-[15px] max-[768px]:text-[11px]">
+            <div className="absolute bottom-[118px] left-[74px] right-[284px] z-10 flex flex-col items-start max-[1200px]:bottom-[105px] max-[1200px]:left-[54px] max-[1200px]:right-[216px] max-[768px]:bottom-[112px] max-[768px]:left-7 max-[768px]:right-7">
+              <div className="mb-2.5 flex items-center gap-2.5 font-body text-[16px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[1200px]:text-[14px] max-[768px]:text-[11px]">
                 <span className="h-2 w-2 shrink-0 bg-[#E6FF2A]" />
                 <span>Featured Thoughts</span>
               </div>
 
-              <h2 className="max-w-[1299px] font-heading text-[clamp(34px,3.333vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#F7F7F7]">
+              <h2 className="max-w-[1180px] font-heading text-[clamp(32px,3vw,58px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#F7F7F7] transition-colors duration-300 group-hover:text-[#E6FF2A]">
                 <Link
                   href={`/insight-programs/leadership-thoughts/${featured?.slug}`}
                   className="transition-opacity hover:opacity-80"
@@ -306,12 +306,12 @@ export default function LeadershipThoughtsPage() {
                 </Link>
               </h2>
 
-              <div className="mt-5 flex min-h-[59px] items-center rounded-full border border-[#717171] px-8 font-body text-[18px] leading-[1.5] tracking-[0.02em] text-white max-[1200px]:min-h-[50px] max-[1200px]:px-6 max-[1200px]:text-[15px] max-[768px]:mt-4 max-[768px]:min-h-[42px] max-[768px]:px-5 max-[768px]:text-[12px]">
+              <div className="mt-5 flex min-h-[54px] items-center rounded-full border border-[#717171] px-7 font-body text-[16px] leading-[1.5] tracking-[0.02em] text-white max-[1200px]:min-h-[48px] max-[1200px]:px-6 max-[1200px]:text-[14px] max-[768px]:mt-4 max-[768px]:min-h-[42px] max-[768px]:px-5 max-[768px]:text-[12px]">
                 by {featured?.author}
               </div>
             </div>
 
-            <div className="absolute bottom-[60px] left-[83px] z-20 flex h-2.5 items-center gap-2 max-[1200px]:bottom-10 max-[1200px]:left-[60px] max-[768px]:bottom-7 max-[768px]:left-7">
+            <div className="absolute bottom-[54px] left-[74px] z-20 flex h-2.5 items-center gap-2 max-[1200px]:bottom-10 max-[1200px]:left-[54px] max-[768px]:bottom-7 max-[768px]:left-7">
               {FEATURED_ARTICLES.map((article, index) => (
                 <button
                   key={article.id}
@@ -328,12 +328,12 @@ export default function LeadershipThoughtsPage() {
               ))}
             </div>
 
-            <div className="absolute bottom-[60px] right-[83px] z-20 flex gap-2 max-[1200px]:bottom-10 max-[1200px]:right-[60px] max-[768px]:bottom-7 max-[768px]:right-7">
+            <div className="absolute bottom-[54px] right-[74px] z-20 flex gap-2 max-[1200px]:bottom-10 max-[1200px]:right-[54px] max-[768px]:bottom-7 max-[768px]:right-7">
               <button
                 type="button"
                 onClick={handlePrevious}
                 aria-label="Previous featured thought"
-                className="flex h-16 w-16 items-center justify-center rounded-xl border border-[#D9D9D9] text-[#D9D9D9] transition-colors duration-200 hover:bg-white hover:text-black max-[768px]:h-12 max-[768px]:w-12 max-[768px]:rounded-lg"
+                className="flex h-[58px] w-[58px] items-center justify-center rounded-[11px] border border-[#D9D9D9] text-[#D9D9D9] transition-colors duration-200 hover:bg-white hover:text-black max-[768px]:h-12 max-[768px]:w-12 max-[768px]:rounded-lg"
               >
                 <IconArrowLeft size={24} />
               </button>
@@ -342,7 +342,7 @@ export default function LeadershipThoughtsPage() {
                 type="button"
                 onClick={handleNext}
                 aria-label="Next featured thought"
-                className="flex h-16 w-16 items-center justify-center rounded-xl border border-[#D9D9D9] text-[#D9D9D9] transition-colors duration-200 hover:bg-white hover:text-black max-[768px]:h-12 max-[768px]:w-12 max-[768px]:rounded-lg"
+                className="flex h-[58px] w-[58px] items-center justify-center rounded-[11px] border border-[#D9D9D9] text-[#D9D9D9] transition-colors duration-200 hover:bg-white hover:text-black max-[768px]:h-12 max-[768px]:w-12 max-[768px]:rounded-lg"
               >
                 <IconArrowRight size={24} />
               </button>
@@ -357,7 +357,7 @@ export default function LeadershipThoughtsPage() {
       <section
         id="explore-thoughts"
         aria-label="Explore Our Thoughts"
-        className="bg-[rgba(153,166,231,0.10)] px-[clamp(20px,5.729vw,110px)] py-[110px] max-[1024px]:py-20 max-[768px]:py-16"
+        className="bg-[rgba(153,166,231,0.10)] px-[6vw] py-[110px] max-[1199px]:px-[4vw] max-[1024px]:py-20 max-[768px]:py-16"
       >
         <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-16 max-[768px]:gap-10">
           <header className="flex w-full items-end justify-between gap-8 max-[1050px]:flex-col max-[1050px]:items-start">
@@ -416,7 +416,7 @@ export default function LeadershipThoughtsPage() {
                         className="absolute inset-0 h-full w-full object-contain object-center grayscale contrast-[1.14] brightness-[0.78] transition-[filter,transform] duration-500 group-hover:scale-[1.012] group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-90"
                       />
                       <div className="absolute inset-0 bg-black/15 transition-colors duration-300 group-hover:bg-black/5" />
-                      <span className="absolute bottom-5 left-5 inline-flex translate-y-2 items-center rounded-full bg-[#1A3E9E] px-5 py-3 font-body text-[12px] font-bold uppercase tracking-[0.03em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:bg-[#132B7A] group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 sm:bottom-6 sm:left-6 sm:text-[14px]">
+                      <span className="absolute bottom-5 left-5 inline-flex translate-y-2 items-center rounded-full bg-[#1A3E9E] px-5 py-3 font-body text-[12px] font-semibold uppercase tracking-[0.03em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:bg-[#132B7A] group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 sm:bottom-6 sm:left-6 sm:text-[14px]">
                         Read article
                       </span>
                     </div>

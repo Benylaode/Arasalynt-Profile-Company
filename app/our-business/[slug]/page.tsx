@@ -108,10 +108,10 @@ export async function generateMetadata({
   if (!biz) return { title: 'Not Found' };
 
   return {
-    title: `${biz.name} — Arsalynt`,
+    title: `${biz.name} — Arsalynk`,
     description: biz.aboutDesc.slice(0, 155),
     openGraph: {
-      title: `${biz.name} | Arsalynt`,
+      title: `${biz.name} | Arsalynk`,
       description: biz.aboutDesc.slice(0, 155),
       images: [{ url: biz.heroImg }],
     },
@@ -155,12 +155,12 @@ function DownIcon() {
 
 function PainPointIcon({ icon, index }: { icon?: string; index: number }) {
   if (icon?.startsWith('/')) {
-    return <img src={icon} alt="" aria-hidden="true" className="h-8 w-8 object-contain" />;
+    return <img src={icon} alt="" aria-hidden="true" className="h-[26px] w-[26px] object-contain" />;
   }
 
   const common = {
-    width: 32,
-    height: 32,
+    width: 26,
+    height: 26,
     viewBox: '0 0 32 32',
     fill: 'none',
     'aria-hidden': true,
@@ -189,7 +189,14 @@ function PainPointIcon({ icon, index }: { icon?: string; index: number }) {
     </svg>,
   ];
 
-  return variants[index % variants.length];
+  const semanticIconIndex: Record<string, number> = {
+    'legacy-hardware': 0,
+    'disconnected-software': 1,
+    'operational-blind-spots': 2,
+    'unexpected-downtime': 3,
+  };
+
+  return variants[(icon ? semanticIconIndex[icon] : undefined) ?? index % variants.length];
 }
 
 function Label({ children, tone = 'blue' }: { children: ReactNode; tone?: 'blue' | 'lime' }) {
@@ -246,7 +253,8 @@ function buildSliderCss(slug: string, workCount: number, otherCount: number) {
       padding-left: var(--work-start);
       padding-right: var(--work-start);
       transition: transform 760ms cubic-bezier(.22,1,.36,1);
-      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
     #works-slider-${safe} .work-card {
       width: var(--work-card-w);
@@ -269,7 +277,8 @@ function buildSliderCss(slug: string, workCount: number, otherCount: number) {
       padding-left: var(--other-start);
       padding-right: var(--other-start);
       transition: transform 760ms cubic-bezier(.22,1,.36,1);
-      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
     #other-slider-${safe} .other-card { width: var(--other-card-w); }
     #other-slider-${safe} .other-control { display: none; }
@@ -404,27 +413,17 @@ export default async function BusinessSlugPage({
       </section>
 
       {/* TECHNOLOGY / PAIN POINTS — 100% structure from Leadership Principles */}
-      <section className="relative isolate w-full overflow-hidden bg-[#F7F7F7] px-[clamp(24px,5.729vw,110px)] py-[clamp(100px,8.125vw,156px)]">
-        {/* Layer 1: Leadership world/vector background */}
+      <section className="relative isolate w-full overflow-hidden bg-[#EEF0F6] px-[6vw] py-[clamp(100px,8.125vw,156px)] max-[1199px]:px-[4vw]">
+        {/* Shared decorative layer for every Business challenge section. */}
         <div
-          className="pointer-events-none absolute bottom-0 left-[clamp(-8px,calc(5.729vw-32px),78px)] right-[clamp(-8px,calc(5.729vw-32px),78px)] top-[-50px] z-0 bg-contain bg-center bg-no-repeat opacity-100"
+          className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[clamp(420px,52vw,700px)] w-[88%] max-w-[1759px] -translate-x-1/2 -translate-y-1/2 bg-cover bg-center bg-no-repeat opacity-[0.14] max-[1199px]:w-[92%]"
           style={{
-            backgroundImage: "url('/images/company-leadership/Vector.svg')",
+            backgroundImage: "url('/images/our-business/pain-points-radial.png')",
           }}
           aria-hidden="true"
         />
 
-        {/* Layer 2: top and bottom fades */}
-        <div
-          className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[438px] bg-gradient-to-b from-[#F7F7F7] to-transparent"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[438px] bg-gradient-to-t from-[#F7F7F7] via-[#F7F7F7]/60 to-transparent"
-          aria-hidden="true"
-        />
-
-        {/* Layer 3: foreground content */}
+        {/* Foreground content */}
         <div className="relative z-20 mx-auto flex w-full max-w-[1700px] flex-col items-center gap-[clamp(48px,4.167vw,80px)]">
           <div className="flex w-full flex-col items-center gap-[clamp(18px,1.25vw,24px)] text-center">
             <div className="flex items-center justify-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.06em] text-[#1A3E9E] md:text-[14px]">
@@ -441,13 +440,13 @@ export default async function BusinessSlugPage({
             {biz.painPoints.map((point, index) => (
               <article
                 key={`${point.title}-${index}`}
-                className="group relative flex min-h-[clamp(220px,15vw,290px)] flex-col items-start overflow-hidden rounded-[16px] border border-transparent px-4 pb-4 pt-4 backdrop-blur-[8px] transition-all duration-300 hover:border-[#99A6E7]/60 hover:bg-[linear-gradient(135deg,rgba(26,62,158,0.15)_0%,rgba(133,166,255,0.25)_100%)] hover:shadow-[0_8px_40px_rgba(26,62,158,0.18)]"
+                className="group relative flex min-h-[clamp(220px,15vw,290px)] flex-col items-start overflow-hidden rounded-[16px] border border-transparent p-4 backdrop-blur-[8px] transition-[transform,border-color,background-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[#7F9CFF] hover:bg-[linear-gradient(135deg,rgba(26,62,158,0.18)_0%,rgba(133,166,255,0.34)_100%)] hover:shadow-[0_12px_42px_rgba(26,62,158,0.20)]"
                 style={{
                   background:
                     'linear-gradient(79deg, rgba(26,62,158,.0375) 13.31%, rgba(133,166,255,.075) 132.94%)',
                 }}
               >
-                <div className="relative z-10 flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-lg border border-[#99A6E7] bg-[rgba(153,166,231,.35)] text-[#101010] transition-colors duration-300 group-hover:bg-[rgba(26,62,158,0.35)]">
+                <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-[#99A6E7] bg-[rgba(153,166,231,.35)] text-[#101010] transition-colors duration-300 group-hover:bg-[rgba(26,62,158,0.35)]">
                   <PainPointIcon icon={point.icon} index={index} />
                 </div>
 
@@ -476,7 +475,7 @@ export default async function BusinessSlugPage({
         />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-b from-transparent to-[#101010]" />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-[1920px] flex-col gap-16 px-[110px] max-[1536px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
+        <div className="relative z-10 mx-auto flex w-[88%] max-w-[1980px] flex-col gap-16 px-0 max-[1199px]:w-[92%]">
           <div className="mx-auto flex max-w-[841px] flex-col items-center gap-4 text-center">
             <Label tone="lime">{biz.servicesLabel ?? 'OUR SOLUTIONS'}</Label>
             <h2 className="font-heading text-[clamp(46px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#F7F7F7]">
@@ -492,7 +491,7 @@ export default async function BusinessSlugPage({
             {biz.services.map((service, index) => (
               <article
                 key={`${service.name}-${index}`}
-                className="group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-[#F5F5F5]/15 bg-gradient-to-b from-[#101010]/5 to-white/[0.05] p-5 pb-6 sm:p-6 sm:pb-7 backdrop-blur-[12.5px] transition duration-500 hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.07]"
+                className="group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-[#F5F5F5]/15 bg-gradient-to-b from-[#101010]/5 to-white/[0.05] p-5 pb-6 sm:p-6 sm:pb-7 backdrop-blur-[12.5px] transition duration-500 hover:-translate-y-1 hover:border-white/80 hover:bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.28))] hover:shadow-[0_18px_50px_rgba(0,0,0,0.25)]"
               >
                 <div className={`relative w-full overflow-hidden rounded-lg bg-[#0A2951] ${
                     threeColumnServices ? 'aspect-[499/265]' : 'aspect-[353/265]'
@@ -504,7 +503,7 @@ export default async function BusinessSlugPage({
                   />
                   <div className="absolute inset-0 bg-black/15" />
                 </div>
-                <h3 className="font-heading text-[clamp(22px,1.8vw,32px)] font-medium leading-[1.2] tracking-[-0.01em] text-[#D9D9D9]">
+                <h3 className="font-heading text-[clamp(22px,1.8vw,32px)] font-medium leading-[1.2] tracking-[-0.01em] text-[#D9D9D9] transition-colors duration-300 group-hover:text-[#E6FF2A]">
                   {service.name}
                 </h3>
               </article>
@@ -522,7 +521,7 @@ export default async function BusinessSlugPage({
         />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[440px] bg-gradient-to-b from-[#101010] via-[#101010]/80 to-transparent" />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-[1920px] flex-col items-center gap-8 px-[110px] text-center max-[1536px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
+        <div className="relative z-10 mx-auto flex w-[88%] max-w-[1980px] flex-col items-center gap-8 px-0 text-center max-[1199px]:w-[92%]">
           <Label tone="lime">{biz.visionLabel ?? 'OUR VISION'}</Label>
           <p
             className={`font-heading font-semibold tracking-[-0.01em] text-[#F7F7F7] ${
@@ -644,7 +643,7 @@ export default async function BusinessSlugPage({
               />
             ))}
 
-            <div className="mx-auto mb-[42px] flex w-full max-w-[1920px] items-end justify-between gap-8 px-[110px] max-[1536px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
+            <div className="mx-auto mb-[42px] flex w-[88%] max-w-[1980px] items-end justify-between gap-8 px-0 max-[1199px]:w-[92%]">
               <h2 className="font-heading text-[clamp(42px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
                 {biz.otherBusinessesTitle ?? 'Explore Other Business'}
               </h2>
@@ -697,7 +696,7 @@ export default async function BusinessSlugPage({
                       <h3 className="font-heading text-[clamp(34px,3.334vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#F7F7F7]">
                         {business.name}
                       </h3>
-                      <div className="inline-flex h-[44px] items-center justify-center gap-2 rounded-full bg-[#E6FF2A] px-6 font-body text-[13px] font-extrabold uppercase tracking-[0.04em] text-[#101010] shadow-[0_10px_25px_rgba(230,255,42,0.25)] transition-all duration-500 opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0">
+                      <div className="inline-flex h-[44px] items-center justify-center gap-2 rounded-full bg-[#E6FF2A] px-6 font-body text-[13px] font-semibold uppercase tracking-[0.04em] text-[#101010] shadow-[0_10px_25px_rgba(230,255,42,0.25)] transition-all duration-500 opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0">
                         <span>LEARN MORE</span>
                         <ArrowIcon direction="right" />
                       </div>

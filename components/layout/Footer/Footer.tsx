@@ -32,7 +32,7 @@ const BrandLogo = () => (
   <svg
     aria-hidden="true"
     viewBox="110 96 402 109.185"
-    className="block h-[78px] w-[287px] shrink-0 max-[767px]:h-auto max-[767px]:w-[200px]"
+    className="block h-[70px] w-[258px] shrink-0 max-[767px]:h-auto max-[767px]:w-[190px]"
   >
     <path d="M218.792 150.595C218.792 153.457 217.667 156.13 215.68 158.125L203.342 170.512C200.642 173.261 197.192 174.992 193.48 175.595C193.292 172.395 192.467 169.383 191.042 166.597H191.455C193.48 166.371 195.392 165.429 196.855 163.999L209.23 151.612C209.492 151.311 209.642 150.972 209.642 150.595C209.642 150.219 209.492 149.88 209.23 149.579L196.892 137.192C193.405 133.728 187.78 133.728 184.255 137.192L174.28 147.207L167.867 140.806L177.73 130.678C178.63 129.812 179.567 129.059 180.542 128.382C183.505 126.386 186.955 125.332 190.555 125.332C191.605 125.332 192.617 125.407 193.63 125.596C197.305 126.236 200.68 127.968 203.342 130.641L215.68 143.028C217.667 145.023 218.792 147.734 218.792 150.558V150.595Z" fill="#E6FF2A" />
     <path d="M161.002 160.57L151.065 170.509C150.165 171.413 149.265 172.166 148.252 172.806C145.327 174.801 141.84 175.818 138.24 175.818C137.19 175.818 136.177 175.743 135.165 175.592C131.527 174.952 128.115 173.22 125.452 170.509L113.152 158.122C109.027 153.981 109.027 147.204 113.152 143.025L125.49 130.638C128.227 127.927 131.64 126.195 135.352 125.593C135.54 128.755 136.327 131.805 137.79 134.591H137.415C135.352 134.817 133.477 135.721 131.977 137.189L119.64 149.576C119.115 150.141 119.115 151.082 119.64 151.609L131.94 163.996C133.627 165.69 135.877 166.631 138.277 166.631C140.677 166.631 142.89 165.652 144.577 163.996L154.515 154.019L161.002 160.57Z" fill="#E6FF2A" />
@@ -90,7 +90,7 @@ const FooterTitle = ({ children }: { children: string }) => (
 const FooterLink = ({ href, children }: { href: string; children: string }) => (
   <Link
     href={href}
-    className="block h-[19px] whitespace-nowrap text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors duration-200 hover:text-white"
+    className="block h-[19px] whitespace-nowrap text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors duration-200 hover:text-[#E6FF2A]"
   >
     {children}
   </Link>
@@ -115,9 +115,9 @@ export default function Footer() {
       className={`${manrope.className} w-full bg-[#101010] text-[#D9D9D9]`}
       style={{ fontSynthesis: 'none', textRendering: 'geometricPrecision' }}
     >
-      <div className="mx-auto w-full max-w-[1920px] px-[clamp(1rem,5.6vw,6.75rem)] pt-[69px] max-[767px]:pt-[40px]">
-        <div className="flex flex-col gap-[46px] max-[767px]:gap-[34px]">
-          <div className="flex h-[78px] items-start max-[767px]:h-auto">
+      <div className="mx-auto w-[88%] max-w-[1980px] px-0 pt-[60px] max-[1199px]:w-[92%] max-[767px]:pt-[40px]">
+        <div className="flex flex-col gap-[40px] max-[767px]:gap-[34px]">
+          <div className="flex h-[70px] items-start max-[767px]:h-auto">
             <Link href="/" aria-label="Arsalynk home" className="inline-flex no-underline">
               <BrandLogo />
             </Link>
@@ -148,18 +148,18 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="flex h-[354px] flex-col justify-center gap-[30px] max-[1799px]:h-auto max-[1799px]:justify-start">
-              <div className="flex h-[49px] flex-col gap-[9px]">
+            <div className="flex h-[354px] flex-col justify-center gap-[30px] max-[1799px]:h-auto max-[1799px]:justify-start max-[767px]:grid max-[767px]:grid-cols-2 max-[767px]:gap-x-7 max-[767px]:gap-y-[30px]">
+              <div className="flex h-[49px] flex-col gap-[9px] max-[767px]:col-start-1 max-[767px]:row-start-1">
                 <FooterTitle>IT INFRASTRUCTURE</FooterTitle>
                 <FooterLink href="/our-business/kaluna-technology">Kaluna Technology</FooterLink>
               </div>
 
-              <div className="flex h-[49px] flex-col gap-[9px]">
+              <div className="flex h-[49px] flex-col gap-[9px] max-[767px]:col-start-1 max-[767px]:row-start-2">
                 <FooterTitle>DATA &amp; ANALYTICS</FooterTitle>
                 <FooterLink href="/our-business/artic-analytica">Artic Analytica</FooterLink>
               </div>
 
-              <div className="flex h-[196px] flex-col gap-[17px]">
+              <div className="flex h-[196px] flex-col gap-[17px] max-[767px]:col-start-2 max-[767px]:row-span-2 max-[767px]:row-start-1">
                 <FooterTitle>MEDIA</FooterTitle>
                 <ul className="m-0 flex list-none flex-col gap-[9px] p-0">
                   {MEDIA_LINKS.map((link) => (
@@ -178,7 +178,7 @@ export default function Footer() {
                   href="https://maps.google.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="m-0 h-[39px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline hover:text-white"
+                  className="m-0 h-[39px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
                 >
                   <span className="block max-[1799px]:inline">Menara Rajawali 26th Floor Jl. DR. Ide Anak Agung Gde</span>
                   <span className="block max-[1799px]:inline">Agung, Jakarta, Indonesia 12950 →</span>
@@ -191,7 +191,7 @@ export default function Footer() {
                   href="https://maps.google.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="m-0 h-[58px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline hover:text-white"
+                  className="m-0 h-[58px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
                 >
                   <span className="block max-[1799px]:inline">MG Setos, Jl. Inspeksi, 3rd Floor Kembangsari Subdistrict,</span>
                   <span className="block max-[1799px]:inline">Semarang Tengah District, Semarang City, Central Java</span>
@@ -206,7 +206,7 @@ export default function Footer() {
                     href="https://wa.me/6287855471107"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-[19px] items-start gap-[9px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline hover:text-white"
+                    className="flex h-[19px] items-start gap-[9px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
                   >
                     <WhatsAppIcon />
                     <span className="h-[19px]">+62 878-5547-107</span>
@@ -214,7 +214,7 @@ export default function Footer() {
 
                   <a
                     href="mailto:corporate.arsalynk@gmail.com"
-                    className="flex h-[19px] items-start gap-[9px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline hover:text-white"
+                    className="flex h-[19px] items-start gap-[9px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
                   >
                     <MailIcon />
                     <span className="h-[19px]">corporate.arsalynk@gmail.com</span>
@@ -225,7 +225,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-[60px] flex h-[83px] items-center justify-between border-t-[0.5px] border-t-[rgba(245,245,245,0.5)] py-[19px] max-[1100px]:mt-[51px] max-[767px]:mt-[46px] max-[767px]:h-auto max-[767px]:flex-col max-[767px]:items-start max-[767px]:gap-[14px] max-[767px]:py-[17px]">
+        <div className="mt-[52px] flex h-[78px] items-center justify-between border-t-[0.5px] border-t-[rgba(245,245,245,0.5)] py-[16px] max-[1100px]:mt-[46px] max-[767px]:mt-[42px] max-[767px]:h-auto max-[767px]:flex-col-reverse max-[767px]:items-center max-[767px]:gap-[14px] max-[767px]:py-[17px]">
           <p className="m-0 h-[19px] whitespace-nowrap text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9]">
             © 2026 PT Sinergi Muda Arsa
           </p>

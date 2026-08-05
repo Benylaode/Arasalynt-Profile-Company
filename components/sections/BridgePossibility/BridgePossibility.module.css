@@ -1,0 +1,54 @@
+@media (max-width: 640px) {
+  .visual {
+    height: 420px;
+    aspect-ratio: auto;
+  }
+
+  .cards {
+    position: absolute;
+    inset: 0;
+    display: block;
+    max-height: none;
+    max-width: none;
+    padding: 0;
+  }
+
+  .card {
+    position: absolute;
+    width: 180px;
+    height: 90px;
+    margin: 0;
+    transform: none;
+  }
+
+  .cardOne {
+    left: 2%;
+    top: 16%;
+  }
+
+  .cardTwo {
+    right: 0;
+    top: 45%;
+  }
+
+  .cardThree {
+    bottom: 6%;
+    left: 2%;
+  }
+
+  .cardViewport {
+    width: 180px;
+    height: 90px;
+  }
+
+  .cardSurface {
+    transform: scale(0.55) !important;
+    transform-origin: top left !important;
+  }
+
+  .number {
+    top: -54px;
+    left: 20px;
+    font-size: 100px;
+  }
+}

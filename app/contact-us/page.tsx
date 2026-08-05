@@ -753,7 +753,7 @@ export default function ContactUsPage() {
             OTHER COMPANIES — Compact Height & Sizing
         ================================================================= */}
         <section className="w-full bg-[rgba(153,166,231,0.10)] py-[54px] md:py-[64px]">
-          <div className="mx-auto flex w-full max-w-[1920px] flex-col gap-[clamp(24px,2vw,38px)] px-[110px] max-[1536px]:px-[64px] max-[1024px]:px-[40px] max-[768px]:px-[24px] max-[480px]:px-[16px]">
+          <div className="mx-auto flex w-[88%] max-w-[1980px] flex-col gap-[clamp(24px,2vw,38px)] px-0 max-[1199px]:w-[92%]">
             <div className="flex flex-col items-center gap-3 text-center">
               <div className="flex items-center justify-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.6] tracking-[0.02em] text-[#1A3E9E] md:text-[13px]">
                 <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
