@@ -4,6 +4,7 @@ import './globals.css';
 import { SITE_NAME, SITE_DESCRIPTION } from '@/lib/constants';
 import Navbar from '@/components/layout/Navbar/Navbar';
 import Footer from '@/components/layout/Footer/Footer';
+import WhatsAppFloatingButton from '@/components/layout/WhatsAppFloatingButton/WhatsAppFloatingButton';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -56,6 +57,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <WhatsAppFloatingButton />
       </body>
     </html>
   );
