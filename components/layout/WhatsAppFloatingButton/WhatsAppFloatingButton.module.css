@@ -1,14 +1,17 @@
 .button {
   position: fixed;
-  right: max(20px, env(safe-area-inset-right));
-  bottom: max(20px, env(safe-area-inset-bottom));
+  right: 0;
+  bottom: max(clamp(18px, 3vw, 36px), env(safe-area-inset-bottom));
   z-index: 90;
   display: grid;
-  width: 68px;
-  height: 68px;
+  box-sizing: border-box;
+  width: calc(clamp(68px, 4.4vw, 84px) + env(safe-area-inset-right));
+  height: clamp(68px, 4.4vw, 84px);
+  padding-right: env(safe-area-inset-right);
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 12px;
+  border-right: 0;
+  border-radius: 10px 0 0 10px;
   background: #1a3e9e;
   color: #ffffff;
   box-shadow: 0 12px 30px rgba(5, 28, 92, 0.28);
@@ -21,11 +24,11 @@
 .button:hover {
   background: #152571;
   box-shadow: 0 16px 34px rgba(5, 28, 92, 0.36);
-  transform: translateY(-3px);
+  transform: translateX(-3px);
 }
 
 .button:active {
-  transform: translateY(-1px) scale(0.97);
+  transform: translateX(-1px) scale(0.97);
 }
 
 .button:focus-visible {
@@ -34,22 +37,34 @@
 }
 
 .icon {
-  width: 38px;
-  height: 38px;
+  width: clamp(36px, 2.25vw, 43px);
+  height: clamp(36px, 2.25vw, 43px);
 }
 
 @media (max-width: 767px) {
   .button {
-    right: max(16px, env(safe-area-inset-right));
     bottom: max(16px, env(safe-area-inset-bottom));
-    width: 58px;
-    height: 58px;
-    border-radius: 10px;
+    width: calc(clamp(58px, 16vw, 68px) + env(safe-area-inset-right));
+    height: clamp(58px, 16vw, 68px);
+    border-radius: 9px 0 0 9px;
   }
 
   .icon {
-    width: 32px;
-    height: 32px;
+    width: clamp(31px, 8.5vw, 36px);
+    height: clamp(31px, 8.5vw, 36px);
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .button {
+    bottom: max(10px, env(safe-area-inset-bottom));
+    width: calc(54px + env(safe-area-inset-right));
+    height: 54px;
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
   }
 }
 
