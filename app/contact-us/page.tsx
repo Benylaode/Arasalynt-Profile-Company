@@ -440,16 +440,6 @@ export default function ContactUsPage() {
           >
             <DownIcon />
           </a>
-
-          <a
-            href="https://wa.me/6287855471107"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Contact Arsalynk through WhatsApp"
-            className="absolute bottom-6 right-0 z-30 hidden h-[60px] w-[60px] items-center justify-center rounded-l-[8px] bg-[#1A3E9E] text-white transition hover:bg-[#14347F] md:flex xl:bottom-8 xl:h-[72px] xl:w-[72px]"
-          >
-            <WhatsAppIcon />
-          </a>
         </section>
 
         {/* ================================================================
