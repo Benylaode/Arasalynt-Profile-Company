@@ -160,17 +160,17 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   works: [
     {
       name: 'Digital Platform Development',
-      tag: 'Website Development',
+      tag: 'WEBSITE DEVELOPMENT • DIGITAL PLATFORM',
       img: '/images/our-business/kaluna-technology/works/project-01.webp',
     },
     {
       name: 'Sinau Print Marketplace Website',
-      tag: 'Marketplace Website',
+      tag: 'MARKETPLACE WEBSITE • ERP SYSTEM',
       img: '/images/our-business/kaluna-technology/works/sinau-print-marketplace.webp',
     },
     {
       name: 'X-1 Tire Company Profile Website',
-      tag: 'Company Profile Website',
+      tag: 'COMPANY PROFILE • WEBSITE DESIGN',
       img: '/images/our-business/kaluna-technology/works/x1-tire-website.webp',
     },
   ],
@@ -287,19 +287,22 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   featuredWorkIndex: 1,
   works: [
     {
-      name: 'Digital Media Production Platform',
-      tag: 'Digital Platform',
-      img: '/images/shared/performance-campaign-dashboard-caf797.webp',
+      name: 'Kajian Kelayakan Pengembangan Gedung Industri Kreatif (GIK)',
+      tag: 'DATA & RESEARCH • FEASIBILITY STUDY',
+      img: '/images/projects/kajian-kelayakan-gik/1.webp',
+      slug: 'kajian-kelayakan-gik',
     },
     {
-      name: 'Sinau Print Marketplace Website',
-      tag: 'Marketplace Website',
-      img: '/images/shared/sinau-print-marketplace.webp',
+      name: 'Penyusunan Buku Panduan Perubahan Perilaku Stunting',
+      tag: 'DATA & RESEARCH • SOCIAL RESEARCH',
+      img: '/images/projects/panduan-perubahan-perilaku-stunting/1.webp',
+      slug: 'panduan-perubahan-perilaku-stunting',
     },
     {
-      name: 'X-1 Tire Company Profile Website',
-      tag: 'Company Profile Website',
-      img: '/images/shared/x1-tire-website.webp',
+      name: 'Artic Complex Web Architecture & Portal',
+      tag: 'DATA & ANALYTICS • WEB PLATFORM',
+      img: '/images/projects/artic-complex-web/1.webp',
+      slug: 'artic-complex-web',
     },
   ],
 
@@ -416,19 +419,15 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   featuredWorkIndex: 1,
   works: [
     {
+      name: 'Produksi Konten Video Portret Padel Arena',
+      tag: 'MEDIA & CREATIVE • VIDEO PRODUCTION',
+      img: '/images/projects/video-portret-padel-arena/1.webp',
+      slug: 'video-portret-padel-arena',
+    },
+    {
       name: 'National Hybrid Event Livestream',
-      tag: 'Broadcast Production',
+      tag: 'BROADCAST PRODUCTION • LIVE EVENT',
       img: '/images/shared/performance-campaign-dashboard-caf797.webp',
-    },
-    {
-      name: 'Sinau Print Marketplace Website',
-      tag: 'Branding · Survey and Analytics',
-      img: '/images/shared/sinau-print-marketplace.webp',
-    },
-    {
-      name: 'X-1 Tire Company Profile Website',
-      tag: 'Website · Digital Experience',
-      img: '/images/shared/x1-tire-website.webp',
     },
   ],
 
@@ -545,19 +544,16 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   featuredWorkIndex: 1,
   works: [
     {
-      name: 'Integrated Brand Campaign Platform',
-      tag: 'Brand Strategy · Digital Experience',
-      img: '/images/shared/performance-campaign-dashboard-caf797.webp',
+      name: 'Desain Pelatihan Wasit Kota Semarang',
+      tag: 'MEDIA & CREATIVE • TRAINING DESIGN',
+      img: '/images/projects/desain-pelatihan-wasit-semarang/1.webp',
+      slug: 'desain-pelatihan-wasit-semarang',
     },
     {
-      name: 'Sinau Print Marketplace Website',
-      tag: 'Branding · Survey and Analytics',
-      img: '/images/shared/sinau-print-marketplace.webp',
-    },
-    {
-      name: 'X-1 Tire Company Profile Website',
-      tag: 'Corporate Identity · Website',
-      img: '/images/shared/x1-tire-website.webp',
+      name: 'Web Media Corporate Profile & Digital Presence',
+      tag: 'MEDIA & CREATIVE • DIGITAL BRANDING',
+      img: '/images/projects/web-media-profile/1.webp',
+      slug: 'web-media-profile',
     },
   ],
 

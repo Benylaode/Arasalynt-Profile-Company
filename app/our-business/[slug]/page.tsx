@@ -1,11 +1,13 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Script from 'next/script';
 import type { ReactNode } from 'react';
 import {
   getBusinessBySlug,
   getAllBusinessSlugs,
 } from '@/lib/db/actions';
+import BusinessWorksCarousel from '@/components/sections/BusinessWorksCarousel/BusinessWorksCarousel';
 
 type PainPoint = {
   icon?: string;
@@ -139,6 +141,27 @@ function ArrowIcon({ direction = 'right' }: { direction?: 'left' | 'right' }) {
   );
 }
 
+function WorkArrowIcon({ direction }: { direction: 'left' | 'right' }) {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className={direction === 'left' ? 'rotate-180' : ''}
+    >
+      <path
+        d="M8 4.5 15.5 12 8 19.5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function DownIcon() {
   return (
     <svg width="32" height="22" viewBox="0 0 32 22" fill="none" aria-hidden="true">
@@ -211,27 +234,8 @@ function Label({ children, tone = 'blue' }: { children: ReactNode; tone?: 'blue'
   );
 }
 
-function buildSliderCss(slug: string, workCount: number, otherCount: number) {
+function buildSliderCss(slug: string, otherCount: number) {
   const safe = slug.replace(/[^a-z0-9_-]/gi, '-');
-  const workRules = Array.from({ length: workCount }, (_, index) => {
-    const workShift = Array.from({ length: index }, () => ' - var(--work-card-w) - 16px').join('');
-    return `
-      #works-slider-${safe}:has(#work-${safe}-${index}:checked) .works-track {
-        transform: translate3d(calc(0px${workShift}), 0, 0);
-      }
-      #works-slider-${safe}:has(#work-${safe}-${index}:checked) .work-card-${index} {
-        opacity: 1;
-        transform: scale(1);
-      }
-      #works-slider-${safe}:has(#work-${safe}-${index}:checked) .work-control-${index} {
-        display: flex;
-      }
-      #works-slider-${safe}:has(#work-${safe}-${index}:checked) .work-progress-${index} {
-        transform: scaleX(1);
-      }
-    `;
-  }).join('\n');
-
   const otherRules = Array.from({ length: otherCount }, (_, index) => {
     const otherShift = Array.from({ length: index }, () => ' - var(--other-card-w) - 30px').join('');
     return `
@@ -245,28 +249,51 @@ function buildSliderCss(slug: string, workCount: number, otherCount: number) {
   }).join('\n');
 
   return `
-    #works-slider-${safe} {
-      --work-card-w: min(1413px, 73.59375vw);
-      --work-start: max(calc(50vw - 706.5px), 13.203125vw);
-    }
-    #works-slider-${safe} .works-track {
-      padding-left: var(--work-start);
-      padding-right: var(--work-start);
-      transition: transform 760ms cubic-bezier(.22,1,.36,1);
+    #business-works-slider-${safe} .business-work-track {
+      transition: transform 900ms cubic-bezier(.22,1,.36,1);
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
+      will-change: transform;
     }
-    #works-slider-${safe} .work-card {
-      width: var(--work-card-w);
-      opacity: .45;
-      transform: scale(.975);
-      transition: opacity 550ms ease, transform 760ms cubic-bezier(.22,1,.36,1);
+
+    #business-works-slider-${safe} .business-work-card {
+      z-index: 10;
+      cursor: pointer;
     }
-    #works-slider-${safe} .work-control { display: none; }
-    #works-slider-${safe} .work-progress-fill {
-      transform: scaleX(0);
+
+    #business-works-slider-${safe} .business-work-card[data-active="true"] {
+      z-index: 20;
+      cursor: default;
+    }
+
+    #business-works-slider-${safe} .business-work-link {
+      pointer-events: none;
+    }
+
+    #business-works-slider-${safe} .business-work-card[data-active="true"] .business-work-link {
+      pointer-events: auto;
+    }
+
+    #business-works-slider-${safe} .business-work-side-fade {
+      opacity: 0;
+      transition: opacity 400ms ease;
+    }
+
+    #business-works-slider-${safe} .business-work-card[data-side="left"] .business-work-left-fade,
+    #business-works-slider-${safe} .business-work-card[data-side="right"] .business-work-right-fade {
+      opacity: 1;
+    }
+
+    #business-works-slider-${safe} .business-work-progress {
+      animation-name: businessWorkProgress;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
       transform-origin: left;
-      transition: transform 760ms cubic-bezier(.22,1,.36,1);
+    }
+
+    @keyframes businessWorkProgress {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
     }
 
     #other-slider-${safe} {
@@ -283,21 +310,28 @@ function buildSliderCss(slug: string, workCount: number, otherCount: number) {
     #other-slider-${safe} .other-card { width: var(--other-card-w); }
     #other-slider-${safe} .other-control { display: none; }
 
-    ${workRules}
     ${otherRules}
 
     @media (max-width: 767px) {
-      #works-slider-${safe} {
-        --work-card-w: calc(100vw - 32px);
-        --work-start: 16px;
-      }
       #other-slider-${safe} {
         --other-card-w: calc(100vw - 48px);
         --other-start: 24px;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      #business-works-slider-${safe} .business-work-track {
+        transition-duration: 1ms !important;
+      }
+
+      #business-works-slider-${safe} .business-work-progress {
+        animation: none !important;
+      }
+    }
   `;
 }
+
+
 
 export default async function BusinessSlugPage({
   params,
@@ -318,12 +352,14 @@ export default async function BusinessSlugPage({
   const visionImg = biz.visionImg ?? `${assetBase}/vision-bg.webp`;
   const ctaImg = biz.ctaImg ?? `${assetBase}/cta-bg.webp`;
 
-  const sliderCss = buildSliderCss(safeSlug, biz.works.length, biz.otherBusinesses.length);
+  const sliderCss = buildSliderCss(safeSlug, biz.otherBusinesses.length);
   const serviceColumns = biz.servicesColumns ?? (biz.services.length === 6 ? 3 : 4);
   const threeColumnServices = serviceColumns === 3;
   const featuredWorkIndex = biz.works.length
     ? Math.min(Math.max(biz.featuredWorkIndex ?? Math.min(1, biz.works.length - 1), 0), biz.works.length - 1)
     : 0;
+
+
   const featuredOtherBusinessIndex = biz.otherBusinesses.length
     ? Math.min(Math.max(biz.featuredOtherBusinessIndex ?? 0, 0), biz.otherBusinesses.length - 1)
     : 0;
@@ -351,17 +387,17 @@ export default async function BusinessSlugPage({
         <div className="absolute -right-[9%] -top-[14%] h-[150%] w-[64%] rotate-[7deg] bg-gradient-to-b from-transparent via-white/[0.055] to-transparent" />
 
         <div className="relative z-10 flex max-w-[1100px] flex-col items-center gap-5 px-5 text-center md:gap-6">
-          <div className="flex flex-wrap justify-center gap-2 font-body text-[7px] font-bold uppercase tracking-[0.06em] text-[#E6FF2A] md:text-[9px]">
-            <span>Home</span><span>/</span><span>Our Business</span><span>/</span><span>{biz.name}</span>
-          </div>
+          <div className="font-body text-[10px] font-normal uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
+              Home&nbsp;&nbsp;&gt;&nbsp;&nbsp;Our Business&nbsp;&nbsp;&gt;&nbsp;&nbsp;{biz.name}
+            </div>
           <h1 className="font-heading text-[clamp(44px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
             {biz.name}
           </h1>
         </div>
 
         <a
-          href="#about"
-          aria-label="Scroll to business introduction"
+          href="#beyond-expectations"
+          aria-label="Scroll to CTA"
           className="absolute bottom-[34px] left-1/2 z-20 flex h-[58px] w-[58px] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 bg-white/[0.12] text-white backdrop-blur-[4px] transition hover:bg-white/20 md:bottom-[71px] md:h-20 md:w-20"
         >
           <DownIcon />
@@ -512,19 +548,19 @@ export default async function BusinessSlugPage({
         </div>
       </section>
 
-      {/* VISION */}
-      <section className="relative isolate flex min-h-[580px] items-center overflow-hidden bg-gradient-to-b from-[#101010] to-[#1A3E9E] py-[120px] md:min-h-[753px] md:py-[180px]">
+      {/* VISION — reduced to 80% of the previous section height */}
+      <section className="relative isolate flex min-h-[464px] items-center overflow-hidden bg-gradient-to-b from-[#101010] to-[#1A3E9E] py-[96px] md:min-h-[602px] md:py-[144px]">
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[96%] bg-cover bg-bottom opacity-55"
           style={{ backgroundImage: `url(${visionImg})` }}
           aria-hidden="true"
         />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[440px] bg-gradient-to-b from-[#101010] via-[#101010]/80 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[352px] bg-gradient-to-b from-[#101010] via-[#101010]/80 to-transparent" />
 
         <div className="site-shell relative z-10 flex flex-col items-center gap-8 px-0 text-center">
           <Label tone="lime">{biz.visionLabel ?? 'OUR VISION'}</Label>
           <p
-            className={`font-heading font-semibold tracking-[-0.01em] text-[#F7F7F7] ${
+            className={`w-full max-w-[85%] font-heading font-semibold tracking-[-0.01em] text-[#F7F7F7] max-[1024px]:max-w-[78%] max-[640px]:max-w-full ${
               biz.visionTextSize === 'large'
                 ? 'text-[clamp(36px,3.334vw,64px)] leading-[1.2]'
                 : 'text-[clamp(34px,2.917vw,56px)] leading-[1.1]'
@@ -535,97 +571,12 @@ export default async function BusinessSlugPage({
         </div>
       </section>
 
-      {/* WORKS */}
+      {/* WORKS — clean React BusinessWorksCarousel component */}
       {biz.works.length > 0 && (
-        <section className="overflow-hidden bg-[#F7F7F7] py-[88px] md:py-[110px]">
-          <div className="mx-auto mb-[42px] flex max-w-[1000px] flex-col items-center gap-6 px-6 text-center">
-            <Label>{biz.worksLabel ?? 'OUR PROJECTS'}</Label>
-            <h2 className="font-heading text-[clamp(46px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em]">
-              {biz.worksTitle ?? `Explore ${shortName}’s Work`}
-            </h2>
-          </div>
-
-          <div
-            id={`works-slider-${safeSlug}`}
-            className="relative h-[clamp(440px,39.584vw,760px)] w-full overflow-hidden"
-          >
-            {biz.works.map((_, index) => (
-              <input
-                key={`work-input-${index}`}
-                id={`work-${safeSlug}-${index}`}
-                type="radio"
-                name={`work-slider-${safeSlug}`}
-                defaultChecked={index === featuredWorkIndex}
-                className="sr-only"
-              />
-            ))}
-
-            <div className="works-track flex h-full w-max items-stretch gap-4">
-              {biz.works.map((work, index) => {
-                const href = work.href ?? (work.slug ? `/our-works/${work.slug}` : '/our-works');
-                return (
-                  <Link
-                    key={`${work.name}-${index}`}
-                    href={href}
-                    className={`work-card work-card-${index} relative block h-full shrink-0 overflow-hidden rounded-[18px] bg-[#191919] no-underline md:rounded-[32px]`}
-                  >
-                    <img
-                      src={work.img}
-                      alt={work.name}
-                      className="h-full w-full object-cover transition duration-700 hover:scale-[1.02]"
-                    />
-                    <div className="absolute inset-0 bg-black/20" />
-                    <div className="absolute inset-x-0 bottom-0 h-[43%] bg-gradient-to-t from-black via-black/65 to-transparent" />
-
-                    <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col gap-2 px-7 pb-10 md:px-[65px] md:pb-[58px]">
-                      <h3 className="max-w-[1236px] font-heading text-[clamp(34px,3.334vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#F7F7F7]">
-                        {work.name}
-                      </h3>
-                      <div className="flex items-center gap-3 font-body text-[11px] font-extrabold uppercase tracking-[0.06em] text-[#E6FF2A]/75 md:text-[18px]">
-                        <span>{work.tag}</span>
-                      </div>
-                    </div>
-
-                    <div className="absolute inset-x-0 bottom-0 h-1.5 bg-white/45">
-                      <span className={`work-progress-fill work-progress-${index} block h-full w-full bg-[#E6FF2A]`} />
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-full">
-              <div className="absolute inset-y-0 left-0 w-[13%] bg-gradient-to-r from-[#101010]/90 to-transparent" />
-              <div className="absolute inset-y-0 right-0 w-[13%] bg-gradient-to-l from-[#101010]/90 to-transparent" />
-            </div>
-
-            {biz.works.map((_, index) => {
-              const previous = (index - 1 + biz.works.length) % biz.works.length;
-              const next = (index + 1) % biz.works.length;
-              return (
-                <div
-                  key={`work-control-${index}`}
-                  className={`work-control work-control-${index} pointer-events-none absolute left-1/2 top-1/2 z-20 w-[calc(100%_-_32px)] max-w-[1700px] -translate-x-1/2 -translate-y-1/2 items-center justify-between`}
-                >
-                  <label
-                    htmlFor={`work-${safeSlug}-${previous}`}
-                    aria-label="Previous project"
-                    className="pointer-events-auto flex h-12 w-12 cursor-pointer items-center justify-center rounded-md border border-[#4C4C4C] bg-[#101010]/45 text-[#D9D9D9] backdrop-blur md:h-16 md:w-16"
-                  >
-                    <ArrowIcon direction="left" />
-                  </label>
-                  <label
-                    htmlFor={`work-${safeSlug}-${next}`}
-                    aria-label="Next project"
-                    className="pointer-events-auto flex h-12 w-12 cursor-pointer items-center justify-center rounded-md border border-[#4C4C4C] bg-[#101010]/45 text-[#D9D9D9] backdrop-blur md:h-16 md:w-16"
-                  >
-                    <ArrowIcon />
-                  </label>
-                </div>
-              );
-            })}
-          </div>
-        </section>
+        <BusinessWorksCarousel
+          works={biz.works}
+          title={biz.worksTitle ?? `Explore ${shortName}’s Work`}
+        />
       )}
 
       {/* OTHER BUSINESSES — Header Title aligned with Navbar Logo + Infinite Slider Track */}
@@ -660,14 +611,14 @@ export default async function BusinessSlugPage({
                       <label
                         htmlFor={`other-${safeSlug}-${previous}`}
                         aria-label="Previous business"
-                        className="flex h-[54px] w-[54px] cursor-pointer items-center justify-center rounded-xl border border-[#D9D9D9] text-[#717171] transition hover:border-[#1A3E9E] hover:text-[#1A3E9E]"
+                        className="flex h-[59px] w-[59px] cursor-pointer items-center justify-center rounded-xl border border-[#D9D9D9] text-[#717171] transition hover:border-[#1A3E9E] hover:text-[#1A3E9E]"
                       >
                         <ArrowIcon direction="left" />
                       </label>
                       <label
                         htmlFor={`other-${safeSlug}-${next}`}
                         aria-label="Next business"
-                        className="flex h-[54px] w-[54px] cursor-pointer items-center justify-center rounded-xl border border-[#D9D9D9] text-[#717171] transition hover:border-[#1A3E9E] hover:text-[#1A3E9E]"
+                        className="flex h-[59px] w-[59px] cursor-pointer items-center justify-center rounded-xl border border-[#D9D9D9] text-[#717171] transition hover:border-[#1A3E9E] hover:text-[#1A3E9E]"
                       >
                         <ArrowIcon />
                       </label>

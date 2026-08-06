@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { LEADERSHIP_THOUGHTS_DUMMY_DATA } from '@/lib/db/dummy';
 
@@ -104,6 +104,80 @@ function IconSearch({ size = 24 }: { size?: number }) {
   );
 }
 
+/* ── Custom FilterDropdown ───────────────────────────────────────────────── */
+
+type FilterDropdownOption = { label: string; value: string };
+
+function FilterDropdown({
+  value,
+  onChange,
+  options,
+  ariaLabel,
+}: {
+  value: string;
+  onChange: (val: string) => void;
+  options: FilterDropdownOption[];
+  ariaLabel: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const selected = options.find((opt) => opt.value === value) ?? options[0];
+
+  useEffect(() => {
+    if (!open) return;
+    const handleClick = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [open]);
+
+  return (
+    <div ref={ref} className="relative h-[42px] shrink-0" aria-label={ariaLabel}>
+      <button
+        type="button"
+        onClick={() => setOpen((prev) => !prev)}
+        className={`flex h-full items-center gap-2 rounded-full border px-4 font-body text-[13px] font-medium tracking-[0.02em] transition-colors ${
+          open
+            ? 'border-[#1A3E9E] bg-[rgba(153,166,231,0.15)] text-[#1A3E9E]'
+            : 'border-[#D9D9D9] bg-transparent text-[#717171] hover:border-[#1A3E9E] hover:text-[#1A3E9E]'
+        }`}
+      >
+        <span>{selected.label}</span>
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+          className={`shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+        >
+          <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="absolute right-0 top-[calc(100%+6px)] z-50 min-w-[140px] rounded-[16px] bg-white px-2 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
+          {options.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => { onChange(opt.value); setOpen(false); }}
+              className={`w-full rounded-full px-4 py-2.5 text-left font-body text-[13px] font-medium tracking-[0.02em] transition-colors hover:bg-[#F5F5F5] ${
+                opt.value === value ? 'text-[#101010]' : 'text-[#717171]'
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ── Data normalization ─────────────────────────────────────────────────── */
 
 const LEADERSHIP_THOUGHTS = LEADERSHIP_THOUGHTS_DUMMY_DATA.map(
@@ -126,22 +200,62 @@ const FEATURED_ARTICLES = LEADERSHIP_THOUGHTS.slice(0, 3);
 /* ── Page ───────────────────────────────────────────────────────────────── */
 
 export default function LeadershipThoughtsPage() {
+  const CAROUSEL_DURATION = 6000;
+  const CAROUSEL_TICK = 50;
+
   const [activeSlide, setActiveSlide] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const progressRef = useRef(0);
+  const lastTimeRef = useRef<number | null>(null);
+
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
 
-  useEffect(() => {
-    if (FEATURED_ARTICLES.length <= 1) return;
-
-    const timer = window.setInterval(() => {
-      setActiveSlide((current) =>
-        current === FEATURED_ARTICLES.length - 1 ? 0 : current + 1,
-      );
-    }, 7000);
-
-    return () => window.clearInterval(timer);
+  const resetProgress = useCallback(() => {
+    progressRef.current = 0;
+    lastTimeRef.current = null;
+    setProgress(0);
   }, []);
+
+  const handleNext = useCallback(() => {
+    resetProgress();
+    setActiveSlide((current) => (current === FEATURED_ARTICLES.length - 1 ? 0 : current + 1));
+  }, [resetProgress]);
+
+  const handlePrevious = useCallback(() => {
+    resetProgress();
+    setActiveSlide((current) => (current === 0 ? FEATURED_ARTICLES.length - 1 : current - 1));
+  }, [resetProgress]);
+
+  useEffect(() => {
+    if (FEATURED_ARTICLES.length <= 1 || isPaused) {
+      lastTimeRef.current = null;
+      return;
+    }
+    lastTimeRef.current = performance.now();
+    const id = window.setInterval(() => {
+      const now = performance.now();
+      if (document.hidden) {
+        lastTimeRef.current = now;
+        return;
+      }
+      const elapsed = now - (lastTimeRef.current ?? now);
+      lastTimeRef.current = now;
+      const nextProgress = progressRef.current + (elapsed / CAROUSEL_DURATION) * 100;
+      if (nextProgress >= 100) {
+        progressRef.current = 0;
+        lastTimeRef.current = now;
+        setProgress(0);
+        setActiveSlide((current) => (current === FEATURED_ARTICLES.length - 1 ? 0 : current + 1));
+        return;
+      }
+      progressRef.current = nextProgress;
+      setProgress(nextProgress);
+    }, CAROUSEL_TICK);
+    return () => window.clearInterval(id);
+  }, [isPaused]);
 
   const filteredArticles = useMemo(() => {
     const keyword = searchTerm.trim().toLowerCase();
@@ -174,17 +288,7 @@ export default function LeadershipThoughtsPage() {
       ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const handlePrevious = () => {
-    setActiveSlide((current) =>
-      current === 0 ? FEATURED_ARTICLES.length - 1 : current - 1,
-    );
-  };
-
-  const handleNext = () => {
-    setActiveSlide((current) =>
-      current === FEATURED_ARTICLES.length - 1 ? 0 : current + 1,
-    );
-  };
+  // Already defined above via useCallback
 
   return (
     <main className="w-full overflow-hidden bg-[#F7F7F7] text-[#101010]">
@@ -219,38 +323,18 @@ export default function LeadershipThoughtsPage() {
         />
 
         <div className="relative z-10 mx-auto flex w-full max-w-[900px] flex-col items-center px-6 text-center">
-          <div className="mb-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-body text-[10px] font-bold uppercase leading-[1.3] tracking-[0.08em] text-[#E6FF2A] sm:text-xs lg:text-sm">
-            <span>Home</span>
-            <span aria-hidden="true">›</span>
-            <span>Insight &amp; Programs</span>
-            <span aria-hidden="true">›</span>
-            <span>Leadership Thoughts</span>
-          </div>
+          <div className="font-body text-[10.5px] font-normal uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
+              Home&nbsp;&nbsp;&gt;&nbsp;&nbsp;Insight &amp; Programs&nbsp;&nbsp;&gt;&nbsp;&nbsp;Leadership Thoughts
+            </div>
 
-          <h1 className="font-heading text-[clamp(52px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
+          <h1 className="font-heading mt-5 text-[clamp(52px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
             Leadership Thoughts
           </h1>
 
-          <p className="mt-6 max-w-[806px] font-body text-[clamp(14px,1.042vw,20px)] font-normal leading-[1.6] tracking-[0.02em] text-white/95">
+          <p className="mt-6 max-w-[650px] font-body text-[clamp(14px,1.042vw,20px)] font-light leading-[1.6] tracking-[0.02em] text-white/95">
             Perspectives, principles, and strategic insights from the Arsalynk leadership team —
             shaping the way we think about business, technology, and human potential.
           </p>
-
-          {/* Program Switcher Tabs */}
-          <div className="mt-8 flex items-center justify-center gap-3">
-            <Link
-              href="/insight-programs/Case-Studies"
-              className="px-6 py-2.5 rounded-full font-heading text-xs font-bold uppercase tracking-wider bg-white/10 text-white hover:bg-white/20 border border-white/20 transition-all no-underline"
-            >
-              Case Studies
-            </Link>
-            <Link
-              href="/insight-programs/leadership-thoughts"
-              className="px-6 py-2.5 rounded-full font-heading text-xs font-bold uppercase tracking-wider bg-[#E6FF2A] text-[#101010] shadow-md no-underline"
-            >
-              Leadership Thoughts
-            </Link>
-          </div>
         </div>
 
         <button
@@ -272,12 +356,16 @@ export default function LeadershipThoughtsPage() {
         className="bg-[#F7F7F7] px-[6vw] py-16 max-[1199px]:px-[4vw] max-[768px]:py-10"
       >
         <div className="mx-auto w-full max-w-[1600px]">
-          <article className="group relative aspect-[17/8] w-full overflow-hidden rounded-[28px] bg-black max-[900px]:aspect-[4/3] max-[640px]:aspect-[4/5] max-[480px]:rounded-[22px]">
+          <article
+            className="group relative aspect-[17/8] w-full overflow-hidden rounded-[28px] bg-black max-[900px]:aspect-[4/3] max-[640px]:aspect-[4/5] max-[480px]:rounded-[22px]"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             <img
               key={`${featured?.id}-${activeSlide}`}
               src={featured?.featuredImage}
               alt={featured?.title ?? 'Featured leadership thought'}
-              className="absolute inset-0 h-full w-full object-contain object-center grayscale contrast-[1.14] brightness-[0.72] transition-[filter,transform] duration-500 group-hover:scale-[1.012] group-hover:brightness-[0.62]"
+              className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
             />
 
             <div className="absolute inset-0 bg-black/35" />
@@ -312,20 +400,28 @@ export default function LeadershipThoughtsPage() {
             </div>
 
             <div className="absolute bottom-[54px] left-[74px] z-20 flex h-2.5 items-center gap-2 max-[1200px]:bottom-10 max-[1200px]:left-[54px] max-[768px]:bottom-7 max-[768px]:left-7">
-              {FEATURED_ARTICLES.map((article, index) => (
-                <button
-                  key={article.id}
-                  type="button"
-                  onClick={() => setActiveSlide(index)}
-                  aria-label={`Show featured thought ${index + 1}`}
-                  aria-current={index === activeSlide ? 'true' : undefined}
-                  className={`h-2.5 rounded-[1px] transition-all duration-300 ${
-                    index === activeSlide
-                      ? 'w-[54px] bg-[#BDC22E]'
-                      : 'w-2.5 bg-[#717171]'
-                  }`}
-                />
-              ))}
+              {FEATURED_ARTICLES.map((article, index) => {
+                const isActive = index === activeSlide;
+                return (
+                  <button
+                    key={article.id}
+                    type="button"
+                    onClick={() => { resetProgress(); setActiveSlide(index); }}
+                    aria-label={`Show featured thought ${index + 1}`}
+                    aria-current={isActive ? 'true' : undefined}
+                    className={`relative h-2.5 overflow-hidden rounded-[2px] transition-all duration-300 ${
+                      isActive ? 'w-[54px] bg-[#A8B31E]' : 'w-2.5 bg-[#717171]'
+                    }`}
+                  >
+                    {isActive && (
+                      <span
+                        className="absolute inset-y-0 left-0 w-full origin-left bg-[#E6FF2A] transition-transform duration-[75ms] ease-linear"
+                        style={{ transform: `scaleX(${Math.min(progress / 100, 1)})` }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
             </div>
 
             <div className="absolute bottom-[54px] right-[74px] z-20 flex gap-2 max-[1200px]:bottom-10 max-[1200px]:right-[54px] max-[768px]:bottom-7 max-[768px]:right-7">
@@ -366,8 +462,8 @@ export default function LeadershipThoughtsPage() {
             </h2>
 
             <div className="flex items-center justify-end gap-2 max-[700px]:w-full max-[700px]:flex-col max-[700px]:items-stretch">
-              <label className="flex h-[59px] w-[350px] items-center justify-between gap-3 rounded-full border border-[#D9D9D9] px-6 text-[#717171] max-[700px]:w-full">
-                <span className="sr-only">Search thoughts</span>
+              {/* Search input */}
+              <div className="relative h-[42px] w-[260px] shrink-0 max-[700px]:w-full">
                 <input
                   type="search"
                   value={searchTerm}
@@ -376,28 +472,24 @@ export default function LeadershipThoughtsPage() {
                     setVisibleCount(PAGE_SIZE);
                   }}
                   placeholder="Search Thoughts..."
-                  className="min-w-0 flex-1 bg-transparent font-body text-[18px] leading-[1.5] tracking-[0.02em] text-[#101010] outline-none placeholder:text-[#717171] max-[768px]:text-[15px]"
+                  aria-label="Search thoughts"
+                  className="h-full w-full cursor-pointer appearance-none rounded-full border border-[#D9D9D9] bg-transparent pl-5 pr-10 font-body text-[13px] font-medium tracking-[0.02em] text-[#101010] outline-none placeholder:text-[#717171] hover:border-[#1A3E9E] hover:text-[#1A3E9E] focus:border-[#1A3E9E]"
                 />
-                <IconSearch size={24} />
-              </label>
-
-              <label className="relative flex h-[59px] w-[147px] items-center justify-center rounded-full border border-[#D9D9D9] px-6 text-[#717171] max-[700px]:w-full">
-                <span className="sr-only">Sort thoughts</span>
-                <select
-                  value={sortOrder}
-                  onChange={(event) => {
-                    setSortOrder(event.target.value as 'newest' | 'oldest');
-                    setVisibleCount(PAGE_SIZE);
-                  }}
-                  className="absolute inset-0 h-full w-full cursor-pointer appearance-none rounded-full bg-transparent pl-6 pr-12 font-body text-[18px] leading-[1.5] tracking-[0.02em] text-[#717171] outline-none max-[768px]:text-[15px]"
-                >
-                  <option value="newest">Newest</option>
-                  <option value="oldest">Oldest</option>
-                </select>
-                <span className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2">
-                  <IconChevronDown size={20} />
+                <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#717171]">
+                  <IconSearch size={16} />
                 </span>
-              </label>
+              </div>
+
+              {/* Sort dropdown */}
+              <FilterDropdown
+                value={sortOrder}
+                onChange={(val) => { setSortOrder(val as 'newest' | 'oldest'); setVisibleCount(PAGE_SIZE); }}
+                options={[
+                  { label: 'Newest', value: 'newest' },
+                  { label: 'Oldest', value: 'oldest' },
+                ]}
+                ariaLabel="Sort thoughts"
+              />
             </div>
           </header>
 
@@ -409,16 +501,12 @@ export default function LeadershipThoughtsPage() {
                     href={`/insight-programs/leadership-thoughts/${article.slug}`}
                     className="group block"
                   >
-                    <div className="relative flex aspect-[546/400] w-full items-center justify-center overflow-hidden rounded-3xl bg-[#101010] max-[480px]:rounded-[18px]">
+                    <div className="relative flex aspect-[546/400] w-full overflow-hidden rounded-3xl max-[480px]:rounded-[18px]">
                       <img
                         src={article.image}
                         alt={article.title}
-                        className="absolute inset-0 h-full w-full object-contain object-center grayscale contrast-[1.14] brightness-[0.78] transition-[filter,transform] duration-500 group-hover:scale-[1.012] group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-90"
+                        className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
                       />
-                      <div className="absolute inset-0 bg-black/15 transition-colors duration-300 group-hover:bg-black/5" />
-                      <span className="absolute bottom-5 left-5 inline-flex translate-y-2 items-center rounded-full bg-[#1A3E9E] px-5 py-3 font-body text-[12px] font-semibold uppercase tracking-[0.03em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:bg-[#132B7A] group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 sm:bottom-6 sm:left-6 sm:text-[14px]">
-                        Read article
-                      </span>
                     </div>
 
                     <div className="mt-6 flex flex-col gap-4">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 
@@ -12,8 +12,8 @@ const IconChevronDown = ({ size = 32 }: { size?: number }) => (
 
 const IconSliderArrow = ({ direction }: { direction: 'left' | 'right' }) => (
   <svg
-    width="20"
-    height="20"
+    width="15"
+    height="15"
     viewBox="0 0 24 24"
     fill="none"
     aria-hidden="true"
@@ -106,31 +106,56 @@ function SectionLabel({ children, theme = 'blue' }: { children: React.ReactNode;
 export default function CorporateProfilePage() {
   const [activeSlide, setActiveSlide] = useState(1);
   const [isSliderPaused, setIsSliderPaused] = useState(false);
+  const [wrappingSlideIndex, setWrappingSlideIndex] = useState<number | null>(null);
+  const [isSlideChanging, setIsSlideChanging] = useState(false);
+  const transitionTimerRef = useRef<number | null>(null);
 
-  useEffect(() => {
-    if (isSliderPaused) return;
-
-    const timer = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % FOUNDATION_SLIDES.length);
-    }, 6000);
-
-    return () => window.clearInterval(timer);
-  }, [isSliderPaused]);
-
-  const changeSlide = (direction: -1 | 1) => {
-    setActiveSlide((current) => (current + direction + FOUNDATION_SLIDES.length) % FOUNDATION_SLIDES.length);
-  };
-
-  const getSlideOffset = (index: number) => {
-    let offset = index - activeSlide;
+  const getSlideOffset = (index: number, currentSlide = activeSlide) => {
+    let offset = index - currentSlide;
     const half = Math.floor(FOUNDATION_SLIDES.length / 2);
     if (offset > half) offset -= FOUNDATION_SLIDES.length;
     if (offset < -half) offset += FOUNDATION_SLIDES.length;
     return offset;
   };
 
+  const changeSlide = (direction: -1 | 1) => {
+    if (isSlideChanging) return;
+
+    const wrappedOffset = direction === 1 ? -1 : 1;
+    const wrappedIndex = FOUNDATION_SLIDES.findIndex(
+      (_, index) => getSlideOffset(index) === wrappedOffset,
+    );
+
+    setIsSlideChanging(true);
+    setWrappingSlideIndex(wrappedIndex >= 0 ? wrappedIndex : null);
+    setActiveSlide(
+      (current) =>
+        (current + direction + FOUNDATION_SLIDES.length) %
+        FOUNDATION_SLIDES.length,
+    );
+
+    if (transitionTimerRef.current !== null) {
+      window.clearTimeout(transitionTimerRef.current);
+    }
+
+    transitionTimerRef.current = window.setTimeout(() => {
+      setWrappingSlideIndex(null);
+      setIsSlideChanging(false);
+      transitionTimerRef.current = null;
+    }, 900);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (transitionTimerRef.current !== null) {
+        window.clearTimeout(transitionTimerRef.current);
+      }
+    };
+  }, []);
+
+
   const handleScrollDown = () => {
-    document.getElementById('corporate-foundation')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('beyond-expectations')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
@@ -167,9 +192,10 @@ export default function CorporateProfilePage() {
         />
 
         <div className="absolute left-1/2 top-1/2 z-10 flex w-full max-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-6 text-center">
-          <p className="font-body text-[6px] font-bold leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[5px]">
+          <div className="font-body text-[10px] font-normal uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
             HOME&nbsp;&nbsp;&gt;&nbsp;&nbsp;ABOUT US&nbsp;&nbsp;&gt;&nbsp;&nbsp;CORPORATE PROFILE
-          </p>
+          </div>
+
           <h1 className="font-heading text-[clamp(56px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
             Corporate Profile
           </h1>
@@ -199,36 +225,92 @@ export default function CorporateProfilePage() {
         </div>
 
         <div
-          className="relative mt-[clamp(32px,2.5vw,48px)] h-[clamp(500px,39.583vw,760px)] w-full overflow-hidden"
+          className="relative mt-[clamp(32px,2.5vw,48px)] h-[clamp(500px,39.583vw,760px)] w-full overflow-hidden bg-[#F7F7F7]"
           onMouseEnter={() => setIsSliderPaused(true)}
           onMouseLeave={() => setIsSliderPaused(false)}
         >
           {FOUNDATION_SLIDES.map((slide, index) => {
             const offset = getSlideOffset(index);
             const isActive = offset === 0;
+            const isWrapping = wrappingSlideIndex === index;
 
             return (
               <article
                 key={slide.src}
                 data-offset={offset}
-                className={`cp-slide absolute left-1/2 top-0 h-full overflow-hidden rounded-[32px] transition-[transform,filter,opacity] duration-700 ease-[cubic-bezier(.22,1,.36,1)] max-[640px]:rounded-[18px] ${
-                  isActive ? 'z-20 opacity-100' : 'z-10 opacity-60'
+                className={`cp-slide group absolute left-1/2 top-0 h-full overflow-hidden rounded-[32px] bg-black max-[640px]:rounded-[18px] ${
+                  isWrapping
+                    ? 'z-0 opacity-0 transition-none'
+                    : 'transition-[transform,opacity] duration-[900ms] ease-[cubic-bezier(.22,1,.36,1)]'
+                } ${
+                  isActive ? 'z-20 cursor-default' : 'z-10 cursor-pointer'
                 }`}
                 aria-hidden={!isActive}
+                onClick={() => {
+                  if (!isActive && !isSlideChanging) {
+                    changeSlide(offset > 0 ? 1 : -1);
+                  }
+                }}
               >
                 <img
                   src={slide.src}
                   alt={slide.alt}
-                  className="h-full w-full object-cover"
+                  draggable={false}
+                  className="h-full w-full select-none object-cover transition-transform duration-[900ms] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.04]"
                   style={{ objectPosition: slide.position }}
                 />
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-b from-transparent to-black/70" aria-hidden="true" />
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[6px] bg-white/40" aria-hidden="true">
+
+                {/* Overlay hitam mengikuti zoom saat hover. */}
+                <div
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute inset-0 z-[1] bg-black transition-opacity duration-500 ${
+                    isActive
+                      ? 'opacity-[0.10] group-hover:opacity-[0.22]'
+                      : 'opacity-[0.20] group-hover:opacity-[0.30]'
+                  }`}
+                />
+
+                {/* Gradient bawah tetap lembut dan hanya berada di dalam card. */}
+                <div
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[46%] bg-gradient-to-b from-transparent to-black transition-opacity duration-500 ${
+                    isActive
+                      ? 'opacity-[0.64] group-hover:opacity-[0.72]'
+                      : 'opacity-[0.36] group-hover:opacity-[0.46]'
+                  }`}
+                />
+
+                {/* Fade hitam tipis hanya di ujung luar card kiri dan kanan. */}
+                {offset === -1 && (
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-y-0 left-0 z-[2] w-[22%] bg-gradient-to-r from-black/45 via-black/15 to-transparent"
+                  />
+                )}
+
+                {offset === 1 && (
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-y-0 right-0 z-[2] w-[22%] bg-gradient-to-l from-black/45 via-black/15 to-transparent"
+                  />
+                )}
+
+                {/*
+                  Progress track sepenuhnya berada di dalam card aktif.
+                  Animasi ini sekaligus menjadi timer autoplay 6 detik.
+                */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-[6px] overflow-hidden bg-black/20"
+                >
                   {isActive && (
                     <span
-                      key={`${activeSlide}-${isSliderPaused}`}
-                      className="cp-progress block h-full origin-left bg-[#E6FF2A]"
-                      style={{ animationPlayState: isSliderPaused ? 'paused' : 'running' }}
+                      key={activeSlide}
+                      className="cp-progress block h-full w-full origin-left bg-[#E6FF2A]"
+                      style={{
+                        animationPlayState: isSliderPaused ? 'paused' : 'running',
+                      }}
+                      onAnimationEnd={() => changeSlide(1)}
                     />
                   )}
                 </div>
@@ -236,22 +318,27 @@ export default function CorporateProfilePage() {
             );
           })}
 
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-30 w-[250px] max-[768px]:w-[70px]" style={{ background: 'linear-gradient(90deg, #101010 0%, rgba(16,16,16,0) 100%)' }} />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-30 w-[250px] max-[768px]:w-[70px]" style={{ background: 'linear-gradient(270deg, #101010 0%, rgba(16,16,16,0) 100%)' }} />
+          {/*
+            Shader hitam global kiri dan kanan dihapus.
+            Karena itu gap 16px antar-card tetap menampilkan #F7F7F7.
+          */}
 
           <button
             type="button"
             onClick={() => changeSlide(-1)}
+            disabled={isSlideChanging}
             aria-label="Previous corporate photo"
-            className="absolute left-[5.75vw] top-1/2 z-40 flex h-16 w-16 -translate-y-1/2 items-center justify-center rounded-[6px] border border-[#4C4C4C] text-[#D9D9D9] transition-colors hover:border-white hover:text-white max-[768px]:left-5 max-[768px]:h-12 max-[768px]:w-12"
+            className="absolute left-[5.75vw] top-1/2 z-40 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-[5px] border border-[#4C4C4C] bg-black/20 text-[#D9D9D9] backdrop-blur-[2px] transition-[border-color,background-color,color,transform] duration-300 hover:scale-[1.04] hover:border-white hover:bg-black/55 hover:text-white disabled:pointer-events-none disabled:opacity-60 max-[768px]:left-5 max-[768px]:h-[30px] max-[768px]:w-[30px]"
           >
             <IconSliderArrow direction="left" />
           </button>
+
           <button
             type="button"
             onClick={() => changeSlide(1)}
+            disabled={isSlideChanging}
             aria-label="Next corporate photo"
-            className="absolute right-[5.75vw] top-1/2 z-40 flex h-16 w-16 -translate-y-1/2 items-center justify-center rounded-[6px] border border-[#4C4C4C] text-[#D9D9D9] transition-colors hover:border-white hover:text-white max-[768px]:right-5 max-[768px]:h-12 max-[768px]:w-12"
+            className="absolute right-[5.75vw] top-1/2 z-40 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-[5px] border border-[#4C4C4C] bg-black/20 text-[#D9D9D9] backdrop-blur-[2px] transition-[border-color,background-color,color,transform] duration-300 hover:scale-[1.04] hover:border-white hover:bg-black/55 hover:text-white disabled:pointer-events-none disabled:opacity-60 max-[768px]:right-5 max-[768px]:h-[30px] max-[768px]:w-[30px]"
           >
             <IconSliderArrow direction="right" />
           </button>
@@ -306,33 +393,33 @@ export default function CorporateProfilePage() {
           </div>
 
           <div className="grid grid-cols-4 gap-[clamp(20px,1.563vw,30px)] max-[1024px]:grid-cols-2 max-[640px]:grid-cols-1">
-{SERVICES.map((service, index) => (
-  <article
-    key={`${service.title.join('-')}-${index}`}
-    className="relative isolate flex flex-col gap-5 overflow-hidden rounded-[12px] border border-[#D9D9D9] bg-[rgba(153,166,231,0.10)] p-4 backdrop-blur-[12.5px]"
-    style={{ WebkitBackdropFilter: 'blur(12.5px)' }}
-  >
-    {/* Image */}
-    <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[10px] bg-[#E8EBFF]">
-      <img
-        src={service.image}
-        alt={service.alt}
-        className="h-full w-full object-cover"
-      />
-      <div
-        className="pointer-events-none absolute inset-0 bg-black/[0.05]"
-        aria-hidden="true"
-      />
-    </div>
+            {SERVICES.map((service, index) => (
+              <article
+                key={`${service.title.join('-')}-${index}`}
+                className="group relative isolate flex flex-col gap-5 overflow-hidden rounded-[12px] border border-[#D9D9D9] bg-[rgba(153,166,231,0.10)] p-4 backdrop-blur-[12.5px] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#1A3E9E]/40 hover:bg-[rgba(153,166,231,0.20)] hover:shadow-[0_12px_30px_rgba(26,62,158,0.12)]"
+                style={{ WebkitBackdropFilter: 'blur(12.5px)' }}
+              >
+                {/* Image */}
+                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[10px] bg-[#E8EBFF]">
+                  <img
+                    src={service.image}
+                    alt={service.alt}
+                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                  />
+                  <div
+                    className="pointer-events-none absolute inset-0 bg-black/[0.05]"
+                    aria-hidden="true"
+                  />
+                </div>
 
-    {/* Title */}
-    <h3 className="font-heading text-[clamp(24px,2.188vw,42px)] font-medium leading-[1.1] tracking-[-0.01em] text-[#1A3E9E]">
-      {service.title[0]}
-      <br />
-      {service.title[1]}
-    </h3>
-  </article>
-))}
+                {/* Title */}
+                <h3 className="font-heading text-[clamp(24px,2.188vw,42px)] font-medium leading-[1.1] tracking-[-0.01em] text-[#1A3E9E] transition-colors duration-300 group-hover:text-[#101010]">
+                  {service.title[0]}
+                  <br />
+                  {service.title[1]}
+                </h3>
+              </article>
+            ))}
           </div>
         </WideContainer>
       </section>

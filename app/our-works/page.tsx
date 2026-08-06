@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 
@@ -174,6 +174,166 @@ const IconScrollDown = () => (
   </svg>
 );
 
+const IconChevronLeft = ({ size = 24 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const IconChevronRight = ({ size = 24 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M9 6L15 12L9 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+/* ── Homepage-style Featured Carousel ───────────────────────────────────── */
+
+const CAROUSEL_LOOP = 30;
+const CAROUSEL_DURATION = 6000;
+const CAROUSEL_TICK = 50;
+
+type CarouselProject = { id: number | string; title: string; slug?: string; image?: string; service: string; industry: string; };
+
+function FeaturedCarousel({ projects }: { projects: CarouselProject[] }) {
+  const extended = Array.from({ length: CAROUSEL_LOOP }, () => projects).flat();
+  const startIndex = Math.floor((CAROUSEL_LOOP * Math.max(projects.length, 1)) / 2);
+
+  const [activeIndex, setActiveIndex] = useState(startIndex);
+  const [isMoving, setIsMoving] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [dragStart, setDragStart] = useState<number | null>(null);
+  const [progress, setProgress] = useState(0);
+  const progressRef = useRef(0);
+  const lastTimeRef = useRef<number | null>(null);
+
+  const resetProgress = useCallback(() => { progressRef.current = 0; lastTimeRef.current = null; setProgress(0); }, []);
+
+  const next = useCallback(() => { setIsMoving(true); resetProgress(); setActiveIndex((i) => i + 1); }, [resetProgress]);
+  const prev = useCallback(() => { setIsMoving(true); resetProgress(); setActiveIndex((i) => i - 1); }, [resetProgress]);
+
+  useEffect(() => {
+    if (projects.length <= 1 || isPaused) { lastTimeRef.current = null; return; }
+    lastTimeRef.current = performance.now();
+    const id = window.setInterval(() => {
+      const now = performance.now();
+      if (document.hidden) { lastTimeRef.current = now; return; }
+      const elapsed = now - (lastTimeRef.current ?? now);
+      lastTimeRef.current = now;
+      const next = progressRef.current + (elapsed / CAROUSEL_DURATION) * 100;
+      if (next >= 100) {
+        progressRef.current = 0; lastTimeRef.current = now;
+        setProgress(0); setIsMoving(true);
+        setActiveIndex((i) => i + 1);
+        return;
+      }
+      progressRef.current = next; setProgress(next);
+    }, CAROUSEL_TICK);
+    return () => window.clearInterval(id);
+  }, [isPaused, projects.length]);
+
+  const handleDragEnd = (clientX: number) => {
+    if (dragStart === null) return;
+    const diff = dragStart - clientX;
+    if (diff > 50) next();
+    else if (diff < -50) prev();
+    setDragStart(null);
+  };
+
+  if (!projects.length) return null;
+
+  return (
+    <div
+      className="relative h-[clamp(500px,39.583vw,760px)] w-full cursor-grab select-none overflow-hidden active:cursor-grabbing"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={(e) => { setIsPaused(false); if (dragStart !== null) handleDragEnd(e.clientX); }}
+      onMouseDown={(e) => setDragStart(e.clientX)}
+      onMouseUp={(e) => handleDragEnd(e.clientX)}
+      onTouchStart={(e) => setDragStart(e.touches[0].clientX)}
+      onTouchEnd={(e) => handleDragEnd(e.changedTouches[0].clientX)}
+    >
+      {/* Track */}
+      <div
+        className="absolute left-0 top-0 flex h-full gap-[16px]"
+        onTransitionEnd={(e) => { if (e.target === e.currentTarget) setIsMoving(false); }}
+        style={{
+          '--slide-width': 'clamp(760px, 73.594vw, 1413px)',
+          transform: `translate3d(calc(50vw - (var(--slide-width) / 2) - ${activeIndex} * (var(--slide-width) + 16px)), 0, 0)`,
+          transition: 'transform 900ms cubic-bezier(0.22, 1, 0.36, 1)',
+          willChange: isMoving ? 'transform' : 'auto',
+        } as CSSProperties}
+      >
+        {extended.map((project, index) => {
+          const isActive = index === activeIndex;
+          return (
+            <article
+              key={`${project.id}-${index}`}
+              onClick={() => { if (!isActive) { setIsMoving(true); resetProgress(); setActiveIndex(index); } }}
+              className={`group relative h-full w-[var(--slide-width)] shrink-0 overflow-hidden rounded-[32px] bg-black ${isActive ? 'z-10' : 'z-0'}`}
+            >
+              {project.image && (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  loading="lazy"
+                  draggable={false}
+                  className="pointer-events-none absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.025]"
+                />
+              )}
+              {/* overlays */}
+              <div aria-hidden="true" className={`pointer-events-none absolute inset-0 z-[1] bg-black transition-opacity duration-500 ${isActive ? 'opacity-[0.46]' : 'opacity-[0.64] group-hover:opacity-[0.52]'}`} />
+              <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[68%] bg-gradient-to-b from-transparent via-black/55 to-black" />
+              <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-[38%] bg-gradient-to-t from-black via-black/50 to-transparent" />
+              {/* info */}
+              <div className="pointer-events-none absolute bottom-[clamp(32px,3.021vw,58px)] left-[clamp(32px,3.385vw,65px)] right-[clamp(32px,3.385vw,65px)] z-[5]">
+                <h3 className="max-w-[1236px] font-heading text-[clamp(38px,3.333vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#F7F7F7]">
+                  {project.title}
+                </h3>
+                <div className="mt-[clamp(7px,0.365vw,10px)] flex flex-wrap items-center gap-x-[clamp(8px,0.625vw,12px)] gap-y-[5px] font-body font-medium uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] text-[clamp(11.8px,0.854vw,16.4px)]">
+                  <span>{project.service}</span>
+                  <span aria-hidden="true" className="h-[3px] w-[3px] shrink-0 bg-[#F7F7F7]" />
+                  <span>{project.industry}</span>
+                </div>
+              </div>
+              {/* progress bar */}
+              <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-[4px] overflow-hidden bg-white/35 xl:h-[6px]">
+                {isActive && projects.length > 1 && (
+                  <span
+                    className="absolute inset-y-0 left-0 w-full origin-left bg-[#E6FF2A] transition-transform duration-[75ms] ease-linear"
+                    style={{ transform: `scaleX(${Math.min(progress / 100, 1)})` }}
+                  />
+                )}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+      {/* side shaders */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-20 w-[clamp(120px,13.021vw,250px)] bg-gradient-to-r from-black via-black/80 to-transparent" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-20 w-[clamp(120px,13.021vw,250px)] bg-gradient-to-l from-black via-black/80 to-transparent" />
+      {/* prev button */}
+      <div className="absolute top-1/2 z-30 -translate-y-1/2" style={{ left: 'max(5.755vw, calc((100vw - 1699px) / 2))' }}>
+        <button
+          type="button"
+          aria-label="Previous slide"
+          onMouseDown={(e) => e.stopPropagation()}
+          onClick={(e) => { e.stopPropagation(); prev(); }}
+          className="flex h-[clamp(54.5px,3.633vw,70px)] w-[clamp(54.5px,3.633vw,70px)] items-center justify-center rounded-[6px] border border-[#4C4C4C] bg-black/30 text-[#D9D9D9] transition-[border-color,background-color,color] duration-300 hover:border-[#D9D9D9] hover:bg-black/70 hover:text-white"
+        ><IconChevronLeft size={26} /></button>
+      </div>
+      {/* next button */}
+      <div className="absolute top-1/2 z-30 -translate-y-1/2" style={{ right: 'max(5.755vw, calc((100vw - 1699px) / 2))' }}>
+        <button
+          type="button"
+          aria-label="Next slide"
+          onMouseDown={(e) => e.stopPropagation()}
+          onClick={(e) => { e.stopPropagation(); next(); }}
+          className="flex h-[clamp(54.5px,3.633vw,70px)] w-[clamp(54.5px,3.633vw,70px)] items-center justify-center rounded-[6px] border border-[#4C4C4C] bg-black/30 text-[#D9D9D9] transition-[border-color,background-color,color] duration-300 hover:border-[#D9D9D9] hover:bg-black/70 hover:text-white"
+        ><IconChevronRight size={26} /></button>
+      </div>
+    </div>
+  );
+}
+
 function WorkImage({ image, title }: { image?: string; title: string }) {
   if (!image) {
     return (
@@ -194,12 +354,12 @@ function WorkImage({ image, title }: { image?: string; title: string }) {
 
 function WorkMeta({ project, featured = false }: { project: Project; featured?: boolean }) {
   return (
-    <div className={`flex flex-wrap items-center font-body font-extrabold uppercase tracking-[0.06em] text-[#A2A627] ${featured ? 'gap-3' : 'gap-[10px] md:gap-3'}`}>
-      <span className={featured ? 'text-[clamp(10px,0.94vw,18px)] leading-[1.3]' : 'text-[clamp(9px,0.84vw,16px)] leading-[1.3]'}>
+    <div className={`flex flex-wrap items-center font-body font-medium uppercase tracking-[0.06em] text-[#E6FF2A] ${featured ? 'gap-3' : 'gap-[10px] md:gap-3'}`}>
+      <span className={featured ? 'text-[clamp(9.1px,0.855vw,16.4px)] leading-[1.3]' : 'text-[clamp(8.2px,0.76vw,14.5px)] leading-[1.3]'}>
         {project.service}
       </span>
       <span className="h-[3px] w-[3px] shrink-0 bg-[#F7F7F7]" />
-      <span className={featured ? 'text-[clamp(10px,0.94vw,18px)] leading-[1.3]' : 'text-[clamp(9px,0.84vw,16px)] leading-[1.3]'}>
+      <span className={featured ? 'text-[clamp(9.1px,0.855vw,16.4px)] leading-[1.3]' : 'text-[clamp(8.2px,0.76vw,14.5px)] leading-[1.3]'}>
         {project.industry}
       </span>
     </div>
@@ -241,38 +401,74 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-function FilterSelect({
+function FilterDropdown({
   value,
   onChange,
-  children,
-  width = 'w-auto',
-  active = false,
+  options,
   ariaLabel,
+  width,
 }: {
   value: string;
   onChange: (val: string) => void;
-  children: ReactNode;
-  width?: string;
-  active?: boolean;
+  options: { label: string; value: string }[];
   ariaLabel: string;
+  width?: string;
 }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const selected = options.find((opt) => opt.value === value) ?? options[0];
+
+  useEffect(() => {
+    if (!open) return;
+    const handleClick = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [open]);
+
   return (
-    <div className={`relative h-[42px] shrink-0 md:h-[44px] ${width}`}>
-      <select
-        value={value}
-        aria-label={ariaLabel}
-        onChange={(event) => onChange(event.target.value)}
-        className={`h-full w-full cursor-pointer appearance-none rounded-full border px-4 pr-9 font-body text-[12px] font-medium tracking-[0.02em] outline-none transition-colors md:px-5 md:pr-10 md:text-[13px] ${
-          active
+    <div ref={ref} className={`relative h-[42px] shrink-0 md:h-[44px] ${width ?? ''}`} aria-label={ariaLabel}>
+      <button
+        type="button"
+        onClick={() => setOpen((prev) => !prev)}
+        className={`flex h-full w-full items-center justify-between gap-2 rounded-full border px-4 font-body text-[12px] font-medium tracking-[0.02em] transition-colors md:px-5 md:text-[13px] ${
+          open
             ? 'border-[#1A3E9E] bg-[rgba(153,166,231,0.22)] font-semibold text-[#1A3E9E]'
             : 'border-[#D9D9D9] bg-transparent text-[#717171] hover:border-[#1A3E9E] hover:text-[#1A3E9E]'
         }`}
       >
-        {children}
-      </select>
-      <span className={`pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 md:right-4 ${active ? 'text-[#1A3E9E]' : 'text-[#717171]'}`}>
-        <IconChevronDown size={16} />
-      </span>
+        <span className="truncate">{selected.label}</span>
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+          className={`shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+        >
+          <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="absolute left-0 top-[calc(100%+6px)] z-50 min-w-full w-max max-w-[260px] rounded-[16px] bg-white px-2 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
+          {options.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => { onChange(opt.value); setOpen(false); }}
+              className={`w-full rounded-full px-4 py-2.5 text-left font-body text-[13px] font-medium tracking-[0.02em] transition-colors hover:bg-[#F5F5F5] ${
+                opt.value === value ? 'font-semibold text-[#101010]' : 'text-[#717171]'
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -301,8 +497,6 @@ function EmptyState() {
 }
 
 export default function OurWorksPage() {
-  const [featuredIndex, setFeaturedIndex] = useState(1);
-  const [isFeaturedPaused, setIsFeaturedPaused] = useState(false);
   const [visibleCount, setVisibleCount] = useState(6);
   const [otherPage, setOtherPage] = useState(0);
 
@@ -346,24 +540,6 @@ export default function OurWorksPage() {
     const start = otherPage * 2;
     return otherProjects.slice(start, start + 2);
   }, [otherPage, otherProjects]);
-
-  const featuredTriplet = useMemo(() => {
-    if (!featuredProjects.length) return [];
-    const current = featuredIndex % featuredProjects.length;
-    const previous = (current - 1 + featuredProjects.length) % featuredProjects.length;
-    const next = (current + 1) % featuredProjects.length;
-    return [featuredProjects[previous], featuredProjects[current], featuredProjects[next]];
-  }, [featuredIndex, featuredProjects]);
-
-  useEffect(() => {
-    if (hasSearched || isFeaturedPaused || featuredProjects.length <= 1) return;
-
-    const interval = window.setInterval(() => {
-      setFeaturedIndex((current) => (current + 1) % featuredProjects.length);
-    }, 6000);
-
-    return () => window.clearInterval(interval);
-  }, [featuredProjects.length, hasSearched, isFeaturedPaused]);
 
   const updateCorporation = (value: string) => {
     setCorporation(value);
@@ -413,16 +589,9 @@ export default function OurWorksPage() {
     });
   };
 
-  const previousFeatured = () => {
-    setFeaturedIndex((current) => (current - 1 + featuredProjects.length) % featuredProjects.length);
-  };
-
-  const nextFeatured = () => {
-    setFeaturedIndex((current) => (current + 1) % featuredProjects.length);
-  };
-
-  const handleScrollDown = () => {
-    document.getElementById(hasSearched ? 'explore-section' : 'featured-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const handleScrollDown = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    document.getElementById('beyond-expectations')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
@@ -485,14 +654,14 @@ export default function OurWorksPage() {
           </h1>
         </div>
 
-        <button
-          type="button"
+        <a
+          href="#beyond-expectations"
           onClick={handleScrollDown}
-          aria-label="Scroll to works"
+          aria-label="Scroll to CTA"
           className="absolute bottom-[46px] left-1/2 z-20 flex h-[58px] w-[58px] -translate-x-1/2 items-center justify-center rounded-full border border-[rgba(175,175,175,0.25)] bg-[linear-gradient(230.45deg,rgba(247,247,247,0.21)_-7.74%,rgba(247,247,247,0.105)_81.5%)] text-white backdrop-blur-[4px] transition-transform hover:scale-105 md:bottom-[60px] md:h-[70px] md:w-[70px] xl:bottom-[71px] xl:h-[80px] xl:w-[80px]"
         >
           <IconScrollDown />
-        </button>
+        </a>
       </section>
 
       {/* FEATURED: hilang setelah tombol Search ditekan */}
@@ -500,88 +669,18 @@ export default function OurWorksPage() {
         <section
           id="featured-section"
           aria-label="Featured Works"
-          className="relative flex w-full scroll-mt-20 flex-col items-center bg-[#F7F7F7] py-[64px] md:py-[80px] xl:py-[96px]"
+          className="relative w-full scroll-mt-20 bg-[#F7F7F7] pb-0 pt-[64px] md:pt-[80px] xl:pt-[96px]"
         >
-          <div className="flex w-full flex-col items-center gap-4 text-center md:gap-6">
-            <div className="flex items-center justify-center gap-2">
-              <span className="h-2 w-2 bg-[#1A3E9E]" />
-              <span className="font-body text-[11px] font-extrabold uppercase leading-[1.6] tracking-[0.02em] text-[#1A3E9E] md:text-[12px] xl:text-[14px]">
-                Featured Works
-              </span>
-            </div>
-            <h2 className="w-full font-heading text-[clamp(42px,4.38vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
-              Amplify Your Business
-              <br />
-              in One Ecosystem
+          {/* Heading — Our Business SectionLabel style */}
+          <div className="mx-auto mb-8 flex w-full max-w-[1699px] items-center gap-[10px] px-[6vw] py-[11px] max-[1199px]:px-[4vw]">
+            <span className="h-2 w-2 shrink-0 bg-[#1A3E9E]" aria-hidden="true" />
+            <h2 className="font-body text-[28px] font-semibold leading-[1.6] tracking-[-0.02em] text-[#101010] max-[1280px]:text-[22px] max-[768px]:text-[17px]">
+              Featured Works
             </h2>
           </div>
 
-          <div
-            className="relative mt-[44px] h-[clamp(260px,39.59vw,760px)] w-full overflow-hidden md:mt-[54px] xl:mt-[64px]"
-            onMouseEnter={() => setIsFeaturedPaused(true)}
-            onMouseLeave={() => setIsFeaturedPaused(false)}
-          >
-            <div className="absolute left-1/2 top-0 flex h-full w-max -translate-x-1/2 gap-4">
-              {featuredTriplet.map((project, slot) => {
-                const active = slot === 1;
-                return (
-                  <Link
-                    key={`${featuredIndex}-${slot}-${project.id}`}
-                    href={project.slug ? `/our-works/${project.slug}` : '#'}
-                    tabIndex={active ? 0 : -1}
-                    aria-hidden={!active}
-                    className={`relative isolate h-full w-[clamp(420px,73.6vw,1413px)] shrink-0 overflow-hidden rounded-[16px] bg-[#101010] no-underline transition-opacity duration-700 md:rounded-[24px] xl:rounded-[32px] ${active ? 'z-10 opacity-100' : 'pointer-events-none opacity-[0.38]'}`}
-                  >
-                    <WorkImage image={project.image} title={project.title} />
-                    <div className="absolute inset-0 bg-black/20" />
-                    <div className="absolute inset-x-0 bottom-0 h-[43%] bg-gradient-to-b from-transparent to-black/90" />
-
-                    <div className="absolute bottom-[clamp(24px,3.02vw,58px)] left-[clamp(24px,3.39vw,65px)] right-[clamp(24px,3.39vw,65px)] z-10">
-                      <h3 className="max-w-[1236px] font-heading text-[clamp(28px,3.34vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#F7F7F7]">
-                        {project.title}
-                      </h3>
-                      <div className="mt-[clamp(8px,0.63vw,12px)]">
-                        <WorkMeta project={project} featured />
-                      </div>
-                    </div>
-
-                    <div className="absolute inset-x-0 bottom-0 z-20 h-[4px] bg-white/40 xl:h-[6px]">
-                      {active && (
-                        <div
-                          key={`featured-progress-${featuredIndex}`}
-                          className="h-full bg-[#E6FF2A]"
-                          style={{
-                            animation: 'featuredProgress 6s linear forwards',
-                            animationPlayState: isFeaturedPaused ? 'paused' : 'running',
-                          }}
-                        />
-                      )}
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-20 hidden w-[13.03vw] max-w-[250px] bg-gradient-to-r from-[#101010] to-transparent md:block" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-[13.03vw] max-w-[250px] bg-gradient-to-l from-[#101010] to-transparent md:block" />
-
-            <button
-              type="button"
-              onClick={previousFeatured}
-              aria-label="Previous featured work"
-              className="absolute left-4 top-1/2 z-30 flex h-[46px] w-[46px] -translate-y-1/2 items-center justify-center rounded-[5px] border border-[#4C4C4C] bg-[#101010]/40 text-[#D9D9D9] transition-all hover:border-[#D9D9D9] hover:bg-[#101010]/80 md:left-[5.73vw] md:h-[54px] md:w-[54px] xl:left-[110px] xl:h-[64px] xl:w-[64px]"
-            >
-              <IconArrow direction="left" />
-            </button>
-            <button
-              type="button"
-              onClick={nextFeatured}
-              aria-label="Next featured work"
-              className="absolute right-4 top-1/2 z-30 flex h-[46px] w-[46px] -translate-y-1/2 items-center justify-center rounded-[5px] border border-[#4C4C4C] bg-[#101010]/40 text-[#D9D9D9] transition-all hover:border-[#D9D9D9] hover:bg-[#101010]/80 md:right-[5.73vw] md:h-[54px] md:w-[54px] xl:right-[110px] xl:h-[64px] xl:w-[64px]"
-            >
-              <IconArrow />
-            </button>
-          </div>
+          {/* Homepage-style carousel */}
+          <FeaturedCarousel projects={featuredProjects.map((p) => ({ id: p.id, title: p.title, slug: p.slug, image: p.image, service: p.service, industry: p.industry }))} />
         </section>
       )}
 
@@ -607,38 +706,38 @@ export default function OurWorksPage() {
             </div>
 
             <div className="flex w-full flex-wrap items-center gap-2 xl:w-auto xl:flex-nowrap xl:justify-end">
-              <FilterSelect
+              <FilterDropdown
                 value={corporation}
                 onChange={updateCorporation}
-                width="w-[calc(50%_-_4px)] sm:w-[155px]"
-                active={true}
+                options={[
+                  { label: 'All Corporation', value: 'all' },
+                  ...CORPORATION_OPTIONS.map((item) => ({ label: item, value: item })),
+                ]}
+                width="w-[calc(50%_-_4px)] sm:w-[165px]"
                 ariaLabel="Select Type"
-              >
-                <option value="all">All Corporation</option>
-                {CORPORATION_OPTIONS.map((item) => <option key={item} value={item}>{item}</option>)}
-              </FilterSelect>
+              />
 
-              <FilterSelect
+              <FilterDropdown
                 value={sortOrder}
                 onChange={updateSortOrder}
+                options={[
+                  { label: 'Newest', value: 'newest' },
+                  { label: 'Oldest', value: 'oldest' },
+                ]}
                 width="w-[calc(50%_-_4px)] sm:w-[120px]"
-                active={sortOrder !== 'newest'}
                 ariaLabel="Sort works"
-              >
-                <option value="newest">Newest</option>
-                <option value="oldest">Oldest</option>
-              </FilterSelect>
+              />
 
-              <FilterSelect
+              <FilterDropdown
                 value={industry}
                 onChange={updateIndustry}
-                width="w-[calc(50%_-_4px)] sm:w-[135px]"
-                active={industry !== 'all'}
+                options={[
+                  { label: 'Industry', value: 'all' },
+                  ...INDUSTRY_OPTIONS.map((item) => ({ label: item, value: item })),
+                ]}
+                width="w-[calc(50%_-_4px)] sm:w-[145px]"
                 ariaLabel="Select Industry"
-              >
-                <option value="all">Industry</option>
-                {INDUSTRY_OPTIONS.map((item) => <option key={item} value={item}>{item}</option>)}
-              </FilterSelect>
+              />
 
               <button
                 type="button"

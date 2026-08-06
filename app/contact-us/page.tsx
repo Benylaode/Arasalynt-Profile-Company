@@ -855,7 +855,7 @@ export default function ContactUsPage() {
       </main>
 
       {/* Global Footer */}
-      <Footer />
+      {/* <Footer /> */}
 
       {showSuccessModal && (
         <SuccessModal onClose={() => setShowSuccessModal(false)} />

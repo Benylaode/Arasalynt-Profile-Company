@@ -92,12 +92,12 @@ const BUSINESS_MEDIA = {
 
 const INSIGHT_LINKS: NavItem[] = [
   {
-    name: 'Case Studies',
-    href: '/insight-programs/Case-Studies',
-  },
-  {
     name: 'Leadership Thoughts',
     href: '/insight-programs/leadership-thoughts',
+  },
+  {
+    name: 'Case Studies',
+    href: '/insight-programs/Case-Studies',
   },
 ];
 

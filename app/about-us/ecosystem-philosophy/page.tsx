@@ -56,7 +56,7 @@ const NarrowContainer = ({ children, className = '' }: { children: React.ReactNo
 
 export default function EcosystemPhilosophyPage() {
   const handleScrollDown = () => {
-    document.getElementById('ecosystem-intro')?.scrollIntoView({
+    document.getElementById('beyond-expectations')?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     });
@@ -103,9 +103,9 @@ export default function EcosystemPhilosophyPage() {
         />
 
         <div className="absolute left-1/2 top-1/2 z-10 flex w-full max-w-[948px] -translate-x-1/2 -translate-y-[60%] flex-col items-center gap-6 text-center max-[640px]:px-4 max-[640px]:gap-4">
-          <p className="font-body text-[9px] font-bold uppercase leading-[130%] tracking-[0.06em] text-[#E6FF2A] max-[640px]:text-[7px]">
-            HOME&nbsp;&nbsp;&gt;&nbsp;&nbsp;ABOUT US&nbsp;&nbsp;&gt;&nbsp;&nbsp;ECOSYSTEM PHILOSOPHY
-          </p>
+          <div className="font-body text-[10px] font-normal uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
+            HOME&nbsp;&nbsp;&gt;&nbsp;&nbsp;ABOUT US&nbsp;&nbsp;&gt;&nbsp;&nbsp;ECOSYSTEM PHYLOSOPHY
+          </div>
           <h1 className="font-heading text-[clamp(56px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
             Ecosystem Philosophy
           </h1>
@@ -160,7 +160,7 @@ export default function EcosystemPhilosophyPage() {
             <img
               src={`${ASSET}/intro-hand.webp`}
               alt="Integrated digital ecosystem"
-              className="absolute inset-0 h-full w-full object-cover object-[65%_center]"
+              className="absolute inset-0 h-full w-full object-cover object-[93%_50%]"
             />
           </div>
         </NarrowContainer>

@@ -212,11 +212,11 @@ export default async function LeadershipThoughtDetailPage({
                 href={`/insight-programs/leadership-thoughts/${other.slug}`}
                 className="group flex min-w-0 flex-col gap-5 no-underline xl:gap-6"
               >
-                <div className="flex aspect-[546/400] w-full items-center justify-center overflow-hidden rounded-[16px] bg-[#101010] sm:rounded-[20px] xl:rounded-[24px]">
+                <div className="flex aspect-[546/400] w-full items-center justify-center overflow-hidden rounded-[16px] bg-[#EBECEF] sm:rounded-[20px] xl:rounded-[24px]">
                   <img
                     src={other.coverImage}
                     alt={other.coverImageAlt}
-                    className="h-full w-full object-contain object-center grayscale contrast-[1.14] brightness-[0.78] transition-[filter,transform] duration-500 ease-out group-hover:scale-[1.012] group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-90"
+                    className="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                   />
                 </div>
 

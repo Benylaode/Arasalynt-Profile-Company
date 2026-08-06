@@ -101,7 +101,7 @@ const WorkCard = ({ href, src, title, categories }: { href: string; src: string;
     <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4 sm:inset-x-7 sm:bottom-7 2xl:inset-x-[40px] 2xl:bottom-[40px]">
       <div className="min-w-0 flex-1">
         <h3 className="max-w-[700px] font-heading text-[23px] font-medium leading-[1.1] tracking-[-0.01em] text-[#F7F7F7] sm:text-[30px] xl:text-[34px] 2xl:text-[42px]">{title}</h3>
-        <div className="mt-4 flex flex-wrap items-center gap-3 font-body text-[10px] font-extrabold uppercase tracking-[0.06em] text-[#C8CC35] sm:text-[12px] 2xl:text-[16px]">
+        <div className="mt-4 flex flex-wrap items-center gap-3 font-body text-[10px] font-medium uppercase tracking-[0.06em] text-[#E6FF2A] sm:text-[12px] 2xl:text-[16px]">
           {categories.map((category, index) => (
             <span key={category} className="flex items-center gap-3">
               {index > 0 && <span className="h-[3px] w-[3px] bg-white" />}
@@ -342,7 +342,7 @@ export default async function WorkDetailPage({
   return (
     <main className="w-full bg-[#F7F7F7] text-[#101010]">
       {/* INTRO WORKS */}
-      <section className="px-5 pb-14 pt-[130px] sm:px-8 sm:pb-20 sm:pt-[150px] lg:px-14 2xl:px-0 2xl:pb-24 2xl:pt-[186px]">
+      <section className="px-[6vw] pb-14 pt-[130px] max-[1199px]:px-[4vw] sm:pb-20 sm:pt-[150px] 2xl:pb-24 2xl:pt-[186px]">
         <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-10 2xl:gap-16">
           <div className="flex flex-col gap-5 sm:gap-7 2xl:gap-8">
             <div className="flex flex-wrap items-center gap-2 font-body text-[10px] font-bold uppercase tracking-[0.06em] text-[#1A3E9E] sm:text-[12px] 2xl:text-[14px]">
@@ -366,7 +366,7 @@ export default async function WorkDetailPage({
             </div>
           </div>
 
-          <div className="relative h-[300px] overflow-hidden rounded-[18px] bg-[#2B2B2B] sm:h-[480px] sm:rounded-[24px] lg:h-[650px] 2xl:h-[800px] 2xl:rounded-[32px]">
+          <div className="relative h-[300px] w-full overflow-hidden rounded-[18px] bg-[#2B2B2B] sm:h-[480px] sm:rounded-[24px] lg:h-[650px] 2xl:h-[800px] 2xl:rounded-[32px]">
             <img
               src={currentProject.heroImage}
               alt={currentProject.title}
@@ -377,7 +377,7 @@ export default async function WorkDetailPage({
       </section>
 
       {/* DETAIL WORKS */}
-      <section className="px-5 pb-20 pt-4 sm:px-8 sm:pb-24 lg:px-14 lg:pt-20 2xl:px-0 2xl:pb-[132px] 2xl:pt-24">
+      <section className="px-[6vw] pb-20 pt-4 max-[1199px]:px-[4vw] sm:pb-24 lg:pt-20 2xl:pb-[132px] 2xl:pt-24">
         <div className="mx-auto grid w-full max-w-[1700px] grid-cols-1 items-start gap-10 xl:grid-cols-[310px_minmax(0,1fr)] xl:gap-[64px]">
           <aside className="relative z-30 self-start xl:sticky xl:top-[96px]">
             <div className="rounded-[20px] bg-[rgba(153,166,231,0.1)] px-5 py-6 sm:px-6 sm:py-7 2xl:px-6 2xl:py-8">
@@ -468,7 +468,7 @@ export default async function WorkDetailPage({
       </section>
 
       {/* OTHER WORKS */}
-      <section className="bg-[rgba(153,166,231,0.1)] px-5 py-16 sm:px-8 sm:py-20 lg:px-14 2xl:px-0 2xl:pb-[110px] 2xl:pt-24">
+      <section className="bg-[rgba(153,166,231,0.1)] px-[6vw] py-16 max-[1199px]:px-[4vw] sm:py-20 2xl:pb-[110px] 2xl:pt-24">
         <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-8">
           <div className="flex items-end justify-between gap-6">
             <h2 className="font-heading text-[46px] font-medium leading-none tracking-[-0.03em] text-[#101010] sm:text-[60px] 2xl:text-[84px]">Other Works</h2>

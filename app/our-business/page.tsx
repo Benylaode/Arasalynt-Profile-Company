@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { getAllBusinesses } from '@/lib/db/actions';
+import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 
 export const metadata: Metadata = {
   title: 'Our Business — Arsalynk',
@@ -229,8 +230,8 @@ export default async function OurBusinessPage() {
         </div>
 
         <a
-          href="#business-content"
-          aria-label="Scroll to business divisions"
+          href="#beyond-expectations"
+          aria-label="Scroll to CTA"
           className="absolute bottom-[71px] left-1/2 z-[4] flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full border border-[rgba(175,175,175,0.25)] text-white backdrop-blur-[4px] transition-transform duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/30 max-[768px]:bottom-[48px] max-[768px]:h-14 max-[768px]:w-14 max-[768px]:[&_svg]:h-[15px] max-[768px]:[&_svg]:w-[24px]"
           style={{
             background:
@@ -279,6 +280,9 @@ export default async function OurBusinessPage() {
           </section>
         ) : null}
       </div>
+
+      {/* CTA Section */}
+      <BeyondExpectations />
     </main>
   );
 }

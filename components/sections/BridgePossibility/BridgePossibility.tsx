@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import styles from './BridgePossibility.module.css';
 
 const PILLARS_DATA = [
@@ -351,12 +352,12 @@ export default function BridgePossibility() {
           </p>
 
           <div className="pt-4">
-            <a 
-              href="#about-us" 
+            <Link 
+              href="/about-us" 
               className="inline-flex items-center justify-center px-8 py-4 bg-[#E6FF2A] text-[#101010] font-body text-[14px] font-extrabold uppercase tracking-wider rounded-full no-underline transition-[background-color,transform,box-shadow] duration-200 hover:bg-[#d8f21d] hover:shadow-[0_8px_25px_rgba(230,255,42,0.35)] hover:-translate-y-0.5"
             >
               LEARN ABOUT US
-            </a>
+            </Link>
           </div>
         </div>
 

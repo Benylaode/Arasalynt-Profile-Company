@@ -17,6 +17,8 @@ export interface Work {
   name: string;
   img: string;
   tag: string;
+  slug?: string;
+  href?: string;
 }
 
 export interface OtherBusiness {

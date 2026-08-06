@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 
 const ABOUT_CARDS = [
   {
@@ -46,7 +47,7 @@ const WhatsAppIcon = () => (
 
 export default function AboutUsPage() {
   const handleScrollDown = () => {
-    document.getElementById('about-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('beyond-expectations')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
@@ -158,6 +159,9 @@ export default function AboutUsPage() {
           ))}
         </div>
       </section>
+
+      {/* CTA Section */}
+      <BeyondExpectations />
     </main>
   );
 }

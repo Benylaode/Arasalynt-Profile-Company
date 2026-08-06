@@ -134,7 +134,7 @@ export default function CompanyLeadershipPage() {
   }, []);
 
   const handleScrollDown = () => {
-    document.getElementById('leadership-foundation')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('beyond-expectations')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const changeSlide = (direction: 'prev' | 'next') => {
@@ -183,7 +183,7 @@ export default function CompanyLeadershipPage() {
 
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
           <div className="flex flex-col items-center gap-6 max-[768px]:gap-4">
-            <div className="font-body text-[9px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
+           <div className="font-body text-[10px] font-normal uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
               Home&nbsp;&nbsp;&gt;&nbsp;&nbsp;About Us&nbsp;&nbsp;&gt;&nbsp;&nbsp;Company Leadership
             </div>
             <h1 className="font-heading text-[clamp(56px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">

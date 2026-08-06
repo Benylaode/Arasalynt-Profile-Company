@@ -169,8 +169,8 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-7 xl:grid-cols-3 xl:gap-[30px]">
             {relatedArticles.map((related) => (
               <Link key={related.slug} href={`/insight-programs/Case-Studies/${related.slug}`} className="group flex min-w-0 flex-col gap-5 no-underline">
-                <div className="flex aspect-[546/400] w-full items-center justify-center overflow-hidden rounded-[16px] bg-[#101010] sm:rounded-[20px] xl:rounded-[24px]">
-                  <img src={related.coverImage} alt={related.coverImageAlt} loading="lazy" className="h-full w-full object-contain object-center grayscale contrast-[1.14] brightness-[0.78] transition-[filter,transform] duration-500 group-hover:scale-[1.012] group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-90" />
+                <div className="flex aspect-[546/400] w-full items-center justify-center overflow-hidden rounded-[16px] bg-[#EBECEF] sm:rounded-[20px] xl:rounded-[24px]">
+                  <img src={related.coverImage} alt={related.coverImageAlt} loading="lazy" className="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.03]" />
                 </div>
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-between gap-4 font-body text-[10px] font-bold uppercase tracking-[0.06em] text-[#1A3E9E] sm:text-xs xl:text-sm">
