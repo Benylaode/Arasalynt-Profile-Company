@@ -591,7 +591,11 @@ export default function OurWorksPage() {
 
   const handleScrollDown = (e?: React.MouseEvent) => {
     if (e) e.preventDefault();
-    document.getElementById('beyond-expectations')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const target = document.getElementById('beyond-expectations');
+    if (target) {
+      const top = target.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -600,7 +604,7 @@ export default function OurWorksPage() {
       <section
         id="hero"
         aria-label="Our Works Hero"
-        className="relative isolate h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#101010] max-[640px]:rounded-b-[24px]"
+        className="relative isolate flex h-[clamp(560px,41.666vw,800px)] w-full items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-[#101010]"
       >
         <img
           src="/images/our-works/our-works-hero-bg.webp"
@@ -643,7 +647,7 @@ export default function OurWorksPage() {
           </defs>
         </svg>
 
-        <div className="absolute left-1/2 top-1/2 z-10 flex w-full max-w-[766px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-4 px-5 text-center md:gap-6">
+        <div className="relative z-10 mx-auto flex w-full max-w-[900px] flex-col items-center gap-4 px-6 text-center md:gap-6">
           <div className="flex items-center gap-2 font-body text-[10px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] md:text-[12px] xl:text-[14px]">
             <span>Home</span>
             <span>&gt;</span>
@@ -658,7 +662,7 @@ export default function OurWorksPage() {
           href="#beyond-expectations"
           onClick={handleScrollDown}
           aria-label="Scroll to CTA"
-          className="absolute bottom-[46px] left-1/2 z-20 flex h-[58px] w-[58px] -translate-x-1/2 items-center justify-center rounded-full border border-[rgba(175,175,175,0.25)] bg-[linear-gradient(230.45deg,rgba(247,247,247,0.21)_-7.74%,rgba(247,247,247,0.105)_81.5%)] text-white backdrop-blur-[4px] transition-transform hover:scale-105 md:bottom-[60px] md:h-[70px] md:w-[70px] xl:bottom-[71px] xl:h-[80px] xl:w-[80px]"
+          className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 bg-white/[0.14] text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20"
         >
           <IconScrollDown />
         </a>

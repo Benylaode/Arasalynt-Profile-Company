@@ -59,8 +59,8 @@ const ABOUT_CARDS = [
 ] as const;
 
 const ChevronDown = () => (
-  <svg viewBox="0 0 32 21" className="h-[21px] w-8" fill="none" aria-hidden="true">
-    <path d="M2 2.25 16 17.5 30 2.25" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+  <svg width="32" height="22" viewBox="0 0 32 22" fill="none" aria-hidden="true">
+    <path d="M3 4L16 17L29 4" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -71,12 +71,21 @@ const WhatsAppIcon = () => (
 );
 
 export default function AboutUsPage() {
-  const handleScrollDown = () => {
-    document.getElementById('about-content')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const handleScrollDown = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    const targets = Array.from(document.querySelectorAll('#beyond-expectations'));
+    const visibleTarget = targets.find((el) => {
+      const rect = el.getBoundingClientRect();
+      return rect.height > 0 && window.getComputedStyle(el).display !== 'none';
+    });
+    if (visibleTarget) {
+      const top = visibleTarget.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
   };
 
   return (
-    <main className="relative w-full overflow-hidden bg-[#F7F7F7]">
+    <main className="relative w-full overflow-x-hidden bg-[#F7F7F7]">
       {/*
         Desktop geometry follows the supplied 1920px design.
         The global navbar remains outside this file; at desktop it occupies 90px,
@@ -85,7 +94,7 @@ export default function AboutUsPage() {
       <section
         id="hero"
         aria-label="About Arsalynk Hero"
-        className="relative h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#020714] max-[640px]:rounded-b-[24px]"
+        className="relative isolate flex h-[clamp(560px,41.666vw,800px)] w-full items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-[#020714]"
       >
         {/* Primary infinity artwork: Figma rect 2707 × 975 at y = -39.
             Relative to the already-rendered 90px navbar, its top becomes -129px. */}
@@ -123,29 +132,32 @@ export default function AboutUsPage() {
         />
 
         {/* Hero copy: y = 287px in the 800px master frame, or 197px below navbar */}
-        <div className="absolute left-1/2 top-[197px] z-10 flex w-[766px] -translate-x-1/2 flex-col items-center gap-6 text-center max-[1024px]:top-[170px] max-[1024px]:w-[720px] max-[768px]:top-[112px] max-[768px]:w-full max-[768px]:gap-[14px] max-[768px]:px-5">
+        <div className="relative z-10 mx-auto flex w-full max-w-[900px] flex-col items-center px-6 text-center">
           <div className="font-body text-[9px] font-bold leading-[130%] tracking-[0.06em] text-[#E6FF2A] max-[768px]:hidden">
             HOME&nbsp;&nbsp;&gt;&nbsp;&nbsp;ABOUT US
           </div>
 
-          <h1 className="font-heading text-[96px] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7] max-[1280px]:text-[82px] max-[1024px]:text-[72px] max-[768px]:max-w-[250px] max-[768px]:text-[42px] max-[768px]:leading-[0.96] max-[480px]:text-[38px]">
+          <h1 className="font-heading mt-5 text-[clamp(52px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7] max-[768px]:max-w-[300px]">
             <span className="max-[768px]:block">About</span>{' '}Arsalynk
           </h1>
 
-          <p className="font-body w-full text-[20px] font-normal leading-[160%] tracking-[0.02em] text-white max-[1024px]:max-w-[660px] max-[768px]:max-w-[350px] max-[768px]:text-[12px] max-[768px]:leading-[145%]">
+          <p className="mt-6 max-w-[650px] font-body text-[clamp(14px,1.042vw,20px)] font-light leading-[1.6] tracking-[0.02em] text-white/95">
             Connecting capabilities across strategy, technology, and execution to solve complex business challenges and deliver lasting value.
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={handleScrollDown}
-          aria-label="Scroll to About Us links"
-          className="absolute bottom-[71px] left-1/2 z-20 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full border border-[rgba(175,175,175,0.25)] text-white backdrop-blur-[4px] transition-transform duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6FF2A] max-[768px]:bottom-8 max-[768px]:h-14 max-[768px]:w-14"
+        <a
+          href="#beyond-expectations"
+          onClick={(e) => {
+            e.preventDefault();
+            handleScrollDown();
+          }}
+          aria-label="Scroll to CTA"
+          className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6FF2A]"
           style={{ background: 'linear-gradient(230.45deg, rgba(247,247,247,0.21) -7.74%, rgba(247,247,247,0.105) 81.5%)' }}
         >
           <ChevronDown />
-        </button>
+        </a>
       </section>
 
       {/* Exact desktop section: 720px high, 110px padding, 30px gap, cards 546 × 500 */}

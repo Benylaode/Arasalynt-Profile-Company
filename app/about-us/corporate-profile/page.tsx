@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 
-const IconChevronDown = ({ size = 32 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 32 21" fill="none" aria-hidden="true">
-    <path d="M2 2.25 16 17.5 30 2.25" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+const IconChevronDown = () => (
+  <svg width="32" height="22" viewBox="0 0 32 22" fill="none" aria-hidden="true">
+    <path d="M3 4L16 17L29 4" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -164,8 +164,13 @@ export default function CorporateProfilePage() {
   }, []);
 
 
-  const handleScrollDown = () => {
-    document.getElementById('beyond-expectations')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const handleScrollDown = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    const target = document.getElementById('beyond-expectations');
+    if (target) {
+      const top = target.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -211,15 +216,18 @@ export default function CorporateProfilePage() {
           </h1>
         </div>
 
-        <button
-          type="button"
-          onClick={handleScrollDown}
-          aria-label="Scroll to corporate profile content"
+        <a
+          href="#beyond-expectations"
+          onClick={(e) => {
+            e.preventDefault();
+            handleScrollDown();
+          }}
+          aria-label="Scroll to CTA"
           className="absolute left-1/2 bottom-[clamp(34px,4.5vw,71px)] z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white backdrop-blur-[4px] transition-transform duration-300 hover:scale-105"
           style={{ background: 'linear-gradient(230.45deg, rgba(247,247,247,.21) -7.74%, rgba(247,247,247,.105) 81.5%)' }}
         >
-          <IconChevronDown size={32} />
-        </button>
+          <IconChevronDown />
+        </a>
       </section>
 
       {/* OUR FOUNDATION */}

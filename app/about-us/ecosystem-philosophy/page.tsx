@@ -6,21 +6,8 @@ import Link from 'next/link';
 const ASSET = '/images/ecosystem-philosophy';
 
 const IconChevronDown = () => (
-  <svg
-    width="32"
-    height="21"
-    viewBox="0 0 32 21"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <path
-      d="M2 2.25L16 17.25L30 2.25"
-      stroke="currentColor"
-      strokeWidth="3.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+  <svg width="32" height="22" viewBox="0 0 32 22" fill="none" aria-hidden="true">
+    <path d="M3 4L16 17L29 4" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -111,10 +98,17 @@ export default function EcosystemPhilosophyPage() {
           </h1>
         </div>
 
-        <button
-          type="button"
-          aria-label="Scroll to ecosystem introduction"
-          onClick={handleScrollDown}
+        <a
+          href="#beyond-expectations"
+          aria-label="Scroll to CTA"
+          onClick={(e) => {
+            e.preventDefault();
+            const target = document.getElementById('beyond-expectations');
+            if (target) {
+              const top = target.getBoundingClientRect().top + window.scrollY;
+              window.scrollTo({ top, behavior: 'smooth' });
+            }
+          }}
           className="absolute left-1/2 bottom-[clamp(34px,4.5vw,71px)] z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-[rgba(175,175,175,0.25)] text-white transition-transform duration-300 hover:translate-y-1"
           style={{
             background:
@@ -124,7 +118,7 @@ export default function EcosystemPhilosophyPage() {
           }}
         >
           <IconChevronDown />
-        </button>
+        </a>
       </section>
 
       {/* SECTION 01 — SPECIALIZED INDUSTRY */}

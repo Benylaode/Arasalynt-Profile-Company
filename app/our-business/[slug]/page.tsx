@@ -166,7 +166,7 @@ function DownIcon() {
   return (
     <svg width="32" height="22" viewBox="0 0 32 22" fill="none" aria-hidden="true">
       <path
-        d="m4 5 12 12L28 5"
+        d="M3 4L16 17L29 4"
         stroke="currentColor"
         strokeWidth="2.2"
         strokeLinecap="round"

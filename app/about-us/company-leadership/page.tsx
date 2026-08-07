@@ -6,9 +6,9 @@ import { useEffect, useState } from 'react';
 
 const ASSET_BASE = '/images/company-leadership';
 
-const IconChevronDown = ({ size = 32 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 32 21" fill="none" aria-hidden="true">
-    <path d="M2 2.25 16 16.5 30 2.25" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+const IconChevronDown = () => (
+  <svg width="32" height="22" viewBox="0 0 32 22" fill="none" aria-hidden="true">
+    <path d="M3 4L16 17L29 4" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -133,8 +133,13 @@ export default function CompanyLeadershipPage() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const handleScrollDown = () => {
-    document.getElementById('beyond-expectations')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const handleScrollDown = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    const target = document.getElementById('beyond-expectations');
+    if (target) {
+      const top = target.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
   };
 
   const changeSlide = (direction: 'prev' | 'next') => {
@@ -192,15 +197,18 @@ export default function CompanyLeadershipPage() {
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={handleScrollDown}
-          aria-label="Scroll to leadership foundation"
+        <a
+          href="#beyond-expectations"
+          onClick={(e) => {
+            e.preventDefault();
+            handleScrollDown();
+          }}
+          aria-label="Scroll to CTA"
           className="absolute bottom-[clamp(34px,4.5vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-[rgba(175,175,175,.25)] text-white backdrop-blur-[4px] transition-transform duration-300 hover:scale-105"
           style={{ background: 'linear-gradient(230.45deg, rgba(247,247,247,.21) -7.74%, rgba(247,247,247,.105) 81.5%)' }}
         >
-          <IconChevronDown size={32} />
-        </button>
+          <IconChevronDown />
+        </a>
       </section>
 
       {/* LEADERSHIP FOUNDATION */}
