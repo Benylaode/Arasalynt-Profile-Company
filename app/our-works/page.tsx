@@ -671,11 +671,18 @@ export default function OurWorksPage() {
           aria-label="Featured Works"
           className="relative w-full scroll-mt-20 bg-[#F7F7F7] pb-0 pt-[64px] md:pt-[80px] xl:pt-[96px]"
         >
-          {/* Heading — Our Business SectionLabel style */}
-          <div className="mx-auto mb-8 flex w-full max-w-[1699px] items-center gap-[10px] px-[6vw] py-[11px] max-[1199px]:px-[4vw]">
-            <span className="h-2 w-2 shrink-0 bg-[#1A3E9E]" aria-hidden="true" />
-            <h2 className="font-body text-[28px] font-semibold leading-[1.6] tracking-[-0.02em] text-[#101010] max-[1280px]:text-[22px] max-[768px]:text-[17px]">
-              Featured Works
+          {/* Heading — Restored to reference design */}
+          <div className="mx-auto mb-8 flex w-full max-w-[1699px] flex-col items-center justify-center gap-3 px-[6vw] text-center md:mb-12 max-[1199px]:px-[4vw]">
+            <div className="flex items-center gap-[8px]">
+              <span className="h-[7.5px] w-[7.5px] shrink-0 bg-[#1A3E9E]" aria-hidden="true" />
+              <span className="font-body text-[8px] font-extrabold uppercase leading-[1.6] tracking-[0.04em] text-[#1A3E9E] md:text-[10px] xl:text-[11px]">
+                FEATURED WORKS
+              </span>
+            </div>
+            <h2 className="font-heading text-[clamp(36px,4.5vw,72px)] font-medium leading-[1.08] tracking-[-0.02em] text-[#101010]">
+              Amplify Your Business
+              <br />
+              in One Ecosystem
             </h2>
           </div>
 
