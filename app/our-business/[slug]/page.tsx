@@ -699,7 +699,7 @@ export default async function BusinessSlugPage({
               {biz.ctaPrimaryLabel ?? 'Let’s Work Together'}
             </Link>
             <Link
-              href={biz.ctaSecondaryHref ?? '/our-works'}
+              href={biz.ctaSecondaryHref ?? (safeSlug === 'kaluna-technology' || safeSlug === 'myboss' ? '/our-works/myboss-iot-system' : safeSlug === 'artic-analytica' ? '/our-works/artic-complex-web' : safeSlug === 'altatic' ? '/our-works/altatic-analytic' : safeSlug === 'web-media' ? '/our-works/web-media-profile' : safeSlug === 'sinau-print' ? '/our-works/sinau-print-erp' : safeSlug === 'loxlive' || safeSlug === 'seveny' ? '/our-works/video-portret-padel-arena' : safeSlug === 'the-drafroom' ? '/our-works/desain-pelatihan-wasit-semarang' : '/our-works')}
               className="inline-flex h-[clamp(47px,3.125vw,60px)] min-w-[clamp(171px,11.719vw,225px)] items-center justify-center rounded-full border border-[#E6FF2A] px-[clamp(24px,1.667vw,32px)] font-body text-[clamp(14px,0.833vw,16px)] font-extrabold leading-[1.2] text-[#F7F7F7] no-underline transition-colors duration-300 hover:bg-[#E6FF2A] hover:text-[#101010] max-[480px]:w-full max-[480px]:max-w-[280px]"
             >
               {biz.ctaSecondaryLabel ?? 'Explore Our Works'}

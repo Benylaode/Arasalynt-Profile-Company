@@ -254,41 +254,34 @@ function seedIfEmpty(db: Database.Database): void {
     console.error('Failed to sync DB from dummy:', err);
   }
 
-  const heroCount = (
-    db.prepare('SELECT COUNT(*) as cnt FROM hero_slides').get() as { cnt: number }
-  ).cnt;
+  const insertHero = db.prepare(`
+    INSERT OR REPLACE INTO hero_slides
+      (id, headline, body, background_image, mobile_background_image, background_position,
+       primary_cta_label, primary_cta_href, secondary_cta_label, secondary_cta_href, sort_order)
+    VALUES
+      (@id, @headline, @body, @background_image, @mobile_background_image, @background_position,
+       @primary_cta_label, @primary_cta_href, @secondary_cta_label, @secondary_cta_href, @sort_order)
+  `);
 
-  if (heroCount < HERO_SLIDES_DUMMY_DATA.length) {
-    const insertHero = db.prepare(`
-      INSERT OR REPLACE INTO hero_slides
-        (id, headline, body, background_image, mobile_background_image, background_position,
-         primary_cta_label, primary_cta_href, secondary_cta_label, secondary_cta_href, sort_order)
-      VALUES
-        (@id, @headline, @body, @background_image, @mobile_background_image, @background_position,
-         @primary_cta_label, @primary_cta_href, @secondary_cta_label, @secondary_cta_href, @sort_order)
-    `);
-
-    const insertManyHero = db.transaction(() => {
-      HERO_SLIDES_DUMMY_DATA.forEach((slide, idx) => {
-        insertHero.run({
-          id: String(slide.id),
-          headline: slide.headline,
-          body: slide.body,
-          background_image: slide.backgroundImage,
-          mobile_background_image: slide.mobileBackgroundImage || null,
-          background_position: slide.backgroundPosition || 'center center',
-          primary_cta_label: slide.primaryCta.label,
-          primary_cta_href: slide.primaryCta.href,
-          secondary_cta_label: slide.secondaryCta.label,
-          secondary_cta_href: slide.secondaryCta.href,
-          sort_order: idx,
-        });
+  const insertManyHero = db.transaction(() => {
+    HERO_SLIDES_DUMMY_DATA.forEach((slide, idx) => {
+      insertHero.run({
+        id: String(slide.id),
+        headline: slide.headline,
+        body: slide.body,
+        background_image: slide.backgroundImage,
+        mobile_background_image: slide.mobileBackgroundImage || null,
+        background_position: slide.backgroundPosition || 'center center',
+        primary_cta_label: slide.primaryCta.label,
+        primary_cta_href: slide.primaryCta.href,
+        secondary_cta_label: slide.secondaryCta.label,
+        secondary_cta_href: slide.secondaryCta.href,
+        sort_order: idx,
       });
     });
+  });
 
-    insertManyHero();
-    console.log(`[db] Seeded ${HERO_SLIDES_DUMMY_DATA.length} hero slides into SQLite.`);
-  }
+  insertManyHero();
 
   const testiCount = (
     db.prepare('SELECT COUNT(*) as cnt FROM testimonials').get() as { cnt: number }

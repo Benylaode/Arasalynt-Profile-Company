@@ -16,11 +16,11 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     mobileBackgroundImage: '/images/shared/slide-01-mobile-38814c.webp',
     backgroundPosition: 'center center',
     primaryCta: {
-      label: 'OUR BUSINESS',
-      href: '#our-business',
+      label: 'LEARN MORE',
+      href: '/about-us/ecosystem-philosophy',
     },
     secondaryCta: {
-      label: 'EXPLORE WORKS',
+      label: 'OUR WORK',
       href: '/our-works',
     },
   },
@@ -33,12 +33,12 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     mobileBackgroundImage: '/images/shared/slide-02-mobile-838ce3.webp',
     backgroundPosition: 'center center',
     primaryCta: {
-      label: 'READ MORE',
-      href: '/insight-programs',
+      label: 'LEARN MORE',
+      href: '/insight-programs/Case-Studies',
     },
     secondaryCta: {
-      label: 'EXPLORE WORKS',
-      href: '/our-works',
+      label: 'OUR WORK',
+      href: '/our-works/web-media-profile',
     },
   },
   {
@@ -51,11 +51,11 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     backgroundPosition: 'center center',
     primaryCta: {
       label: 'LEARN MORE',
-      href: '#services',
+      href: '/insight-programs/Case-Studies/connecting-field-operations-with-myboss-iot',
     },
     secondaryCta: {
-      label: 'EXPLORE WORKS',
-      href: '/our-works',
+      label: 'OUR WORK',
+      href: '/our-works/myboss-iot-system',
     },
   },
   {
@@ -68,11 +68,11 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     backgroundPosition: 'center center',
     primaryCta: {
       label: 'LEARN MORE',
-      href: '#services',
+      href: '/insight-programs/Case-Studies/turning-operational-data-into-decisions-with-altatic',
     },
     secondaryCta: {
-      label: 'EXPLORE WORKS',
-      href: '/our-works',
+      label: 'OUR WORK',
+      href: '/our-works/altatic-analytic',
     },
   },
 ];

@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import { HERO_SLIDES } from '@/lib/constants';
 
 const SLIDE_DURATION = 6000;
@@ -199,19 +200,19 @@ export default function HeroSection() {
           </div>
 
           <div className="mt-8 flex items-center justify-center gap-3 max-[768px]:mt-6 max-[480px]:mt-0 max-[480px]:w-full max-[480px]:flex-col max-[480px]:gap-[8px]">
-            <a
+            <Link
               href={slide.primaryCta.href}
               className="inline-flex h-11 w-[160px] items-center justify-center rounded-full bg-[#E6FF2A] px-4 font-body text-[14px] font-semibold tracking-[0.04em] uppercase text-[#101010] no-underline transition-transform duration-200 hover:scale-[1.025] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A] max-[768px]:h-10 max-[768px]:text-[13px] max-[480px]:h-[55px] max-[480px]:w-full max-[480px]:px-[32px] max-[480px]:text-[18px] max-[480px]:leading-[1.3] max-[480px]:tracking-normal"
             >
               {slide.primaryCta.label}
-            </a>
+            </Link>
 
-            <a
+            <Link
               href={slide.secondaryCta.href}
               className="inline-flex h-11 w-[175px] items-center justify-center rounded-full border border-[#E6FF2A] bg-transparent px-4 font-body text-[14px] font-semibold tracking-[0.04em] uppercase text-[#F7F7F7] no-underline transition-colors duration-200 hover:bg-[#E6FF2A]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A] max-[768px]:h-10 max-[768px]:text-[13px] max-[480px]:h-[55px] max-[480px]:w-full max-[480px]:px-[32px] max-[480px]:text-[18px] max-[480px]:leading-[1.3] max-[480px]:tracking-normal"
             >
               {slide.secondaryCta.label}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import {
   useState,
 } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
+import Link from 'next/link';
 import styles from './ITInfrastructure.module.css';
 
 type PillarKey = 'it' | 'media' | 'data';
@@ -60,6 +61,12 @@ type PillarStyle = CSSProperties & {
 const AUTO_ROTATE_MS = 6000;
 const MOTION_DURATION_MS = 1280;
 const ASSET_ROOT = '/images/services/it-motion';
+
+const SCENE_HREFS: Record<number, string> = {
+  0: '/insight-programs/Case-Studies/connecting-field-operations-with-myboss-iot',
+  1: '/insight-programs/Case-Studies/turning-operational-data-into-decisions-with-altatic',
+  2: '/insight-programs/Case-Studies/producing-a-cinematic-portrait-of-padel-arena',
+};
 
 const SCENES: Scene[] = [
   {
@@ -609,13 +616,13 @@ export default function ITInfrastructure() {
           </div>
         </div>
 
-        <a
-          href="#portfolio"
+        <Link
+          href={SCENE_HREFS[targetScene] ?? '/our-works'}
           className={styles.desktopLearnMore}
           aria-label={`Learn more about ${currentScene.title}`}
         >
           LEARN MORE
-        </a>
+        </Link>
 
         <div
           className={styles.hotspotLayer}
@@ -685,9 +692,9 @@ export default function ITInfrastructure() {
             )}
           </div>
 
-          <a href="#portfolio" className={styles.mobileLearnMore}>
+          <Link href={SCENE_HREFS[targetScene] ?? '/our-works'} className={styles.mobileLearnMore}>
             LEARN MORE
-          </a>
+          </Link>
         </div>
 
         <div className={styles.mobileVisual} aria-hidden="true">
