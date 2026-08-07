@@ -213,7 +213,7 @@ export default function CorporateProfilePage() {
       </section>
 
       {/* OUR FOUNDATION */}
-      <section id="corporate-foundation" className="relative flex w-full scroll-mt-20 flex-col items-center bg-[#F7F7F7] pt-[clamp(72px,5.729vw,110px)] pb-[clamp(72px,5.729vw,110px)]">
+      <section id="our-foundation" className="relative flex w-full scroll-mt-20 flex-col items-center bg-[#F7F7F7] pt-[clamp(72px,5.729vw,110px)] pb-[clamp(72px,5.729vw,110px)]">
         <div className="flex w-full max-w-[896px] px-6 flex-col items-center gap-[clamp(20px,1.667vw,32px)] text-center">
           <SectionLabel>OUR FOUNDATION</SectionLabel>
           <h2 className="font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
@@ -346,7 +346,7 @@ export default function CorporateProfilePage() {
       </section>
 
       {/* VISION & MISSION */}
-      <section className="relative w-full overflow-hidden bg-[linear-gradient(180deg,#101010_0%,#1A3E9E_95.29%)] px-[clamp(24px,13.333vw,256px)] py-[clamp(100px,8.54vw,164px)] text-white">
+      <section id="vision-mission" className="relative w-full scroll-mt-24 overflow-hidden bg-[linear-gradient(180deg,#101010_0%,#1A3E9E_95.29%)] px-[clamp(24px,13.333vw,256px)] py-[clamp(100px,8.54vw,164px)] text-white">
         <img
           src="/images/shared/network-overlay.webp"
           alt=""
@@ -374,7 +374,7 @@ export default function CorporateProfilePage() {
       </section>
 
       {/* OUR CAPABILITIES */}
-      <section className="relative w-full overflow-hidden bg-[#F7F7F7] px-[6vw] py-[clamp(100px,8.125vw,156px)] max-[1199px]:px-[4vw]">
+      <section id="our-capabilities" className="relative w-full scroll-mt-24 overflow-hidden bg-[#F7F7F7] px-[6vw] py-[clamp(100px,8.125vw,156px)] max-[1199px]:px-[4vw]">
         <img
           src="/images/shared/network-overlay.webp"
           alt=""

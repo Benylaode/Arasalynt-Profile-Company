@@ -3,18 +3,21 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import { CASE_STUDIES_DUMMY_DATA } from '@/lib/db/dummy';
+import { SOLUTION_CASE_STUDIES } from '@/lib/our-solution.data';
+
+const ALL_CASE_STUDIES = [...SOLUTION_CASE_STUDIES, ...CASE_STUDIES_DUMMY_DATA];
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
-  return CASE_STUDIES_DUMMY_DATA.map(({ slug }) => ({ slug }));
+  return ALL_CASE_STUDIES.map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const article = CASE_STUDIES_DUMMY_DATA.find((item) => item.slug === slug);
+  const article = ALL_CASE_STUDIES.find((item) => item.slug === slug);
 
   if (!article) {
     return { title: 'Case Study Not Found — Arsalynk' };
@@ -63,11 +66,11 @@ function ArticleImage({ src, alt }: { src: string; alt: string }) {
 
 export default async function CaseStudyDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const article = CASE_STUDIES_DUMMY_DATA.find((item) => item.slug === slug);
+  const article = ALL_CASE_STUDIES.find((item) => item.slug === slug);
 
   if (!article) notFound();
 
-  const relatedArticles = CASE_STUDIES_DUMMY_DATA.filter(
+  const relatedArticles = ALL_CASE_STUDIES.filter(
     (item) => item.slug !== article.slug,
   )
     .sort((a, b) => {

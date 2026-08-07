@@ -327,7 +327,7 @@ export default function CompanyLeadershipPage() {
       </section>
 
       {/* LEADERSHIP PRINCIPLES */}
-      <section className="relative isolate w-full overflow-hidden bg-[#F7F7F7] px-[6vw] py-[clamp(100px,8.125vw,156px)] max-[1199px]:px-[4vw]">
+      <section id="leadership-principles" className="relative isolate w-full scroll-mt-24 overflow-hidden bg-[#F7F7F7] px-[6vw] py-[clamp(100px,8.125vw,156px)] max-[1199px]:px-[4vw]">
         {/* Layer 1: Lowest Layer - Vector Graphic */}
         <div
           aria-hidden="true"

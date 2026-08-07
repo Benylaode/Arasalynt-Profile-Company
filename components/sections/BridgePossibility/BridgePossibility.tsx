@@ -7,23 +7,23 @@ const PILLARS_DATA = [
   {
     id: 0,
     number: "01",
-    category: "TECHNOLOGY",
-    action: "WE BUILD",
-    description: "Building resilient enterprise infrastructure",
+    category: "UNCOVER",
+    action: "THE POTENTIAL",
+    description: "Identify opportunities and map out possibilities",
   },
   {
     id: 1,
     number: "02",
-    category: "DATA & SURVEY",
-    action: "WE UNDERSTAND",
-    description: "Turning data into strategic decisions",
+    category: "ARCHITECT",
+    action: "THE SOLUTION",
+    description: "Engineer ERP and IoT frameworks for maximum impact",
   },
   {
     id: 2,
     number: "03",
-    category: "MEDIA",
-    action: "WE AMPLIFY",
-    description: "Delivering ideas with measurable impact",
+    category: "CONNECT",
+    action: "THE FUTURE",
+    description: "Deploy seamless, future-ready enterprise capabilities",
   },
 ];
 
@@ -353,10 +353,10 @@ export default function BridgePossibility() {
 
           <div className="pt-4">
             <Link 
-              href="/about-us" 
+              href="/our-solution"
               className="inline-flex items-center justify-center px-8 py-4 bg-[#E6FF2A] text-[#101010] font-body text-[14px] font-extrabold uppercase tracking-wider rounded-full no-underline transition-[background-color,transform,box-shadow] duration-200 hover:bg-[#d8f21d] hover:shadow-[0_8px_25px_rgba(230,255,42,0.35)] hover:-translate-y-0.5"
             >
-              LEARN ABOUT US
+              EXPLORE OUR SOLUTION
             </Link>
           </div>
         </div>

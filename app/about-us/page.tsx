@@ -2,30 +2,55 @@
 
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
+import CorporateProfilePage from './corporate-profile/page';
+import CompanyLeadershipPage from './company-leadership/page';
 
 const ABOUT_CARDS = [
   {
-    href: '/about-us/corporate-profile',
-    title: <>Corporate<br />Profile</>,
-    alt: 'Corporate Profile',
+    href: '#our-foundation',
+    id: 'our-foundation',
+    title: <>Our<br />Foundation</>,
+    alt: 'Our Foundation',
     image: '/images/shared/corporate-profile-card.webp',
     imageClassName: 'inset-0 h-full w-full object-center',
     shade: 'bg-black/20',
     gradientClassName: 'inset-0 bg-gradient-to-t from-black to-transparent',
   },
   {
-    href: '/about-us/company-leadership',
-    title: <>Company<br />Leadership</>,
-    alt: 'Company Leadership',
+    href: '#vision-mission',
+    id: 'vision-mission',
+    title: <>Our Vision<br />&amp; Mission</>,
+    alt: 'Our Vision and Mission',
+    image: '/images/about-us/corporate-profile-hero.jpg',
+    imageClassName: 'inset-0 h-full w-full object-center',
+    shade: 'bg-black/10',
+    gradientClassName: 'left-0 right-0 bottom-0 h-[58%] bg-gradient-to-t from-black via-black/55 to-transparent',
+  },
+  {
+    href: '#leadership-foundation',
+    id: 'leadership-foundation',
+    title: <>Leadership<br />Foundation</>,
+    alt: 'Leadership Foundation',
     image: '/images/about-us/company-leadership-hero.png',
     imageClassName: 'inset-0 h-full w-full object-center',
     shade: 'bg-black/10',
     gradientClassName: 'left-0 right-0 bottom-0 h-[58%] bg-gradient-to-t from-black via-black/55 to-transparent',
   },
   {
-    href: '/about-us/ecosystem-philosophy',
-    title: <>Ecosystem<br />Philosophy</>,
-    alt: 'Ecosystem Philosophy',
+    href: '#leadership-principles',
+    id: 'leadership-principles',
+    title: <>Leadership<br />Principles</>,
+    alt: 'Leadership Principles',
+    image: '/images/shared/leadership-intro-office.webp',
+    imageClassName: 'inset-0 h-full w-full object-center',
+    shade: 'bg-black/10',
+    gradientClassName: 'left-0 right-0 bottom-0 h-[58%] bg-gradient-to-t from-black via-black/55 to-transparent',
+  },
+  {
+    href: '#our-capabilities',
+    id: 'our-capabilities',
+    title: <>Our<br />Capabilities</>,
+    alt: 'Our Capabilities',
     image: '/images/about-us/ecosystem-philosophy-hero.png',
     imageClassName: 'inset-0 h-full w-full object-center',
     shade: 'bg-black/10',
@@ -47,7 +72,7 @@ const WhatsAppIcon = () => (
 
 export default function AboutUsPage() {
   const handleScrollDown = () => {
-    document.getElementById('beyond-expectations')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('about-content')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
@@ -127,12 +152,13 @@ export default function AboutUsPage() {
       <section
         id="about-grid"
         aria-label="About Us Sections"
-        className="relative flex h-[720px] scroll-mt-[90px] items-center justify-center bg-[#F7F7F7] px-[6vw] py-[110px] max-[1440px]:h-auto max-[1199px]:px-[4vw] max-[1024px]:py-20 max-[768px]:py-14"
+        className="hidden"
       >
-        <div className="grid w-full max-w-[1700px] grid-cols-3 justify-center gap-[30px] max-[1024px]:grid-cols-2 max-[1024px]:gap-6 max-[700px]:grid-cols-1 min-[1800px]:grid-cols-[repeat(3,546px)]">
+        <div className="grid w-full max-w-[1700px] grid-cols-3 justify-center gap-[30px] max-[1024px]:grid-cols-2 max-[1024px]:gap-6 max-[700px]:grid-cols-1">
           {ABOUT_CARDS.map((card) => (
             <Link
               key={card.href}
+              id={card.id}
               href={card.href}
               aria-label={card.alt}
               className="group relative h-[500px] min-w-0 overflow-hidden rounded-3xl bg-[#8C8C8C] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#1A3E9E]/40 max-[1440px]:h-[440px] max-[1024px]:h-[460px] max-[700px]:mx-auto max-[700px]:aspect-[1.095] max-[700px]:h-auto max-[700px]:w-full max-[700px]:max-w-[546px] max-[480px]:rounded-[16px]"
@@ -159,6 +185,68 @@ export default function AboutUsPage() {
           ))}
         </div>
       </section>
+
+      {/*
+        Single-page composition. Each source keeps its original markup,
+        responsive styling, slider, hover states, and animation timing.
+      */}
+      <div id="about-content" className="about-sections scroll-mt-[90px]">
+        <div className="about-source about-source-corporate-primary">
+          <CorporateProfilePage />
+        </div>
+
+        <div className="about-source about-source-leadership">
+          <CompanyLeadershipPage />
+        </div>
+      </div>
+
+      <style jsx global>{`
+        .about-sections {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .about-source,
+        .about-source > main {
+          display: contents;
+        }
+
+        .about-source > main > section,
+        .about-source > main > div,
+        .about-source > main > a {
+          display: none;
+        }
+
+        .about-source-corporate-primary > main > section:nth-of-type(2) {
+          display: flex;
+          order: 1;
+        }
+
+        .about-source-corporate-primary > main > section:nth-of-type(3) {
+          display: block;
+          order: 2;
+        }
+
+        .about-source-leadership > main > section:nth-of-type(2) {
+          display: block;
+          order: 3;
+        }
+
+        .about-source-leadership > main > section:nth-of-type(4) {
+          display: block;
+          order: 4;
+        }
+
+        .about-source-corporate-primary > main > section:nth-of-type(4) {
+          display: block;
+          order: 5;
+        }
+
+        .about-source-corporate-primary > main,
+        .about-source-leadership > main {
+          min-height: 0;
+        }
+      `}</style>
 
       {/* CTA Section */}
       <BeyondExpectations />

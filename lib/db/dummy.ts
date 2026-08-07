@@ -9,70 +9,70 @@ import type { HeroSlide, CaseStudyArticle, LeadershipThoughtArticle } from '@/ty
 export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
   {
     id: 'unified-enterprise-ecosystem',
-    headline: 'The Unified\nEnterprise Ecosystem',
+    headline: 'Leading Digital\nEnterprise Solution',
     body:
-      'Arsalynk connects technology, data, and media into one synchronized ecosystem\nthat helps enterprises solve complex business challenges.',
+      'We drive modern transformation through scalable ERP and emerging IoT solutions,\nfully integrating your operations to elevate your enterprise.',
     backgroundImage: '/images/shared/slide-01-mobile-38814c.webp',
     mobileBackgroundImage: '/images/shared/slide-01-mobile-38814c.webp',
     backgroundPosition: 'center center',
     primaryCta: {
-      label: 'LEARN MORE',
-      href: '/about-us/ecosystem-philosophy',
+      label: 'OUR SOLUTION',
+      href: '/our-solution',
     },
     secondaryCta: {
-      label: 'OUR WORK',
-      href: '/our-works',
+      label: 'ABOUT US',
+      href: '/about-us',
     },
   },
   {
-    id: 'tia-hendi-campaign',
-    headline: 'The Road of Tia Hendi, How\nWe Won The Council for Her',
+    id: 'uncover-the-potential',
+    headline: 'Uncover\nthe Potential',
     body:
-      "Beginning with Tia Hendi's campaign as a candidate, we joined forces to win the trust of Semarang's citizens to win a seat in the Semarang City Council District.",
+      'We dive deep into your unique ecosystem to identify opportunities\nand map out possibilities.',
     backgroundImage: '/images/shared/slide-02-mobile-838ce3.webp',
     mobileBackgroundImage: '/images/shared/slide-02-mobile-838ce3.webp',
     backgroundPosition: 'center center',
     primaryCta: {
-      label: 'LEARN MORE',
-      href: '/insight-programs/Case-Studies',
+      label: 'EXPLORE SOLUTIONS',
+      href: '/our-solution#challenge',
     },
     secondaryCta: {
-      label: 'OUR WORK',
-      href: '/our-works/web-media-profile',
+      label: 'ABOUT US',
+      href: '/about-us#our-foundation',
     },
   },
   {
-    id: 'intelligent-technology',
-    headline: 'Intelligent Technology for\nConnected Businesses',
+    id: 'architect-the-solution',
+    headline: 'Architect\nthe Solution',
     body:
-      'Build a connected digital ecosystem that links physical devices with business applications.\nStreamline operations, automate workflows, and make faster decisions through real-time data.',
+      'We engineer ERP and IoT integration frameworks\ndesigned for maximum impact.',
     backgroundImage: '/images/shared/slide-03-mobile-2f3b2e.webp',
     mobileBackgroundImage: '/images/shared/slide-03-mobile-2f3b2e.webp',
     backgroundPosition: 'center center',
     primaryCta: {
-      label: 'LEARN MORE',
-      href: '/insight-programs/Case-Studies/connecting-field-operations-with-myboss-iot',
+      label: 'EXPLORE SOLUTIONS',
+      href: '/our-solution#solutions',
     },
     secondaryCta: {
-      label: 'OUR WORK',
-      href: '/our-works/myboss-iot-system',
+      label: 'OUR CAPABILITIES',
+      href: '/about-us#our-capabilities',
     },
   },
   {
-    id: 'strategic-intelligence',
-    headline: 'From Raw Data to\nStrategic Intelligence',
+    id: 'connect-the-future',
+    headline: 'Connect\nthe Future',
     body:
-      'Collect, analyze, and transform continuous business information to uncover trends,\npredict outcomes, and support long-term organizational growth.',
+      'We deploy seamlessly, bridging current operations\nand future-ready enterprise capabilities.',
     backgroundImage: '/images/shared/slide-04-mobile-6f32fe.webp',
     mobileBackgroundImage: '/images/shared/slide-04-mobile-6f32fe.webp',
     backgroundPosition: 'center center',
     primaryCta: {
-      label: 'LEARN MORE',
-      href: '/insight-programs/Case-Studies/turning-operational-data-into-decisions-with-altatic',
+      label: 'EXPLORE SERVICES',
+      href: '/our-solution#services',
     },
     secondaryCta: {
-      label: 'OUR WORK',
-      href: '/our-works/altatic-analytic',
+      label: 'CONTACT US',
+      href: '/contact-us',
     },
   },
 ];

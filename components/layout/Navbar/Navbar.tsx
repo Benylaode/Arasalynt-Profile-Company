@@ -24,68 +24,53 @@ type NavItem = {
   href: string;
 };
 
-const ABOUT_LINKS: NavItem[] = [
-  {
-    name: 'Company Profile',
-    href: '/about-us/corporate-profile',
-  },
-  {
-    name: 'Company Leadership',
-    href: '/about-us/company-leadership',
-  },
-  {
-    name: 'Ecosystem Philosophy',
-    href: '/about-us/ecosystem-philosophy',
-  },
-];
-
 const BUSINESS_COLUMNS = [
   {
-    category: 'IT INFRASTRUCTURE',
+    category: 'OUR SOLUTION',
     items: [
       {
-        name: 'Kaluna Technology',
-        href: '/our-business/kaluna-technology',
+        name: 'Enterprise Resource Planning',
+        href: '/our-solution#enterprise-resource-planning',
       },
     ],
   },
   {
-    category: 'DATA & ANALYTICS',
+    category: 'CONNECTED ENTERPRISE',
     items: [
       {
-        name: 'Artic Analytica',
-        href: '/our-business/artic-analytica',
+        name: 'Internet of Things',
+        href: '/our-solution#internet-of-things',
       },
     ],
   },
 ];
 
 const BUSINESS_MEDIA = {
-  category: 'MEDIA',
+  category: 'EXPLORE OUR SERVICES',
   items: [
     {
-      name: 'LOXLive',
-      href: '/our-business/loxlive',
+      name: 'POS & Retail Management',
+      href: '/insight-programs/Case-Studies/point-of-sale-retail-management-system',
     },
     {
-      name: 'TheDrafroom',
-      href: '/our-business/the-drafroom',
+      name: 'HR & Talent Management',
+      href: '/insight-programs/Case-Studies/hr-talent-management-engine',
     },
     {
-      name: 'Ilusia',
-      href: '/our-business/ilusia',
+      name: 'Financial Automation',
+      href: '/insight-programs/Case-Studies/financial-accounting-automation-hub',
     },
     {
-      name: 'Adsvar',
-      href: '/our-business/adsvar',
+      name: 'Supply Chain Control',
+      href: '/insight-programs/Case-Studies/supply-chain-inventory-control-system',
     },
     {
-      name: 'Seveny',
-      href: '/our-business/seveny',
+      name: 'Logistics & Fleet Tracker',
+      href: '/insight-programs/Case-Studies/logistics-fleet-operations-tracker',
     },
     {
-      name: 'Personice',
-      href: '/our-business/personice',
+      name: 'Warehouse Management',
+      href: '/insight-programs/Case-Studies/warehouse-management-system',
     },
   ],
 };
@@ -617,7 +602,7 @@ function BusinessDropdown({
           ${overlay ? 'text-[#F7F7F7]' : 'text-[#101010]'}
         `}
       >
-        Business
+        Our Solution
 
         <ChevronDown
           className={`
@@ -631,8 +616,8 @@ function BusinessDropdown({
       </button>
 
       <DropdownCardModal
-        title="Our Business"
-        titleHref="/our-business"
+        title="Our Solution"
+        titleHref="/our-solution"
         isOpen={isOpen}
         onClose={() => setActiveDropdown(null)}
         size="business"
@@ -1048,21 +1033,16 @@ export default function Navbar() {
               <ActiveIndicator active={routeIsActive('/')} />
             </Link>
 
-            <SimpleDropdown
-              id="about"
-              label="About Us"
+            <DesktopNavLink
               href="/about-us"
-              title="About Us"
-              links={ABOUT_LINKS}
+              label="About Us"
               overlay={overlay}
               active={routeIsActive('/about-us')}
-              activeDropdown={activeDropdown}
-              setActiveDropdown={setActiveDropdown}
             />
 
             <BusinessDropdown
               overlay={overlay}
-              active={routeIsActive('/our-business')}
+              active={routeIsActive('/our-solution')}
               activeDropdown={activeDropdown}
               setActiveDropdown={setActiveDropdown}
             />
@@ -1079,12 +1059,7 @@ export default function Navbar() {
               setActiveDropdown={setActiveDropdown}
             />
 
-            <DesktopNavLink
-              href="/our-works"
-              label="Our Works"
-              overlay={overlay}
-              active={routeIsActive('/our-works')}
-            />
+
           </nav>
 
           {/* Desktop Contact Us */}
@@ -1262,28 +1237,21 @@ export default function Navbar() {
             Home
           </Link>
 
-          <MobileAccordion
-            id="about"
-            label="About Us"
-            links={[
-              {
-                name: 'View All About Us',
-                href: '/about-us',
-              },
-              ...ABOUT_LINKS,
-            ]}
-            activeDropdown={activeDropdown}
-            setActiveDropdown={setActiveDropdown}
-            closeMenu={closeMobileMenu}
-          />
+          <Link
+            href="/about-us"
+            onClick={closeMobileMenu}
+            className="block border-b border-white/10 py-[14px] text-[17px] font-medium text-white no-underline"
+          >
+            About Us
+          </Link>
 
           <MobileAccordion
             id="business"
-            label="Business"
+            label="Our Solution"
             links={[
               {
-                name: 'View All Business',
-                href: '/our-business',
+                name: 'View Our Solution',
+                href: '/our-solution',
               },
               ...BUSINESS_LINKS_MOBILE,
             ]}
@@ -1300,22 +1268,6 @@ export default function Navbar() {
             setActiveDropdown={setActiveDropdown}
             closeMenu={closeMobileMenu}
           />
-
-          <Link
-            href="/our-works"
-            onClick={closeMobileMenu}
-            className="
-              block
-              border-b border-white/10
-              py-[14px]
-              text-[17px]
-              font-medium
-              text-white
-              no-underline
-            "
-          >
-            Our Works
-          </Link>
 
           <button
             type="button"

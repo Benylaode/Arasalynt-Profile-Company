@@ -9,9 +9,11 @@ const manrope = Manrope({
 });
 
 const ABOUT_LINKS = [
-  { name: 'Company Profile', href: '/about-us/corporate-profile' },
-  { name: 'Leadership', href: '/about-us/company-leadership' },
-  { name: 'Ecosystem Philosophy', href: '/about-us/ecosystem-philosophy' },
+  { name: 'Our Foundation', href: '/about-us#our-foundation' },
+  { name: 'Our Vision & Mission', href: '/about-us#vision-mission' },
+  { name: 'Leadership Foundation', href: '/about-us#leadership-foundation' },
+  { name: 'Leadership Principles', href: '/about-us#leadership-principles' },
+  { name: 'Our Capabilities', href: '/about-us#our-capabilities' },
 ];
 
 const INSIGHT_LINKS = [
@@ -20,12 +22,12 @@ const INSIGHT_LINKS = [
 ];
 
 const MEDIA_LINKS = [
-  { name: 'LoxLive', href: '/our-business/loxlive' },
-  { name: 'TheDrafroom', href: '/our-business/the-drafroom' },
-  { name: 'Ilusia Studio', href: '/our-business/ilusia' },
-  { name: 'Adsvar', href: '/our-business/adsvar' },
-  { name: 'Seveny', href: '/our-business/seveny' },
-  { name: 'Personice', href: '/our-business/personice' },
+  { name: 'Point of Sale (POS)', href: '/insight-programs/Case-Studies/point-of-sale-retail-management-system' },
+  { name: 'HR & Talent Management', href: '/insight-programs/Case-Studies/hr-talent-management-engine' },
+  { name: 'Financial Automation', href: '/insight-programs/Case-Studies/financial-accounting-automation-hub' },
+  { name: 'Supply Chain Control', href: '/insight-programs/Case-Studies/supply-chain-inventory-control-system' },
+  { name: 'Logistics & Fleet Tracker', href: '/insight-programs/Case-Studies/logistics-fleet-operations-tracker' },
+  { name: 'Warehouse Management', href: '/insight-programs/Case-Studies/warehouse-management-system' },
 ];
 
 const BrandLogo = () => (
@@ -150,17 +152,17 @@ export default function Footer() {
 
             <div className="flex h-[354px] flex-col justify-center gap-[30px] max-[1799px]:h-auto max-[1799px]:justify-start max-[767px]:grid max-[767px]:grid-cols-2 max-[767px]:gap-x-7 max-[767px]:gap-y-[30px]">
               <div className="flex h-[49px] flex-col gap-[9px] max-[767px]:col-start-1 max-[767px]:row-start-1">
-                <FooterTitle>IT INFRASTRUCTURE</FooterTitle>
-                <FooterLink href="/our-business/kaluna-technology">Kaluna Technology</FooterLink>
+                <FooterTitle>ENTERPRISE SYSTEM</FooterTitle>
+                <FooterLink href="/our-solution#enterprise-resource-planning">Enterprise Resource Planning</FooterLink>
               </div>
 
               <div className="flex h-[49px] flex-col gap-[9px] max-[767px]:col-start-1 max-[767px]:row-start-2">
-                <FooterTitle>DATA &amp; ANALYTICS</FooterTitle>
-                <FooterLink href="/our-business/artic-analytica">Artic Analytica</FooterLink>
+                <FooterTitle>CONNECTED ENTERPRISE</FooterTitle>
+                <FooterLink href="/our-solution#internet-of-things">Internet of Things</FooterLink>
               </div>
 
               <div className="flex h-[196px] flex-col gap-[17px] max-[767px]:col-start-2 max-[767px]:row-span-2 max-[767px]:row-start-1">
-                <FooterTitle>MEDIA</FooterTitle>
+                <FooterTitle>OUR SERVICES</FooterTitle>
                 <ul className="m-0 flex list-none flex-col gap-[9px] p-0">
                   {MEDIA_LINKS.map((link) => (
                     <li key={link.href} className="h-[19px]">
