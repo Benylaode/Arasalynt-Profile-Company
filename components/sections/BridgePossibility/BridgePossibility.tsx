@@ -9,21 +9,21 @@ const PILLARS_DATA = [
     number: "01",
     category: "UNCOVER",
     action: "THE POTENTIAL",
-    description: "Identify opportunities and map out possibilities",
+    description: "Discover opportunities across your enterprise ecosystem.",
   },
   {
     id: 1,
     number: "02",
     category: "ARCHITECT",
     action: "THE SOLUTION",
-    description: "Engineer ERP and IoT frameworks for maximum impact",
+    description: "Engineer high-impact ERP and IoT integration.",
   },
   {
     id: 2,
     number: "03",
     category: "CONNECT",
     action: "THE FUTURE",
-    description: "Deploy seamless, future-ready enterprise capabilities",
+    description: "Connect current operations with future-ready systems.",
   },
 ];
 
@@ -344,7 +344,11 @@ export default function BridgePossibility() {
             Possibility
           </h2>
 
-          <p className="w-full font-body text-[14px] font-normal leading-relaxed text-white/85 max-w-[400px] max-[100px]:text-[11px]">
+          <p className="w-full max-w-[400px] font-body text-[14px] font-normal leading-relaxed text-white/85 max-[100px]:text-[11px]">
+            We connect discovery, architecture, and deployment into one continuous transformation path&mdash;turning fragmented enterprise operations into integrated, future-ready capabilities.
+          </p>
+
+          <p className="hidden">
             Arsalynk was built on a singular belief: the greatest challenge
             facing modern organizations isn&apos;t ambition — it&apos;s
             fragmentation. As complexity grows, disconnected capabilities

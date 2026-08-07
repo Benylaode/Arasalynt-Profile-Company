@@ -28,37 +28,47 @@ const FOUNDATION_SLIDES = [
     src: '/images/corporate-profile/team-discussion.webp',
     alt: 'Arsalynk team discussing a project',
     position: 'center 47%',
+    title: 'Dependability First',
+    description: 'We earn lasting partnerships through proven system reliability, clear communication, and precise execution across every project lifecycle.',
   },
   {
     src: '/images/corporate-profile/team-collaboration.webp',
     alt: 'Arsalynk team collaborating around a laptop',
     position: 'center 56%',
+    title: 'Cross-Disciplinary IT Expertise',
+    description: 'We merge deep technical knowledge across enterprise systems, data architecture, and IoT engineering into single-source, fully integrated solutions.',
   },
   {
     src: '/images/corporate-profile/team-event.webp',
     alt: 'Arsalynk team at a company event',
     position: 'center 52%',
+    title: 'Built for System Continuity',
+    description: 'Our delivery and management frameworks are built to scale sustainably, ensuring high-availability operations without operational bottlenecks or single points of failure.',
   },
 ];
 
 const SERVICES = [
   {
     title: ['Enterprise Data', '& Intelligence'],
+    description: 'Unifying data pipelines, advanced analytics, and actionable operational insights.',
     image: '/images/corporate-profile/service-data.webp',
     alt: 'Enterprise data and intelligence illustration',
   },
   {
-    title: ['Customer', 'Acquisition'],
+    title: ['Scalable Systems', '& IoT Integration'],
+    description: 'Connecting devices, hardware, and networks into high-performance digital environments.',
     image: '/images/corporate-profile/service-data.webp',
-    alt: 'Customer acquisition illustration',
+    alt: 'Scalable systems and IoT integration illustration',
   },
   {
-    title: ['Mission-Critical', 'Broadcast'],
+    title: ['Mission-Critical', 'IT Infrastructure'],
+    description: 'Building secure, high-availability networks and cloud systems engineered for uninterrupted uptime.',
     image: '/images/corporate-profile/service-broadcast.webp',
-    alt: 'Mission-critical broadcast illustration',
+    alt: 'Mission-critical IT infrastructure illustration',
   },
   {
     title: ['Integrated', 'Execution'],
+    description: 'Deploying unified ERP workflows that reduce friction and improve enterprise productivity.',
     image: '/images/corporate-profile/service-execution.webp',
     alt: 'Integrated execution illustration',
   },
@@ -220,7 +230,7 @@ export default function CorporateProfilePage() {
             The Backbone<br />of Modern Enterprise
           </h2>
           <p className="font-body w-full text-[clamp(15px,1.042vw,20px)] font-normal leading-[1.6] tracking-[0.02em] text-[#292929]">
-            Arsalynk Group was founded on a singular realization: modern enterprises<br className="max-[768px]:hidden" /> do not fail due to a lack of ambition; they stall due to fragmentation.
+            Arsalynk was founded on a singular realization: modern enterprises do not fail due to a lack of ambition; they stall due to fragmented technology.
           </p>
         </div>
 
@@ -279,6 +289,19 @@ export default function CorporateProfilePage() {
                       : 'opacity-[0.36] group-hover:opacity-[0.46]'
                   }`}
                 />
+
+                <div className={`absolute inset-x-[clamp(24px,3vw,56px)] bottom-[clamp(30px,3vw,58px)] z-[4] max-w-[760px] transition-[opacity,transform] duration-700 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <div className="mb-4 flex items-center gap-2.5 font-body text-[10px] font-bold uppercase tracking-[0.08em] text-[#E6FF2A] sm:text-[12px]">
+                    <span className="h-2 w-2 shrink-0 bg-[#E6FF2A]" />
+                    Foundation Principle
+                  </div>
+                  <h3 className="font-heading text-[clamp(30px,3.2vw,60px)] font-medium leading-[1.02] tracking-[-0.025em] text-white">
+                    {slide.title}
+                  </h3>
+                  <p className="mt-4 max-w-[690px] font-body text-[clamp(13px,1vw,18px)] leading-[1.6] text-white/80">
+                    {slide.description}
+                  </p>
+                </div>
 
                 {/* Fade hitam tipis hanya di ujung luar card kiri dan kanan. */}
                 {offset === -1 && (
@@ -360,14 +383,14 @@ export default function CorporateProfilePage() {
           <div className="flex w-full flex-col items-center gap-[clamp(20px,1.667vw,32px)] text-center">
             <SectionLabel theme="lime">OUR VISION</SectionLabel>
             <h2 className="font-heading text-[clamp(40px,3.333vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#F7F7F7]">
-              We envision a future where enterprises thrive<br className="max-[1024px]:hidden" /> through one unified ecosystem built for growth,<br className="max-[1024px]:hidden" /> resilience, and execution
+              We envision a future where enterprises thrive through seamlessly integrated ERP and IT needs built for growth, resilience, and operational precision.
             </h2>
           </div>
 
           <div className="flex w-full flex-col items-center gap-[clamp(20px,1.667vw,32px)] text-center">
             <SectionLabel theme="lime">MISSION</SectionLabel>
             <p className="font-body text-[clamp(18px,1.458vw,28px)] font-normal leading-[1.6] tracking-[-0.02em] text-[#F7F7F7]">
-              Our mission is to make corporate execution flawless,<br className="max-[768px]:hidden" /> predictable, and remarkably capital-efficient.
+              Our mission is to make enterprise IT execution flawless, predictable, and remarkably capital-efficient.
             </p>
           </div>
         </NarrowContainer>
@@ -388,7 +411,7 @@ export default function CorporateProfilePage() {
           <div className="flex flex-col items-center gap-[clamp(20px,1.667vw,32px)] text-center">
             <SectionLabel>OUR CAPABILITIES</SectionLabel>
             <h2 className="font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
-              Make Sustainable<br />Business Excellence
+              Enabling Sustainable<br />Digital Excellence
             </h2>
           </div>
 
@@ -418,6 +441,9 @@ export default function CorporateProfilePage() {
                   <br />
                   {service.title[1]}
                 </h3>
+                <p className="font-body text-[clamp(12px,.85vw,16px)] leading-[1.6] text-[#424242]">
+                  {service.description}
+                </p>
               </article>
             ))}
           </div>

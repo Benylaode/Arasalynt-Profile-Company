@@ -23,8 +23,8 @@ export const HERO_SLIDES: HeroSlide[] = HERO_SLIDES_DUMMY_DATA;
 
 /* ─── Contact Info ─── */
 
-export const WHATSAPP_PHONE_DISPLAY = '+62 878-5547-107';
-export const WHATSAPP_PHONE_RAW = '6287855471107';
+export const WHATSAPP_PHONE_DISPLAY = '+62 821-3939-569';
+export const WHATSAPP_PHONE_RAW = '628213939569';
 export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_PHONE_RAW}`;
 
 
@@ -138,7 +138,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     title: 'Contact',
     links: [
       { label: 'hello@arsalynk.com', href: 'mailto:hello@arsalynk.com' },
-      { label: '+62 812 3456 7890', href: 'tel:+6281234567890' },
+      { label: WHATSAPP_PHONE_DISPLAY, href: `tel:+${WHATSAPP_PHONE_RAW}` },
       { label: 'Jakarta, Indonesia', href: '#' },
     ],
   },

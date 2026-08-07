@@ -16,12 +16,13 @@ const AUTOPLAY_DURATION = 6000;
 const PROGRESS_UPDATE_INTERVAL = 50;
 const LOOP_COUNT = 30;
 
-const CATEGORIES = ['TECHNOLOGY', 'SURVEY & DATA', 'MEDIA'] as const;
+const CATEGORIES = ['ERP SYSTEMS', 'OPERATIONS', 'CONNECTED IOT'] as const;
 
 type ProjectCategory = (typeof CATEGORIES)[number];
 
 type Project = {
   id: number;
+  slug: string;
   client: string;
   title: string;
   category: string;
@@ -32,43 +33,57 @@ type Project = {
 const MOCK_PROJECTS: Project[] = [
   {
     id: 1,
-    client: 'SINAU PRINT',
-    title: 'Sinau Print Marketplace Website',
+    slug: 'point-of-sale-pos',
+    client: 'RETAIL OPERATIONS',
+    title: 'Point of Sale (POS)',
     category: 'BRANDING • SURVEY AND ANALYTICS',
-    tabCategory: 'TECHNOLOGY',
-    image: '/images/projects/sinau-print-erp/1.webp',
+    tabCategory: 'ERP SYSTEMS',
+    image: '/images/our-business/kaluna-technology/services/point-of-sales-system.webp',
   },
   {
     id: 2,
-    client: 'ARTIC ANALYTICA',
-    title: 'Artic Complex Web Architecture & Portal',
+    slug: 'hr-talent-management-engine',
+    client: 'PEOPLE OPERATIONS',
+    title: 'HR & Talent Management Engine (HRMS)',
     category: 'COMPLEX WEB • DATA PLATFORM',
-    tabCategory: 'TECHNOLOGY',
-    image: '/images/projects/artic-complex-web/1.webp',
+    tabCategory: 'ERP SYSTEMS',
+    image: '/images/our-business/kaluna-technology/services/appointment-system.webp',
   },
   {
     id: 3,
-    client: 'MYBOSS',
-    title: 'MyBoss Connected IoT Hardware & Control System',
+    slug: 'financial-accounting-automation-hub',
+    client: 'FINANCE OPERATIONS',
+    title: 'Financial & Accounting Automation Hub',
     category: 'IOT SYSTEM • IT INFRASTRUCTURE',
-    tabCategory: 'TECHNOLOGY',
-    image: '/images/projects/myboss-iot-system/1.webp',
+    tabCategory: 'ERP SYSTEMS',
+    image: '/images/our-business/kaluna-technology/services/finance-system.webp',
   },
   {
     id: 4,
-    client: 'ALTATIC',
-    title: 'Altatic Data Analytics & Intelligence Dashboard',
+    slug: 'supply-chain-inventory-control',
+    client: 'SUPPLY CHAIN',
+    title: 'Supply Chain & Inventory Control System',
     category: 'SURVEY & DATA • ANALYTICS PLATFORM',
-    tabCategory: 'SURVEY & DATA',
-    image: '/images/projects/altatic-analytic/1.webp',
+    tabCategory: 'OPERATIONS',
+    image: '/images/our-business/kaluna-technology/services/e-commerce-website.webp',
   },
   {
     id: 5,
-    client: 'WEB MEDIA',
-    title: 'Web Media Corporate Profile & Digital Presence',
+    slug: 'warehouse-management-system',
+    client: 'WAREHOUSE OPERATIONS',
+    title: 'Warehouse Management System',
     category: 'MEDIA • CORPORATE PROFILE',
-    tabCategory: 'MEDIA',
-    image: '/images/projects/web-media-profile/1.webp',
+    tabCategory: 'OPERATIONS',
+    image: '/images/our-business/kaluna-technology/services/warehouse-management.webp',
+  },
+  {
+    id: 6,
+    slug: 'logistics-fleet-operations-tracker',
+    client: 'CONNECTED OPERATIONS',
+    title: 'Logistics & Fleet Operations Tracker',
+    category: 'IOT / FLEET VISIBILITY',
+    tabCategory: 'CONNECTED IOT',
+    image: '/images/projects/myboss-iot-system/1.webp',
   },
 ];
 
@@ -81,9 +96,18 @@ const MOCK_PROJECTS: Project[] = [
  * MEDIA           97px → 80.5px
  */
 const CATEGORY_WIDTH: Record<ProjectCategory, string> = {
-  TECHNOLOGY: 'w-[clamp(113px,7.263vw,139.5px)]',
-  'SURVEY & DATA': 'w-[clamp(114.5px,7.176vw,138px)]',
-  MEDIA: 'w-[clamp(71.5px,4.193vw,80.5px)]',
+  'ERP SYSTEMS': 'w-[clamp(113px,7.263vw,139.5px)]',
+  OPERATIONS: 'w-[clamp(114.5px,7.176vw,138px)]',
+  'CONNECTED IOT': 'w-[clamp(120px,8vw,154px)]',
+};
+
+const SERVICE_CATEGORY_LABELS: Record<string, string> = {
+  'point-of-sale-pos': 'ERP / RETAIL MANAGEMENT',
+  'hr-talent-management-engine': 'ERP / PEOPLE & TALENT',
+  'financial-accounting-automation-hub': 'ERP / FINANCE AUTOMATION',
+  'supply-chain-inventory-control': 'OPERATIONS / INVENTORY',
+  'warehouse-management-system': 'OPERATIONS / FULFILLMENT',
+  'logistics-fleet-operations-tracker': 'IOT / FLEET VISIBILITY',
 };
 
 /* =========================================================
@@ -136,7 +160,7 @@ function IconChevronRight({ size = 24 }: { size?: number }) {
 
 export default function ProjectShowcase() {
   const [activeCategory, setActiveCategory] =
-    useState<ProjectCategory>('TECHNOLOGY');
+    useState<ProjectCategory>('ERP SYSTEMS');
 
   const filteredProjects = MOCK_PROJECTS.filter(
     (project) => project.tabCategory === activeCategory,
@@ -209,7 +233,7 @@ export default function ProjectShowcase() {
                 xl:text-[clamp(11px,0.656vw,12.6px)]
               "
             >
-              Featured Works
+              Featured Solutions
             </span>
           </div>
 
@@ -225,7 +249,7 @@ export default function ProjectShowcase() {
               xl:text-[clamp(64px,4.375vw,84px)]
             "
           >
-            We Build It All
+            Explore Our Services
           </h2>
         </div>
 
@@ -311,7 +335,7 @@ export default function ProjectShowcase() {
 
           {/* See All Works dibuat 17% lebih kecil */}
           <a
-            href="/our-works"
+            href="/our-solution#services"
             className="
               inline-flex h-[38px]
               shrink-0 items-center justify-center
@@ -343,7 +367,7 @@ export default function ProjectShowcase() {
               xl:text-[clamp(12px,0.779vw,15px)]
             "
           >
-            <span className="whitespace-nowrap">SEE ALL WORKS</span>
+            <span className="whitespace-nowrap">SEE ALL SERVICES</span>
 
             <span
               className="
@@ -375,7 +399,7 @@ export default function ProjectShowcase() {
         {filteredProjects.map((project) => (
           <a
             key={project.id}
-            href={`/works/${project.id}`}
+            href={`/our-solution/${project.slug}`}
             className="
               group relative block
               aspect-[1.72/1]
@@ -447,7 +471,7 @@ export default function ProjectShowcase() {
               </span>
 
               <ProjectCategoryLabel
-                category={project.category}
+                category={SERVICE_CATEGORY_LABELS[project.slug] ?? project.category}
                 className="mt-[10px] text-[9px]"
               />
             </span>
@@ -823,7 +847,7 @@ function ProjectCarouselTrack({ projects }: { projects: Project[] }) {
                 </h3>
 
                 <ProjectCategoryLabel
-                  category={project.category}
+                  category={SERVICE_CATEGORY_LABELS[project.slug] ?? project.category}
                   className="
                     mt-[clamp(7px,0.365vw,10px)]
                     text-[clamp(11.8px,0.854vw,16.4px)]

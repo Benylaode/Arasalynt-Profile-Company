@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import { Manrope } from 'next/font/google';
 import type { ReactNode } from 'react';
+import {
+  WHATSAPP_LINK,
+  WHATSAPP_PHONE_DISPLAY,
+} from '@/lib/constants';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -205,13 +209,13 @@ export default function Footer() {
                 <FooterTitle>CONTACT</FooterTitle>
                 <div className="flex h-[47px] flex-col gap-[9px]">
                   <a
-                    href="https://wa.me/6287855471107"
+                    href={WHATSAPP_LINK}
                     target="_blank"
                     rel="noreferrer"
                     className="flex h-[19px] items-start gap-[9px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
                   >
                     <WhatsAppIcon />
-                    <span className="h-[19px]">+62 878-5547-107</span>
+                    <span className="h-[19px]">{WHATSAPP_PHONE_DISPLAY}</span>
                   </a>
 
                   <a

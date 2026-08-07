@@ -1114,7 +1114,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
 },
 ];
 
-export const TESTIMONIALS_DUMMY_DATA = [
+const LEGACY_TESTIMONIALS_DUMMY_DATA = [
   {
     id: 1,
     name: "RIZKI SIAHAAN",
@@ -1822,3 +1822,28 @@ export const LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
 
 void LEGACY_CASE_STUDIES_DUMMY_DATA;
 void LEGACY_LEADERSHIP_THOUGHTS_DUMMY_DATA;
+void LEGACY_TESTIMONIALS_DUMMY_DATA;
+
+export const TESTIMONIALS_DUMMY_DATA = [
+  {
+    id: 1,
+    name: 'ENTERPRISE OPERATIONS LEAD',
+    role: 'ERP Transformation Program',
+    text: 'Arsalynk brought finance, inventory, and operational reporting into one connected ERP workflow. Our teams now work from the same information, approvals move faster, and management has a clearer view of daily performance.',
+    avatar: '/images/projects/sinau-print-erp/1.webp',
+  },
+  {
+    id: 2,
+    name: 'TECHNOLOGY DIRECTOR',
+    role: 'Connected Infrastructure Program',
+    text: 'The IoT implementation gave us reliable visibility into field assets and system conditions. Alerts are clearer, operational response is faster, and maintenance decisions are now supported by real-time evidence.',
+    avatar: '/images/projects/myboss-iot-system/1.webp',
+  },
+  {
+    id: 3,
+    name: 'FINANCE & DATA LEAD',
+    role: 'Enterprise Intelligence Program',
+    text: 'Automated reconciliation and governed dashboards reduced repetitive reporting work while giving leadership a consistent source of truth for financial and operational decisions.',
+    avatar: '/images/projects/altatic-analytic/1.webp',
+  },
+];

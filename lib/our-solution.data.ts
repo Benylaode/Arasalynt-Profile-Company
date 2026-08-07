@@ -24,22 +24,29 @@ export type SolutionService = {
 export const OUR_SOLUTION_CHALLENGE = {
   title: "What’s Slowing Your Enterprise Down?",
   description:
-    'Disconnected systems, fragmented data, and manual workflows prevent teams from seeing the same operational picture and moving at enterprise speed.',
+    'Legacy infrastructure, fragmented ERP, delayed operational data, and reactive maintenance prevent enterprises from moving with speed, visibility, and confidence.',
 };
+
+export const OUR_SOLUTION_CHALLENGES = [
+  { title: 'Legacy Hardware & Outdated Infrastructure', description: 'Aging physical servers and legacy equipment severely limit business expansion, carry high maintenance costs, and resist modern IoT or cloud integration.' },
+  { title: 'Stuck Software & Fragmented ERP', description: 'Operating on disjointed platforms creates data silos, forces manual workarounds, and leads to expensive duplicate tasks across enterprise departments.' },
+  { title: 'Operational Blind Spots & Data Lag', description: 'Without real-time data flow from the shop floor to the executive dashboard, leaders rely on outdated reports and cannot make proactive decisions.' },
+  { title: 'Unplanned Downtime & Reactive Maintenance', description: 'Limited machine and system monitoring results in sudden equipment failures, costly operational halts, and escalating emergency IT expenses.' },
+] as const;
 
 export const CORE_SOLUTIONS = [
   {
     slug: 'enterprise-resource-planning',
     title: 'Enterprise Resource Planning',
     description:
-      'Unify finance, people, sales, inventory, and operational workflows in one scalable source of truth.',
+      'Centralizing core business functions into a unified digital platform, automating finance, supply chain, inventory, and HR workflows to eliminate operational problems and boost enterprise productivity.',
     image: '/images/our-business/kaluna-technology/services/finance-system.webp',
   },
   {
     slug: 'internet-of-things',
     title: 'Internet of Things',
     description:
-      'Connect physical assets with enterprise software for real-time visibility, automation, and faster decisions.',
+      'Connecting physical machinery, smart sensors, and edge devices to digital networks, providing real-time asset monitoring, automated data collection, and predictive insight across your operations.',
     image: '/images/our-business/kaluna-technology/services/software-development.webp',
   },
 ] as const;

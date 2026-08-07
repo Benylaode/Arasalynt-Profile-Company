@@ -71,37 +71,37 @@ const PrincipleIcon = ({ type }: { type: 'technical' | 'roi' | 'expertise' | 'le
 const PRINCIPLES = [
   {
     title: 'Technical\nExcellence',
-    desc: 'Every decision is grounded in deep technical expertise, engineering precision, and measurable outcomes.',
+    desc: 'Every architectural decision is grounded in deep systems engineering expertise, strict security protocols, and measurable operational performance.',
     icon: 'technical' as const,
   },
   {
     title: 'ROI-First\nExecution',
-    desc: 'We prioritize transparent attribution, clear operational outcomes, and immediate execution velocity for our partners.',
+    desc: 'We focus on high-impact technology deployment—delivering clear efficiency gains, rapid implementation velocity, and tangible cost optimization for our enterprise partners.',
     icon: 'roi' as const,
   },
   {
-    title: 'Cross-Disciplinary\nExpertise',
-    desc: 'Bringing together specialists across technology, data science, marketing, and visual production to solve complex business challenges.',
+    title: 'Cross-Disciplinary\nIT Expertise',
+    desc: 'Bringing together specialists across ERP architecture, IoT hardware integration, data engineering, and system security to solve complex technical challenges.',
     icon: 'expertise' as const,
   },
   {
-    title: 'Redundant\nLeadership',
-    desc: 'Cultural leadership ensuring that no project, technical discipline, or operational process has a single point of failure.',
+    title: 'Continuity-Driven\nLeadership',
+    desc: 'Resilient teams and technical fail-safes keep every critical system and operation running without a single point of failure.',
     icon: 'leadership' as const,
   },
 ];
 
 const TRUST_SLIDES = [
   {
-    text: 'By combining technical precision with a commitment to client success, Arsalynk Group delivers reliable, predictable, and results-driven execution.',
+    text: 'We earn lasting partnerships through proven system reliability, clear communication, and precise execution across every project lifecycle.',
     image: `${ASSET_BASE}/building-trust-reference-01.webp`
   },
   {
-    text: 'Long-term client relationships are earned by delivering dependable solutions, maintaining clear communication, and consistently meeting expectations across every engagement.',
+    text: 'We merge deep technical knowledge across enterprise systems, data architecture, and IoT engineering into single-source, fully integrated solutions.',
     image: `${ASSET_BASE}/building-trust-reference-02.webp`
   },
   {
-    text: 'We integrate expertise across technology, data, media, and creative disciplines to build complete solutions.',
+    text: 'Our delivery and management frameworks scale sustainably, ensuring high-availability operations without bottlenecks or single points of failure.',
     image: '/images/shared/building-trust.webp'
   },
   {
@@ -217,15 +217,13 @@ export default function CompanyLeadershipPage() {
               </div>
 
               <h2 className="font-heading text-[clamp(40px,3.333vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#101010]">
-                Leading with
+                Driven by Technical Mastery
                 <br />
-                Expertise and
-                <br />
-                Purpose
+                &amp; Strategic Execution
               </h2>
 
               <p className="font-body text-[clamp(15px,1.042vw,20px)] font-normal leading-[1.6] tracking-[0.02em] text-[#292929]">
-                Leadership at Arsalynk Group is built on technical excellence and deep industry expertise. Our leadership team brings together systems architects, data scientists, performance marketers, and creative directors to ensure every strategic decision is driven by data, engineering precision, and exceptional design.
+                At Arsalynk, leadership is anchored in deep industry expertise and rigorous engineering discipline. Guided by seasoned systems architects and enterprise technology leaders, we ensure every deployment&mdash;from core ERP integration to complex IoT infrastructure&mdash;is built on performance, security, and scalability.
               </p>
             </div>
           </div>

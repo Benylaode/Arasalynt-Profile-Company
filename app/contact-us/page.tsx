@@ -6,6 +6,10 @@ import Navbar from '@/components/layout/Navbar/Navbar';
 import Footer from '@/components/layout/Footer/Footer';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import { submitLead } from '@/lib/actions';
+import {
+  WHATSAPP_PHONE_DISPLAY,
+  WHATSAPP_PHONE_RAW,
+} from '@/lib/constants';
 
 function DownIcon() {
   return (
@@ -259,7 +263,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: 'tel:+6287855471107',
+    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
   },
   {
     name: 'TheDrafroom',
@@ -269,7 +273,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: 'tel:+6287855471107',
+    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
   },
   {
     name: 'Ilusia Studio',
@@ -279,7 +283,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: 'tel:+6287855471107',
+    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
   },
   {
     name: 'Seveny',
@@ -289,7 +293,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: 'tel:+6287855471107',
+    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
   },
   {
     name: 'AdsVar',
@@ -299,7 +303,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: 'tel:+6287855471107',
+    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
   },
   {
     name: 'Personice',
@@ -309,7 +313,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: 'tel:+6287855471107',
+    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
   },
 ];
 
@@ -469,13 +473,13 @@ export default function ContactUsPage() {
 
                   <div className="flex flex-col gap-1.5">
                     <a
-                      href="tel:+6287855471107"
+                      href={`tel:+${WHATSAPP_PHONE_RAW}`}
                       className="flex items-center gap-2.5 font-body text-[14px] leading-[1.5] tracking-[0.02em] text-[#717171] transition hover:text-[#101010] md:text-[15px]"
                     >
                       <span className="shrink-0">
                         <PhoneIcon size={18} />
                       </span>
-                      <span>+62 878-5547-107</span>
+                      <span>{WHATSAPP_PHONE_DISPLAY}</span>
                     </a>
 
                     <a

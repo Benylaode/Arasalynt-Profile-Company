@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
-import { CORE_SOLUTIONS, OUR_SOLUTION_CHALLENGE, SOLUTION_SERVICES } from '@/lib/our-solution.data';
+import { CORE_SOLUTIONS, OUR_SOLUTION_CHALLENGE, OUR_SOLUTION_CHALLENGES, SOLUTION_SERVICES } from '@/lib/our-solution.data';
 import SolutionWorksExplorer from '@/components/sections/SolutionWorksExplorer/SolutionWorksExplorer';
 
 export const metadata: Metadata = {
@@ -28,7 +28,16 @@ export default function OurSolutionPage() {
         <div className="pointer-events-none absolute left-1/2 top-1/2 h-[clamp(420px,52vw,700px)] w-[88%] max-w-[1759px] -translate-x-1/2 -translate-y-1/2 bg-cover bg-center opacity-[.14]" style={{ backgroundImage: "url('/images/our-business/pain-points-radial.png')" }} />
         <div className="relative z-10 mx-auto flex max-w-[1700px] flex-col items-center gap-[clamp(48px,4.167vw,80px)]">
           <div className="flex flex-col items-center gap-6 text-center"><p className="font-body text-[13px] font-bold tracking-[.08em] text-[#1A3E9E]">▪ THE CHALLENGE</p><h2 className="max-w-[900px] font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-[1.08]">{OUR_SOLUTION_CHALLENGE.title}</h2></div>
-          <article className="group flex w-full max-w-[1100px] items-center gap-[clamp(28px,4vw,72px)] rounded-[16px] border border-transparent bg-[linear-gradient(79deg,rgba(26,62,158,.05),rgba(133,166,255,.12))] p-[clamp(28px,4vw,64px)] backdrop-blur-[8px] transition-[transform,border-color,background-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[#7F9CFF] hover:shadow-[0_12px_42px_rgba(26,62,158,.2)] max-[700px]:flex-col max-[700px]:items-start">
+          <div className="grid w-full grid-cols-4 gap-[clamp(16px,1.56vw,30px)] max-[1100px]:grid-cols-2 max-[640px]:grid-cols-1">
+            {OUR_SOLUTION_CHALLENGES.map((challenge, index) => (
+              <article key={challenge.title} className="group flex min-h-[290px] flex-col rounded-[16px] border border-transparent bg-[linear-gradient(79deg,rgba(26,62,158,.05),rgba(133,166,255,.12))] p-[clamp(20px,1.6vw,30px)] backdrop-blur-[8px] transition-[transform,border-color,background-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[#7F9CFF] hover:shadow-[0_12px_42px_rgba(26,62,158,.2)]">
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-[#99A6E7] bg-[#99A6E7]/35 font-body text-[13px] font-bold text-[#1A3E9E]">0{index + 1}</div>
+                <h3 className="mt-7 font-heading text-[clamp(25px,2vw,38px)] font-medium leading-[1.08]">{challenge.title}</h3>
+                <p className="mt-4 font-body text-[clamp(13px,.85vw,16px)] leading-[1.6] text-[#424242]">{challenge.description}</p>
+              </article>
+            ))}
+          </div>
+          <article className="hidden">
             <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-[#99A6E7] bg-[#99A6E7]/35 text-[30px]">⌁</div>
             <div><h3 className="font-heading text-[clamp(28px,3vw,54px)] font-medium leading-tight">Disconnected Enterprise Workflow</h3><p className="mt-4 max-w-[820px] font-body text-[clamp(14px,1vw,18px)] leading-[1.65] text-[#424242]">{OUR_SOLUTION_CHALLENGE.description}</p></div>
           </article>

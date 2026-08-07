@@ -20,9 +20,9 @@ const CARDS: CardItem[] = [
     id: 1,
     image: '/images/specialized/specialized-technology.webp',
     imageAlt: 'Isometric technology infrastructure illustration',
-    title: ['Flexible Resilients', 'Technology Infrastructure'],
+    title: ['Flexible Resilience', '& Modern Infrastructure'],
     description:
-      'We build resilient systems, optimize infrastructure, and uncover insights that strengthen our business partner',
+      'We engineer resilient IT architectures, optimize digital infrastructure, and surface actionable insights—empowering our enterprise partners to adapt, scale, and thrive in a dynamic tech landscape.',
     label: 'FLEXIBLE TECH COVERING',
     mediaSide: 'left',
     imageClass: styles.technologyImage,
@@ -33,7 +33,7 @@ const CARDS: CardItem[] = [
     imageAlt: 'Isometric strategic intelligence dashboard illustration',
     title: ['Driven by Strategic', 'Intelligence'],
     description:
-      'Our ecosystem contributes to a shared intelligence network, allowing knowledge, experience, and innovation to compound across every engagement.',
+      'Our integrated ecosystem feeds a shared intelligence network, allowing deep technical expertise, industry best practices, and continuous innovation to compound across every client engagement.',
     label: 'DATA-DRIVEN DECISION MAKING',
     mediaSide: 'right',
     imageClass: styles.intelligenceImage,
@@ -42,9 +42,9 @@ const CARDS: CardItem[] = [
     id: 3,
     image: '/images/specialized/specialized-impact.webp',
     imageAlt: 'Isometric media and long-term impact illustration',
-    title: ['Designed for Long', 'Lasting Impact'],
+    title: ['Designed for Long-', 'Lasting Impact'],
     description:
-      'Transform strategy into influence, delivering creative execution and enterprise communications with precision, consistency, and measurable impact.',
+      'We turn complex IT strategy into operational advantage, delivering high-performance ERP, IoT, and system integrations with technical precision, operational consistency, and measurable results.',
     label: 'MEASURABLE BUSINESS OUTCOMES',
     mediaSide: 'left',
     imageClass: styles.impactImage,
