@@ -5,6 +5,7 @@ import { SITE_NAME, SITE_DESCRIPTION } from '@/lib/constants';
 import Navbar from '@/components/layout/Navbar/Navbar';
 import Footer from '@/components/layout/Footer/Footer';
 import WhatsAppFloatingButton from '@/components/layout/WhatsAppFloatingButton/WhatsAppFloatingButton';
+import HashScrollHandler from '@/components/ui/HashScrollHandler/HashScrollHandler';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -54,6 +55,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <HashScrollHandler />
         <Navbar />
         {children}
         <Footer />

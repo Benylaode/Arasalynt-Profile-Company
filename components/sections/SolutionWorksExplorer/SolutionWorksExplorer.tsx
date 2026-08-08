@@ -21,6 +21,12 @@ function searchableText(service: SolutionService) {
   ].join(' '));
 }
 
+const IconArrow = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M5 12H19M14 7L19 12L14 17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 export default function SolutionWorksExplorer({ services }: { services: SolutionService[] }) {
   const [query, setQuery] = useState('');
   const [appliedQuery, setAppliedQuery] = useState('');
@@ -69,27 +75,38 @@ export default function SolutionWorksExplorer({ services }: { services: Solution
       </div>
 
       {results.length ? (
-        <div className="grid grid-cols-3 gap-x-[30px] gap-y-[60px] max-[1024px]:grid-cols-2 max-[680px]:grid-cols-1">
+        <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[24px] xl:gap-[30px]">
           {results.map((service) => (
             <article key={service.slug} className="min-w-0">
-              <Link href={`/insight-programs/Case-Studies/${service.caseStudySlug}`} className="group block">
-                <div className="relative flex aspect-[546/400] w-full overflow-hidden rounded-3xl max-[480px]:rounded-[18px]">
-                  <img src={service.relatedWorkImage} alt={service.relatedWorkTitle} loading="lazy" className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]" />
-                </div>
-                <div className="mt-6 flex flex-col gap-4">
-                  <div className="flex min-w-0 items-center justify-between gap-4 font-body text-[14px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] max-[1200px]:text-[12px] max-[480px]:text-[10px]">
-                    <div className="flex min-w-0 items-center gap-2.5">
-                      <span className="h-2 w-2 shrink-0 bg-[#1A3E9E]" />
-                      <span className="truncate">{service.articleCategory}</span>
+              <Link
+                href={`/our-works/${service.relatedWorkSlug}`}
+                className="group relative isolate block aspect-[835/570] w-full overflow-hidden rounded-[20px] bg-[#101010] no-underline max-[480px]:rounded-[16px]"
+              >
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                />
+                <div className="absolute inset-0 bg-black/25" />
+                <div className="absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-b from-transparent to-black" />
+                <div className="absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-b from-transparent to-black/80" />
+
+                <div className="absolute bottom-[clamp(20px,2.08vw,36px)] left-[clamp(20px,2.03vw,36px)] right-[clamp(20px,2.03vw,36px)] z-10 flex items-end justify-between gap-4">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="max-w-[702px] font-heading text-[clamp(20px,1.9vw,34px)] font-medium leading-[1.12] tracking-[-0.01em] text-[#F7F7F7]">
+                      {service.title}
+                    </h3>
+                    <div className="mt-[clamp(8px,0.84vw,14px)] flex flex-wrap items-center gap-[10px] font-body text-[clamp(11px,0.85vw,15px)] font-medium uppercase tracking-[0.06em] text-[#E6FF2A]">
+                      <span>{service.articleCategory}</span>
+                      <span aria-hidden="true" className="h-[3px] w-[3px] shrink-0 bg-[#F7F7F7]" />
+                      <span>{service.industry}</span>
                     </div>
-                    <time dateTime={service.articleDateValue} className="shrink-0">{service.articleDateLabel}</time>
                   </div>
-                  <h3 className="font-heading text-[clamp(27px,2.1875vw,42px)] font-medium leading-[1.1] tracking-[-0.01em] text-[#101010] transition-colors group-hover:text-[#1A3E9E]">
-                    {service.title}
-                  </h3>
-                  <p className="line-clamp-2 font-body text-[16px] font-normal leading-[1.6] text-[#292929] max-[1200px]:text-[14px]">
-                    {service.description}
-                  </p>
+
+                  <span className="flex h-[clamp(38px,2.82vw,54px)] w-[clamp(38px,2.82vw,54px)] shrink-0 items-center justify-center rounded-[6px] border border-[#4C4C4C] text-[#D9D9D9] transition-all duration-300 group-hover:border-[#E6FF2A] group-hover:bg-[#E6FF2A] group-hover:text-[#101010]">
+                    <IconArrow size={20} />
+                  </span>
                 </div>
               </Link>
             </article>

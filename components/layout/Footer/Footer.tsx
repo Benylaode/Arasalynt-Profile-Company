@@ -13,11 +13,11 @@ const manrope = Manrope({
 });
 
 const ABOUT_LINKS = [
-  { name: 'Our Foundation', href: '/about-us#our-foundation' },
-  { name: 'Our Vision & Mission', href: '/about-us#vision-mission' },
-  { name: 'Leadership Foundation', href: '/about-us#leadership-foundation' },
-  { name: 'Leadership Principles', href: '/about-us#leadership-principles' },
-  { name: 'Our Capabilities', href: '/about-us#our-capabilities' },
+  { name: 'Our Foundation', href: '/about-us/corporate-profile#our-foundation' },
+  { name: 'Our Vision & Mission', href: '/about-us/corporate-profile#vision-mission' },
+  { name: 'Leadership Foundation', href: '/about-us/company-leadership#leadership-foundation' },
+  { name: 'Leadership Principles', href: '/about-us/company-leadership#leadership-principles' },
+  { name: 'Our Capabilities', href: '/about-us/corporate-profile#our-capabilities' },
 ];
 
 const INSIGHT_LINKS = [
@@ -26,12 +26,12 @@ const INSIGHT_LINKS = [
 ];
 
 const MEDIA_LINKS = [
-  { name: 'Point of Sale (POS)', href: '/insight-programs/Case-Studies/point-of-sale-retail-management-system' },
-  { name: 'HR & Talent Management', href: '/insight-programs/Case-Studies/hr-talent-management-engine' },
-  { name: 'Financial Automation', href: '/insight-programs/Case-Studies/financial-accounting-automation-hub' },
-  { name: 'Supply Chain Control', href: '/insight-programs/Case-Studies/supply-chain-inventory-control-system' },
-  { name: 'Logistics & Fleet Tracker', href: '/insight-programs/Case-Studies/logistics-fleet-operations-tracker' },
-  { name: 'Warehouse Management', href: '/insight-programs/Case-Studies/warehouse-management-system' },
+  { name: 'Point of Sale (POS)', href: '/our-solution/point-of-sale-pos' },
+  { name: 'HR & Talent Management', href: '/our-solution/hr-talent-management-engine' },
+  { name: 'Financial Automation', href: '/our-solution/financial-accounting-automation-hub' },
+  { name: 'Supply Chain Control', href: '/our-solution/supply-chain-inventory-control' },
+  { name: 'Logistics & Fleet Tracker', href: '/our-solution/logistics-fleet-operations-tracker' },
+  { name: 'Warehouse Management', href: '/our-solution/warehouse-management-system' },
 ];
 
 const BrandLogo = () => (
@@ -87,11 +87,21 @@ const FacebookIcon = () => (
   </svg>
 );
 
-const FooterTitle = ({ children }: { children: string }) => (
-  <h3 className="m-0 h-[21px] text-[13px] font-semibold uppercase leading-[20.6px] tracking-[0.13px] text-[#717171]">
-    {children}
-  </h3>
-);
+const FooterTitle = ({ children, href }: { children: string; href?: string }) => {
+  const content = (
+    <h3 className="m-0 h-[21px] text-[13px] font-semibold uppercase leading-[20.6px] tracking-[0.13px] text-[#717171] transition-colors hover:text-[#E6FF2A]">
+      {children}
+    </h3>
+  );
+  if (href) {
+    return (
+      <Link href={href} className="no-underline">
+        {content}
+      </Link>
+    );
+  }
+  return content;
+};
 
 const FooterLink = ({ href, children }: { href: string; children: string }) => (
   <Link
@@ -129,24 +139,24 @@ export default function Footer() {
             </Link>
           </div>
 
-          <div className="grid h-[354px] grid-cols-[357px_357px_357px] gap-x-[71px] max-[1799px]:h-auto max-[1799px]:grid-cols-3 max-[1799px]:gap-x-[46px] max-[1100px]:grid-cols-2 max-[1100px]:gap-x-[40px] max-[1100px]:gap-y-[46px] max-[767px]:grid-cols-1 max-[767px]:gap-y-[40px]">
-            <div className="flex h-[241px] flex-col gap-[43px] max-[1799px]:h-auto">
-              <div className="flex h-[113px] flex-col gap-[17px]">
-                <FooterTitle>ABOUT US</FooterTitle>
-                <ul className="m-0 flex list-none flex-col gap-[9px] p-0">
+          <div className="grid grid-cols-[357px_357px_357px] gap-x-[71px] max-[1799px]:grid-cols-3 max-[1799px]:gap-x-[46px] max-[1100px]:grid-cols-2 max-[1100px]:gap-x-[40px] max-[1100px]:gap-y-[46px] max-[767px]:grid-cols-1 max-[767px]:gap-y-[40px]">
+            <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-3.5">
+                <FooterTitle href="/about-us">ABOUT US</FooterTitle>
+                <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
                   {ABOUT_LINKS.map((link) => (
-                    <li key={link.href} className="h-[19px]">
+                    <li key={link.href}>
                       <FooterLink href={link.href}>{link.name}</FooterLink>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="flex h-[85px] flex-col gap-[17px]">
-                <FooterTitle>INSIGHT &amp; PROGRAMS</FooterTitle>
-                <ul className="m-0 flex list-none flex-col gap-[9px] p-0">
+              <div className="flex flex-col gap-3.5">
+                <FooterTitle href="/insight-programs/Case-Studies">INSIGHT &amp; PROGRAMS</FooterTitle>
+                <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
                   {INSIGHT_LINKS.map((link) => (
-                    <li key={link.href} className="h-[19px]">
+                    <li key={link.href}>
                       <FooterLink href={link.href}>{link.name}</FooterLink>
                     </li>
                   ))}
@@ -154,22 +164,22 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="flex h-[354px] flex-col justify-center gap-[30px] max-[1799px]:h-auto max-[1799px]:justify-start max-[767px]:grid max-[767px]:grid-cols-2 max-[767px]:gap-x-7 max-[767px]:gap-y-[30px]">
-              <div className="flex h-[49px] flex-col gap-[9px] max-[767px]:col-start-1 max-[767px]:row-start-1">
+            <div className="flex flex-col gap-7 max-[767px]:grid max-[767px]:grid-cols-2 max-[767px]:gap-x-7 max-[767px]:gap-y-7">
+              <div className="flex flex-col gap-2.5 max-[767px]:col-start-1 max-[767px]:row-start-1">
                 <FooterTitle>ENTERPRISE SYSTEM</FooterTitle>
                 <FooterLink href="/our-solution#enterprise-resource-planning">Enterprise Resource Planning</FooterLink>
               </div>
 
-              <div className="flex h-[49px] flex-col gap-[9px] max-[767px]:col-start-1 max-[767px]:row-start-2">
+              <div className="flex flex-col gap-2.5 max-[767px]:col-start-1 max-[767px]:row-start-2">
                 <FooterTitle>CONNECTED ENTERPRISE</FooterTitle>
                 <FooterLink href="/our-solution#internet-of-things">Internet of Things</FooterLink>
               </div>
 
-              <div className="flex h-[196px] flex-col gap-[17px] max-[767px]:col-start-2 max-[767px]:row-span-2 max-[767px]:row-start-1">
+              <div className="flex flex-col gap-3.5 max-[767px]:col-start-2 max-[767px]:row-span-2 max-[767px]:row-start-1">
                 <FooterTitle>OUR SERVICES</FooterTitle>
-                <ul className="m-0 flex list-none flex-col gap-[9px] p-0">
+                <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
                   {MEDIA_LINKS.map((link) => (
-                    <li key={link.href} className="h-[19px]">
+                    <li key={link.href}>
                       <FooterLink href={link.href}>{link.name}</FooterLink>
                     </li>
                   ))}
@@ -177,53 +187,53 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="flex h-[309px] flex-col gap-[30px] max-[1799px]:h-auto">
-              <div className="flex h-[76px] flex-col gap-[17px]">
+            <div className="flex flex-col gap-7">
+              <div className="flex flex-col gap-3">
                 <FooterTitle>JAKARTA OFFICE</FooterTitle>
                 <a
                   href="https://maps.google.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="m-0 h-[39px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
+                  className="m-0 text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
                 >
-                  <span className="block max-[1799px]:inline">Menara Rajawali 26th Floor Jl. DR. Ide Anak Agung Gde</span>
+                  <span className="block max-[1799px]:inline">Menara Rajawali 26th Floor Jl. DR. Ide Anak Agung Gde</span>{' '}
                   <span className="block max-[1799px]:inline">Agung, Jakarta, Indonesia 12950 →</span>
                 </a>
               </div>
 
-              <div className="flex h-[96px] flex-col gap-[17px]">
+              <div className="flex flex-col gap-3">
                 <FooterTitle>SEMARANG HQ</FooterTitle>
                 <a
                   href="https://maps.google.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="m-0 h-[58px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
+                  className="m-0 text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
                 >
-                  <span className="block max-[1799px]:inline">MG Setos, Jl. Inspeksi, 3rd Floor Kembangsari Subdistrict,</span>
-                  <span className="block max-[1799px]:inline">Semarang Tengah District, Semarang City, Central Java</span>
+                  <span className="block max-[1799px]:inline">MG Setos, Jl. Inspeksi, 3rd Floor Kembangsari Subdistrict,</span>{' '}
+                  <span className="block max-[1799px]:inline">Semarang Tengah District, Semarang City, Central Java</span>{' '}
                   <span className="block max-[1799px]:inline">50133, Indonesia →</span>
                 </a>
               </div>
 
-              <div className="flex h-[76px] flex-col gap-[9px]">
+              <div className="flex flex-col gap-3">
                 <FooterTitle>CONTACT</FooterTitle>
-                <div className="flex h-[47px] flex-col gap-[9px]">
+                <div className="flex flex-col gap-2.5">
                   <a
                     href={WHATSAPP_LINK}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-[19px] items-start gap-[9px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
+                    className="flex items-center gap-[9px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
                   >
                     <WhatsAppIcon />
-                    <span className="h-[19px]">{WHATSAPP_PHONE_DISPLAY}</span>
+                    <span>{WHATSAPP_PHONE_DISPLAY}</span>
                   </a>
 
                   <a
                     href="mailto:corporate.arsalynk@gmail.com"
-                    className="flex h-[19px] items-start gap-[9px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
+                    className="flex items-center gap-[9px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
                   >
                     <MailIcon />
-                    <span className="h-[19px]">corporate.arsalynk@gmail.com</span>
+                    <span>corporate.arsalynk@gmail.com</span>
                   </a>
                 </div>
               </div>

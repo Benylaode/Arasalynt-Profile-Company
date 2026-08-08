@@ -88,7 +88,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
             <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 font-body text-[10px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] sm:text-xs xl:text-sm">
               <Link href="/" className="transition-opacity hover:opacity-65">Home</Link>
               <span aria-hidden="true">/</span>
-              <Link href="/insight-programs" className="transition-opacity hover:opacity-65">Insight &amp; Programs</Link>
+              <Link href="/insight-programs/Case-Studies" className="transition-opacity hover:opacity-65">Insight &amp; Programs</Link>
               <span aria-hidden="true">/</span>
               <Link href="/insight-programs/Case-Studies" className="transition-opacity hover:opacity-65">Case Studies</Link>
             </nav>

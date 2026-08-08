@@ -11,6 +11,7 @@ export interface PainPoint {
 export interface Service {
   name: string;
   img: string;
+  href?: string;
 }
 
 export interface Work {

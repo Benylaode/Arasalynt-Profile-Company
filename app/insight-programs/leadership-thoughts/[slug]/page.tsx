@@ -98,7 +98,7 @@ export default async function LeadershipThoughtDetailPage({
             </Link>
             <span aria-hidden="true">/</span>
             <Link
-              href="/insight-programs"
+              href="/insight-programs/Case-Studies"
               className="transition-opacity hover:opacity-65"
             >
               Insight &amp; Programs

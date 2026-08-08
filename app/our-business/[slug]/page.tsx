@@ -18,6 +18,7 @@ type PainPoint = {
 type ServiceItem = {
   name: string;
   img: string;
+  href?: string;
 };
 
 type WorkItem = {
@@ -524,26 +525,30 @@ export default async function BusinessSlugPage({
               threeColumnServices ? 'xl:grid-cols-3 xl:gap-[30px]' : 'xl:grid-cols-4 xl:gap-8'
             }`}
           >
-            {biz.services.map((service, index) => (
-              <article
-                key={`${service.name}-${index}`}
-                className="group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-[#F5F5F5]/15 bg-gradient-to-b from-[#101010]/5 to-white/[0.05] p-5 pb-6 sm:p-6 sm:pb-7 backdrop-blur-[12.5px] transition duration-500 hover:-translate-y-1 hover:border-white/80 hover:bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.28))] hover:shadow-[0_18px_50px_rgba(0,0,0,0.25)]"
-              >
-                <div className={`relative w-full overflow-hidden rounded-lg bg-[#0A2951] ${
-                    threeColumnServices ? 'aspect-[499/265]' : 'aspect-[353/265]'
-                  }`}>
-                  <img
-                    src={service.img}
-                    alt={service.name}
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
-                  />
-                  <div className="absolute inset-0 bg-black/15" />
-                </div>
-                <h3 className="font-heading text-[clamp(22px,1.8vw,32px)] font-medium leading-[1.2] tracking-[-0.01em] text-[#D9D9D9] transition-colors duration-300 group-hover:text-[#E6FF2A]">
-                  {service.name}
-                </h3>
-              </article>
-            ))}
+            {biz.services.map((service, index) => {
+              const serviceHref = service.href ?? '/our-solution';
+              return (
+                <Link
+                  key={`${service.name}-${index}`}
+                  href={serviceHref}
+                  className="group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-[#F5F5F5]/15 bg-gradient-to-b from-[#101010]/5 to-white/[0.05] p-5 pb-6 sm:p-6 sm:pb-7 backdrop-blur-[12.5px] transition duration-500 hover:-translate-y-1 hover:border-white/80 hover:bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.28))] hover:shadow-[0_18px_50px_rgba(0,0,0,0.25)] no-underline"
+                >
+                  <div className={`relative w-full overflow-hidden rounded-lg bg-[#0A2951] ${
+                      threeColumnServices ? 'aspect-[499/265]' : 'aspect-[353/265]'
+                    }`}>
+                    <img
+                      src={service.img}
+                      alt={service.name}
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
+                    />
+                    <div className="absolute inset-0 bg-black/15" />
+                  </div>
+                  <h3 className="font-heading text-[clamp(22px,1.8vw,32px)] font-medium leading-[1.2] tracking-[-0.01em] text-[#D9D9D9] transition-colors duration-300 group-hover:text-[#E6FF2A]">
+                    {service.name}
+                  </h3>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

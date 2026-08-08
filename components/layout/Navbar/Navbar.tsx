@@ -50,27 +50,27 @@ const BUSINESS_MEDIA = {
   items: [
     {
       name: 'POS & Retail Management',
-      href: '/insight-programs/Case-Studies/point-of-sale-retail-management-system',
+      href: '/our-solution/point-of-sale-pos',
     },
     {
       name: 'HR & Talent Management',
-      href: '/insight-programs/Case-Studies/hr-talent-management-engine',
+      href: '/our-solution/hr-talent-management-engine',
     },
     {
       name: 'Financial Automation',
-      href: '/insight-programs/Case-Studies/financial-accounting-automation-hub',
+      href: '/our-solution/financial-accounting-automation-hub',
     },
     {
       name: 'Supply Chain Control',
-      href: '/insight-programs/Case-Studies/supply-chain-inventory-control-system',
+      href: '/our-solution/supply-chain-inventory-control',
     },
     {
       name: 'Logistics & Fleet Tracker',
-      href: '/insight-programs/Case-Studies/logistics-fleet-operations-tracker',
+      href: '/our-solution/logistics-fleet-operations-tracker',
     },
     {
       name: 'Warehouse Management',
-      href: '/insight-programs/Case-Studies/warehouse-management-system',
+      href: '/our-solution/warehouse-management-system',
     },
   ],
 };
@@ -1050,7 +1050,7 @@ export default function Navbar() {
             <SimpleDropdown
               id="insight"
               label="Insight & Programs"
-              href="/insight-programs"
+              href="/insight-programs/Case-Studies"
               title="Insight & Programs"
               links={INSIGHT_LINKS}
               overlay={overlay}
