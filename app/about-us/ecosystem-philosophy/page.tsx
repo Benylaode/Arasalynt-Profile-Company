@@ -6,21 +6,8 @@ import Link from 'next/link';
 const ASSET = '/images/ecosystem-philosophy';
 
 const IconChevronDown = () => (
-  <svg
-    width="32"
-    height="21"
-    viewBox="0 0 32 21"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <path
-      d="M2 2.25L16 17.25L30 2.25"
-      stroke="currentColor"
-      strokeWidth="3.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+  <svg width="32" height="22" viewBox="0 0 32 22" fill="none" aria-hidden="true">
+    <path d="M3 4L16 17L29 4" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -71,14 +58,14 @@ export default function EcosystemPhilosophyPage() {
         className="relative h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#020714] max-[640px]:rounded-b-[24px]"
       >
         <img
-          src="/images/about-us/ecosystem-philosophy-hero.png"
+          src="/images/about-us/ecosystem-philosophy-hero.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
         />
 
         <img
-          src="/images/shared/network-overlay.webp"
+          src="/images/about-us/network-overlay.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute bottom-[-44%] left-1/2 h-[125%] w-[250%] max-w-none -translate-x-1/2 select-none object-contain opacity-70 max-[640px]:bottom-[-16%] max-[640px]:h-[82%] max-[640px]:w-[220%]"
@@ -111,10 +98,17 @@ export default function EcosystemPhilosophyPage() {
           </h1>
         </div>
 
-        <button
-          type="button"
-          aria-label="Scroll to ecosystem introduction"
-          onClick={handleScrollDown}
+        <a
+          href="#beyond-expectations"
+          aria-label="Scroll to CTA"
+          onClick={(e) => {
+            e.preventDefault();
+            const target = document.getElementById('beyond-expectations');
+            if (target) {
+              const top = target.getBoundingClientRect().top + window.scrollY;
+              window.scrollTo({ top, behavior: 'smooth' });
+            }
+          }}
           className="absolute left-1/2 bottom-[clamp(34px,4.5vw,71px)] z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-[rgba(175,175,175,0.25)] text-white transition-transform duration-300 hover:translate-y-1"
           style={{
             background:
@@ -124,7 +118,7 @@ export default function EcosystemPhilosophyPage() {
           }}
         >
           <IconChevronDown />
-        </button>
+        </a>
       </section>
 
       {/* SECTION 01 — SPECIALIZED INDUSTRY */}
@@ -247,7 +241,7 @@ export default function EcosystemPhilosophyPage() {
               className="group relative overflow-hidden rounded-[24px] border border-transparent bg-[#8C8C8C] no-underline aspect-[835/500] transition-all duration-500 hover:border-white/80 hover:shadow-[0_18px_45px_rgba(0,0,0,0.18)] focus-visible:border-white focus-visible:outline-none"
             >
               <img
-                src="/images/shared/leadership-portrait.webp"
+                src="/images/about-us/company-leadership/leadership-portrait.webp"
                 alt="Company Leadership"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
@@ -264,7 +258,7 @@ export default function EcosystemPhilosophyPage() {
               className="group relative overflow-hidden rounded-[24px] border border-transparent bg-[#8C8C8C] no-underline aspect-[835/500] transition-all duration-500 hover:border-white/80 hover:shadow-[0_18px_45px_rgba(0,0,0,0.18)] focus-visible:border-white focus-visible:outline-none"
             >
               <img
-                src="/images/shared/corporate-profile-card.webp"
+                src="/images/about-us/cards/corporate-profile-card.webp"
                 alt="Corporate Profile"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />

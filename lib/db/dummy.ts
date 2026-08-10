@@ -4,75 +4,97 @@
    ========================================================================== */
 
 import type { BusinessPage } from '@/lib/business.types';
+import type { TeamMember } from '@/lib/team.data';
 import type { HeroSlide, CaseStudyArticle, LeadershipThoughtArticle } from '@/types';
+
+export const TEAM_MEMBERS_DUMMY_DATA: TeamMember[] = [
+  {
+    slug: 'rian-destianto',
+    name: 'Rian Destianto',
+    role: 'Head of Commercial',
+    discipline: 'Commercial',
+    image: '/images/leadership-thoughts/featured-leader-bw.webp',
+    imagePosition: 'center 28%',
+    summary:
+      'Leading Arsalynk’s commercial direction by connecting market insight, strategic partnerships, and sustainable business growth.',
+    biography: [],
+    expertise: [],
+    principles: [],
+    phone: '+62 823 2230 8719',
+    email: 'rian@arsalynk.com',
+    address:
+      'Menara Rajawali Lt.26, Mega Kuningan, South Jakarta, Indonesia 12950',
+    company: 'Arsalynk',
+  },
+];
 
 export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
   {
     id: 'unified-enterprise-ecosystem',
-    headline: 'The Unified\nEnterprise Ecosystem',
+    headline: 'Leading Digital\nEnterprise Solution',
     body:
-      'Arsalynk connects technology, data, and media into one synchronized ecosystem\nthat helps enterprises solve complex business challenges.',
-    backgroundImage: '/images/shared/slide-01-mobile-38814c.webp',
-    mobileBackgroundImage: '/images/shared/slide-01-mobile-38814c.webp',
+      'We drive modern transformation through scalable ERP and emerging IoT solutions,\nfully integrating your operations to elevate your enterprise.',
+    backgroundImage: '/images/home/hero/slide-01-mobile-38814c.webp',
+    mobileBackgroundImage: '/images/home/hero/slide-01-mobile-38814c.webp',
     backgroundPosition: 'center center',
     primaryCta: {
-      label: 'LEARN MORE',
-      href: '/about-us/ecosystem-philosophy',
+      label: 'OUR SOLUTION',
+      href: '/our-solution',
     },
     secondaryCta: {
-      label: 'OUR WORK',
-      href: '/our-works',
+      label: 'ABOUT US',
+      href: '/about-us',
     },
   },
   {
-    id: 'tia-hendi-campaign',
-    headline: 'The Road of Tia Hendi, How\nWe Won The Council for Her',
+    id: 'uncover-the-potential',
+    headline: 'Uncover\nthe Potential',
     body:
-      "Beginning with Tia Hendi's campaign as a candidate, we joined forces to win the trust of Semarang's citizens to win a seat in the Semarang City Council District.",
-    backgroundImage: '/images/shared/slide-02-mobile-838ce3.webp',
-    mobileBackgroundImage: '/images/shared/slide-02-mobile-838ce3.webp',
+      'We dive deep into your unique ecosystem to identify opportunities\nand map out possibilities.',
+    backgroundImage: '/images/home/hero/slide-02-mobile-838ce3.webp',
+    mobileBackgroundImage: '/images/home/hero/slide-02-mobile-838ce3.webp',
     backgroundPosition: 'center center',
     primaryCta: {
-      label: 'LEARN MORE',
-      href: '/insight-programs/Case-Studies',
+      label: 'EXPLORE SOLUTIONS',
+      href: '/our-solution#challenge',
     },
     secondaryCta: {
-      label: 'OUR WORK',
-      href: '/our-works/web-media-profile',
+      label: 'ABOUT US',
+      href: '/about-us#our-foundation',
     },
   },
   {
-    id: 'intelligent-technology',
-    headline: 'Intelligent Technology for\nConnected Businesses',
+    id: 'architect-the-solution',
+    headline: 'Architect\nthe Solution',
     body:
-      'Build a connected digital ecosystem that links physical devices with business applications.\nStreamline operations, automate workflows, and make faster decisions through real-time data.',
-    backgroundImage: '/images/shared/slide-03-mobile-2f3b2e.webp',
-    mobileBackgroundImage: '/images/shared/slide-03-mobile-2f3b2e.webp',
+      'We engineer ERP and IoT integration frameworks\ndesigned for maximum impact.',
+    backgroundImage: '/images/home/hero/slide-03-mobile-2f3b2e.webp',
+    mobileBackgroundImage: '/images/home/hero/slide-03-mobile-2f3b2e.webp',
     backgroundPosition: 'center center',
     primaryCta: {
-      label: 'LEARN MORE',
-      href: '/insight-programs/Case-Studies/connecting-field-operations-with-myboss-iot',
+      label: 'EXPLORE SOLUTIONS',
+      href: '/our-solution#solutions',
     },
     secondaryCta: {
-      label: 'OUR WORK',
-      href: '/our-works/myboss-iot-system',
+      label: 'OUR CAPABILITIES',
+      href: '/about-us#our-capabilities',
     },
   },
   {
-    id: 'strategic-intelligence',
-    headline: 'From Raw Data to\nStrategic Intelligence',
+    id: 'connect-the-future',
+    headline: 'Connect\nthe Future',
     body:
-      'Collect, analyze, and transform continuous business information to uncover trends,\npredict outcomes, and support long-term organizational growth.',
-    backgroundImage: '/images/shared/slide-04-mobile-6f32fe.webp',
-    mobileBackgroundImage: '/images/shared/slide-04-mobile-6f32fe.webp',
+      'We deploy seamlessly, bridging current operations\nand future-ready enterprise capabilities.',
+    backgroundImage: '/images/home/hero/slide-04-mobile-6f32fe.webp',
+    mobileBackgroundImage: '/images/home/hero/slide-04-mobile-6f32fe.webp',
     backgroundPosition: 'center center',
     primaryCta: {
-      label: 'LEARN MORE',
-      href: '/insight-programs/Case-Studies/turning-operational-data-into-decisions-with-altatic',
+      label: 'EXPLORE SERVICES',
+      href: '/our-solution#services',
     },
     secondaryCta: {
-      label: 'OUR WORK',
-      href: '/our-works/altatic-analytic',
+      label: 'CONTACT US',
+      href: '/contact-us',
     },
   },
 ];
@@ -159,11 +181,6 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
 
   works: [
     {
-      name: 'Digital Platform Development',
-      tag: 'WEBSITE DEVELOPMENT • DIGITAL PLATFORM',
-      img: '/images/our-business/kaluna-technology/works/project-01.webp',
-    },
-    {
       name: 'Sinau Print Marketplace Website',
       tag: 'MARKETPLACE WEBSITE • ERP SYSTEM',
       img: '/images/our-business/kaluna-technology/works/sinau-print-marketplace.webp',
@@ -218,7 +235,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   brandColor: '#2020D3',
 
   heroImg: '/images/our-business/artic-analytica/hero.webp',
-  heroOverlayImg: '/images/shared/hero-network-overlay-4600c8.webp',
+  heroOverlayImg: '/images/our-business/backgrounds/hero-network-overlay-4600c8.webp',
   aboutDesc:
     'Artic Analytica helps businesses unlock the full value of their data through advanced analytics, predictive modeling, and market research—turning complex information into actionable insights for smarter decision-making.',
   aboutImg: '/images/our-business/artic-analytica/about.webp',
@@ -281,7 +298,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   visionLabel: 'OUR VISION',
   visionQuote:
     'We envision a future where every business decision is driven by data, predictive insights, and intelligent research.',
-  visionImg: '/images/shared/hero-network-overlay-4600c8.webp',
+  visionImg: '/images/our-business/backgrounds/hero-network-overlay-4600c8.webp',
 
   worksLabel: 'OUR PROJECTS',
   featuredWorkIndex: 1,
@@ -317,7 +334,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       slug: 'loxlive',
       name: 'LoxLive',
-      img: '/images/shared/loxlive-69e358.webp',
+      img: '/images/our-business/previews/loxlive-69e358.webp',
     },
     {
       slug: 'adsvar',
@@ -352,12 +369,12 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   logoMaxHeight: 80,
   brandColor: '#FF2828',
 
-  heroImg: '/images/shared/loxlive-69e358.webp',
-  heroOverlayImg: '/images/shared/hero-network-overlay-69f0f9.webp',
+  heroImg: '/images/our-business/previews/loxlive-69e358.webp',
+  heroOverlayImg: '/images/our-business/backgrounds/hero-network-overlay-69f0f9.webp',
   heroObjectPosition: 'center top',
   aboutDesc:
     'LoxLive provides premium broadcast and livestreaming solutions that combine studio-grade production, reliable streaming infrastructure, and seamless event execution to deliver exceptional virtual experiences.',
-  aboutImg: '/images/shared/about.webp',
+  aboutImg: '/images/our-business/backgrounds/about.webp',
   aboutObjectPosition: 'center',
 
   painPointsLabel: 'THE CHALLENGE',
@@ -390,7 +407,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   servicesColumns: 4,
   services: [
     {
-      name: 'Livestream Production',
+      name: 'Video & Livestream Production',
       img: '/images/our-business/loxlive/services/livestream-production.webp',
     },
     {
@@ -406,28 +423,23 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       img: '/images/our-business/loxlive/services/interactive-event-experience.webp',
     },
   ],
-  servicesBg: '/images/shared/services-bg.webp',
+  servicesBg: '/images/our-business/backgrounds/services-bg.webp',
 
   visionLabel: 'OUR VISION',
   visionTextSize: 'large',
   visionQuote:
     'We envision a future where virtual events are as immersive, engaging, and impactful as being there in person.',
-  visionImg: '/images/shared/hero-network-overlay-69f0f9.webp',
+  visionImg: '/images/our-business/backgrounds/hero-network-overlay-69f0f9.webp',
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore LoxLive’s Work',
-  featuredWorkIndex: 1,
+  featuredWorkIndex: 0,
   works: [
     {
       name: 'Produksi Konten Video Portret Padel Arena',
-      tag: 'MEDIA & CREATIVE • VIDEO PRODUCTION',
+      tag: 'VIDEO & LIVESTREAM PRODUCTION • SPORTS CONTENT',
       img: '/images/projects/video-portret-padel-arena/1.webp',
       slug: 'video-portret-padel-arena',
-    },
-    {
-      name: 'National Hybrid Event Livestream',
-      tag: 'BROADCAST PRODUCTION • LIVE EVENT',
-      img: '/images/shared/performance-campaign-dashboard-caf797.webp',
     },
   ],
 
@@ -437,29 +449,29 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       slug: 'personice',
       name: 'Personice',
-      img: '/images/shared/personice.webp',
+      img: '/images/our-business/previews/personice.webp',
     },
     {
       slug: 'loxlive',
       name: 'LoxLive',
-      img: '/images/shared/loxlive.webp',
+      img: '/images/our-business/previews/loxlive.webp',
     },
     {
       slug: 'adsvar',
       name: 'Adsvar',
-      img: '/images/shared/adsvar.webp',
+      img: '/images/our-business/previews/adsvar.webp',
     },
     {
       slug: 'seveny',
       name: 'Seveny',
-      img: '/images/shared/seveny.webp',
+      img: '/images/our-business/previews/seveny.webp',
     },
   ],
 
   ctaTitle: 'Let’s Start Your Quality Streaming Event',
   ctaDesc:
     'Bring your next event to life with reliable broadcast production, professional infrastructure, and a seamless livestream experience from preparation to delivery.',
-  ctaImg: '/images/shared/cta-bg.webp',
+  ctaImg: '/images/our-business/backgrounds/cta-bg.webp',
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
@@ -478,7 +490,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   brandColor: '#544D4D',
 
   heroImg: '/images/our-business/the-drafroom/hero.webp',
-  heroOverlayImg: '/images/shared/hero-network-overlay-69f0f9.webp',
+  heroOverlayImg: '/images/our-business/backgrounds/hero-network-overlay-69f0f9.webp',
   heroObjectPosition: 'center',
   aboutDesc:
     'The Drafroom helps businesses transform their brand identity into a strategic competitive advantage through research-driven branding, premium design, and compelling visual communication.',
@@ -527,17 +539,17 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       img: '/images/our-business/the-drafroom/services/digital-brand-experience.webp',
     },
     {
-      name: 'Corporate Communication',
+      name: 'Corporate Communication & Learning Design',
       img: '/images/our-business/the-drafroom/services/corporate-communication.webp',
     },
   ],
-  servicesBg: '/images/shared/services-bg.webp',
+  servicesBg: '/images/our-business/backgrounds/services-bg.webp',
 
   visionLabel: 'OUR VISION',
   visionTextSize: 'large',
   visionQuote:
     'Help ambitious brands build iconic value that inspire trust, create lasting value, and stand the test of time.',
-  visionImg: '/images/shared/hero-network-overlay-69f0f9.webp',
+  visionImg: '/images/our-business/backgrounds/hero-network-overlay-69f0f9.webp',
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore The Drafroom’s Work',
@@ -545,7 +557,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   works: [
     {
       name: 'Desain Pelatihan Wasit Kota Semarang',
-      tag: 'MEDIA & CREATIVE • TRAINING DESIGN',
+      tag: 'CORPORATE COMMUNICATION • LEARNING EXPERIENCE DESIGN',
       img: '/images/projects/desain-pelatihan-wasit-semarang/1.webp',
       slug: 'desain-pelatihan-wasit-semarang',
     },
@@ -563,29 +575,29 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       slug: 'personice',
       name: 'Personice',
-      img: '/images/shared/personice.webp',
+      img: '/images/our-business/previews/personice.webp',
     },
     {
       slug: 'loxlive',
       name: 'LoxLive',
-      img: '/images/shared/loxlive.webp',
+      img: '/images/our-business/previews/loxlive.webp',
     },
     {
       slug: 'adsvar',
       name: 'Adsvar',
-      img: '/images/shared/adsvar.webp',
+      img: '/images/our-business/previews/adsvar.webp',
     },
     {
       slug: 'seveny',
       name: 'Seveny',
-      img: '/images/shared/seveny.webp',
+      img: '/images/our-business/previews/seveny.webp',
     },
   ],
 
   ctaTitle: 'Discover More with The Drafroom',
   ctaDesc:
     'Explore our branding expertise, creative capabilities, and strategic design solutions that help ambitious brands build recognition, relevance, and lasting value.',
-  ctaImg: '/images/shared/cta-bg.webp',
+  ctaImg: '/images/our-business/backgrounds/cta-bg.webp',
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
@@ -604,7 +616,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   brandColor: '#101010',
 
   heroImg: '/images/our-business/ilusia/hero.webp',
-  heroOverlayImg: '/images/shared/hero-network-overlay-69f0f9.webp',
+  heroOverlayImg: '/images/our-business/backgrounds/hero-network-overlay-69f0f9.webp',
   heroObjectPosition: 'center',
   aboutDesc:
     'Ilusia transforms complex products, services, and business concepts into engaging motion graphics and cinematic animations that communicate with clarity, impact, and purpose.',
@@ -663,28 +675,12 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   visionTextSize: 'large',
   visionQuote:
     'Powerful visual storytelling that transforms technical concepts into clear and engaging experiences.',
-  visionImg: '/images/shared/hero-network-overlay-69f0f9.webp',
+  visionImg: '/images/our-business/backgrounds/hero-network-overlay-69f0f9.webp',
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore Ilusia Studio’s Work',
-  featuredWorkIndex: 1,
-  works: [
-    {
-      name: 'Live Event Motion Package',
-      tag: 'Motion Graphics · Broadcast Visuals',
-      img: '/images/shared/performance-campaign-dashboard-caf797.webp',
-    },
-    {
-      name: 'Sinau Print Marketplace Website',
-      tag: 'Branding · Survey and Analytics',
-      img: '/images/shared/sinau-print-marketplace.webp',
-    },
-    {
-      name: 'X-1 Tire Company Profile Website',
-      tag: 'Product Visualization · Website',
-      img: '/images/shared/x1-tire-website.webp',
-    },
-  ],
+  featuredWorkIndex: 0,
+  works: [],
 
   otherBusinessesTitle: 'Explore Other Businesses',
   featuredOtherBusinessIndex: 1,
@@ -692,29 +688,29 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       slug: 'personice',
       name: 'Personice',
-      img: '/images/shared/personice.webp',
+      img: '/images/our-business/previews/personice.webp',
     },
     {
       slug: 'loxlive',
       name: 'LoxLive',
-      img: '/images/shared/loxlive.webp',
+      img: '/images/our-business/previews/loxlive.webp',
     },
     {
       slug: 'adsvar',
       name: 'Adsvar',
-      img: '/images/shared/adsvar.webp',
+      img: '/images/our-business/previews/adsvar.webp',
     },
     {
       slug: 'seveny',
       name: 'Seveny',
-      img: '/images/shared/seveny.webp',
+      img: '/images/our-business/previews/seveny.webp',
     },
   ],
 
   ctaTitle: 'Discover More with Ilusia Studio',
   ctaDesc:
     'Explore our motion expertise, creative capabilities, and visual storytelling solutions that transform complex ideas into clear and engaging experiences.',
-  ctaImg: '/images/shared/cta-bg.webp',
+  ctaImg: '/images/our-business/backgrounds/cta-bg.webp',
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
@@ -734,11 +730,11 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   brandColor: '#101010',
 
   heroImg: '/images/our-business/adsvar/hero.webp',
-  heroOverlayImg: '/images/shared/hero-network-overlay-69f0f9.webp',
+  heroOverlayImg: '/images/our-business/backgrounds/hero-network-overlay-69f0f9.webp',
   heroObjectPosition: 'center top',
   aboutDesc:
     'Adsvar helps businesses maximize advertising performance through data-driven strategies, precision targeting, and measurable campaign optimization that delivers real business outcomes.',
-  aboutImg: '/images/shared/about.webp',
+  aboutImg: '/images/our-business/backgrounds/about.webp',
   aboutObjectPosition: 'center',
 
   painPointsLabel: 'THE CHALLENGE',
@@ -750,7 +746,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       desc: 'Low-performing spend and broad targeting make it difficult to turn advertising investment into meaningful results.',
     },
     {
-      icon: '/images/shared/limited-production-quality.svg',
+      icon: '/images/our-business/icons/limited-production-quality.svg',
       title: 'Limited Production Quality',
       desc: 'Weak campaign assets and inconsistent execution reduce attention, credibility, and conversion potential.',
     },
@@ -787,34 +783,18 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       img: '/images/our-business/adsvar/services/campaign-management.webp',
     },
   ],
-  servicesBg: '/images/shared/services-bg.webp',
+  servicesBg: '/images/our-business/backgrounds/services-bg.webp',
 
   visionLabel: 'OUR VISION',
   visionTextSize: 'large',
   visionQuote:
     'Data-driven advertising that transforms marketing investment into predictable customer acquisition, measurable outcomes, and long-term growth.',
-  visionImg: '/images/shared/hero-network-overlay-69f0f9.webp',
+  visionImg: '/images/our-business/backgrounds/hero-network-overlay-69f0f9.webp',
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore Adsvar’s Work',
-  featuredWorkIndex: 1,
-  works: [
-    {
-      name: 'Performance Campaign Dashboard',
-      tag: 'Paid Media · Campaign Analytics',
-      img: '/images/shared/performance-campaign-dashboard-caf797.webp',
-    },
-    {
-      name: 'Sinau Print Marketplace Website',
-      tag: 'Branding · Survey and Analytics',
-      img: '/images/shared/sinau-print-marketplace.webp',
-    },
-    {
-      name: 'X-1 Tire Company Profile Website',
-      tag: 'Digital Campaign · Website',
-      img: '/images/shared/x1-tire-website.webp',
-    },
-  ],
+  featuredWorkIndex: 0,
+  works: [],
 
   otherBusinessesTitle: 'Explore Other Businesses',
   featuredOtherBusinessIndex: 1,
@@ -822,29 +802,29 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       slug: 'personice',
       name: 'Personice',
-      img: '/images/shared/personice.webp',
+      img: '/images/our-business/previews/personice.webp',
     },
     {
       slug: 'loxlive',
       name: 'LoxLive',
-      img: '/images/shared/loxlive.webp',
+      img: '/images/our-business/previews/loxlive.webp',
     },
     {
       slug: 'adsvar',
       name: 'Adsvar',
-      img: '/images/shared/adsvar.webp',
+      img: '/images/our-business/previews/adsvar.webp',
     },
     {
       slug: 'seveny',
       name: 'Seveny',
-      img: '/images/shared/seveny.webp',
+      img: '/images/our-business/previews/seveny.webp',
     },
   ],
 
   ctaTitle: 'Explore More Our Capability with Adsvar',
   ctaDesc:
     'Explore our performance marketing expertise, paid advertising solutions, and data-driven campaign capabilities designed to accelerate measurable business growth.',
-  ctaImg: '/images/shared/cta-bg.webp',
+  ctaImg: '/images/our-business/backgrounds/cta-bg.webp',
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
@@ -864,7 +844,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   brandColor: '#0E1534',
 
   heroImg: '/images/our-business/personice/hero.webp',
-  heroOverlayImg: '/images/shared/hero-network-overlay-62360c.webp',
+  heroOverlayImg: '/images/our-business/backgrounds/hero-network-overlay-62360c.webp',
   heroObjectPosition: 'center 40%',
   aboutDesc:
     'Personice helps organizations strengthen their public image, build executive credibility, and foster meaningful relationships through strategic public relations and talent management.',
@@ -880,7 +860,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       desc: 'Inconsistent exposure and unclear positioning make it difficult for the brand to earn attention and recognition.',
     },
     {
-      icon: '/images/shared/limited-production-quality.svg',
+      icon: '/images/our-business/icons/limited-production-quality.svg',
       title: 'Limited Production Quality',
       desc: 'Weak communication materials and inconsistent execution can reduce credibility across public-facing channels.',
     },
@@ -917,34 +897,18 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       img: '/images/our-business/personice/services/crisis-management.webp',
     },
   ],
-  servicesBg: '/images/shared/services-bg.webp',
+  servicesBg: '/images/our-business/backgrounds/services-bg.webp',
 
   visionLabel: 'OUR VISION',
   visionTextSize: 'large',
   visionQuote:
     'Authentic relationships, credible leadership, and strategic communication that strengthen reputation and create lasting public trust.',
-  visionImg: '/images/shared/hero-network-overlay-62360c.webp',
+  visionImg: '/images/our-business/backgrounds/hero-network-overlay-62360c.webp',
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore Personice’s Work',
-  featuredWorkIndex: 1,
-  works: [
-    {
-      name: 'Strategic PR Campaign',
-      tag: 'Public Relations · Brand Reputation',
-      img: '/images/shared/strategic-pr-campaign-ccd63a.webp',
-    },
-    {
-      name: 'Sinau Print Marketplace Website',
-      tag: 'Branding · Survey and Analytics',
-      img: '/images/shared/sinau-print-marketplace-76333edbd7.webp',
-    },
-    {
-      name: 'X-1 Tire Company Profile Website',
-      tag: 'Digital Campaign · Website',
-      img: '/images/shared/x1-tire-website-c7f44b16ce.webp',
-    },
-  ],
+  featuredWorkIndex: 0,
+  works: [],
 
   otherBusinessesTitle: 'Explore Other Businesses',
   featuredOtherBusinessIndex: 1,
@@ -952,29 +916,29 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       slug: 'personice',
       name: 'Personice',
-      img: '/images/shared/personice-a6a6869660.webp',
+      img: '/images/our-business/previews/personice-a6a6869660.webp',
     },
     {
       slug: 'loxlive',
       name: 'LoxLive',
-      img: '/images/shared/loxlive-f0a3422706.webp',
+      img: '/images/our-business/previews/loxlive-f0a3422706.webp',
     },
     {
       slug: 'adsvar',
       name: 'Adsvar',
-      img: '/images/shared/adsvar-8828f15721.webp',
+      img: '/images/our-business/previews/adsvar-8828f15721.webp',
     },
     {
       slug: 'seveny',
       name: 'Seveny',
-      img: '/images/shared/seveny-937131ba40.webp',
+      img: '/images/our-business/previews/seveny-937131ba40.webp',
     },
   ],
 
   ctaTitle: 'Discover PR & Executive Talent Management with Personice',
   ctaDesc:
     'Explore our public relations expertise, executive branding, and talent management solutions designed to build credibility, strengthen reputation, and create lasting public trust.',
-  ctaImg: '/images/shared/cta-bg-debfb86c03.webp',
+  ctaImg: '/images/our-business/backgrounds/cta-bg-debfb86c03.webp',
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
@@ -996,7 +960,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   brandColor: '#101010',
 
   heroImg: '/images/our-business/seveny/hero.webp',
-  heroOverlayImg: '/images/shared/hero-network-overlay-62360c.webp',
+  heroOverlayImg: '/images/our-business/backgrounds/hero-network-overlay-62360c.webp',
   heroObjectPosition: 'center center',
   aboutDesc:
     'Seveny creates premium corporate events that combine innovative technology, immersive experiences, and seamless event management to deliver meaningful engagement beyond the venue.',
@@ -1049,34 +1013,18 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       img: '/images/our-business/seveny/services/event-analytics-insights.webp',
     },
   ],
-  servicesBg: '/images/shared/services-bg.webp',
+  servicesBg: '/images/our-business/backgrounds/services-bg.webp',
 
   visionLabel: 'OUR VISION',
   visionTextSize: 'large',
   visionQuote:
     'Corporate events that combine immersive experiences, intelligent technology, and meaningful engagement to create lasting business impact.',
-  visionImg: '/images/shared/hero-network-overlay-62360c.webp',
+  visionImg: '/images/our-business/backgrounds/hero-network-overlay-62360c.webp',
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore Seveny’s Work',
-  featuredWorkIndex: 1,
-  works: [
-    {
-      name: 'Signature Corporate Event Production',
-      tag: 'Event Management · Experiential Production',
-      img: '/images/shared/strategic-pr-campaign-ccd63a.webp',
-    },
-    {
-      name: 'Sinau Print Marketplace Website',
-      tag: 'Branding · Survey and Analytics',
-      img: '/images/shared/sinau-print-marketplace-76333edbd7.webp',
-    },
-    {
-      name: 'X-1 Tire Company Profile Website',
-      tag: 'Digital Campaign · Website',
-      img: '/images/shared/x1-tire-website-c7f44b16ce.webp',
-    },
-  ],
+  featuredWorkIndex: 0,
+  works: [],
 
   otherBusinessesTitle: 'Explore Other Businesses',
   featuredOtherBusinessIndex: 1,
@@ -1084,29 +1032,29 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
     {
       slug: 'personice',
       name: 'Personice',
-      img: '/images/shared/personice-a6a6869660.webp',
+      img: '/images/our-business/previews/personice-a6a6869660.webp',
     },
     {
       slug: 'loxlive',
       name: 'LoxLive',
-      img: '/images/shared/loxlive-f0a3422706.webp',
+      img: '/images/our-business/previews/loxlive-f0a3422706.webp',
     },
     {
       slug: 'adsvar',
       name: 'Adsvar',
-      img: '/images/shared/adsvar-8828f15721.webp',
+      img: '/images/our-business/previews/adsvar-8828f15721.webp',
     },
     {
       slug: 'seveny',
       name: 'Seveny',
-      img: '/images/shared/seveny-937131ba40.webp',
+      img: '/images/our-business/previews/seveny-937131ba40.webp',
     },
   ],
 
   ctaTitle: "Let's Create Your Next Signature Event",
   ctaDesc:
     'From concept and technology to production and guest experience, Seveny helps organizations create memorable events with clear purpose and lasting business impact.',
-  ctaImg: '/images/shared/cta-bg-debfb86c03.webp',
+  ctaImg: '/images/our-business/backgrounds/cta-bg-debfb86c03.webp',
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
@@ -1114,7 +1062,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
 },
 ];
 
-export const TESTIMONIALS_DUMMY_DATA = [
+const LEGACY_TESTIMONIALS_DUMMY_DATA = [
   {
     id: 1,
     name: "RIZKI SIAHAAN",
@@ -1151,7 +1099,7 @@ const LEGACY_CASE_STUDIES_DUMMY_DATA: CaseStudyArticle[] = [
     dateLabel: 'DECEMBER 2025',
     dateValue: '2025-12-20',
     description: 'Organizing a national-scale sporting event requires seamless coordination, high-quality production, and reliable broadcast technology to ensure fans across the country can engage with the tournament.',
-    coverImage: '/images/shared/building-trust.webp',
+    coverImage: '/images/about-us/company-leadership/building-trust.webp',
     coverImageAlt: 'Badminton Match Venue',
     sections: [
       {
@@ -1822,3 +1770,28 @@ export const LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
 
 void LEGACY_CASE_STUDIES_DUMMY_DATA;
 void LEGACY_LEADERSHIP_THOUGHTS_DUMMY_DATA;
+void LEGACY_TESTIMONIALS_DUMMY_DATA;
+
+export const TESTIMONIALS_DUMMY_DATA = [
+  {
+    id: 1,
+    name: 'ENTERPRISE OPERATIONS LEAD',
+    role: 'ERP Transformation Program',
+    text: 'Arsalynk brought finance, inventory, and operational reporting into one connected ERP workflow. Our teams now work from the same information, approvals move faster, and management has a clearer view of daily performance.',
+    avatar: '/images/projects/sinau-print-erp/1.webp',
+  },
+  {
+    id: 2,
+    name: 'TECHNOLOGY DIRECTOR',
+    role: 'Connected Infrastructure Program',
+    text: 'The IoT implementation gave us reliable visibility into field assets and system conditions. Alerts are clearer, operational response is faster, and maintenance decisions are now supported by real-time evidence.',
+    avatar: '/images/projects/myboss-iot-system/1.webp',
+  },
+  {
+    id: 3,
+    name: 'FINANCE & DATA LEAD',
+    role: 'Enterprise Intelligence Program',
+    text: 'Automated reconciliation and governed dashboards reduced repetitive reporting work while giving leadership a consistent source of truth for financial and operational decisions.',
+    avatar: '/images/projects/altatic-analytic/1.webp',
+  },
+];

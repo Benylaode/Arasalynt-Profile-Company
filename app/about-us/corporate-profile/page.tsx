@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 
-const IconChevronDown = ({ size = 32 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 32 21" fill="none" aria-hidden="true">
-    <path d="M2 2.25 16 17.5 30 2.25" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+const IconChevronDown = () => (
+  <svg width="32" height="22" viewBox="0 0 32 22" fill="none" aria-hidden="true">
+    <path d="M3 4L16 17L29 4" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -28,38 +28,48 @@ const FOUNDATION_SLIDES = [
     src: '/images/corporate-profile/team-discussion.webp',
     alt: 'Arsalynk team discussing a project',
     position: 'center 47%',
+    title: 'Dependability First',
+    description: 'We earn lasting partnerships through proven system reliability, clear communication, and precise execution across every project lifecycle.',
   },
   {
     src: '/images/corporate-profile/team-collaboration.webp',
     alt: 'Arsalynk team collaborating around a laptop',
     position: 'center 56%',
+    title: 'Cross-Disciplinary IT Expertise',
+    description: 'We merge deep technical knowledge across enterprise systems, data architecture, and IoT engineering into single-source, fully integrated solutions.',
   },
   {
     src: '/images/corporate-profile/team-event.webp',
     alt: 'Arsalynk team at a company event',
     position: 'center 52%',
+    title: 'Built for System Continuity',
+    description: 'Our delivery and management frameworks are built to scale sustainably, ensuring high-availability operations without operational bottlenecks or single points of failure.',
   },
 ];
 
 const SERVICES = [
   {
     title: ['Enterprise Data', '& Intelligence'],
-    image: '/images/corporate-profile/service-data.webp',
+    description: 'Unifying data pipelines, advanced analytics, and actionable operational insights.',
+    image: '/images/corporate-profile/capabilities/enterprise-data-intelligence.webp',
     alt: 'Enterprise data and intelligence illustration',
   },
   {
-    title: ['Customer', 'Acquisition'],
-    image: '/images/corporate-profile/service-data.webp',
-    alt: 'Customer acquisition illustration',
+    title: ['Scalable Systems', '& IoT Integration'],
+    description: 'Connecting devices, hardware, and networks into high-performance digital environments.',
+    image: '/images/corporate-profile/capabilities/scalable-systems-iot.webp',
+    alt: 'Scalable systems and IoT integration illustration',
   },
   {
-    title: ['Mission-Critical', 'Broadcast'],
-    image: '/images/corporate-profile/service-broadcast.webp',
-    alt: 'Mission-critical broadcast illustration',
+    title: ['Mission-Critical', 'IT Infrastructure'],
+    description: 'Building secure, high-availability networks and cloud systems engineered for uninterrupted uptime.',
+    image: '/images/corporate-profile/capabilities/mission-critical-infrastructure.webp',
+    alt: 'Mission-critical IT infrastructure illustration',
   },
   {
     title: ['Integrated', 'Execution'],
-    image: '/images/corporate-profile/service-execution.webp',
+    description: 'Deploying unified ERP workflows that reduce friction and improve enterprise productivity.',
+    image: '/images/corporate-profile/capabilities/integrated-execution.webp',
     alt: 'Integrated execution illustration',
   },
 ];
@@ -68,13 +78,13 @@ const OTHER_INFORMATION = [
   {
     href: '/about-us/company-leadership',
     title: 'Company Leadership',
-    image: '/images/shared/leadership-portrait.webp',
+    image: '/images/about-us/company-leadership/leadership-portrait.webp',
     imagePosition: 'center 53%',
   },
   {
     href: '/about-us/ecosystem-philosophy',
     title: 'Ecosystem Philosophy',
-    image: '/images/shared/ecosystem-philosophy-card.webp',
+    image: '/images/about-us/cards/ecosystem-philosophy-card.webp',
     imagePosition: 'center center',
   },
 ];
@@ -154,8 +164,13 @@ export default function CorporateProfilePage() {
   }, []);
 
 
-  const handleScrollDown = () => {
-    document.getElementById('beyond-expectations')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const handleScrollDown = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    const target = document.getElementById('beyond-expectations');
+    if (target) {
+      const top = target.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -167,14 +182,14 @@ export default function CorporateProfilePage() {
         className="relative h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#050914] max-[640px]:rounded-b-[24px]"
       >
         <img
-          src="/images/about-us/corporate-profile-hero.jpg"
+          src="/images/about-us/corporate-profile-hero.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-bottom"
         />
 
         <img
-          src="/images/shared/network-overlay.webp"
+          src="/images/about-us/network-overlay.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute bottom-[-44%] left-1/2 h-[125%] w-[250%] max-w-none -translate-x-1/2 select-none object-contain opacity-70 max-[640px]:bottom-[-16%] max-[640px]:h-[82%] max-[640px]:w-[220%]"
@@ -201,26 +216,29 @@ export default function CorporateProfilePage() {
           </h1>
         </div>
 
-        <button
-          type="button"
-          onClick={handleScrollDown}
-          aria-label="Scroll to corporate profile content"
+        <a
+          href="#beyond-expectations"
+          onClick={(e) => {
+            e.preventDefault();
+            handleScrollDown();
+          }}
+          aria-label="Scroll to CTA"
           className="absolute left-1/2 bottom-[clamp(34px,4.5vw,71px)] z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white backdrop-blur-[4px] transition-transform duration-300 hover:scale-105"
           style={{ background: 'linear-gradient(230.45deg, rgba(247,247,247,.21) -7.74%, rgba(247,247,247,.105) 81.5%)' }}
         >
-          <IconChevronDown size={32} />
-        </button>
+          <IconChevronDown />
+        </a>
       </section>
 
       {/* OUR FOUNDATION */}
-      <section id="corporate-foundation" className="relative flex w-full scroll-mt-20 flex-col items-center bg-[#F7F7F7] pt-[clamp(72px,5.729vw,110px)] pb-[clamp(72px,5.729vw,110px)]">
+      <section id="our-foundation" className="relative flex w-full scroll-mt-20 flex-col items-center bg-[#F7F7F7] pt-[clamp(72px,5.729vw,110px)] pb-[clamp(72px,5.729vw,110px)]">
         <div className="flex w-full max-w-[896px] px-6 flex-col items-center gap-[clamp(20px,1.667vw,32px)] text-center">
           <SectionLabel>OUR FOUNDATION</SectionLabel>
           <h2 className="font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
             The Backbone<br />of Modern Enterprise
           </h2>
           <p className="font-body w-full text-[clamp(15px,1.042vw,20px)] font-normal leading-[1.6] tracking-[0.02em] text-[#292929]">
-            Arsalynk Group was founded on a singular realization: modern enterprises<br className="max-[768px]:hidden" /> do not fail due to a lack of ambition; they stall due to fragmentation.
+            Arsalynk was founded on a singular realization: modern enterprises do not fail due to a lack of ambition; they stall due to fragmented technology.
           </p>
         </div>
 
@@ -279,6 +297,19 @@ export default function CorporateProfilePage() {
                       : 'opacity-[0.36] group-hover:opacity-[0.46]'
                   }`}
                 />
+
+                <div className={`absolute inset-x-[clamp(24px,3vw,56px)] bottom-[clamp(30px,3vw,58px)] z-[4] max-w-[760px] transition-[opacity,transform] duration-700 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <div className="mb-4 flex items-center gap-2.5 font-body text-[10px] font-bold uppercase tracking-[0.08em] text-[#E6FF2A] sm:text-[12px]">
+                    <span className="h-2 w-2 shrink-0 bg-[#E6FF2A]" />
+                    Foundation Principle
+                  </div>
+                  <h3 className="font-heading text-[clamp(30px,3.2vw,60px)] font-medium leading-[1.02] tracking-[-0.025em] text-white">
+                    {slide.title}
+                  </h3>
+                  <p className="mt-4 max-w-[690px] font-body text-[clamp(13px,1vw,18px)] leading-[1.6] text-white/80">
+                    {slide.description}
+                  </p>
+                </div>
 
                 {/* Fade hitam tipis hanya di ujung luar card kiri dan kanan. */}
                 {offset === -1 && (
@@ -346,9 +377,9 @@ export default function CorporateProfilePage() {
       </section>
 
       {/* VISION & MISSION */}
-      <section className="relative w-full overflow-hidden bg-[linear-gradient(180deg,#101010_0%,#1A3E9E_95.29%)] px-[clamp(24px,13.333vw,256px)] py-[clamp(100px,8.54vw,164px)] text-white">
+      <section id="vision-mission" className="relative w-full scroll-mt-24 overflow-hidden bg-[linear-gradient(180deg,#101010_0%,#1A3E9E_95.29%)] px-[clamp(24px,13.333vw,256px)] py-[clamp(100px,8.54vw,164px)] text-white">
         <img
-          src="/images/shared/network-overlay.webp"
+          src="/images/about-us/network-overlay.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute bottom-[-31px] left-1/2 w-[103.02vw] max-w-none -translate-x-1/2 opacity-[0.30] mix-blend-screen"
@@ -360,23 +391,23 @@ export default function CorporateProfilePage() {
           <div className="flex w-full flex-col items-center gap-[clamp(20px,1.667vw,32px)] text-center">
             <SectionLabel theme="lime">OUR VISION</SectionLabel>
             <h2 className="font-heading text-[clamp(40px,3.333vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#F7F7F7]">
-              We envision a future where enterprises thrive<br className="max-[1024px]:hidden" /> through one unified ecosystem built for growth,<br className="max-[1024px]:hidden" /> resilience, and execution
+              We envision a future where enterprises thrive through seamlessly integrated ERP and IT needs built for growth, resilience, and operational precision.
             </h2>
           </div>
 
           <div className="flex w-full flex-col items-center gap-[clamp(20px,1.667vw,32px)] text-center">
             <SectionLabel theme="lime">MISSION</SectionLabel>
             <p className="font-body text-[clamp(18px,1.458vw,28px)] font-normal leading-[1.6] tracking-[-0.02em] text-[#F7F7F7]">
-              Our mission is to make corporate execution flawless,<br className="max-[768px]:hidden" /> predictable, and remarkably capital-efficient.
+              Our mission is to make enterprise IT execution flawless, predictable, and remarkably capital-efficient.
             </p>
           </div>
         </NarrowContainer>
       </section>
 
       {/* OUR CAPABILITIES */}
-      <section className="relative w-full overflow-hidden bg-[#F7F7F7] px-[6vw] py-[clamp(100px,8.125vw,156px)] max-[1199px]:px-[4vw]">
+      <section id="our-capabilities" className="relative w-full scroll-mt-24 overflow-hidden bg-[#F7F7F7] px-[6vw] py-[clamp(100px,8.125vw,156px)] max-[1199px]:px-[4vw]">
         <img
-          src="/images/shared/network-overlay.webp"
+          src="/images/about-us/network-overlay.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-[-22%] w-[104%] max-w-none -translate-x-1/2 opacity-[0.09] mix-blend-multiply"
@@ -388,7 +419,7 @@ export default function CorporateProfilePage() {
           <div className="flex flex-col items-center gap-[clamp(20px,1.667vw,32px)] text-center">
             <SectionLabel>OUR CAPABILITIES</SectionLabel>
             <h2 className="font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
-              Make Sustainable<br />Business Excellence
+              Enabling Sustainable<br />Digital Excellence
             </h2>
           </div>
 
@@ -404,7 +435,7 @@ export default function CorporateProfilePage() {
                   <img
                     src={service.image}
                     alt={service.alt}
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                    className="h-full w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                   />
                   <div
                     className="pointer-events-none absolute inset-0 bg-black/[0.05]"
@@ -418,6 +449,9 @@ export default function CorporateProfilePage() {
                   <br />
                   {service.title[1]}
                 </h3>
+                <p className="font-body text-[clamp(12px,.85vw,16px)] leading-[1.6] text-[#424242]">
+                  {service.description}
+                </p>
               </article>
             ))}
           </div>

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
+import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import { LEADERSHIP_THOUGHTS_DUMMY_DATA } from '@/lib/db/dummy';
 
 /* ==========================================================================
@@ -11,29 +12,16 @@ import { LEADERSHIP_THOUGHTS_DUMMY_DATA } from '@/lib/db/dummy';
    ========================================================================== */
 
 const ASSETS = {
-  hero: '/images/leadership-thoughts/hero-handshake.webp',
-  heroNetwork: '/images/shared/network-overlay.webp',
+  hero: '/images/leadership-thoughts/hero-leadership-thoughts-v2.webp',
 } as const;
 const PAGE_SIZE = 9;
 
 /* ── Pure SVG icons ─────────────────────────────────────────────────────── */
 
-function IconChevronDown({ size = 24 }: { size?: number }) {
+function IconChevronDown() {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="m5 9 7 7 7-7"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg width="32" height="22" viewBox="0 0 32 22" fill="none" aria-hidden="true">
+      <path d="M3 4L16 17L29 4" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -284,14 +272,14 @@ export default function LeadershipThoughtsPage() {
 
   const handleScrollDown = () => {
     document
-      .getElementById('featured-thoughts')
+      .getElementById('beyond-expectations')
       ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   // Already defined above via useCallback
 
   return (
-    <main className="w-full overflow-hidden bg-[#F7F7F7] text-[#101010]">
+    <main className="w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
       {/* ==================================================================
           HERO
           ================================================================== */}
@@ -303,23 +291,7 @@ export default function LeadershipThoughtsPage() {
         <img
           src={ASSETS.hero}
           alt="Leadership thoughts hero background"
-          className="absolute inset-0 h-full w-full object-cover object-center brightness-[0.52] saturate-[0.9]"
-        />
-        <img
-          src={ASSETS.heroNetwork}
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-40 mix-blend-plus-lighter"
-        />
-
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(26,62,158,0.82)_0%,rgba(26,62,158,0.14)_54%,rgba(16,16,16,0.16)_64%,#101010_100%)] mix-blend-multiply"
-        />
-
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(25,69,180,0.08)_0%,rgba(5,10,22,0.05)_38%,rgba(0,0,0,0.38)_100%)]"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
 
         <div className="relative z-10 mx-auto flex w-full max-w-[900px] flex-col items-center px-6 text-center">
@@ -337,14 +309,26 @@ export default function LeadershipThoughtsPage() {
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={handleScrollDown}
-          aria-label="Scroll to featured thoughts"
-          className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 bg-white/[0.14] text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20"
+        <a
+          href="#beyond-expectations"
+          onClick={(e) => {
+            e.preventDefault();
+            const targets = Array.from(document.querySelectorAll('#beyond-expectations'));
+            const visibleTarget = targets.find((el) => {
+              const rect = el.getBoundingClientRect();
+              return rect.height > 0 && window.getComputedStyle(el).display !== 'none';
+            });
+            if (visibleTarget) {
+              const top = visibleTarget.getBoundingClientRect().top + window.scrollY;
+              window.scrollTo({ top, behavior: 'smooth' });
+            }
+          }}
+          aria-label="Scroll to CTA"
+          className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20"
+          style={{ background: 'linear-gradient(230.45deg, rgba(247,247,247,0.21) -7.74%, rgba(247,247,247,0.105) 81.5%)' }}
         >
-          <IconChevronDown size={32} />
-        </button>
+          <IconChevronDown />
+        </a>
       </section>
 
       {/* ==================================================================
@@ -569,6 +553,7 @@ export default function LeadershipThoughtsPage() {
           )}
         </div>
       </section>
+      <BeyondExpectations />
     </main>
   );
 }

@@ -5,9 +5,18 @@ import { getAllBusinesses } from '@/lib/db/actions';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 
 export const metadata: Metadata = {
-  title: 'Our Business — Arsalynk',
+  title: 'Our Integrated Business Ecosystem',
   description:
     'Explore the Arsalynk ecosystem — from IT infrastructure and data analytics to media, branding, and beyond.',
+  keywords: ['Arsalynk business ecosystem', 'technology and data Indonesia', 'creative business ecosystem', 'integrated enterprise capabilities'],
+  alternates: { canonical: '/our-business' },
+  openGraph: {
+    title: 'Our Integrated Business Ecosystem | Arsalynk',
+    description: 'Technology, data, strategy, communication, and creative capabilities connected in one ecosystem.',
+    url: '/our-business',
+    images: ['/images/our-business/hero-business.webp'],
+  },
+  twitter: { card: 'summary_large_image', title: 'Our Integrated Business Ecosystem | Arsalynk', description: 'Explore technology, data, strategy, communication, and creative capabilities across Arsalynk.', images: ['/images/our-business/hero-business.webp'] },
 };
 
 type Business = Awaited<ReturnType<typeof getAllBusinesses>>[number];
@@ -200,16 +209,16 @@ export default async function OurBusinessPage() {
       <section
         id="hero"
         aria-label="Our Business"
-        className="relative h-[800px] w-full overflow-hidden rounded-b-[42px] bg-[#132B75] max-[1024px]:h-[680px] max-[768px]:h-[590px] max-[480px]:h-[540px] max-[768px]:rounded-b-[28px]"
+        className="relative isolate flex h-[clamp(560px,41.666vw,800px)] w-full items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-[#132B75]"
       >
         <img
           src={HERO_IMAGE}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-center brightness-[0.52] saturate-[0.9]"
         />
 
-        <div className="absolute inset-0 z-[2] flex items-center justify-center px-6">
+        <div className="relative z-10 mx-auto flex w-full max-w-[900px] items-center justify-center px-6">
           <div className="flex w-full max-w-[766px] flex-col items-center gap-6 text-center max-[768px]:gap-[18px]">
             <div className="flex items-center justify-center gap-2 font-body text-[9px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
               <span>Home</span>
@@ -217,11 +226,11 @@ export default async function OurBusinessPage() {
               <span>Our Business</span>
             </div>
 
-            <h1 className="font-heading text-[96px] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7] max-[1280px]:text-[78px] max-[1024px]:text-[68px] max-[768px]:text-[52px] max-[480px]:text-[42px]">
+            <h1 className="font-heading text-[clamp(52px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
               Our Business
             </h1>
 
-            <p className="max-w-[766px] font-body text-[20px] font-normal leading-[1.6] tracking-[0.02em] text-white max-[1024px]:max-w-[650px] max-[1024px]:text-[18px] max-[768px]:max-w-[520px] max-[768px]:text-[15px] max-[480px]:text-[14px]">
+            <p className="max-w-[650px] font-body text-[clamp(14px,1.042vw,20px)] font-light leading-[1.6] tracking-[0.02em] text-white/95">
               An integrated ecosystem of capabilities designed to solve complex
               challenges, accelerate growth, and create measurable business
               impact.
@@ -232,7 +241,7 @@ export default async function OurBusinessPage() {
         <a
           href="#beyond-expectations"
           aria-label="Scroll to CTA"
-          className="absolute bottom-[71px] left-1/2 z-[4] flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full border border-[rgba(175,175,175,0.25)] text-white backdrop-blur-[4px] transition-transform duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/30 max-[768px]:bottom-[48px] max-[768px]:h-14 max-[768px]:w-14 max-[768px]:[&_svg]:h-[15px] max-[768px]:[&_svg]:w-[24px]"
+          className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/30"
           style={{
             background:
               'linear-gradient(230.45deg, rgba(247,247,247,0.21) -7.74%, rgba(247,247,247,0.105) 81.5%)',

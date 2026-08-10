@@ -7,23 +7,23 @@ const PILLARS_DATA = [
   {
     id: 0,
     number: "01",
-    category: "TECHNOLOGY",
-    action: "WE BUILD",
-    description: "Building resilient enterprise infrastructure",
+    category: "UNCOVER",
+    action: "THE POTENTIAL",
+    description: "Discover opportunities across your enterprise ecosystem.",
   },
   {
     id: 1,
     number: "02",
-    category: "DATA & SURVEY",
-    action: "WE UNDERSTAND",
-    description: "Turning data into strategic decisions",
+    category: "ARCHITECT",
+    action: "THE SOLUTION",
+    description: "Engineer high-impact ERP and IoT integration.",
   },
   {
     id: 2,
     number: "03",
-    category: "MEDIA",
-    action: "WE AMPLIFY",
-    description: "Delivering ideas with measurable impact",
+    category: "CONNECT",
+    action: "THE FUTURE",
+    description: "Connect current operations with future-ready systems.",
   },
 ];
 
@@ -200,7 +200,7 @@ export default function BridgePossibility() {
 
           {/* Animated Arrow GIF */}
           <img
-            src="/images/gif/Arrow%20GIF.gif"
+            src="/images/gif/Arrow%20GIF.webp"
             alt="Connecting Arrow"
             className="absolute z-[2] w-[89%] h-auto object-contain pointer-events-none select-none opacity-80"
           />
@@ -344,7 +344,11 @@ export default function BridgePossibility() {
             Possibility
           </h2>
 
-          <p className="w-full font-body text-[14px] font-normal leading-relaxed text-white/85 max-w-[400px] max-[100px]:text-[11px]">
+          <p className="w-full max-w-[400px] font-body text-[14px] font-normal leading-relaxed text-white/85 max-[100px]:text-[11px]">
+            We connect discovery, architecture, and deployment into one continuous transformation path&mdash;turning fragmented enterprise operations into integrated, future-ready capabilities.
+          </p>
+
+          <p className="hidden">
             Arsalynk was built on a singular belief: the greatest challenge
             facing modern organizations isn&apos;t ambition — it&apos;s
             fragmentation. As complexity grows, disconnected capabilities
@@ -353,10 +357,10 @@ export default function BridgePossibility() {
 
           <div className="pt-4">
             <Link 
-              href="/about-us" 
+              href="/our-solution"
               className="inline-flex items-center justify-center px-8 py-4 bg-[#E6FF2A] text-[#101010] font-body text-[14px] font-extrabold uppercase tracking-wider rounded-full no-underline transition-[background-color,transform,box-shadow] duration-200 hover:bg-[#d8f21d] hover:shadow-[0_8px_25px_rgba(230,255,42,0.35)] hover:-translate-y-0.5"
             >
-              LEARN ABOUT US
+              EXPLORE OUR SOLUTION
             </Link>
           </div>
         </div>

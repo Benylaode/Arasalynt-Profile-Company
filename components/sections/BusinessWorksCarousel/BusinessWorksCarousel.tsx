@@ -153,18 +153,22 @@ export default function BusinessWorksCarousel({
             return (
               <article
                 key={`${work.name}-${index}`}
-                onClick={() => {
-                  if (!isActive) {
-                    setIsMoving(true);
-                    resetProgress();
-                    setActiveIndex(index);
-                  }
-                }}
                 className={`group relative h-full w-[var(--slide-width)] shrink-0 overflow-hidden rounded-[32px] bg-black ${
                   isActive ? 'z-10' : 'z-0'
                 }`}
               >
-                <Link href={href} className="block h-full w-full no-underline">
+                <Link
+                  href={href}
+                  onClick={(e) => {
+                    if (!isActive) {
+                      e.preventDefault();
+                      setIsMoving(true);
+                      resetProgress();
+                      setActiveIndex(index);
+                    }
+                  }}
+                  className="block h-full w-full no-underline"
+                >
                   {work.img && (
                     <img
                       src={work.img}

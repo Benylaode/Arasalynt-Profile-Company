@@ -19,6 +19,7 @@ type Scene = {
   title: string;
   titleLines: ReactNode;
   tags: string[];
+  description: string;
 };
 
 type MotionState = {
@@ -63,44 +64,47 @@ const MOTION_DURATION_MS = 1280;
 const ASSET_ROOT = '/images/services/it-motion';
 
 const SCENE_HREFS: Record<number, string> = {
-  0: '/insight-programs/Case-Studies/connecting-field-operations-with-myboss-iot',
-  1: '/insight-programs/Case-Studies/turning-operational-data-into-decisions-with-altatic',
-  2: '/insight-programs/Case-Studies/producing-a-cinematic-portrait-of-padel-arena',
+  0: '/our-solution#enterprise-resource-planning',
+  1: '/our-solution#internet-of-things',
+  2: '/our-solution#services',
 };
 
 const SCENES: Scene[] = [
   {
     id: 0,
     number: '01',
-    title: 'Information Technology Infrastructure',
+    title: 'Connected Infrastructure',
     titleLines: (
       <>
-        Information<br />Technology<br />Infrastructure
+        Connected<br />Infrastructure
       </>
     ),
-    tags: ['SOFTWARE DEVELOPMENT', 'CLOUD', 'INFRASTRUCTURE', 'More...'],
+    tags: ['DEVICES', 'DATA', 'SOFTWARE'],
+    description: 'Bringing devices, data, and software together under one roof.',
   },
   {
     id: 1,
     number: '02',
-    title: 'Data Survey and Analytics',
+    title: 'System Convergence',
     titleLines: (
       <>
-        Data Survey<br />and Analytics
+        System<br />Convergence
       </>
     ),
-    tags: ['DATA ANALYTICS', 'COMMUNITY SURVEY', 'CAMPAIGN', 'More...'],
+    tags: ['AUTOMATION', 'INTELLIGENCE', 'INTEGRATION'],
+    description: 'Turning data and hardware into automated, actionable intelligence.',
   },
   {
     id: 2,
     number: '03',
-    title: 'Digital Media and Impact',
+    title: 'Enterprise Scalability',
     titleLines: (
       <>
-        Digital Media<br />and Impact
+        Enterprise<br />Scalability
       </>
     ),
-    tags: ['BRANDING', 'ADS/PROMOTION', 'CAMPAIGN MAKING', 'More...'],
+    tags: ['HIGH AVAILABILITY', 'SECURITY', 'GROWTH'],
+    description: 'Ensuring systems grow seamlessly with high availability and security.',
   },
 ];
 
@@ -593,7 +597,7 @@ export default function ITInfrastructure() {
         <div className={styles.desktopCopyArea}>
           <div className={styles.desktopLabel}>
             <span aria-hidden="true" />
-            ONE ECOSYSTEM, THREE PILLARS
+            THREE PILLARS OF INTEGRATION
           </div>
 
           <div className={styles.desktopCopyViewport}>
@@ -668,7 +672,7 @@ export default function ITInfrastructure() {
         <div className={styles.mobileCopyArea}>
           <div className={styles.mobileLabel}>
             <span aria-hidden="true" />
-            ONE ECOSYSTEM, THREE PILLARS
+            THREE PILLARS OF INTEGRATION
           </div>
 
           <div className={styles.mobileCopyViewport}>

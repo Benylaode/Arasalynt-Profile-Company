@@ -1,5 +1,8 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
+import { SITE_URL } from '@/lib/constants';
 
 const IconArrow = ({ direction = 'right', size = 20 }: { direction?: 'left' | 'right'; size?: number }) => (
   <svg
@@ -137,7 +140,7 @@ const PROJECT_DETAILS_MAP: Record<string, {
   'sinau-print-erp': {
     title: 'Manifesting The A-Z Print Solution, Marketplace Website Optimization for Sinau Print',
     corporation: 'Sinau Print',
-    tags: ['Website Marketplace', 'E-Commerce', 'ERP System'],
+    tags: ['Enterprise Systems', 'ERP & Marketplace', 'E-Commerce'],
     heroImage: '/images/projects/sinau-print-erp/1.webp',
     gallery1: '/images/projects/sinau-print-erp/2.webp',
     gallery2: '/images/projects/sinau-print-erp/3.webp',
@@ -160,7 +163,7 @@ const PROJECT_DETAILS_MAP: Record<string, {
   'artic-complex-web': {
     title: 'Artic Complex Web Architecture & High-Performance Data Portal',
     corporation: 'Artic Analytica',
-    tags: ['Web Platform', 'Data Architecture', 'Complex Analytics'],
+    tags: ['Digital Platforms', 'Data Portal Development', 'Data Architecture'],
     heroImage: '/images/projects/artic-complex-web/1.webp',
     gallery1: '/images/projects/artic-complex-web/2.webp',
     gallery2: '/images/projects/artic-complex-web/3.webp',
@@ -183,7 +186,7 @@ const PROJECT_DETAILS_MAP: Record<string, {
   'myboss-iot-system': {
     title: 'MyBoss Connected IoT Hardware & Real-Time Control System',
     corporation: 'MyBoss',
-    tags: ['IoT System', 'IT Infrastructure', 'Hardware Control'],
+    tags: ['Connected Technology', 'IoT Integration', 'Hardware Control'],
     heroImage: '/images/projects/myboss-iot-system/1.webp',
     gallery1: '/images/projects/myboss-iot-system/2.webp',
     gallery2: '/images/projects/myboss-iot-system/3.webp',
@@ -206,7 +209,7 @@ const PROJECT_DETAILS_MAP: Record<string, {
   'altatic-analytic': {
     title: 'Altatic Data Analytics & Intelligence Dashboard Platform',
     corporation: 'Altatic',
-    tags: ['Survey & Analytics', 'Data Platform', 'Business Intelligence'],
+    tags: ['Data & Intelligence', 'Analytics Dashboard', 'Business Intelligence'],
     heroImage: '/images/projects/altatic-analytic/1.webp',
     gallery1: '/images/projects/altatic-analytic/2.webp',
     gallery2: '/images/projects/altatic-analytic/3.webp',
@@ -229,7 +232,7 @@ const PROJECT_DETAILS_MAP: Record<string, {
   'web-media-profile': {
     title: 'Web Media Corporate Profile & Interactive Digital Presence',
     corporation: 'Web Media',
-    tags: ['Media & Creative', 'Corporate Profile', 'Digital Branding'],
+    tags: ['Brand & Digital Experience', 'Corporate Profile Website', 'Digital Branding'],
     heroImage: '/images/projects/web-media-profile/1.webp',
     gallery1: '/images/projects/web-media-profile/2.webp',
     gallery2: '/images/projects/web-media-profile/3.webp',
@@ -252,7 +255,7 @@ const PROJECT_DETAILS_MAP: Record<string, {
   'kajian-kelayakan-gik': {
     title: 'Kajian Kelayakan Pengembangan Gedung Industri Kreatif (GIK) sebagai Destinasi Wisata Belanja Oleh-Oleh Khas Kota Semarang',
     corporation: 'Artic Analytica',
-    tags: ['Data & Research', 'Feasibility Study', 'Tourism Development'],
+    tags: ['Research & Strategy', 'Feasibility Study', 'Tourism Development'],
     heroImage: '/images/projects/kajian-kelayakan-gik/1.webp',
     gallery1: '/images/projects/kajian-kelayakan-gik/1.webp',
     gallery2: '/images/projects/kajian-kelayakan-gik/1.webp',
@@ -272,7 +275,7 @@ const PROJECT_DETAILS_MAP: Record<string, {
   'panduan-perubahan-perilaku-stunting': {
     title: 'Penyusunan Buku Panduan Perubahan Perilaku Pendampingan Keluarga Dalam Upaya Percepatan Penurunan Risiko Stunting di Tingkat Kelurahan',
     corporation: 'Artic Analytica',
-    tags: ['Data & Research', 'Social Research', 'Public Health'],
+    tags: ['Research & Social Impact', 'Behaviour Change Research', 'Public Health'],
     heroImage: '/images/projects/panduan-perubahan-perilaku-stunting/1.webp',
     gallery1: '/images/projects/panduan-perubahan-perilaku-stunting/1.webp',
     gallery2: '/images/projects/panduan-perubahan-perilaku-stunting/1.webp',
@@ -292,7 +295,7 @@ const PROJECT_DETAILS_MAP: Record<string, {
   'desain-pelatihan-wasit-semarang': {
     title: 'Desain Pelatihan Wasit Kota Semarang',
     corporation: 'The Drafroom',
-    tags: ['Media & Creative', 'Training Design', 'Sports Communication'],
+    tags: ['Communication & Learning', 'Learning Experience Design', 'Sports Communication'],
     heroImage: '/images/projects/desain-pelatihan-wasit-semarang/1.webp',
     gallery1: '/images/projects/desain-pelatihan-wasit-semarang/1.webp',
     gallery2: '/images/projects/desain-pelatihan-wasit-semarang/1.webp',
@@ -312,7 +315,7 @@ const PROJECT_DETAILS_MAP: Record<string, {
   'video-portret-padel-arena': {
     title: 'Produksi Konten Video Portret Padel Arena',
     corporation: 'LoxLive',
-    tags: ['Media & Creative', 'Video Production', 'Sports Portrait'],
+    tags: ['Media Production', 'Cinematic Video Production', 'Sports Portrait'],
     heroImage: '/images/projects/video-portret-padel-arena/1.webp',
     gallery1: '/images/projects/video-portret-padel-arena/1.webp',
     gallery2: '/images/projects/video-portret-padel-arena/1.webp',
@@ -331,16 +334,87 @@ const PROJECT_DETAILS_MAP: Record<string, {
   },
 };
 
+export function generateStaticParams() {
+  return Object.keys(PROJECT_DETAILS_MAP).map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = PROJECT_DETAILS_MAP[slug];
+
+  if (!project) {
+    return { title: 'Work Not Found', robots: { index: false, follow: false } };
+  }
+
+  const canonical = `/our-works/${slug}`;
+  const title = `${project.title} — Project`;
+
+  return {
+    title,
+    description: project.description,
+    keywords: [...project.tags, project.corporation, 'Arsalynk portfolio', 'enterprise project Indonesia'],
+    alternates: { canonical },
+    openGraph: {
+      type: 'article',
+      title: `${project.title} | Arsalynk`,
+      description: project.description,
+      url: canonical,
+      images: [{ url: project.heroImage, alt: project.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${project.title} | Arsalynk`,
+      description: project.description,
+      images: [project.heroImage],
+    },
+  };
+}
+
 export default async function WorkDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const currentProject = PROJECT_DETAILS_MAP[slug] || PROJECT_DETAILS_MAP['sinau-print-erp'];
+  const currentProject = PROJECT_DETAILS_MAP[slug];
+
+  if (!currentProject) notFound();
+
+  const canonicalUrl = `${SITE_URL}/our-works/${slug}`;
+  const projectSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CreativeWork',
+        '@id': `${canonicalUrl}/#project`,
+        name: currentProject.title,
+        description: currentProject.description,
+        url: canonicalUrl,
+        image: `${SITE_URL}${currentProject.heroImage}`,
+        creator: { '@id': `${SITE_URL}/#organization` },
+        about: currentProject.tags,
+        keywords: currentProject.tags.join(', '),
+        inLanguage: 'en',
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${canonicalUrl}/#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Our Works', item: `${SITE_URL}/our-works` },
+          { '@type': 'ListItem', position: 3, name: currentProject.title, item: canonicalUrl },
+        ],
+      },
+    ],
+  };
 
   return (
     <main className="w-full bg-[#F7F7F7] text-[#101010]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema).replace(/</g, '\\u003c') }} />
       {/* INTRO WORKS */}
       <section className="px-[6vw] pb-14 pt-[130px] max-[1199px]:px-[4vw] sm:pb-20 sm:pt-[150px] 2xl:pb-24 2xl:pt-[186px]">
         <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-10 2xl:gap-16">

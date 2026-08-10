@@ -6,9 +6,9 @@ import { useEffect, useState } from 'react';
 
 const ASSET_BASE = '/images/company-leadership';
 
-const IconChevronDown = ({ size = 32 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 32 21" fill="none" aria-hidden="true">
-    <path d="M2 2.25 16 16.5 30 2.25" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+const IconChevronDown = () => (
+  <svg width="32" height="22" viewBox="0 0 32 22" fill="none" aria-hidden="true">
+    <path d="M3 4L16 17L29 4" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -71,38 +71,38 @@ const PrincipleIcon = ({ type }: { type: 'technical' | 'roi' | 'expertise' | 'le
 const PRINCIPLES = [
   {
     title: 'Technical\nExcellence',
-    desc: 'Every decision is grounded in deep technical expertise, engineering precision, and measurable outcomes.',
+    desc: 'Every architectural decision is grounded in deep systems engineering expertise, strict security protocols, and measurable operational performance.',
     icon: 'technical' as const,
   },
   {
     title: 'ROI-First\nExecution',
-    desc: 'We prioritize transparent attribution, clear operational outcomes, and immediate execution velocity for our partners.',
+    desc: 'We focus on high-impact technology deployment—delivering clear efficiency gains, rapid implementation velocity, and tangible cost optimization for our enterprise partners.',
     icon: 'roi' as const,
   },
   {
-    title: 'Cross-Disciplinary\nExpertise',
-    desc: 'Bringing together specialists across technology, data science, marketing, and visual production to solve complex business challenges.',
+    title: 'Cross-Disciplinary\nIT Expertise',
+    desc: 'Bringing together specialists across ERP architecture, IoT hardware integration, data engineering, and system security to solve complex technical challenges.',
     icon: 'expertise' as const,
   },
   {
-    title: 'Redundant\nLeadership',
-    desc: 'Cultural leadership ensuring that no project, technical discipline, or operational process has a single point of failure.',
+    title: 'Continuity-Driven\nLeadership',
+    desc: 'Resilient teams and technical fail-safes keep every critical system and operation running without a single point of failure.',
     icon: 'leadership' as const,
   },
 ];
 
 const TRUST_SLIDES = [
   {
-    text: 'By combining technical precision with a commitment to client success, Arsalynk Group delivers reliable, predictable, and results-driven execution.',
+    text: 'We earn lasting partnerships through proven system reliability, clear communication, and precise execution across every project lifecycle.',
     image: `${ASSET_BASE}/building-trust-reference-01.webp`
   },
   {
-    text: 'Long-term client relationships are earned by delivering dependable solutions, maintaining clear communication, and consistently meeting expectations across every engagement.',
+    text: 'We merge deep technical knowledge across enterprise systems, data architecture, and IoT engineering into single-source, fully integrated solutions.',
     image: `${ASSET_BASE}/building-trust-reference-02.webp`
   },
   {
-    text: 'We integrate expertise across technology, data, media, and creative disciplines to build complete solutions.',
-    image: '/images/shared/building-trust.webp'
+    text: 'Our delivery and management frameworks scale sustainably, ensuring high-availability operations without bottlenecks or single points of failure.',
+    image: '/images/about-us/company-leadership/building-trust.webp'
   },
   {
     text: 'Our teams are designed to operate sustainably without creating a single point of leadership or operational failure.',
@@ -133,8 +133,13 @@ export default function CompanyLeadershipPage() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const handleScrollDown = () => {
-    document.getElementById('beyond-expectations')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const handleScrollDown = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    const target = document.getElementById('beyond-expectations');
+    if (target) {
+      const top = target.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
   };
 
   const changeSlide = (direction: 'prev' | 'next') => {
@@ -153,14 +158,14 @@ export default function CompanyLeadershipPage() {
         className="relative isolate h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#101010] max-[640px]:rounded-b-[24px]"
       >
         <img
-          src="/images/about-us/company-leadership-hero.png"
+          src="/images/about-us/company-leadership-hero.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top"
         />
 
         <img
-          src="/images/shared/network-overlay.webp"
+          src="/images/about-us/network-overlay.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute bottom-[-44%] left-1/2 h-[125%] w-[250%] max-w-none -translate-x-1/2 select-none object-contain opacity-70 max-[640px]:bottom-[-16%] max-[640px]:h-[82%] max-[640px]:w-[220%]"
@@ -192,15 +197,18 @@ export default function CompanyLeadershipPage() {
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={handleScrollDown}
-          aria-label="Scroll to leadership foundation"
+        <a
+          href="#beyond-expectations"
+          onClick={(e) => {
+            e.preventDefault();
+            handleScrollDown();
+          }}
+          aria-label="Scroll to CTA"
           className="absolute bottom-[clamp(34px,4.5vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-[rgba(175,175,175,.25)] text-white backdrop-blur-[4px] transition-transform duration-300 hover:scale-105"
           style={{ background: 'linear-gradient(230.45deg, rgba(247,247,247,.21) -7.74%, rgba(247,247,247,.105) 81.5%)' }}
         >
-          <IconChevronDown size={32} />
-        </button>
+          <IconChevronDown />
+        </a>
       </section>
 
       {/* LEADERSHIP FOUNDATION */}
@@ -217,22 +225,20 @@ export default function CompanyLeadershipPage() {
               </div>
 
               <h2 className="font-heading text-[clamp(40px,3.333vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#101010]">
-                Leading with
+                Driven by Technical Mastery
                 <br />
-                Expertise and
-                <br />
-                Purpose
+                &amp; Strategic Execution
               </h2>
 
               <p className="font-body text-[clamp(15px,1.042vw,20px)] font-normal leading-[1.6] tracking-[0.02em] text-[#292929]">
-                Leadership at Arsalynk Group is built on technical excellence and deep industry expertise. Our leadership team brings together systems architects, data scientists, performance marketers, and creative directors to ensure every strategic decision is driven by data, engineering precision, and exceptional design.
+                At Arsalynk, leadership is anchored in deep industry expertise and rigorous engineering discipline. Guided by seasoned systems architects and enterprise technology leaders, we ensure every deployment&mdash;from core ERP integration to complex IoT infrastructure&mdash;is built on performance, security, and scalability.
               </p>
             </div>
           </div>
 
           <div className="relative w-[54.3%] shrink-0 overflow-hidden rounded-[24px] bg-[#252A2F] max-[1024px]:w-full aspect-[764/670]">
             <img
-              src="/images/shared/leadership-intro-office.webp"
+              src="/images/about-us/company-leadership/leadership-intro-office.webp"
               alt="Arsalynk leadership office"
               className="absolute inset-[-10px] h-[calc(100%+20px)] w-[calc(100%+20px)] object-cover blur-[6.6px]"
             />
@@ -327,7 +333,7 @@ export default function CompanyLeadershipPage() {
       </section>
 
       {/* LEADERSHIP PRINCIPLES */}
-      <section className="relative isolate w-full overflow-hidden bg-[#F7F7F7] px-[6vw] py-[clamp(100px,8.125vw,156px)] max-[1199px]:px-[4vw]">
+      <section id="leadership-principles" className="relative isolate w-full scroll-mt-24 overflow-hidden bg-[#F7F7F7] px-[6vw] py-[clamp(100px,8.125vw,156px)] max-[1199px]:px-[4vw]">
         {/* Layer 1: Lowest Layer - Vector Graphic */}
         <div
           aria-hidden="true"
@@ -396,7 +402,7 @@ export default function CompanyLeadershipPage() {
               className="group relative overflow-hidden rounded-[24px] border border-transparent bg-[#8C8C8C] no-underline aspect-[835/500] transition-all duration-500 hover:border-white/80 hover:shadow-[0_18px_45px_rgba(0,0,0,0.18)] focus-visible:border-white focus-visible:outline-none"
             >
               <img
-                src="/images/shared/corporate-profile-card.webp"
+                src="/images/about-us/cards/corporate-profile-card.webp"
                 alt="Corporate Profile"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
@@ -413,7 +419,7 @@ export default function CompanyLeadershipPage() {
               className="group relative overflow-hidden rounded-[24px] border border-transparent bg-[#8C8C8C] no-underline aspect-[835/500] transition-all duration-500 hover:border-white/80 hover:shadow-[0_18px_45px_rgba(0,0,0,0.18)] focus-visible:border-white focus-visible:outline-none"
             >
               <img
-                src="/images/shared/ecosystem-philosophy-card.webp"
+                src="/images/about-us/cards/ecosystem-philosophy-card.webp"
                 alt="Ecosystem Philosophy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />

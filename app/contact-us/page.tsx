@@ -6,6 +6,10 @@ import Navbar from '@/components/layout/Navbar/Navbar';
 import Footer from '@/components/layout/Footer/Footer';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import { submitLead } from '@/lib/actions';
+import {
+  WHATSAPP_PHONE_DISPLAY,
+  WHATSAPP_PHONE_RAW,
+} from '@/lib/constants';
 
 function DownIcon() {
   return (
@@ -259,7 +263,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: 'tel:+6287855471107',
+    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
   },
   {
     name: 'TheDrafroom',
@@ -269,7 +273,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: 'tel:+6287855471107',
+    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
   },
   {
     name: 'Ilusia Studio',
@@ -279,7 +283,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: 'tel:+6287855471107',
+    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
   },
   {
     name: 'Seveny',
@@ -289,7 +293,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: 'tel:+6287855471107',
+    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
   },
   {
     name: 'AdsVar',
@@ -299,7 +303,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: 'tel:+6287855471107',
+    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
   },
   {
     name: 'Personice',
@@ -309,7 +313,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: 'tel:+6287855471107',
+    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
   },
 ];
 
@@ -379,7 +383,7 @@ export default function ContactUsPage() {
         {/* ================================================================
             HERO — Standard Height Matching About Us & Our Business
         ================================================================= */}
-        <section className="relative isolate h-[380px] overflow-hidden rounded-b-[24px] bg-[#05070A] sm:h-[440px] sm:rounded-b-[32px] lg:h-[500px] xl:h-[560px] xl:rounded-b-[42px]">
+        <section className="relative isolate flex h-[clamp(560px,41.666vw,800px)] items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-[#05070A]">
           <div className="absolute inset-0 -z-30">
             <img
               src="/images/our-business/kaluna-technology/hero.webp"
@@ -413,7 +417,7 @@ export default function ContactUsPage() {
             aria-hidden="true"
           />
 
-          <div className="absolute inset-0 z-10 flex items-center justify-center px-5 pt-[20px] sm:px-8 xl:pt-0">
+          <div className="relative z-10 mx-auto flex w-full max-w-[900px] items-center justify-center px-6">
             <div className="flex flex-col items-center gap-3 text-center sm:gap-4">
               <div className="flex items-center justify-center gap-2 font-body text-[11px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] sm:text-[13px]">
                 <Link href="/" className="transition-opacity hover:opacity-70">
@@ -423,16 +427,24 @@ export default function ContactUsPage() {
                 <span>CONTACT US</span>
               </div>
 
-              <h1 className="font-heading text-[42px] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7] sm:text-[56px] lg:text-[72px] xl:text-[84px]">
+              <h1 className="font-heading text-[clamp(52px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
                 Contact Us
               </h1>
             </div>
           </div>
 
           <a
-            href="#contact-form"
-            aria-label="Scroll to contact form"
-            className="absolute bottom-5 left-1/2 z-20 flex h-[48px] w-[48px] -translate-x-1/2 items-center justify-center rounded-full border border-[rgba(175,175,175,0.25)] text-white backdrop-blur-[4px] transition hover:bg-white/20 sm:bottom-6 sm:h-[56px] sm:w-[56px] xl:bottom-7 xl:h-[64px] xl:w-[64px]"
+            href="#beyond-expectations"
+            onClick={(e) => {
+              e.preventDefault();
+              const target = document.getElementById('beyond-expectations');
+              if (target) {
+                const top = target.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({ top, behavior: 'smooth' });
+              }
+            }}
+            aria-label="Scroll to CTA"
+            className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20"
             style={{
               background:
                 'linear-gradient(230.45deg, rgba(247,247,247,0.21) -7.74%, rgba(247,247,247,0.105) 81.5%)',
@@ -469,13 +481,13 @@ export default function ContactUsPage() {
 
                   <div className="flex flex-col gap-1.5">
                     <a
-                      href="tel:+6287855471107"
+                      href={`tel:+${WHATSAPP_PHONE_RAW}`}
                       className="flex items-center gap-2.5 font-body text-[14px] leading-[1.5] tracking-[0.02em] text-[#717171] transition hover:text-[#101010] md:text-[15px]"
                     >
                       <span className="shrink-0">
                         <PhoneIcon size={18} />
                       </span>
-                      <span>+62 878-5547-107</span>
+                      <span>{WHATSAPP_PHONE_DISPLAY}</span>
                     </a>
 
                     <a

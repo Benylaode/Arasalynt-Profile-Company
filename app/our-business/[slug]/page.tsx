@@ -8,6 +8,7 @@ import {
   getAllBusinessSlugs,
 } from '@/lib/db/actions';
 import BusinessWorksCarousel from '@/components/sections/BusinessWorksCarousel/BusinessWorksCarousel';
+import { SITE_URL } from '@/lib/constants';
 
 type PainPoint = {
   icon?: string;
@@ -18,6 +19,7 @@ type PainPoint = {
 type ServiceItem = {
   name: string;
   img: string;
+  href?: string;
 };
 
 type WorkItem = {
@@ -107,15 +109,26 @@ export async function generateMetadata({
   const { slug } = await params;
   const biz = await resolveBusiness(slug);
 
-  if (!biz) return { title: 'Not Found' };
+  if (!biz) return { title: 'Business Not Found', robots: { index: false, follow: false } };
+
+  const canonical = `/our-business/${biz.slug}`;
 
   return {
-    title: `${biz.name} — Arsalynk`,
+    title: biz.name,
     description: biz.aboutDesc.slice(0, 155),
+    keywords: [biz.name, biz.category, ...biz.services.map((service) => service.name), 'Arsalynk business ecosystem'],
+    alternates: { canonical },
     openGraph: {
       title: `${biz.name} | Arsalynk`,
       description: biz.aboutDesc.slice(0, 155),
-      images: [{ url: biz.heroImg }],
+      url: canonical,
+      images: [{ url: biz.heroImg, alt: `${biz.name} — Arsalynk business` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${biz.name} | Arsalynk`,
+      description: biz.aboutDesc.slice(0, 155),
+      images: [biz.heroImg],
     },
   };
 }
@@ -166,7 +179,7 @@ function DownIcon() {
   return (
     <svg width="32" height="22" viewBox="0 0 32 22" fill="none" aria-hidden="true">
       <path
-        d="m4 5 12 12L28 5"
+        d="M3 4L16 17L29 4"
         stroke="currentColor"
         strokeWidth="2.2"
         strokeLinecap="round"
@@ -364,8 +377,39 @@ export default async function BusinessSlugPage({
     ? Math.min(Math.max(biz.featuredOtherBusinessIndex ?? 0, 0), biz.otherBusinesses.length - 1)
     : 0;
 
+  const canonicalUrl = `${SITE_URL}/our-business/${biz.slug}`;
+  const businessSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${canonicalUrl}#organization`,
+        name: biz.name,
+        url: canonicalUrl,
+        description: biz.aboutDesc,
+        logo: `${SITE_URL}${biz.logo}`,
+        parentOrganization: { '@id': `${SITE_URL}/#organization` },
+        knowsAbout: biz.services.map((service) => service.name),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${canonicalUrl}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Our Business', item: `${SITE_URL}/our-business` },
+          { '@type': 'ListItem', position: 3, name: biz.name, item: canonicalUrl },
+        ],
+      },
+    ],
+  };
+
   return (
     <main className="relative w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
+      <Script
+        id={`business-schema-${biz.slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema).replace(/</g, '\\u003c') }}
+      />
       <style dangerouslySetInnerHTML={{ __html: sliderCss }} />
 
       {/* HERO */}
@@ -454,7 +498,7 @@ export default async function BusinessSlugPage({
         <div
           className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[clamp(420px,52vw,700px)] w-[88%] max-w-[1759px] -translate-x-1/2 -translate-y-1/2 bg-cover bg-center bg-no-repeat opacity-[0.14] max-[1199px]:w-[92%]"
           style={{
-            backgroundImage: "url('/images/our-business/pain-points-radial.png')",
+            backgroundImage: "url('/images/our-business/pain-points-radial.webp')",
           }}
           aria-hidden="true"
         />
@@ -524,26 +568,30 @@ export default async function BusinessSlugPage({
               threeColumnServices ? 'xl:grid-cols-3 xl:gap-[30px]' : 'xl:grid-cols-4 xl:gap-8'
             }`}
           >
-            {biz.services.map((service, index) => (
-              <article
-                key={`${service.name}-${index}`}
-                className="group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-[#F5F5F5]/15 bg-gradient-to-b from-[#101010]/5 to-white/[0.05] p-5 pb-6 sm:p-6 sm:pb-7 backdrop-blur-[12.5px] transition duration-500 hover:-translate-y-1 hover:border-white/80 hover:bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.28))] hover:shadow-[0_18px_50px_rgba(0,0,0,0.25)]"
-              >
-                <div className={`relative w-full overflow-hidden rounded-lg bg-[#0A2951] ${
-                    threeColumnServices ? 'aspect-[499/265]' : 'aspect-[353/265]'
-                  }`}>
-                  <img
-                    src={service.img}
-                    alt={service.name}
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
-                  />
-                  <div className="absolute inset-0 bg-black/15" />
-                </div>
-                <h3 className="font-heading text-[clamp(22px,1.8vw,32px)] font-medium leading-[1.2] tracking-[-0.01em] text-[#D9D9D9] transition-colors duration-300 group-hover:text-[#E6FF2A]">
-                  {service.name}
-                </h3>
-              </article>
-            ))}
+            {biz.services.map((service, index) => {
+              const serviceHref = service.href ?? '/our-solution';
+              return (
+                <Link
+                  key={`${service.name}-${index}`}
+                  href={serviceHref}
+                  className="group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-[#F5F5F5]/15 bg-gradient-to-b from-[#101010]/5 to-white/[0.05] p-5 pb-6 sm:p-6 sm:pb-7 backdrop-blur-[12.5px] transition duration-500 hover:-translate-y-1 hover:border-white/80 hover:bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.28))] hover:shadow-[0_18px_50px_rgba(0,0,0,0.25)] no-underline"
+                >
+                  <div className={`relative w-full overflow-hidden rounded-lg bg-[#0A2951] ${
+                      threeColumnServices ? 'aspect-[499/265]' : 'aspect-[353/265]'
+                    }`}>
+                    <img
+                      src={service.img}
+                      alt={service.name}
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
+                    />
+                    <div className="absolute inset-0 bg-black/15" />
+                  </div>
+                  <h3 className="font-heading text-[clamp(22px,1.8vw,32px)] font-medium leading-[1.2] tracking-[-0.01em] text-[#D9D9D9] transition-colors duration-300 group-hover:text-[#E6FF2A]">
+                    {service.name}
+                  </h3>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
