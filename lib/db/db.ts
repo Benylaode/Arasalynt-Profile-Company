@@ -6,15 +6,44 @@
 import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
+import os from 'os';
 import { BUSINESS_DUMMY_DATA, HERO_SLIDES_DUMMY_DATA, TESTIMONIALS_DUMMY_DATA, CASE_STUDIES_DUMMY_DATA, LEADERSHIP_THOUGHTS_DUMMY_DATA } from './dummy';
 
-/* ── Resolve path ke file database (di project root / .next tidak masuk) ── */
+/* ── Resolve database path ── */
 const DB_DIR = path.join(process.cwd(), '.db');
-const DB_PATH = path.join(DB_DIR, 'arsalynt.db');
+const SOURCE_DB_PATH = path.join(DB_DIR, 'arsalynt.db');
+const IS_VERCEL = Boolean(process.env.VERCEL);
+const RUNTIME_DB_PATH = IS_VERCEL
+  ? path.join(os.tmpdir(), 'arsalynt.db')
+  : SOURCE_DB_PATH;
 
-/* Pastikan folder .db ada */
-if (!fs.existsSync(DB_DIR)) {
-  fs.mkdirSync(DB_DIR, { recursive: true });
+/*
+ * Vercel deployment files are read-only. Copy the committed seed database to
+ * the writable /tmp directory once per warm serverless instance. Local
+ * development keeps using .db/arsalynt.db so its data remains persistent.
+ */
+function prepareRuntimeDatabase(): void {
+  if (!IS_VERCEL) {
+    if (!fs.existsSync(DB_DIR)) {
+      fs.mkdirSync(DB_DIR, { recursive: true });
+    }
+    return;
+  }
+
+  if (fs.existsSync(RUNTIME_DB_PATH)) return;
+
+  if (fs.existsSync(SOURCE_DB_PATH)) {
+    try {
+      fs.copyFileSync(
+        SOURCE_DB_PATH,
+        RUNTIME_DB_PATH,
+        fs.constants.COPYFILE_EXCL,
+      );
+    } catch (error) {
+      const code = (error as NodeJS.ErrnoException).code;
+      if (code !== 'EEXIST') throw error;
+    }
+  }
 }
 
 /* ── Inisialisasi koneksi singleton ── */
@@ -23,7 +52,8 @@ let _db: Database.Database | null = null;
 function getDb(): Database.Database {
   if (_db) return _db;
 
-  _db = new Database(DB_PATH);
+  prepareRuntimeDatabase();
+  _db = new Database(RUNTIME_DB_PATH);
 
   /* Aktifkan WAL mode untuk performa lebih baik */
   _db.pragma('journal_mode = WAL');
@@ -379,4 +409,3 @@ export function getAllTestimonials() {
 }
 
 export { getDb };
-
