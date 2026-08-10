@@ -388,7 +388,7 @@ export default function CaseStudiesPage() {
 
               <h2 className="max-w-[1180px] font-heading text-[clamp(32px,3vw,58px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#F7F7F7] transition-colors duration-300 group-hover:text-[#E6FF2A]">
                 <Link
-                  href={`/insight-programs/Case-Studies/${featured?.slug}`}
+                  href={`/insight-programs/case-studies/${featured?.slug}`}
                   className="transition-opacity hover:opacity-80"
                 >
                   {featured?.title}
@@ -495,7 +495,7 @@ export default function CaseStudiesPage() {
               {visibleCases.map((item) => (
                 <article key={item.id} className="min-w-0">
                   <Link
-                    href={`/insight-programs/Case-Studies/${item.slug}`}
+                    href={`/insight-programs/case-studies/${item.slug}`}
                     className="group block"
                   >
                     <div className="relative flex aspect-[546/400] w-full overflow-hidden rounded-3xl max-[480px]:rounded-[18px]">

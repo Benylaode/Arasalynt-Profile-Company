@@ -23,6 +23,6 @@ export default async function SolutionServicePage({ params }: PageProps) {
     notFound();
   }
 
-  // Directly navigate to the work article from our-works
-  redirect(`/our-works/${service.relatedWorkSlug}`);
+  // Open the service-specific case study instead of claiming an unrelated work.
+  redirect(`/insight-programs/case-studies/${service.caseStudySlug}`);
 }

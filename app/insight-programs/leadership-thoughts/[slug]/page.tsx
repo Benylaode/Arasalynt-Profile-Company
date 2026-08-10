@@ -23,14 +23,28 @@ export async function generateMetadata({
 
   if (!article) {
     return {
-      title: 'Thought Not Found — Arsalynk',
+      title: 'Thought Not Found',
+      robots: { index: false, follow: false },
     };
   }
 
+  const canonical = `/insight-programs/leadership-thoughts/${article.slug}`;
+
   return {
-    title: `${article.title} — Arsalynk Leadership Thought`,
+    title: `${article.title} — Leadership Thought`,
     description: article.description,
+    keywords: [...article.tags, article.category, 'Arsalynk leadership insights', 'enterprise strategy'],
+    alternates: { canonical },
     openGraph: {
+      title: `${article.title} | Arsalynk Leadership Thought`,
+      description: article.description,
+      type: 'article',
+      url: canonical,
+      publishedTime: new Date(article.date).toISOString(),
+      images: [article.coverImage],
+    },
+    twitter: {
+      card: 'summary_large_image',
       title: `${article.title} | Arsalynk Leadership Thought`,
       description: article.description,
       images: [article.coverImage],
@@ -98,7 +112,7 @@ export default async function LeadershipThoughtDetailPage({
             </Link>
             <span aria-hidden="true">/</span>
             <Link
-              href="/insight-programs/Case-Studies"
+              href="/insight-programs/case-studies"
               className="transition-opacity hover:opacity-65"
             >
               Insight &amp; Programs

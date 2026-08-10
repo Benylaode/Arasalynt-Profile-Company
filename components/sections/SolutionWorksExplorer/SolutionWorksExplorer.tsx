@@ -13,7 +13,7 @@ function searchableText(service: SolutionService) {
     service.title,
     service.shortTitle,
     service.description,
-    service.relatedWorkTitle,
+    service.relatedWork?.title ?? '',
     service.articleCategory,
     service.industry,
     ...service.articleTags,
@@ -40,7 +40,7 @@ export default function SolutionWorksExplorer({ services }: { services: Solution
         const haystack = searchableText(service);
         const matchedTerms = terms.filter((term) => haystack.includes(term)).length;
         const exactTitle = normalize(service.title).includes(normalizedQuery) ? 3 : 0;
-        const exactWork = normalize(service.relatedWorkTitle).includes(normalizedQuery) ? 2 : 0;
+        const exactWork = service.relatedWork && normalize(service.relatedWork.title).includes(normalizedQuery) ? 2 : 0;
         return { service, score: matchedTerms + exactTitle + exactWork };
       })
       .filter(({ score }) => score > 0)
@@ -57,8 +57,8 @@ export default function SolutionWorksExplorer({ services }: { services: Solution
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             onKeyDown={(event) => { if (event.key === 'Enter') setAppliedQuery(query); }}
-            placeholder="Search service or project"
-            aria-label="Search service works"
+            placeholder="Search service or capability"
+            aria-label="Search services and capabilities"
             className={`h-full w-full rounded-full border bg-transparent pl-10 pr-5 font-body text-[12px] font-medium tracking-[0.02em] outline-none transition-colors placeholder:text-[#717171] md:pl-11 md:text-[13px] ${appliedQuery ? 'border-[#1A3E9E] bg-[rgba(153,166,231,0.22)] font-semibold text-[#1A3E9E]' : 'border-[#D9D9D9] text-[#717171] hover:border-[#1A3E9E] focus:border-[#1A3E9E] focus:text-[#1A3E9E]'}`}
           />
         </div>
@@ -79,7 +79,7 @@ export default function SolutionWorksExplorer({ services }: { services: Solution
           {results.map((service) => (
             <article key={service.slug} className="min-w-0">
               <Link
-                href={`/our-works/${service.relatedWorkSlug}`}
+                href={`/insight-programs/case-studies/${service.caseStudySlug}`}
                 className="group relative isolate block aspect-[835/570] w-full overflow-hidden rounded-[20px] bg-[#101010] no-underline max-[480px]:rounded-[16px]"
               >
                 <img
@@ -109,12 +109,26 @@ export default function SolutionWorksExplorer({ services }: { services: Solution
                   </span>
                 </div>
               </Link>
+              {service.relatedWork && (
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-3 px-1 font-body text-[12px] text-[#424242] sm:text-[13px]">
+                  <span>
+                    {service.relatedWork.relationship === 'direct' ? 'Implemented in' : 'Supported by'}{' '}
+                    <strong>{service.relatedWork.title}</strong>
+                  </span>
+                  <Link
+                    href={`/our-works/${service.relatedWork.slug}`}
+                    className="inline-flex items-center gap-2 font-semibold text-[#1A3E9E] no-underline hover:underline"
+                  >
+                    View related work <IconArrow size={16} />
+                  </Link>
+                </div>
+              )}
             </article>
           ))}
         </div>
       ) : (
         <div className="rounded-[24px] border border-[#CAD0DF] bg-white px-6 py-16 text-center">
-          <h3 className="font-heading text-[32px] font-medium text-[#1A3E9E]">No matching work found</h3>
+          <h3 className="font-heading text-[32px] font-medium text-[#1A3E9E]">No matching service found</h3>
           <p className="mt-3 font-body text-[14px] text-[#555]">Try a service name, workflow, industry, or technology such as ERP, POS, IoT, finance, fleet, or warehouse.</p>
         </div>
       )}

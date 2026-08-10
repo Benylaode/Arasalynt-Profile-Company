@@ -8,6 +8,7 @@ import {
   getAllBusinessSlugs,
 } from '@/lib/db/actions';
 import BusinessWorksCarousel from '@/components/sections/BusinessWorksCarousel/BusinessWorksCarousel';
+import { SITE_URL } from '@/lib/constants';
 
 type PainPoint = {
   icon?: string;
@@ -108,15 +109,26 @@ export async function generateMetadata({
   const { slug } = await params;
   const biz = await resolveBusiness(slug);
 
-  if (!biz) return { title: 'Not Found' };
+  if (!biz) return { title: 'Business Not Found', robots: { index: false, follow: false } };
+
+  const canonical = `/our-business/${biz.slug}`;
 
   return {
-    title: `${biz.name} — Arsalynk`,
+    title: biz.name,
     description: biz.aboutDesc.slice(0, 155),
+    keywords: [biz.name, biz.category, ...biz.services.map((service) => service.name), 'Arsalynk business ecosystem'],
+    alternates: { canonical },
     openGraph: {
       title: `${biz.name} | Arsalynk`,
       description: biz.aboutDesc.slice(0, 155),
-      images: [{ url: biz.heroImg }],
+      url: canonical,
+      images: [{ url: biz.heroImg, alt: `${biz.name} — Arsalynk business` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${biz.name} | Arsalynk`,
+      description: biz.aboutDesc.slice(0, 155),
+      images: [biz.heroImg],
     },
   };
 }
@@ -365,8 +377,39 @@ export default async function BusinessSlugPage({
     ? Math.min(Math.max(biz.featuredOtherBusinessIndex ?? 0, 0), biz.otherBusinesses.length - 1)
     : 0;
 
+  const canonicalUrl = `${SITE_URL}/our-business/${biz.slug}`;
+  const businessSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${canonicalUrl}#organization`,
+        name: biz.name,
+        url: canonicalUrl,
+        description: biz.aboutDesc,
+        logo: `${SITE_URL}${biz.logo}`,
+        parentOrganization: { '@id': `${SITE_URL}/#organization` },
+        knowsAbout: biz.services.map((service) => service.name),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${canonicalUrl}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Our Business', item: `${SITE_URL}/our-business` },
+          { '@type': 'ListItem', position: 3, name: biz.name, item: canonicalUrl },
+        ],
+      },
+    ],
+  };
+
   return (
     <main className="relative w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
+      <Script
+        id={`business-schema-${biz.slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema).replace(/</g, '\\u003c') }}
+      />
       <style dangerouslySetInnerHTML={{ __html: sliderCss }} />
 
       {/* HERO */}

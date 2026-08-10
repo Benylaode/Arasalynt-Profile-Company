@@ -101,6 +101,7 @@ export default function SpecializedByNature() {
                   <div className={styles.mediaPanel}>
                     <div
                       className={`${styles.imageFrame} ${item.imageClass}`}
+                      style={{ position: 'absolute' }}
                     >
                       <Image
                         src={item.image}
@@ -108,7 +109,6 @@ export default function SpecializedByNature() {
                         fill
                         sizes="(max-width: 767px) 100vw, (max-width: 1024px) 37vw, 520px"
                         className={styles.image}
-                        priority={index === 0}
                         unoptimized
                       />
                     </div>

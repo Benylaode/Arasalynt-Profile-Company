@@ -181,11 +181,6 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
 
   works: [
     {
-      name: 'Digital Platform Development',
-      tag: 'WEBSITE DEVELOPMENT • DIGITAL PLATFORM',
-      img: '/images/our-business/kaluna-technology/works/project-01.webp',
-    },
-    {
       name: 'Sinau Print Marketplace Website',
       tag: 'MARKETPLACE WEBSITE • ERP SYSTEM',
       img: '/images/our-business/kaluna-technology/works/sinau-print-marketplace.webp',
@@ -412,7 +407,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   servicesColumns: 4,
   services: [
     {
-      name: 'Livestream Production',
+      name: 'Video & Livestream Production',
       img: '/images/our-business/loxlive/services/livestream-production.webp',
     },
     {
@@ -438,18 +433,13 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore LoxLive’s Work',
-  featuredWorkIndex: 1,
+  featuredWorkIndex: 0,
   works: [
     {
       name: 'Produksi Konten Video Portret Padel Arena',
-      tag: 'MEDIA & CREATIVE • VIDEO PRODUCTION',
+      tag: 'VIDEO & LIVESTREAM PRODUCTION • SPORTS CONTENT',
       img: '/images/projects/video-portret-padel-arena/1.webp',
       slug: 'video-portret-padel-arena',
-    },
-    {
-      name: 'National Hybrid Event Livestream',
-      tag: 'BROADCAST PRODUCTION • LIVE EVENT',
-      img: '/images/our-business/work-previews/performance-campaign-dashboard-caf797.webp',
     },
   ],
 
@@ -549,7 +539,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
       img: '/images/our-business/the-drafroom/services/digital-brand-experience.webp',
     },
     {
-      name: 'Corporate Communication',
+      name: 'Corporate Communication & Learning Design',
       img: '/images/our-business/the-drafroom/services/corporate-communication.webp',
     },
   ],
@@ -567,7 +557,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   works: [
     {
       name: 'Desain Pelatihan Wasit Kota Semarang',
-      tag: 'MEDIA & CREATIVE • TRAINING DESIGN',
+      tag: 'CORPORATE COMMUNICATION • LEARNING EXPERIENCE DESIGN',
       img: '/images/projects/desain-pelatihan-wasit-semarang/1.webp',
       slug: 'desain-pelatihan-wasit-semarang',
     },
@@ -689,24 +679,8 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore Ilusia Studio’s Work',
-  featuredWorkIndex: 1,
-  works: [
-    {
-      name: 'Live Event Motion Package',
-      tag: 'Motion Graphics · Broadcast Visuals',
-      img: '/images/our-business/work-previews/performance-campaign-dashboard-caf797.webp',
-    },
-    {
-      name: 'Sinau Print Marketplace Website',
-      tag: 'Branding · Survey and Analytics',
-      img: '/images/our-business/work-previews/sinau-print-marketplace.webp',
-    },
-    {
-      name: 'X-1 Tire Company Profile Website',
-      tag: 'Product Visualization · Website',
-      img: '/images/our-business/work-previews/x1-tire-website.webp',
-    },
-  ],
+  featuredWorkIndex: 0,
+  works: [],
 
   otherBusinessesTitle: 'Explore Other Businesses',
   featuredOtherBusinessIndex: 1,
@@ -819,24 +793,8 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore Adsvar’s Work',
-  featuredWorkIndex: 1,
-  works: [
-    {
-      name: 'Performance Campaign Dashboard',
-      tag: 'Paid Media · Campaign Analytics',
-      img: '/images/our-business/work-previews/performance-campaign-dashboard-caf797.webp',
-    },
-    {
-      name: 'Sinau Print Marketplace Website',
-      tag: 'Branding · Survey and Analytics',
-      img: '/images/our-business/work-previews/sinau-print-marketplace.webp',
-    },
-    {
-      name: 'X-1 Tire Company Profile Website',
-      tag: 'Digital Campaign · Website',
-      img: '/images/our-business/work-previews/x1-tire-website.webp',
-    },
-  ],
+  featuredWorkIndex: 0,
+  works: [],
 
   otherBusinessesTitle: 'Explore Other Businesses',
   featuredOtherBusinessIndex: 1,
@@ -949,24 +907,8 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore Personice’s Work',
-  featuredWorkIndex: 1,
-  works: [
-    {
-      name: 'Strategic PR Campaign',
-      tag: 'Public Relations · Brand Reputation',
-      img: '/images/our-business/work-previews/strategic-pr-campaign-ccd63a.webp',
-    },
-    {
-      name: 'Sinau Print Marketplace Website',
-      tag: 'Branding · Survey and Analytics',
-      img: '/images/our-business/work-previews/sinau-print-marketplace-76333edbd7.webp',
-    },
-    {
-      name: 'X-1 Tire Company Profile Website',
-      tag: 'Digital Campaign · Website',
-      img: '/images/our-business/work-previews/x1-tire-website-c7f44b16ce.webp',
-    },
-  ],
+  featuredWorkIndex: 0,
+  works: [],
 
   otherBusinessesTitle: 'Explore Other Businesses',
   featuredOtherBusinessIndex: 1,
@@ -1081,24 +1023,8 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
 
   worksLabel: 'OUR PROJECTS',
   worksTitle: 'Explore Seveny’s Work',
-  featuredWorkIndex: 1,
-  works: [
-    {
-      name: 'Signature Corporate Event Production',
-      tag: 'Event Management · Experiential Production',
-      img: '/images/our-business/work-previews/strategic-pr-campaign-ccd63a.webp',
-    },
-    {
-      name: 'Sinau Print Marketplace Website',
-      tag: 'Branding · Survey and Analytics',
-      img: '/images/our-business/work-previews/sinau-print-marketplace-76333edbd7.webp',
-    },
-    {
-      name: 'X-1 Tire Company Profile Website',
-      tag: 'Digital Campaign · Website',
-      img: '/images/our-business/work-previews/x1-tire-website-c7f44b16ce.webp',
-    },
-  ],
+  featuredWorkIndex: 0,
+  works: [],
 
   otherBusinessesTitle: 'Explore Other Businesses',
   featuredOtherBusinessIndex: 1,

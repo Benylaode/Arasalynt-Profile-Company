@@ -22,7 +22,7 @@ const ABOUT_LINKS = [
 
 const INSIGHT_LINKS = [
   { name: 'Thought Leadership', href: '/insight-programs/leadership-thoughts' },
-  { name: 'Case Studies', href: '/insight-programs/Case-Studies' },
+  { name: 'Case Studies', href: '/insight-programs/case-studies' },
 ];
 
 const MEDIA_LINKS = [
@@ -153,7 +153,7 @@ export default function Footer() {
               </div>
 
               <div className="flex flex-col gap-3.5">
-                <FooterTitle href="/insight-programs/Case-Studies">INSIGHT &amp; PROGRAMS</FooterTitle>
+                <FooterTitle href="/insight-programs/case-studies">INSIGHT &amp; PROGRAMS</FooterTitle>
                 <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
                   {INSIGHT_LINKS.map((link) => (
                     <li key={link.href}>

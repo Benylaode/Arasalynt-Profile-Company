@@ -12,7 +12,7 @@ type Project = {
   slug?: string;
   image?: string;
   corporation: string;
-  industry: string;
+  capability: string;
   service: string;
   year: number;
   featured?: boolean;
@@ -20,14 +20,14 @@ type Project = {
 
 type AppliedFilters = {
   corporation: string;
-  industry: string;
+  capability: string;
   sortOrder: SortOrder;
 };
 
 /*
   Ganti array ini dengan hasil JSON dari dummy route Anda.
   Layout memakai field: id, title, slug, image, corporation,
-  industry, service, year, dan featured.
+  capability, service, year, dan featured.
 */
 const PROJECTS: Project[] = [
   {
@@ -36,7 +36,7 @@ const PROJECTS: Project[] = [
     slug: 'sinau-print-erp',
     image: '/images/projects/sinau-print-erp/1.webp',
     corporation: 'Sinau Print',
-    industry: 'Web Platform',
+    capability: 'Enterprise Systems',
     service: 'ERP & Marketplace',
     year: 2026,
     featured: true,
@@ -47,8 +47,8 @@ const PROJECTS: Project[] = [
     slug: 'artic-complex-web',
     image: '/images/projects/artic-complex-web/1.webp',
     corporation: 'Artic Analytica',
-    industry: 'Web Platform',
-    service: 'Complex Web Systems',
+    capability: 'Digital Platforms',
+    service: 'Data Portal Development',
     year: 2026,
     featured: true,
   },
@@ -58,7 +58,7 @@ const PROJECTS: Project[] = [
     slug: 'myboss-iot-system',
     image: '/images/projects/myboss-iot-system/1.webp',
     corporation: 'MyBoss',
-    industry: 'IT Infrastructure',
+    capability: 'Connected Technology',
     service: 'IoT Integration',
     year: 2026,
     featured: true,
@@ -69,8 +69,8 @@ const PROJECTS: Project[] = [
     slug: 'altatic-analytic',
     image: '/images/projects/altatic-analytic/1.webp',
     corporation: 'Altatic',
-    industry: 'Data & Analytics',
-    service: 'Analytics Platform',
+    capability: 'Data & Intelligence',
+    service: 'Analytics Dashboard',
     year: 2025,
     featured: false,
   },
@@ -80,8 +80,8 @@ const PROJECTS: Project[] = [
     slug: 'web-media-profile',
     image: '/images/projects/web-media-profile/1.webp',
     corporation: 'Web Media',
-    industry: 'Media & Creative',
-    service: 'Media Profile',
+    capability: 'Brand & Digital Experience',
+    service: 'Corporate Profile Website',
     year: 2025,
     featured: false,
   },
@@ -91,7 +91,7 @@ const PROJECTS: Project[] = [
     slug: 'kajian-kelayakan-gik',
     image: '/images/projects/kajian-kelayakan-gik/1.webp',
     corporation: 'Artic Analytica',
-    industry: 'Data & Research',
+    capability: 'Research & Strategy',
     service: 'Feasibility Study',
     year: 2026,
     featured: false,
@@ -102,8 +102,8 @@ const PROJECTS: Project[] = [
     slug: 'panduan-perubahan-perilaku-stunting',
     image: '/images/projects/panduan-perubahan-perilaku-stunting/1.webp',
     corporation: 'Artic Analytica',
-    industry: 'Data & Research',
-    service: 'Social Research',
+    capability: 'Research & Social Impact',
+    service: 'Behaviour Change Research',
     year: 2026,
     featured: false,
   },
@@ -113,8 +113,8 @@ const PROJECTS: Project[] = [
     slug: 'desain-pelatihan-wasit-semarang',
     image: '/images/projects/desain-pelatihan-wasit-semarang/1.webp',
     corporation: 'The Drafroom',
-    industry: 'Media & Creative',
-    service: 'Training Design',
+    capability: 'Communication & Learning',
+    service: 'Learning Experience Design',
     year: 2026,
     featured: false,
   },
@@ -124,8 +124,8 @@ const PROJECTS: Project[] = [
     slug: 'video-portret-padel-arena',
     image: '/images/projects/video-portret-padel-arena/1.webp',
     corporation: 'LoxLive',
-    industry: 'Media & Creative',
-    service: 'Video Production',
+    capability: 'Media Production',
+    service: 'Cinematic Video Production',
     year: 2026,
     featured: false,
   },
@@ -141,12 +141,16 @@ const CORPORATION_OPTIONS = [
   'LoxLive',
 ];
 
-const INDUSTRY_OPTIONS = [
-  'Web Platform',
-  'Data & Analytics',
-  'Data & Research',
-  'IT Infrastructure',
-  'Media & Creative',
+const CAPABILITY_OPTIONS = [
+  'Enterprise Systems',
+  'Digital Platforms',
+  'Connected Technology',
+  'Data & Intelligence',
+  'Brand & Digital Experience',
+  'Research & Strategy',
+  'Research & Social Impact',
+  'Communication & Learning',
+  'Media Production',
 ];
 
 const IconChevronDown = ({ size = 24 }: { size?: number }) => (
@@ -192,7 +196,7 @@ const CAROUSEL_LOOP = 30;
 const CAROUSEL_DURATION = 6000;
 const CAROUSEL_TICK = 50;
 
-type CarouselProject = { id: number | string; title: string; slug?: string; image?: string; service: string; industry: string; };
+type CarouselProject = { id: number | string; title: string; slug?: string; image?: string; service: string; capability: string; };
 
 function FeaturedCarousel({ projects }: { projects: CarouselProject[] }) {
   const extended = Array.from({ length: CAROUSEL_LOOP }, () => projects).flat();
@@ -291,7 +295,7 @@ function FeaturedCarousel({ projects }: { projects: CarouselProject[] }) {
                 <div className="mt-[clamp(7px,0.365vw,10px)] flex flex-wrap items-center gap-x-[clamp(8px,0.625vw,12px)] gap-y-[5px] font-body font-medium uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] text-[clamp(11.8px,0.854vw,16.4px)]">
                   <span>{project.service}</span>
                   <span aria-hidden="true" className="h-[3px] w-[3px] shrink-0 bg-[#F7F7F7]" />
-                  <span>{project.industry}</span>
+                  <span>{project.capability}</span>
                 </div>
               </div>
               {/* progress bar */}
@@ -360,7 +364,7 @@ function WorkMeta({ project, featured = false }: { project: Project; featured?: 
       </span>
       <span className="h-[3px] w-[3px] shrink-0 bg-[#F7F7F7]" />
       <span className={featured ? 'text-[clamp(9.1px,0.855vw,16.4px)] leading-[1.3]' : 'text-[clamp(8.2px,0.76vw,14.5px)] leading-[1.3]'}>
-        {project.industry}
+        {project.capability}
       </span>
     </div>
   );
@@ -501,7 +505,7 @@ export default function OurWorksPage() {
   const [otherPage, setOtherPage] = useState(0);
 
   const [corporation, setCorporation] = useState('all');
-  const [industry, setIndustry] = useState('all');
+  const [capability, setCapability] = useState('all');
   const [sortOrder, setSortOrder] = useState<SortOrder>('newest');
   const [appliedFilters, setAppliedFilters] = useState<AppliedFilters | null>(null);
 
@@ -515,14 +519,14 @@ export default function OurWorksPage() {
   const filteredProjects = useMemo(() => {
     const filters = appliedFilters ?? {
       corporation: 'all',
-      industry: 'all',
+      capability: 'all',
       sortOrder: 'newest' as SortOrder,
     };
 
     return PROJECTS.filter((project) => {
       const matchesCorporation = filters.corporation === 'all' || project.corporation === filters.corporation;
-      const matchesIndustry = filters.industry === 'all' || project.industry === filters.industry;
-      return matchesCorporation && matchesIndustry;
+      const matchesCapability = filters.capability === 'all' || project.capability === filters.capability;
+      return matchesCorporation && matchesCapability;
     }).sort((a, b) => (filters.sortOrder === 'oldest' ? a.year - b.year : b.year - a.year));
   }, [appliedFilters]);
 
@@ -549,10 +553,10 @@ export default function OurWorksPage() {
     }
   };
 
-  const updateIndustry = (value: string) => {
-    setIndustry(value);
+  const updateCapability = (value: string) => {
+    setCapability(value);
     if (hasSearched) {
-      setAppliedFilters((current) => current ? { ...current, industry: value } : current);
+      setAppliedFilters((current) => current ? { ...current, capability: value } : current);
       setVisibleCount(6);
     }
   };
@@ -567,7 +571,7 @@ export default function OurWorksPage() {
   };
 
   const handleSearch = () => {
-    setAppliedFilters({ corporation, industry, sortOrder });
+    setAppliedFilters({ corporation, capability, sortOrder });
     setVisibleCount(6);
     setOtherPage(0);
 
@@ -578,7 +582,7 @@ export default function OurWorksPage() {
 
   const handleReset = () => {
     setCorporation('all');
-    setIndustry('all');
+    setCapability('all');
     setSortOrder('newest');
     setAppliedFilters(null);
     setVisibleCount(6);
@@ -691,7 +695,7 @@ export default function OurWorksPage() {
           </div>
 
           {/* Homepage-style carousel */}
-          <FeaturedCarousel projects={featuredProjects.map((p) => ({ id: p.id, title: p.title, slug: p.slug, image: p.image, service: p.service, industry: p.industry }))} />
+          <FeaturedCarousel projects={featuredProjects.map((p) => ({ id: p.id, title: p.title, slug: p.slug, image: p.image, service: p.service, capability: p.capability }))} />
         </section>
       )}
 
@@ -740,14 +744,14 @@ export default function OurWorksPage() {
               />
 
               <FilterDropdown
-                value={industry}
-                onChange={updateIndustry}
+                value={capability}
+                onChange={updateCapability}
                 options={[
-                  { label: 'Industry', value: 'all' },
-                  ...INDUSTRY_OPTIONS.map((item) => ({ label: item, value: item })),
+                  { label: 'Capability', value: 'all' },
+                  ...CAPABILITY_OPTIONS.map((item) => ({ label: item, value: item })),
                 ]}
                 width="w-[calc(50%_-_4px)] sm:w-[145px]"
-                ariaLabel="Select Industry"
+                ariaLabel="Select capability"
               />
 
               <button

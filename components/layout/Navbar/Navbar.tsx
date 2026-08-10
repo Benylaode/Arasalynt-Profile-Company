@@ -82,7 +82,7 @@ const INSIGHT_LINKS: NavItem[] = [
   },
   {
     name: 'Case Studies',
-    href: '/insight-programs/Case-Studies',
+    href: '/insight-programs/case-studies',
   },
 ];
 
@@ -1050,7 +1050,7 @@ export default function Navbar() {
             <SimpleDropdown
               id="insight"
               label="Insight & Programs"
-              href="/insight-programs/Case-Studies"
+              href="/insight-programs/case-studies"
               title="Insight & Programs"
               links={INSIGHT_LINKS}
               overlay={overlay}

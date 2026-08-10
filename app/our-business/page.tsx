@@ -5,9 +5,18 @@ import { getAllBusinesses } from '@/lib/db/actions';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 
 export const metadata: Metadata = {
-  title: 'Our Business — Arsalynk',
+  title: 'Our Integrated Business Ecosystem',
   description:
     'Explore the Arsalynk ecosystem — from IT infrastructure and data analytics to media, branding, and beyond.',
+  keywords: ['Arsalynk business ecosystem', 'technology and data Indonesia', 'creative business ecosystem', 'integrated enterprise capabilities'],
+  alternates: { canonical: '/our-business' },
+  openGraph: {
+    title: 'Our Integrated Business Ecosystem | Arsalynk',
+    description: 'Technology, data, strategy, communication, and creative capabilities connected in one ecosystem.',
+    url: '/our-business',
+    images: ['/images/our-business/hero-business.webp'],
+  },
+  twitter: { card: 'summary_large_image', title: 'Our Integrated Business Ecosystem | Arsalynk', description: 'Explore technology, data, strategy, communication, and creative capabilities across Arsalynk.', images: ['/images/our-business/hero-business.webp'] },
 };
 
 type Business = Awaited<ReturnType<typeof getAllBusinesses>>[number];

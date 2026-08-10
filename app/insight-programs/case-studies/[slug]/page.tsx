@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import { CASE_STUDIES_DUMMY_DATA } from '@/lib/db/dummy';
 import { SOLUTION_CASE_STUDIES } from '@/lib/our-solution.data';
+import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 const ALL_CASE_STUDIES = [...SOLUTION_CASE_STUDIES, ...CASE_STUDIES_DUMMY_DATA];
 
@@ -20,16 +21,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const article = ALL_CASE_STUDIES.find((item) => item.slug === slug);
 
   if (!article) {
-    return { title: 'Case Study Not Found — Arsalynk' };
+    return { title: 'Case Study Not Found', robots: { index: false, follow: false } };
   }
 
+  const canonical = `/insight-programs/case-studies/${article.slug}`;
+
   return {
-    title: `${article.title} — Arsalynk Case Study`,
+    title: `${article.title} — Case Study`,
     description: article.description,
+    keywords: [...article.tags, article.category, 'Arsalynk case study', 'enterprise transformation Indonesia'],
+    alternates: { canonical },
     openGraph: {
       title: `${article.title} | Arsalynk Case Study`,
       description: article.description,
+      url: canonical,
+      type: 'article',
+      publishedTime: article.dateValue,
       images: [{ url: article.coverImage, alt: article.coverImageAlt }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${article.title} | Arsalynk Case Study`,
+      description: article.description,
+      images: [article.coverImage],
     },
   };
 }
@@ -80,17 +94,50 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
     })
     .slice(0, 3);
 
+  const canonicalUrl = `${SITE_URL}/insight-programs/case-studies/${article.slug}`;
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Article',
+        '@id': `${canonicalUrl}/#article`,
+        headline: article.title,
+        description: article.description,
+        image: `${SITE_URL}${article.coverImage}`,
+        datePublished: article.dateValue,
+        dateModified: article.dateValue,
+        mainEntityOfPage: canonicalUrl,
+        author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+        publisher: { '@id': `${SITE_URL}/#organization` },
+        keywords: article.tags.join(', '),
+        articleSection: article.category,
+        inLanguage: 'en',
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${canonicalUrl}/#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Insight & Programs', item: `${SITE_URL}/insight-programs/case-studies` },
+          { '@type': 'ListItem', position: 3, name: 'Case Studies', item: `${SITE_URL}/insight-programs/case-studies` },
+          { '@type': 'ListItem', position: 4, name: article.title, item: canonicalUrl },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, '\\u003c') }} />
       <header className="px-[6vw] pb-[clamp(42px,3.333vw,64px)] pt-[clamp(130px,9.688vw,186px)] max-[1199px]:px-[4vw]">
         <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-[clamp(36px,3.333vw,64px)]">
           <div className="flex max-w-[1500px] flex-col gap-[clamp(20px,1.667vw,32px)]">
             <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 font-body text-[10px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] sm:text-xs xl:text-sm">
               <Link href="/" className="transition-opacity hover:opacity-65">Home</Link>
               <span aria-hidden="true">/</span>
-              <Link href="/insight-programs/Case-Studies" className="transition-opacity hover:opacity-65">Insight &amp; Programs</Link>
+              <Link href="/insight-programs/case-studies" className="transition-opacity hover:opacity-65">Insight &amp; Programs</Link>
               <span aria-hidden="true">/</span>
-              <Link href="/insight-programs/Case-Studies" className="transition-opacity hover:opacity-65">Case Studies</Link>
+              <Link href="/insight-programs/case-studies" className="transition-opacity hover:opacity-65">Case Studies</Link>
             </nav>
 
             <h1 className="font-heading text-[clamp(38px,3.75vw,72px)] font-medium leading-[1.08] tracking-[-0.02em]">
@@ -164,14 +211,14 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
               <SectionLabel>Continue Exploring</SectionLabel>
               <h2 className="font-heading text-[clamp(40px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em]">Other Case Studies</h2>
             </div>
-            <Link href="/insight-programs/Case-Studies" className="inline-flex items-center gap-2 font-body text-sm font-bold uppercase tracking-[0.04em] text-[#1A3E9E] hover:underline">
+            <Link href="/insight-programs/case-studies" className="inline-flex items-center gap-2 font-body text-sm font-bold uppercase tracking-[0.04em] text-[#1A3E9E] hover:underline">
               View all <ArrowUpRight />
             </Link>
           </div>
 
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-7 xl:grid-cols-3 xl:gap-[30px]">
             {relatedArticles.map((related) => (
-              <Link key={related.slug} href={`/insight-programs/Case-Studies/${related.slug}`} className="group flex min-w-0 flex-col gap-5 no-underline">
+              <Link key={related.slug} href={`/insight-programs/case-studies/${related.slug}`} className="group flex min-w-0 flex-col gap-5 no-underline">
                 <div className="flex aspect-[546/400] w-full items-center justify-center overflow-hidden rounded-[16px] bg-[#EBECEF] sm:rounded-[20px] xl:rounded-[24px]">
                   <img src={related.coverImage} alt={related.coverImageAlt} loading="lazy" className="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.03]" />
                 </div>

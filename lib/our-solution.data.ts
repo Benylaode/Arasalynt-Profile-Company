@@ -9,9 +9,12 @@ export type SolutionService = {
   challenge: string;
   approach: string[];
   outcomes: string[];
-  relatedWorkSlug: string;
-  relatedWorkTitle: string;
-  relatedWorkImage: string;
+  relatedWork?: {
+    slug: string;
+    title: string;
+    image: string;
+    relationship: 'direct' | 'supporting';
+  };
   caseStudySlug: string;
   articleCategory: string;
   articleDateLabel: string;
@@ -61,9 +64,12 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     challenge: 'Disconnected transaction and inventory records make retail decisions slower and less reliable.',
     approach: ['Centralized product and pricing controls', 'Real-time sales and stock synchronization', 'Multi-outlet reporting and role management'],
     outcomes: ['Faster checkout workflows', 'Accurate inventory visibility', 'Consistent retail reporting'],
-    relatedWorkSlug: 'sinau-print-erp',
-    relatedWorkTitle: 'Sinau Print ERP & Marketplace Platform',
-    relatedWorkImage: '/images/projects/sinau-print-erp/1.webp',
+    relatedWork: {
+      slug: 'sinau-print-erp',
+      title: 'Sinau Print ERP & Marketplace Platform',
+      image: '/images/projects/sinau-print-erp/1.webp',
+      relationship: 'direct',
+    },
     caseStudySlug: 'point-of-sale-retail-management-system',
     articleCategory: 'TECHNOLOGY', articleDateLabel: 'APRIL 2026', articleDateValue: '2026-04-22',
     articleTags: ['ERP', 'RETAIL', 'POINT OF SALE'],
@@ -79,9 +85,6 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     challenge: 'Scattered employee information creates repetitive administration and weak workforce visibility.',
     approach: ['Unified employee lifecycle records', 'Automated attendance and approval workflows', 'Performance and talent dashboards'],
     outcomes: ['Lower administrative workload', 'Clearer workforce decisions', 'Consistent employee experience'],
-    relatedWorkSlug: 'artic-complex-web',
-    relatedWorkTitle: 'Artic Complex Web Architecture & Portal',
-    relatedWorkImage: '/images/projects/artic-complex-web/1.webp',
     caseStudySlug: 'hr-talent-management-engine',
     articleCategory: 'TECHNOLOGY & DATA', articleDateLabel: 'JUNE 2026', articleDateValue: '2026-06-24',
     articleTags: ['HRMS', 'ENTERPRISE PORTAL', 'WORKFLOW'],
@@ -97,9 +100,6 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     challenge: 'Manual reconciliation and isolated financial records delay reporting and increase operational risk.',
     approach: ['Automated journals and reconciliation', 'Configurable approval controls', 'Live financial reporting'],
     outcomes: ['Faster closing cycles', 'Stronger financial governance', 'Reliable management reporting'],
-    relatedWorkSlug: 'altatic-analytic',
-    relatedWorkTitle: 'Altatic Data Analytics & Intelligence Dashboard',
-    relatedWorkImage: '/images/projects/altatic-analytic/1.webp',
     caseStudySlug: 'financial-accounting-automation-hub',
     articleCategory: 'DATA & ANALYTICS', articleDateLabel: 'MARCH 2026', articleDateValue: '2026-03-19',
     articleTags: ['FINANCE', 'AUTOMATION', 'DASHBOARD'],
@@ -115,9 +115,12 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     challenge: 'Limited coordination between purchasing and stock operations causes shortages, delays, and excess inventory.',
     approach: ['Supplier and procurement workflows', 'Demand-aware replenishment', 'End-to-end stock movement visibility'],
     outcomes: ['Healthier inventory levels', 'More predictable procurement', 'Reduced operational waste'],
-    relatedWorkSlug: 'sinau-print-erp',
-    relatedWorkTitle: 'Sinau Print ERP & Marketplace Platform',
-    relatedWorkImage: '/images/projects/sinau-print-erp/1.webp',
+    relatedWork: {
+      slug: 'sinau-print-erp',
+      title: 'Sinau Print ERP & Marketplace Platform',
+      image: '/images/projects/sinau-print-erp/1.webp',
+      relationship: 'supporting',
+    },
     caseStudySlug: 'supply-chain-inventory-control-system',
     articleCategory: 'TECHNOLOGY', articleDateLabel: 'APRIL 2026', articleDateValue: '2026-04-22',
     articleTags: ['ERP', 'SUPPLY CHAIN', 'INVENTORY'],
@@ -133,9 +136,12 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     challenge: 'Fragmented fleet information limits delivery control, asset utilization, and timely intervention.',
     approach: ['Live fleet and assignment monitoring', 'Route and delivery status tracking', 'Maintenance and utilization records'],
     outcomes: ['Improved fleet utilization', 'More reliable deliveries', 'Faster operational response'],
-    relatedWorkSlug: 'myboss-iot-system',
-    relatedWorkTitle: 'MyBoss Connected IoT Hardware & Control System',
-    relatedWorkImage: '/images/projects/myboss-iot-system/1.webp',
+    relatedWork: {
+      slug: 'myboss-iot-system',
+      title: 'MyBoss Connected IoT Hardware & Control System',
+      image: '/images/projects/myboss-iot-system/1.webp',
+      relationship: 'supporting',
+    },
     caseStudySlug: 'logistics-fleet-operations-tracker',
     articleCategory: 'TECHNOLOGY', articleDateLabel: 'MAY 2026', articleDateValue: '2026-05-30',
     articleTags: ['IOT', 'LOGISTICS', 'FLEET OPERATIONS'],
@@ -151,9 +157,12 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     challenge: 'Manual warehouse processes create inventory discrepancies and slow order fulfillment.',
     approach: ['Structured inbound and storage workflows', 'Barcode-ready picking and packing', 'Real-time warehouse inventory control'],
     outcomes: ['Higher stock accuracy', 'Faster fulfillment', 'Traceable warehouse operations'],
-    relatedWorkSlug: 'sinau-print-erp',
-    relatedWorkTitle: 'Sinau Print ERP & Marketplace Platform',
-    relatedWorkImage: '/images/projects/sinau-print-erp/1.webp',
+    relatedWork: {
+      slug: 'sinau-print-erp',
+      title: 'Sinau Print ERP & Marketplace Platform',
+      image: '/images/projects/sinau-print-erp/1.webp',
+      relationship: 'supporting',
+    },
     caseStudySlug: 'warehouse-management-system',
     articleCategory: 'TECHNOLOGY', articleDateLabel: 'APRIL 2026', articleDateValue: '2026-04-22',
     articleTags: ['ERP', 'WAREHOUSE', 'FULFILLMENT'],
@@ -171,15 +180,23 @@ export const SOLUTION_CASE_STUDIES: CaseStudyArticle[] = SOLUTION_SERVICES.map((
   dateLabel: service.articleDateLabel,
   dateValue: service.articleDateValue,
   description: service.description,
-  coverImage: service.relatedWorkImage,
-  coverImageAlt: `${service.title} implemented through ${service.relatedWorkTitle}`,
+  coverImage: service.relatedWork?.image ?? service.image,
+  coverImageAlt: service.relatedWork
+    ? `${service.title} capability represented by ${service.relatedWork.title}`
+    : `${service.title} capability illustration`,
   sections: [
     {
       eyebrow: 'THE CHALLENGE',
       mainTitle: service.challenge,
-      paragraphs: [
-        `${service.relatedWorkTitle} provides the project foundation for this solution. The implementation translates a real operational requirement into a connected enterprise workflow.`,
-      ],
+      paragraphs: service.relatedWork
+        ? [
+            service.relatedWork.relationship === 'direct'
+              ? `${service.relatedWork.title} demonstrates this capability in a delivered operational workflow.`
+              : `${service.relatedWork.title} demonstrates supporting technology relevant to this capability without being presented as an identical implementation.`,
+          ]
+        : [
+            'This capability is presented as a service offering. No published project is currently claimed as a direct implementation.',
+          ],
     },
     {
       eyebrow: 'OUR SOLUTION',

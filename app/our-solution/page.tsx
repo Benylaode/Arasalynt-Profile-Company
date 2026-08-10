@@ -4,8 +4,26 @@ import { CORE_SOLUTIONS, OUR_SOLUTION_CHALLENGE, OUR_SOLUTION_CHALLENGES, SOLUTI
 import SolutionWorksExplorer from '@/components/sections/SolutionWorksExplorer/SolutionWorksExplorer';
 
 export const metadata: Metadata = {
-  title: 'Our Solution — Arsalynk',
-  description: 'IT solution to optimize your enterprise workflow.',
+  title: 'Enterprise ERP, IoT & Operational Systems',
+  description: 'Explore Arsalynk enterprise solutions for ERP, IoT integration, POS, HRMS, finance automation, supply chain, fleet, and warehouse operations.',
+  keywords: [
+    'enterprise ERP Indonesia', 'IoT integration Indonesia', 'custom operational systems',
+    'POS system development', 'HRMS development', 'finance automation',
+    'supply chain software', 'fleet management system', 'warehouse management system',
+  ],
+  alternates: { canonical: '/our-solution' },
+  openGraph: {
+    title: 'Enterprise ERP, IoT & Operational Systems | Arsalynk',
+    description: 'Connected enterprise systems designed around real operational workflows.',
+    url: '/our-solution',
+    images: ['/images/our-works/our-works-hero-bg.webp'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Enterprise ERP, IoT & Operational Systems | Arsalynk',
+    description: 'Connected enterprise systems designed around real operational workflows.',
+    images: ['/images/our-works/our-works-hero-bg.webp'],
+  },
 };
 
 function IconChevronDown() {
