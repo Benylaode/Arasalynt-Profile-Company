@@ -9,6 +9,7 @@ import { BUSINESS_DUMMY_DATA } from './dummy';
 
 function optionalText(value: string | null | undefined): string | undefined {
   const normalized = value?.trim();
+  
   return normalized || undefined;
 }
 
