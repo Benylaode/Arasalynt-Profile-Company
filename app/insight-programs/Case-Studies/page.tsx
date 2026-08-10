@@ -11,8 +11,7 @@ import { SOLUTION_CASE_STUDIES } from '@/lib/our-solution.data';
    ========================================================================== */
 
 const ASSETS = {
-  hero: '/images/insight-programs/case-studies/hero-case-studies.webp',
-  heroNetwork: '/images/shared/network-overlay.webp',
+  hero: '/images/insight-programs/case-studies/hero-case-studies-v2.webp',
 } as const;
 
 const PAGE_SIZE = 9;
@@ -308,23 +307,7 @@ export default function CaseStudiesPage() {
         <img
           src={ASSETS.hero}
           alt="Case studies hero background"
-          className="absolute inset-0 h-full w-full object-cover object-center brightness-[0.52] saturate-[0.9]"
-        />
-        <img
-          src={ASSETS.heroNetwork}
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-40 mix-blend-plus-lighter"
-        />
-
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(26,62,158,0.82)_0%,rgba(26,62,158,0.14)_54%,rgba(16,16,16,0.16)_64%,#101010_100%)] mix-blend-multiply"
-        />
-
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(25,69,180,0.08)_0%,rgba(5,10,22,0.05)_38%,rgba(0,0,0,0.38)_100%)]"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
 
         <div className="relative z-10 mx-auto flex w-full max-w-[900px] flex-col items-center px-6 text-center">

@@ -455,7 +455,7 @@ export default async function BusinessSlugPage({
         <div
           className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[clamp(420px,52vw,700px)] w-[88%] max-w-[1759px] -translate-x-1/2 -translate-y-1/2 bg-cover bg-center bg-no-repeat opacity-[0.14] max-[1199px]:w-[92%]"
           style={{
-            backgroundImage: "url('/images/our-business/pain-points-radial.png')",
+            backgroundImage: "url('/images/our-business/pain-points-radial.webp')",
           }}
           aria-hidden="true"
         />

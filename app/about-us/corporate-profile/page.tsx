@@ -51,25 +51,25 @@ const SERVICES = [
   {
     title: ['Enterprise Data', '& Intelligence'],
     description: 'Unifying data pipelines, advanced analytics, and actionable operational insights.',
-    image: '/images/corporate-profile/service-data.webp',
+    image: '/images/corporate-profile/capabilities/enterprise-data-intelligence.webp',
     alt: 'Enterprise data and intelligence illustration',
   },
   {
     title: ['Scalable Systems', '& IoT Integration'],
     description: 'Connecting devices, hardware, and networks into high-performance digital environments.',
-    image: '/images/corporate-profile/service-data.webp',
+    image: '/images/corporate-profile/capabilities/scalable-systems-iot.webp',
     alt: 'Scalable systems and IoT integration illustration',
   },
   {
     title: ['Mission-Critical', 'IT Infrastructure'],
     description: 'Building secure, high-availability networks and cloud systems engineered for uninterrupted uptime.',
-    image: '/images/corporate-profile/service-broadcast.webp',
+    image: '/images/corporate-profile/capabilities/mission-critical-infrastructure.webp',
     alt: 'Mission-critical IT infrastructure illustration',
   },
   {
     title: ['Integrated', 'Execution'],
     description: 'Deploying unified ERP workflows that reduce friction and improve enterprise productivity.',
-    image: '/images/corporate-profile/service-execution.webp',
+    image: '/images/corporate-profile/capabilities/integrated-execution.webp',
     alt: 'Integrated execution illustration',
   },
 ];
@@ -78,13 +78,13 @@ const OTHER_INFORMATION = [
   {
     href: '/about-us/company-leadership',
     title: 'Company Leadership',
-    image: '/images/shared/leadership-portrait.webp',
+    image: '/images/about-us/company-leadership/leadership-portrait.webp',
     imagePosition: 'center 53%',
   },
   {
     href: '/about-us/ecosystem-philosophy',
     title: 'Ecosystem Philosophy',
-    image: '/images/shared/ecosystem-philosophy-card.webp',
+    image: '/images/about-us/cards/ecosystem-philosophy-card.webp',
     imagePosition: 'center center',
   },
 ];
@@ -182,14 +182,14 @@ export default function CorporateProfilePage() {
         className="relative h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#050914] max-[640px]:rounded-b-[24px]"
       >
         <img
-          src="/images/about-us/corporate-profile-hero.jpg"
+          src="/images/about-us/corporate-profile-hero.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-bottom"
         />
 
         <img
-          src="/images/shared/network-overlay.webp"
+          src="/images/about-us/network-overlay.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute bottom-[-44%] left-1/2 h-[125%] w-[250%] max-w-none -translate-x-1/2 select-none object-contain opacity-70 max-[640px]:bottom-[-16%] max-[640px]:h-[82%] max-[640px]:w-[220%]"
@@ -379,7 +379,7 @@ export default function CorporateProfilePage() {
       {/* VISION & MISSION */}
       <section id="vision-mission" className="relative w-full scroll-mt-24 overflow-hidden bg-[linear-gradient(180deg,#101010_0%,#1A3E9E_95.29%)] px-[clamp(24px,13.333vw,256px)] py-[clamp(100px,8.54vw,164px)] text-white">
         <img
-          src="/images/shared/network-overlay.webp"
+          src="/images/about-us/network-overlay.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute bottom-[-31px] left-1/2 w-[103.02vw] max-w-none -translate-x-1/2 opacity-[0.30] mix-blend-screen"
@@ -407,7 +407,7 @@ export default function CorporateProfilePage() {
       {/* OUR CAPABILITIES */}
       <section id="our-capabilities" className="relative w-full scroll-mt-24 overflow-hidden bg-[#F7F7F7] px-[6vw] py-[clamp(100px,8.125vw,156px)] max-[1199px]:px-[4vw]">
         <img
-          src="/images/shared/network-overlay.webp"
+          src="/images/about-us/network-overlay.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-[-22%] w-[104%] max-w-none -translate-x-1/2 opacity-[0.09] mix-blend-multiply"
@@ -435,7 +435,7 @@ export default function CorporateProfilePage() {
                   <img
                     src={service.image}
                     alt={service.alt}
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                    className="h-full w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                   />
                   <div
                     className="pointer-events-none absolute inset-0 bg-black/[0.05]"

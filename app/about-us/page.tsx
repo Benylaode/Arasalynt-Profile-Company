@@ -11,7 +11,7 @@ const ABOUT_CARDS = [
     id: 'our-foundation',
     title: <>Our<br />Foundation</>,
     alt: 'Our Foundation',
-    image: '/images/shared/corporate-profile-card.webp',
+    image: '/images/about-us/cards/corporate-profile-card.webp',
     imageClassName: 'inset-0 h-full w-full object-center',
     shade: 'bg-black/20',
     gradientClassName: 'inset-0 bg-gradient-to-t from-black to-transparent',
@@ -21,7 +21,7 @@ const ABOUT_CARDS = [
     id: 'vision-mission',
     title: <>Our Vision<br />&amp; Mission</>,
     alt: 'Our Vision and Mission',
-    image: '/images/about-us/corporate-profile-hero.jpg',
+    image: '/images/about-us/corporate-profile-hero.webp',
     imageClassName: 'inset-0 h-full w-full object-center',
     shade: 'bg-black/10',
     gradientClassName: 'left-0 right-0 bottom-0 h-[58%] bg-gradient-to-t from-black via-black/55 to-transparent',
@@ -31,7 +31,7 @@ const ABOUT_CARDS = [
     id: 'leadership-foundation',
     title: <>Leadership<br />Foundation</>,
     alt: 'Leadership Foundation',
-    image: '/images/about-us/company-leadership-hero.png',
+    image: '/images/about-us/company-leadership-hero.webp',
     imageClassName: 'inset-0 h-full w-full object-center',
     shade: 'bg-black/10',
     gradientClassName: 'left-0 right-0 bottom-0 h-[58%] bg-gradient-to-t from-black via-black/55 to-transparent',
@@ -41,7 +41,7 @@ const ABOUT_CARDS = [
     id: 'leadership-principles',
     title: <>Leadership<br />Principles</>,
     alt: 'Leadership Principles',
-    image: '/images/shared/leadership-intro-office.webp',
+    image: '/images/about-us/company-leadership/leadership-intro-office.webp',
     imageClassName: 'inset-0 h-full w-full object-center',
     shade: 'bg-black/10',
     gradientClassName: 'left-0 right-0 bottom-0 h-[58%] bg-gradient-to-t from-black via-black/55 to-transparent',
@@ -51,7 +51,7 @@ const ABOUT_CARDS = [
     id: 'our-capabilities',
     title: <>Our<br />Capabilities</>,
     alt: 'Our Capabilities',
-    image: '/images/about-us/ecosystem-philosophy-hero.png',
+    image: '/images/about-us/ecosystem-philosophy-hero.webp',
     imageClassName: 'inset-0 h-full w-full object-center',
     shade: 'bg-black/10',
     gradientClassName: 'left-0 right-0 bottom-0 h-[58%] bg-gradient-to-t from-black via-black/55 to-transparent',
@@ -99,7 +99,7 @@ export default function AboutUsPage() {
         {/* Primary infinity artwork: Figma rect 2707 × 975 at y = -39.
             Relative to the already-rendered 90px navbar, its top becomes -129px. */}
         <img
-          src="/images/about-us/hero-infinity-new.jpg"
+          src="/images/about-us/hero-infinity-new.webp"
           alt=""
           aria-hidden="true"
           draggable={false}
@@ -108,7 +108,7 @@ export default function AboutUsPage() {
 
         {/* Transparent network dome from the supplied SVG */}
         <img
-          src="/images/shared/network-overlay.webp"
+          src="/images/about-us/network-overlay.webp"
           alt=""
           aria-hidden="true"
           draggable={false}

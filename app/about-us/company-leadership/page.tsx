@@ -102,7 +102,7 @@ const TRUST_SLIDES = [
   },
   {
     text: 'Our delivery and management frameworks scale sustainably, ensuring high-availability operations without bottlenecks or single points of failure.',
-    image: '/images/shared/building-trust.webp'
+    image: '/images/about-us/company-leadership/building-trust.webp'
   },
   {
     text: 'Our teams are designed to operate sustainably without creating a single point of leadership or operational failure.',
@@ -158,14 +158,14 @@ export default function CompanyLeadershipPage() {
         className="relative isolate h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#101010] max-[640px]:rounded-b-[24px]"
       >
         <img
-          src="/images/about-us/company-leadership-hero.png"
+          src="/images/about-us/company-leadership-hero.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top"
         />
 
         <img
-          src="/images/shared/network-overlay.webp"
+          src="/images/about-us/network-overlay.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute bottom-[-44%] left-1/2 h-[125%] w-[250%] max-w-none -translate-x-1/2 select-none object-contain opacity-70 max-[640px]:bottom-[-16%] max-[640px]:h-[82%] max-[640px]:w-[220%]"
@@ -238,7 +238,7 @@ export default function CompanyLeadershipPage() {
 
           <div className="relative w-[54.3%] shrink-0 overflow-hidden rounded-[24px] bg-[#252A2F] max-[1024px]:w-full aspect-[764/670]">
             <img
-              src="/images/shared/leadership-intro-office.webp"
+              src="/images/about-us/company-leadership/leadership-intro-office.webp"
               alt="Arsalynk leadership office"
               className="absolute inset-[-10px] h-[calc(100%+20px)] w-[calc(100%+20px)] object-cover blur-[6.6px]"
             />
@@ -402,7 +402,7 @@ export default function CompanyLeadershipPage() {
               className="group relative overflow-hidden rounded-[24px] border border-transparent bg-[#8C8C8C] no-underline aspect-[835/500] transition-all duration-500 hover:border-white/80 hover:shadow-[0_18px_45px_rgba(0,0,0,0.18)] focus-visible:border-white focus-visible:outline-none"
             >
               <img
-                src="/images/shared/corporate-profile-card.webp"
+                src="/images/about-us/cards/corporate-profile-card.webp"
                 alt="Corporate Profile"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
@@ -419,7 +419,7 @@ export default function CompanyLeadershipPage() {
               className="group relative overflow-hidden rounded-[24px] border border-transparent bg-[#8C8C8C] no-underline aspect-[835/500] transition-all duration-500 hover:border-white/80 hover:shadow-[0_18px_45px_rgba(0,0,0,0.18)] focus-visible:border-white focus-visible:outline-none"
             >
               <img
-                src="/images/shared/ecosystem-philosophy-card.webp"
+                src="/images/about-us/cards/ecosystem-philosophy-card.webp"
                 alt="Ecosystem Philosophy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />

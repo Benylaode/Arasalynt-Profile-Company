@@ -200,7 +200,7 @@ export default function BridgePossibility() {
 
           {/* Animated Arrow GIF */}
           <img
-            src="/images/gif/Arrow%20GIF.gif"
+            src="/images/gif/Arrow%20GIF.webp"
             alt="Connecting Arrow"
             className="absolute z-[2] w-[89%] h-auto object-contain pointer-events-none select-none opacity-80"
           />

@@ -58,14 +58,14 @@ export default function EcosystemPhilosophyPage() {
         className="relative h-[clamp(520px,41.667vw,800px)] w-full overflow-hidden rounded-b-[42px] bg-[#020714] max-[640px]:rounded-b-[24px]"
       >
         <img
-          src="/images/about-us/ecosystem-philosophy-hero.png"
+          src="/images/about-us/ecosystem-philosophy-hero.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
         />
 
         <img
-          src="/images/shared/network-overlay.webp"
+          src="/images/about-us/network-overlay.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute bottom-[-44%] left-1/2 h-[125%] w-[250%] max-w-none -translate-x-1/2 select-none object-contain opacity-70 max-[640px]:bottom-[-16%] max-[640px]:h-[82%] max-[640px]:w-[220%]"
@@ -241,7 +241,7 @@ export default function EcosystemPhilosophyPage() {
               className="group relative overflow-hidden rounded-[24px] border border-transparent bg-[#8C8C8C] no-underline aspect-[835/500] transition-all duration-500 hover:border-white/80 hover:shadow-[0_18px_45px_rgba(0,0,0,0.18)] focus-visible:border-white focus-visible:outline-none"
             >
               <img
-                src="/images/shared/leadership-portrait.webp"
+                src="/images/about-us/company-leadership/leadership-portrait.webp"
                 alt="Company Leadership"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
@@ -258,7 +258,7 @@ export default function EcosystemPhilosophyPage() {
               className="group relative overflow-hidden rounded-[24px] border border-transparent bg-[#8C8C8C] no-underline aspect-[835/500] transition-all duration-500 hover:border-white/80 hover:shadow-[0_18px_45px_rgba(0,0,0,0.18)] focus-visible:border-white focus-visible:outline-none"
             >
               <img
-                src="/images/shared/corporate-profile-card.webp"
+                src="/images/about-us/cards/corporate-profile-card.webp"
                 alt="Corporate Profile"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
