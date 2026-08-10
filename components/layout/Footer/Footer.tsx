@@ -13,19 +13,21 @@ const manrope = Manrope({
 });
 
 const ABOUT_LINKS = [
-  { name: 'Our Foundation', href: '/about-us/corporate-profile#our-foundation' },
-  { name: 'Our Vision & Mission', href: '/about-us/corporate-profile#vision-mission' },
-  { name: 'Leadership Foundation', href: '/about-us/company-leadership#leadership-foundation' },
-  { name: 'Leadership Principles', href: '/about-us/company-leadership#leadership-principles' },
-  { name: 'Our Capabilities', href: '/about-us/corporate-profile#our-capabilities' },
+  { name: 'About Arsalynk', href: '/about-us' },
+  { name: 'Corporate Profile', href: '/about-us/corporate-profile' },
+  { name: 'Company Leadership', href: '/about-us/company-leadership' },
+  { name: 'Ecosystem Philosophy', href: '/about-us/ecosystem-philosophy' },
+  { name: 'Contact Us', href: '/contact-us' },
 ];
 
-const INSIGHT_LINKS = [
-  { name: 'Thought Leadership', href: '/insight-programs/leadership-thoughts' },
+const EXPLORE_LINKS = [
+  { name: 'Our Solution', href: '/our-solution' },
+  { name: 'Our Works', href: '/our-works' },
   { name: 'Case Studies', href: '/insight-programs/case-studies' },
+  { name: 'Leadership Thoughts', href: '/insight-programs/leadership-thoughts' },
 ];
 
-const MEDIA_LINKS = [
+const SERVICE_LINKS = [
   { name: 'Point of Sale (POS)', href: '/our-solution/point-of-sale-pos' },
   { name: 'HR & Talent Management', href: '/our-solution/hr-talent-management-engine' },
   { name: 'Financial Automation', href: '/our-solution/financial-accounting-automation-hub' },
@@ -139,7 +141,7 @@ export default function Footer() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-[357px_357px_357px] gap-x-[71px] max-[1799px]:grid-cols-3 max-[1799px]:gap-x-[46px] max-[1100px]:grid-cols-2 max-[1100px]:gap-x-[40px] max-[1100px]:gap-y-[46px] max-[767px]:grid-cols-1 max-[767px]:gap-y-[40px]">
+          <div className="grid grid-cols-[minmax(220px,.85fr)_minmax(280px,1fr)_minmax(340px,1.35fr)] gap-x-[clamp(36px,5vw,96px)] max-[1100px]:grid-cols-2 max-[1100px]:gap-y-[46px] max-[767px]:grid-cols-1 max-[767px]:gap-y-[40px]">
             <div className="flex flex-col gap-8">
               <div className="flex flex-col gap-3.5">
                 <FooterTitle href="/about-us">ABOUT US</FooterTitle>
@@ -153,9 +155,9 @@ export default function Footer() {
               </div>
 
               <div className="flex flex-col gap-3.5">
-                <FooterTitle href="/insight-programs/case-studies">INSIGHT &amp; PROGRAMS</FooterTitle>
+                <FooterTitle>EXPLORE</FooterTitle>
                 <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
-                  {INSIGHT_LINKS.map((link) => (
+                  {EXPLORE_LINKS.map((link) => (
                     <li key={link.href}>
                       <FooterLink href={link.href}>{link.name}</FooterLink>
                     </li>
@@ -164,21 +166,17 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-7 max-[767px]:grid max-[767px]:grid-cols-2 max-[767px]:gap-x-7 max-[767px]:gap-y-7">
-              <div className="flex flex-col gap-2.5 max-[767px]:col-start-1 max-[767px]:row-start-1">
-                <FooterTitle>ENTERPRISE SYSTEM</FooterTitle>
+            <div className="flex flex-col gap-7">
+              <div className="flex flex-col gap-2.5">
+                <FooterTitle href="/our-solution">CORE SOLUTIONS</FooterTitle>
                 <FooterLink href="/our-solution#enterprise-resource-planning">Enterprise Resource Planning</FooterLink>
-              </div>
-
-              <div className="flex flex-col gap-2.5 max-[767px]:col-start-1 max-[767px]:row-start-2">
-                <FooterTitle>CONNECTED ENTERPRISE</FooterTitle>
                 <FooterLink href="/our-solution#internet-of-things">Internet of Things</FooterLink>
               </div>
 
-              <div className="flex flex-col gap-3.5 max-[767px]:col-start-2 max-[767px]:row-span-2 max-[767px]:row-start-1">
+              <div className="flex flex-col gap-3.5">
                 <FooterTitle>OUR SERVICES</FooterTitle>
                 <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
-                  {MEDIA_LINKS.map((link) => (
+                  {SERVICE_LINKS.map((link) => (
                     <li key={link.href}>
                       <FooterLink href={link.href}>{link.name}</FooterLink>
                     </li>
@@ -191,7 +189,7 @@ export default function Footer() {
               <div className="flex flex-col gap-3">
                 <FooterTitle>JAKARTA OFFICE</FooterTitle>
                 <a
-                  href="https://maps.google.com"
+                  href="https://www.google.com/maps/search/?api=1&query=Menara+Rajawali+Mega+Kuningan+Jakarta"
                   target="_blank"
                   rel="noreferrer"
                   className="m-0 text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
@@ -204,7 +202,7 @@ export default function Footer() {
               <div className="flex flex-col gap-3">
                 <FooterTitle>SEMARANG HQ</FooterTitle>
                 <a
-                  href="https://maps.google.com"
+                  href="https://www.google.com/maps/search/?api=1&query=MG+Setos+Semarang+Indonesia"
                   target="_blank"
                   rel="noreferrer"
                   className="m-0 text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
