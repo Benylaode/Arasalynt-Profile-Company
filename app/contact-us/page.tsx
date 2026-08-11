@@ -2,8 +2,6 @@
 
 import { useState, type FormEvent, type ReactNode } from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/layout/Navbar/Navbar';
-import Footer from '@/components/layout/Footer/Footer';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import { submitLead } from '@/lib/actions';
 import {
@@ -377,8 +375,6 @@ export default function ContactUsPage() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#F7F7F7]">
-      <Navbar />
-
       <main>
         {/* ================================================================
             HERO — Standard Height Matching About Us & Our Business

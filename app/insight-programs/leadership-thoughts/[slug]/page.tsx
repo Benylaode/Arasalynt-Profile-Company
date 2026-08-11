@@ -1,9 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
+import Script from 'next/script';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import { LEADERSHIP_THOUGHTS_DUMMY_DATA } from '@/lib/db/dummy';
+import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 export async function generateStaticParams() {
   return LEADERSHIP_THOUGHTS_DUMMY_DATA.map((article) => ({
@@ -33,7 +35,6 @@ export async function generateMetadata({
   return {
     title: `${article.title} — Leadership Thought`,
     description: article.description,
-    keywords: [...article.tags, article.category, 'Arsalynk leadership insights', 'enterprise strategy'],
     alternates: { canonical },
     openGraph: {
       title: `${article.title} | Arsalynk Leadership Thought`,
@@ -98,8 +99,48 @@ export default async function LeadershipThoughtDetailPage({
     article.author ? `By ${article.author}` : article.readTime,
   ].filter(Boolean);
 
+  const canonicalUrl = `${SITE_URL}/insight-programs/leadership-thoughts/${article.slug}`;
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Article',
+        '@id': `${canonicalUrl}#article`,
+        headline: article.title,
+        description: article.description,
+        image: `${SITE_URL}${article.coverImage}`,
+        datePublished: new Date(article.date).toISOString(),
+        mainEntityOfPage: canonicalUrl,
+        author: {
+          '@type': 'Person',
+          name: article.author || SITE_NAME,
+        },
+        publisher: { '@id': `${SITE_URL}/#organization` },
+        keywords: article.tags.join(', '),
+        articleSection: article.category,
+        inLanguage: 'en',
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${canonicalUrl}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Insight & Programs', item: `${SITE_URL}/insight-programs/leadership-thoughts` },
+          { '@type': 'ListItem', position: 3, name: 'Leadership Thoughts', item: `${SITE_URL}/insight-programs/leadership-thoughts` },
+          { '@type': 'ListItem', position: 4, name: article.title, item: canonicalUrl },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
+      <Script
+        id={`thought-schema-${article.slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, '\\u003c') }}
+      />
+
       {/* HERO */}
       <section className="flex w-full flex-col items-center gap-10 bg-[#F7F7F7] px-[clamp(20px,5.73vw,110px)] pb-10 pt-[clamp(132px,9.69vw,186px)] sm:gap-12 sm:pb-12 xl:gap-16 xl:pb-16">
         <div className="flex w-full max-w-[1700px] flex-col gap-5 sm:gap-7 xl:gap-8">

@@ -1,23 +1,30 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Script from 'next/script';
 import type { ReactNode } from 'react';
 import { getAllBusinesses } from '@/lib/db/actions';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
+import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Our Integrated Business Ecosystem',
+  title: 'Ekosistem Bisnis Enterprise & Layanan IT Terintegrasi',
   description:
-    'Explore the Arsalynk ecosystem — from IT infrastructure and data analytics to media, branding, and beyond.',
-  keywords: ['Arsalynk business ecosystem', 'technology and data Indonesia', 'creative business ecosystem', 'integrated enterprise capabilities'],
+    'Jelajahi ekosistem bisnis Arsalynk di Indonesia: Dari infrastruktur IT, integrasi IoT, survey & data analytics, hingga media digital dan komunikasi strategis.',
   alternates: { canonical: '/our-business' },
   openGraph: {
-    title: 'Our Integrated Business Ecosystem | Arsalynk',
-    description: 'Technology, data, strategy, communication, and creative capabilities connected in one ecosystem.',
+    title: 'Ekosistem Bisnis Enterprise & Layanan IT Terintegrasi | Arsalynk',
+    description: 'Teknologi, data, strategi, komunikasi, dan kapabilitas kreatif terhubung dalam satu ekosistem enterprise.',
     url: '/our-business',
     images: ['/images/our-business/hero-business.webp'],
   },
-  twitter: { card: 'summary_large_image', title: 'Our Integrated Business Ecosystem | Arsalynk', description: 'Explore technology, data, strategy, communication, and creative capabilities across Arsalynk.', images: ['/images/our-business/hero-business.webp'] },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ekosistem Bisnis Enterprise & Layanan IT Terintegrasi | Arsalynk',
+    description: 'Jelajahi kapabilitas teknologi, data, strategi, dan komunikasi terintegrasi Arsalynk.',
+    images: ['/images/our-business/hero-business.webp'],
+  },
 };
+
 
 type Business = Awaited<ReturnType<typeof getAllBusinesses>>[number];
 
@@ -203,8 +210,25 @@ export default async function OurBusinessPage() {
     })
     .sort((a, b) => getMediaOrder(a) - getMediaOrder(b));
 
+  const canonicalUrl = `${SITE_URL}/our-business`;
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${canonicalUrl}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Our Business', item: canonicalUrl },
+    ],
+  };
+
   return (
     <main className="relative w-full overflow-x-hidden bg-[#F7F7F7]">
+      <Script
+        id="our-business-breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c') }}
+      />
+
       {/* HERO */}
       <section
         id="hero"
