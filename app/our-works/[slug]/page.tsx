@@ -356,7 +356,6 @@ export async function generateMetadata({
   return {
     title,
     description: project.description,
-    keywords: [...project.tags, project.corporation, 'Arsalynk portfolio', 'enterprise project Indonesia'],
     alternates: { canonical },
     openGraph: {
       type: 'article',

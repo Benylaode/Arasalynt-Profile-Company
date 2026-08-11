@@ -10,15 +10,13 @@ const WORK_SLUGS = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
   const entry = (path: string, priority: number, changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency']) => ({
     url: `${SITE_URL}${path}`,
-    lastModified: now,
     changeFrequency,
     priority,
   });
 
-  return [
+  const entries = [
     entry('/', 1, 'weekly'),
     entry('/about-us', 0.8, 'monthly'),
     entry('/about-us/corporate-profile', 0.7, 'monthly'),
@@ -36,4 +34,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...CASE_STUDIES_DUMMY_DATA.map(({ slug }) => entry(`/insight-programs/case-studies/${slug}`, 0.75, 'monthly')),
     ...LEADERSHIP_THOUGHTS_DUMMY_DATA.map(({ slug }) => entry(`/insight-programs/leadership-thoughts/${slug}`, 0.7, 'monthly')),
   ];
+
+  return Array.from(new Map(entries.map((item) => [item.url, item])).values());
 }

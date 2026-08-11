@@ -29,7 +29,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${article.title} — Case Study`,
     description: article.description,
-    keywords: [...article.tags, article.category, 'Arsalynk case study', 'enterprise transformation Indonesia'],
     alternates: { canonical },
     openGraph: {
       title: `${article.title} | Arsalynk Case Study`,

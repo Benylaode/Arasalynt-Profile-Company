@@ -148,5 +148,5 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
 
 export const SITE_NAME = 'Arsalynk';
 export const SITE_DESCRIPTION =
-  'Arsalynk builds unified enterprise ecosystems — integrated technology solutions for resilient, scalable, and intelligent business operations.';
-export const SITE_URL = 'https://arsalynk.com';
+  'Arsalynk menyediakan solusi teknologi enterprise terintegrasi di Indonesia, meliputi ERP, IoT, data analytics, POS, HRMS, dan transformasi digital bisnis.';
+export const SITE_URL = 'https://www.arsalynk.com';

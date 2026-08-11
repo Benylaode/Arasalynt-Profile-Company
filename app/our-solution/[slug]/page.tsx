@@ -11,8 +11,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const service = getSolutionService(slug);
-  if (!service) return {};
-  return { title: `${service.title} — Arsalynk`, description: service.description };
+  if (!service) return { title: 'Solution Not Found', robots: { index: false, follow: false } };
+  return {
+    title: service.title,
+    description: service.description,
+    robots: { index: false, follow: true },
+    alternates: { canonical: `/insight-programs/case-studies/${service.caseStudySlug}` },
+  };
 }
 
 export default async function SolutionServicePage({ params }: PageProps) {

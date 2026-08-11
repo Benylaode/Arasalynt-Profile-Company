@@ -116,7 +116,6 @@ export async function generateMetadata({
   return {
     title: biz.name,
     description: biz.aboutDesc.slice(0, 155),
-    keywords: [biz.name, biz.category, ...biz.services.map((service) => service.name), 'Arsalynk business ecosystem'],
     alternates: { canonical },
     openGraph: {
       title: `${biz.name} | Arsalynk`,
