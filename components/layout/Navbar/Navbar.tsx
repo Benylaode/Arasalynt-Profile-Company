@@ -808,10 +808,13 @@ export default function Navbar() {
    */
   const overlay = pathname === '/' && !isScrolled && activeDropdown === null;
 
+  const isMountedRef = useRef(false);
+
   const readScrollPosition = useCallback(() => {
-    if (scrollFrameRef.current !== null) return;
+    if (scrollFrameRef.current !== null || !isMountedRef.current) return;
 
     scrollFrameRef.current = window.requestAnimationFrame(() => {
+      if (!isMountedRef.current) return;
       const nextScrolled = window.scrollY > SCROLL_THRESHOLD;
       setIsScrolled((current) => current === nextScrolled ? current : nextScrolled);
       scrollFrameRef.current = null;
@@ -819,6 +822,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    isMountedRef.current = true;
     readScrollPosition();
 
     window.addEventListener('scroll', readScrollPosition, {
@@ -826,6 +830,7 @@ export default function Navbar() {
     });
 
     return () => {
+      isMountedRef.current = false;
       window.removeEventListener('scroll', readScrollPosition);
       if (scrollFrameRef.current !== null) {
         window.cancelAnimationFrame(scrollFrameRef.current);

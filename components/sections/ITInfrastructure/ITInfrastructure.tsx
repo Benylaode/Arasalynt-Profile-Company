@@ -457,11 +457,13 @@ export default function ITInfrastructure() {
   const [motion, setMotion] = useState<MotionState | null>(null);
   const [hoveredPillar, setHoveredPillar] = useState<PillarKey | null>(null);
 
+  const isMountedRef = useRef(false);
   const settledRef = useRef(0);
   const motionRef = useRef<MotionState | null>(null);
   const queuedSceneRef = useRef<number | null>(null);
   const autoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const finishTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const rafRef = useRef<number | null>(null);
   const motionKeyRef = useRef(0);
 
   const clearAutoTimer = useCallback(() => {
@@ -478,17 +480,27 @@ export default function ITInfrastructure() {
     }
   }, []);
 
+  const clearRaf = useCallback(() => {
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+  }, []);
+
   const beginTransitionRef = useRef<(nextScene: number) => void>(() => undefined);
 
   const scheduleAutoRotate = useCallback(() => {
     clearAutoTimer();
+    if (!isMountedRef.current) return;
     autoTimerRef.current = setTimeout(() => {
+      if (!isMountedRef.current) return;
       beginTransitionRef.current((settledRef.current + 1) % SCENES.length);
     }, AUTO_ROTATE_MS);
   }, [clearAutoTimer]);
 
   const finishTransition = useCallback(
     (finishedMotion: MotionState) => {
+      if (!isMountedRef.current) return;
       settledRef.current = finishedMotion.to;
       motionRef.current = null;
       setSettledScene(finishedMotion.to);
@@ -498,16 +510,22 @@ export default function ITInfrastructure() {
       queuedSceneRef.current = null;
 
       if (queued !== null && queued !== finishedMotion.to) {
-        requestAnimationFrame(() => beginTransitionRef.current(queued));
+        clearRaf();
+        rafRef.current = requestAnimationFrame(() => {
+          if (!isMountedRef.current) return;
+          beginTransitionRef.current(queued);
+          rafRef.current = null;
+        });
       } else {
         scheduleAutoRotate();
       }
     },
-    [scheduleAutoRotate],
+    [clearRaf, scheduleAutoRotate],
   );
 
   const beginTransition = useCallback(
     (nextScene: number) => {
+      if (!isMountedRef.current) return;
       const normalized = ((nextScene % SCENES.length) + SCENES.length) % SCENES.length;
 
       if (motionRef.current) {
@@ -534,7 +552,10 @@ export default function ITInfrastructure() {
       setMotion(nextMotion);
 
       finishTimerRef.current = setTimeout(
-        () => finishTransition(nextMotion),
+        () => {
+          if (!isMountedRef.current) return;
+          finishTransition(nextMotion);
+        },
         MOTION_DURATION_MS + 80,
       );
     },
@@ -542,10 +563,8 @@ export default function ITInfrastructure() {
   );
 
   useEffect(() => {
+    isMountedRef.current = true;
     beginTransitionRef.current = beginTransition;
-  }, [beginTransition]);
-
-  useEffect(() => {
     scheduleAutoRotate();
 
     const handleVisibilityChange = () => {
@@ -559,11 +578,13 @@ export default function ITInfrastructure() {
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
+      isMountedRef.current = false;
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       clearAutoTimer();
       clearFinishTimer();
+      clearRaf();
     };
-  }, [clearAutoTimer, clearFinishTimer, scheduleAutoRotate]);
+  }, [beginTransition, clearAutoTimer, clearFinishTimer, clearRaf, scheduleAutoRotate]);
 
   const targetScene = motion?.to ?? settledScene;
   const currentScene = SCENES[targetScene];

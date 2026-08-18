@@ -545,15 +545,17 @@ function ProjectCarouselTrack({ projects }: { projects: Project[] }) {
     setActiveIndex((previousIndex) => previousIndex - 1);
   }, [resetProgress]);
 
+  const isMountedRef = useRef(false);
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
+
   /* =======================================================
      AUTOPLAY TIMER + PROGRESS BAR
-
-     - Durasi 6 detik.
-     - Progress 0% sampai 100%.
-     - Otomatis pindah slide saat mencapai 100%.
-     - Pause saat hover.
-     - Lanjut dari posisi terakhir setelah hover selesai.
-     - Reset saat navigasi manual.
   ======================================================= */
 
   useEffect(() => {
@@ -565,6 +567,7 @@ function ProjectCarouselTrack({ projects }: { projects: Project[] }) {
     lastProgressTimeRef.current = window.performance.now();
 
     const progressInterval = window.setInterval(() => {
+      if (!isMountedRef.current) return;
       const currentTime = window.performance.now();
 
       if (document.hidden) {

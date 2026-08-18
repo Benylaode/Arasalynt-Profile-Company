@@ -63,6 +63,15 @@ export default function BusinessWorksCarousel({
     setActiveIndex((i) => i - 1);
   }, [resetProgress]);
 
+  const isMountedRef = useRef(false);
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
+
   useEffect(() => {
     if (works.length <= 1 || isPaused) {
       lastTimeRef.current = null;
@@ -70,6 +79,7 @@ export default function BusinessWorksCarousel({
     }
     lastTimeRef.current = performance.now();
     const id = window.setInterval(() => {
+      if (!isMountedRef.current) return;
       const now = performance.now();
       if (document.hidden) {
         lastTimeRef.current = now;
