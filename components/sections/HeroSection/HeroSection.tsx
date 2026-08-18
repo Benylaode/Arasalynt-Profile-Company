@@ -51,13 +51,30 @@ export default function HeroSection() {
   const [isContentVisible, setIsContentVisible] = useState(true);
 
   const transitionTimerRef = useRef<number | null>(null);
+  const rafRef = useRef<number | null>(null);
   const transitionLockRef = useRef(false);
+  const isMountedRef = useRef(false);
 
   const totalSlides = HERO_SLIDES.length;
 
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+      if (transitionTimerRef.current !== null) {
+        window.clearTimeout(transitionTimerRef.current);
+        transitionTimerRef.current = null;
+      }
+      if (rafRef.current !== null) {
+        window.cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, []);
+
   const goToSlide = useCallback(
     (requestedIndex: number) => {
-      if (totalSlides <= 1 || transitionLockRef.current) return;
+      if (totalSlides <= 1 || transitionLockRef.current || !isMountedRef.current) return;
 
       const nextIndex = (requestedIndex + totalSlides) % totalSlides;
       if (nextIndex === currentSlide) return;
@@ -67,11 +84,14 @@ export default function HeroSection() {
       setProgress(0);
 
       transitionTimerRef.current = window.setTimeout(() => {
+        if (!isMountedRef.current) return;
         setCurrentSlide(nextIndex);
 
-        window.requestAnimationFrame(() => {
+        rafRef.current = window.requestAnimationFrame(() => {
+          if (!isMountedRef.current) return;
           setIsContentVisible(true);
           transitionLockRef.current = false;
+          rafRef.current = null;
         });
       }, CONTENT_FADE_DURATION);
     },
@@ -93,12 +113,14 @@ export default function HeroSection() {
     const progressStep = 100 / (SLIDE_DURATION / tickDuration);
 
     const progressInterval = window.setInterval(() => {
+      if (!isMountedRef.current) return;
       setProgress((previousProgress) =>
         Math.min(previousProgress + progressStep, 100)
       );
     }, tickDuration);
 
     const slideTimeout = window.setTimeout(() => {
+      if (!isMountedRef.current) return;
       goToSlide(currentSlide + 1);
     }, SLIDE_DURATION);
 
@@ -107,14 +129,6 @@ export default function HeroSection() {
       window.clearTimeout(slideTimeout);
     };
   }, [currentSlide, goToSlide, totalSlides]);
-
-  useEffect(() => {
-    return () => {
-      if (transitionTimerRef.current !== null) {
-        window.clearTimeout(transitionTimerRef.current);
-      }
-    };
-  }, []);
 
   if (totalSlides === 0) return null;
 

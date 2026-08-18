@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { TESTIMONIALS_DUMMY_DATA } from '@/lib/db/dummy';
 
 const SLIDE_DURATION = 6000;
@@ -43,11 +43,21 @@ export default function Testimonials() {
     setActiveIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
   };
 
+  const isMountedRef = useRef(false);
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
+
   // Autoplay otomatis tanpa hambatan ref lock
   useEffect(() => {
     if (isPaused || totalSlides <= 1) return;
 
     const interval = setInterval(() => {
+      if (!isMountedRef.current) return;
       setActiveIndex((prev) => (prev + 1) % totalSlides);
     }, SLIDE_DURATION);
 

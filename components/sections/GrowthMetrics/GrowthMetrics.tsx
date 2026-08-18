@@ -45,13 +45,16 @@ export default function GrowthMetrics() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
+  const isMountedRef = useRef(false);
+
   useEffect(() => {
+    isMountedRef.current = true;
     const node = sectionRef.current;
     if (!node) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting && isMountedRef.current) {
           setIsVisible(true);
           observer.disconnect();
         }
@@ -61,7 +64,10 @@ export default function GrowthMetrics() {
 
     observer.observe(node);
 
-    return () => observer.disconnect();
+    return () => {
+      isMountedRef.current = false;
+      observer.disconnect();
+    };
   }, []);
 
   const revealBase = `transition-[opacity,transform] duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-[22px] opacity-0'}`;
