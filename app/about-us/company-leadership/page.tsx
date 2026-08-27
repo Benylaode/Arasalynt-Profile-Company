@@ -235,7 +235,7 @@ export default function CompanyLeadershipPage() {
               </p>
             </div>
           </div>
-
+{/* 
           <div className="relative w-[54.3%] shrink-0 overflow-hidden rounded-[24px] bg-[#252A2F] max-[1024px]:w-full aspect-[764/670]">
             <img
               src="/images/about-us/company-leadership/leadership-intro-office.webp"
@@ -250,6 +250,13 @@ export default function CompanyLeadershipPage() {
             />
             <div className="absolute inset-x-0 bottom-0 h-[54%] bg-gradient-to-b from-transparent to-black/70 opacity-70" />
             <div className="absolute inset-x-0 bottom-0 h-[91px] bg-gradient-to-b from-transparent to-black/70" />
+          </div> */}
+          <div className="relative w-[54.3%] overflow-hidden rounded-[24px]">
+            <img
+              src="/images/about-us/company-leadership/leadership.svg"
+              alt="Arsalynk illustration"
+              className="h-full w-full object-contain"
+            />
           </div>
         </NarrowContainer>
       </section>
