@@ -1087,568 +1087,321 @@ const LEGACY_TESTIMONIALS_DUMMY_DATA = [
 ];
 
 /* ─────────────────────────────────────────────────────────────────────────
-   CASE STUDIES DUMMY DATA
+   CASE STUDIES DUMMY DATA (6 Articles aligned 1-to-1 with Our Solution)
    ───────────────────────────────────────────────────────────────────────── */
-const LEGACY_CASE_STUDIES_DUMMY_DATA: CaseStudyArticle[] = [
-  {
-    id: 1,
-    slug: 'delivering-a-seamless-national-badminton-championship-experience',
-    title: 'Delivering a Seamless National Badminton Championship Experience',
-    category: 'PROJECT STORIES',
-    tags: ['PADEL NASIONAL', 'LIVE STREAMING'],
-    dateLabel: 'DECEMBER 2025',
-    dateValue: '2025-12-20',
-    description: 'Organizing a national-scale sporting event requires seamless coordination, high-quality production, and reliable broadcast technology to ensure fans across the country can engage with the tournament.',
-    coverImage: '/images/about-us/company-leadership/building-trust.webp',
-    coverImageAlt: 'Badminton Match Venue',
-    sections: [
-      {
-        mainTitle: 'Bringing Every Match to Audiences Nationwide',
-        paragraphs: [
-          'Organizing a national-scale sporting event requires seamless coordination, high-quality production, and reliable broadcast technology to ensure fans across the country can engage with the tournament. We partnered with the organizers to deliver a comprehensive live broadcasting and media production solution.',
-          'From ultra-low latency streaming pipelines to high-definition court coverage, our engineered workflow ensured zero interruptions during peak broadcast hours across mobile and desktop viewers.'
-        ],
-        image: {
-          src: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200&auto=format&fit=crop',
-          alt: 'Broadcast Monitoring'
-        }
-      },
-      {
-        eyebrow: 'THE CHALLENGE',
-        mainTitle: 'Broadcasting Every Match Without Compromise',
-        paragraphs: [
-          'With multiple courts running simultaneously, our challenge was to ensure that not a single moment of action was missed. We deployed a robust, multi-court streaming architecture with centralized mixing and live graphics integration to provide a premium viewing experience comparable to international sports broadcasts.'
-        ]
-      },
-      {
-        eyebrow: 'OUR SOLUTION',
-        mainTitle: 'Professional Production From Court to Screen',
-        paragraphs: [],
-        subsections: [
-          {
-            subtitle: 'Multi-Camera Production',
-            content: 'Each court featured a dedicated multi-camera setup covering wide angles and tight action shots, seamlessly switching to capture player emotions, fast-paced rallies, and crucial referee decisions.'
-          },
-          {
-            subtitle: 'Live Broadcast Direction',
-            content: 'Our technical directors and producers worked in real-time to overlay scores, player statistics, and sponsor graphics, ensuring a continuous and highly professional output for the audience watching from home.'
-          }
-        ],
-        image: {
-          src: 'https://images.unsplash.com/photo-1601506521793-dc748fc80b67?q=80&w=1200&auto=format&fit=crop',
-          alt: 'Live Broadcast System Monitor'
-        }
-      },
-      {
-        eyebrow: 'THE RESULTS',
-        mainTitle: 'A Championship Experienced Beyond the Venue',
-        paragraphs: [
-          'The resulting production achieved record-breaking viewership numbers across online platforms. By delivering a flawless live stream, we helped expand the championship\'s reach far beyond the physical venue, bringing the excitement of national badminton directly to fans\' living rooms.'
-        ]
-      }
-    ]
-  },
-  {
-    id: 2,
-    slug: 'how-we-built-an-election-data-tracking-system',
-    title: 'How We Built an Election Data Tracking System',
-    category: 'INSIGHT',
-    tags: ['DATA VISUALIZATION', 'PUBLIC SECTOR', 'REAL-TIME ANALYTICS'],
-    dateLabel: 'JANUARY 2024',
-    dateValue: '2024-01-15',
-    description: 'Discover how real-time data visualization and centralized reporting helped stakeholders monitor election progress with greater accuracy and speed.',
-    coverImage: '/images/insight-programs/case-studies/case-election-data.webp',
-    coverImageAlt: 'Digital technology and data visualization',
-    sections: [
-      {
-        mainTitle: 'Transforming Public Data Architecture Under High Demand',
-        paragraphs: [
-          'Elections demand total data integrity, ultra-low latency updates, and total transparency for thousands of simultaneous observers. We engineered a resilient data intake platform capable of parsing millions of incoming tally data points in real time.',
-          'By leveraging distributed validation nodes and encrypted sync pipelines, the platform maintained 99.999% uptime during peak transmission windows.'
-        ],
-        image: {
-          src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop',
-          alt: 'Data analytics dashboard'
-        }
-      },
-      {
-        mainTitle: 'Key Architecture & Security Highlights',
-        subsections: [
-          {
-            subtitle: 'Automated Anomaly Detection',
-            content: 'Machine-learning routines continuously cross-checked regional vote tallies against historical variances to highlight irregularities for human verification.'
-          },
-          {
-            subtitle: 'Interactive Dashboard Web Client',
-            content: 'Media outlets and election officials accessed customizable visualization portals with instant CSV export and live geospatial mapping features.'
-          }
-        ]
-      },
-      {
-        mainTitle: 'Measurable Impact and Public Trust',
-        paragraphs: [
-          'The system provided unprecedented visibility, cutting regional reporting delay from days to minutes while securing public confidence through transparent, audit-ready data tracks.'
-        ]
-      }
-    ]
-  },
-  {
-    id: 3,
-    slug: 'modernizing-operations-with-enterprise-iot',
-    title: 'Modernizing Operations with Enterprise IoT',
-    category: 'INSIGHT',
-    tags: ['ENTERPRISE IOT', 'SMART INFRASTRUCTURE', 'AUTOMATION'],
-    dateLabel: 'DECEMBER 2025',
-    dateValue: '2025-12-18',
-    description: 'See how connected sensors and system integration transformed fragmented infrastructure into a unified real-time operational ecosystem.',
-    coverImage: '/images/insight-programs/case-studies/case-enterprise-iot.webp',
-    coverImageAlt: 'Team presenting an enterprise technology solution',
-    sections: [
-      {
-        mainTitle: 'Bridging Legacy Industrial Hardware with Cloud Intelligence',
-        paragraphs: [
-          'Industrial operations often suffer from operational blind spots caused by disconnected equipment and manual logging. We implemented a unified IoT telemetry network connecting thousands of edge devices to a centralized monitoring system.',
-          'Real-time metrics allow facility operators to anticipate equipment degradation, automate energy distribution, and reduce unplanned downtime.'
-        ],
-        image: {
-          src: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop',
-          alt: 'Enterprise IoT system components'
-        }
-      },
-      {
-        mainTitle: 'Core Engineering Pillars',
-        subsections: [
-          {
-            subtitle: 'Edge Node Processing',
-            content: 'Smart gateway devices process sensor data locally to trigger immediate safety protocols before sending aggregated diagnostics to the cloud.'
-          },
-          {
-            subtitle: 'Predictive Maintenance Models',
-            content: 'By analyzing vibration, temperature, and power consumption trends, maintenance teams receive actionable alerts weeks before potential hardware failures.'
-          }
-        ]
-      },
-      {
-        mainTitle: 'Operational Results',
-        paragraphs: [
-          'Client facilities achieved a 35% reduction in maintenance costs and eliminated emergency operational shutdowns within six months of deployment.'
-        ]
-      }
-    ]
-  },
-  {
-    id: 4,
-    slug: 'how-we-broadcasted-pbpi-sirnas-jawa-tengah',
-    title: 'How We Broadcasted PBPI Sirnas Jawa Tengah',
-    category: 'PROJECT STORIES',
-    tags: ['LIVE STREAMING', 'MULTI-CAMERA', 'SPORTS BROADCAST'],
-    dateLabel: 'DECEMBER 2025',
-    dateValue: '2025-12-12',
-    description: 'A behind-the-scenes look at how LOXLive delivered a seamless multi-camera livestream experience for one of Indonesia’s major badminton events.',
-    coverImage: '/images/insight-programs/case-studies/case-live-broadcast.webp',
-    coverImageAlt: 'Live multi-camera badminton broadcast monitor',
-    sections: [
-      {
-        mainTitle: 'Delivering Regional Tournament Coverage at Scale',
-        paragraphs: [
-          'PBPI Sirnas Jawa Tengah brought together top regional athletes across multiple courts. LOXLive delivered continuous live broadcasting across digital channels, ensuring fans didn\'t miss a single set.',
-          'Custom graphics packages, automated replay systems, and live commentator audio feeds provided a broadcast quality matching national television standards.'
-        ],
-        image: {
-          src: 'https://images.unsplash.com/photo-1599577180579-2470e8ed3233?q=80&w=1200&auto=format&fit=crop',
-          alt: 'Live tournament stream setup'
-        }
-      },
-      {
-        mainTitle: 'Key Broadcast Features',
-        subsections: [
-          {
-            subtitle: 'Dynamic Live Scoreboards',
-            content: 'Integrated with official referee scoring tablets to update court scores instantly on screen without manual operator delays.'
-          },
-          {
-            subtitle: 'Multi-Platform Distribution',
-            content: 'Simulcasted streams to YouTube, Facebook, and custom web portals with adaptive bitrate streaming for low-bandwidth mobile viewers.'
-          }
-        ]
-      }
-    ]
-  }
-];
-
-/* ─────────────────────────────────────────────────────────────────────────
-   LEADERSHIP THOUGHTS DUMMY DATA
-   ───────────────────────────────────────────────────────────────────────── */
-const LEGACY_LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
-  {
-    id: 1,
-    slug: 'building-high-performance-teams-starts-with-trust-not-control',
-    title: 'Building High-Performance Teams Starts with Trust, Not Control',
-    category: 'LEADERSHIP INSIGHTS',
-    tags: ['LEADERSHIP', 'CULTURE', 'MANAGEMENT'],
-    author: 'Arsalynk Executive Team',
-    readTime: '6 min read',
-    date: 'July 2026',
-    description: 'The most effective leaders don\'t manage from a position of authority — they create environments where trust becomes the operating system of performance.',
-    coverImage: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=1600&auto=format&fit=crop',
-    coverImageAlt: 'Silhouette of business people',
-    sections: [
-      {
-        mainTitle: 'Trust Begins with Clarity',
-        paragraphs: [
-          'A high-performance culture is not built on micromanagement or constant surveillance. It is built on trust, which stems from clarity of purpose, alignment of goals, and the empowerment of individuals to make decisions. When leaders focus on defining the "what" and the "why," leaving the "how" to their teams, they unlock unprecedented levels of innovation and ownership.',
-          'Trust is not a passive state; it requires active communication, vulnerability from leadership, and a safe environment where taking calculated risks is encouraged rather than penalized.'
-        ],
-        image: {
-          src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop',
-          alt: 'Team assembling puzzle'
-        }
-      },
-      {
-        mainTitle: 'Ownership Over Micromanagement',
-        paragraphs: [
-          'When individuals are given autonomy, they naturally assume greater responsibility. Leaders must shift their mindset from controlling outcomes to coaching their teams toward them. Providing regular, constructive feedback and removing roadblocks is far more effective than monitoring every step of the process.'
-        ]
-      },
-      {
-        mainTitle: 'Mistakes Are Opportunities to Improve',
-        subsections: [
-          {
-            subtitle: 'Psychological Safety',
-            content: 'A culture that fears failure is a culture that stagnates. High-performance teams understand that mistakes are an inevitable part of pushing boundaries. By conducting blameless post-mortems and focusing on systemic improvements rather than individual blame, organizations can turn failures into their most valuable learning opportunities.'
-          },
-          {
-            subtitle: 'Building Trust Through Transparency',
-            content: 'Transparency in decision-making, financial health, and company strategy eliminates rumors and builds a cohesive unit. When team members understand the broader context of their work, they are better equipped to make autonomous decisions that align with the organization\'s overarching goals.'
-          }
-        ],
-        image: {
-          src: 'https://images.unsplash.com/photo-1601506521793-dc748fc80b67?q=80&w=1200&auto=format&fit=crop',
-          alt: 'Leadership strategy session'
-        }
-      },
-      {
-        mainTitle: 'Sustaining Excellence Over Time',
-        paragraphs: [
-          'Ultimately, leadership is about serving those you lead. By cultivating a culture rooted in trust, respect, and continuous learning, leaders can build resilient teams capable of navigating uncertainty and achieving sustained excellence.'
-        ]
-      }
-    ]
-  },
-  {
-    id: 2,
-    slug: 'why-we-prioritize-process-before-technology',
-    title: 'Why We Prioritize Process Before Technology',
-    category: 'STRATEGIC THINKING',
-    tags: ['STRATEGY', 'OPERATIONS', 'PROCESS DESIGN'],
-    author: 'Arsalynk Executive Team',
-    readTime: '5 min read',
-    date: 'June 2026',
-    description: 'Investing in technology without a solid operational foundation is like building a skyscraper on sand. Here\'s how we help organisations get the order right.',
-    coverImage: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1600&auto=format&fit=crop',
-    coverImageAlt: 'Strategy and workflow meeting',
-    sections: [
-      {
-        mainTitle: 'The Trap of Technological Automation',
-        paragraphs: [
-          'Organizations frequently fall into the trap of purchasing expensive software tools to solve operational friction. However, automating a flawed process only amplifies inefficiency.',
-          'Before writing a single line of code or deploying complex software architectures, leadership must first audit, streamline, and standardize core business workflows.'
-        ],
-        image: {
-          src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop',
-          alt: 'Business workflow audit'
-        }
-      },
-      {
-        mainTitle: 'The Three-Step Operational Framework',
-        subsections: [
-          {
-            subtitle: '1. Map the True Workflow',
-            content: 'Document step-by-step how work actually flows through teams, identifying hidden bottlenecks, duplicate approvals, and handoff delays.'
-          },
-          {
-            subtitle: '2. Eliminate Non-Value-Add Steps',
-            content: 'Strip away historical procedures that no longer serve a clear customer or business objective.'
-          },
-          {
-            subtitle: '3. Introduce Targeted Automation',
-            content: 'Only after the workflow is streamlined do we introduce custom technology solutions to automate repetitive manual tasks.'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: 3,
-    slug: 'lessons-from-scaling-cross-functional-collaboration',
-    title: 'Lessons from Scaling Cross-Functional Collaboration',
-    category: 'ORGANISATIONAL GROWTH',
-    tags: ['GROWTH', 'COLLABORATION', 'SCALING'],
-    author: 'Arsalynk Executive Team',
-    readTime: '7 min read',
-    date: 'June 2026',
-    description: 'Scaling a business isn\'t just about hiring more people — it\'s about designing systems that allow teams across disciplines to work as one unified force.',
-    coverImage: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1600&auto=format&fit=crop',
-    coverImageAlt: 'Cross functional team collaboration',
-    sections: [
-      {
-        mainTitle: 'Dismantling Departmental Silos',
-        paragraphs: [
-          'As organizations grow, departments naturally tend to isolate themselves into functional silos. Engineering, design, marketing, and sales start measuring success against isolated KPIs rather than unified outcomes.',
-          'True cross-functional alignment requires shared incentives, transparent communication channels, and multidisciplinary project squads.'
-        ],
-        image: {
-          src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop',
-          alt: 'Team strategy workshop'
-        }
-      },
-      {
-        mainTitle: 'Best Practices for Interdisciplinary Teams',
-        subsections: [
-          {
-            subtitle: 'Shared North Star Metrics',
-            content: 'Align all team members behind singular business objectives rather than localized departmental goals.'
-          },
-          {
-            subtitle: 'Asynchronous Documentation Culture',
-            content: 'Maintain centralized, open-access documentation so information flows freely without requiring endless status meetings.'
-          }
-        ]
-      }
-    ]
-  }
-];
-
-/* Content aligned with the current Arsalynk project portfolio. */
 export const CASE_STUDIES_DUMMY_DATA: CaseStudyArticle[] = [
+  /* ── 1. Sinau Print — POS ── */
   {
     id: 1,
-    slug: 'producing-a-cinematic-portrait-of-padel-arena',
-    title: 'Producing a Cinematic Portrait of Padel Arena',
-    category: 'MEDIA & CREATIVE',
-    tags: ['VIDEO PRODUCTION', 'SPORTS', 'BRAND STORYTELLING'],
-    dateLabel: 'JULY 2026',
-    dateValue: '2026-07-18',
-    description: 'How a focused production system translated the energy, community, and visual identity of Padel Arena into a campaign-ready brand film.',
-    coverImage: '/images/projects/video-portret-padel-arena/1.webp',
-    coverImageAlt: 'Video portrait production at Padel Arena',
-    sections: [
-      {
-        eyebrow: 'PROJECT CONTEXT',
-        mainTitle: 'A Venue with Energy That Static Documentation Could Not Capture',
-        paragraphs: [
-          'Padel Arena needed a visual asset that could introduce the venue to new audiences while remaining useful across launch communication, social media, and partnership presentations.',
-          'The central challenge was balancing the speed of sport with a controlled premium image. Production also had to work around reflective glass, mixed venue lighting, limited reset time, and the natural rhythm of active players.'
-        ]
-      },
-      {
-        mainTitle: 'Turning a Sporting Venue into a Brand Story',
-        paragraphs: [
-          'The brief was not simply to document a venue. The film needed to communicate movement, atmosphere, and the sense of community that makes the arena distinctive.',
-          'LoxLive developed a visual treatment that combined athlete portraits, architectural details, and live-action sequences within one consistent narrative.'
-        ],
-        image: { src: '/images/projects/video-portret-padel-arena/case-study-angle-02.webp', alt: 'Alternate angle of the Padel Arena video production' }
-      },
-      {
-        eyebrow: 'THE APPROACH',
-        mainTitle: 'A Production Workflow Built Around Authentic Moments',
-        subsections: [
-          { subtitle: 'Visual Direction', content: 'Shot composition, lighting, and camera movement were designed to retain the pace of the sport while keeping the brand visible and premium.' },
-          { subtitle: 'Campaign-Ready Delivery', content: 'The master footage was structured into adaptable edits for website, social media, and short-form campaign placements.' }
-        ]
-      },
-      {
-        eyebrow: 'THE RESULT',
-        mainTitle: 'One Visual System Across Multiple Channels',
-        paragraphs: ['The final content library gave Padel Arena a coherent visual identity and reusable material for ongoing digital communication.', 'A modular shot library also reduced the need for repeated production: wide venue footage, athlete portraits, equipment details, and short action sequences could be recombined for different campaign lengths and placements.']
-      }
-    ]
-  },
-  {
-    id: 2,
-    slug: 'designing-a-scalable-data-architecture-for-artic-analytica',
-    title: 'Designing a Scalable Data Architecture for Artic Analytica',
-    category: 'TECHNOLOGY & DATA',
-    tags: ['COMPLEX WEB', 'DATA ARCHITECTURE', 'ANALYTICS'],
-    dateLabel: 'JUNE 2026',
-    dateValue: '2026-06-24',
-    description: 'A modular web and data platform that turns complex analytical workflows into a clear, reliable, and extensible digital experience.',
-    coverImage: '/images/projects/artic-complex-web/1.webp',
-    coverImageAlt: 'Artic Analytica web and data platform',
-    sections: [
-      {
-        eyebrow: 'THE CHALLENGE',
-        mainTitle: 'One Platform Had to Serve Different Levels of Data Literacy',
-        paragraphs: [
-          'Prospective clients needed to understand Artic Analytica quickly, while technical stakeholders required enough depth to assess its research and analytical capabilities.',
-          'The existing information had different formats, owners, and levels of complexity. Without a structured content model, every new report or service would increase editorial inconsistency and maintenance cost.'
-        ]
-      },
-      {
-        mainTitle: 'Making Complex Information Easier to Use',
-        paragraphs: ['Artic Analytica required more than a corporate website. Its platform needed to organize research, analytical services, and evolving datasets without creating friction for editors or users.'],
-        image: { src: '/images/projects/artic-complex-web/case-study-angle-02.webp', alt: 'Artic analysts reviewing the platform from a collaborative workspace' }
-      },
-      {
-        eyebrow: 'OUR SOLUTION',
-        mainTitle: 'A Modular Foundation for Continuous Growth',
-        subsections: [
-          { subtitle: 'Structured Content Architecture', content: 'Reusable content models keep reports, services, and insights consistent while allowing new formats to be introduced safely.' },
-          { subtitle: 'Performance and Governance', content: 'Clear publishing workflows, scalable components, and deliberate data boundaries improve maintainability as the platform grows.' }
-        ]
-      },
-      {
-        eyebrow: 'THE OUTCOME',
-        mainTitle: 'A Platform Ready for New Services, Reports, and Audiences',
-        paragraphs: ['The modular architecture created a consistent publishing path and made important information easier to find. Artic can now extend the platform without redesigning its foundations for every new analytical offering.', 'The result is a clearer public experience and a more manageable internal system, with content structure, visual components, and governance working as one operating model.']
-      }
-    ]
-  },
-  {
-    id: 3,
-    slug: 'connecting-field-operations-with-myboss-iot',
-    title: 'Connecting Field Operations with the MyBoss IoT Control System',
+    slug: 'sinau-print-pos-system',
+    title: 'Sinau Print (Point of Sale)',
     category: 'TECHNOLOGY',
-    tags: ['IOT', 'HARDWARE INTEGRATION', 'OPERATIONS'],
-    dateLabel: 'MAY 2026',
-    dateValue: '2026-05-30',
-    description: 'How integrated hardware, telemetry, and a centralized control layer created clearer operational visibility for MyBoss.',
-    coverImage: '/images/projects/myboss-iot-system/1.webp',
-    coverImageAlt: 'MyBoss connected IoT system',
-    sections: [
-      {
-        eyebrow: 'THE CHALLENGE',
-        mainTitle: 'Operational Decisions Were Moving Faster Than Field Information',
-        paragraphs: ['Location updates, device status, and maintenance information arrived through separate channels. This made it difficult for supervisors to distinguish routine movement from events requiring intervention.', 'The system also needed to remain understandable to daily operators, not only technical administrators, while accommodating unstable connectivity and varied device conditions.']
-      },
-      {
-        mainTitle: 'From Disconnected Devices to Operational Visibility',
-        paragraphs: ['Field information had to move reliably from physical devices into one interface. The architecture therefore treated connectivity, device health, and operator clarity as one system rather than separate deliverables.'],
-        image: { src: '/images/projects/myboss-iot-system/case-study-angle-02.webp', alt: 'Operations team using the connected tracking system' }
-      },
-      {
-        eyebrow: 'ENGINEERING OUTCOME',
-        mainTitle: 'A Control Layer Designed for Real Conditions',
-        subsections: [
-          { subtitle: 'Resilient Device Communication', content: 'The integration accounts for intermittent connections and preserves the status history needed by operators.' },
-          { subtitle: 'Actionable Monitoring', content: 'The dashboard prioritizes alerts and control actions instead of overwhelming users with raw telemetry.' }
-        ]
-      },
-      {
-        eyebrow: 'THE OUTCOME',
-        mainTitle: 'A Shared Operational Picture from Field to Control Room',
-        paragraphs: ['The connected system consolidated location, status, and exception information into one workflow. Supervisors can identify priority events earlier while field teams receive clearer follow-up instructions.', 'Historical records also support maintenance planning and operational review, turning device telemetry into evidence for continuous improvement.']
-      }
-    ]
-  },
-  {
-    id: 4,
-    slug: 'building-an-integrated-erp-and-marketplace-for-sinau-print',
-    title: 'Building an Integrated ERP and Marketplace for Sinau Print',
-    category: 'TECHNOLOGY',
-    tags: ['ERP', 'MARKETPLACE', 'BUSINESS PROCESS'],
+    tags: ['POINT OF SALE', 'ERP', 'RETAIL OPERATIONS'],
     dateLabel: 'APRIL 2026',
     dateValue: '2026-04-22',
-    description: 'A unified platform connecting ordering, production, inventory, and customer transactions across Sinau Print operations.',
-    coverImage: '/images/projects/sinau-print-erp/1.webp',
-    coverImageAlt: 'Sinau Print ERP and marketplace platform',
+    description: 'A centralized Point of Sale solution designed to streamline sales operations, order management, payment processing, and customer communication—from the initial order to final completion.',
+    coverImage: '/images/case-studies/sinau-print-pos/cover.webp',
+    coverImageAlt: 'Operations team managing sales and order workflows on the Sinau Print POS system',
     sections: [
-      { eyebrow: 'THE CHALLENGE', mainTitle: 'Customer Convenience Had to Connect with Production Reality', paragraphs: ['An online ordering experience could not succeed if pricing, artwork approval, material availability, and production scheduling remained disconnected behind the scenes.', 'The team mapped common products, custom-order exceptions, approval points, and the information required by each role before defining the platform architecture.'] },
-      { mainTitle: 'One Workflow from Order to Production', paragraphs: ['The project began by mapping how customer orders moved through pricing, approval, production, and fulfilment. That operational map became the foundation of the platform.'], image: { src: '/images/projects/sinau-print-erp/case-study-angle-02.webp', alt: 'Sinau Print production staff connecting digital orders with printed output' } },
-      { eyebrow: 'THE SOLUTION', mainTitle: 'Commerce, ERP, and Production Status in One System', subsections: [{ subtitle: 'Guided Ordering', content: 'Product configuration and upload requirements help customers submit more complete orders before production review.' }, { subtitle: 'Role-Based Operations', content: 'Sales, design, production, and fulfilment teams work from shared records while seeing the controls relevant to their responsibilities.' }] },
-      { eyebrow: 'THE RESULT', mainTitle: 'Less Repetition, Better Operational Control', paragraphs: ['Shared records and role-based workflows reduced duplicate entry while giving teams a clearer view of order status, capacity, and inventory.', 'The platform establishes a foundation for measuring turnaround time, recurring exceptions, and product demand as transaction volume grows.'] }
-    ]
+      {
+        eyebrow: 'THE CHALLENGE',
+        mainTitle: 'Managing Sales Across Multiple Teams Without a Centralized System',
+        paragraphs: [
+          'Managing sales and customer orders across multiple teams can quickly become complex, especially when transactions involve deposits, installment payments, production processes, and different levels of user access.',
+          'Without a centralized system, businesses face limited visibility into real-time sales performance, manual and fragmented order management, difficulty tracking deposits and outstanding balances, time-consuming invoice creation, lack of clear authorization across purchasing and production teams, inconsistent customer communication, and a high risk of errors when multiple teams access the same order data.',
+        ],
+      },
+      {
+        mainTitle: 'Bringing Sales, Orders, and Payments into One Operational Platform',
+        paragraphs: [
+          'We developed an integrated Point of Sale system that connects sales, order management, payments, production, and customer communication within a single platform, ensuring every transaction and workflow step is visible, controlled, and consistent.',
+        ],
+        image: { src: '/images/case-studies/sinau-print-pos/case-study-angle-02.webp', alt: 'Centralized POS platform connecting sales, payments, and production teams' },
+      },
+      {
+        eyebrow: 'OUR SOLUTION',
+        mainTitle: 'An Integrated System Built Around Every Stage of the Sales Workflow',
+        subsections: [
+          { subtitle: '01', content: 'Real-Time Sales Dashboard: A centralized dashboard provides key sales metrics and performance insights, allowing teams and management to monitor business performance and make informed decisions based on real-time data.' },
+          { subtitle: '02', content: 'Direct Order Input & Management: Sales and customer service teams can create, update, and manage orders directly within the system, ensuring order information remains centralized, accurate, and accessible to authorized users.' },
+          { subtitle: '03', content: 'Split Bill & Installment Management: The system supports flexible payment structures, including deposits and final payments, making it easier to manage transactions where customers pay in multiple stages.' },
+          { subtitle: '04', content: 'Save Order for Credit & Installment Transactions: Orders can be saved and managed for customers who purchase on credit or through installment plans, allowing teams to track outstanding payments without losing the original order details.' },
+          { subtitle: '05', content: 'Midtrans Integration & Automated Invoicing: Payment processing is integrated with Midtrans, while invoices are generated automatically based on transaction data, reducing manual administrative work and minimizing payment-related errors.' },
+          { subtitle: '06', content: 'Role-Based Access Control: The system provides different access levels for Superadmin, Admin, Customer Service, and Production teams, ensuring each role accesses only the functions and information relevant to their responsibilities.' },
+          { subtitle: '07', content: 'Authorized Purchase, Production & Order Completion Workflow: Business processes are structured into controlled stages—from purchasing and production to order completion—managed by authorized users, creating a clearer workflow and reducing unauthorized actions.' },
+          { subtitle: '08', content: 'Automated Invoice Delivery via WhatsApp: Invoices are automatically delivered to customers through WhatsApp, providing a faster and more convenient way to communicate payment information while reducing manual follow-ups.' },
+        ],
+      },
+      {
+        eyebrow: 'THE OUTCOME',
+        mainTitle: 'A More Connected, Efficient, and Transparent Sales Operation',
+        paragraphs: [
+          'The POS system creates a more connected and efficient operational workflow by bringing sales, payments, orders, production, and customer communication into one platform.',
+          'As a result, the business benefits from greater operational efficiency through centralized order and sales management, improved financial visibility with clearer tracking of deposits and outstanding balances, reduced manual processes through automated invoicing and payment integration, better accountability with role-based access and authorized workflows, faster customer communication through automated invoice delivery via WhatsApp, and more accurate order management by maintaining consistent information across teams.',
+        ],
+      },
+    ],
   },
+
+  /* ── 2. Sinau Print — WMS ── */
+  {
+    id: 2,
+    slug: 'sinau-print-warehouse-management-wms',
+    title: 'Sinau Print (Warehouse Management)',
+    category: 'TECHNOLOGY',
+    tags: ['WAREHOUSE MANAGEMENT', 'INVENTORY', 'SUPPLY CHAIN'],
+    dateLabel: 'APRIL 2026',
+    dateValue: '2026-04-22',
+    description: 'A Warehouse Management System built to provide complete visibility and control over inventory—from purchase orders and inbound stock to production consumption and stock reconciliation.',
+    coverImage: '/images/case-studies/sinau-print-wms/cover.webp',
+    coverImageAlt: 'Warehouse operations team conducting stock opname and inventory inspection at Sinau Print',
+    sections: [
+      {
+        eyebrow: 'THE CHALLENGE',
+        mainTitle: 'Inaccurate Inventory and Limited Visibility Across Warehouse Operations',
+        paragraphs: [
+          'Managing warehouse operations manually often leads to inaccurate inventory records, inefficient stock movement, and limited visibility into material usage. As production scales, businesses need a reliable system to ensure that inventory remains accurate, procurement is well-documented, and stock levels support uninterrupted operations.',
+          'Common operational challenges include manual tracking of incoming and outgoing inventory, difficulty monitoring raw material consumption for each production order, limited visibility into vendor purchasing history, unexpected stock shortages due to late replenishment, poor estimation of material waste during production, and time-consuming stock audits and inventory adjustments.',
+        ],
+      },
+      {
+        mainTitle: 'A Central Inventory System from Purchase Order to Production Floor',
+        paragraphs: [
+          'We developed a centralized Warehouse Management System that automates inventory movement, improves material traceability, and helps businesses maintain accurate stock records across every stage of warehouse operations.',
+        ],
+        image: { src: '/images/case-studies/sinau-print-wms/case-study-angle-02.webp', alt: 'Industrial warehouse facility with high-bay racking system and inventory management operations' },
+      },
+      {
+        eyebrow: 'OUR SOLUTION',
+        mainTitle: 'Automating Inventory Accuracy from Receiving to Production',
+        subsections: [
+          { subtitle: '01', content: 'Automated Purchase Orders & Stock Movement: The system automatically records purchase orders, inbound inventory, and outbound stock transactions, ensuring every stock movement is reflected in real time while reducing manual data entry.' },
+          { subtitle: '02', content: 'Material Consumption Tracking per Production Order: Raw material usage is tracked for each production order, providing clear visibility into how inventory is consumed throughout the manufacturing process and supporting more accurate production planning.' },
+          { subtitle: '03', content: 'Vendor Transaction History: A complete history of purchases and transactions is maintained for every vendor, making it easier to review procurement activities, evaluate supplier performance, and access historical purchasing data whenever needed.' },
+          { subtitle: '04', content: 'Low Stock Alerts: The system proactively monitors inventory levels and sends alerts when stock reaches predefined thresholds, allowing teams to replenish inventory before shortages impact production.' },
+          { subtitle: '05', content: 'Material Waste Estimation: Built-in waste estimation helps businesses monitor expected material loss during production, enabling better cost control and more informed inventory planning.' },
+          { subtitle: '06', content: 'Stock Opname & Manual Adjustments: The WMS supports physical inventory counts along with authorized manual adjustments, ensuring that warehouse records remain aligned with actual inventory conditions.' },
+        ],
+      },
+      {
+        eyebrow: 'THE OUTCOME',
+        mainTitle: 'Greater Inventory Accuracy, Stronger Production Support, and Efficient Warehouse Management',
+        paragraphs: [
+          'By centralizing warehouse operations into a single platform, the WMS helps businesses achieve greater inventory accuracy, stronger production support, and more efficient warehouse management.',
+          'Key outcomes include improved inventory accuracy through automated stock movement recording, greater production visibility with material consumption tracking for every order, better procurement insights through comprehensive vendor transaction history, fewer stock shortages with proactive low-stock alerts, more effective cost control through waste estimation and inventory monitoring, and faster inventory reconciliation with streamlined stock opname and adjustment processes.',
+        ],
+      },
+    ],
+  },
+
+  /* ── 3. PT Sinergi Muda Arsa — HRMS ── */
+  {
+    id: 3,
+    slug: 'pt-sinergi-muda-arsa-hr-management',
+    title: 'PT Sinergi Muda Arsa (HR Management)',
+    category: 'TECHNOLOGY & DATA',
+    tags: ['HRMS', 'ENTERPRISE PORTAL', 'WORKFORCE MANAGEMENT'],
+    dateLabel: 'JUNE 2026',
+    dateValue: '2026-06-24',
+    description: 'An integrated ERP solution designed to streamline Human Resources management, employee development, and organizational processes through a centralized and structured platform.',
+    coverImage: '/images/case-studies/sinergi-muda-arsa-hr/cover.webp',
+    coverImageAlt: 'HR team reviewing employee assessment and development data on the integrated ERP portal',
+    sections: [
+      {
+        eyebrow: 'THE CHALLENGE',
+        mainTitle: 'Fragmented HR Data and Inconsistent Evaluation Processes Limiting Workforce Visibility',
+        paragraphs: [
+          'Managing human resources effectively requires more than maintaining employee records. Organizations need a structured approach to managing employee performance, development, assessments, and HR processes while ensuring that relevant information is accessible to the right people.',
+          'As organizations grow, HR teams face challenges such as employee information scattered across different systems, manual and time-consuming HR administration, difficulty monitoring employee development and assessment results, inconsistent processes for periodic employee evaluations, limited visibility into employee potential and competencies, difficulty maintaining structured assessment histories, and a lack of centralized HR data to support management decision-making.',
+        ],
+      },
+      {
+        mainTitle: 'Centralizing People Data, Processes, and Annual Assessments in One ERP Platform',
+        paragraphs: [
+          'We developed an ERP solution with an integrated Human Resources Management system that centralizes employee information, HR processes, and annual psychological assessments within a single platform, enabling more structured, data-driven, and sustainable people management.',
+        ],
+        image: { src: '/images/case-studies/sinergi-muda-arsa-hr/cover.webp', alt: 'HR professionals managing employee lifecycle data, assessments, and development insights on the ERP portal' },
+      },
+      {
+        eyebrow: 'OUR SOLUTION',
+        mainTitle: 'An Integrated HR Platform Built Around Employee Lifecycle and Annual Assessment',
+        subsections: [
+          { subtitle: '01', content: 'Centralized Employee Management: The system provides a centralized employee database where HR teams can manage employee profiles, organizational information, employment records, and relevant HR data in a structured and easily accessible environment.' },
+          { subtitle: '02', content: 'Annual Psychological Assessment: The ERP provides a dedicated platform for conducting annual psychological assessments (psychotests) for employees, allowing organizations to conduct periodic evaluations and maintain assessment records as part of their employee development and HR management processes.' },
+          { subtitle: '03', content: 'Employee Assessment History: Psychological assessment results and employee evaluation records are stored systematically, creating a historical overview that HR teams can use to monitor employee development over time.' },
+          { subtitle: '04', content: 'Structured HR Management: The system helps standardize HR processes across the organization, reducing reliance on manual administration and ensuring that employee-related activities follow a consistent workflow.' },
+          { subtitle: '05', content: 'Employee Development & Potential Mapping: Assessment data provides HR teams and management with additional insights into employee characteristics, competencies, and development areas, supporting more informed decisions regarding employee development, training, and organizational planning.' },
+          { subtitle: '06', content: 'Role-Based HR Access: Access to employee and assessment information is controlled according to user roles and responsibilities, helping protect sensitive HR data while ensuring that authorized users have access to the information they need.' },
+          { subtitle: '07', content: 'Centralized HR Data & Reporting: By consolidating HR information and assessment data into one platform, management can access more structured information to support workforce planning, evaluation, and strategic decision-making.' },
+        ],
+      },
+      {
+        eyebrow: 'THE OUTCOME',
+        mainTitle: 'A More Structured, Centralized, and Data-Driven HR Workflow',
+        paragraphs: [
+          'The ERP solution transforms HR management from a fragmented and administrative process into a more structured, centralized, and data-driven workflow.',
+          'Key outcomes include more efficient HR administration through centralized employee management, structured annual psychological assessments with digital workflows and records, better visibility into employee development through historical assessment data, more informed workforce decisions supported by centralized HR information, improved data organization and accessibility across HR processes, stronger data governance through controlled access to employee information, and a more consistent HR workflow that can scale alongside organizational growth.',
+        ],
+      },
+    ],
+  },
+
+  /* ── 4. Financial Management System ── */
+  {
+    id: 4,
+    slug: 'financial-management-system',
+    title: 'Financial Management System',
+    category: 'TECHNOLOGY & DATA',
+    tags: ['FINANCE', 'ACCOUNTING AUTOMATION', 'CASH FLOW'],
+    dateLabel: 'MAY 2026',
+    dateValue: '2026-05-15',
+    description: 'An integrated financial management solution designed to provide real-time visibility into cash flow, cost structures, accounting transactions, taxation, payments, and project financing—helping businesses manage their financial operations with greater accuracy and control.',
+    coverImage: '/images/case-studies/financial-management/cover.webp',
+    coverImageAlt: 'Development team building the integrated financial management system architecture',
+    sections: [
+      {
+        eyebrow: 'THE CHALLENGE',
+        mainTitle: 'Fragmented Financial Processes Limiting Visibility, Accuracy, and Management Decisions',
+        paragraphs: [
+          'Managing financial operations across multiple projects, vendors, transactions, and payment schedules can become increasingly complex as a business grows.',
+          'Without an integrated financial management system, finance teams face challenges such as limited visibility into real-time cash flow and financial conditions, difficulty calculating and monitoring Cost of Goods Sold for each business unit or project, manual recording and reconciliation of accounting transactions, complex tax administration and period-end closing processes, time-consuming vendor invoice processing, inefficient management of bulk and recurring payments, limited visibility into project capital allocation, and difficulty tracking and allocating overhead costs accurately.',
+        ],
+      },
+      {
+        mainTitle: 'Connecting Accounting, Cash Flow, Taxation, and Project Finance in One Platform',
+        paragraphs: [
+          'We developed an integrated financial management solution that connects accounting, cash flow, taxation, payments, project financing, and cost management within a centralized platform, enabling finance teams to work from one consistent source of financial truth.',
+        ],
+        image: { src: '/images/case-studies/financial-management/case-study-angle-02.webp', alt: 'Backend architecture powering the integrated financial management system with clean enterprise code structure' },
+      },
+      {
+        eyebrow: 'OUR APPROACH',
+        mainTitle: 'A Comprehensive Financial Engine for Enterprise Accuracy and Control',
+        subsections: [
+          { subtitle: '01', content: "Real-Time Cash Flow Monitoring: The system provides real-time visibility into cash inflows and outflows, allowing finance teams and management to monitor the company's current cash position and better manage liquidity." },
+          { subtitle: '02', content: 'Unit-Level COGS Management: The system enables businesses to calculate and monitor Cost of Goods Sold at the business-unit or project level, providing greater visibility into direct costs and helping management evaluate profitability more accurately.' },
+          { subtitle: '03', content: 'Journal Entries & Transaction Records: Financial transactions are recorded systematically through journal entries, creating a structured accounting trail for income, expenses, payments, adjustments, and other financial activities.' },
+          { subtitle: '04', content: 'Tax Management & Period-End Closing: The system supports structured tax management and period-end closing processes, helping finance teams organize tax-related transactions and complete accounting periods in a more controlled and consistent manner.' },
+          { subtitle: '05', content: 'Vendor Invoice Management: Vendor invoices are recorded and managed centrally, providing better visibility into outstanding payables, payment schedules, and vendor-related financial obligations.' },
+          { subtitle: '06', content: 'Batch Payment Processing: The system supports batch payments, allowing multiple payment transactions to be processed efficiently in a single workflow, reducing repetitive administrative tasks and improving payment processing efficiency.' },
+          { subtitle: '07', content: 'Recurring Payment Management: Recurring payments can be scheduled and monitored for regular financial obligations such as subscriptions, operational expenses, service fees, or other recurring commitments.' },
+          { subtitle: '08', content: 'Project Capital & Overhead Cost Management: The system provides visibility into project capital allocation and funding while also enabling systematic tracking and allocation of overhead costs, supporting more accurate profitability analysis.' },
+        ],
+      },
+      {
+        eyebrow: 'THE OUTCOME',
+        mainTitle: 'A Centralized, Transparent, and Data-Driven Financial Ecosystem',
+        paragraphs: [
+          'By integrating financial operations into a centralized platform, the system helps businesses improve financial visibility, strengthen accounting accuracy, and streamline day-to-day finance processes.',
+          'Key outcomes include real-time financial visibility through centralized cash flow monitoring, more accurate profitability analysis with unit-level COGS tracking, improved accounting accuracy through structured journal entries and transaction records, more efficient tax and period-end processes through centralized financial data, streamlined accounts payable management with centralized vendor invoices, greater payment efficiency through batch and recurring payment capabilities, better project financial control through centralized capital allocation, and more accurate cost management through structured overhead allocation.',
+        ],
+      },
+    ],
+  },
+
+  /* ── 5. MyBoss — Logistics & Fleet Management ── */
   {
     id: 5,
-    slug: 'turning-operational-data-into-decisions-with-altatic',
-    title: 'Turning Operational Data into Decisions with Altatic',
-    category: 'DATA & ANALYTICS',
-    tags: ['BUSINESS INTELLIGENCE', 'DASHBOARD', 'DECISION SUPPORT'],
-    dateLabel: 'MARCH 2026',
-    dateValue: '2026-03-19',
-    description: 'A decision-support dashboard designed around the questions leaders need answered, not around the volume of data available.',
-    coverImage: '/images/projects/altatic-analytic/1.webp',
-    coverImageAlt: 'Altatic analytics and intelligence dashboard',
+    slug: 'myboss-logistics-fleet-management',
+    title: 'MyBoss (Logistics & Fleet Management)',
+    category: 'TECHNOLOGY',
+    tags: ['LOGISTICS', 'FLEET MANAGEMENT', 'IOT OPERATIONS'],
+    dateLabel: 'MAY 2026',
+    dateValue: '2026-05-30',
+    description: 'An integrated Logistics & Fleet Management System powered by MyBoss IoT infrastructure, designed to streamline transportation, delivery operations, real-time shipment tracking, and logistics costs while providing complete visibility over field assets and driver activity.',
+    coverImage: '/images/case-studies/myboss-logistics/cover.webp',
+    coverImageAlt: 'BSP Track dashboard showing real-time fleet management, vehicle status, and delivery operations for MyBoss',
     sections: [
-      { eyebrow: 'THE CHALLENGE', mainTitle: 'Different Reports Were Producing Different Versions of Performance', paragraphs: ['Teams had access to data, but definitions, reporting periods, and calculation logic were not always aligned. Leaders spent valuable meeting time reconciling numbers instead of discussing action.', 'The project therefore treated metric governance and decision context as seriously as dashboard design.'] },
-      { mainTitle: 'Designing from Decisions Backward', paragraphs: ['The team first identified recurring management decisions and the indicators behind them. Data modelling and interface design were then organized around those practical needs.'], image: { src: '/images/projects/altatic-analytic/case-study-angle-02.webp', alt: 'Leadership team reviewing the Altatic analytical dashboard' } },
-      { eyebrow: 'THE SOLUTION', mainTitle: 'Governed Metrics with Progressive Detail', subsections: [{ subtitle: 'Shared Definitions', content: 'Each priority metric has an agreed source, calculation, owner, and refresh cadence.' }, { subtitle: 'From Signal to Detail', content: 'Summary indicators lead users into the relevant operational breakdown without placing every chart on one screen.' }] },
-      { eyebrow: 'THE IMPACT', mainTitle: 'A Shared View of Performance', paragraphs: ['Consistent definitions and focused visual hierarchy made the dashboard useful across operational and leadership conversations.', 'Teams can now spend less time validating the report and more time investigating causes, agreeing priorities, and tracking follow-through.'] }
-    ]
+      {
+        eyebrow: 'THE CHALLENGE',
+        mainTitle: 'Operational Blind Spots Between the Control Room, Drivers, and Customers',
+        paragraphs: [
+          'Managing field logistics and fleet operations manually creates blind spots between the control room, drivers, and customers. Disconnected communication and lack of real-time telemetry lead to operational delays, high fuel costs, and poor delivery accountability.',
+          'Common operational challenges include the inability to track fleet location, delivery progress, and vehicle status in real time, inefficient dispatch scheduling and unoptimized transport routes, reliance on paper-based delivery orders and manual proof of handover, uncontrolled transportation and fuel expenses without live operational data, difficulty monitoring driver behavior and idle time, and customer dissatisfaction due to inaccurate estimated time of arrival.',
+        ],
+      },
+      {
+        mainTitle: 'A Centralized Logistics Command Layer Integrated with MyBoss IoT Telemetry',
+        paragraphs: [
+          'We engineered a centralized Logistics & Fleet Management layer directly connected to MyBoss IoT telemetry, integrating shipment planning, routing, driver management, and tracking into a single command dashboard—making every vehicle, delivery, and route visible in real time.',
+        ],
+        image: { src: '/images/case-studies/myboss-logistics/cover.webp', alt: 'BSP Track fleet management dashboard showing vehicle types, driver assignments, and delivery status for the MyBoss logistics operation' },
+      },
+      {
+        eyebrow: 'OUR APPROACH',
+        mainTitle: 'From Disconnected Field Assets to a Unified Operational Command Dashboard',
+        subsections: [
+          { subtitle: '01', content: 'Automated Delivery Order Management: Teams can generate, assign, and track digital delivery orders through a structured workflow, eliminating lost paperwork and ensuring clear task assignment for every driver and vehicle.' },
+          { subtitle: '02', content: 'IoT-Powered Real-Time Shipment & Fleet Tracking: Live telemetry and GPS data from MyBoss hardware provide continuous visibility into vehicle coordinates, movement status, and delivery milestones across all active routes.' },
+          { subtitle: '03', content: 'Dynamic Delivery Scheduling & Dispatch: Dispatchers can organize delivery queues based on destination priorities, fleet payload capacity, and urgent shipment requirements, reducing idle time and improving fleet utilization.' },
+          { subtitle: '04', content: 'Smart Route Optimization: The system recommends optimal delivery routes to minimize mileage, avoid bottlenecks, and reduce fuel consumption across the entire fleet.' },
+          { subtitle: '05', content: 'Driver & Vehicle Performance Monitoring: Centralized logging of driver activity, operating hours, vehicle health, and idle time improves safety, operational discipline, and proactive fleet maintenance scheduling.' },
+          { subtitle: '06', content: 'Digital Proof of Delivery (e-POD): Delivery completion is recorded digitally with recipient confirmations and condition documentation at the point of delivery, providing instant reconciliation and eliminating paper disputes.' },
+          { subtitle: '07', content: 'Logistics Cost & Fuel Analytics: Transit expenses, toll fees, and fuel usage per trip are recorded and monitored, giving management accurate cost-per-delivery insights to support financial and operational decisions.' },
+        ],
+      },
+      {
+        eyebrow: 'THE OUTCOME',
+        mainTitle: 'Full Operational Visibility from Field Assets to Control Room',
+        paragraphs: [
+          'The integration of MyBoss IoT with the logistics management layer delivers total control over transportation operations—replacing fragmented manual processes with a connected, data-driven fleet command system.',
+          'Key outcomes include full operational visibility with live map tracking and status updates from the field, lower transport operating costs through optimized routes and idle-time reduction, faster delivery turnaround and higher on-time fulfillment rates, elimination of paper disputes through instant verifiable digital Proof of Delivery, improved driver accountability, and proactive fleet maintenance scheduling supported by real-time vehicle health data.',
+        ],
+      },
+    ],
   },
+
+  /* ── 6. MyBoss — Supply Chain & Distribution System ── */
   {
     id: 6,
-    slug: 'reframing-web-media-digital-presence',
-    title: 'Reframing Web Media as a Clear and Credible Digital Presence',
-    category: 'MEDIA & CREATIVE',
-    tags: ['CORPORATE PROFILE', 'CONTENT DESIGN', 'DIGITAL BRAND'],
-    dateLabel: 'FEBRUARY 2026',
-    dateValue: '2026-02-26',
-    description: 'A corporate media platform that balances editorial identity, information clarity, and a maintainable publishing experience.',
-    coverImage: '/images/projects/web-media-profile/1.webp',
-    coverImageAlt: 'Web Media corporate profile platform',
+    slug: 'myboss-supply-chain-distribution-system',
+    title: 'MyBoss (Supply Chain & Distribution System)',
+    category: 'TECHNOLOGY & DATA',
+    tags: ['SUPPLY CHAIN', 'PROCUREMENT', 'DISTRIBUTION'],
+    dateLabel: 'MAY 2026',
+    dateValue: '2026-05-30',
+    description: 'An end-to-end Supply Chain & Distribution Management solution integrated with MyBoss operational data, connecting suppliers, procurement, distribution hubs, demand forecasting, and fulfillment into a unified ecosystem.',
+    coverImage: '/images/case-studies/myboss-supply-chain/cover.webp',
+    coverImageAlt: 'Container cargo ship at an international port terminal representing global supply chain and distribution management',
     sections: [
-      { eyebrow: 'THE CHALLENGE', mainTitle: 'Editorial Variety Was Weakening the Overall Identity', paragraphs: ['Different story formats and publishing needs had accumulated without one clear hierarchy. The redesign needed to protect editorial flexibility while giving readers predictable navigation and stronger trust signals.', 'The internal publishing experience was equally important: a visually ambitious front end would not be sustainable if routine updates required technical intervention.'] },
-      { mainTitle: 'Clarity Before Decoration', paragraphs: ['The experience was reorganized around audience questions, editorial priorities, and trust signals so visitors could understand the organization quickly.'], image: { src: '/images/projects/web-media-profile/case-study-angle-02.webp', alt: 'Editorial team reviewing responsive Web Media layouts' } },
-      { eyebrow: 'THE APPROACH', mainTitle: 'Reusable Patterns for Stories, Profiles, and Updates', subsections: [{ subtitle: 'Responsive Story Hierarchy', content: 'Editorial priority remains clear from large desktop displays to compact mobile screens.' }, { subtitle: 'Maintainable Publishing', content: 'Structured fields and reusable components let editors create varied pages without breaking the design system.' }] },
-      { eyebrow: 'DESIGN OUTCOME', mainTitle: 'A Flexible Editorial System', paragraphs: ['Reusable layouts and clear content hierarchy give the internal team room to publish consistently without sacrificing the visual identity.', 'The new system makes the publication feel coherent across story types while keeping future content expansion manageable.'] }
-    ]
+      {
+        eyebrow: 'THE CHALLENGE',
+        mainTitle: 'Fragmented Supply Chain Processes Creating Inventory Mismatches and Supplier Blind Spots',
+        paragraphs: [
+          'Managing a multi-point supply chain without connected data creates significant inventory mismatches, delayed replenishment, and weak supplier accountability. When procurement and distribution operate in silos, businesses struggle to match field demand with warehouse supply.',
+          'Common challenges include fragmented communication between central procurement, regional distribution hubs, and suppliers, inaccurate demand forecasting leading to overstocking or sudden stockouts in the field, lack of supplier performance tracking regarding delivery punctuality and fulfillment quality, inefficient purchasing approval workflows causing procurement bottlenecks, limited financial visibility into total landed costs and supply chain overheads, and delayed response to sudden shifts in customer order volume and seasonal demand.',
+        ],
+      },
+      {
+        mainTitle: 'Synchronizing Supplier Networks, Procurement, and Field Inventory with MyBoss Distribution Data',
+        paragraphs: [
+          'We developed an integrated Supply Chain Management System that synchronizes supplier networks, procurement workflows, and field inventory levels with MyBoss distribution telemetry, creating a connected and demand-driven supply chain from procurement to final delivery.',
+        ],
+        image: { src: '/images/case-studies/myboss-supply-chain/case-study-angle-02.webp', alt: 'Global supply chain network visualization representing multi-hub distribution connectivity and operational visibility' },
+      },
+      {
+        eyebrow: 'OUR APPROACH',
+        mainTitle: 'A Connected Supply Chain Ecosystem from Supplier to Distribution Hub',
+        subsections: [
+          { subtitle: '01', content: 'Centralized Supplier & Vendor Management: Maintains complete supplier profiles, contract terms, pricing agreements, and transaction history to streamline vendor relations and enable data-driven sourcing decisions.' },
+          { subtitle: '02', content: 'Structured Procurement & Purchase Request Workflows: Multi-level approval workflows for purchase requisitions and purchase orders ensure strict budget compliance, operational alignment, and full audit readiness.' },
+          { subtitle: '03', content: 'Data-Driven Demand & Inventory Planning: Analyzes historical order trends and field consumption rates to forecast replenishment needs accurately across all distribution hubs and inventory locations.' },
+          { subtitle: '04', content: 'Multi-Hub Supply & Demand Visibility: Provides a unified view of inventory across central warehouses, transit hubs, and regional distribution points, helping businesses maintain appropriate stock levels and avoid overstocking.' },
+          { subtitle: '05', content: 'Supplier Performance & SLA Evaluation: Supplier performance is evaluated based on lead times, order completeness, and delivery reliability, helping businesses make better strategic sourcing decisions and hold suppliers accountable.' },
+          { subtitle: '06', content: 'End-to-End Supply Chain Cost Tracking: Tracks purchase costs, freight charges, holding costs, and distribution expenses to provide management with accurate product margins and total landed cost visibility.' },
+          { subtitle: '07', content: 'Executive Supply Chain Analytics & Reporting: Consolidated dashboards deliver actionable metrics on procurement cycles, inventory turnover, supplier performance, and fulfillment efficiency to support senior management decisions.' },
+        ],
+      },
+      {
+        eyebrow: 'THE OUTCOME',
+        mainTitle: 'A Synchronized, Demand-Driven Distribution Network',
+        paragraphs: [
+          'The system transforms disconnected supply chain operations into a synchronized, demand-driven distribution network—connecting suppliers, procurement, inventory, and fulfillment into one coordinated operational ecosystem.',
+          'Key outcomes include seamless alignment between supplier procurement, inventory availability, and customer fulfillment, minimized stockouts and reduced carrying costs through intelligent demand planning, greater procurement transparency with controlled approval hierarchies, stronger supplier accountability backed by objective SLA performance data, better cost control through end-to-end supply chain cost visibility, and agile supply chain decision-making powered by real-time inventory and logistics data.',
+        ],
+      },
+    ],
   },
-  {
-    id: 7,
-    slug: 'evaluating-gik-as-a-semarang-creative-tourism-destination',
-    title: 'Evaluating GIK as a Creative Tourism and Local Retail Destination',
-    category: 'DATA & RESEARCH',
-    tags: ['FEASIBILITY STUDY', 'CREATIVE ECONOMY', 'TOURISM'],
-    dateLabel: 'JANUARY 2026',
-    dateValue: '2026-01-28',
-    description: 'A feasibility study combining market evidence, visitor behaviour, spatial potential, and an operating model for Semarang Creative Industry Building.',
-    coverImage: '/images/projects/kajian-kelayakan-gik/1.webp',
-    coverImageAlt: 'Creative industry destination feasibility study',
-    sections: [
-      { eyebrow: 'THE RESEARCH QUESTION', mainTitle: 'Could GIK Become a Destination, Not Only a Building?', paragraphs: ['The study examined whether GIK could attract repeat visits by connecting Semarang creative products, culinary experiences, events, and a distinctive sense of place.', 'A credible answer required more than demand estimation. The team considered visitor segments, tenant readiness, accessibility, surrounding destinations, spatial programming, revenue logic, and institutional capacity.'] },
-      { mainTitle: 'Testing the Opportunity from Multiple Angles', paragraphs: ['The study assessed demand, local product potential, visitor journeys, competitive context, and commercial assumptions instead of relying on one headline indicator.'], image: { src: '/images/projects/kajian-kelayakan-gik/case-study-angle-02.webp', alt: 'GIK research team observing visitor flow in Semarang' } },
-      { eyebrow: 'METHOD', mainTitle: 'Combining Market, Place, and Operating Evidence', subsections: [{ subtitle: 'Demand and Visitor Behaviour', content: 'Field observation and audience perspectives clarified visit triggers, barriers, expected experiences, and likely spending patterns.' }, { subtitle: 'Operating Scenarios', content: 'Alternative tenant mixes, programming models, and management assumptions were compared against practical implementation requirements.' }] },
-      { eyebrow: 'RESEARCH OUTPUT', mainTitle: 'Evidence That Supports the Next Decision', paragraphs: ['The final recommendations translated findings into development priorities, operational scenarios, and measurable considerations for implementation.', 'Instead of presenting one rigid forecast, the study gives decision-makers assumptions to monitor and staged choices that can be adjusted as evidence develops.'] }
-    ]
-  },
-  {
-    id: 8,
-    slug: 'designing-a-behaviour-change-guide-for-stunting-risk-reduction',
-    title: 'Designing a Behaviour Change Guide for Stunting Risk Reduction',
-    category: 'DATA & RESEARCH',
-    tags: ['SOCIAL RESEARCH', 'BEHAVIOUR CHANGE', 'PUBLIC HEALTH'],
-    dateLabel: 'DECEMBER 2025',
-    dateValue: '2025-12-16',
-    description: 'Turning research and field realities into a practical guide for family assistance at neighbourhood level.',
-    coverImage: '/images/projects/panduan-perubahan-perilaku-stunting/1.webp',
-    coverImageAlt: 'Behaviour change assistance guide',
-    sections: [
-      { eyebrow: 'THE CHALLENGE', mainTitle: 'Information Alone Does Not Automatically Change Household Practice', paragraphs: ['Family assistants work with different levels of knowledge, confidence, resources, and support. A useful guide therefore had to help facilitators identify barriers and choose an appropriate conversation, not merely repeat health messages.', 'The content also needed to stay consistent with programme objectives while using examples and language that felt relevant at neighbourhood level.'] },
-      { mainTitle: 'From Policy Language to Daily Practice', paragraphs: ['The guide had to remain evidence-based while being understandable and useful during real conversations with families. Content was structured around specific behaviours, barriers, and supporting actions.'], image: { src: '/images/projects/panduan-perubahan-perilaku-stunting/case-study-angle-02.webp', alt: 'Facilitator demonstrating balanced nutrition in a neighbourhood session' } },
-      { eyebrow: 'CONTENT DESIGN', mainTitle: 'Guidance Built Around Conversation and Follow-Up', subsections: [{ subtitle: 'Behaviour-Based Modules', content: 'Each module connects a desired practice with common barriers, discussion prompts, examples, and realistic next steps.' }, { subtitle: 'Facilitator Support', content: 'Visual cues and simple sequencing make it easier to prepare a session, record commitments, and revisit progress.' }] },
-      { eyebrow: 'THE RESULT', mainTitle: 'A Consistent Tool for Local Assistance', paragraphs: ['Clear prompts, scenarios, and follow-up steps help facilitators communicate consistently while adapting to each family context.', 'The guide creates a shared method for assistance without removing the facilitator judgment needed to respond respectfully to different household conditions.'] }
-    ]
-  },
-  {
-    id: 9,
-    slug: 'designing-a-practical-referee-training-program-for-semarang',
-    title: 'Designing a Practical Referee Training Program for Semarang',
-    category: 'MEDIA & CREATIVE',
-    tags: ['TRAINING DESIGN', 'SPORTS', 'LEARNING EXPERIENCE'],
-    dateLabel: 'NOVEMBER 2025',
-    dateValue: '2025-11-21',
-    description: 'A structured learning experience that connects regulations, match scenarios, assessment, and confident decision-making.',
-    coverImage: '/images/projects/desain-pelatihan-wasit-semarang/1.webp',
-    coverImageAlt: 'Referee training design in Semarang',
-    sections: [
-      { eyebrow: 'THE CHALLENGE', mainTitle: 'Knowing the Rulebook Is Different from Making a Decision in Real Time', paragraphs: ['Referees must interpret movement, positioning, contact, timing, and communication under pressure. A lecture-heavy programme would not reveal whether participants could apply the rules consistently.', 'The training design therefore needed a progressive path from shared interpretation to observed practice and structured feedback.'] },
-      { mainTitle: 'Training for Decisions, Not Memorisation', paragraphs: ['The program was designed around realistic match situations so participants could practise interpretation, communication, and judgment under pressure.'], image: { src: '/images/projects/desain-pelatihan-wasit-semarang/case-study-angle-02.webp', alt: 'Referee trainees reviewing match positioning with an instructor' } },
-      { eyebrow: 'LEARNING DESIGN', mainTitle: 'A Repeatable Path from Theory to Evaluation', subsections: [{ subtitle: 'Scenario-Based Practice', content: 'Participants analyse realistic incidents, select a decision, explain the rule basis, and practise the correct signal.' }, { subtitle: 'Observable Assessment', content: 'Consistent rubrics cover positioning, accuracy, communication, composure, and post-match reflection.' }] },
-      { eyebrow: 'THE OUTCOME', mainTitle: 'More Consistent Decisions and a Reusable Training Format', paragraphs: ['Modular materials, scenario exercises, and consistent assessment criteria created a format that can support future training cohorts.', 'Facilitators can identify specific development needs and give feedback grounded in observable behaviour rather than general impressions.'] }
-    ]
-  }
 ];
 
 export const LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
@@ -1768,9 +1521,6 @@ export const LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
   }
 ];
 
-void LEGACY_CASE_STUDIES_DUMMY_DATA;
-void LEGACY_LEADERSHIP_THOUGHTS_DUMMY_DATA;
-void LEGACY_TESTIMONIALS_DUMMY_DATA;
 
 export const TESTIMONIALS_DUMMY_DATA = [
   {

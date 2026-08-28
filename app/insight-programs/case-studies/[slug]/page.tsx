@@ -3,10 +3,9 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import { CASE_STUDIES_DUMMY_DATA } from '@/lib/db/dummy';
-import { SOLUTION_CASE_STUDIES } from '@/lib/our-solution.data';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
-const ALL_CASE_STUDIES = [...SOLUTION_CASE_STUDIES, ...CASE_STUDIES_DUMMY_DATA];
+const ALL_CASE_STUDIES = CASE_STUDIES_DUMMY_DATA;
 
 type PageProps = {
   params: Promise<{ slug: string }>;

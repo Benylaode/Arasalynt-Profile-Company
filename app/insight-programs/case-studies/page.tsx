@@ -4,7 +4,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import { CASE_STUDIES_DUMMY_DATA } from '@/lib/db/dummy';
-import { SOLUTION_CASE_STUDIES } from '@/lib/our-solution.data';
 
 /* ========================================================================== 
    CASE STUDIES PAGE (/insight-programs/Case-Studies)
@@ -196,7 +195,7 @@ const FEATURED_STUDIES: FeaturedStudy[] = CASE_STUDIES_DUMMY_DATA.slice(0, 3).ma
   imageAlt: item.coverImageAlt,
 }));
 
-const ALL_CASES: CaseStudy[] = [...SOLUTION_CASE_STUDIES, ...CASE_STUDIES_DUMMY_DATA].map((item) => ({
+const ALL_CASES: CaseStudy[] = CASE_STUDIES_DUMMY_DATA.map((item) => ({
   id: item.id,
   slug: item.slug,
   title: item.title,
