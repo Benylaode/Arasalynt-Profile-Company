@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo, useCallback } from 'react';
 import { ChatMessage, QuickActionItem } from '@/types/chatbot';
 import {
   MARBOT_QUICK_ACTIONS,
@@ -14,6 +14,8 @@ interface MarBotDrawerProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+type ChatMode = 'ai' | 'human_cs';
 
 function CloseIcon() {
   return (
@@ -65,42 +67,167 @@ function StopIcon({ className = '' }: { className?: string }) {
   );
 }
 
+function WhatsAppIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  );
+}
+
 function formatCurrentTime(): string {
-  const now = new Date();
-  const hours = now.getHours().toString().padStart(2, '0');
-  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const date = new Date();
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
   return `${hours}.${minutes}`;
+}
+
+const HUMAN_ESCALATION_KEYWORDS = [
+  'cs',
+  'customer service',
+  'human',
+  'orang',
+  'admin',
+  'sales',
+  'konsultan',
+  'konsultasi',
+  'harga',
+  'biaya',
+  'penawaran',
+  'quotation',
+  'meeting',
+  'demo',
+  'jadwal',
+  'wa',
+  'whatsapp',
+  'telepon',
+  'hubungi',
+  'kontak',
+  'bicara dengan',
+  'kontak langsung',
+];
+
+function isEscalationKeyword(text: string): boolean {
+  const lower = text.toLowerCase();
+  return HUMAN_ESCALATION_KEYWORDS.some((kw) => lower.includes(kw));
+}
+
+function createNewSessionId(): string {
+  return `guest_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 6)}`;
 }
 
 const INITIAL_MESSAGE: ChatMessage = {
   id: 'initial-greeting',
   role: 'assistant',
   content:
-    'Halo! Saya MarBot, asisten AI resmi Arsalynk (PT Sinergi Muda Arsa). Saya siap membantu Anda mengetahui lebih banyak tentang profil perusahaan kami, solusi teknologi enterprise (ERP, IoT, Cloud), studi kasus proyek, serta konsultasi bisnis. Ada yang ingin Anda tanyakan?',
+    'Halo! Saya MarBot, asisten cerdas Arsalynk (PT Sinergi Muda Arsa). Saya dapat membantu Anda mengetahui profil perusahaan, solusi teknologi enterprise, atau menghubungkan Anda langsung dengan Tim CS. Ada yang bisa saya bantu?',
   timestamp: formatCurrentTime(),
 };
+
+// Memoized Message Item
+const MessageBubble = memo(function MessageBubble({
+  msg,
+}: {
+  msg: ChatMessage;
+}) {
+  const isAssistant = msg.role === 'assistant';
+  const isHumanCS = msg.role === 'human_cs';
+
+  return (
+    <div
+      key={`group-${msg.id}`}
+      className={`${styles.messageGroup} ${
+        msg.role === 'user'
+          ? styles.userMessageGroup
+          : styles.assistantMessageGroup
+      }`}
+    >
+      <div className={styles.messageMeta}>
+        {isAssistant && (
+          <div className={styles.miniAvatar}>
+            <MarBotIcon className={styles.miniAvatarIcon} />
+          </div>
+        )}
+        {isHumanCS && (
+          <div className={styles.csMiniAvatar}>
+            <WhatsAppIcon className={styles.miniAvatarIcon} />
+          </div>
+        )}
+        <span className={isHumanCS ? styles.csSenderName : styles.senderName}>
+          {isHumanCS ? 'Customer Service' : isAssistant ? 'MarBot' : 'Anda'}
+        </span>
+        {isHumanCS && <span className={styles.csVerified}>WhatsApp</span>}
+        <span className={styles.messageTimestamp}>· {msg.timestamp}</span>
+      </div>
+
+      <div
+        className={`${styles.bubble} ${
+          isHumanCS
+            ? styles.csBubble
+            : isAssistant
+              ? styles.assistantBubble
+              : styles.userBubble
+        }`}
+      >
+        <MarkdownRenderer content={msg.content} />
+
+        {msg.sources && msg.sources.length > 0 && (
+          <div className={styles.sourcesContainer}>
+            <span className={styles.sourcesLabel}>Sumber:</span>
+            {msg.sources.map((src, i) => (
+              <span key={`src-${i}`} className={styles.sourceBadge}>
+                {src}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+});
 
 export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [chatMode, setChatMode] = useState<ChatMode>('ai');
   const [conversationId, setConversationId] = useState<string | null>(null);
+  const [sessionId, setSessionId] = useState<string>('');
   const [isMounted, setIsMounted] = useState(false);
 
+  const sessionStartTimeRef = useRef<number>(Date.now());
   const abortControllerRef = useRef<AbortController | null>(null);
-  const chatEndRef = useRef<HTMLDivElement | null>(null);
+  const chatBodyRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
+  // Buffer state for high-performance streaming updates
+  const streamBufferRef = useRef<string>('');
+  const rafIdRef = useRef<number | null>(null);
+
+  // Initialize unique session ID for this conversation
   useEffect(() => {
     setIsMounted(true);
+    const newId = createNewSessionId();
+    setSessionId(newId);
+    sessionStartTimeRef.current = Date.now();
   }, []);
 
-  // Auto-scroll to bottom on new messages or when opened
+  // Smooth scroll handler
+  const scrollChatToBottom = useCallback(() => {
+    if (chatBodyRef.current) {
+      chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
+    }
+  }, []);
+
   useEffect(() => {
     if (isOpen && isMounted) {
-      chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      scrollChatToBottom();
     }
-  }, [isOpen, isMounted, messages, isLoading]);
+  }, [isOpen, isMounted, messages.length, scrollChatToBottom]);
 
   // Focus input when opened
   useEffect(() => {
@@ -123,7 +250,66 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
+  // 2-Way WhatsApp Polling: Active ONLY when chatMode === 'human_cs'
+  useEffect(() => {
+    if (!isOpen || !sessionId || chatMode !== 'human_cs') return;
+
+    let isPolling = true;
+
+    const pollLiveMessages = async () => {
+      try {
+        const res = await fetch(`/api/whatsapp/messages?sessionId=${sessionId}`);
+        if (!res.ok || !isPolling) return;
+        const data = await res.json();
+        if (data?.data && Array.isArray(data.data)) {
+          // Only take messages received after the start of this active CS session
+          const csRecords = data.data.filter(
+            (m: { sender: string; createdAt: string }) =>
+              m.sender === 'human_cs' &&
+              new Date(m.createdAt).getTime() >= sessionStartTimeRef.current - 2000
+          );
+
+          setMessages((prev) => {
+            const existingIds = new Set(prev.map((p) => p.id));
+            const newCsMessages: ChatMessage[] = [];
+
+            for (const csMsg of csRecords) {
+              const msgId = `cs-${csMsg.id}`;
+              if (!existingIds.has(msgId)) {
+                newCsMessages.push({
+                  id: msgId,
+                  role: 'human_cs',
+                  content: csMsg.message || csMsg.content,
+                  timestamp: formatCurrentTime(),
+                });
+              }
+            }
+
+            if (newCsMessages.length > 0) {
+              return [...prev, ...newCsMessages];
+            }
+            return prev;
+          });
+        }
+      } catch {
+        // non-blocking
+      }
+    };
+
+    pollLiveMessages();
+    const interval = setInterval(pollLiveMessages, 3000);
+
+    return () => {
+      isPolling = false;
+      clearInterval(interval);
+    };
+  }, [isOpen, sessionId, chatMode]);
+
   const handleStopGeneration = () => {
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    }
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
       abortControllerRef.current = null;
@@ -147,6 +333,57 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
       timestamp: formatCurrentTime(),
     };
 
+    // Auto-Switching Check: If user asks for CS / pricing / quotation in AI mode
+    if (chatMode === 'ai' && isEscalationKeyword(messageContent)) {
+      setChatMode('human_cs');
+      setInputValue('');
+      sessionStartTimeRef.current = Date.now();
+
+      const autoHandoverMessage: ChatMessage = {
+        id: `bot-handover-${Date.now()}`,
+        role: 'assistant',
+        content: `Pertanyaan Anda telah diteruskan ke **Customer Service Arsalynk (Live WhatsApp)**. Anda kini terhubung langsung dengan representatif kami dan dapat melanjutkan obrolan di sini.`,
+        timestamp: formatCurrentTime(),
+      };
+
+      setMessages((prev) => [...prev, userMessage, autoHandoverMessage]);
+
+      try {
+        await fetch('/api/whatsapp/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sessionId,
+            message: messageContent,
+          }),
+        });
+      } catch (err) {
+        console.warn('[WhatsApp Auto-Forward Error]', err);
+      }
+      return;
+    }
+
+    // When already in Human CS mode: Send message directly to WhatsApp CS
+    if (chatMode === 'human_cs') {
+      setMessages((prev) => [...prev, userMessage]);
+      setInputValue('');
+
+      try {
+        await fetch('/api/whatsapp/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sessionId,
+            message: messageContent,
+          }),
+        });
+      } catch (err) {
+        console.warn('[WhatsApp CS Send Error]', err);
+      }
+      return;
+    }
+
+    // Default: Regular AI Stream Completion
     const assistantPlaceholderId = `bot-${Date.now()}`;
     const assistantPlaceholder: ChatMessage = {
       id: assistantPlaceholderId,
@@ -162,8 +399,25 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
     }
     setIsLoading(true);
 
+    streamBufferRef.current = '';
     const abortController = new AbortController();
     abortControllerRef.current = abortController;
+
+    const scheduleBufferFlush = () => {
+      if (rafIdRef.current) return;
+      rafIdRef.current = requestAnimationFrame(() => {
+        rafIdRef.current = null;
+        const currentText = streamBufferRef.current;
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === assistantPlaceholderId
+              ? { ...msg, content: currentText }
+              : msg
+          )
+        );
+        scrollChatToBottom();
+      });
+    };
 
     try {
       await streamChatCompletion({
@@ -171,15 +425,15 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
         conversationId: conversationId || undefined,
         signal: abortController.signal,
         onChunk: (delta: string) => {
-          setMessages((prev) =>
-            prev.map((msg) =>
-              msg.id === assistantPlaceholderId
-                ? { ...msg, content: msg.content + delta }
-                : msg
-            )
-          );
+          streamBufferRef.current += delta;
+          scheduleBufferFlush();
         },
         onDone: (meta) => {
+          if (rafIdRef.current) {
+            cancelAnimationFrame(rafIdRef.current);
+            rafIdRef.current = null;
+          }
+          const finalText = streamBufferRef.current;
           if (meta.conversationId) {
             setConversationId(meta.conversationId);
           }
@@ -188,6 +442,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
               msg.id === assistantPlaceholderId
                 ? {
                     ...msg,
+                    content: finalText || msg.content,
                     isStreaming: false,
                     sources: meta.sources || msg.sources,
                   }
@@ -196,8 +451,13 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
           );
           setIsLoading(false);
           abortControllerRef.current = null;
+          scrollChatToBottom();
         },
         onError: (err) => {
+          if (rafIdRef.current) {
+            cancelAnimationFrame(rafIdRef.current);
+            rafIdRef.current = null;
+          }
           console.error('[MarBot Stream Error]', err);
           setMessages((prev) =>
             prev.map((msg) =>
@@ -205,19 +465,25 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
                 ? {
                     ...msg,
                     content:
+                      streamBufferRef.current ||
                       msg.content ||
-                      'Mohon maaf, saat ini terjadi kendala koneksi ke server AI. Anda dapat mencoba sesaat lagi atau menghubungi kami melalui WhatsApp.',
+                      'Mohon maaf, saat ini terjadi kendala koneksi ke server AI. Anda dapat mencoba sesaat lagi atau langsung menghubungi tim kami via WhatsApp.',
                     isStreaming: false,
-                    isError: !msg.content,
+                    isError: !msg.content && !streamBufferRef.current,
                   }
                 : msg
             )
           );
           setIsLoading(false);
           abortControllerRef.current = null;
+          scrollChatToBottom();
         },
       });
     } catch {
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
       setIsLoading(false);
       abortControllerRef.current = null;
     }
@@ -234,12 +500,34 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
     }
   };
 
+  const handleSwitchToAI = () => {
+    setChatMode('ai');
+    // Generate fresh session ID for future clean sessions
+    const freshSessionId = createNewSessionId();
+    setSessionId(freshSessionId);
+    sessionStartTimeRef.current = Date.now();
+
+    const returnMsg: ChatMessage = {
+      id: `system-return-${Date.now()}`,
+      role: 'assistant',
+      content: 'Mode percakapan telah dikembalikan ke **MarBot AI**.',
+      timestamp: formatCurrentTime(),
+    };
+    setMessages((prev) => [...prev, returnMsg]);
+  };
+
   if (!isMounted || !isOpen) return null;
 
   return (
     <>
-      <div className={styles.overlay} onClick={onClose} aria-hidden="true" />
+      <div
+        key="marbot-overlay"
+        className={styles.overlay}
+        onClick={onClose}
+        aria-hidden="true"
+      />
       <section
+        key="marbot-drawer-section"
         className={styles.drawer}
         role="dialog"
         aria-label="MarBot Chat Assistant"
@@ -248,82 +536,70 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
         {/* Header */}
         <header className={styles.header}>
           <div className={styles.botInfo}>
-            <div className={styles.headerAvatar}>
-              <MarBotIcon className={styles.headerAvatarIcon} />
+            <div
+              key={`header-icon-${chatMode}`}
+              className={
+                chatMode === 'human_cs'
+                  ? styles.headerAvatarCS
+                  : styles.headerAvatar
+              }
+            >
+              {chatMode === 'human_cs' ? (
+                <WhatsAppIcon className={styles.headerAvatarIcon} />
+              ) : (
+                <MarBotIcon className={styles.headerAvatarIcon} />
+              )}
             </div>
             <div className={styles.botText}>
-              <span className={styles.botName}>MarBot</span>
+              <span className={styles.botName}>
+                {chatMode === 'human_cs' ? 'Customer Service' : 'MarBot'}
+              </span>
               <span className={styles.botStatus}>
                 <span className={styles.statusDot} />
-                Online
+                {chatMode === 'human_cs'
+                  ? 'Live WhatsApp'
+                  : 'Online & CS Ready'}
               </span>
             </div>
           </div>
-          <button
-            type="button"
-            className={styles.closeButton}
-            onClick={onClose}
-            aria-label="Tutup jendela chat"
-          >
-            <CloseIcon />
-          </button>
+
+          <div className={styles.headerActions}>
+            {chatMode === 'human_cs' && (
+              <button
+                type="button"
+                className={styles.switchModeBtn}
+                onClick={handleSwitchToAI}
+                title="Kembali ke mode MarBot AI"
+              >
+                ← Mode AI
+              </button>
+            )}
+            <button
+              type="button"
+              className={styles.closeButton}
+              onClick={onClose}
+              aria-label="Tutup jendela chat"
+            >
+              <CloseIcon />
+            </button>
+          </div>
         </header>
 
         {/* Chat Body */}
-        <div className={styles.chatBody}>
+        <div ref={chatBodyRef} className={styles.chatBody}>
           {messages.map((msg) => {
-            // Sembunyikan placeholder bot kosong saat baru mengawali request
             if (msg.role === 'assistant' && !msg.content && isLoading) {
               return null;
             }
 
-            return (
-              <div
-                key={msg.id}
-                className={`${styles.messageGroup} ${
-                  msg.role === 'user'
-                    ? styles.userMessageGroup
-                    : styles.assistantMessageGroup
-                }`}
-              >
-                <div className={styles.messageMeta}>
-                  {msg.role === 'assistant' && (
-                    <div className={styles.miniAvatar}>
-                      <MarBotIcon className={styles.miniAvatarIcon} />
-                    </div>
-                  )}
-                  <span className={styles.senderName}>
-                    {msg.role === 'assistant' ? 'MarBot' : 'Anda'}
-                  </span>
-                  <span className={styles.messageTimestamp}>· {msg.timestamp}</span>
-                </div>
-
-                <div
-                  className={`${styles.bubble} ${
-                    msg.role === 'assistant'
-                      ? styles.assistantBubble
-                      : styles.userBubble
-                  }`}
-                >
-                  <MarkdownRenderer content={msg.content} />
-
-                  {msg.sources && msg.sources.length > 0 && (
-                    <div className={styles.sourcesContainer}>
-                      <span className={styles.sourcesLabel}>Sumber:</span>
-                      {msg.sources.map((src, i) => (
-                        <span key={i} className={styles.sourceBadge}>
-                          {src}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
+            return <MessageBubble key={msg.id} msg={msg} />;
           })}
 
           {isLoading && !messages[messages.length - 1]?.content && (
-            <div className={`${styles.messageGroup} ${styles.assistantMessageGroup}`}>
+            <div
+              key="typing-indicator"
+              className={`${styles.messageGroup} ${styles.assistantMessageGroup}`}
+            >
               <div className={styles.messageMeta}>
                 <div className={styles.miniAvatar}>
                   <MarBotIcon className={styles.miniAvatarIcon} />
@@ -340,12 +616,12 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
           )}
 
           {/* Quick Actions */}
-          {messages.length <= 1 && (
-            <div className={styles.quickActionsSection}>
+          {messages.length <= 1 && chatMode === 'ai' && (
+            <div key="quick-actions-section" className={styles.quickActionsSection}>
               <span className={styles.quickActionsTitle}>Quick Actions</span>
               {MARBOT_QUICK_ACTIONS.map((action) => (
                 <button
-                  key={action.id}
+                  key={`qa-${action.id}`}
                   type="button"
                   className={styles.quickActionButton}
                   onClick={() => handleQuickActionClick(action)}
@@ -356,8 +632,6 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
               ))}
             </div>
           )}
-
-          <div ref={chatEndRef} />
         </div>
 
         {/* Footer */}
@@ -369,10 +643,14 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleInputKeyDown}
-              placeholder="Ask MarBot anything.."
+              placeholder={
+                chatMode === 'human_cs'
+                  ? 'Ketik pesan untuk Customer Service...'
+                  : 'Ask MarBot anything..'
+              }
               className={styles.inputField}
               disabled={isLoading}
-              aria-label="Ketik pesan untuk MarBot"
+              aria-label="Ketik pesan"
             />
             {isLoading ? (
               <button
@@ -397,7 +675,9 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
             )}
           </div>
           <p className={styles.disclaimer}>
-            MarBot didukung AI. Silakan verifikasi data penting ke tim resmi Arsalynk.
+            {chatMode === 'human_cs'
+              ? 'Terkoneksi langsung ke WhatsApp CS (+62 822-5285-6710).'
+              : 'MarBot didukung AI & Live WhatsApp CS.'}
           </p>
         </footer>
       </section>

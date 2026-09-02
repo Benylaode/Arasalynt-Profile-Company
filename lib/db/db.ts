@@ -176,6 +176,25 @@ function initSchema(db: Database.Database): void {
       cover_image_alt TEXT    NOT NULL,
       sections        TEXT    NOT NULL DEFAULT '[]'
     );
+
+    CREATE TABLE IF NOT EXISTS live_chat_sessions (
+      id              TEXT    PRIMARY KEY,
+      user_name       TEXT,
+      phone           TEXT,
+      status          TEXT    NOT NULL DEFAULT 'active',
+      last_message    TEXT,
+      created_at      TEXT    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at      TEXT    NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS live_chat_messages (
+      id              TEXT    PRIMARY KEY,
+      session_id      TEXT    NOT NULL,
+      sender          TEXT    NOT NULL, -- 'user', 'bot', 'human_cs'
+      content         TEXT    NOT NULL,
+      created_at      TEXT    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (session_id) REFERENCES live_chat_sessions(id) ON DELETE CASCADE
+    );
   `);
 
   /* Ensure columns exist if database was created previously */
