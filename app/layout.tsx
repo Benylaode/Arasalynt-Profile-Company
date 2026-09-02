@@ -5,6 +5,7 @@ import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from '@/lib/constants';
 import Navbar from '@/components/layout/Navbar/Navbar';
 import Footer from '@/components/layout/Footer/Footer';
 import WhatsAppFloatingButton from '@/components/layout/WhatsAppFloatingButton/WhatsAppFloatingButton';
+import MarBotWidget from '@/components/chatbot/MarBotWidget';
 import HashScrollHandler from '@/components/ui/HashScrollHandler/HashScrollHandler';
 
 const manrope = Manrope({
@@ -96,6 +97,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <WhatsAppFloatingButton />
+        <MarBotWidget />
       </body>
     </html>
   );
