@@ -1,0 +1,116 @@
+.trigger {
+  position: fixed;
+  right: 0;
+  bottom: calc(
+    clamp(68px, 4.4vw, 84px) +
+    max(clamp(18px, 3vw, 36px), env(safe-area-inset-bottom)) +
+    10px
+  );
+  z-index: 90;
+  display: grid;
+  box-sizing: border-box;
+  width: calc(clamp(68px, 4.4vw, 84px) + env(safe-area-inset-right));
+  height: clamp(68px, 4.4vw, 84px);
+  padding-right: env(safe-area-inset-right);
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-right: 0;
+  border-radius: 10px 0 0 10px;
+  background: #1a3e9e;
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(5, 28, 92, 0.28);
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.trigger:hover {
+  background: #152571;
+  box-shadow: 0 16px 34px rgba(5, 28, 92, 0.36);
+  transform: translateX(-3px);
+}
+
+.trigger:active {
+  transform: translateX(-1px) scale(0.97);
+}
+
+.trigger:focus-visible {
+  outline: 3px solid #e6ff2a;
+  outline-offset: 4px;
+}
+
+.icon {
+  width: clamp(34px, 2.2vw, 40px);
+  height: clamp(34px, 2.2vw, 40px);
+  fill: currentColor;
+}
+
+.tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%) translateX(8px);
+  padding: 8px 14px;
+  background: #101010;
+  color: #ffffff;
+  font-family: var(--font-heading, 'Switzer', sans-serif);
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+}
+
+.trigger:hover .tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 767px) {
+  .trigger {
+    bottom: calc(
+      clamp(58px, 16vw, 68px) +
+      max(16px, env(safe-area-inset-bottom)) +
+      8px
+    );
+    width: calc(clamp(58px, 16vw, 68px) + env(safe-area-inset-right));
+    height: clamp(58px, 16vw, 68px);
+    border-radius: 9px 0 0 9px;
+  }
+
+  .icon {
+    width: clamp(28px, 7.8vw, 34px);
+    height: clamp(28px, 7.8vw, 34px);
+  }
+
+  .tooltip {
+    display: none;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .trigger {
+    bottom: calc(54px + max(10px, env(safe-area-inset-bottom)) + 6px);
+    width: calc(54px + env(safe-area-inset-right));
+    height: 54px;
+  }
+
+  .icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger {
+    transition: none;
+  }
+}
