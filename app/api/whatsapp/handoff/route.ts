@@ -4,10 +4,10 @@ import { requestHumanHandoff } from '@/lib/whatsapp/handoff.client';
 export const dynamic = 'force-dynamic';
 
 /**
- * POST /api/whatsapp/send (Legacy Send Endpoint)
+ * POST /api/whatsapp/handoff
  * 
- * Delegates to the common Transactional Outbox handoff client
- * ensuring zero message loss and full dual-layer idempotency.
+ * Initiates human CS handoff using Transactional Outbox.
+ * Returns HTTP 202 Accepted immediately once persisted.
  */
 export async function POST(req: NextRequest) {
   try {
@@ -28,17 +28,11 @@ export async function POST(req: NextRequest) {
       requestId,
     });
 
-    return NextResponse.json({
-      success: result.accepted,
-      accepted: result.accepted,
-      requestId: result.requestId,
-      conversationCode: result.conversationCode,
-      status: result.status,
-    }, { status: result.accepted ? 200 : 500 });
+    return NextResponse.json(result, { status: result.accepted ? 202 : 500 });
   } catch (error: unknown) {
     const errorMsg = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
-      { error: `Send error: ${errorMsg}` },
+      { error: `Handoff error: ${errorMsg}` },
       { status: 500 }
     );
   }

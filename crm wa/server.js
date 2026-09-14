@@ -8,6 +8,15 @@ const fs = require('fs');
 const os = require('os');
 const Database = require('better-sqlite3');
 
+// WhatsApp Reliability Architecture Modules
+const { initDatabase } = require('./config/database');
+const outboxService = require('./services/outbox.service');
+const handoffRoutes = require('./routes/handoff.routes');
+const healthRoutes = require('./routes/health.routes');
+const healthService = require('./services/health.service');
+const inboundService = require('./services/inbound.service');
+const { startRecoveryCron } = require('./services/reconciliation.service');
+
 const app = express();
 app.set('trust proxy', 1);
 
@@ -311,6 +320,10 @@ app.use(cors({
 }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Mount WhatsApp Reliability Routes
+app.use(handoffRoutes);
+app.use(healthRoutes);
 
 function requireGatewayAuth(req, res, next) {
   if (!GATEWAY_SECRET) return next();
@@ -704,6 +717,31 @@ async function startWhatsAppBot() {
       getMessage: getMessageFromStore,
     });
 
+    // Register Outbox Gateway Sender with Layer 2 Idempotency
+    outboxService.registerGatewaySender(async function({ to, text, idempotencyKey }) {
+      if (idempotencyKey && processedMessageIds.has(idempotencyKey)) {
+        console.log('[GatewayIdempotency] Request duplicate dicegah di Layer 2: ' + idempotencyKey);
+        return { success: true, messageId: 'cached_idempotent', queued: false };
+      }
+      const target = to.includes('@') ? to.replace('@c.us', '@s.whatsapp.net') : (to + '@s.whatsapp.net');
+      if (!sock || connectionStatus !== 'connected') {
+        throw new Error('WhatsApp gateway is not connected');
+      }
+      const jid = await resolveJid(target);
+      const result = await sendMessageWithTimeout(jid, { text: String(text) });
+      cacheOutboundMessage(result);
+      if (idempotencyKey) {
+        processedMessageIds.add(idempotencyKey);
+        if (processedMessageIds.size > 2000) processedMessageIds.delete(processedMessageIds.values().next().value);
+      }
+      healthService.recordOutboundActivity();
+      return {
+        success: true,
+        messageId: result && result.key && result.key.id,
+        to: jid,
+      };
+    });
+
     // WAJIB: creds.update harus selalu disimpan
     sock.ev.on('creds.update', saveCreds);
 
@@ -727,6 +765,7 @@ async function startWhatsAppBot() {
         addDiagLog('warn', 'Koneksi terputus. Kode: ' + code + ' | Reconnect: ' + shouldReconnect);
         if (connectionWatchdogTimer) { clearInterval(connectionWatchdogTimer); connectionWatchdogTimer = null; }
         connectionStatus = 'disconnected';
+        healthService.setSessionStatus('DISCONNECTED');
         currentQrImage = null;
         connectedUserPhone = null;
         if (shouldReconnect) {
@@ -742,12 +781,15 @@ async function startWhatsAppBot() {
       } else if (connection === 'open') {
         currentQrImage = null;
         connectionStatus = 'connected';
+        healthService.setSessionStatus('WORKING');
         lastDisconnectReason = null;
         lastConnectedAt = Date.now();
         reconnectAttempts = 0;
         connectedUserPhone = sock && sock.user && sock.user.id ? sock.user.id.split(':')[0] : 'Aktif';
         addDiagLog('info', 'WHATSAPP TERHUBUNG! Akun: ' + connectedUserPhone);
         startConnectionWatchdog();
+        // Trigger Outbox Dispatcher
+        outboxService.triggerImmediateDispatch().catch(function() {});
         if (outboundQueue.length) {
           addDiagLog('info', 'Flush ' + outboundQueue.length + ' pesan tertunda.');
           scheduleOutboundFlush(500);
@@ -835,10 +877,29 @@ async function startWhatsAppBot() {
       }
 
       lastSuccessfulDecryptAt = Date.now();
+      healthService.recordInboundActivity();
 
       const resolved = resolveSessionIdAndBody(msg, rawText);
-      const messageText = resolved.body;
-      const sessionId = resolved.sessionId;
+      let messageText = resolved.body;
+      let sessionId = resolved.sessionId;
+
+      // Inbound Service: Quoted reply ID mapping & short code [#A7K2Q9]
+      const ctx = extractContextInfo(msg);
+      const quotedId = ctx && ctx.stanzaId;
+      try {
+        const inboundRes = await inboundService.processInboundWhatsAppMessage({
+          providerMessageId: msgId,
+          fromJid: jid,
+          body: rawText,
+          quotedMessageId: quotedId,
+        });
+        if (inboundRes && inboundRes.status === 'ok') {
+          sessionId = inboundRes.sessionId || inboundRes.shortCode;
+          messageText = inboundRes.cleanText || messageText;
+        }
+      } catch (inboundErr) {
+        console.warn('[InboundService] Inbound resolution error:', inboundErr.message);
+      }
 
       // DIAG-6: echo system msg dari gateway sendiri
       if (fromMe) {
@@ -1257,14 +1318,21 @@ app.get('/', function(req, res) {
 // SERVER BOOTSTRAP
 // ============================================================
 if (!isServerless || process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, function() {
+  app.listen(PORT, async function() {
     console.log('\n🤖 Arsalynk WhatsApp Gateway aktif di: http://localhost:' + PORT);
     console.log('📁 Auth Storage Path: ' + AUTH_PATH + ' (Serverless Mode: ' + isServerless + ')');
     console.log('🔗 Webhook Target: ' + NEXTJS_WEBHOOK_URL);
     try { getMsgStoreDir(); } catch (e) { console.warn('MsgStore init gagal: ' + e.message); }
+    try {
+      await initDatabase();
+      startRecoveryCron(30000);
+    } catch (e) {
+      console.warn('[Database] Init warning: ' + e.message);
+    }
     startWhatsAppBot();
   });
 } else {
+  initDatabase().then(function() { startRecoveryCron(30000); }).catch(function() {});
   startWhatsAppBot();
 }
 
