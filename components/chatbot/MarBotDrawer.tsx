@@ -254,6 +254,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [chatMode, setChatMode] = useState<ChatMode>('ai');
   const [conversationId, setConversationId] = useState<string | null>(null);
+  const [shortCode, setShortCode] = useState<string>('');
   const [sessionId, setSessionId] = useState<string>('');
   const [isMounted, setIsMounted] = useState(false);
 
@@ -397,17 +398,9 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
       setInputValue('');
       sessionStartTimeRef.current = Date.now();
 
-      const autoHandoverMessage: ChatMessage = {
-        id: `bot-handover-${Date.now()}`,
-        role: 'assistant',
-        content: `Pertanyaan Anda telah diteruskan ke **Customer Service Arsalynk (Live WhatsApp)**. Anda kini terhubung langsung dengan representatif kami dan dapat melanjutkan obrolan di sini.`,
-        timestamp: formatCurrentTime(),
-      };
-
-      setMessages((prev) => [...prev, userMessage, autoHandoverMessage]);
-
+      let activeCode = shortCode;
       try {
-        await fetch('/api/whatsapp/send', {
+        const handoffRes = await fetch('/api/whatsapp/handoff', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -415,9 +408,24 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
             message: messageContent,
           }),
         });
+        const data = await handoffRes.json().catch(() => null);
+        if (data?.conversationCode) {
+          activeCode = data.conversationCode;
+          setShortCode(data.conversationCode);
+        }
       } catch (err) {
-        console.warn('[WhatsApp Auto-Forward Error]', err);
+        console.warn('[WhatsApp Handoff Error]', err);
       }
+
+      const ticketTag = activeCode ? ` (Kode Tiket: **#${activeCode}**)` : '';
+      const autoHandoverMessage: ChatMessage = {
+        id: `bot-handover-${Date.now()}`,
+        role: 'assistant',
+        content: `Pertanyaan Anda telah diteruskan kepada tim Customer Service kami${ticketTag}. Anda kini terhubung langsung dengan representatif kami dan dapat melanjutkan obrolan di sini.`,
+        timestamp: formatCurrentTime(),
+      };
+
+      setMessages((prev) => [...prev, userMessage, autoHandoverMessage]);
       return;
     }
 
@@ -427,7 +435,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
       setInputValue('');
 
       try {
-        await fetch('/api/whatsapp/send', {
+        await fetch('/api/whatsapp/handoff', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -734,7 +742,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
           </div>
           <p className={styles.disclaimer}>
             {chatMode === 'human_cs'
-              ? 'Terkoneksi langsung ke WhatsApp CS (+62 822-5285-6710).'
+              ? (shortCode ? `Terkoneksi langsung ke WhatsApp CS (Tiket #${shortCode}).` : 'Terkoneksi langsung ke WhatsApp CS (+62 822-5285-6710).')
               : 'ArsAI didukung AI & Live WhatsApp CS.'}
           </p>
         </footer>
