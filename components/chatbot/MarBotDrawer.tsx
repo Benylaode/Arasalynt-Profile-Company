@@ -318,15 +318,15 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
 
     const pollLiveMessages = async () => {
       try {
-        const res = await fetch(`/api/whatsapp/messages?sessionId=${sessionId}`);
+        const res = await fetch(`/api/whatsapp/messages?sessionId=${sessionId}&_t=${Date.now()}`, {
+          cache: 'no-store',
+        });
         if (!res.ok || !isPolling) return;
         const data = await res.json();
         if (data?.data && Array.isArray(data.data)) {
-          // Only take messages received after the start of this active CS session
+          // Take all messages from human_cs for this session (dedup handled via existingIds)
           const csRecords = data.data.filter(
-            (m: { sender: string; createdAt: string }) =>
-              m.sender === 'human_cs' &&
-              new Date(m.createdAt).getTime() >= sessionStartTimeRef.current - 2000
+            (m: { sender: string }) => m.sender === 'human_cs'
           );
 
           setMessages((prev) => {

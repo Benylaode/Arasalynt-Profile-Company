@@ -56,7 +56,13 @@ export async function GET(req: NextRequest) {
     }
 
     const data = await res.json();
-    return NextResponse.json(data);
+    return NextResponse.json(data, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        Pragma: 'no-cache',
+        Expires: '0',
+      },
+    });
   } catch (err: unknown) {
     const isTimeout = err instanceof Error && err.name === 'AbortError';
     const msg = isTimeout
@@ -64,6 +70,15 @@ export async function GET(req: NextRequest) {
       : (err instanceof Error ? err.message : String(err));
     console.warn(`[Messages] Error fetching from gateway: ${msg}`);
     // Return empty list alih-alih error — UI tetap berjalan meski gateway down
-    return NextResponse.json({ success: true, data: [], _warning: msg });
+    return NextResponse.json(
+      { success: true, data: [], _warning: msg },
+      {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+          Pragma: 'no-cache',
+          Expires: '0',
+        },
+      }
+    );
   }
 }
