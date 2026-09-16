@@ -58,7 +58,7 @@ async function processHandoffRequest({
     deliveryStatus: 'QUEUED',
   });
 
-  // 2. Resolve destination (testing converges to 082252856710)
+  // 2. Resolve destination (testing converges to 087862766846)
   const destInfo = resolveDestination(conversation.logical_route || 'GENERAL');
 
   // 3. Store Transactional Outbox event

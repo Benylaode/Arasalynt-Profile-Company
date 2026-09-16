@@ -23,8 +23,8 @@ export const HERO_SLIDES: HeroSlide[] = HERO_SLIDES_DUMMY_DATA;
 
 /* ─── Contact Info ─── */
 
-export const WHATSAPP_PHONE_DISPLAY = '+62 822-5285-6710';
-export const WHATSAPP_PHONE_RAW = '6282252856710';
+export const WHATSAPP_PHONE_DISPLAY = '+62 878-6276-6846';
+export const WHATSAPP_PHONE_RAW = '6287862766846';
 export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_PHONE_RAW}`;
 
 

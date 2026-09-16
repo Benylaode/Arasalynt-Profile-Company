@@ -4,21 +4,21 @@
  * WhatsApp Gateway Constants & Identity Configuration
  * 
  * SENDER / GATEWAY IDENTITY: 085904403535 (6285904403535)
- * TESTING DESTINATION:       082252856710 (6282252856710)
+ * TESTING DESTINATION:       087862766846 (6287862766846)
  */
 
 module.exports = {
   SENDER_PHONE: '6285904403535',
-  TEST_DESTINATION_PHONE: '6282252856710',
+  TEST_DESTINATION_PHONE: '6287862766846',
   ROUTING_MODE: process.env.ROUTING_MODE || 'TEST', // 'TEST' | 'PROD'
   
   // Production routing numbers (fallback to test destination if not configured)
   PRODUCTION_ROUTES: {
-    SALES: process.env.WA_SALES_PHONE || '6282252856710',
-    FINANCE: process.env.WA_FINANCE_PHONE || '6282252856710',
-    TECHNICAL: process.env.WA_TECHNICAL_PHONE || '6282252856710',
-    PROJECT: process.env.WA_PROJECT_PHONE || '6282252856710',
-    GENERAL: process.env.WA_GENERAL_PHONE || '6282252856710',
+    SALES: process.env.WA_SALES_PHONE || '6287862766846',
+    FINANCE: process.env.WA_FINANCE_PHONE || '6287862766846',
+    TECHNICAL: process.env.WA_TECHNICAL_PHONE || '6287862766846',
+    PROJECT: process.env.WA_PROJECT_PHONE || '6287862766846',
+    GENERAL: process.env.WA_GENERAL_PHONE || '6287862766846',
   },
 
   // State Machine definitions

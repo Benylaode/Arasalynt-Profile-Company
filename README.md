@@ -135,7 +135,7 @@ Dengan demikian, **target penyelesaian proyek utama pada Jumat, 7 Agustus 2026 t
 
 # 🤖 Dokumentasi ArsAI & WhatsApp CS Handover System
 
-> **ArsAI** (*Arsalynk Enterprise AI Assistant*) adalah asisten virtual cerdas berbasis LLM RAG yang terintegrasi secara **hybrid** dengan sistem **Live WhatsApp Customer Service (CS)** Arsalynk (`+62 822-5285-6710`).
+> **ArsAI** (*Arsalynk Enterprise AI Assistant*) adalah asisten virtual cerdas berbasis LLM RAG yang terintegrasi secara **hybrid** dengan sistem **Live WhatsApp Customer Service (CS)** Arsalynk (`+62 878-6276-6846`).
 
 ---
 
@@ -157,7 +157,7 @@ Dengan demikian, **target penyelesaian proyek utama pada Jumat, 7 Agustus 2026 t
                         │   3. Quick Action WA CS             │
                         ▼                                     ▼
              [ Jawaban Cepat AI ]                  [ Pesan Diteruskan ke WA ]
-                                                   (+62 822-5285-6710 via WAHA)
+                                                   (+62 878-6276-6846 via WAHA)
                                                               │
                                                               ▼
                                                    [ Balasan CS Masuk ke Web ]
@@ -201,7 +201,7 @@ Setelah beralih ke Customer Service, pengunjung memiliki **2 opsi kenyamanan**:
    * Drawer melakukan polling ke `/api/whatsapp/messages` secara berkala (setiap 3 detik) untuk menangkap balasan tim CS secara real-time dan menampilkannya sebagai gelembung hijau berlabel **Customer Service (WhatsApp Verified)**.
 2. **Buka Langsung di Aplikasi WhatsApp Pribadi**:
    * Di dalam kartu notifikasi chat, tersedia tombol hijau **"Buka di WhatsApp App ↗"**.
-   * Tombol ini mengarahkan langsung ke `https://wa.me/6282252856710` dengan draf pesan yang sudah terformat rapi.
+   * Tombol ini mengarahkan langsung ke `https://wa.me/6287862766846` dengan draf pesan yang sudah terformat rapi.
 
 ---
 
@@ -223,7 +223,7 @@ Setelah beralih ke Customer Service, pengunjung memiliki **2 opsi kenyamanan**:
 | [`components/chatbot/ArsAIDrawer.tsx`](file:///d:/projectku/Arsalynt/Arsalynt%20web/arsalynt/components/chatbot/ArsAIDrawer.tsx) | Antarmuka drawer chat, logika streaming SSE AI, polling balasan WhatsApp 2-way, dan sistem handover. |
 | [`components/chatbot/ArsAITrigger.tsx`](file:///d:/projectku/Arsalynt/Arsalynt%20web/arsalynt/components/chatbot/ArsAITrigger.tsx) | Tombol trigger melayang di sisi kanan layar dengan efek pulsasi dan tooltip interaktif. |
 | [`lib/chatbot.service.ts`](file:///d:/projectku/Arsalynt/Arsalynt%20web/arsalynt/lib/chatbot.service.ts) | Service client-side untuk integrasi streaming SSE (`/api/v1/chat/completions`) & quick actions. |
-| [`lib/constants.ts`](file:///d:/projectku/Arsalynt/Arsalynt%20web/arsalynt/lib/constants.ts) | Konfigurasi nomor WhatsApp CS (`WHATSAPP_PHONE_RAW = '6282252856710'`). |
+| [`lib/constants.ts`](file:///d:/projectku/Arsalynt/Arsalynt%20web/arsalynt/lib/constants.ts) | Konfigurasi nomor WhatsApp CS (`WHATSAPP_PHONE_RAW = '6287862766846'`). |
 | [`app/api/whatsapp/send/route.ts`](file:///d:/projectku/Arsalynt/Arsalynt%20web/arsalynt/app/api/whatsapp/send/route.ts) | API route untuk meneruskan pesan user ke WAHA / database live chat. |
 | [`app/api/whatsapp/messages/route.ts`](file:///d:/projectku/Arsalynt/Arsalynt%20web/arsalynt/app/api/whatsapp/messages/route.ts) | API route untuk mengambil pesan balasan real-time dari tim CS. |
 

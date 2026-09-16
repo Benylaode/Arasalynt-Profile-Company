@@ -6,6 +6,7 @@ import {
   MARBOT_QUICK_ACTIONS,
   streamChatCompletion,
 } from '@/lib/chatbot.service';
+import { WHATSAPP_PHONE_DISPLAY } from '@/lib/constants';
 import { MarBotIcon } from './MarBotTrigger';
 import { MarkdownRenderer } from './MarkdownRenderer';
 import styles from './MarBotDrawer.module.css';
@@ -742,7 +743,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
           </div>
           <p className={styles.disclaimer}>
             {chatMode === 'human_cs'
-              ? (shortCode ? `Terkoneksi langsung ke WhatsApp CS (Tiket #${shortCode}).` : 'Terkoneksi langsung ke WhatsApp CS (+62 822-5285-6710).')
+              ? (shortCode ? `Terkoneksi langsung ke WhatsApp CS (Tiket #${shortCode}).` : `Terkoneksi langsung ke WhatsApp CS (${WHATSAPP_PHONE_DISPLAY}).`)
               : 'ArsAI didukung AI & Live WhatsApp CS.'}
           </p>
         </footer>
