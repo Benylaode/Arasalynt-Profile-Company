@@ -17,7 +17,7 @@ export const WAHA_CONFIG = {
     return (process.env.WAHA_API_KEY || process.env.GATEWAY_SECRET || '').trim();
   },
   get csPhone() {
-    return (process.env.WHATSAPP_CS_PHONE || '6282252856710').trim();
+    return (process.env.WHATSAPP_CS_PHONE || '6287862766846').trim();
   },
   get timeoutMs() {
     const ms = parseInt(process.env.WAHA_TIMEOUT_MS || '', 10);

@@ -2,7 +2,7 @@
  * WhatsApp Reliability Architecture Configuration (Next.js Layer)
  * 
  * SENDER:              085904403535 (6285904403535)
- * TESTING DESTINATION: 082252856710 (6282252856710)
+ * TESTING DESTINATION: 087862766846 (6287862766846)
  */
 
 export const WA_CONFIG = {
@@ -24,7 +24,7 @@ export const WA_CONFIG = {
   },
 
   get testDestinationPhone(): string {
-    return '6282252856710';
+    return '6287862766846';
   },
 
   get timeoutMs(): number {
