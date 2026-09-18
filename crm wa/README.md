@@ -142,4 +142,4 @@ npm run dev
 ---
 
 ## 📄 Lisensi
-Hak Cipta © 2026 Arsalynt. Dikembangkan untuk integrasi WhatsApp Business yang tangguh dan fleksibel.
+Hak Cipta © 2026 Arsalynt. Dikembangkan untuk integrasi WhatsApp Business yang tangguh dan fleksibel
