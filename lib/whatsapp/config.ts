@@ -36,12 +36,38 @@ function isValidPhoneNumberId(raw: string): boolean {
   return /^\d{5,}$/.test(String(raw || '').trim());
 }
 
+/**
+ * Environment values are normally entered as the raw secret only. In practice
+ * it is easy to accidentally paste `KEY=value` or wrap the value in quotes in
+ * deployment dashboards. Normalise those harmless formatting mistakes so they
+ * do not produce an opaque webhook signature mismatch.
+ */
+function normalizeSecretValue(source: string, raw: string | undefined): string {
+  let value = String(raw || '').trim();
+  if (!value) return '';
+
+  const prefix = `${source}=`;
+  if (value.toLowerCase().startsWith(prefix.toLowerCase())) {
+    value = value.slice(prefix.length).trim();
+  }
+
+  if (
+    value.length >= 2 &&
+    ((value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'")))
+  ) {
+    value = value.slice(1, -1).trim();
+  }
+
+  return value;
+}
+
 function uniqueSecrets(values: Array<[string, string | undefined]>): Array<{ source: string; value: string }> {
   const seen = new Set<string>();
   const result: Array<{ source: string; value: string }> = [];
 
   for (const [source, raw] of values) {
-    const value = String(raw || '').trim();
+    const value = normalizeSecretValue(source, raw);
     if (!value || seen.has(value)) continue;
     seen.add(value);
     result.push({ source, value });
@@ -95,9 +121,17 @@ export const WA_CONFIG = {
   },
 
   /**
+   * Optional public Meta App ID. This is useful for diagnostics only; webhook
+   * authenticity still relies exclusively on the App Secret HMAC signature.
+   */
+  get cloudAppId(): string {
+    return (process.env.WHATSAPP_CLOUD_APP_ID || '').trim();
+  },
+
+  /**
    * Accept the canonical Meta App Secret plus common aliases and one previous
-   * secret for zero-downtime secret rotation. Values are deduplicated and
-   * never exposed by status endpoints or logs.
+   * secret for zero-downtime secret rotation. Values are deduplicated and are
+   * never returned by public status endpoints.
    */
   get cloudAppSecrets(): Array<{ source: string; value: string }> {
     return uniqueSecrets([
