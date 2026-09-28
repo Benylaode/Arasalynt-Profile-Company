@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createHmac, timingSafeEqual } from 'crypto';
+import { createHash, createHmac, timingSafeEqual } from 'crypto';
 import { WA_CONFIG } from '@/lib/whatsapp/config';
 import { recordLiveChatMessage } from '@/lib/waha.service';
 import { persistDurableLiveChatMessage } from '@/lib/whatsapp/live-chat-store';
@@ -13,7 +13,22 @@ type MetaSignatureCheck = {
   valid: boolean;
   reason: 'ok' | 'app_secret_not_configured' | 'signature_missing_or_malformed' | 'signature_mismatch';
   source?: string;
+  fingerprint?: string;
 };
+
+function secretFingerprint(secret: string): string {
+  return createHash('sha256')
+    .update(secret, 'utf8')
+    .digest('hex')
+    .slice(0, 12);
+}
+
+function configuredSecretDiagnostics(): string {
+  const values = WA_CONFIG.cloudAppSecrets.map(
+    (item) => `${item.source}:${secretFingerprint(item.value)}`
+  );
+  return values.length > 0 ? values.join(',') : 'none';
+}
 
 function extractWebsiteSessionId(text: string): string {
   const match = String(text || '').match(
@@ -22,7 +37,7 @@ function extractWebsiteSessionId(text: string): string {
   return match?.[1] || match?.[2] || '';
 }
 
-function verifyMetaSignature(rawBody: string, signature: string | null): MetaSignatureCheck {
+function verifyMetaSignature(rawBody: Buffer, signature: string | null): MetaSignatureCheck {
   const candidates = WA_CONFIG.cloudAppSecrets;
 
   if (candidates.length === 0) {
@@ -41,8 +56,10 @@ function verifyMetaSignature(rawBody: string, signature: string | null): MetaSig
   const receivedBuffer = Buffer.from(receivedHex, 'hex');
 
   for (const candidate of candidates) {
+    // Verify against the exact bytes received from Meta. This avoids any
+    // UTF-8 decode/re-encode differences between the signed body and our HMAC.
     const expectedHex = createHmac('sha256', candidate.value)
-      .update(rawBody, 'utf8')
+      .update(rawBody)
       .digest('hex');
     const expectedBuffer = Buffer.from(expectedHex, 'hex');
 
@@ -50,7 +67,12 @@ function verifyMetaSignature(rawBody: string, signature: string | null): MetaSig
       receivedBuffer.length === expectedBuffer.length &&
       timingSafeEqual(receivedBuffer, expectedBuffer)
     ) {
-      return { valid: true, reason: 'ok', source: candidate.source };
+      return {
+        valid: true,
+        reason: 'ok',
+        source: candidate.source,
+        fingerprint: secretFingerprint(candidate.value),
+      };
     }
   }
 
@@ -279,14 +301,14 @@ export async function POST(req: NextRequest) {
   const requestId = Math.random().toString(36).slice(2, 8);
 
   try {
-    const rawBody = await req.text();
-    if (!rawBody) {
+    const rawBody = Buffer.from(await req.arrayBuffer());
+    if (rawBody.length === 0) {
       return NextResponse.json({ status: 'ignored', reason: 'Empty body' });
     }
 
     let payload: any;
     try {
-      payload = JSON.parse(rawBody);
+      payload = JSON.parse(rawBody.toString('utf8'));
     } catch {
       return NextResponse.json({ status: 'ignored', reason: 'Invalid JSON' });
     }
@@ -304,10 +326,14 @@ export async function POST(req: NextRequest) {
 
       const signature = req.headers.get('x-hub-signature-256');
       const signatureCheck = verifyMetaSignature(rawBody, signature);
+      const entryId = String(payload?.entry?.[0]?.id || '').trim() || '-';
+      const webhookPhoneNumberId = String(
+        payload?.entry?.[0]?.changes?.[0]?.value?.metadata?.phone_number_id || ''
+      ).trim() || '-';
 
       if (!signatureCheck.valid) {
         console.warn(
-          `[MetaWebhook][reqId:${requestId}] Signature rejected reason=${signatureCheck.reason} configuredSecretCount=${WA_CONFIG.cloudAppSecrets.length}`
+          `[MetaWebhook][reqId:${requestId}] Signature rejected reason=${signatureCheck.reason} configuredSecretCount=${WA_CONFIG.cloudAppSecrets.length} secretFingerprints=${configuredSecretDiagnostics()} configuredAppId=${WA_CONFIG.cloudAppId || '-'} wabaEntryId=${entryId} phoneNumberId=${webhookPhoneNumberId}`
         );
         return NextResponse.json(
           {
@@ -315,7 +341,7 @@ export async function POST(req: NextRequest) {
             code: signatureCheck.reason,
             hint:
               signatureCheck.reason === 'signature_mismatch'
-                ? 'WHATSAPP_CLOUD_APP_SECRET must be the Meta App Secret for the app that owns this webhook subscription.'
+                ? 'Meta signed this request with a different App Secret. Confirm the webhook subscription and access token belong to the same Meta App whose App Secret is configured in WHATSAPP_CLOUD_APP_SECRET.'
                 : undefined,
           },
           { status: 401 }
@@ -323,7 +349,7 @@ export async function POST(req: NextRequest) {
       }
 
       console.info(
-        `[MetaWebhook][reqId:${requestId}] Valid Meta webhook received secretSource=${signatureCheck.source || 'configured'}.`
+        `[MetaWebhook][reqId:${requestId}] Valid Meta webhook received secretSource=${signatureCheck.source || 'configured'} secretFingerprint=${signatureCheck.fingerprint || '-'} configuredAppId=${WA_CONFIG.cloudAppId || '-'} wabaEntryId=${entryId} phoneNumberId=${webhookPhoneNumberId}.`
       );
       return handleMetaWebhook(payload, requestId);
     }
