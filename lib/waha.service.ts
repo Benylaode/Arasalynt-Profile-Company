@@ -1,27 +1,21 @@
 import { getDb } from '@/lib/db/db';
+import { WA_CONFIG } from '@/lib/whatsapp/config';
 
 export const WAHA_CONFIG = {
   get baseUrl() {
-    let url = (process.env.WAHA_BASE_URL || 'http://localhost:3000').trim();
-    // Bersihkan karakter accidental '=' di depan (misal salah paste: =https://...)
-    url = url.replace(/^=+/, '').trim();
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      url = `https://${url}`;
-    }
-    return url.replace(/\/+$/, '');
+    return WA_CONFIG.baseUrl;
   },
   get session() {
     return process.env.WAHA_SESSION || 'default';
   },
   get apiKey() {
-    return (process.env.WAHA_API_KEY || process.env.GATEWAY_SECRET || '').trim();
+    return WA_CONFIG.secret;
   },
   get csPhone() {
-    return (process.env.WHATSAPP_CS_PHONE || '6287862766846').trim();
+    return WA_CONFIG.csPhone;
   },
   get timeoutMs() {
-    const ms = parseInt(process.env.WAHA_TIMEOUT_MS || '', 10);
-    return !isNaN(ms) && ms > 0 ? ms : 15000;
+    return WA_CONFIG.timeoutMs;
   },
 };
 
@@ -34,7 +28,33 @@ export interface LiveChatMessageRecord {
 }
 
 /**
- * Format standard Indonesian/International phone to WAHA chatId (e.g. 628213939569@c.us)
+ * Remove the internal website-session marker from customer-facing CS messages.
+ *
+ * The marker remains part of the WhatsApp routing contract, for example:
+ *   [#guest_xxx] Halo kak
+ * but the website only displays:
+ *   Halo kak
+ */
+function stripWebsiteSessionTag(text: string): string {
+  const raw = String(text || '').trim();
+  if (!raw) return '';
+
+  return raw
+    .replace(/^\s*\*?\[#\s*guest_[a-zA-Z0-9_-]+\]\*?\s*:?[\s]*/i, '')
+    .replace(/^\s*\*?#\s*guest_[a-zA-Z0-9_-]+\*?\s*:?[\s]*/i, '')
+    .trim();
+}
+
+function normalizeLiveChatContent(
+  sender: 'user' | 'bot' | 'human_cs',
+  content: string
+): string {
+  if (sender !== 'human_cs') return String(content || '');
+  return stripWebsiteSessionTag(content) || String(content || '').trim();
+}
+
+/**
+ * Format standard Indonesian/International phone to WAHA chatId.
  */
 export function formatChatId(phone: string): string {
   const cleaned = phone.replace(/\D/g, '');
@@ -42,13 +62,14 @@ export function formatChatId(phone: string): string {
   return `${normalized}@c.us`;
 }
 
-/**
- * Send WhatsApp text message via WAHA HTTP API / Baileys Gateway
- */
-export async function sendWahaMessage(toPhone: string, text: string): Promise<boolean> {
-  // If WAHA is pointing to default Next.js port 3000 without dedicated WAHA container, avoid spamming 404s
-  if (!process.env.WAHA_BASE_URL && WAHA_CONFIG.baseUrl.includes(':3000')) {
-    console.warn('[WAHA] Pengiriman dibatalkan: WAHA_BASE_URL belum dikonfigurasi di .env.');
+function normalizePhone(phone: string): string {
+  const cleaned = String(phone || '').replace(/\D/g, '');
+  return cleaned.startsWith('0') ? `62${cleaned.slice(1)}` : cleaned;
+}
+
+async function sendViaCrmWa(toPhone: string, text: string): Promise<boolean> {
+  if (!WA_CONFIG.gatewayConfigured) {
+    console.warn('[WhatsApp][crm_wa] Pengiriman dibatalkan: konfigurasi gateway belum lengkap.');
     return false;
   }
 
@@ -84,23 +105,106 @@ export async function sendWahaMessage(toPhone: string, text: string): Promise<bo
 
     if (!res.ok) {
       const msg = resData?.error || resData?.message || JSON.stringify(resData);
-      console.warn(`[WAHA] Gateway returned HTTP ${res.status}: ${msg}`);
+      console.warn(`[WhatsApp][crm_wa] Gateway returned HTTP ${res.status}: ${msg}`);
       return false;
     }
 
     if (resData && resData.queued) {
-      console.info(`[WAHA] Pesan disimpan di antrean gateway (status: ${resData.status || 'offline'}). Akan terkirim setelah WhatsApp online.`);
+      console.info(
+        `[WhatsApp][crm_wa] Pesan disimpan di antrean gateway (status: ${resData.status || 'offline'}).`
+      );
     }
 
     return true;
   } catch (err: unknown) {
     if (err instanceof Error && err.name === 'AbortError') {
-      console.warn(`[WAHA] Timeout: WhatsApp Gateway (${url}) tidak merespon dalam ${Math.round(timeoutLimit / 1000)} detik.`);
+      console.warn(
+        `[WhatsApp][crm_wa] Timeout: Gateway (${url}) tidak merespon dalam ${Math.round(timeoutLimit / 1000)} detik.`
+      );
     } else {
-      console.warn('[WAHA] Failed to connect to WhatsApp Gateway:', err);
+      console.warn('[WhatsApp][crm_wa] Failed to connect to gateway:', err);
     }
     return false;
   }
+}
+
+async function sendViaMetaCloud(toPhone: string, text: string): Promise<boolean> {
+  if (!WA_CONFIG.cloudConfigured || !WA_CONFIG.cloudMessagesUrl) {
+    const reason = WA_CONFIG.cloudConfigError || 'Meta WhatsApp Cloud API belum dikonfigurasi lengkap.';
+    console.warn(`[WhatsApp][meta_cloud] ${reason}`);
+    throw new Error(reason);
+  }
+
+  const timeoutLimit = WA_CONFIG.timeoutMs;
+  const to = normalizePhone(toPhone);
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutLimit);
+
+    const res = await fetch(WA_CONFIG.cloudMessagesUrl, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${WA_CONFIG.cloudAccessToken}`,
+        'Content-Type': 'application/json',
+      },
+      signal: controller.signal,
+      body: JSON.stringify({
+        messaging_product: 'whatsapp',
+        recipient_type: 'individual',
+        to,
+        type: 'text',
+        text: {
+          preview_url: false,
+          body: String(text),
+        },
+      }),
+    });
+    clearTimeout(timeout);
+
+    const data = await res.json().catch(() => null);
+    if (!res.ok) {
+      const metaMessage =
+        data?.error?.error_user_msg ||
+        data?.error?.message ||
+        'Meta Graph API menolak request tanpa detail error.';
+      const metaCode = data?.error?.code ? ` code=${data.error.code}` : '';
+      const metaSubcode = data?.error?.error_subcode
+        ? ` subcode=${data.error.error_subcode}`
+        : '';
+      const errorMessage = `Meta Graph API HTTP ${res.status}:${metaCode}${metaSubcode} ${metaMessage}`.trim();
+
+      console.warn(`[WhatsApp][meta_cloud] ${errorMessage}`);
+      throw new Error(errorMessage);
+    }
+
+    console.info(
+      `[WhatsApp][meta_cloud] Pesan terkirim ke ${to}. messageId=${data?.messages?.[0]?.id || '-'}`
+    );
+    return true;
+  } catch (err: unknown) {
+    if (err instanceof Error && err.name === 'AbortError') {
+      const timeoutError = `Meta Graph API timeout setelah ${Math.round(timeoutLimit / 1000)} detik.`;
+      console.warn(`[WhatsApp][meta_cloud] ${timeoutError}`);
+      throw new Error(timeoutError);
+    }
+
+    const message = err instanceof Error ? err.message : String(err);
+    console.warn('[WhatsApp][meta_cloud] Gagal mengirim direct text:', message);
+    throw err instanceof Error ? err : new Error(message);
+  }
+}
+
+/**
+ * Unified outbound WhatsApp sender.
+ *
+ * BAYPASS=true  -> crm wa / Baileys gateway
+ * BAYPASS=false -> Meta WhatsApp Cloud API direct text
+ */
+export async function sendWahaMessage(toPhone: string, text: string): Promise<boolean> {
+  return WA_CONFIG.baypass
+    ? sendViaCrmWa(toPhone, text)
+    : sendViaMetaCloud(toPhone, text);
 }
 
 /**
@@ -115,25 +219,24 @@ export function recordLiveChatMessage(
   const db = getDb();
   const id = `msg_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
   const now = new Date().toISOString();
+  const displayContent = normalizeLiveChatContent(sender, content);
 
-  // Pastikan session ada
   db.prepare(
     `INSERT INTO live_chat_sessions (id, last_message, updated_at)
      VALUES (?, ?, ?)
      ON CONFLICT(id) DO UPDATE SET last_message = excluded.last_message, updated_at = excluded.updated_at`
-  ).run(sessionId, content, now);
+  ).run(sessionId, displayContent, now);
 
-  // Simpan pesan dengan whatsapp_message_id untuk deduplication
   db.prepare(
     `INSERT INTO live_chat_messages (id, session_id, sender, content, created_at, whatsapp_message_id)
      VALUES (?, ?, ?, ?, ?, ?)`
-  ).run(id, sessionId, sender, content, now, whatsappMessageId || null);
+  ).run(id, sessionId, sender, displayContent, now, whatsappMessageId || null);
 
-  return { id, sessionId, sender, content, createdAt: now };
+  return { id, sessionId, sender, content: displayContent, createdAt: now };
 }
 
 /**
- * Get message history for a specific guest session
+ * Get message history for a specific guest session.
  */
 export function getLiveChatMessages(sessionId: string): LiveChatMessageRecord[] {
   const db = getDb();
@@ -146,11 +249,14 @@ export function getLiveChatMessages(sessionId: string): LiveChatMessageRecord[] 
     )
     .all(sessionId) as LiveChatMessageRecord[];
 
-  return rows;
+  return rows.map((row) => ({
+    ...row,
+    content: normalizeLiveChatContent(row.sender, row.content),
+  }));
 }
 
 /**
- * Escalate guest inquiry to CS WhatsApp number via WAHA
+ * Escalate guest inquiry to CS WhatsApp number through the selected provider.
  */
 export async function forwardGuestInquiryToWhatsApp(
   sessionId: string,
