@@ -9,31 +9,69 @@ const WORK_SLUGS = [
   'desain-pelatihan-wasit-semarang', 'video-portret-padel-arena',
 ];
 
+// Timestamp update terakhir situs (perbarui setiap deploy besar)
+const LAST_MODIFIED = new Date('2026-10-01');
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const entry = (path: string, priority: number, changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency']) => ({
+  const entry = (
+    path: string,
+    priority: number,
+    changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'],
+    lastModified?: Date
+  ) => ({
     url: `${SITE_URL}${path}`,
+    lastModified: lastModified ?? LAST_MODIFIED,
     changeFrequency,
     priority,
   });
 
   const entries = [
-    entry('/', 1, 'weekly'),
-    entry('/about-us', 0.8, 'monthly'),
-    entry('/about-us/corporate-profile', 0.7, 'monthly'),
-    entry('/about-us/company-leadership', 0.7, 'monthly'),
-    entry('/about-us/ecosystem-philosophy', 0.7, 'monthly'),
-    entry('/our-business', 0.9, 'weekly'),
-    entry('/our-solution', 0.9, 'weekly'),
-    entry('/our-works', 0.9, 'weekly'),
-    entry('/insight-programs/case-studies', 0.8, 'weekly'),
-    entry('/insight-programs/leadership-thoughts', 0.8, 'weekly'),
-    entry('/contact-us', 0.7, 'monthly'),
-    ...BUSINESS_DUMMY_DATA.map(({ slug }) => entry(`/our-business/${slug}`, 0.8, 'monthly')),
-    ...WORK_SLUGS.map((slug) => entry(`/our-works/${slug}`, 0.8, 'monthly')),
-    ...SOLUTION_SERVICES.map(({ caseStudySlug }) => entry(`/insight-programs/case-studies/${caseStudySlug}`, 0.75, 'monthly')),
-    ...CASE_STUDIES_DUMMY_DATA.map(({ slug }) => entry(`/insight-programs/case-studies/${slug}`, 0.75, 'monthly')),
-    ...LEADERSHIP_THOUGHTS_DUMMY_DATA.map(({ slug }) => entry(`/insight-programs/leadership-thoughts/${slug}`, 0.7, 'monthly')),
+    // ── Halaman Utama ──────────────────────────────────────────────────────
+    entry('/', 1.0, 'weekly'),
+
+    // ── About Us ──────────────────────────────────────────────────────────
+    entry('/about-us', 0.85, 'monthly'),
+    entry('/about-us/corporate-profile', 0.75, 'monthly'),
+    entry('/about-us/company-leadership', 0.75, 'monthly'),
+    entry('/about-us/ecosystem-philosophy', 0.75, 'monthly'),
+
+    // ── Layanan & Bisnis ───────────────────────────────────────────────────
+    entry('/our-business', 0.90, 'weekly'),
+    entry('/our-solution', 0.90, 'weekly'),
+
+    // ── Portofolio ─────────────────────────────────────────────────────────
+    entry('/our-works', 0.90, 'weekly'),
+
+    // ── Insight Programs ───────────────────────────────────────────────────
+    entry('/insight-programs/case-studies', 0.85, 'weekly'),
+    entry('/insight-programs/leadership-thoughts', 0.85, 'weekly'),
+
+    // ── Kontak & Legal ─────────────────────────────────────────────────────
+    entry('/contact-us', 0.75, 'monthly'),
+    entry('/privacy-policy', 0.40, 'yearly'),
+
+    // ── Halaman Dinamis: Business Units ────────────────────────────────────
+    ...BUSINESS_DUMMY_DATA.map(({ slug }) => entry(`/our-business/${slug}`, 0.80, 'monthly')),
+
+    // ── Halaman Dinamis: Our Works ─────────────────────────────────────────
+    ...WORK_SLUGS.map((slug) => entry(`/our-works/${slug}`, 0.80, 'monthly')),
+
+    // ── Halaman Dinamis: Case Studies dari Solution Services ───────────────
+    ...SOLUTION_SERVICES.map(({ caseStudySlug }) =>
+      entry(`/insight-programs/case-studies/${caseStudySlug}`, 0.75, 'monthly')
+    ),
+
+    // ── Halaman Dinamis: Case Studies dari Dummy Data ──────────────────────
+    ...CASE_STUDIES_DUMMY_DATA.map(({ slug }) =>
+      entry(`/insight-programs/case-studies/${slug}`, 0.75, 'monthly')
+    ),
+
+    // ── Halaman Dinamis: Leadership Thoughts ───────────────────────────────
+    ...LEADERSHIP_THOUGHTS_DUMMY_DATA.map(({ slug }) =>
+      entry(`/insight-programs/leadership-thoughts/${slug}`, 0.70, 'monthly')
+    ),
   ];
 
+  // Deduplikasi: jika ada slug ganda, ambil hanya satu
   return Array.from(new Map(entries.map((item) => [item.url, item])).values());
 }

@@ -22,16 +22,39 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
+  keywords: [
+    'arsalynk',
+    'software house indonesia',
+    'enterprise technology',
+    'ERP system indonesia',
+    'solusi teknologi bisnis',
+    'IoT integration indonesia',
+    'data analytics',
+    'digital transformation',
+    'HRMS indonesia',
+    'POS retail system',
+    'konsultan IT indonesia',
+    'custom software development',
+  ],
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
+  category: 'Technology',
+  classification: 'Business/Technology',
+  // Google Search Console verification — ganti dengan ID verifikasi asli Anda
+  // verification: {
+  //   google: 'GANTI_DENGAN_GSC_VERIFICATION_TOKEN',
+  //   yandex: 'GANTI_DENGAN_YANDEX_TOKEN',
+  // },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
@@ -53,7 +76,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'id_ID',
+    alternateLocale: 'en_US',
     siteName: SITE_NAME,
     url: '/',
     title: `${SITE_NAME} — Enterprise Technology Solutions & Software House Indonesia`,
@@ -64,12 +88,14 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         type: 'image/webp',
-        alt: `${SITE_NAME} enterprise technology ecosystem`,
+        alt: `${SITE_NAME} — Enterprise Technology & Software House Indonesia`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
+    site: '@arsalynk',
+    creator: '@arsalynk',
     title: `${SITE_NAME} — Enterprise Technology & Software House Indonesia`,
     description: SITE_DESCRIPTION,
     images: ['/images/our-works/our-works-hero-bg.webp'],
@@ -82,7 +108,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={manrope.variable} data-scroll-behavior="smooth">
+    <html lang="id" className={manrope.variable} data-scroll-behavior="smooth">
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://api.fontshare.com" />
