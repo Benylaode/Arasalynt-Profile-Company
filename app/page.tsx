@@ -236,7 +236,9 @@ export default function Home() {
       <BridgePossibility />
       <SpecializedByNature />
       <GrowthMetrics />
-      <ProjectShowcase />
+      <div data-nosnippet>
+        <ProjectShowcase />
+      </div>
       <Testimonials />
       <BeyondExpectations />
     </main>
