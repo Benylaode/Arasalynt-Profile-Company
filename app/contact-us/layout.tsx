@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
+import { BRAND } from '@/lib/seo/brand';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
@@ -45,7 +47,7 @@ export default function ContactLayout({ children }: Readonly<{ children: React.R
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
           { '@type': 'ListItem', position: 2, name: 'Contact Us', item: canonicalUrl },
         ],
       },
@@ -63,12 +65,15 @@ export default function ContactLayout({ children }: Readonly<{ children: React.R
         mainEntity: {
           '@type': 'Organization',
           '@id': `${SITE_URL}/#organization`,
-          name: SITE_NAME,
-          url: SITE_URL,
-          telephone: '+62-878-6276-6846',
+          name: BRAND.name,
+          legalName: BRAND.legalName,
+          url: `${SITE_URL}/`,
+          telephone: BRAND.phone,
+          email: BRAND.email,
           contactPoint: {
             '@type': 'ContactPoint',
-            telephone: '+62-878-6276-6846',
+            telephone: BRAND.phone,
+            email: BRAND.email,
             contactType: 'customer service',
             areaServed: 'ID',
             availableLanguage: ['Indonesian', 'English'],
@@ -80,13 +85,7 @@ export default function ContactLayout({ children }: Readonly<{ children: React.R
 
   return (
     <>
-      <script
-        id="contact-us-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(contactSchema).replace(/</g, '\\u003c'),
-        }}
-      />
+      <JsonLd id="contact-us-schema" data={contactSchema} />
       {children}
     </>
   );

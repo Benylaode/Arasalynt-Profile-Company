@@ -50,3 +50,5 @@ next-env.d.ts
 /crm wa/*.db-wal
 /crm wa/auth_info_baileys/
 /crm wa/chatbot_conversations.json
+
+

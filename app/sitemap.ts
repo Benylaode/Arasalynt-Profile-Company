@@ -1,125 +1,110 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/constants';
 import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
-import { BUSINESS_DUMMY_DATA, CASE_STUDIES_DUMMY_DATA, LEADERSHIP_THOUGHTS_DUMMY_DATA } from '@/lib/db/dummy';
+import {
+  BUSINESS_DUMMY_DATA,
+  CASE_STUDIES_DUMMY_DATA,
+  LEADERSHIP_THOUGHTS_DUMMY_DATA,
+} from '@/lib/db/dummy';
 
-const WORK_DATES: Record<string, Date> = {
-  'sinau-print-erp': new Date('2026-06-25T00:00:00.000Z'),
-  'artic-complex-web': new Date('2026-06-10T00:00:00.000Z'),
-  'myboss-iot-system': new Date('2026-05-30T00:00:00.000Z'),
-  'altatic-analytic': new Date('2025-11-20T00:00:00.000Z'),
-  'web-media-profile': new Date('2025-12-15T00:00:00.000Z'),
-  'kajian-kelayakan-gik': new Date('2026-04-15T00:00:00.000Z'),
-  'panduan-perubahan-perilaku-stunting': new Date('2026-03-25T00:00:00.000Z'),
-  'desain-pelatihan-wasit-semarang': new Date('2026-02-18T00:00:00.000Z'),
-  'video-portret-padel-arena': new Date('2026-02-12T00:00:00.000Z'),
+const WORK_DATES: Record<string, string> = {
+  'sinau-print-erp': '2026-06-25',
+  'artic-complex-web': '2026-06-10',
+  'myboss-iot-system': '2026-05-30',
+  'altatic-analytic': '2025-11-20',
+  'web-media-profile': '2025-12-15',
+  'kajian-kelayakan-gik': '2026-04-15',
+  'panduan-perubahan-perilaku-stunting': '2026-03-25',
+  'desain-pelatihan-wasit-semarang': '2026-02-18',
+  'video-portret-padel-arena': '2026-02-12',
 };
 
-const SOLUTION_DATES: Record<string, Date> = {
-  'enterprise-resource-planning': new Date('2026-10-06T00:00:00.000Z'),
-  'internet-of-things': new Date('2026-10-06T00:00:00.000Z'),
-  'point-of-sale-pos': new Date('2026-10-04T00:00:00.000Z'),
-  'warehouse-management-system': new Date('2026-10-04T00:00:00.000Z'),
-  'hr-talent-management-engine': new Date('2026-10-03T00:00:00.000Z'),
-  'financial-accounting-automation-hub': new Date('2026-10-03T00:00:00.000Z'),
-  'logistics-fleet-operations-tracker': new Date('2026-10-02T00:00:00.000Z'),
-  'supply-chain-inventory-control': new Date('2026-10-02T00:00:00.000Z'),
+const SOLUTION_DATES: Record<string, string> = {
+  'enterprise-resource-planning': '2026-10-06',
+  'internet-of-things': '2026-10-06',
+  'point-of-sale-pos': '2026-10-04',
+  'warehouse-management-system': '2026-10-04',
+  'hr-talent-management-engine': '2026-10-03',
+  'financial-accounting-automation-hub': '2026-10-03',
+  'logistics-fleet-operations-tracker': '2026-10-02',
+  'supply-chain-inventory-control': '2026-10-02',
 };
 
-const parseThoughtDate = (dateStr: string): Date => {
-  const monthMap: Record<string, string> = {
-    january: '01', february: '02', march: '03', april: '04',
-    may: '05', june: '06', july: '07', august: '08',
-    september: '09', october: '10', november: '11', december: '12',
-  };
-  const parts = dateStr.toLowerCase().split(' ');
-  const month = parts[0];
-  const year = parts[1] ?? '2026';
-  const mm = monthMap[month] ?? '06';
-  return new Date(`${year}-${mm}-15T00:00:00.000Z`);
-};
-
-const caseStudyDateMap = new Map<string, Date>(
-  CASE_STUDIES_DUMMY_DATA.map((item) => [
-    item.slug,
-    new Date(`${item.dateValue}T00:00:00.000Z`),
-  ])
+const caseStudyDateMap = new Map<string, string>(
+  CASE_STUDIES_DUMMY_DATA.map((item) => [item.slug, item.dateValue])
 );
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const entry = (
-    path: string,
-    priority: number,
-    changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'],
-    lastModified: Date
-  ) => ({
+function entry(
+  path: string,
+  lastModified?: string | Date
+): MetadataRoute.Sitemap[number] {
+  return {
     url: `${SITE_URL}${path}`,
-    lastModified,
-    changeFrequency,
-    priority,
-  });
+    ...(lastModified
+      ? {
+          lastModified:
+            lastModified instanceof Date ? lastModified : new Date(lastModified),
+        }
+      : {}),
+  };
+}
 
+export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [
     // ── Halaman Utama ──────────────────────────────────────────────────────
-    entry('/', 1.0, 'weekly', new Date('2026-10-06T00:00:00.000Z')),
+    entry('/', '2026-10-06'),
 
     // ── About Us & Sub-Pages ───────────────────────────────────────────────
-    entry('/about-us', 0.85, 'monthly', new Date('2026-10-06T00:00:00.000Z')),
-    entry('/about-us/corporate-profile', 0.75, 'monthly', new Date('2026-09-15T00:00:00.000Z')),
-    entry('/about-us/company-leadership', 0.75, 'monthly', new Date('2026-09-20T00:00:00.000Z')),
-    entry('/about-us/ecosystem-philosophy', 0.75, 'monthly', new Date('2026-09-10T00:00:00.000Z')),
+    entry('/about-us', '2026-10-06'),
+    entry('/about-us/corporate-profile', '2026-09-15'),
+    entry('/about-us/company-leadership', '2026-09-20'),
+    entry('/about-us/ecosystem-philosophy', '2026-09-10'),
 
     // ── Layanan & Bisnis ───────────────────────────────────────────────────
-    entry('/our-business', 0.90, 'weekly', new Date('2026-08-25T00:00:00.000Z')),
-    entry('/our-solution', 0.90, 'weekly', new Date('2026-10-06T00:00:00.000Z')),
+    entry('/our-business', '2026-08-25'),
+    entry('/our-solution', '2026-10-06'),
 
     // ── Halaman Dinamis: Our Solution Services (200 OK & Indexable) ────────
     ...SOLUTION_SERVICES.map(({ slug }) =>
-      entry(
-        `/our-solution/${slug}`,
-        0.85,
-        'monthly',
-        SOLUTION_DATES[slug] ?? new Date('2026-10-02T00:00:00.000Z')
-      )
+      entry(`/our-solution/${slug}`, SOLUTION_DATES[slug] ?? '2026-10-06')
     ),
 
     // ── Portofolio (Supporting Proof Layer) ────────────────────────────────
-    entry('/our-works', 0.85, 'weekly', new Date('2026-09-28T00:00:00.000Z')),
+    entry('/our-works', '2026-09-28'),
 
-    // ── Insight Programs ───────────────────────────────────────────────────
-    entry('/insight-programs/case-studies', 0.85, 'weekly', new Date('2026-06-25T00:00:00.000Z')),
-    entry('/insight-programs/leadership-thoughts', 0.85, 'weekly', new Date('2026-07-20T00:00:00.000Z')),
+    // ── Insight & Programs (Hub & Sub-Sections) ────────────────────────────
+    entry('/insight-programs', '2026-10-06'),
+    entry('/insight-programs/case-studies', '2026-06-25'),
+    entry('/insight-programs/leadership-thoughts', '2026-07-20'),
 
     // ── Kontak & Legal ─────────────────────────────────────────────────────
-    entry('/contact-us', 0.80, 'monthly', new Date('2026-09-01T00:00:00.000Z')),
-    entry('/privacy-policy', 0.40, 'yearly', new Date('2026-01-15T00:00:00.000Z')),
+    entry('/contact-us', '2026-09-01'),
+    entry('/privacy-policy', '2026-01-15'),
 
     // ── Halaman Dinamis: Business Units ────────────────────────────────────
     ...BUSINESS_DUMMY_DATA.map(({ slug }) =>
-      entry(`/our-business/${slug}`, 0.80, 'monthly', new Date('2026-08-25T00:00:00.000Z'))
+      entry(`/our-business/${slug}`, '2026-08-25')
     ),
 
     // ── Halaman Dinamis: Our Works ─────────────────────────────────────────
     ...Object.entries(WORK_DATES).map(([slug, date]) =>
-      entry(`/our-works/${slug}`, 0.80, 'monthly', date)
+      entry(`/our-works/${slug}`, date)
     ),
 
-    // ── Halaman Dinamis: Case Studies dari Solution Services & Dummy Data ──
+    // ── Halaman Dinamis: Case Studies ──────────────────────────────────────
     ...Array.from(caseStudyDateMap.entries()).map(([slug, date]) =>
-      entry(`/insight-programs/case-studies/${slug}`, 0.75, 'monthly', date)
+      entry(`/insight-programs/case-studies/${slug}`, date)
     ),
 
     // ── Halaman Dinamis: Leadership Thoughts ───────────────────────────────
     ...LEADERSHIP_THOUGHTS_DUMMY_DATA.map((article) =>
       entry(
         `/insight-programs/leadership-thoughts/${article.slug}`,
-        0.70,
-        'monthly',
-        parseThoughtDate(article.date)
+        article.datePublished
       )
     ),
   ];
 
-  // Deduplikasi berdasarkan URL
+  // Deduplikasi berdasarkan URL canonical
   return Array.from(new Map(entries.map((item) => [item.url, item])).values());
 }

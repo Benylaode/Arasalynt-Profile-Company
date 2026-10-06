@@ -3,9 +3,25 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* better-sqlite3 adalah native module — jangan di-bundle oleh webpack */
   serverExternalPackages: ['better-sqlite3'],
+  experimental: {
+    cpus: 2,
+  },
 
   async redirects() {
     return [
+      // ── P0: Canonical Host Redirect (arsalynk.com -> www.arsalynk.com) ──
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'arsalynk.com',
+          },
+        ],
+        destination: 'https://www.arsalynk.com/:path*',
+        permanent: true,
+      },
+
       // ── P0: Legacy Case Study URLs (Google Indexed -> Canonical 200 OK) ──
       {
         source: '/insight-programs/case-studies/point-of-sale-retail-management-system',

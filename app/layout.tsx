@@ -18,7 +18,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Enterprise Technology Solutions & Software House Indonesia`,
+    default: 'Arsalynk — Enterprise Technology Solutions Indonesia',
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,

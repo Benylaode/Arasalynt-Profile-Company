@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
+import JsonLd from '@/components/seo/JsonLd';
 import { getSolutionService, SOLUTION_SERVICES } from '@/lib/our-solution.data';
 import { SITE_URL } from '@/lib/constants';
 
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const canonicalUrl = `/our-solution/${service.slug}`;
-  const title = `${service.title} | Solusi Enterprise Arsalynk`;
+  const title = service.title;
 
   return {
     title,
@@ -108,7 +109,7 @@ export default async function SolutionServicePage({ params }: PageProps) {
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
           { '@type': 'ListItem', position: 2, name: 'Our Solution', item: `${SITE_URL}/our-solution` },
           { '@type': 'ListItem', position: 3, name: service.shortTitle, item: canonicalUrl },
         ],
@@ -118,12 +119,9 @@ export default async function SolutionServicePage({ params }: PageProps) {
 
   return (
     <main className="relative w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
-      <script
+      <JsonLd
         id={`solution-service-schema-${service.slug}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(solutionServiceSchema).replace(/</g, '\\u003c'),
-        }}
+        data={solutionServiceSchema}
       />
 
       {/* ── HERO SECTION ── */}

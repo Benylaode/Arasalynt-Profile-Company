@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Script from 'next/script';
+import JsonLd from '@/components/seo/JsonLd';
 import type { ReactNode } from 'react';
 import {
   getBusinessBySlug,
@@ -394,7 +394,7 @@ export default async function BusinessSlugPage({
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
           { '@type': 'ListItem', position: 2, name: 'About Us', item: `${SITE_URL}/about-us` },
           { '@type': 'ListItem', position: 3, name: 'Our Business', item: `${SITE_URL}/our-business` },
           { '@type': 'ListItem', position: 4, name: biz.name, item: canonicalUrl },
@@ -405,10 +405,9 @@ export default async function BusinessSlugPage({
 
   return (
     <main className="relative w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
-      <Script
+      <JsonLd
         id={`business-schema-${biz.slug}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema).replace(/</g, '\\u003c') }}
+        data={businessSchema}
       />
       <style dangerouslySetInnerHTML={{ __html: sliderCss }} />
 
@@ -431,9 +430,15 @@ export default async function BusinessSlugPage({
         <div className="absolute -right-[9%] -top-[14%] h-[150%] w-[64%] rotate-[7deg] bg-gradient-to-b from-transparent via-white/[0.055] to-transparent" />
 
         <div className="relative z-10 flex max-w-[1100px] flex-col items-center gap-5 px-5 text-center md:gap-6">
-          <div className="font-body text-[10px] font-normal uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
-              Home&nbsp;&nbsp;&gt;&nbsp;&nbsp;Our Business&nbsp;&nbsp;&gt;&nbsp;&nbsp;{biz.name}
-            </div>
+          <nav aria-label="Breadcrumb" className="flex flex-wrap items-center justify-center gap-2 font-body text-[10px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[8px]">
+            <Link href="/" className="transition hover:opacity-75">Home</Link>
+            <span className="text-white/60">&gt;</span>
+            <Link href="/about-us" className="transition hover:opacity-75">About Us</Link>
+            <span className="text-white/60">&gt;</span>
+            <Link href="/our-business" className="transition hover:opacity-75">Our Business</Link>
+            <span className="text-white/60">&gt;</span>
+            <span className="text-white/90">{biz.name}</span>
+          </nav>
           <h1 className="font-heading text-[clamp(44px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
             {biz.name}
           </h1>

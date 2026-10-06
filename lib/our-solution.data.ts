@@ -25,6 +25,10 @@ export type SolutionService = {
   articleTags: string[];
   industry: string;
   keywords: string[];
+  updatedAt?: string;
+  language?: 'id-ID' | 'en-US';
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 export const OUR_SOLUTION_CHALLENGE = {
@@ -120,6 +124,9 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     articleTags: ['ERP', 'ENTERPRISE', 'WORKFLOW'],
     industry: 'Enterprise Operations & Manufacturing',
     keywords: ['erp', 'enterprise resource planning', 'workflow', 'operations', 'automation'],
+    updatedAt: '2026-10-06',
+    language: 'id-ID',
+    seoTitle: 'Enterprise Resource Planning (ERP)',
   },
   {
     slug: 'internet-of-things',
@@ -167,6 +174,9 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     articleTags: ['IOT', 'HARDWARE', 'SENSORS', 'CONNECTED ENTERPRISE'],
     industry: 'Manufacturing, Logistics & Infrastructure',
     keywords: ['iot', 'internet of things', 'hardware integration', 'sensors', 'telemetry', 'connectivity'],
+    updatedAt: '2026-10-06',
+    language: 'id-ID',
+    seoTitle: 'Internet of Things (IoT) Integration',
   },
   {
     slug: 'point-of-sale-pos',
@@ -213,6 +223,9 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     articleTags: ['ERP', 'RETAIL', 'POINT OF SALE'],
     industry: 'Retail & Commerce',
     keywords: ['pos', 'point of sale', 'retail', 'marketplace', 'checkout', 'erp', 'inventory'],
+    updatedAt: '2026-10-06',
+    language: 'id-ID',
+    seoTitle: 'Point of Sale (POS)',
   },
   {
     slug: 'hr-talent-management-engine',
@@ -253,6 +266,9 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     articleTags: ['HRMS', 'ENTERPRISE PORTAL', 'WORKFLOW'],
     industry: 'Enterprise Operations',
     keywords: ['hr', 'hrms', 'human resources', 'talent', 'employee', 'workflow', 'portal'],
+    updatedAt: '2026-10-06',
+    language: 'id-ID',
+    seoTitle: 'HR & Talent Management Engine (HRMS)',
   },
   {
     slug: 'financial-accounting-automation-hub',
@@ -293,6 +309,9 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     articleTags: ['FINANCE', 'AUTOMATION', 'DASHBOARD'],
     industry: 'Finance & Analytics',
     keywords: ['finance', 'accounting', 'automation', 'reconciliation', 'dashboard', 'analytics'],
+    updatedAt: '2026-10-06',
+    language: 'id-ID',
+    seoTitle: 'Financial & Accounting Automation Hub',
   },
   {
     slug: 'supply-chain-inventory-control',
@@ -339,6 +358,9 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     articleTags: ['ERP', 'SUPPLY CHAIN', 'INVENTORY'],
     industry: 'Supply Chain',
     keywords: ['supply chain', 'procurement', 'supplier', 'inventory', 'stock', 'erp'],
+    updatedAt: '2026-10-06',
+    language: 'id-ID',
+    seoTitle: 'Supply Chain & Inventory Control System',
   },
   {
     slug: 'logistics-fleet-operations-tracker',
@@ -385,6 +407,9 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     articleTags: ['IOT', 'LOGISTICS', 'FLEET OPERATIONS'],
     industry: 'Logistics & IoT',
     keywords: ['logistics', 'fleet', 'vehicle', 'tracking', 'route', 'iot', 'delivery'],
+    updatedAt: '2026-10-06',
+    language: 'id-ID',
+    seoTitle: 'Logistics & Fleet Operations Tracker',
   },
   {
     slug: 'warehouse-management-system',
@@ -431,6 +456,9 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     articleTags: ['ERP', 'WAREHOUSE', 'FULFILLMENT'],
     industry: 'Warehouse & Fulfillment',
     keywords: ['warehouse', 'wms', 'storage', 'picking', 'packing', 'dispatch', 'inventory'],
+    updatedAt: '2026-10-06',
+    language: 'id-ID',
+    seoTitle: 'Warehouse Management System',
   },
 ];
 

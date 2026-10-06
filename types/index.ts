@@ -104,6 +104,10 @@ export interface CaseStudyArticle {
   coverImage: string;
   coverImageAlt: string;
   sections: ArticleSection[];
+  datePublished?: string;
+  dateModified?: string;
+  language?: 'id-ID' | 'en-US';
+  updatedAt?: string;
 }
 
 export interface LeadershipThoughtArticle {
@@ -119,6 +123,10 @@ export interface LeadershipThoughtArticle {
   coverImage: string;
   coverImageAlt: string;
   sections: ArticleSection[];
+  datePublished?: string;
+  dateModified?: string;
+  language?: 'id-ID' | 'en-US';
+  updatedAt?: string;
 }
 
 

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
+import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -47,8 +47,9 @@ export default function CaseStudiesLayout({ children }: Readonly<{ children: Rea
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Case Studies', item: canonicalUrl },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Insight & Programs', item: `${SITE_URL}/insight-programs` },
+          { '@type': 'ListItem', position: 3, name: 'Case Studies', item: canonicalUrl },
         ],
       },
       {
@@ -74,14 +75,7 @@ export default function CaseStudiesLayout({ children }: Readonly<{ children: Rea
 
   return (
     <>
-      <Script
-        id="case-studies-schema"
-        type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(caseStudiesSchema).replace(/</g, '\\u003c'),
-        }}
-      />
+      <JsonLd id="case-studies-schema" data={caseStudiesSchema} />
       {children}
     </>
   );

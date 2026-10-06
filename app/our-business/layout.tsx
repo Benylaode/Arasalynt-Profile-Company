@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -44,7 +45,7 @@ export default function OurBusinessLayout({ children }: Readonly<{ children: Rea
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
           { '@type': 'ListItem', position: 2, name: 'About Us', item: `${SITE_URL}/about-us` },
           { '@type': 'ListItem', position: 3, name: 'Our Business', item: canonicalUrl },
         ],
@@ -66,11 +67,7 @@ export default function OurBusinessLayout({ children }: Readonly<{ children: Rea
 
   return (
     <>
-      <script
-        id="our-business-layout-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessNavSchema).replace(/</g, '\\u003c') }}
-      />
+      <JsonLd id="our-business-layout-schema" data={businessNavSchema} />
       {children}
     </>
   );
