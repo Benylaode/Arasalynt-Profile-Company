@@ -46,11 +46,12 @@ export default function OurBusinessLayout({ children }: Readonly<{ children: Rea
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Ekosistem Bisnis', item: canonicalUrl },
+          { '@type': 'ListItem', position: 2, name: 'About Us', item: `${SITE_URL}/about-us` },
+          { '@type': 'ListItem', position: 3, name: 'Our Business', item: canonicalUrl },
         ],
       },
       {
-        '@type': 'WebPage',
+        '@type': 'CollectionPage',
         '@id': `${canonicalUrl}#webpage`,
         url: canonicalUrl,
         name: `Ekosistem Bisnis Enterprise & Layanan IT Terintegrasi | ${SITE_NAME}`,

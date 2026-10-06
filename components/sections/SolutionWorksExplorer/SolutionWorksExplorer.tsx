@@ -79,7 +79,7 @@ export default function SolutionWorksExplorer({ services }: { services: Solution
           {results.map((service) => (
             <article key={service.slug} className="min-w-0">
               <Link
-                href={`/insight-programs/case-studies/${service.caseStudySlug}`}
+                href={`/our-solution/${service.slug}`}
                 className="group relative isolate block aspect-[835/570] w-full overflow-hidden rounded-[20px] bg-[#101010] no-underline max-[480px]:rounded-[16px]"
               >
                 <img

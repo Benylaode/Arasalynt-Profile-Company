@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import type { CSSProperties } from 'react';
 import styles from './SpecializedByNature.module.css';
 
@@ -137,6 +138,16 @@ export default function SpecializedByNature() {
               </article>
             );
           })}
+        </div>
+
+        <div className="mt-14 flex justify-center">
+          <Link
+            href="/our-business"
+            className="inline-flex items-center gap-3 rounded-full border border-[#1A3E9E] bg-[#1A3E9E] px-8 py-4 font-body text-[13px] font-bold uppercase tracking-wider text-white no-underline transition hover:bg-[#152571] hover:shadow-[0_8px_25px_rgba(26,62,158,0.25)]"
+          >
+            <span>EXPLORE OUR BUSINESS ECOSYSTEM</span>
+            <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </div>
     </section>

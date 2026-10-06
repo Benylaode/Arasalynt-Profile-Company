@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
+import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import { CORE_SOLUTIONS, OUR_SOLUTION_CHALLENGE, OUR_SOLUTION_CHALLENGES, SOLUTION_SERVICES } from '@/lib/our-solution.data';
 import SolutionWorksExplorer from '@/components/sections/SolutionWorksExplorer/SolutionWorksExplorer';
-import { SITE_NAME, SITE_URL } from '@/lib/constants';
+import { SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Solusi ERP, IoT & Sistem Enterprise Indonesia',
@@ -71,7 +71,7 @@ export default function OurSolutionPage() {
 
   return (
     <main className="relative w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
-      <Script
+      <script
         id="solution-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(solutionSchema).replace(/</g, '\\u003c') }}
@@ -118,7 +118,37 @@ export default function OurSolutionPage() {
       <section id="solutions" className="relative overflow-hidden bg-[#101010] px-[6vw] py-[clamp(100px,8.125vw,156px)] text-white max-[1199px]:px-[4vw]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(26,62,158,.45),transparent_48%)]" />
         <div className="relative z-10 mx-auto max-w-[1700px]"><div className="mb-12 text-center"><p className="font-body text-[13px] font-bold tracking-[.08em] text-[#E6FF2A]">▪ OUR SOLUTION</p><h2 className="mt-5 font-heading text-[clamp(48px,4.375vw,84px)] font-medium">Integrated Enterprise Solutions</h2></div>
-          <div className="grid grid-cols-2 gap-[30px] max-[800px]:grid-cols-1">{CORE_SOLUTIONS.map((solution) => <article id={solution.slug} key={solution.slug} className="group scroll-mt-24 overflow-hidden rounded-[18px] border border-white/20 bg-white/[.04] p-4 transition-[transform,border-color,background-color] duration-300 hover:-translate-y-1 hover:border-[#E6FF2A]/60 hover:bg-white/[.09]"><div className="aspect-[16/9] overflow-hidden rounded-[12px]"><img src={solution.image} alt={`${solution.title} - Arsalynk solution`} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]" /></div><div className="px-2 pb-5 pt-8"><h3 className="font-heading text-[clamp(32px,3vw,56px)] font-medium leading-[1.05] text-[#E6FF2A]">{solution.title}</h3><p className="mt-5 max-w-[650px] font-body text-[15px] leading-[1.65] text-white/75">{solution.description}</p></div></article>)}</div>
+          <div className="grid grid-cols-2 gap-[30px] max-[800px]:grid-cols-1">
+            {CORE_SOLUTIONS.map((solution) => (
+              <Link
+                id={solution.slug}
+                key={solution.slug}
+                href={`/our-solution/${solution.slug}`}
+                className="group block scroll-mt-24 overflow-hidden rounded-[18px] border border-white/20 bg-white/[.04] p-4 no-underline transition-[transform,border-color,background-color] duration-300 hover:-translate-y-1 hover:border-[#E6FF2A]/60 hover:bg-white/[.09]"
+              >
+                <div className="aspect-[16/9] overflow-hidden rounded-[12px]">
+                  <img
+                    src={solution.image}
+                    alt={`${solution.title} - Arsalynk solution`}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
+                  />
+                </div>
+                <div className="px-2 pb-5 pt-8">
+                  <div className="flex items-center justify-between gap-4">
+                    <h3 className="font-heading text-[clamp(32px,3vw,56px)] font-medium leading-[1.05] text-[#E6FF2A]">
+                      {solution.title}
+                    </h3>
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/20 text-white transition-colors duration-300 group-hover:border-[#E6FF2A] group-hover:bg-[#E6FF2A] group-hover:text-[#101010]">
+                      →
+                    </span>
+                  </div>
+                  <p className="mt-5 max-w-[650px] font-body text-[15px] leading-[1.65] text-white/75">
+                    {solution.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

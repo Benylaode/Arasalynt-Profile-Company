@@ -395,8 +395,9 @@ export default async function BusinessSlugPage({
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Our Business', item: `${SITE_URL}/our-business` },
-          { '@type': 'ListItem', position: 3, name: biz.name, item: canonicalUrl },
+          { '@type': 'ListItem', position: 2, name: 'About Us', item: `${SITE_URL}/about-us` },
+          { '@type': 'ListItem', position: 3, name: 'Our Business', item: `${SITE_URL}/our-business` },
+          { '@type': 'ListItem', position: 4, name: biz.name, item: canonicalUrl },
         ],
       },
     ],

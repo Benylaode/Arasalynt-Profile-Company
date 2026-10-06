@@ -7,6 +7,7 @@ import {
   useState,
   type CSSProperties,
 } from 'react';
+import Link from 'next/link';
 
 /* =========================================================
    CONFIGURATION
@@ -333,9 +334,9 @@ export default function ProjectShowcase() {
             );
           })}
 
-          {/* See All Works dibuat 17% lebih kecil */}
-          <a
-            href="/our-solution#services"
+          {/* View All Works */}
+          <Link
+            href="/our-works"
             className="
               inline-flex h-[38px]
               shrink-0 items-center justify-center
@@ -352,6 +353,7 @@ export default function ProjectShowcase() {
               leading-[1.6]
               tracking-[0.01em]
               text-[#F7F7F7]
+              no-underline
 
               transition-[background-color,border-color]
               duration-300
@@ -367,7 +369,7 @@ export default function ProjectShowcase() {
               xl:text-[clamp(12px,0.779vw,15px)]
             "
           >
-            <span className="whitespace-nowrap">SEE ALL SERVICES</span>
+            <span className="whitespace-nowrap">VIEW ALL WORKS</span>
 
             <span
               className="
@@ -380,7 +382,7 @@ export default function ProjectShowcase() {
             >
               <IconChevronRight size={17} />
             </span>
-          </a>
+          </Link>
         </div>
       </div>
 

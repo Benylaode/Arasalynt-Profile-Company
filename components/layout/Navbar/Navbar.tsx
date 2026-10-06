@@ -30,7 +30,7 @@ const BUSINESS_COLUMNS = [
     items: [
       {
         name: 'Enterprise Resource Planning',
-        href: '/our-solution#enterprise-resource-planning',
+        href: '/our-solution/enterprise-resource-planning',
       },
     ],
   },
@@ -39,7 +39,7 @@ const BUSINESS_COLUMNS = [
     items: [
       {
         name: 'Internet of Things',
-        href: '/our-solution#internet-of-things',
+        href: '/our-solution/internet-of-things',
       },
     ],
   },
@@ -839,10 +839,12 @@ export default function Navbar() {
     };
   }, [readScrollPosition]);
 
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setIsMobileOpen(false);
     setActiveDropdown(null);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     document.body.style.overflow = isMobileOpen ? 'hidden' : '';
@@ -1068,9 +1070,8 @@ export default function Navbar() {
           </nav>
 
           {/* Desktop Contact Us */}
-          <button
-            type="button"
-            onClick={() => scrollToSection('contact')}
+          <Link
+            href="/contact-us"
             className={`
               hidden
               h-[40px]
@@ -1085,6 +1086,7 @@ export default function Navbar() {
               text-[12px]
               leading-none
               tracking-[0.01em]
+              no-underline
               transition-[background-color,color,transform,box-shadow]
               duration-300
               hover:scale-[1.02]
@@ -1113,7 +1115,7 @@ export default function Navbar() {
           >
             CONTACT US
             <ButtonChevron />
-          </button>
+          </Link>
 
           {/* Mobile hamburger */}
           <button
@@ -1274,9 +1276,9 @@ export default function Navbar() {
             closeMenu={closeMobileMenu}
           />
 
-          <button
-            type="button"
-            onClick={() => scrollToSection('contact')}
+          <Link
+            href="/contact-us"
+            onClick={closeMobileMenu}
             className="
               mt-[25px]
               flex h-[44px] w-full
@@ -1289,11 +1291,12 @@ export default function Navbar() {
               text-[14px]
               font-semibold
               text-[#101010]
+              no-underline
             "
           >
             CONTACT US
             <ButtonChevron />
-          </button>
+          </Link>
         </nav>
       </div>
     </>

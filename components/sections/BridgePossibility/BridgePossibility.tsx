@@ -355,12 +355,18 @@ export default function BridgePossibility() {
             weaken execution and limit long-term value.
           </p>
 
-          <div className="pt-4">
+          <div className="flex flex-wrap items-center gap-3 pt-4">
+            <Link 
+              href="/about-us"
+              className="inline-flex items-center justify-center rounded-full bg-[#E6FF2A] px-7 py-3.5 font-body text-[13px] font-extrabold uppercase tracking-wider text-[#101010] no-underline transition-[background-color,transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-[#d8f21d] hover:shadow-[0_8px_25px_rgba(230,255,42,0.35)]"
+            >
+              ABOUT ARSALYNK
+            </Link>
             <Link 
               href="/our-solution"
-              className="inline-flex items-center justify-center px-8 py-4 bg-[#E6FF2A] text-[#101010] font-body text-[14px] font-extrabold uppercase tracking-wider rounded-full no-underline transition-[background-color,transform,box-shadow] duration-200 hover:bg-[#d8f21d] hover:shadow-[0_8px_25px_rgba(230,255,42,0.35)] hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center rounded-full border border-white/30 bg-transparent px-7 py-3.5 font-body text-[13px] font-bold uppercase tracking-wider text-white no-underline transition-[border-color,background-color] duration-200 hover:border-white hover:bg-white/10"
             >
-              EXPLORE OUR SOLUTION
+              OUR SOLUTION
             </Link>
           </div>
         </div>
