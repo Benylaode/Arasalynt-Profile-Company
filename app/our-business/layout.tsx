@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -67,10 +66,9 @@ export default function OurBusinessLayout({ children }: Readonly<{ children: Rea
 
   return (
     <>
-      <Script
+      <script
         id="our-business-layout-schema"
         type="application/ld+json"
-        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(businessNavSchema).replace(/</g, '\\u003c') }}
       />
       {children}

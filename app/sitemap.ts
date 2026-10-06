@@ -19,11 +19,11 @@ const SOLUTION_DATES: Record<string, Date> = {
   'enterprise-resource-planning': new Date('2026-10-06T00:00:00.000Z'),
   'internet-of-things': new Date('2026-10-06T00:00:00.000Z'),
   'point-of-sale-pos': new Date('2026-10-04T00:00:00.000Z'),
-  'warehouse-management-wms': new Date('2026-10-04T00:00:00.000Z'),
-  'hr-management': new Date('2026-10-03T00:00:00.000Z'),
-  'financial-management-system': new Date('2026-10-03T00:00:00.000Z'),
-  'logistics-fleet-management': new Date('2026-10-02T00:00:00.000Z'),
-  'supply-chain-distribution-system': new Date('2026-10-02T00:00:00.000Z'),
+  'warehouse-management-system': new Date('2026-10-04T00:00:00.000Z'),
+  'hr-talent-management-engine': new Date('2026-10-03T00:00:00.000Z'),
+  'financial-accounting-automation-hub': new Date('2026-10-03T00:00:00.000Z'),
+  'logistics-fleet-operations-tracker': new Date('2026-10-02T00:00:00.000Z'),
+  'supply-chain-inventory-control': new Date('2026-10-02T00:00:00.000Z'),
 };
 
 const parseThoughtDate = (dateStr: string): Date => {
