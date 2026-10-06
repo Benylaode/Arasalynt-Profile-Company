@@ -3,7 +3,7 @@ import Script from 'next/script';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Pemikiran & Wawasan Strategi Enterprise',
+  title: 'Leadership Thoughts',
   description:
     'Perspektif dan pemikiran para pemimpin Arsalynk tentang transformasi enterprise, kepemimpinan berbasis data, desain organisasi, dan komunikasi bisnis.',
   keywords: [
@@ -17,21 +17,22 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/insight-programs/leadership-thoughts' },
   openGraph: {
-    title: 'Pemikiran & Wawasan Strategi Enterprise | Arsalynk',
-    description: 'Perspektif kepemimpinan mengenai transformasi digital, data, dan strategi organisasi enterprise.',
+    title: `Leadership Thoughts | ${SITE_NAME}`,
+    description:
+      'Perspektif kepemimpinan mengenai transformasi digital, data, dan strategi organisasi enterprise.',
     url: '/insight-programs/leadership-thoughts',
     images: [
       {
         url: '/images/leadership-thoughts/hero-leadership-thoughts-v2.webp',
         width: 1200,
         height: 630,
-        alt: 'Arsalynk — Pemikiran & Wawasan Strategi Enterprise',
+        alt: 'Arsalynk — Leadership Thoughts',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pemikiran & Wawasan Strategi Enterprise | Arsalynk',
+    title: `Leadership Thoughts | ${SITE_NAME}`,
     description: 'Perspektif enterprise dari para pemimpin Arsalynk.',
     images: ['/images/leadership-thoughts/hero-leadership-thoughts-v2.webp'],
   },
@@ -47,15 +48,14 @@ export default function LeadershipThoughtsLayout({ children }: Readonly<{ childr
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Insight & Programs', item: `${SITE_URL}/insight-programs` },
-          { '@type': 'ListItem', position: 3, name: 'Leadership Thoughts', item: canonicalUrl },
+          { '@type': 'ListItem', position: 2, name: 'Leadership Thoughts', item: canonicalUrl },
         ],
       },
       {
         '@type': ['Blog', 'WebPage'],
         '@id': `${canonicalUrl}#webpage`,
         url: canonicalUrl,
-        name: `Pemikiran & Wawasan Strategi Enterprise | ${SITE_NAME}`,
+        name: `Leadership Thoughts | ${SITE_NAME}`,
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
         breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
@@ -79,7 +79,9 @@ export default function LeadershipThoughtsLayout({ children }: Readonly<{ childr
         id="leadership-thoughts-schema"
         type="application/ld+json"
         strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(leadershipSchema).replace(/</g, '\\u003c') }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(leadershipSchema).replace(/</g, '\\u003c'),
+        }}
       />
       {children}
     </>
