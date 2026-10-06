@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -61,17 +60,29 @@ export default function ContactLayout({ children }: Readonly<{ children: React.R
         description:
           'Hubungi tim Arsalynk di Indonesia untuk konsultasi sistem ERP, integrasi IoT, data analytics, software development, riset bisnis, dan produksi media.',
         inLanguage: 'id-ID',
-        mainEntity: { '@id': `${SITE_URL}/#organization` },
+        mainEntity: {
+          '@type': 'Organization',
+          '@id': `${SITE_URL}/#organization`,
+          name: SITE_NAME,
+          url: SITE_URL,
+          telephone: '+62-878-6276-6846',
+          contactPoint: {
+            '@type': 'ContactPoint',
+            telephone: '+62-878-6276-6846',
+            contactType: 'customer service',
+            areaServed: 'ID',
+            availableLanguage: ['Indonesian', 'English'],
+          },
+        },
       },
     ],
   };
 
   return (
     <>
-      <Script
+      <script
         id="contact-us-schema"
         type="application/ld+json"
-        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(contactSchema).replace(/</g, '\\u003c'),
         }}
