@@ -88,10 +88,10 @@ export default async function SolutionServicePage({ params }: PageProps) {
         name: service.title,
         description: service.description,
         provider: { '@id': `${SITE_URL}/#organization` },
-        serviceType: service.industry,
+        serviceType: service.title,
         areaServed: 'ID',
         url: canonicalUrl,
-        category: service.articleCategory,
+        category: service.industry,
       },
       {
         '@type': 'WebPage',

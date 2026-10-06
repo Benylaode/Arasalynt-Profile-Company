@@ -1,29 +1,7 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
-import Script from 'next/script';
 import type { ReactNode } from 'react';
 import { getAllBusinesses } from '@/lib/db/actions';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
-import { SITE_NAME, SITE_URL } from '@/lib/constants';
-
-export const metadata: Metadata = {
-  title: 'Ekosistem Bisnis Enterprise & Layanan IT Terintegrasi',
-  description:
-    'Jelajahi ekosistem bisnis Arsalynk di Indonesia: Dari infrastruktur IT, integrasi IoT, survey & data analytics, hingga media digital dan komunikasi strategis.',
-  alternates: { canonical: '/our-business' },
-  openGraph: {
-    title: 'Ekosistem Bisnis Enterprise & Layanan IT Terintegrasi | Arsalynk',
-    description: 'Teknologi, data, strategi, komunikasi, dan kapabilitas kreatif terhubung dalam satu ekosistem enterprise.',
-    url: '/our-business',
-    images: ['/images/our-business/hero-business.webp'],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Ekosistem Bisnis Enterprise & Layanan IT Terintegrasi | Arsalynk',
-    description: 'Jelajahi kapabilitas teknologi, data, strategi, dan komunikasi terintegrasi Arsalynk.',
-    images: ['/images/our-business/hero-business.webp'],
-  },
-};
 
 
 type Business = Awaited<ReturnType<typeof getAllBusinesses>>[number];
@@ -210,25 +188,8 @@ export default async function OurBusinessPage() {
     })
     .sort((a, b) => getMediaOrder(a) - getMediaOrder(b));
 
-  const canonicalUrl = `${SITE_URL}/our-business`;
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    '@id': `${canonicalUrl}#breadcrumb`,
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Our Business', item: canonicalUrl },
-    ],
-  };
-
   return (
     <main className="relative w-full overflow-x-hidden bg-[#F7F7F7]">
-      <Script
-        id="our-business-breadcrumb-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c') }}
-      />
-
       {/* HERO */}
       <section
         id="hero"
@@ -244,11 +205,13 @@ export default async function OurBusinessPage() {
 
         <div className="relative z-10 mx-auto flex w-full max-w-[900px] items-center justify-center px-6">
           <div className="flex w-full max-w-[766px] flex-col items-center gap-6 text-center max-[768px]:gap-[18px]">
-            <div className="flex items-center justify-center gap-2 font-body text-[9px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
-              <span>Home</span>
+            <nav aria-label="Breadcrumb" className="flex items-center justify-center gap-2 font-body text-[10px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[8px]">
+              <Link href="/" className="transition hover:opacity-75">Home</Link>
               <span aria-hidden="true">›</span>
-              <span>Our Business</span>
-            </div>
+              <Link href="/about-us" className="transition hover:opacity-75">About Us</Link>
+              <span aria-hidden="true">›</span>
+              <span className="text-white/80">Our Business</span>
+            </nav>
 
             <h1 className="font-heading text-[clamp(52px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
               Our Business

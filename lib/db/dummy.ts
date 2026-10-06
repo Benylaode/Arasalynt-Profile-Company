@@ -20,7 +20,7 @@ export const TEAM_MEMBERS_DUMMY_DATA: TeamMember[] = [
     biography: [],
     expertise: [],
     principles: [],
-    phone: '+62 823 2230 8719',
+    phone: '+62 878-6276-6846',
     email: 'rian@arsalynk.com',
     address:
       'Menara Rajawali Lt.26, Mega Kuningan, South Jakarta, Indonesia 12950',
