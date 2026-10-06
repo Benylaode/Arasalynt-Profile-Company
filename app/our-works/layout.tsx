@@ -3,9 +3,9 @@ import Script from 'next/script';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Portofolio & Studi Kasus Proyek IT Enterprise Indonesia',
+  title: 'Our Works',
   description:
-    'Portofolio karya dan proyek IT Arsalynk di Indonesia: Sistem ERP, IoT, data analytics dashboard, platform digital perusahaan, riset kebijakan & produksi media sinematik.',
+    'Portofolio karya dan proyek Arsalynk di Indonesia: sistem ERP, IoT, data analytics dashboard, platform digital perusahaan, riset kebijakan, dan produksi media.',
   keywords: [
     'portofolio IT indonesia',
     'studi kasus proyek enterprise',
@@ -17,21 +17,22 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/our-works' },
   openGraph: {
-    title: 'Portofolio & Studi Kasus Proyek IT Enterprise Indonesia | Arsalynk',
-    description: 'Proyek teknologi enterprise, riset, komunikasi, dan produksi media terpilih oleh ekosistem Arsalynk.',
+    title: `Our Works | ${SITE_NAME}`,
+    description:
+      'Proyek teknologi enterprise, riset, komunikasi, dan produksi media terpilih oleh ekosistem Arsalynk.',
     url: '/our-works',
     images: [
       {
         url: '/images/our-works/our-works-hero-bg.webp',
         width: 1200,
         height: 630,
-        alt: 'Arsalynk — Portofolio Proyek IT Enterprise Indonesia',
+        alt: 'Arsalynk — Our Works',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Portofolio & Studi Kasus Proyek IT Enterprise Indonesia | Arsalynk',
+    title: `Our Works | ${SITE_NAME}`,
     description: 'Jelajahi proyek teknologi enterprise, riset, dan media produksi terpilih Arsalynk.',
     images: ['/images/our-works/our-works-hero-bg.webp'],
   },
@@ -47,19 +48,19 @@ export default function OurWorksLayout({ children }: Readonly<{ children: React.
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Karya & Portofolio', item: canonicalUrl },
+          { '@type': 'ListItem', position: 2, name: 'Our Works', item: canonicalUrl },
         ],
       },
       {
         '@type': 'CollectionPage',
         '@id': `${canonicalUrl}#webpage`,
         url: canonicalUrl,
-        name: `Portofolio & Studi Kasus Proyek IT Enterprise Indonesia | ${SITE_NAME}`,
+        name: `Our Works | ${SITE_NAME}`,
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
         breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
         description:
-          'Portofolio karya dan proyek IT Arsalynk di Indonesia: Sistem ERP, IoT, data analytics dashboard, platform digital perusahaan, riset kebijakan & produksi media sinematik.',
+          'Portofolio karya dan proyek Arsalynk di Indonesia: sistem ERP, IoT, data analytics dashboard, platform digital perusahaan, riset kebijakan, dan produksi media.',
         inLanguage: 'id-ID',
         image: {
           '@type': 'ImageObject',
@@ -77,7 +78,9 @@ export default function OurWorksLayout({ children }: Readonly<{ children: React.
         id="our-works-schema"
         type="application/ld+json"
         strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ourWorksSchema).replace(/</g, '\\u003c') }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(ourWorksSchema).replace(/</g, '\\u003c'),
+        }}
       />
       {children}
     </>
