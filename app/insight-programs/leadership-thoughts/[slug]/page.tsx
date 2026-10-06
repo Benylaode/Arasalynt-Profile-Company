@@ -125,7 +125,7 @@ export default async function LeadershipThoughtDetailPage({
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Insight & Programs', item: `${SITE_URL}/insight-programs/leadership-thoughts` },
+          { '@type': 'ListItem', position: 2, name: 'Insight & Programs', item: `${SITE_URL}/insight-programs` },
           { '@type': 'ListItem', position: 3, name: 'Leadership Thoughts', item: `${SITE_URL}/insight-programs/leadership-thoughts` },
           { '@type': 'ListItem', position: 4, name: article.title, item: canonicalUrl },
         ],

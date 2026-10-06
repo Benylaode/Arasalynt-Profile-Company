@@ -17,23 +17,29 @@ const ABOUT_LINKS = [
   { name: 'Corporate Profile', href: '/about-us/corporate-profile' },
   { name: 'Company Leadership', href: '/about-us/company-leadership' },
   { name: 'Ecosystem Philosophy', href: '/about-us/ecosystem-philosophy' },
-  { name: 'Contact Us', href: '/contact-us' },
 ];
 
-const EXPLORE_LINKS = [
-  { name: 'Our Solution', href: '/our-solution' },
+const COMPANY_LINKS = [
+  { name: 'Our Business', href: '/our-business' },
   { name: 'Our Works', href: '/our-works' },
-  { name: 'Case Studies', href: '/insight-programs/case-studies' },
-  { name: 'Leadership Thoughts', href: '/insight-programs/leadership-thoughts' },
+  { name: 'Contact Us', href: '/contact-us' },
+  { name: 'Privacy Policy', href: '/privacy-policy' },
 ];
 
-const SERVICE_LINKS = [
+const SOLUTION_LINKS = [
+  { name: 'Enterprise Resource Planning', href: '/our-solution/enterprise-resource-planning' },
+  { name: 'Internet of Things', href: '/our-solution/internet-of-things' },
   { name: 'Point of Sale (POS)', href: '/our-solution/point-of-sale-pos' },
   { name: 'HR & Talent Management', href: '/our-solution/hr-talent-management-engine' },
   { name: 'Financial Automation', href: '/our-solution/financial-accounting-automation-hub' },
   { name: 'Supply Chain Control', href: '/our-solution/supply-chain-inventory-control' },
   { name: 'Logistics & Fleet Tracker', href: '/our-solution/logistics-fleet-operations-tracker' },
   { name: 'Warehouse Management', href: '/our-solution/warehouse-management-system' },
+];
+
+const INSIGHT_LINKS = [
+  { name: 'Case Studies', href: '/insight-programs/case-studies' },
+  { name: 'Leadership Thoughts', href: '/insight-programs/leadership-thoughts' },
 ];
 
 const BrandLogo = () => (
@@ -141,10 +147,11 @@ export default function Footer() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-[minmax(220px,.85fr)_minmax(280px,1fr)_minmax(340px,1.35fr)] gap-x-[clamp(36px,5vw,96px)] max-[1100px]:grid-cols-2 max-[1100px]:gap-y-[46px] max-[767px]:grid-cols-1 max-[767px]:gap-y-[40px]">
+          <div className="grid grid-cols-[minmax(200px,.85fr)_minmax(280px,1.2fr)_minmax(300px,1.1fr)] gap-x-[clamp(36px,5vw,96px)] max-[1100px]:grid-cols-2 max-[1100px]:gap-y-[46px] max-[767px]:grid-cols-1 max-[767px]:gap-y-[40px]">
+            {/* Column 1: ABOUT & COMPANY */}
             <div className="flex flex-col gap-8">
               <div className="flex flex-col gap-3.5">
-                <FooterTitle href="/about-us">ABOUT US</FooterTitle>
+                <FooterTitle href="/about-us">ABOUT</FooterTitle>
                 <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
                   {ABOUT_LINKS.map((link) => (
                     <li key={link.href}>
@@ -155,9 +162,9 @@ export default function Footer() {
               </div>
 
               <div className="flex flex-col gap-3.5">
-                <FooterTitle>EXPLORE</FooterTitle>
+                <FooterTitle>COMPANY</FooterTitle>
                 <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
-                  {EXPLORE_LINKS.map((link) => (
+                  {COMPANY_LINKS.map((link) => (
                     <li key={link.href}>
                       <FooterLink href={link.href}>{link.name}</FooterLink>
                     </li>
@@ -166,26 +173,31 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-7">
-              <div className="flex flex-col gap-2.5">
-                <FooterTitle href="/our-solution">CORE SOLUTIONS</FooterTitle>
-                <FooterLink href="/our-solution#enterprise-resource-planning">Enterprise Resource Planning</FooterLink>
-                <FooterLink href="/our-solution#internet-of-things">Internet of Things</FooterLink>
-              </div>
+            {/* Column 2: SOLUTIONS */}
+            <div className="flex flex-col gap-3.5">
+              <FooterTitle href="/our-solution">SOLUTIONS</FooterTitle>
+              <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
+                {SOLUTION_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <FooterLink href={link.href}>{link.name}</FooterLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
+            {/* Column 3: INSIGHTS & OFFICE */}
+            <div className="flex flex-col gap-7">
               <div className="flex flex-col gap-3.5">
-                <FooterTitle>OUR SERVICES</FooterTitle>
+                <FooterTitle href="/insight-programs/case-studies">INSIGHTS</FooterTitle>
                 <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
-                  {SERVICE_LINKS.map((link) => (
+                  {INSIGHT_LINKS.map((link) => (
                     <li key={link.href}>
                       <FooterLink href={link.href}>{link.name}</FooterLink>
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
 
-            <div className="flex flex-col gap-7">
               <div className="flex flex-col gap-3">
                 <FooterTitle>JAKARTA OFFICE</FooterTitle>
                 <a

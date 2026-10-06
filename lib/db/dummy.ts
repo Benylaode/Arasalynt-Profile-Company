@@ -56,11 +56,11 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     backgroundPosition: 'center center',
     primaryCta: {
       label: 'EXPLORE SOLUTIONS',
-      href: '/our-solution#challenge',
+      href: '/our-solution',
     },
     secondaryCta: {
       label: 'ABOUT US',
-      href: '/about-us#our-foundation',
+      href: '/about-us',
     },
   },
   {
@@ -72,12 +72,12 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     mobileBackgroundImage: '/images/home/hero/slide-03-mobile-2f3b2e.webp',
     backgroundPosition: 'center center',
     primaryCta: {
-      label: 'EXPLORE SOLUTIONS',
-      href: '/our-solution#solutions',
+      label: 'EXPLORE ERP SOLUTION',
+      href: '/our-solution/enterprise-resource-planning',
     },
     secondaryCta: {
-      label: 'OUR CAPABILITIES',
-      href: '/about-us#our-capabilities',
+      label: 'ECOSYSTEM PHILOSOPHY',
+      href: '/about-us/ecosystem-philosophy',
     },
   },
   {
@@ -89,8 +89,8 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     mobileBackgroundImage: '/images/home/hero/slide-04-mobile-6f32fe.webp',
     backgroundPosition: 'center center',
     primaryCta: {
-      label: 'EXPLORE SERVICES',
-      href: '/our-solution#services',
+      label: 'EXPLORE IOT SOLUTION',
+      href: '/our-solution/internet-of-things',
     },
     secondaryCta: {
       label: 'CONTACT US',

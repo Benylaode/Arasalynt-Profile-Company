@@ -48,11 +48,11 @@ export default function OurSolutionLayout({ children }: Readonly<{ children: Rea
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Solusi Kami', item: canonicalUrl },
+          { '@type': 'ListItem', position: 2, name: 'Our Solution', item: canonicalUrl },
         ],
       },
       {
-        '@type': 'WebPage',
+        '@type': 'CollectionPage',
         '@id': `${canonicalUrl}#webpage`,
         url: canonicalUrl,
         name: `Solusi ERP, IoT & Sistem Enterprise Indonesia | ${SITE_NAME}`,

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRef, useState, useEffect } from 'react';
 
 const ArrowIcon = () => (
@@ -135,10 +136,10 @@ export default function GrowthMetrics() {
                   Discover the leadership philosophy behind resilient enterprise execution.
                 </p>
 
-                <a href="/insight-programs/leadership-thoughts" className="mt-[8px] inline-flex h-[40px] items-center gap-[10px] rounded-full bg-[#E6FF2A] px-[16px] text-[12px] font-bold tracking-[-0.015em] text-[#101010] no-underline transition-[background-color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:bg-[#FBFCDC]">
+                <Link href="/insight-programs/leadership-thoughts" className="mt-[8px] inline-flex h-[40px] items-center gap-[10px] rounded-full bg-[#E6FF2A] px-[16px] text-[12px] font-bold tracking-[-0.015em] text-[#101010] no-underline transition-[background-color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:bg-[#FBFCDC]">
                   LEADERSHIP THOUGHTS
                   <ArrowIcon />
-                </a>
+                </Link>
               </div>
 
               <div className="absolute right-[16px] top-[16px] flex h-[44px] w-[44px] items-center justify-center rounded-[8px] border border-[#F5F5F5]/50 text-[#F5F5F5] transition-[border-color,background-color,color] duration-300 group-hover:border-[#F5F5F5]/80 group-hover:bg-white/15 group-hover:text-[#E6FF2A] lg:right-[20px] lg:top-[20px]">
@@ -159,10 +160,10 @@ export default function GrowthMetrics() {
                   Explore proven outcomes across the Arsalynk ecosystem.
                 </p>
 
-                <a href="/insight-programs/case-studies" className="mt-[8px] inline-flex h-[40px] items-center gap-[10px] rounded-full bg-[#E6FF2A] px-[16px] text-[12px] font-bold tracking-[-0.015em] text-[#101010] no-underline transition-[background-color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:bg-[#FBFCDC]">
+                <Link href="/insight-programs/case-studies" className="mt-[8px] inline-flex h-[40px] items-center gap-[10px] rounded-full bg-[#E6FF2A] px-[16px] text-[12px] font-bold tracking-[-0.015em] text-[#101010] no-underline transition-[background-color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:bg-[#FBFCDC]">
                   CASE STUDIES
                   <ArrowIcon />
-                </a>
+                </Link>
               </div>
 
               <div className="absolute right-[16px] top-[16px] flex h-[44px] w-[44px] items-center justify-center rounded-[8px] border border-[#F5F5F5]/50 text-[#F5F5F5] transition-[border-color,background-color,color] duration-300 group-hover:border-[#F5F5F5]/80 group-hover:bg-white/15 group-hover:text-[#E6FF2A] lg:right-[20px] lg:top-[20px]">

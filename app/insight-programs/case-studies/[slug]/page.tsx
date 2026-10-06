@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import { CASE_STUDIES_DUMMY_DATA } from '@/lib/db/dummy';
+import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 const ALL_CASE_STUDIES = CASE_STUDIES_DUMMY_DATA;
@@ -92,6 +93,8 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
     })
     .slice(0, 3);
 
+    const relatedSolution = SOLUTION_SERVICES.find((s) => s.caseStudySlug === article.slug);
+
   const canonicalUrl = `${SITE_URL}/insight-programs/case-studies/${article.slug}`;
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -116,7 +119,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
         '@id': `${canonicalUrl}/#breadcrumb`,
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Insight & Programs', item: `${SITE_URL}/insight-programs/case-studies` },
+          { '@type': 'ListItem', position: 2, name: 'Insight & Programs', item: `${SITE_URL}/insight-programs` },
           { '@type': 'ListItem', position: 3, name: 'Case Studies', item: `${SITE_URL}/insight-programs/case-studies` },
           { '@type': 'ListItem', position: 4, name: article.title, item: canonicalUrl },
         ],
@@ -153,6 +156,30 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
                 </span>
               ))}
             </div>
+
+            {relatedSolution && (
+              <div className="mt-2 flex flex-wrap items-center gap-4 rounded-2xl border border-[#1A3E9E]/20 bg-[rgba(26,62,158,0.04)] p-4 text-sm text-[#1A3E9E]">
+                <span className="font-bold uppercase tracking-wider">Related Solution:</span>
+                <Link
+                  href={`/our-solution/${relatedSolution.slug}`}
+                  className="font-semibold underline hover:opacity-80"
+                >
+                  {relatedSolution.title} →
+                </Link>
+                {relatedSolution.relatedWork && (
+                  <>
+                    <span aria-hidden="true" className="text-[#1A3E9E]/30">|</span>
+                    <span className="font-bold uppercase tracking-wider">Proof of Work:</span>
+                    <Link
+                      href={`/our-works/${relatedSolution.relatedWork.slug}`}
+                      className="font-semibold underline hover:opacity-80"
+                    >
+                      {relatedSolution.relatedWork.title} →
+                    </Link>
+                  </>
+                )}
+              </div>
+            )}
           </div>
 
           <figure className="m-0 flex aspect-[17/8] w-full items-center justify-center overflow-hidden rounded-[18px] bg-[#101010] sm:rounded-[24px] xl:rounded-[32px]">

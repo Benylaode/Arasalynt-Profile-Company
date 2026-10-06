@@ -64,9 +64,9 @@ const MOTION_DURATION_MS = 1280;
 const ASSET_ROOT = '/images/services/it-motion';
 
 const SCENE_HREFS: Record<number, string> = {
-  0: '/our-solution#enterprise-resource-planning',
-  1: '/our-solution#internet-of-things',
-  2: '/our-solution#services',
+  0: '/our-solution/enterprise-resource-planning',
+  1: '/our-solution/internet-of-things',
+  2: '/our-solution',
 };
 
 const SCENES: Scene[] = [
