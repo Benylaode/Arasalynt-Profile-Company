@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
+import JsonLd from '@/components/seo/JsonLd';
 import { SITE_URL } from '@/lib/constants';
 
 const IconArrow = ({ direction = 'right', size = 20 }: { direction?: 'left' | 'right'; size?: number }) => (
@@ -403,7 +404,7 @@ export default async function WorkDetailPage({
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}/#breadcrumb`,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
           { '@type': 'ListItem', position: 2, name: 'Our Works', item: `${SITE_URL}/our-works` },
           { '@type': 'ListItem', position: 3, name: currentProject.title, item: canonicalUrl },
         ],
@@ -413,18 +414,18 @@ export default async function WorkDetailPage({
 
   return (
     <main className="w-full bg-[#F7F7F7] text-[#101010]">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema).replace(/</g, '\\u003c') }} />
+      <JsonLd id={`work-schema-${currentProject.title}`} data={projectSchema} />
       {/* INTRO WORKS */}
       <section className="px-[6vw] pb-14 pt-[130px] max-[1199px]:px-[4vw] sm:pb-20 sm:pt-[150px] 2xl:pb-24 2xl:pt-[186px]">
         <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-10 2xl:gap-16">
           <div className="flex flex-col gap-5 sm:gap-7 2xl:gap-8">
-            <div className="flex flex-wrap items-center gap-2 font-body text-[10px] font-bold uppercase tracking-[0.06em] text-[#1A3E9E] sm:text-[12px] 2xl:text-[14px]">
-              <span>Home</span>
-              <span>›</span>
-              <span>Our Works</span>
-              <span>›</span>
-              <span>{currentProject.corporation}</span>
-            </div>
+            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 font-body text-[10px] font-bold uppercase tracking-[0.06em] text-[#1A3E9E] sm:text-[12px] 2xl:text-[14px]">
+              <Link href="/" className="transition hover:underline">Home</Link>
+              <span aria-hidden="true">›</span>
+              <Link href="/our-works" className="transition hover:underline">Our Works</Link>
+              <span aria-hidden="true">›</span>
+              <span className="text-[#101010]">{currentProject.title}</span>
+            </nav>
 
             <h1 className={`max-w-[1640px] font-heading font-medium leading-[1.08] tracking-[-0.02em] text-[#101010] 2xl:leading-[1.1] ${currentProject.title.length > 110 ? 'text-[28px] sm:text-[36px] lg:text-[44px] 2xl:text-[52px]' : currentProject.title.length > 70 ? 'text-[32px] sm:text-[42px] lg:text-[50px] 2xl:text-[60px]' : 'text-[36px] sm:text-[48px] lg:text-[58px] 2xl:text-[72px]'}`}>
               {currentProject.title}

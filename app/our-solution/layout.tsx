@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
+import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
+import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
 
 export const metadata: Metadata = {
   title: 'Solusi ERP, IoT & Sistem Enterprise Indonesia',
@@ -47,7 +48,7 @@ export default function OurSolutionLayout({ children }: Readonly<{ children: Rea
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
           { '@type': 'ListItem', position: 2, name: 'Our Solution', item: canonicalUrl },
         ],
       },
@@ -63,17 +64,23 @@ export default function OurSolutionLayout({ children }: Readonly<{ children: Rea
           'Layanan solusi teknologi enterprise Arsalynk di Indonesia: Pengembangan sistem ERP, integrasi hardware IoT, POS retail, HRMS, otomasi keuangan & supply chain.',
         inLanguage: 'id-ID',
       },
+      {
+        '@type': 'ItemList',
+        '@id': `${canonicalUrl}#services`,
+        name: 'Arsalynk Enterprise Solutions',
+        itemListElement: SOLUTION_SERVICES.map((service, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: service.title,
+          url: `${SITE_URL}/our-solution/${service.slug}`,
+        })),
+      },
     ],
   };
 
   return (
     <>
-      <Script
-        id="our-solution-layout-schema"
-        type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(solutionNavSchema).replace(/</g, '\\u003c') }}
-      />
+      <JsonLd id="our-solution-layout-schema" data={solutionNavSchema} />
       {children}
     </>
   );

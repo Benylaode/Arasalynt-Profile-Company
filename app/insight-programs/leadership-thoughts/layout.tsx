@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
+import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -47,8 +47,9 @@ export default function LeadershipThoughtsLayout({ children }: Readonly<{ childr
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Leadership Thoughts', item: canonicalUrl },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Insight & Programs', item: `${SITE_URL}/insight-programs` },
+          { '@type': 'ListItem', position: 3, name: 'Leadership Thoughts', item: canonicalUrl },
         ],
       },
       {
@@ -75,14 +76,7 @@ export default function LeadershipThoughtsLayout({ children }: Readonly<{ childr
 
   return (
     <>
-      <Script
-        id="leadership-thoughts-schema"
-        type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(leadershipSchema).replace(/</g, '\\u003c'),
-        }}
-      />
+      <JsonLd id="leadership-thoughts-schema" data={leadershipSchema} />
       {children}
     </>
   );

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import HeroSection from '@/components/sections/HeroSection/HeroSection';
 import ClientLogoBar from '@/components/sections/ClientLogoBar/ClientLogoBar';
 import ITInfrastructure from '@/components/sections/ITInfrastructure/ITInfrastructure';
@@ -9,7 +8,10 @@ import GrowthMetrics from '@/components/sections/GrowthMetrics/GrowthMetrics';
 import ProjectShowcase from '@/components/sections/ProjectShowcase/ProjectShowcase';
 import Testimonials from '@/components/sections/Testimonials/Testimonials';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
+import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
+import { BRAND } from '@/lib/seo/brand';
+import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
 
 export const metadata: Metadata = {
   title: { absolute: `${SITE_NAME} | Solusi Teknologi Enterprise Indonesia` },
@@ -59,52 +61,37 @@ export default function Home() {
       {
         '@type': ['Organization', 'Corporation'],
         '@id': `${SITE_URL}/#organization`,
-        name: 'Arsalynk',
-        legalName: 'PT Sinergi Muda Arsa',
-        alternateName: ['Arsalynk Enterprise Ecosystem', 'Arsalynk Indonesia'],
-        url: SITE_URL,
+        name: BRAND.name,
+        legalName: BRAND.legalName,
+        alternateName: BRAND.alternateNames,
+        url: `${SITE_URL}/`,
         logo: {
           '@type': 'ImageObject',
           '@id': `${SITE_URL}/#logo`,
-          url: `${SITE_URL}/images/logos/arsalynk-mark-512.png`,
-          contentUrl: `${SITE_URL}/images/logos/arsalynk-mark-512.png`,
+          url: BRAND.logo,
+          contentUrl: BRAND.logo,
           width: 512,
           height: 512,
-          caption: 'Arsalynk',
+          caption: BRAND.name,
         },
         image: {
           '@type': 'ImageObject',
-          url: `${SITE_URL}/images/our-works/our-works-hero-bg.webp`,
+          url: BRAND.heroImage,
           width: 1200,
           height: 630,
         },
         description:
           'Arsalynk adalah ekosistem bisnis teknologi enterprise terintegrasi di Indonesia, menyediakan solusi ERP, IoT, data analytics, software development, HRMS, POS, riset strategis, dan transformasi digital.',
-        foundingDate: '2020',
-        foundingLocation: {
-          '@type': 'Place',
-          name: 'Jakarta, Indonesia',
-          address: {
-            '@type': 'PostalAddress',
-            addressLocality: 'Jakarta',
-            addressRegion: 'DKI Jakarta',
-            addressCountry: 'ID',
-          },
-        },
-        address: {
+        address: BRAND.addresses.map((addr) => ({
           '@type': 'PostalAddress',
-          streetAddress: 'Menara Rajawali 26th Floor, Jl. DR. Ide Anak Agung Gde Agung',
-          addressLocality: 'Jakarta',
-          addressRegion: 'DKI Jakarta',
-          postalCode: '12950',
-          addressCountry: 'ID',
-        },
-        telephone: '+62-878-6276-6846',
-        email: 'corporate.arsalynk@gmail.com',
+          ...addr,
+        })),
+        telephone: BRAND.phone,
+        email: BRAND.email,
         contactPoint: [
           {
             '@type': 'ContactPoint',
-            telephone: '+62-878-6276-6846',
+            telephone: BRAND.phone,
             contactType: 'customer service',
             areaServed: 'ID',
             availableLanguage: ['Indonesian', 'English'],
@@ -117,7 +104,7 @@ export default function Home() {
           },
           {
             '@type': 'ContactPoint',
-            email: 'corporate.arsalynk@gmail.com',
+            email: BRAND.email,
             contactType: 'sales',
             areaServed: 'ID',
             availableLanguage: ['Indonesian', 'English'],
@@ -127,76 +114,42 @@ export default function Home() {
           '@type': 'Country',
           name: 'Indonesia',
         },
-        knowsAbout: [
-          'Enterprise Resource Planning (ERP)',
-          'Internet of Things (IoT) Integration',
-          'Data Analytics & Business Intelligence',
-          'Software House & Custom Development',
-          'Human Resource Management System (HRMS)',
-          'Point of Sale (POS) Systems',
-          'Digital Transformation',
-          'Strategic Research & Consulting',
-          'Digital Media & Creative Production',
-        ],
+        knowsAbout: [...BRAND.knowsAbout],
         sameAs: [
-          'https://www.instagram.com/arsalynk',
-          'https://www.linkedin.com/company/arsalynk-group/',
-          'https://www.facebook.com/share/1bbYtBuoUd/',
+          BRAND.social.instagram,
+          BRAND.social.linkedin,
+          BRAND.social.facebook,
         ],
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
           name: 'Arsalynk Enterprise Solutions',
-          itemListElement: [
-            {
-              '@type': 'Offer',
-              itemOffered: {
-                '@type': 'Service',
-                name: 'Enterprise ERP Systems',
-                url: `${SITE_URL}/our-solution`,
-              },
+          itemListElement: SOLUTION_SERVICES.map((service) => ({
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': `${SITE_URL}/our-solution/${service.slug}#service`,
+              name: service.title,
+              url: `${SITE_URL}/our-solution/${service.slug}`,
+              provider: { '@id': `${SITE_URL}/#organization` },
             },
-            {
-              '@type': 'Offer',
-              itemOffered: {
-                '@type': 'Service',
-                name: 'IoT Hardware Integration',
-                url: `${SITE_URL}/our-solution`,
-              },
-            },
-            {
-              '@type': 'Offer',
-              itemOffered: {
-                '@type': 'Service',
-                name: 'Data Analytics & Intelligence',
-                url: `${SITE_URL}/our-solution`,
-              },
-            },
-            {
-              '@type': 'Offer',
-              itemOffered: {
-                '@type': 'Service',
-                name: 'Custom Software Development',
-                url: `${SITE_URL}/our-solution`,
-              },
-            },
-          ],
+          })),
         },
       },
       {
         '@type': 'WebSite',
         '@id': `${SITE_URL}/#website`,
-        url: SITE_URL,
-        name: 'Arsalynk',
-        alternateName: 'Arsalynk Enterprise Ecosystem',
+        url: `${SITE_URL}/`,
+        name: BRAND.name,
+        alternateName: BRAND.alternateNames,
         description:
-          'Arsalynk adalah penyedia solusi teknologi enterprise, software house, ERP, IoT, dan data analytics terintegrasi di Indonesia.',
+          'Arsalynk menyediakan solusi teknologi enterprise terintegrasi di Indonesia, meliputi ERP, IoT, data analytics, POS, HRMS, dan transformasi digital bisnis.',
         publisher: { '@id': `${SITE_URL}/#organization` },
-        inLanguage: ['id-ID', 'en-US'],
+        inLanguage: 'id-ID',
       },
       {
         '@type': 'WebPage',
         '@id': `${SITE_URL}/#webpage`,
-        url: SITE_URL,
+        url: `${SITE_URL}/`,
         name: 'Arsalynk | Solusi Teknologi Enterprise Indonesia',
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
@@ -210,7 +163,7 @@ export default function Home() {
               '@type': 'ListItem',
               position: 1,
               name: 'Home',
-              item: SITE_URL,
+              item: `${SITE_URL}/`,
             },
           ],
         },
@@ -221,14 +174,7 @@ export default function Home() {
 
   return (
     <main>
-      <Script
-        id="home-website-schema"
-        type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(homeSchema).replace(/</g, '\\u003c'),
-        }}
-      />
+      <JsonLd id="home-website-schema" data={homeSchema} />
 
       <HeroSection />
       <ClientLogoBar />

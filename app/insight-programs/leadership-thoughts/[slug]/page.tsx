@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Script from 'next/script';
+import JsonLd from '@/components/seo/JsonLd';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
@@ -31,6 +31,8 @@ export async function generateMetadata({
   }
 
   const canonical = `/insight-programs/leadership-thoughts/${article.slug}`;
+  const publishedDate = article.datePublished ?? article.date;
+  const modifiedDate = article.dateModified ?? publishedDate;
 
   return {
     title: `${article.title} — Leadership Thought`,
@@ -41,7 +43,8 @@ export async function generateMetadata({
       description: article.description,
       type: 'article',
       url: canonical,
-      publishedTime: new Date(article.date).toISOString(),
+      publishedTime: publishedDate,
+      modifiedTime: modifiedDate,
       images: [article.coverImage],
     },
     twitter: {
@@ -100,6 +103,9 @@ export default async function LeadershipThoughtDetailPage({
   ].filter(Boolean);
 
   const canonicalUrl = `${SITE_URL}/insight-programs/leadership-thoughts/${article.slug}`;
+  const publishedDate = article.datePublished ?? article.date;
+  const modifiedDate = article.dateModified ?? publishedDate;
+
   const articleSchema = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -109,7 +115,8 @@ export default async function LeadershipThoughtDetailPage({
         headline: article.title,
         description: article.description,
         image: `${SITE_URL}${article.coverImage}`,
-        datePublished: new Date(article.date).toISOString(),
+        datePublished: publishedDate,
+        dateModified: modifiedDate,
         mainEntityOfPage: canonicalUrl,
         author: {
           '@type': 'Person',
@@ -118,13 +125,13 @@ export default async function LeadershipThoughtDetailPage({
         publisher: { '@id': `${SITE_URL}/#organization` },
         keywords: article.tags.join(', '),
         articleSection: article.category,
-        inLanguage: 'en',
+        inLanguage: article.language ?? 'en-US',
       },
       {
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
           { '@type': 'ListItem', position: 2, name: 'Insight & Programs', item: `${SITE_URL}/insight-programs` },
           { '@type': 'ListItem', position: 3, name: 'Leadership Thoughts', item: `${SITE_URL}/insight-programs/leadership-thoughts` },
           { '@type': 'ListItem', position: 4, name: article.title, item: canonicalUrl },
@@ -135,10 +142,9 @@ export default async function LeadershipThoughtDetailPage({
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
-      <Script
+      <JsonLd
         id={`thought-schema-${article.slug}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, '\\u003c') }}
+        data={articleSchema}
       />
 
       {/* HERO */}
@@ -153,7 +159,7 @@ export default async function LeadershipThoughtDetailPage({
             </Link>
             <span aria-hidden="true">/</span>
             <Link
-              href="/insight-programs/case-studies"
+              href="/insight-programs"
               className="transition-opacity hover:opacity-65"
             >
               Insight &amp; Programs

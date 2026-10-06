@@ -1057,7 +1057,7 @@ export default function Navbar() {
             <SimpleDropdown
               id="insight"
               label="Insight & Programs"
-              href="/insight-programs/case-studies"
+              href="/insight-programs"
               title="Insight & Programs"
               links={INSIGHT_LINKS}
               overlay={overlay}
@@ -1270,7 +1270,13 @@ export default function Navbar() {
           <MobileAccordion
             id="insight"
             label="Insight & Programs"
-            links={INSIGHT_LINKS}
+            links={[
+              {
+                name: 'View Insight & Programs',
+                href: '/insight-programs',
+              },
+              ...INSIGHT_LINKS,
+            ]}
             activeDropdown={activeDropdown}
             setActiveDropdown={setActiveDropdown}
             closeMenu={closeMobileMenu}

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
+import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -47,7 +47,7 @@ export default function OurWorksLayout({ children }: Readonly<{ children: React.
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
           { '@type': 'ListItem', position: 2, name: 'Our Works', item: canonicalUrl },
         ],
       },
@@ -74,14 +74,7 @@ export default function OurWorksLayout({ children }: Readonly<{ children: React.
 
   return (
     <>
-      <Script
-        id="our-works-schema"
-        type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(ourWorksSchema).replace(/</g, '\\u003c'),
-        }}
-      />
+      <JsonLd id="our-works-schema" data={ourWorksSchema} />
       {children}
     </>
   );
