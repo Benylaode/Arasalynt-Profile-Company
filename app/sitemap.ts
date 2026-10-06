@@ -10,7 +10,7 @@ const WORK_SLUGS = [
 ];
 
 // Timestamp update terakhir situs (perbarui setiap deploy besar)
-const LAST_MODIFIED = new Date('2026-10-01');
+const LAST_MODIFIED = new Date('2026-10-02');
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entry = (
