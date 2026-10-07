@@ -146,6 +146,14 @@ export default function Home() {
           'Arsalynk menyediakan solusi teknologi enterprise terintegrasi di Indonesia, meliputi ERP, IoT, data analytics, POS, HRMS, dan transformasi digital bisnis.',
         publisher: { '@id': `${SITE_URL}/#organization` },
         inLanguage: 'id-ID',
+        hasPart: [
+          { '@type': 'WebPage', name: 'About Us', url: `${SITE_URL}/about-us` },
+          { '@type': 'WebPage', name: 'Our Business', url: `${SITE_URL}/our-business` },
+          { '@type': 'WebPage', name: 'Our Solution', url: `${SITE_URL}/our-solution` },
+          { '@type': 'WebPage', name: 'Our Works', url: `${SITE_URL}/our-works` },
+          { '@type': 'WebPage', name: 'Insight & Programs', url: `${SITE_URL}/insight-programs` },
+          { '@type': 'WebPage', name: 'Contact Us', url: `${SITE_URL}/contact-us` },
+        ],
       },
       {
         '@type': 'WebPage',
