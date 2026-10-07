@@ -3,7 +3,7 @@ import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Ekosistem Bisnis & Layanan IT Terintegrasi',
+  title: 'Our Business',
   description:
     'Jelajahi ekosistem bisnis Arsalynk di Indonesia: infrastruktur IT, integrasi IoT, survey & data analytics, media digital, komunikasi strategis, dan konsultasi bisnis enterprise.',
   keywords: [
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/our-business' },
   openGraph: {
-    title: 'Ekosistem Bisnis & Layanan IT Terintegrasi | Arsalynk',
+    title: 'Our Business | Arsalynk',
     description: 'Temukan portofolio unit bisnis dan kapabilitas enterprise Arsalynk yang terintegrasi di Indonesia.',
     url: '/our-business',
     images: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ekosistem Bisnis & Layanan IT Terintegrasi | Arsalynk',
+    title: 'Our Business | Arsalynk',
     description: 'Ekosistem bisnis enterprise Arsalynk yang terintegrasi di Indonesia.',
     images: ['/images/our-works/our-works-hero-bg.webp'],
   },
@@ -54,7 +54,7 @@ export default function OurBusinessLayout({ children }: Readonly<{ children: Rea
         '@type': 'CollectionPage',
         '@id': `${canonicalUrl}#webpage`,
         url: canonicalUrl,
-        name: `Ekosistem Bisnis Enterprise & Layanan IT Terintegrasi | ${SITE_NAME}`,
+        name: `Our Business | ${SITE_NAME}`,
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
         breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
