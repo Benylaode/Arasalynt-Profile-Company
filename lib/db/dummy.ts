@@ -104,14 +104,14 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   slug: 'kaluna-technology',
   name: 'Kaluna Technology',
   shortName: 'Kaluna',
-  category: 'IoT & Technology Integration',
-  tagline: 'Empowering Smarter Operations',
+  category: 'Web Engineering & System Integration',
+  tagline: 'Building Digital Platforms That Scale',
   logo: '/images/our-business/kaluna-technology/logo.svg',
   brandColor: '#1A3E9E',
 
   heroImg: '/images/our-business/kaluna-technology/hero.webp',
   aboutDesc:
-    'Kaluna Technology delivers IoT and technology integration solutions that connect physical infrastructure with modern digital systems, helping businesses operate more efficiently through real-time monitoring, automation, and intelligent data.',
+    'Kaluna Technology is the web engineering and digital solutions unit within the Arsalynk ecosystem, building high-performance corporate websites, e-commerce platforms, customer portals, custom web applications, and integrated business systems for modern companies.',
   aboutImg: '/images/our-business/kaluna-technology/about.webp',
 
   painPointsLabel: 'THE CHALLENGE',
@@ -219,7 +219,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaDesc:
     'Transform your operations with connected technology, intelligent systems, and scalable digital solutions designed around your business.',
   ctaPrimaryLabel: 'VISIT WEBSITE',
-  ctaPrimaryHref: 'http://www.kalunatechnology.com/',
+  ctaPrimaryHref: 'https://www.kalunatechnology.com/',
   ctaSecondaryLabel: 'EXPLORE WORKS',
   ctaSecondaryHref: '#works',
 },
