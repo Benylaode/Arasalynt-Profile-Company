@@ -23,9 +23,13 @@ export const HERO_SLIDES: HeroSlide[] = HERO_SLIDES_DUMMY_DATA;
 
 /* ─── Contact Info ─── */
 
-export const WHATSAPP_PHONE_DISPLAY = '+62 878-6276-6846';
-export const WHATSAPP_PHONE_RAW = '6287862766846';
+export const WHATSAPP_PHONE_DISPLAY = '+62 821-3939-569';
+export const WHATSAPP_PHONE_RAW = '628213939569';
 export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_PHONE_RAW}`;
+
+// Dedicated CS number used only by the AI-to-human WhatsApp switch flow.
+export const AI_SWITCH_CS_PHONE_DISPLAY = '+62 878-6276-6846';
+export const AI_SWITCH_CS_PHONE_RAW = '6287862766846';
 
 
 /* ─── Client Logos ─── */
@@ -138,7 +142,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     title: 'Contact',
     links: [
       { label: 'hello@arsalynk.com', href: 'mailto:hello@arsalynk.com' },
-      { label: WHATSAPP_PHONE_DISPLAY, href: `tel:+${WHATSAPP_PHONE_RAW}` },
+      { label: WHATSAPP_PHONE_DISPLAY, href: WHATSAPP_LINK },
       { label: 'Jakarta, Indonesia', href: '#' },
     ],
   },
