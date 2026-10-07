@@ -6,7 +6,6 @@ import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondE
 import { submitLead } from '@/lib/actions';
 import {
   WHATSAPP_PHONE_DISPLAY,
-  WHATSAPP_PHONE_RAW,
   WHATSAPP_LINK,
 } from '@/lib/constants';
 
