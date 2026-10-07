@@ -4,7 +4,7 @@ import { SITE_NAME, SITE_URL } from '@/lib/constants';
 import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
 
 export const metadata: Metadata = {
-  title: 'Solusi ERP, IoT & Sistem Enterprise Indonesia',
+  title: 'Our Solution',
   description:
     'Layanan solusi teknologi enterprise Arsalynk di Indonesia: Pengembangan sistem ERP, integrasi hardware IoT, POS retail, HRMS, data analytics, dan otomasi bisnis terintegrasi.',
   keywords: [
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/our-solution' },
   openGraph: {
-    title: 'Solusi ERP, IoT & Sistem Enterprise Indonesia | Arsalynk',
+    title: 'Our Solution | Arsalynk',
     description: 'Layanan ERP, IoT, POS, HRMS, data analytics, dan pengembangan software enterprise terintegrasi oleh Arsalynk.',
     url: '/our-solution',
     images: [
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Solusi ERP, IoT & Sistem Enterprise Indonesia | Arsalynk',
+    title: 'Our Solution | Arsalynk',
     description: 'ERP, IoT, POS, HRMS, data analytics, dan software development enterprise oleh Arsalynk.',
     images: ['/images/our-works/our-works-hero-bg.webp'],
   },
@@ -56,7 +56,7 @@ export default function OurSolutionLayout({ children }: Readonly<{ children: Rea
         '@type': 'CollectionPage',
         '@id': `${canonicalUrl}#webpage`,
         url: canonicalUrl,
-        name: `Solusi ERP, IoT & Sistem Enterprise Indonesia | ${SITE_NAME}`,
+        name: `Our Solution | ${SITE_NAME}`,
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
         breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },

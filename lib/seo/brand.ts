@@ -5,7 +5,7 @@ export const BRAND = {
   legalName: 'PT Sinergi Muda Arsa',
   url: SITE_URL,
   alternateNames: ['Arsalynk Group', 'arsalynk.com'],
-  phone: '+62-878-6276-6846',
+  phone: '+62-821-3939-569',
   email: 'corporate.arsalynk@gmail.com',
   logo: `${SITE_URL}/images/logos/arsalynk-mark-512.png`,
   heroImage: `${SITE_URL}/images/our-works/our-works-hero-bg.webp`,
