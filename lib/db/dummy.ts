@@ -31,7 +31,7 @@ export const TEAM_MEMBERS_DUMMY_DATA: TeamMember[] = [
 export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
   {
     id: 'unified-enterprise-ecosystem',
-    headline: 'Leading Digital\nEnterprise Solution',
+    headline: 'Arsalynk\nEnterprise Technology',
     body:
       'We drive modern transformation through scalable ERP and emerging IoT solutions,\nfully integrating your operations to elevate your enterprise.',
     backgroundImage: '/images/home/hero/slide-01-mobile-38814c.webp',
