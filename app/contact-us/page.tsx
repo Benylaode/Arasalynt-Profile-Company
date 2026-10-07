@@ -7,6 +7,7 @@ import { submitLead } from '@/lib/actions';
 import {
   WHATSAPP_PHONE_DISPLAY,
   WHATSAPP_PHONE_RAW,
+  WHATSAPP_LINK,
 } from '@/lib/constants';
 
 function DownIcon() {
@@ -261,7 +262,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
+    actionHref: WHATSAPP_LINK,
   },
   {
     name: 'TheDrafroom',
@@ -271,7 +272,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
+    actionHref: WHATSAPP_LINK,
   },
   {
     name: 'Ilusia Studio',
@@ -281,7 +282,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
+    actionHref: WHATSAPP_LINK,
   },
   {
     name: 'Seveny',
@@ -291,7 +292,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
+    actionHref: WHATSAPP_LINK,
   },
   {
     name: 'AdsVar',
@@ -301,7 +302,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
+    actionHref: WHATSAPP_LINK,
   },
   {
     name: 'Personice',
@@ -311,7 +312,7 @@ const COMPANY_CARDS: BusinessCard[] = [
     instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
     actionLabel: 'PHONE US',
-    actionHref: `tel:+${WHATSAPP_PHONE_RAW}`,
+    actionHref: WHATSAPP_LINK,
   },
 ];
 
@@ -477,7 +478,7 @@ export default function ContactUsPage() {
 
                   <div className="flex flex-col gap-1.5">
                     <a
-                      href={`tel:+${WHATSAPP_PHONE_RAW}`}
+                      href={WHATSAPP_LINK}
                       className="flex items-center gap-2.5 font-body text-[14px] leading-[1.5] tracking-[0.02em] text-[#717171] transition hover:text-[#101010] md:text-[15px]"
                     >
                       <span className="shrink-0">
