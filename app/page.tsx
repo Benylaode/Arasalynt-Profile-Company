@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import HeroSection from '@/components/sections/HeroSection/HeroSection';
 import ClientLogoBar from '@/components/sections/ClientLogoBar/ClientLogoBar';
 import ITInfrastructure from '@/components/sections/ITInfrastructure/ITInfrastructure';
@@ -177,6 +178,51 @@ export default function Home() {
       <JsonLd id="home-website-schema" data={homeSchema} />
 
       <HeroSection />
+
+      <section
+        aria-labelledby="arsalynk-brand-overview"
+        className="border-b border-black/10 bg-[#F7F7F7] px-[6vw] py-8 max-[1199px]:px-[4vw] md:py-10"
+      >
+        <div className="mx-auto grid max-w-[1600px] gap-7 lg:grid-cols-[1.25fr_1fr] lg:items-center">
+          <div>
+            <p className="mb-2 font-body text-[11px] font-bold uppercase tracking-[0.12em] text-[#1A3E9E]">
+              Arsalynk
+            </p>
+            <h2
+              id="arsalynk-brand-overview"
+              className="font-heading text-[clamp(26px,2.2vw,38px)] font-medium leading-[1.18] tracking-[-0.02em] text-[#101010]"
+            >
+              Enterprise technology solutions, connected through one ecosystem.
+            </h2>
+            <p className="mt-3 max-w-[820px] font-body text-[14px] leading-[1.75] text-[#555] md:text-[15px]">
+              Arsalynk adalah ekosistem teknologi enterprise Indonesia yang menghubungkan ERP, IoT,
+              data analytics, software development, riset, dan kapabilitas bisnis untuk transformasi digital yang terukur.
+            </p>
+          </div>
+
+          <nav
+            aria-label="Explore Arsalynk"
+            className="grid grid-cols-2 gap-2 sm:grid-cols-3"
+          >
+            {[
+              ['About Us', '/about-us'],
+              ['Our Business', '/our-business'],
+              ['Our Solution', '/our-solution'],
+              ['Our Works', '/our-works'],
+              ['Insight & Programs', '/insight-programs'],
+              ['Contact Us', '/contact-us'],
+            ].map(([label, href]) => (
+              <Link
+                key={href}
+                href={href}
+                className="rounded-xl border border-black/10 bg-white px-4 py-3 font-body text-[13px] font-medium text-[#101010] no-underline transition hover:border-[#1A3E9E] hover:text-[#1A3E9E]"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </section>
       <ClientLogoBar />
       <ITInfrastructure />
       <BridgePossibility />
