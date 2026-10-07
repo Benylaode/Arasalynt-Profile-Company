@@ -188,7 +188,7 @@ export default function Footer() {
             {/* Column 3: INSIGHTS & OFFICE */}
             <div className="flex flex-col gap-7">
               <div className="flex flex-col gap-3.5">
-                <FooterTitle href="/insight-programs/case-studies">INSIGHTS</FooterTitle>
+                <FooterTitle href="/insight-programs">INSIGHTS</FooterTitle>
                 <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
                   {INSIGHT_LINKS.map((link) => (
                     <li key={link.href}>
