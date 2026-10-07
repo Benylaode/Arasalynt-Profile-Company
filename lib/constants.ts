@@ -142,7 +142,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     title: 'Contact',
     links: [
       { label: 'hello@arsalynk.com', href: 'mailto:hello@arsalynk.com' },
-      { label: WHATSAPP_PHONE_DISPLAY, href: `tel:+${WHATSAPP_PHONE_RAW}` },
+      { label: WHATSAPP_PHONE_DISPLAY, href: WHATSAPP_LINK },
       { label: 'Jakarta, Indonesia', href: '#' },
     ],
   },
