@@ -15,9 +15,9 @@ import { BRAND } from '@/lib/seo/brand';
 import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
 
 export const metadata: Metadata = {
-  title: { absolute: `${SITE_NAME} | Solusi Teknologi Enterprise Indonesia` },
+  title: { absolute: `${SITE_NAME} — Solusi Teknologi Enterprise & Software House` },
   description:
-    'Arsalynk adalah penyedia solusi teknologi enterprise & software house di Indonesia. Menghubungkan sistem ERP, integrasi IoT, data analytics, POS, HRMS & transformasi digital bisnis.',
+    'Arsalynk adalah penyedia solusi teknologi enterprise dan software house di Indonesia. Menghubungkan ekosistem bisnis dengan sistem ERP, IoT, dan data analytics.',
   keywords: [
     'software house indonesia',
     'enterprise technology indonesia',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
-    title: `${SITE_NAME} | Solusi Teknologi Enterprise Indonesia`,
+    title: `${SITE_NAME} — Solusi Teknologi Enterprise & Software House`,
     description:
       'Penyedia solusi teknologi enterprise, software house, sistem ERP, integrasi IoT, dan data analytics terintegrasi di Indonesia.',
     url: '/',
@@ -96,12 +96,6 @@ export default function Home() {
             contactType: 'customer service',
             areaServed: 'ID',
             availableLanguage: ['Indonesian', 'English'],
-            hoursAvailable: {
-              '@type': 'OpeningHoursSpecification',
-              dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-              opens: '09:00',
-              closes: '17:00',
-            },
           },
           {
             '@type': 'ContactPoint',
@@ -119,7 +113,6 @@ export default function Home() {
         sameAs: [
           BRAND.social.instagram,
           BRAND.social.linkedin,
-          BRAND.social.facebook,
         ],
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
@@ -145,6 +138,7 @@ export default function Home() {
         description:
           'Arsalynk menyediakan solusi teknologi enterprise terintegrasi di Indonesia, meliputi ERP, IoT, data analytics, POS, HRMS, dan transformasi digital bisnis.',
         publisher: { '@id': `${SITE_URL}/#organization` },
+        about: { '@id': `${SITE_URL}/#organization` },
         inLanguage: 'id-ID',
         hasPart: [
           { '@type': 'WebPage', name: 'About Us', url: `${SITE_URL}/about-us` },
@@ -159,9 +153,10 @@ export default function Home() {
         '@type': 'WebPage',
         '@id': `${SITE_URL}/#webpage`,
         url: `${SITE_URL}/`,
-        name: 'Arsalynk | Solusi Teknologi Enterprise Indonesia',
+        name: 'Arsalynk — Solusi Teknologi Enterprise & Software House',
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
+        mainEntity: { '@id': `${SITE_URL}/#organization` },
         description:
           'Arsalynk adalah penyedia solusi teknologi enterprise & software house di Indonesia. Menghubungkan sistem ERP, integrasi IoT, data analytics, POS, HRMS & transformasi digital bisnis.',
         breadcrumb: {

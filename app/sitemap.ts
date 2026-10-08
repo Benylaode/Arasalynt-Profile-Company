@@ -52,17 +52,17 @@ function entry(
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [
     // ── Halaman Utama ──────────────────────────────────────────────────────
-    entry('/', '2026-10-06'),
+    entry('/', '2026-10-08'),
 
     // ── About Us & Sub-Pages ───────────────────────────────────────────────
-    entry('/about-us', '2026-10-06'),
+    entry('/about-us', '2026-10-08'),
     entry('/about-us/corporate-profile', '2026-09-15'),
     entry('/about-us/company-leadership', '2026-09-20'),
     entry('/about-us/ecosystem-philosophy', '2026-09-10'),
 
     // ── Layanan & Bisnis ───────────────────────────────────────────────────
-    entry('/our-business', '2026-08-25'),
-    entry('/our-solution', '2026-10-06'),
+    entry('/our-business', '2026-10-08'),
+    entry('/our-solution', '2026-10-08'),
 
     // ── Halaman Dinamis: Our Solution Services (200 OK & Indexable) ────────
     ...SOLUTION_SERVICES.map(({ slug }) =>
@@ -70,12 +70,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ),
 
     // ── Portofolio (Supporting Proof Layer) ────────────────────────────────
-    entry('/our-works', '2026-09-28'),
+    entry('/our-works', '2026-10-08'),
 
     // ── Insight & Programs (Hub & Sub-Sections) ────────────────────────────
-    entry('/insight-programs', '2026-10-06'),
-    entry('/insight-programs/case-studies', '2026-06-25'),
-    entry('/insight-programs/leadership-thoughts', '2026-07-20'),
+    entry('/insight-programs', '2026-10-08'),
+    entry('/insight-programs/case-studies', '2026-10-08'),
+    entry('/insight-programs/leadership-thoughts', '2026-10-08'),
 
     // ── Kontak & Legal ─────────────────────────────────────────────────────
     entry('/contact-us', '2026-09-01'),

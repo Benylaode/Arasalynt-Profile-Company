@@ -1,4 +1,6 @@
 # 🚀 Blue Print & Rencana Penyesuaian SEO Arsalynk
+
+> **Catatan 8 Oktober 2026:** bagian tentang *Sitelinks Search Box*, estimasi pasti peringkat, dan pemunculan Knowledge Panel di bawah adalah blueprint historis, bukan janji hasil. Google menghentikan Sitelinks Search Box pada 21 November 2024. Lihat `SEO_ENTITY_FIRST_2026.md` untuk implementasi terbaru dan checklist verifikasi.
 > **Target:** Membangun struktur pencarian Google tingkat enterprise (menyerupai *Apple / Stripe / Microsoft*): Brand Snippet, Expanded 6-Pack Sitelinks, Sitelinks Searchbox, serta Google Knowledge Panel.
 
 ---
