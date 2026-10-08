@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import JsonLd from '@/components/seo/JsonLd';
-import { SITE_NAME, SITE_URL } from '@/lib/constants';
+import { SITE_NAME } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Our Business',
@@ -37,38 +36,5 @@ export const metadata: Metadata = {
 };
 
 export default function OurBusinessLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const canonicalUrl = `${SITE_URL}/our-business`;
-  const businessNavSchema = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'BreadcrumbList',
-        '@id': `${canonicalUrl}#breadcrumb`,
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-          { '@type': 'ListItem', position: 2, name: 'About Us', item: `${SITE_URL}/about-us` },
-          { '@type': 'ListItem', position: 3, name: 'Our Business', item: canonicalUrl },
-        ],
-      },
-      {
-        '@type': 'CollectionPage',
-        '@id': `${canonicalUrl}#webpage`,
-        url: canonicalUrl,
-        name: `Our Business | ${SITE_NAME}`,
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        about: { '@id': `${SITE_URL}/#organization` },
-        breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
-        description:
-          'Jelajahi ekosistem bisnis Arsalynk di Indonesia: Dari infrastruktur IT, integrasi IoT, survey & data analytics, hingga media digital dan komunikasi strategis.',
-        inLanguage: 'id-ID',
-      },
-    ],
-  };
-
-  return (
-    <>
-      <JsonLd id="our-business-layout-schema" data={businessNavSchema} />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

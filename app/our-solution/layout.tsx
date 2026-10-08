@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
-import JsonLd from '@/components/seo/JsonLd';
-import { SITE_NAME, SITE_URL } from '@/lib/constants';
-import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
+import { SITE_NAME } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Our Solution',
@@ -40,48 +38,5 @@ export const metadata: Metadata = {
 };
 
 export default function OurSolutionLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const canonicalUrl = `${SITE_URL}/our-solution`;
-  const solutionNavSchema = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'BreadcrumbList',
-        '@id': `${canonicalUrl}#breadcrumb`,
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-          { '@type': 'ListItem', position: 2, name: 'Our Solution', item: canonicalUrl },
-        ],
-      },
-      {
-        '@type': 'CollectionPage',
-        '@id': `${canonicalUrl}#webpage`,
-        url: canonicalUrl,
-        name: `Our Solution | ${SITE_NAME}`,
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        about: { '@id': `${SITE_URL}/#organization` },
-        breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
-        description:
-          'Layanan solusi teknologi enterprise Arsalynk di Indonesia: Pengembangan sistem ERP, integrasi hardware IoT, POS retail, HRMS, otomasi keuangan & supply chain.',
-        inLanguage: 'id-ID',
-      },
-      {
-        '@type': 'ItemList',
-        '@id': `${canonicalUrl}#services`,
-        name: 'Arsalynk Enterprise Solutions',
-        itemListElement: SOLUTION_SERVICES.map((service, index) => ({
-          '@type': 'ListItem',
-          position: index + 1,
-          name: service.title,
-          url: `${SITE_URL}/our-solution/${service.slug}`,
-        })),
-      },
-    ],
-  };
-
-  return (
-    <>
-      <JsonLd id="our-solution-layout-schema" data={solutionNavSchema} />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

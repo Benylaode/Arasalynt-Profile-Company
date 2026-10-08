@@ -18,7 +18,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Arsalynk — Enterprise Technology Solutions Indonesia',
+    default: 'Arsalynk — Solusi Teknologi Enterprise & Software House',
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -42,11 +42,10 @@ export const metadata: Metadata = {
   publisher: SITE_NAME,
   category: 'Technology',
   classification: 'Business/Technology',
-  // Google Search Console verification — ganti dengan ID verifikasi asli Anda
-  // verification: {
-  //   google: 'GANTI_DENGAN_GSC_VERIFICATION_TOKEN',
-  //   yandex: 'GANTI_DENGAN_YANDEX_TOKEN',
-  // },
+  // Google verification only with a real token configured by the owner.
+  ...(process.env.GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } }
+    : {}),
   robots: {
     index: true,
     follow: true,

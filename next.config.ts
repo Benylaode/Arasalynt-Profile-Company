@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
 
+      // Noncanonical aliases redirect to actual indexable pages.
+      { source: '/services', destination: '/our-solution', permanent: true },
+      { source: '/portfolio', destination: '/our-works', permanent: true },
+      { source: '/contact', destination: '/contact-us', permanent: true },
+
       // ── P0: Legacy Case Study URLs (Google Indexed -> Canonical 200 OK) ──
       {
         source: '/insight-programs/case-studies/point-of-sale-retail-management-system',
