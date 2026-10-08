@@ -1,3 +1,4 @@
+import SectionPageJsonLd from '@/components/seo/SectionPageJsonLd';
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import { CASE_STUDIES_DUMMY_DATA, LEADERSHIP_THOUGHTS_DUMMY_DATA } from '@/lib/db/dummy';
@@ -36,6 +37,7 @@ export default function InsightProgramsHubPage() {
 
   return (
     <main className="relative w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
+      <SectionPageJsonLd section="insight-programs" />
       {/* ── HERO SECTION ── */}
       <section
         id="hero"

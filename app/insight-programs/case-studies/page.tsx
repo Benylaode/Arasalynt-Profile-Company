@@ -1,5 +1,6 @@
 'use client';
 
+import SectionPageJsonLd from '@/components/seo/SectionPageJsonLd';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
@@ -295,6 +296,7 @@ export default function CaseStudiesPage() {
 
   return (
     <main className="w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
+      <SectionPageJsonLd section="case-studies" />
       {/* ==================================================================
           HERO
           ================================================================== */}

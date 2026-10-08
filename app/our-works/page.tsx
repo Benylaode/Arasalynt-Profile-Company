@@ -1,5 +1,6 @@
 'use client';
 
+import SectionPageJsonLd from '@/components/seo/SectionPageJsonLd';
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
@@ -604,6 +605,7 @@ export default function OurWorksPage() {
 
   return (
     <main className="relative w-full overflow-x-hidden bg-[#F7F7F7]">
+      <SectionPageJsonLd section="our-works" />
       {/* HERO — navbar Anda tetap berada di luar komponen ini */}
       <section
         id="hero"
