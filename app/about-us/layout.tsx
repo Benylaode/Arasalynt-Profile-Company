@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { SITE_NAME } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Tentang Kami — Arsalynk' },
+  title: 'Tentang Kami',
   description:
     'Mengenal Arsalynk: ekosistem bisnis dan software house terintegrasi di Indonesia yang menghubungkan teknologi, data analytics, riset strategis, dan komunikasi bisnis.',
   keywords: [
