@@ -1,3 +1,4 @@
+import SectionPageJsonLd from '@/components/seo/SectionPageJsonLd';
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 
@@ -63,6 +64,7 @@ function ChevronDown() {
 export default function AboutUsPage() {
   return (
     <main className="relative w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
+      <SectionPageJsonLd section="about-us" />
       {/* ── HERO SECTION ── */}
       <section
         id="hero"

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import JsonLd from '@/components/seo/JsonLd';
-import { SITE_NAME, SITE_URL } from '@/lib/constants';
+import { SITE_NAME } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -38,38 +37,5 @@ export const metadata: Metadata = {
 };
 
 export default function AboutLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const canonicalUrl = `${SITE_URL}/about-us`;
-  const aboutSchema = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'BreadcrumbList',
-        '@id': `${canonicalUrl}#breadcrumb`,
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-          { '@type': 'ListItem', position: 2, name: 'About Us', item: canonicalUrl },
-        ],
-      },
-      {
-        '@type': ['WebPage', 'AboutPage'],
-        '@id': `${canonicalUrl}#webpage`,
-        url: canonicalUrl,
-        name: `About Us | ${SITE_NAME}`,
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        about: { '@id': `${SITE_URL}/#organization` },
-        breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
-        description:
-          'Mengenal Arsalynk: ekosistem bisnis dan software house terintegrasi di Indonesia yang menghubungkan teknologi, data analytics, riset strategis, dan komunikasi bisnis.',
-        inLanguage: 'id-ID',
-        mainEntity: { '@id': `${SITE_URL}/#organization` },
-      },
-    ],
-  };
-
-  return (
-    <>
-      <JsonLd id="about-us-schema" data={aboutSchema} />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }
