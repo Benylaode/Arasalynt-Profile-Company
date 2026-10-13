@@ -164,7 +164,7 @@ export default function Home() {
 
       <section
         aria-labelledby="arsalynk-brand-overview"
-        className="border-b border-black/10 bg-[#F7F7F7] px-[6vw] py-8 max-[1199px]:px-[4vw] md:py-10"
+        className="sr-only"
       >
         <div className="mx-auto flex max-w-[1600px] flex-col gap-8">
           <div className="max-w-[860px]">
