@@ -1,3 +1,4 @@
+import SectionPageJsonLd from '@/components/seo/SectionPageJsonLd';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { getAllBusinesses } from '@/lib/db/actions';
@@ -190,6 +191,7 @@ export default async function OurBusinessPage() {
 
   return (
     <main className="relative w-full overflow-x-hidden bg-[#F7F7F7]">
+      <SectionPageJsonLd section="our-business" />
       {/* HERO */}
       <section
         id="hero"

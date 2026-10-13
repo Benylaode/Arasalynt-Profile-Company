@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import JsonLd from '@/components/seo/JsonLd';
-import { SITE_NAME, SITE_URL } from '@/lib/constants';
+import { SITE_NAME } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Case Studies',
@@ -39,44 +38,5 @@ export const metadata: Metadata = {
 };
 
 export default function CaseStudiesLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const canonicalUrl = `${SITE_URL}/insight-programs/case-studies`;
-  const caseStudiesSchema = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'BreadcrumbList',
-        '@id': `${canonicalUrl}#breadcrumb`,
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-          { '@type': 'ListItem', position: 2, name: 'Insight & Programs', item: `${SITE_URL}/insight-programs` },
-          { '@type': 'ListItem', position: 3, name: 'Case Studies', item: canonicalUrl },
-        ],
-      },
-      {
-        '@type': ['CollectionPage', 'WebPage'],
-        '@id': `${canonicalUrl}#webpage`,
-        url: canonicalUrl,
-        name: `Case Studies | ${SITE_NAME}`,
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        about: { '@id': `${SITE_URL}/#organization` },
-        breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
-        description:
-          'Kumpulan studi kasus implementasi proyek Arsalynk di Indonesia: sistem ERP, IoT, otomasi workflow bisnis, data analytics, riset strategis, dan media.',
-        inLanguage: 'id-ID',
-        image: {
-          '@type': 'ImageObject',
-          url: `${SITE_URL}/images/insight-programs/case-studies/hero-case-studies.webp`,
-          width: 1200,
-          height: 630,
-        },
-      },
-    ],
-  };
-
-  return (
-    <>
-      <JsonLd id="case-studies-schema" data={caseStudiesSchema} />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
-import JsonLd from '@/components/seo/JsonLd';
-import { SITE_NAME, SITE_URL } from '@/lib/constants';
-import { buildBreadcrumbJsonLd, SITE_NAVIGATION_ITEMS } from '@/lib/seo';
+import { SITE_NAME } from '@/lib/constants';
+import { SITE_NAVIGATION_ITEMS } from '@/lib/seo';
 
 const PAGE_DEF = SITE_NAVIGATION_ITEMS.find((item) => item.href === '/our-business')!;
 
@@ -39,35 +38,5 @@ export const metadata: Metadata = {
 };
 
 export default function OurBusinessLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const canonicalUrl = `${SITE_URL}/our-business`;
-  const businessNavSchema = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@id': `${canonicalUrl}#breadcrumb`,
-        ...buildBreadcrumbJsonLd([
-          { name: 'Home', url: `${SITE_URL}/` },
-          { name: 'Our Business', url: canonicalUrl },
-        ]),
-      },
-      {
-        '@type': 'CollectionPage',
-        '@id': `${canonicalUrl}#webpage`,
-        url: canonicalUrl,
-        name: `Our Business | ${SITE_NAME}`,
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        about: { '@id': `${SITE_URL}/#organization` },
-        breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
-        description: PAGE_DEF.description,
-        inLanguage: 'id-ID',
-      },
-    ],
-  };
-
-  return (
-    <>
-      <JsonLd id="our-business-layout-schema" data={businessNavSchema} />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
-import JsonLd from '@/components/seo/JsonLd';
-import { SITE_NAME, SITE_URL } from '@/lib/constants';
-import { buildBreadcrumbJsonLd, SITE_NAVIGATION_ITEMS } from '@/lib/seo';
-import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
+import { SITE_NAME } from '@/lib/constants';
+import { SITE_NAVIGATION_ITEMS } from '@/lib/seo';
 
 const PAGE_DEF = SITE_NAVIGATION_ITEMS.find((item) => item.href === '/our-solution')!;
 
@@ -42,46 +40,5 @@ export const metadata: Metadata = {
 };
 
 export default function OurSolutionLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const canonicalUrl = `${SITE_URL}/our-solution`;
-  const solutionNavSchema = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@id': `${canonicalUrl}#breadcrumb`,
-        ...buildBreadcrumbJsonLd([
-          { name: 'Home', url: `${SITE_URL}/` },
-          { name: 'Our Solution', url: canonicalUrl },
-        ]),
-      },
-      {
-        '@type': 'CollectionPage',
-        '@id': `${canonicalUrl}#webpage`,
-        url: canonicalUrl,
-        name: `Our Solution | ${SITE_NAME}`,
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        about: { '@id': `${SITE_URL}/#organization` },
-        breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
-        description: PAGE_DEF.description,
-        inLanguage: 'id-ID',
-      },
-      {
-        '@type': 'ItemList',
-        '@id': `${canonicalUrl}#services`,
-        name: 'Arsalynk Enterprise Solutions',
-        itemListElement: SOLUTION_SERVICES.map((service, index) => ({
-          '@type': 'ListItem',
-          position: index + 1,
-          name: service.title,
-          url: `${SITE_URL}/our-solution/${service.slug}`,
-        })),
-      },
-    ],
-  };
-
-  return (
-    <>
-      <JsonLd id="our-solution-layout-schema" data={solutionNavSchema} />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

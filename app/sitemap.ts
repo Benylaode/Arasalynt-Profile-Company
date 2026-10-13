@@ -77,8 +77,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ),
 
     // ── Insight & Programs Sub-Sections ────────────────────────────────────
-    entry('/insight-programs/case-studies', '2026-06-25', 0.8, 'weekly'),
-    entry('/insight-programs/leadership-thoughts', '2026-07-20', 0.8, 'weekly'),
+    entry('/insight-programs/case-studies', '2026-10-08', 0.8, 'weekly'),
+    entry('/insight-programs/leadership-thoughts', '2026-10-08', 0.8, 'weekly'),
 
     // ── Kontak & Legal ─────────────────────────────────────────────────────
     entry('/privacy-policy', '2026-01-15', 0.5, 'yearly'),

@@ -99,6 +99,7 @@ export function buildWebSiteJsonLd() {
     description:
       'Arsalynk menyediakan solusi teknologi enterprise terintegrasi di Indonesia, meliputi ERP, IoT, data analytics, POS, HRMS, dan transformasi digital bisnis.',
     publisher: { '@id': `${SITE_URL}/#organization` },
+    about: { '@id': `${SITE_URL}/#organization` },
     inLanguage: 'id-ID',
     hasPart: SITE_NAVIGATION_ITEMS.map((item) => ({
       '@type': 'WebPage',

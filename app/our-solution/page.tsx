@@ -46,6 +46,16 @@ export default function OurSolutionPage() {
         ],
       },
       {
+        '@type': 'CollectionPage',
+        '@id': `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        name: 'Our Solution | Arsalynk',
+        isPartOf: { '@id': `${SITE_URL}/#website` },
+        about: { '@id': `${SITE_URL}/#organization` },
+        breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
+        inLanguage: 'id-ID',
+      },
+      {
         '@type': 'Service',
         '@id': `${canonicalUrl}#service`,
         name: 'Arsalynk Enterprise Technology Solutions',

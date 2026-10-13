@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
-import JsonLd from '@/components/seo/JsonLd';
-import { SITE_NAME, SITE_URL } from '@/lib/constants';
-import { buildBreadcrumbJsonLd, SITE_NAVIGATION_ITEMS } from '@/lib/seo';
+import { SITE_NAME } from '@/lib/constants';
+import { SITE_NAVIGATION_ITEMS } from '@/lib/seo';
 
 const PAGE_DEF = SITE_NAVIGATION_ITEMS.find((item) => item.href === '/insight-programs')!;
 
@@ -38,59 +37,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function InsightProgramsLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const canonicalUrl = `${SITE_URL}/insight-programs`;
-  const hubSchema = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@id': `${canonicalUrl}#breadcrumb`,
-        ...buildBreadcrumbJsonLd([
-          { name: 'Home', url: `${SITE_URL}/` },
-          { name: 'Insight & Programs', url: canonicalUrl },
-        ]),
-      },
-      {
-        '@type': 'CollectionPage',
-        '@id': `${canonicalUrl}#webpage`,
-        url: canonicalUrl,
-        name: `Insight & Programs | ${SITE_NAME}`,
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        about: { '@id': `${SITE_URL}/#organization` },
-        breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
-        description: PAGE_DEF.description,
-        inLanguage: 'id-ID',
-      },
-      {
-        '@type': 'ItemList',
-        '@id': `${canonicalUrl}#sections`,
-        name: 'Insight & Programs Pillars',
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Case Studies',
-            url: `${SITE_URL}/insight-programs/case-studies`,
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'Leadership Thoughts',
-            url: `${SITE_URL}/insight-programs/leadership-thoughts`,
-          },
-        ],
-      },
-    ],
-  };
-
-  return (
-    <>
-      <JsonLd id="insight-programs-hub-schema" data={hubSchema} />
-      {children}
-    </>
-  );
+export default function InsightProgramsLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return <>{children}</>;
 }
