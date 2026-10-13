@@ -1047,12 +1047,14 @@ export default function Navbar() {
               active={routeIsActive('/about-us')}
             />
 
+            {/* 
             <DesktopNavLink
               href="/our-business"
               label="Our Business"
               overlay={overlay}
               active={routeIsActive('/our-business')}
             />
+            */}
 
             <BusinessDropdown
               overlay={overlay}
@@ -1061,12 +1063,14 @@ export default function Navbar() {
               setActiveDropdown={setActiveDropdown}
             />
 
+            {/* 
             <DesktopNavLink
               href="/our-works"
               label="Our Works"
               overlay={overlay}
               active={routeIsActive('/our-works')}
             />
+            */}
 
             <SimpleDropdown
               id="insight"
@@ -1266,6 +1270,7 @@ export default function Navbar() {
             About Us
           </Link>
 
+          {/* 
           <Link
             href="/our-business"
             onClick={closeMobileMenu}
@@ -1273,6 +1278,7 @@ export default function Navbar() {
           >
             Our Business
           </Link>
+          */}
 
           <MobileAccordion
             id="business"
@@ -1289,6 +1295,7 @@ export default function Navbar() {
             closeMenu={closeMobileMenu}
           />
 
+          {/* 
           <Link
             href="/our-works"
             onClick={closeMobileMenu}
@@ -1296,6 +1303,7 @@ export default function Navbar() {
           >
             Our Works
           </Link>
+          */}
 
           <MobileAccordion
             id="insight"
