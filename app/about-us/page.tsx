@@ -119,7 +119,7 @@ export default function AboutUsPage() {
         </div>
 
         <a
-          href="#who-we-are"
+          href="#explore-pillars"
           aria-label="Scroll to narrative"
           className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20"
           style={{ background: 'linear-gradient(230.45deg, rgba(247,247,247,0.21) -7.74%, rgba(247,247,247,0.105) 81.5%)' }}
@@ -129,7 +129,7 @@ export default function AboutUsPage() {
       </section>
 
       {/* ── SECTION: WHO WE ARE (EXECUTIVE OVERVIEW HUB) ── */}
-      <section id="who-we-are" className="scroll-mt-24 px-[6vw] py-[clamp(80px,7vw,130px)] max-[1199px]:px-[4vw]">
+      <section id="who-we-are" className="sr-only">
         <div className="mx-auto flex max-w-[1600px] flex-col gap-12">
           <div className="flex max-w-[840px] flex-col gap-4">
             <div className="flex items-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.08em] text-[#1A3E9E]">
@@ -186,7 +186,7 @@ export default function AboutUsPage() {
       </section>
 
       {/* ── SECTION: THE 4 PILLARS HUB ── */}
-      <section className="bg-[#101010] px-[6vw] py-[clamp(90px,8vw,140px)] text-white max-[1199px]:px-[4vw]">
+      <section id="explore-pillars" className="scroll-mt-24 bg-[#101010] px-[6vw] py-[clamp(90px,8vw,140px)] text-white max-[1199px]:px-[4vw]">
         <div className="mx-auto flex max-w-[1600px] flex-col gap-14">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.08em] text-[#E6FF2A]">

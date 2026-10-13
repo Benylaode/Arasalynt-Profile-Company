@@ -93,7 +93,7 @@ export default function InsightProgramsHubPage() {
         </div>
 
         <a
-          href="#explore-pillars"
+          href="#beyond-expectations"
           aria-label="Scroll to explore pillars"
           className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20"
           style={{
@@ -108,7 +108,7 @@ export default function InsightProgramsHubPage() {
       {/* ── PILLARS OVERVIEW ── */}
       <section
         id="explore-pillars"
-        className="scroll-mt-24 px-[6vw] py-[clamp(80px,7vw,130px)] max-[1199px]:px-[4vw]"
+        className="sr-only"
       >
         <div className="mx-auto flex max-w-[1600px] flex-col gap-16">
           {/* Header */}
