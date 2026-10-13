@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
+import { buildBreadcrumbJsonLd, SITE_NAVIGATION_ITEMS } from '@/lib/seo';
 import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
+
+const PAGE_DEF = SITE_NAVIGATION_ITEMS.find((item) => item.href === '/our-solution')!;
 
 export const metadata: Metadata = {
   title: 'Our Solution',
-  description:
-    'Layanan solusi teknologi enterprise Arsalynk di Indonesia: Pengembangan sistem ERP, integrasi hardware IoT, POS retail, HRMS, data analytics, dan otomasi bisnis terintegrasi.',
+  description: PAGE_DEF.description,
   keywords: [
     'solusi ERP indonesia',
     'sistem enterprise indonesia',
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/our-solution' },
   openGraph: {
     title: 'Our Solution | Arsalynk',
-    description: 'Layanan ERP, IoT, POS, HRMS, data analytics, dan pengembangan software enterprise terintegrasi oleh Arsalynk.',
+    description: PAGE_DEF.description,
     url: '/our-solution',
     images: [
       {
@@ -34,7 +36,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Our Solution | Arsalynk',
-    description: 'ERP, IoT, POS, HRMS, data analytics, dan software development enterprise oleh Arsalynk.',
+    description: PAGE_DEF.description,
     images: ['/images/our-works/our-works-hero-bg.webp'],
   },
 };
@@ -45,12 +47,11 @@ export default function OurSolutionLayout({ children }: Readonly<{ children: Rea
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-          { '@type': 'ListItem', position: 2, name: 'Our Solution', item: canonicalUrl },
-        ],
+        ...buildBreadcrumbJsonLd([
+          { name: 'Home', url: `${SITE_URL}/` },
+          { name: 'Our Solution', url: canonicalUrl },
+        ]),
       },
       {
         '@type': 'CollectionPage',
@@ -60,8 +61,7 @@ export default function OurSolutionLayout({ children }: Readonly<{ children: Rea
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
         breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
-        description:
-          'Layanan solusi teknologi enterprise Arsalynk di Indonesia: Pengembangan sistem ERP, integrasi hardware IoT, POS retail, HRMS, otomasi keuangan & supply chain.',
+        description: PAGE_DEF.description,
         inLanguage: 'id-ID',
       },
       {

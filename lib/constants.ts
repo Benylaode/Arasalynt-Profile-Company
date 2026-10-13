@@ -11,10 +11,12 @@ import type {
 /* ─── Navigation ─── */
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Services', href: '#services' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Our Works', href: '/our-works' },
+  { label: 'Our Solution', href: '/our-solution' },
+  { label: 'About Us', href: '/about-us' },
+  { label: 'Our Business', href: '/our-business' },
+  { label: 'Insight & Programs', href: '/insight-programs' },
+  { label: 'Contact Us', href: '/contact-us' },
 ];
 
 import { HERO_SLIDES_DUMMY_DATA } from '@/lib/db/dummy';

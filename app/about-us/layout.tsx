@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
+import { buildBreadcrumbJsonLd, SITE_NAVIGATION_ITEMS } from '@/lib/seo';
+
+const PAGE_DEF = SITE_NAVIGATION_ITEMS.find((item) => item.href === '/about-us')!;
 
 export const metadata: Metadata = {
   title: 'About Us',
-  description:
-    'Mengenal Arsalynk: ekosistem bisnis dan software house terintegrasi di Indonesia yang menghubungkan teknologi, data analytics, riset strategis, dan komunikasi bisnis.',
+  description: PAGE_DEF.description,
   keywords: [
     'tentang arsalynk',
     'ekosistem teknologi enterprise indonesia',
@@ -17,8 +19,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/about-us' },
   openGraph: {
     title: `About Us | ${SITE_NAME}`,
-    description:
-      'Teknologi, data, strategi, komunikasi, dan kapabilitas kreatif terhubung melalui satu ekosistem enterprise.',
+    description: PAGE_DEF.description,
     url: '/about-us',
     images: [
       {
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `About Us | ${SITE_NAME}`,
-    description: 'Temukan tujuan dan kapabilitas di balik ekosistem enterprise Arsalynk.',
+    description: PAGE_DEF.description,
     images: ['/images/about-us/hero-infinity-new.webp'],
   },
 };
@@ -43,12 +44,11 @@ export default function AboutLayout({ children }: Readonly<{ children: React.Rea
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-          { '@type': 'ListItem', position: 2, name: 'About Us', item: canonicalUrl },
-        ],
+        ...buildBreadcrumbJsonLd([
+          { name: 'Home', url: `${SITE_URL}/` },
+          { name: 'About Us', url: canonicalUrl },
+        ]),
       },
       {
         '@type': ['WebPage', 'AboutPage'],
@@ -58,8 +58,7 @@ export default function AboutLayout({ children }: Readonly<{ children: React.Rea
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
         breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
-        description:
-          'Mengenal Arsalynk: ekosistem bisnis dan software house terintegrasi di Indonesia yang menghubungkan teknologi, data analytics, riset strategis, dan komunikasi bisnis.',
+        description: PAGE_DEF.description,
         inLanguage: 'id-ID',
         mainEntity: { '@id': `${SITE_URL}/#organization` },
       },

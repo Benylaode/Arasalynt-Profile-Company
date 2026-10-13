@@ -12,6 +12,12 @@ import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondE
 import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 import { BRAND } from '@/lib/seo/brand';
+import {
+  SITE_NAVIGATION_ITEMS,
+  buildSiteNavigationElementJsonLd,
+  buildWebSiteJsonLd,
+  buildBreadcrumbJsonLd,
+} from '@/lib/seo';
 import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
 
 export const metadata: Metadata = {
@@ -136,25 +142,8 @@ export default function Home() {
           })),
         },
       },
-      {
-        '@type': 'WebSite',
-        '@id': `${SITE_URL}/#website`,
-        url: `${SITE_URL}/`,
-        name: BRAND.name,
-        alternateName: BRAND.alternateNames,
-        description:
-          'Arsalynk menyediakan solusi teknologi enterprise terintegrasi di Indonesia, meliputi ERP, IoT, data analytics, POS, HRMS, dan transformasi digital bisnis.',
-        publisher: { '@id': `${SITE_URL}/#organization` },
-        inLanguage: 'id-ID',
-        hasPart: [
-          { '@type': 'WebPage', name: 'About Us', url: `${SITE_URL}/about-us` },
-          { '@type': 'WebPage', name: 'Our Business', url: `${SITE_URL}/our-business` },
-          { '@type': 'WebPage', name: 'Our Solution', url: `${SITE_URL}/our-solution` },
-          { '@type': 'WebPage', name: 'Our Works', url: `${SITE_URL}/our-works` },
-          { '@type': 'WebPage', name: 'Insight & Programs', url: `${SITE_URL}/insight-programs` },
-          { '@type': 'WebPage', name: 'Contact Us', url: `${SITE_URL}/contact-us` },
-        ],
-      },
+      buildWebSiteJsonLd(),
+      ...buildSiteNavigationElementJsonLd(),
       {
         '@type': 'WebPage',
         '@id': `${SITE_URL}/#webpage`,
@@ -165,16 +154,8 @@ export default function Home() {
         description:
           'Arsalynk adalah penyedia solusi teknologi enterprise & software house di Indonesia. Menghubungkan sistem ERP, integrasi IoT, data analytics, POS, HRMS & transformasi digital bisnis.',
         breadcrumb: {
-          '@type': 'BreadcrumbList',
           '@id': `${SITE_URL}/#breadcrumb`,
-          itemListElement: [
-            {
-              '@type': 'ListItem',
-              position: 1,
-              name: 'Home',
-              item: `${SITE_URL}/`,
-            },
-          ],
+          ...buildBreadcrumbJsonLd([{ name: 'Home', url: `${SITE_URL}/` }]),
         },
         inLanguage: 'id-ID',
       },
@@ -191,10 +172,10 @@ export default function Home() {
         aria-labelledby="arsalynk-brand-overview"
         className="border-b border-black/10 bg-[#F7F7F7] px-[6vw] py-8 max-[1199px]:px-[4vw] md:py-10"
       >
-        <div className="mx-auto grid max-w-[1600px] gap-7 lg:grid-cols-[1.25fr_1fr] lg:items-center">
-          <div>
+        <div className="mx-auto flex max-w-[1600px] flex-col gap-8">
+          <div className="max-w-[860px]">
             <p className="mb-2 font-body text-[11px] font-bold uppercase tracking-[0.12em] text-[#1A3E9E]">
-              Arsalynk
+              Arsalynk Ecosystem
             </p>
             <h2
               id="arsalynk-brand-overview"
@@ -202,30 +183,40 @@ export default function Home() {
             >
               Enterprise technology solutions, connected through one ecosystem.
             </h2>
-            <p className="mt-3 max-w-[820px] font-body text-[14px] leading-[1.75] text-[#555] md:text-[15px]">
+            <p className="mt-3 font-body text-[14px] leading-[1.75] text-[#555] md:text-[15px]">
               Arsalynk adalah ekosistem teknologi enterprise Indonesia yang menghubungkan ERP, IoT,
               data analytics, software development, riset, dan kapabilitas bisnis untuk transformasi digital yang terukur.
             </p>
           </div>
 
           <nav
-            aria-label="Explore Arsalynk"
-            className="grid grid-cols-2 gap-2 sm:grid-cols-3"
+            aria-label="Explore Arsalynk Sitelinks"
+            className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
           >
-            {[
-              ['About Us', '/about-us'],
-              ['Our Business', '/our-business'],
-              ['Our Solution', '/our-solution'],
-              ['Our Works', '/our-works'],
-              ['Insight & Programs', '/insight-programs'],
-              ['Contact Us', '/contact-us'],
-            ].map(([label, href]) => (
+            {SITE_NAVIGATION_ITEMS.map((item) => (
               <Link
-                key={href}
-                href={href}
-                className="rounded-xl border border-black/10 bg-white px-4 py-3 font-body text-[13px] font-medium text-[#101010] no-underline transition hover:border-[#1A3E9E] hover:text-[#1A3E9E]"
+                key={item.href}
+                href={item.href}
+                itemProp="url"
+                itemScope
+                itemType="https://schema.org/SiteNavigationElement"
+                className="group flex flex-col justify-between rounded-xl border border-black/10 bg-white p-4 font-body no-underline transition-all duration-200 hover:border-[#1A3E9E] hover:shadow-md"
               >
-                {label}
+                <div>
+                  <span
+                    itemProp="name"
+                    className="flex items-center justify-between text-[14px] font-semibold text-[#101010] transition-colors group-hover:text-[#1A3E9E]"
+                  >
+                    {item.name}
+                    <span className="text-[12px] opacity-0 transition-opacity group-hover:opacity-100">→</span>
+                  </span>
+                  <p
+                    itemProp="description"
+                    className="mt-1.5 text-[12px] leading-[1.5] text-[#666]"
+                  >
+                    {item.description}
+                  </p>
+                </div>
               </Link>
             ))}
           </nav>

@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
+import { buildBreadcrumbJsonLd, SITE_NAVIGATION_ITEMS } from '@/lib/seo';
+
+const PAGE_DEF = SITE_NAVIGATION_ITEMS.find((item) => item.href === '/our-business')!;
 
 export const metadata: Metadata = {
   title: 'Our Business',
-  description:
-    'Jelajahi ekosistem bisnis Arsalynk di Indonesia: infrastruktur IT, integrasi IoT, survey & data analytics, media digital, komunikasi strategis, dan konsultasi bisnis enterprise.',
+  description: PAGE_DEF.description,
   keywords: [
     'ekosistem bisnis IT',
     'arsalynk business ecosystem',
@@ -17,7 +19,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/our-business' },
   openGraph: {
     title: 'Our Business | Arsalynk',
-    description: 'Temukan portofolio unit bisnis dan kapabilitas enterprise Arsalynk yang terintegrasi di Indonesia.',
+    description: PAGE_DEF.description,
     url: '/our-business',
     images: [
       {
@@ -31,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Our Business | Arsalynk',
-    description: 'Ekosistem bisnis enterprise Arsalynk yang terintegrasi di Indonesia.',
+    description: PAGE_DEF.description,
     images: ['/images/our-works/our-works-hero-bg.webp'],
   },
 };
@@ -42,13 +44,11 @@ export default function OurBusinessLayout({ children }: Readonly<{ children: Rea
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-          { '@type': 'ListItem', position: 2, name: 'About Us', item: `${SITE_URL}/about-us` },
-          { '@type': 'ListItem', position: 3, name: 'Our Business', item: canonicalUrl },
-        ],
+        ...buildBreadcrumbJsonLd([
+          { name: 'Home', url: `${SITE_URL}/` },
+          { name: 'Our Business', url: canonicalUrl },
+        ]),
       },
       {
         '@type': 'CollectionPage',
@@ -58,8 +58,7 @@ export default function OurBusinessLayout({ children }: Readonly<{ children: Rea
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
         breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
-        description:
-          'Jelajahi ekosistem bisnis Arsalynk di Indonesia: Dari infrastruktur IT, integrasi IoT, survey & data analytics, hingga media digital dan komunikasi strategis.',
+        description: PAGE_DEF.description,
         inLanguage: 'id-ID',
       },
     ],

@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
+import { buildBreadcrumbJsonLd, SITE_NAVIGATION_ITEMS } from '@/lib/seo';
 import { BRAND } from '@/lib/seo/brand';
+
+const PAGE_DEF = SITE_NAVIGATION_ITEMS.find((item) => item.href === '/contact-us')!;
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  description:
-    'Hubungi tim Arsalynk di Indonesia untuk konsultasi sistem ERP, integrasi IoT, data analytics, software development, riset bisnis, dan produksi media.',
+  description: PAGE_DEF.description,
   keywords: [
     'konsultasi IT enterprise',
     'hubungi arsalynk',
@@ -18,8 +20,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/contact-us' },
   openGraph: {
     title: `Contact Us | ${SITE_NAME}`,
-    description:
-      'Diskusikan kebutuhan teknologi enterprise, sistem software, data, atau media produksi Anda bersama tim Arsalynk.',
+    description: PAGE_DEF.description,
     url: '/contact-us',
     images: [
       {
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Contact Us | ${SITE_NAME}`,
-    description: 'Mulai diskusi bersama tim solusi enterprise Arsalynk.',
+    description: PAGE_DEF.description,
     images: ['/images/our-works/our-works-hero-bg.webp'],
   },
 };
@@ -44,12 +45,11 @@ export default function ContactLayout({ children }: Readonly<{ children: React.R
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-          { '@type': 'ListItem', position: 2, name: 'Contact Us', item: canonicalUrl },
-        ],
+        ...buildBreadcrumbJsonLd([
+          { name: 'Home', url: `${SITE_URL}/` },
+          { name: 'Contact Us', url: canonicalUrl },
+        ]),
       },
       {
         '@type': ['ContactPage', 'WebPage'],
@@ -59,8 +59,7 @@ export default function ContactLayout({ children }: Readonly<{ children: React.R
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
         breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
-        description:
-          'Hubungi tim Arsalynk di Indonesia untuk konsultasi sistem ERP, integrasi IoT, data analytics, software development, riset bisnis, dan produksi media.',
+        description: PAGE_DEF.description,
         inLanguage: 'id-ID',
         mainEntity: {
           '@type': 'Organization',
