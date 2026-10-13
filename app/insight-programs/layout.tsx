@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import { SITE_NAME } from '@/lib/constants';
+import { SITE_NAVIGATION_ITEMS } from '@/lib/seo';
+
+const PAGE_DEF = SITE_NAVIGATION_ITEMS.find((item) => item.href === '/insight-programs')!;
 
 export const metadata: Metadata = {
   title: 'Insight & Programs',
-  description:
-    'Studi kasus implementasi sistem enterprise dan pemikiran kepemimpinan strategis dari ekosistem Arsalynk di Indonesia.',
+  description: PAGE_DEF.description,
   keywords: [
     'insight and programs',
     'studi kasus arsalynk',
@@ -16,8 +18,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/insight-programs' },
   openGraph: {
     title: `Insight & Programs | ${SITE_NAME}`,
-    description:
-      'Studi kasus implementasi nyata dan perspektif kepemimpinan dari ekosistem Arsalynk.',
+    description: PAGE_DEF.description,
     url: '/insight-programs',
     images: [
       {
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Insight & Programs | ${SITE_NAME}`,
-    description: 'Knowledge, implementasi, dan perspektif dari ekosistem Arsalynk.',
+    description: PAGE_DEF.description,
     images: ['/images/insight-programs/case-studies/hero-case-studies.webp'],
   },
 };

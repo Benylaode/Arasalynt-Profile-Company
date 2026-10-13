@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import { SITE_NAME } from '@/lib/constants';
+import { SITE_NAVIGATION_ITEMS } from '@/lib/seo';
+
+const PAGE_DEF = SITE_NAVIGATION_ITEMS.find((item) => item.href === '/our-business')!;
 
 export const metadata: Metadata = {
   title: 'Our Business',
-  description:
-    'Jelajahi ekosistem bisnis Arsalynk di Indonesia: infrastruktur IT, integrasi IoT, survey & data analytics, media digital, komunikasi strategis, dan konsultasi bisnis enterprise.',
+  description: PAGE_DEF.description,
   keywords: [
     'ekosistem bisnis IT',
     'arsalynk business ecosystem',
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/our-business' },
   openGraph: {
     title: 'Our Business | Arsalynk',
-    description: 'Temukan portofolio unit bisnis dan kapabilitas enterprise Arsalynk yang terintegrasi di Indonesia.',
+    description: PAGE_DEF.description,
     url: '/our-business',
     images: [
       {
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Our Business | Arsalynk',
-    description: 'Ekosistem bisnis enterprise Arsalynk yang terintegrasi di Indonesia.',
+    description: PAGE_DEF.description,
     images: ['/images/our-works/our-works-hero-bg.webp'],
   },
 };

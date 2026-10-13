@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import { SITE_NAME } from '@/lib/constants';
+import { SITE_NAVIGATION_ITEMS } from '@/lib/seo';
+
+const PAGE_DEF = SITE_NAVIGATION_ITEMS.find((item) => item.href === '/about-us')!;
 
 export const metadata: Metadata = {
   title: 'About Us',
-  description:
-    'Mengenal Arsalynk: ekosistem bisnis dan software house terintegrasi di Indonesia yang menghubungkan teknologi, data analytics, riset strategis, dan komunikasi bisnis.',
+  description: PAGE_DEF.description,
   keywords: [
     'tentang arsalynk',
     'ekosistem teknologi enterprise indonesia',
@@ -16,8 +18,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/about-us' },
   openGraph: {
     title: `About Us | ${SITE_NAME}`,
-    description:
-      'Teknologi, data, strategi, komunikasi, dan kapabilitas kreatif terhubung melalui satu ekosistem enterprise.',
+    description: PAGE_DEF.description,
     url: '/about-us',
     images: [
       {
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `About Us | ${SITE_NAME}`,
-    description: 'Temukan tujuan dan kapabilitas di balik ekosistem enterprise Arsalynk.',
+    description: PAGE_DEF.description,
     images: ['/images/about-us/hero-infinity-new.webp'],
   },
 };

@@ -36,7 +36,9 @@ const caseStudyDateMap = new Map<string, string>(
 
 function entry(
   path: string,
-  lastModified?: string | Date
+  lastModified?: string | Date,
+  priority?: number,
+  changeFrequency?: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
 ): MetadataRoute.Sitemap[number] {
   return {
     url: `${SITE_URL}${path}`,
@@ -46,44 +48,44 @@ function entry(
             lastModified instanceof Date ? lastModified : new Date(lastModified),
         }
       : {}),
+    ...(priority !== undefined ? { priority } : {}),
+    ...(changeFrequency ? { changeFrequency } : {}),
   };
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [
     // ── Halaman Utama ──────────────────────────────────────────────────────
-    entry('/', '2026-10-08'),
+    entry('/', '2026-10-13', 1.0, 'weekly'),
 
-    // ── About Us & Sub-Pages ───────────────────────────────────────────────
-    entry('/about-us', '2026-10-08'),
-    entry('/about-us/corporate-profile', '2026-09-15'),
-    entry('/about-us/company-leadership', '2026-09-20'),
-    entry('/about-us/ecosystem-philosophy', '2026-09-10'),
+    // ── 6-Pack Core Sitelinks (Priority 0.9) ────────────────────────────────
+    entry('/our-works', '2026-10-13', 0.9, 'weekly'),
+    entry('/our-solution', '2026-10-13', 0.9, 'weekly'),
+    entry('/about-us', '2026-10-13', 0.9, 'weekly'),
+    entry('/our-business', '2026-10-13', 0.9, 'weekly'),
+    entry('/insight-programs', '2026-10-13', 0.9, 'weekly'),
+    entry('/contact-us', '2026-10-13', 0.9, 'weekly'),
 
-    // ── Layanan & Bisnis ───────────────────────────────────────────────────
-    entry('/our-business', '2026-10-08'),
-    entry('/our-solution', '2026-10-08'),
+    // ── Sub-Pages About Us ─────────────────────────────────────────────────
+    entry('/about-us/corporate-profile', '2026-09-15', 0.8, 'monthly'),
+    entry('/about-us/company-leadership', '2026-09-20', 0.8, 'monthly'),
+    entry('/about-us/ecosystem-philosophy', '2026-09-10', 0.8, 'monthly'),
 
     // ── Halaman Dinamis: Our Solution Services (200 OK & Indexable) ────────
     ...SOLUTION_SERVICES.map(({ slug }) =>
-      entry(`/our-solution/${slug}`, SOLUTION_DATES[slug] ?? '2026-10-06')
+      entry(`/our-solution/${slug}`, SOLUTION_DATES[slug] ?? '2026-10-06', 0.85, 'weekly')
     ),
 
-    // ── Portofolio (Supporting Proof Layer) ────────────────────────────────
-    entry('/our-works', '2026-10-08'),
-
-    // ── Insight & Programs (Hub & Sub-Sections) ────────────────────────────
-    entry('/insight-programs', '2026-10-08'),
-    entry('/insight-programs/case-studies', '2026-10-08'),
-    entry('/insight-programs/leadership-thoughts', '2026-10-08'),
+    // ── Insight & Programs Sub-Sections ────────────────────────────────────
+    entry('/insight-programs/case-studies', '2026-10-08', 0.8, 'weekly'),
+    entry('/insight-programs/leadership-thoughts', '2026-10-08', 0.8, 'weekly'),
 
     // ── Kontak & Legal ─────────────────────────────────────────────────────
-    entry('/contact-us', '2026-09-01'),
-    entry('/privacy-policy', '2026-01-15'),
+    entry('/privacy-policy', '2026-01-15', 0.5, 'yearly'),
 
     // ── Halaman Dinamis: Business Units ────────────────────────────────────
     ...BUSINESS_DUMMY_DATA.map(({ slug }) =>
-      entry(`/our-business/${slug}`, '2026-08-25')
+      entry(`/our-business/${slug}`, '2026-08-25', 0.8, 'monthly')
     ),
 
     // ── Halaman Dinamis: Our Works ─────────────────────────────────────────

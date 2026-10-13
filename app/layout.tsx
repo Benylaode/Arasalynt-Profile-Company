@@ -7,6 +7,7 @@ import Footer from '@/components/layout/Footer/Footer';
 import WhatsAppFloatingButton from '@/components/layout/WhatsAppFloatingButton/WhatsAppFloatingButton';
 import ArsAIWidget from '@/components/chatbot/ArsAIWidget';
 import HashScrollHandler from '@/components/ui/HashScrollHandler/HashScrollHandler';
+import WebKitBackgroundPreloader from '@/components/performance/WebKitBackgroundPreloader';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -109,6 +110,10 @@ export default function RootLayout({
   return (
     <html lang="id" className={manrope.variable} data-scroll-behavior="smooth">
       <head>
+        {/* Apple Safari & WebKit Performance Hints */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="format-detection" content="telephone=no" />
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://api.fontshare.com" />
         <link
@@ -118,6 +123,7 @@ export default function RootLayout({
       </head>
       <body>
         <HashScrollHandler />
+        <WebKitBackgroundPreloader />
         <Navbar />
         {children}
         <Footer />

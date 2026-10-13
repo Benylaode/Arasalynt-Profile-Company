@@ -3,7 +3,7 @@ import { SITE_URL } from '@/lib/constants';
 
 /** Only mount on index pages. Detail pages have their own breadcrumbs. */
 const SECTIONS = {
-  'about-us': {path:'/about-us',title:'Tentang Kami',type:'AboutPage',description:'Mengenal Arsalynk, ekosistem teknologi enterprise, data analytics, dan kapabilitas bisnis terintegrasi di Indonesia.',ancestors:[] as {name:string;path:string}[]},
+  'about-us': {path:'/about-us',title:'About Us',type:'AboutPage',description:'Mengenal Arsalynk, ekosistem teknologi enterprise, data analytics, dan kapabilitas bisnis terintegrasi di Indonesia.',ancestors:[] as {name:string;path:string}[]},
   'our-business': {path:'/our-business',title:'Our Business',type:'CollectionPage',description:'Ekosistem bisnis Arsalynk dengan spesialisasi teknologi, riset, data analytics, digital media, dan konsultasi bisnis.',ancestors:[] as {name:string;path:string}[]},
   'our-works': {path:'/our-works',title:'Our Works',type:'CollectionPage',description:'Portofolio Arsalynk: ERP, IoT, pengembangan perangkat lunak, analitik data, dan produksi media.',ancestors:[] as {name:string;path:string}[]},
   'insight-programs': {path:'/insight-programs',title:'Insight & Programs',type:'CollectionPage',description:'Studi kasus dan perspektif kepemimpinan Arsalynk tentang teknologi enterprise dan strategi bisnis.',ancestors:[] as {name:string;path:string}[]},
