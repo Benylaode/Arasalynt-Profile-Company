@@ -2,11 +2,13 @@
 
 import nodemailer from 'nodemailer';
 import { getDb } from '@/lib/db/db';
+import { sendMarkaInquiry } from '@/lib/integrations/marka-crm';
 
 export type SubmitLeadResult = {
   success: boolean;
   message?: string;
   id?: number;
+  markaSyncStatus?: 'DELIVERED' | 'FAILED' | 'NOT_CONFIGURED';
 };
 
 /**
@@ -638,6 +640,20 @@ export async function submitLead(
       `[Lead #${leadId}] Lead berhasil disimpan ke database dari ${email}`,
     );
 
+    const markaSyncStatus = await sendMarkaInquiry({
+      name,
+      company,
+      email,
+      phone,
+      inquiry,
+      message,
+    });
+    if (markaSyncStatus === 'NOT_CONFIGURED') {
+      console.info(`[Lead #${leadId}] Marka CRM sync is not configured; website lead and email flow continue.`);
+    } else if (markaSyncStatus === 'FAILED') {
+      console.error(`[Lead #${leadId}] Website stored the lead, but Marka CRM did not acknowledge it after retries.`);
+    }
+
     /**
      * ========================================================
      * 2. KIRIM EMAIL NOTIFICATION
@@ -654,6 +670,7 @@ export async function submitLead(
         message:
           'Inquiry berhasil disimpan, tetapi email notification gagal dikonfigurasi.',
         id: leadId,
+        markaSyncStatus,
       };
     }
 
@@ -703,6 +720,7 @@ export async function submitLead(
       message:
         'Thank you! Your inquiry has been submitted successfully.',
       id: leadId,
+      markaSyncStatus,
     };
   } catch (error: any) {
     console.error('submitLead error:', error);
