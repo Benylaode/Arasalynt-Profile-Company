@@ -227,3 +227,13 @@ Setelah beralih ke Customer Service, pengunjung memiliki **2 opsi kenyamanan**:
 | [`app/api/whatsapp/send/route.ts`](file:///d:/projectku/Arsalynt/Arsalynt%20web/arsalynt/app/api/whatsapp/send/route.ts) | API route untuk meneruskan pesan user ke WAHA / database live chat. |
 | [`app/api/whatsapp/messages/route.ts`](file:///d:/projectku/Arsalynt/Arsalynt%20web/arsalynt/app/api/whatsapp/messages/route.ts) | API route untuk mengambil pesan balasan real-time dari tim CS. |
 
+
+## Marka CRM — Contact Form Integration
+
+The Contact Us form keeps its local lead and email behavior. The server action calls `lib/integrations/marka-crm.ts` to forward an HMAC-SHA256 signed `inquiry.submitted` event to Marka when the `MARKA_CRM_*` environment variables are configured. Keep the signing secret server-side; never prefix it with `NEXT_PUBLIC_`.
+
+1. In Marka, register the landing page from **Company & Access → Integrasi CRM → Landing page / aplikasi**. Enable `inquiry.submitted` for Contact Us; `message.received` is for a separate chat channel.
+2. Add the webhook URL, Integration ID, Key ID, and one-time signing secret to the hosting provider environment using the names in `.env.example`.
+3. Deploy/restart this website and submit a test Contact Us form. The inquiry should appear in Marka CRM **Incoming Inquiry**.
+
+The adapter retries transient failures up to three times with the same event ID and payload. If all attempts fail, check server logs labeled `[Marka CRM]`. This first connector does not include a durable website-side retry queue; a final failure needs operational follow-up. The integration code does not send WhatsApp chat messages.
