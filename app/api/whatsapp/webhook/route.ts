@@ -3,6 +3,7 @@ import { createHash, createHmac, timingSafeEqual } from 'crypto';
 import { WA_CONFIG } from '@/lib/whatsapp/config';
 import { recordLiveChatMessage } from '@/lib/waha.service';
 import { persistDurableLiveChatMessage } from '@/lib/whatsapp/live-chat-store';
+import { sendMarkaMessageReceived, type MarkaMessageSenderType } from '@/lib/integrations/marka-crm-message';
 
 export const dynamic = 'force-dynamic';
 
@@ -151,6 +152,7 @@ async function handleMetaWebhook(
 ): Promise<NextResponse> {
   let received = 0;
   let stored = 0;
+  let markaForwarded = 0;
   let ignored = 0;
 
   for (const entry of payload?.entry || []) {
@@ -199,10 +201,25 @@ async function handleMetaWebhook(
         }
 
         const sessionId = extractWebsiteSessionId(body);
+        const senderPhone = String(message?.from || '').replace(/\D/g, '');
+        const contact = (value?.contacts || []).find((item: any) => String(item?.wa_id || '') === String(message?.from || ''));
+        const messageText = body.replace(/\s*\[#guest_[a-zA-Z0-9_-]+\]|\s*#guest_[a-zA-Z0-9_-]+/gi, '').trim();
+        const markaStatus = await sendMarkaMessageReceived({
+          channel: 'whatsapp',
+          messageId: msgId || ('meta-' + requestId + '-' + received),
+          threadId: 'whatsapp:' + (senderPhone || String(message?.from || 'unknown')),
+          senderName: String(contact?.profile?.name || 'Pelanggan WhatsApp').slice(0, 200),
+          senderType: senderPhone ? 'PHONE' : 'EXTERNAL',
+          senderValue: senderPhone ? '+' + senderPhone : 'whatsapp:' + String(message?.from || 'unknown'),
+          text: messageText || body,
+          occurredAt: message?.timestamp ? new Date(Number(message.timestamp) * 1000).toISOString() : undefined,
+        });
+        if (markaStatus === 'DELIVERED') markaForwarded++;
+        else if (markaStatus === 'FAILED') {
+          console.error('[MetaWebhook][reqId:' + requestId + '] Marka did not acknowledge WhatsApp message ' + (msgId || '-') + '.');
+        }
+
         if (!sessionId) {
-          console.warn(
-            `[MetaWebhook][reqId:${requestId}] Pesan ${msgId || '-'} diabaikan: tidak ada tag guest session.`
-          );
           ignored++;
           continue;
         }
@@ -230,7 +247,7 @@ async function handleMetaWebhook(
   }
 
   console.info(
-    `[MetaWebhook][reqId:${requestId}] Completed received=${received} stored=${stored} ignored=${ignored}`
+    `[MetaWebhook][reqId:${requestId}] Completed received=${received} stored=${stored} markaForwarded=${markaForwarded} ignored=${ignored}`
   );
 
   return NextResponse.json({
@@ -238,6 +255,7 @@ async function handleMetaWebhook(
     provider: 'meta_cloud',
     received,
     stored,
+    markaForwarded,
     ignored,
   });
 }
@@ -255,13 +273,34 @@ async function handleLegacyGatewayWebhook(
   const sessionId = String(msgPayload?.sessionId || '').trim();
   const msgId = String(msgPayload?.id || '').trim();
   const body = String(msgPayload?.body || '').trim();
-
-  if (!sessionId) {
-    return NextResponse.json({ status: 'ignored', reason: 'No website sessionId' });
-  }
+  const fromMe = Boolean(msgPayload?.fromMe);
 
   if (!body) {
     return NextResponse.json({ status: 'ignored', reason: 'Empty message body' });
+  }
+
+  if (!fromMe) {
+    const rawFrom = String(msgPayload?.from || '').trim();
+    const phoneDigits = rawFrom.replace(/@(?:s\.whatsapp\.net|c\.us|g\.us|lid).*$/i, '').replace(/\D/g, '');
+    const senderType: MarkaMessageSenderType = phoneDigits ? 'PHONE' : 'EXTERNAL';
+    const senderValue = phoneDigits ? '+' + phoneDigits : 'whatsapp:' + (rawFrom || 'unknown');
+    const markaStatus = await sendMarkaMessageReceived({
+      channel: 'whatsapp',
+      messageId: msgId || 'gateway-' + requestId,
+      threadId: 'whatsapp:' + senderValue,
+      senderName: String(msgPayload?.pushName || 'Pelanggan WhatsApp').slice(0, 200),
+      senderType,
+      senderValue,
+      text: body,
+      occurredAt: msgPayload?.timestamp ? new Date(Number(msgPayload.timestamp) * 1000).toISOString() : undefined,
+    });
+    if (markaStatus === 'FAILED') {
+      console.error('[Webhook][reqId:' + requestId + '] Marka did not acknowledge WhatsApp message ' + (msgId || '-') + '.');
+    }
+  }
+
+  if (!sessionId) {
+    return NextResponse.json({ status: fromMe ? 'ignored' : 'ok', provider: 'crm_wa', forwardedToMarka: !fromMe, msgId });
   }
 
   try {

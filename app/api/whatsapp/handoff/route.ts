@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requestHumanHandoff } from '@/lib/whatsapp/handoff.client';
 import { recordLiveChatMessage } from '@/lib/waha.service';
 import { persistDurableLiveChatMessage } from '@/lib/whatsapp/live-chat-store';
+import { randomUUID } from 'node:crypto';
+import { sendMarkaMessageReceived } from '@/lib/integrations/marka-crm-message';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,6 +18,8 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { sessionId, message, name, requestId } = body;
+    const messageId = String(body?.messageId || randomUUID()).trim();
+    const occurredAt = String(body?.occurredAt || new Date().toISOString()).trim();
 
     if (
       !sessionId ||
@@ -36,6 +40,20 @@ export async function POST(req: NextRequest) {
     });
 
     if (result.accepted) {
+      const markaStatus = await sendMarkaMessageReceived({
+        channel: 'webchat',
+        messageId,
+        occurredAt,
+        threadId: 'webchat:' + sessionId,
+        senderName: String(name || 'Pengunjung website Arsalynk').slice(0, 200),
+        senderType: 'EXTERNAL',
+        senderValue: 'website:' + sessionId,
+        text: String(message).trim(),
+      });
+      if (markaStatus !== 'DELIVERED' && markaStatus !== 'NOT_CONFIGURED') {
+        console.error('[Handoff] Marka did not acknowledge web chat message ' + messageId + '.');
+      }
+
       try {
         await persistDurableLiveChatMessage({
           sessionId: String(sessionId),
