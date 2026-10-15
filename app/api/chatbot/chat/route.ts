@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { buildSignedRuntimeContext } from '@/lib/chatbot/enterprise-auth';
+import { randomUUID } from 'node:crypto';
+import { sendMarkaMessageReceived } from '@/lib/integrations/marka-crm-message';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -21,6 +23,8 @@ export async function POST(req: NextRequest) {
       ? String(body.conversationId).trim()
       : undefined;
     const externalUserId = String(body?.externalUserId || '').trim();
+    const messageId = String(body?.messageId || randomUUID()).trim();
+    const occurredAt = String(body?.occurredAt || new Date().toISOString()).trim();
 
     if (!message || message.length > 4000) {
       return NextResponse.json(
@@ -34,6 +38,27 @@ export async function POST(req: NextRequest) {
         { success: false, error: 'externalUserId is required and must be <= 160 characters' },
         { status: 400, headers: NO_CACHE_HEADERS },
       );
+    }
+
+    if (!messageId || messageId.length > 300) {
+      return NextResponse.json(
+        { success: false, error: 'messageId is invalid' },
+        { status: 400, headers: NO_CACHE_HEADERS },
+      );
+    }
+
+    const markaStatus = await sendMarkaMessageReceived({
+      channel: 'webchat',
+      messageId,
+      occurredAt,
+      threadId: 'webchat:' + externalUserId,
+      senderName: 'Pengunjung website Arsalynk',
+      senderType: 'EXTERNAL',
+      senderValue: 'website:' + externalUserId,
+      text: message,
+    });
+    if (markaStatus !== 'DELIVERED' && markaStatus !== 'NOT_CONFIGURED') {
+      console.error('[ChatbotTenantProxy] Marka did not acknowledge web chat message ' + messageId + '.');
     }
 
     const { context, signature, config } = buildSignedRuntimeContext(externalUserId);

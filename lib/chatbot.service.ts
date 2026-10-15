@@ -78,6 +78,8 @@ function resolveExternalUserId(provided?: string): string {
 
 export interface StreamChatOptions {
   message: string;
+  messageId?: string;
+  occurredAt?: string;
   conversationId?: string | null;
   externalUserId?: string;
   /** @deprecated Enterprise chat auth is now server-side. */
@@ -94,6 +96,8 @@ export interface StreamChatOptions {
  */
 export async function streamChatCompletion({
   message,
+  messageId,
+  occurredAt,
   conversationId,
   externalUserId,
   signal,
@@ -111,6 +115,8 @@ export async function streamChatCompletion({
       },
       body: JSON.stringify({
         message,
+        messageId,
+        occurredAt,
         conversationId: conversationId || undefined,
         externalUserId: resolvedExternalUserId,
       }),

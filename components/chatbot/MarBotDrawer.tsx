@@ -400,6 +400,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
     const messageContent = (textToSend ?? inputValue).trim();
     if (!messageContent || isLoading) return;
 
+    const occurredAt = new Date().toISOString();
     const userMessage: ChatMessage = {
       id: `user-${Date.now()}`,
       role: 'user',
@@ -415,7 +416,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
         const handoffRes = await fetch('/api/whatsapp/handoff', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sessionId, message: messageContent }),
+          body: JSON.stringify({ sessionId, message: messageContent, messageId: userMessage.id, occurredAt }),
         });
         const data = await handoffRes.json().catch(() => null);
 
@@ -460,7 +461,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
         const handoffRes = await fetch('/api/whatsapp/handoff', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sessionId, message: messageContent }),
+          body: JSON.stringify({ sessionId, message: messageContent, messageId: userMessage.id, occurredAt }),
         });
         const data = await handoffRes.json().catch(() => null);
         if (!handoffRes.ok || !data?.accepted) {
@@ -521,6 +522,9 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
     try {
       await streamChatCompletion({
         message: messageContent,
+        messageId: userMessage.id,
+        occurredAt,
+        externalUserId: sessionId,
         conversationId: conversationId || undefined,
         signal: abortController.signal,
         onChunk: (delta: string) => {
