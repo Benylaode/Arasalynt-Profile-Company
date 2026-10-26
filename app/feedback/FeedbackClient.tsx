@@ -56,7 +56,7 @@ export default function FeedbackClient() {
     setErrorMessage('');
 
     if (!customerCode.trim()) {
-      setErrorMessage('Kode Pelanggan / Customer Code wajib diisi untuk pencocokan data mitra di Marka CRM.');
+      setErrorMessage('Kode Klien wajib diisi agar evaluasi terhubung dengan proyek perusahaan Anda.');
       setIsSubmitting(false);
       return;
     }
@@ -78,13 +78,13 @@ export default function FeedbackClient() {
 
       const json = await res.json();
       if (!res.ok || !json.success) {
-        throw new Error(json.error || 'Gagal mengirimkan feedback ke Marka CRM.');
+        throw new Error(json.error || 'Gagal mengirimkan feedback.');
       }
 
       setIsSuccess(true);
     } catch (err: unknown) {
       const errObj = err as Error;
-      setErrorMessage(errObj.message || 'Terjadi kendala saat menghubungkan ke sistem Marka CRM.');
+      setErrorMessage(errObj.message || 'Terjadi kendala saat mengirimkan ulasan.');
     } finally {
       setIsSubmitting(false);
     }
@@ -98,7 +98,7 @@ export default function FeedbackClient() {
           Terima Kasih Atas Ulasan Anda!
         </h3>
         <p className="mx-auto mt-3 max-w-[480px] font-body text-[14px] leading-[1.6] text-[#717171]">
-          Penilaian Anda untuk mitra <strong className="text-[#1A3E9E]">{customerCode}</strong> telah berhasil diverifikasi dan disinkronkan ke sistem evaluasi kualitas Marka CRM. Kami sangat mengapresiasi masukan berharga Anda.
+          Penilaian Anda untuk klien <strong className="text-[#1A3E9E]">{customerCode}</strong> telah berhasil kami terima. Kami sangat mengapresiasi waktu dan masukan berharga Anda untuk kemajuan layanan Arsalynk.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -129,36 +129,36 @@ export default function FeedbackClient() {
       <div className="mb-6 flex flex-col gap-1">
         <div className="flex items-center gap-2 font-body text-[11px] font-extrabold uppercase tracking-[0.06em] text-[#1A3E9E]">
           <span className="h-1.5 w-1.5 bg-[#1A3E9E]" />
-          <span>INTEGRASI MARKA CRM EVALUATION</span>
+          <span>EVALUASI KEPUASAN KLIEN</span>
         </div>
         <h3 className="font-heading text-[20px] font-medium text-[#101010]">
-          Formulir Penilaian &amp; Kepuasan Klien
+          Formulir Penilaian &amp; Ulasan Layanan
         </h3>
         <p className="font-body text-[13px] text-[#717171]">
-          Evaluasi ini dikirimkan melalui server terenkripsi ke Marka ERP guna mencocokkan kepuasan layanan dengan master customer Anda.
+          Masukan Anda akan dipelajari langsung oleh manajemen Arsalynk guna memastikan kualitas solusi dan pendampingan tim kami selalu optimal.
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4.5">
-        {/* Customer Code - REQUIRED BY MARKA CONTRACT */}
+        {/* Customer Code */}
         <div className="flex flex-col gap-1.5">
-          <RequiredLabel>Kode Klien / Customer Code</RequiredLabel>
+          <RequiredLabel>Kode Klien / ID Perusahaan</RequiredLabel>
           <input
             type="text"
             required
             value={customerCode}
             onChange={(e) => setCustomerCode(e.target.value.toUpperCase())}
-            placeholder="Contoh: CUST-MP-01 atau kode dari kontrak/invoice Anda"
+            placeholder="Contoh: CUST-MP-01 atau sesuai invoice/kontrak Anda"
             className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
           />
           <span className="font-body text-[11px] text-[#717171]">
-            * Wajib diisi dengan kode mitra aktif Anda di Marka ERP agar ulasan terhubung ke master data akun Anda.
+            * Kode identitas yang tertera pada dokumen penawaran, invoice, atau kontrak kerja sama Anda bersama Arsalynk.
           </span>
         </div>
 
         {/* Star Rating Section */}
         <div className="flex flex-col gap-2 rounded-[12px] bg-[#F7F7F7] p-4 border border-[#EAEAEA]">
-          <RequiredLabel>Skala Kepuasan Layanan (1-5)</RequiredLabel>
+          <RequiredLabel>Tingkat Kepuasan Layanan</RequiredLabel>
           <div className="flex items-center gap-2 pt-1">
             {[1, 2, 3, 4, 5].map((star) => (
               <button
@@ -179,9 +179,9 @@ export default function FeedbackClient() {
           <span className="font-body text-[12px] font-semibold text-[#1A3E9E]">
             {rating === 5 && 'Sangat Puas (5/5) — Melebihi Ekspektasi'}
             {rating === 4 && 'Puas (4/5) — Standar Profesional Terpenuhi'}
-            {rating === 3 && 'Cukup (3/5) — Memadai, Butuh Optimasi'}
-            {rating === 2 && 'Kurang Puas (2/5) — Ada Kendala Signifikan'}
-            {rating === 1 && 'Sangat Tidak Puas (1/5) — Perlu Eskalasi Segera'}
+            {rating === 3 && 'Cukup (3/5) — Cukup Baik, Ada Ruang Peningkatan'}
+            {rating === 2 && 'Kurang Puas (2/5) — Perlu Peningkatan Layanan'}
+            {rating === 1 && 'Sangat Tidak Puas (1/5) — Membutuhkan Tindak Lanjut'}
           </span>
         </div>
 
@@ -189,7 +189,7 @@ export default function FeedbackClient() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="flex flex-col gap-1.5">
             <label className="font-body text-[13px] font-medium text-[#292929]">
-              Jenis Evaluasi
+              Bidang Layanan
             </label>
             <div className="relative">
               <select
@@ -197,10 +197,10 @@ export default function FeedbackClient() {
                 onChange={(e) => setFeedbackType(e.target.value)}
                 className="h-[46px] w-full appearance-none rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
               >
-                <option value="CUSTOMER_REVIEW">Customer Review (Ulasan Layanan)</option>
-                <option value="SERVICE_EVALUATION">Evaluasi Kinerja Sistem ERP</option>
-                <option value="PROJECT_FEEDBACK">Ulasan Penyelesaian Proyek</option>
-                <option value="SUPPORT_FEEDBACK">Kepuasan Dukungan Teknis</option>
+                <option value="CUSTOMER_REVIEW">Ulasan Kerja Sama Proyek</option>
+                <option value="SERVICE_EVALUATION">Kinerja Solusi Sistem &amp; Software</option>
+                <option value="PROJECT_FEEDBACK">Komunikasi &amp; Manajemen Proyek</option>
+                <option value="SUPPORT_FEEDBACK">Kualitas Dukungan Teknis</option>
               </select>
               <svg
                 width="20"
@@ -223,7 +223,7 @@ export default function FeedbackClient() {
 
           <div className="flex flex-col gap-1.5">
             <label className="font-body text-[13px] font-medium text-[#292929]">
-              Nomor Sales Order / Proyek (Opsional)
+              Nomor Kontrak / Proyek (Opsional)
             </label>
             <input
               type="text"
@@ -264,15 +264,15 @@ export default function FeedbackClient() {
           </div>
         </div>
 
-        {/* Feedback Text - REQUIRED */}
+        {/* Feedback Text */}
         <div className="flex flex-col gap-1.5">
-          <RequiredLabel>Isi Ulasan &amp; Masukan Evaluasi</RequiredLabel>
+          <RequiredLabel>Pesan, Masukan, atau Saran</RequiredLabel>
           <textarea
             required
             rows={4}
             value={feedbackText}
             onChange={(e) => setFeedbackText(e.target.value)}
-            placeholder="Tuliskan pengalaman Anda mengenai implementasi, komunikasi, dan kualitas penanganan proyek..."
+            placeholder="Bagikan pengalaman Anda selama bekerja sama dengan tim Arsalynk..."
             className="w-full resize-none rounded-[8px] border border-[#C8C8C8] bg-white p-3.5 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10"
           />
         </div>
@@ -289,7 +289,7 @@ export default function FeedbackClient() {
             disabled={isSubmitting}
             className="inline-flex h-[48px] w-full sm:w-[220px] items-center justify-center gap-2 rounded-full bg-[#1A3E9E] px-8 font-body text-[13px] font-bold uppercase tracking-[0.04em] text-white transition hover:bg-[#14347F] disabled:cursor-wait disabled:opacity-60 md:h-[50px]"
           >
-            <span>{isSubmitting ? 'MENGIRIMKAN...' : 'KIRIM FEEDBACK'}</span>
+            <span>{isSubmitting ? 'MENGIRIMKAN...' : 'KIRIM EVALUASI'}</span>
             <svg width="6" height="10" viewBox="0 0 8 14" fill="none" aria-hidden="true">
               <path
                 d="M1 1L7 7L1 13"

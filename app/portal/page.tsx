@@ -117,10 +117,10 @@ export default function ClientPortalPage() {
               </div>
 
               <h1 className="font-heading text-[clamp(44px,4.5vw,84px)] font-medium leading-[1.05] tracking-[-0.02em] text-[#F7F7F7]">
-                Client Portal
+                Portal Klien
               </h1>
               <p className="max-w-[580px] font-body text-[14px] leading-[1.6] text-white/75 sm:text-[16px]">
-                Persetujuan dokumen penawaran (quotation) resmi dan pelaporan tiket dukungan teknis secara digital melalui integrasi aman server Marka CRM.
+                Akses resmi untuk mengonfirmasi dokumen penawaran kerja sama dan mengajukan permohonan bantuan teknis kepada tim Arsalynk.
               </p>
             </div>
           </div>
@@ -151,20 +151,20 @@ export default function ClientPortalPage() {
               <h2 className="font-heading text-[clamp(28px,2.4vw,42px)] font-medium leading-[1.15] tracking-[-0.03em] text-[#101010]">
                 Transparansi &amp;
                 <br />
-                Kendali Dokumen
+                Kemudahan
                 <br />
-                Proyek Anda
+                Kolaborasi
               </h2>
 
               <p className="font-body text-[14px] leading-[1.65] text-[#717171] md:text-[15px]">
-                Setiap keputusan penawaran (quotation) dan tiket dukungan teknis yang Anda kirimkan diproses langsung ke sistem Marka CRM melalui integrasi bertanda tangan server (HMAC-SHA256). Pembaruan pengerjaan tiket akan disampaikan langsung oleh tim teknisi kami secara berkala.
+                Kami memastikan setiap dokumen penawaran dan permohonan bantuan teknis diproses secara tepat waktu. Tim kami siap mendampingi Anda di setiap tahapan proyek.
               </p>
 
               <div className="flex flex-col gap-4 rounded-[16px] md:gap-5">
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>BANTUAN &amp; VERIFIKASI</span>
+                    <span>BANTUAN &amp; INFORMASI</span>
                   </div>
 
                   <div className="flex flex-col gap-1.5">
@@ -195,11 +195,11 @@ export default function ClientPortalPage() {
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>SISTEM TERINTEGRASI</span>
+                    <span>LAYANAN RESMI</span>
                   </div>
 
                   <p className="font-body text-[13px] leading-[1.5] tracking-[0.01em] text-[#717171]">
-                    Terhubung langsung ke core Marka ERP &amp; Helpdesk Engine dengan enkripsi end-to-end tokenized authorization.
+                    Terhubung langsung dengan tim operasional Arsalynk untuk menjamin keamanan data dan ketepatan tindak lanjut.
                   </p>
                 </div>
               </div>

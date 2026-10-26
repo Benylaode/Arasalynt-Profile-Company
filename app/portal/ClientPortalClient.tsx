@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 export default function ClientPortalClient() {
@@ -17,7 +17,7 @@ export default function ClientPortalClient() {
   const [isSubmittingQuote, setIsSubmittingQuote] = useState(false);
   const [quoteFeedback, setQuoteFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-  // Ticket Creation State (ticket.created)
+  // Ticket Creation State
   const [ticketSubject, setTicketSubject] = useState('');
   const [ticketDescription, setTicketDescription] = useState('');
   const [serialNumber, setSerialNumber] = useState('');
@@ -29,7 +29,7 @@ export default function ClientPortalClient() {
     if (!quotationCode.trim()) {
       setQuoteFeedback({
         type: 'error',
-        message: 'Kode Quotation resmi (contoh: QUO-2026-00125) wajib diisi.',
+        message: 'Nomor dokumen penawaran (contoh: QUO-2026-00125) wajib diisi.',
       });
       return;
     }
@@ -37,7 +37,7 @@ export default function ClientPortalClient() {
     if (!signatureName.trim()) {
       setQuoteFeedback({
         type: 'error',
-        message: 'Nama lengkap penandatangan yang berwenang wajib diisi untuk konfirmasi.',
+        message: 'Nama lengkap perwakilan yang berwenang wajib diisi untuk konfirmasi.',
       });
       return;
     }
@@ -59,15 +59,18 @@ export default function ClientPortalClient() {
 
       const data = await res.json();
       if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Gagal mengirimkan keputusan penawaran ke Marka CRM.');
+        throw new Error(data.error || 'Gagal mengirimkan keputusan penawaran.');
       }
 
       setQuoteFeedback({
         type: 'success',
-        message: data.message || `Keputusan ${decision} berhasil dikirim dan dicatat di Marka CRM.`,
+        message:
+          decision === 'ACCEPTED'
+            ? `Persetujuan penawaran ${quotationCode.trim()} telah berhasil kami terima. Tim Arsalynk akan segera menghubungi Anda untuk langkah selanjutnya.`
+            : `Catatan penyesuaian penawaran ${quotationCode.trim()} telah kami terima dan diteruskan ke tim kami untuk tindak lanjut.`,
       });
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Terjadi kendala koneksi ke Marka CRM.';
+      const msg = err instanceof Error ? err.message : 'Terjadi kendala saat mengirim konfirmasi.';
       setQuoteFeedback({ type: 'error', message: msg });
     } finally {
       setIsSubmittingQuote(false);
@@ -79,7 +82,7 @@ export default function ClientPortalClient() {
     if (!ticketSubject.trim() || !ticketDescription.trim()) {
       setTicketFeedback({
         type: 'error',
-        message: 'Subjek dan deskripsi kendala teknis wajib diisi.',
+        message: 'Perihal dan rincian permohonan bantuan wajib diisi.',
       });
       return;
     }
@@ -101,12 +104,12 @@ export default function ClientPortalClient() {
 
       const data = await res.json();
       if (!res.ok || !data.success) {
-        throw new Error(data.error || data.message || 'Gagal membuat tiket di Marka CRM.');
+        throw new Error(data.error || data.message || 'Gagal mengirimkan permohonan bantuan.');
       }
 
       setTicketFeedback({
         type: 'success',
-        message: 'Tiket dukungan teknis berhasil dibuat dan diteruskan ke Helpdesk Marka CRM.',
+        message: 'Permohonan bantuan teknis Anda telah berhasil dikirimkan kepada tim Arsalynk.',
         eventId: data.eventId,
       });
 
@@ -115,7 +118,7 @@ export default function ClientPortalClient() {
       setTicketDescription('');
       setSerialNumber('');
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Terjadi kendala saat menghubungi server support.';
+      const msg = err instanceof Error ? err.message : 'Terjadi kendala saat mengirim permohonan.';
       setTicketFeedback({ type: 'error', message: msg });
     } finally {
       setIsSubmittingTicket(false);
@@ -138,7 +141,7 @@ export default function ClientPortalClient() {
               : 'text-[#505050] hover:text-[#101010]'
           }`}
         >
-          Persetujuan Quotation
+          Konfirmasi Penawaran
         </button>
         <button
           type="button"
@@ -152,23 +155,23 @@ export default function ClientPortalClient() {
               : 'text-[#505050] hover:text-[#101010]'
           }`}
         >
-          Buat Tiket Support
+          Bantuan Dukungan Teknis
         </button>
       </div>
 
-      {/* TAB 1: QUOTATION DECISION (quotation.decision) */}
+      {/* TAB 1: QUOTATION DECISION */}
       {activeTab === 'quotation' && (
         <div className="rounded-[20px] border border-[#D9D9D9] bg-white p-6 sm:p-8 shadow-sm">
           <div className="mb-6 flex flex-col gap-1">
             <div className="flex items-center gap-2 font-body text-[11px] font-extrabold uppercase tracking-[0.06em] text-[#1A3E9E]">
               <span className="h-1.5 w-1.5 bg-[#1A3E9E]" />
-              <span>DOKUMEN KONTRAK &amp; PENAWARAN</span>
+              <span>DOKUMEN KERJA SAMA</span>
             </div>
             <h3 className="font-heading text-[20px] font-medium text-[#101010]">
-              Persetujuan Dokumen Quotation Resmi
+              Konfirmasi Dokumen Penawaran Resmi
             </h3>
             <p className="font-body text-[13px] text-[#717171]">
-              Kirimkan keputusan penerimaan (<span className="font-semibold text-emerald-700">ACCEPTED</span>) atau penolakan/revisi (<span className="font-semibold text-rose-700">REJECTED</span>) langsung ke Marka ERP secara aman melalui event bertanda tangan server.
+              Kirimkan persetujuan atau catatan penyesuaian untuk penawaran kerja sama yang telah dikirimkan oleh tim Arsalynk kepada perusahaan Anda.
             </p>
           </div>
 
@@ -176,7 +179,7 @@ export default function ClientPortalClient() {
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
                 <span className="font-bold text-[#FF5050] mr-1">*</span>
-                Kode Quotation (Sesuai Email / Dokumen Penawaran)
+                Nomor Surat Penawaran
               </label>
               <input
                 type="text"
@@ -187,34 +190,34 @@ export default function ClientPortalClient() {
                 className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
               />
               <span className="font-body text-[11px] text-[#717171]">
-                Gunakan kode dokumen yang dikirimkan kepada Anda (bukan UUID internal). Dokumen harus sudah berstatus terkirim (SENT) di Marka CRM.
+                Masukkan nomor penawaran seperti yang tertera pada surat penawaran atau email dari tim Arsalynk.
               </span>
             </div>
 
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
                 <span className="font-bold text-[#FF5050] mr-1">*</span>
-                Nama Lengkap Penandatangan Sah
+                Nama Lengkap Perwakilan Perusahaan
               </label>
               <input
                 type="text"
                 required
                 value={signatureName}
                 onChange={(e) => setSignatureName(e.target.value)}
-                placeholder="Contoh: Budi Santoso (Direktur Operasional)"
+                placeholder="Contoh: Budi Santoso (Direktur / Manager)"
                 className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
               />
             </div>
 
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
-                Catatan / Persyaratan Khusus (Opsional)
+                Catatan atau Pesan Tambahan (Opsional)
               </label>
               <textarea
                 rows={3}
                 value={decisionNotes}
                 onChange={(e) => setDecisionNotes(e.target.value)}
-                placeholder="Tuliskan catatan lingkup pengerjaan, estimasi tanggal mulai, atau alasan revisi..."
+                placeholder="Tuliskan catatan terkait ruang lingkup, jadwal pengerjaan, atau poin yang ingin didiskusikan..."
                 className="w-full resize-none rounded-[8px] border border-[#C8C8C8] bg-white p-3.5 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10"
               />
             </div>
@@ -239,7 +242,7 @@ export default function ClientPortalClient() {
                 onClick={() => handleQuotationDecision('ACCEPTED')}
                 className="inline-flex h-[48px] items-center justify-center gap-2 rounded-full bg-[#1A3E9E] px-8 font-body text-[13px] font-bold uppercase tracking-[0.04em] text-white transition hover:bg-[#14347F] disabled:cursor-wait disabled:opacity-50 md:h-[50px]"
               >
-                <span>{isSubmittingQuote ? 'MEMPROSES...' : '✓ SETUJUI PENAWARAN (ACCEPT)'}</span>
+                <span>{isSubmittingQuote ? 'MENGIRIMKAN...' : '✓ SETUJUI PENAWARAN'}</span>
               </button>
 
               <button
@@ -248,26 +251,26 @@ export default function ClientPortalClient() {
                 onClick={() => handleQuotationDecision('REJECTED')}
                 className="inline-flex h-[48px] items-center justify-center gap-2 rounded-full border border-[#C8C8C8] bg-white px-8 font-body text-[13px] font-bold uppercase tracking-[0.04em] text-[#505050] transition hover:bg-gray-100 hover:text-[#101010] disabled:cursor-wait disabled:opacity-50 md:h-[50px]"
               >
-                <span>✕ MINTA REVISI / TOLAK</span>
+                <span>✕ AJUKAN PENYESUAIAN</span>
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* TAB 2: SUPPORT TICKET CREATION (ticket.created) */}
+      {/* TAB 2: SUPPORT TICKET */}
       {activeTab === 'ticket' && (
         <div className="rounded-[20px] border border-[#D9D9D9] bg-white p-6 sm:p-8 shadow-sm">
           <div className="mb-6 flex flex-col gap-1">
             <div className="flex items-center gap-2 font-body text-[11px] font-extrabold uppercase tracking-[0.06em] text-[#1A3E9E]">
               <span className="h-1.5 w-1.5 bg-[#1A3E9E]" />
-              <span>HELPDESK MARKA CRM</span>
+              <span>LAYANAN DUKUNGAN KLIEN</span>
             </div>
             <h3 className="font-heading text-[20px] font-medium text-[#101010]">
-              Buat Tiket Dukungan Teknis Baru
+              Permohonan Bantuan Teknis
             </h3>
             <p className="font-body text-[13px] text-[#717171]">
-              Laporkan kendala operasional atau permintaan bantuan teknis. Tiket akan langsung dimasukkan ke antrean Helpdesk Marka ERP.
+              Sampaikan kendala operasional atau kebutuhan bantuan teknis proyek Anda agar tim spesialis kami dapat segera membantu.
             </p>
           </div>
 
@@ -275,14 +278,14 @@ export default function ClientPortalClient() {
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
                 <span className="font-bold text-[#FF5050] mr-1">*</span>
-                Subjek Tiket / Judul Kendala
+                Perihal / Topik Bantuan
               </label>
               <input
                 type="text"
                 required
                 value={ticketSubject}
                 onChange={(e) => setTicketSubject(e.target.value)}
-                placeholder="Contoh: Kendala sinkronisasi data POS ke modul persediaan"
+                placeholder="Contoh: Bantuan sinkronisasi data transaksi atau akun pengguna"
                 className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
               />
             </div>
@@ -290,26 +293,26 @@ export default function ClientPortalClient() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="flex flex-col gap-1.5">
                 <label className="font-body text-[13px] font-medium text-[#292929]">
-                  Nomor Seri Produk / Perangkat (Opsional)
+                  Nomor Seri Perangkat / Modul Terkait (Opsional)
                 </label>
                 <input
                   type="text"
                   value={serialNumber}
                   onChange={(e) => setSerialNumber(e.target.value)}
-                  placeholder="Kosongkan jika bukan kendala hardware"
+                  placeholder="Isi bila terkait perangkat keras atau sensor"
                   className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
                 />
               </div>
 
               <div className="flex flex-col gap-1.5">
                 <label className="font-body text-[13px] font-medium text-[#292929]">
-                  Email Kontak Anda (Untuk Notifikasi Update)
+                  Email Kontak Anda
                 </label>
                 <input
                   type="email"
                   value={customerEmail}
                   onChange={(e) => setCustomerEmail(e.target.value)}
-                  placeholder="admin@perusahaan.co.id"
+                  placeholder="nama@perusahaan.co.id"
                   className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
                 />
               </div>
@@ -318,14 +321,14 @@ export default function ClientPortalClient() {
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
                 <span className="font-bold text-[#FF5050] mr-1">*</span>
-                Deskripsi Kendala &amp; Langkah Reproduksi
+                Rincian Kendala atau Kebutuhan
               </label>
               <textarea
                 required
                 rows={4}
                 value={ticketDescription}
                 onChange={(e) => setTicketDescription(e.target.value)}
-                placeholder="Jelaskan detail pesan error, waktu kejadian, dan modul yang terdampak..."
+                placeholder="Ceritakan kendala yang Anda hadapi secara singkat dan jelas..."
                 className="w-full resize-none rounded-[8px] border border-[#C8C8C8] bg-white p-3.5 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10"
               />
             </div>
@@ -341,8 +344,8 @@ export default function ClientPortalClient() {
                 {ticketFeedback.type === 'success' ? '✓ ' : '✕ '}
                 {ticketFeedback.message}
                 {ticketFeedback.eventId && (
-                  <span className="block mt-1 font-mono text-[11px] text-emerald-700">
-                    ID Transaksi Event: {ticketFeedback.eventId}
+                  <span className="block mt-1 font-body text-[12px] text-emerald-700">
+                    Nomor Referensi: {ticketFeedback.eventId}
                   </span>
                 )}
               </div>
@@ -354,7 +357,7 @@ export default function ClientPortalClient() {
                 disabled={isSubmittingTicket}
                 className="inline-flex h-[48px] items-center justify-center gap-2 rounded-full bg-[#1A3E9E] px-8 font-body text-[13px] font-bold uppercase tracking-[0.04em] text-white transition hover:bg-[#14347F] disabled:cursor-wait disabled:opacity-60 md:h-[50px]"
               >
-                <span>{isSubmittingTicket ? 'MENGIRIM TIKET...' : 'BUAT TIKET SUPPORT'}</span>
+                <span>{isSubmittingTicket ? 'MENGIRIMKAN...' : 'KIRIM PERMOHONAN BANTUAN'}</span>
                 <svg width="6" height="10" viewBox="0 0 8 14" fill="none" aria-hidden="true">
                   <path
                     d="M1 1L7 7L1 13"
@@ -368,13 +371,13 @@ export default function ClientPortalClient() {
             </div>
           </form>
 
-          {/* Transparent Notice regarding Ticket Status Access */}
+          {/* User-friendly info box */}
           <div className="mt-6 rounded-[12px] bg-[#F7F7F7] p-4 border border-[#EAEAEA]">
             <div className="flex items-center gap-2 font-body text-[11px] font-bold uppercase tracking-wider text-[#1A3E9E]">
-              <span>ℹ ALUR PENANGANAN &amp; PEMBARUAN TIKET</span>
+              <span>ℹ INFORMASI PENANGANAN</span>
             </div>
             <p className="mt-1 font-body text-[12px] leading-[1.6] text-[#717171]">
-              Tiket yang dikirimkan akan langsung dialokasikan ke engineer teknis Arsalynk di Marka CRM. Pembaruan progres pengerjaan, hasil investigasi, dan solusi akan dikirimkan langsung secara berkala ke email resmi perusahaan Anda.
+              Permohonan Anda akan langsung ditindaklanjuti oleh tim teknis kami. Perkembangan dan solusi penanganan akan dikabarkan secara berkala ke kontak resmi perusahaan Anda.
             </p>
           </div>
         </div>
