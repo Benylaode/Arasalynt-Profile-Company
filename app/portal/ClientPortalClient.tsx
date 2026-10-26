@@ -18,10 +18,11 @@ export default function ClientPortalClient() {
   const [quoteFeedback, setQuoteFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   // Ticket Creation State
+  const [customerName, setCustomerName] = useState('');
+  const [customerEmail, setCustomerEmail] = useState('');
   const [ticketSubject, setTicketSubject] = useState('');
   const [ticketDescription, setTicketDescription] = useState('');
   const [serialNumber, setSerialNumber] = useState('');
-  const [customerEmail, setCustomerEmail] = useState('');
   const [isSubmittingTicket, setIsSubmittingTicket] = useState(false);
   const [ticketFeedback, setTicketFeedback] = useState<{ type: 'success' | 'error'; message: string; eventId?: string } | null>(null);
 
@@ -52,8 +53,6 @@ export default function ClientPortalClient() {
         body: JSON.stringify({
           quotation_code: quotationCode.trim(),
           decision,
-          decision_notes: decisionNotes.trim() || undefined,
-          signature: signatureName.trim(),
         }),
       });
 
@@ -79,10 +78,10 @@ export default function ClientPortalClient() {
 
   const handleTicketSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!ticketSubject.trim() || !ticketDescription.trim()) {
+    if (!customerName.trim() || !customerEmail.trim() || !ticketSubject.trim() || !ticketDescription.trim()) {
       setTicketFeedback({
         type: 'error',
-        message: 'Perihal dan rincian permohonan bantuan wajib diisi.',
+        message: 'Nama, email, topik, dan rincian permohonan wajib diisi.',
       });
       return;
     }
@@ -95,10 +94,14 @@ export default function ClientPortalClient() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          subject: ticketSubject.trim(),
-          description: ticketDescription.trim(),
-          serialNumber: serialNumber.trim() || undefined,
-          customerEmail: customerEmail.trim() || undefined,
+          customer: {
+            name: customerName.trim(),
+            email: customerEmail.trim(),
+          },
+          requirements: {
+            subject: ticketSubject.trim(),
+            description: ticketDescription.trim(),
+          },
         }),
       });
 
@@ -114,6 +117,8 @@ export default function ClientPortalClient() {
       });
 
       // Reset form on success
+      setCustomerName('');
+      setCustomerEmail('');
       setTicketSubject('');
       setTicketDescription('');
       setSerialNumber('');
@@ -293,23 +298,27 @@ export default function ClientPortalClient() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="flex flex-col gap-1.5">
                 <label className="font-body text-[13px] font-medium text-[#292929]">
-                  Nomor Seri Perangkat / Modul Terkait (Opsional)
+                  <span className="font-bold text-[#FF5050] mr-1">*</span>
+                  Nama Lengkap Anda
                 </label>
                 <input
                   type="text"
-                  value={serialNumber}
-                  onChange={(e) => setSerialNumber(e.target.value)}
-                  placeholder="Isi bila terkait perangkat keras atau sensor"
+                  required
+                  value={customerName}
+                  onChange={(e) => setCustomerName(e.target.value)}
+                  placeholder="Contoh: Budi Santoso"
                   className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
                 />
               </div>
 
               <div className="flex flex-col gap-1.5">
                 <label className="font-body text-[13px] font-medium text-[#292929]">
+                  <span className="font-bold text-[#FF5050] mr-1">*</span>
                   Email Kontak Anda
                 </label>
                 <input
                   type="email"
+                  required
                   value={customerEmail}
                   onChange={(e) => setCustomerEmail(e.target.value)}
                   placeholder="nama@perusahaan.co.id"

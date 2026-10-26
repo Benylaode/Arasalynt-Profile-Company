@@ -69,10 +69,8 @@ export default function FeedbackClient() {
           customer_code: customerCode.trim(),
           rating,
           feedback_text: feedbackText.trim(),
-          feedback_type: feedbackType,
+          feedback_type: feedbackType || 'SERVICE_EVALUATION',
           sales_order_id: salesOrderId.trim() || undefined,
-          name: name.trim() || undefined,
-          email: email.trim() || undefined,
         }),
       });
 

@@ -11,52 +11,96 @@ export async function POST(req: NextRequest) {
     const body = (typeof rawBody.data === 'object' && rawBody.data !== null) ? rawBody.data : rawBody;
     const providedEventId = rawBody.event_id || rawBody.eventId;
 
-    const subject = body.subject;
-    const description = body.description;
-    const serialNumber = body.serialNumber || body.serial_number;
-    const customerEmail = body.customerEmail || body.customer_email;
+    const customerName = String(
+      body.customer?.name ||
+      body.customer_name ||
+      body.customerName ||
+      body.name ||
+      ''
+    ).trim();
 
-    if (!subject || !description) {
+    const customerEmail = String(
+      body.customer?.email ||
+      body.customer_email ||
+      body.customerEmail ||
+      body.email ||
+      ''
+    ).trim();
+
+    const subject = String(
+      body.requirements?.subject ||
+      body.subject ||
+      ''
+    ).trim();
+
+    const description = String(
+      body.requirements?.description ||
+      body.description ||
+      ''
+    ).trim();
+
+    const serialNumber = String(
+      body.serial_number ||
+      body.serialNumber ||
+      ''
+    ).trim();
+
+    if (!customerName) {
       return NextResponse.json(
-        { error: 'Subjek dan deskripsi keluhan wajib diisi' },
+        { error: 'Nama customer wajib diisi (customer.name atau customer_name).' },
         { status: 400 }
       );
     }
 
-    const eventId = providedEventId ? String(providedEventId).trim() : `tkt-${Date.now()}-${randomUUID().slice(0, 8)}`;
+    if (!customerEmail || !customerEmail.includes('@')) {
+      return NextResponse.json(
+        { error: 'Email customer wajib diisi dengan format valid (customer.email atau customer_email).' },
+        { status: 400 }
+      );
+    }
 
-    // Save locally
+    if (!subject) {
+      return NextResponse.json(
+        { error: 'Subjek inquiry/tiket wajib diisi (requirements.subject atau subject).' },
+        { status: 400 }
+      );
+    }
+
+    if (!description) {
+      return NextResponse.json(
+        { error: 'Deskripsi keluhan wajib diisi (requirements.description atau description).' },
+        { status: 400 }
+      );
+    }
+
+    const eventId = providedEventId ? String(providedEventId).trim() : `inq-${Date.now()}-${randomUUID().slice(0, 8)}`;
+
+    // Store in local CRM repository
     try {
       crmRepo.saveTicket({
         eventId,
-        subject: String(subject).trim(),
-        description: String(description).trim(),
-        serialNumber: serialNumber ? String(serialNumber).trim() : undefined,
-        customerEmail: customerEmail ? String(customerEmail).trim() : undefined,
+        subject,
+        description,
+        serialNumber: serialNumber || undefined,
+        customerEmail,
       });
     } catch (dbErr) {
       console.warn('Failed to save local ticket:', dbErr);
     }
 
-    // Send event to Marka CRM using official inquiry.submitted payload as specified
-    const customerEmailClean = String(customerEmail || '').trim() || 'kalunatechnology@gmail.com';
-    const customerNameClean = String(
-      body.customerName ||
-      body.customer_name ||
-      body.name ||
-      (customerEmailClean.includes('@') ? customerEmailClean.split('@')[0] : 'Nama pelanggan')
-    ).trim();
-
-    const result = await sendMarkaEvent(eventId, 'inquiry.submitted', {
+    // Exact Adsvar Marka integration payload contract
+    const eventData: Record<string, unknown> = {
       customer: {
-        name: customerNameClean,
-        email: customerEmailClean,
+        name: customerName,
+        email: customerEmail,
       },
       requirements: {
-        subject: String(subject).trim(),
-        description: String(description).trim(),
+        subject,
+        description,
       },
-    });
+    };
+
+    const result = await sendMarkaEvent(eventId, 'inquiry.submitted', eventData);
 
     return NextResponse.json(
       {
@@ -64,7 +108,7 @@ export async function POST(req: NextRequest) {
         eventId,
         status: result.status,
         message: result.success
-          ? 'Tiket berhasil dibuat di CRM Marka'
+          ? 'Inquiry/tiket berhasil dikirim dan diverifikasi di CRM Marka'
           : 'Gagal membuat tiket di CRM Marka',
         markaResponse: result.data || result.error,
       },
