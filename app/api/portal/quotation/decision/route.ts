@@ -6,7 +6,9 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json().catch(() => ({}));
+    const rawBody = await req.json().catch(() => ({}));
+    const body = (typeof rawBody.data === 'object' && rawBody.data !== null) ? rawBody.data : rawBody;
+    const providedEventId = rawBody.event_id || rawBody.eventId;
 
     // Support quotation_code (Marka official contract) and legacy quotationId
     const quotationCode =
@@ -16,8 +18,6 @@ export async function POST(req: NextRequest) {
       body.quotationId;
 
     const rawDecision = body.decision;
-    const decisionNotes = body.decision_notes || body.reason || body.notes;
-    const signature = body.signature;
 
     if (!quotationCode || typeof quotationCode !== 'string' || !quotationCode.trim()) {
       return NextResponse.json(
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
     }
 
     const cleanCode = quotationCode.trim();
-    const eventId = `quote-dec-${Date.now()}-${randomUUID().slice(0, 8)}`;
+    const eventId = providedEventId ? String(providedEventId).trim() : `quote-dec-${Date.now()}-${randomUUID().slice(0, 8)}`;
 
     const eventData: Record<string, unknown> = {
       quotation_code: cleanCode,

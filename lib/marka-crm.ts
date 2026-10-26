@@ -14,22 +14,22 @@ export function getMarkaConfig(): MarkaConfig {
   return {
     webhookUrl: (
       process.env.MARKA_CRM_WEBHOOK_URL ||
-      'https://lavender-alligator-903719.hostingersite.com/api/v1/integrations/webhooks/events'
+      'https://darkturquoise-mandrill-787280.hostingersite.com/api/v1/integrations/webhooks/events'
     )
       .trim()
       .replace(/^["']|["']$/g, ''),
     integrationId: (
       process.env.MARKA_CRM_INTEGRATION_ID ||
-      'b4252b6c-0fe4-457d-b977-524ca7bec3f7'
+      'b6ff9390-2436-4a3f-841c-7966098651fc'
     )
       .trim()
       .replace(/^["']|["']$/g, ''),
-    keyId: (process.env.MARKA_CRM_KEY_ID || 'k_4bc981dc40ec918c')
+    keyId: (process.env.MARKA_CRM_KEY_ID || 'k_ea725e71b365ebd3')
       .trim()
       .replace(/^["']|["']$/g, ''),
     signingSecret: (
       process.env.MARKA_CRM_SIGNING_SECRET ||
-      '4WwYm1TbI2aYY2wGQB9DPbKPyKIueH8r18r8mjV2zhc'
+      'aGYo57-YHvKY6W9tLpcX7_VIrKCguCuFgNOLRvBz9pk'
     )
       .trim()
       .replace(/^["']|["']$/g, ''),

@@ -6,7 +6,10 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const rawBody = await request.json().catch(() => ({}));
+    const body = (typeof rawBody.data === 'object' && rawBody.data !== null) ? rawBody.data : rawBody;
+    const providedEventId = rawBody.event_id || rawBody.eventId;
+
     const rawCustomer = typeof body.customer === 'object' && body.customer !== null ? body.customer : {};
     const rawRequirements = typeof body.requirements === 'object' && body.requirements !== null ? body.requirements : {};
 
@@ -86,11 +89,15 @@ export async function POST(request: NextRequest) {
     // Synchronize to external Marka CRM
     let markaResult = null;
     try {
-      const eventId = `inq-${inquiry.id}-${Date.now()}`;
+      const eventId = providedEventId ? String(providedEventId).trim() : `inq-${inquiry.id}-${Date.now()}`;
       const phoneDigits = (inquiry.phone || inquiry.contact || '').replace(/\D/g, '');
       const crmEmail = inquiry.email && inquiry.email.includes('@')
         ? inquiry.email.trim().toLowerCase().slice(0, 320)
         : (phoneDigits ? `${phoneDigits}@phone.arsalynk.com` : 'leads@arsalynk.com');
+
+      const targetBudgetNum = body.target_budget !== undefined
+        ? Number(body.target_budget)
+        : (body.targetBudget ? Number(body.targetBudget) : undefined);
 
       markaResult = await sendMarkaEvent(eventId, 'inquiry.submitted', {
         customer: {
@@ -100,8 +107,9 @@ export async function POST(request: NextRequest) {
           ...(inquiry.company ? { company: inquiry.company.slice(0, 200) } : {}),
         },
         requirements: {
-          subject: `[${inquiry.source}] ${inquiry.packageChoice || inquiry.service || 'Inquiry Baru'}`.slice(0, 300),
-          description: (inquiry.message || inquiry.brandDescription || 'Inquiry dari website Arsalynk').slice(0, 20000),
+          subject: String(rawRequirements.subject || inquiry.packageChoice || inquiry.service || 'Inquiry Baru').slice(0, 300),
+          description: String(rawRequirements.description || inquiry.message || inquiry.brandDescription || 'Inquiry dari website Arsalynk').slice(0, 20000),
+          ...(targetBudgetNum !== undefined && !isNaN(targetBudgetNum) ? { target_budget: targetBudgetNum } : {}),
         },
       });
     } catch (crmErr) {

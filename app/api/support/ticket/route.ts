@@ -7,7 +7,14 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {
-    const { subject, description, serialNumber, customerEmail } = await req.json();
+    const rawBody = await req.json().catch(() => ({}));
+    const body = (typeof rawBody.data === 'object' && rawBody.data !== null) ? rawBody.data : rawBody;
+    const providedEventId = rawBody.event_id || rawBody.eventId;
+
+    const subject = body.subject;
+    const description = body.description;
+    const serialNumber = body.serialNumber || body.serial_number;
+    const customerEmail = body.customerEmail || body.customer_email;
 
     if (!subject || !description) {
       return NextResponse.json(
@@ -16,7 +23,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const eventId = `tkt-${Date.now()}-${randomUUID().slice(0, 8)}`;
+    const eventId = providedEventId ? String(providedEventId).trim() : `tkt-${Date.now()}-${randomUUID().slice(0, 8)}`;
 
     // Save locally
     try {
@@ -31,18 +38,23 @@ export async function POST(req: NextRequest) {
       console.warn('Failed to save local ticket:', dbErr);
     }
 
-    // Send event to Marka CRM using official inquiry.submitted contract
-    const emailClean = customerEmail ? String(customerEmail).trim() : 'support@arsalynk.com';
-    const nameClean = emailClean.includes('@') ? emailClean.split('@')[0] : 'Pelanggan Layanan';
+    // Send event to Marka CRM using official inquiry.submitted payload as specified
+    const customerEmailClean = String(customerEmail || '').trim() || 'kalunatechnology@gmail.com';
+    const customerNameClean = String(
+      body.customerName ||
+      body.customer_name ||
+      body.name ||
+      (customerEmailClean.includes('@') ? customerEmailClean.split('@')[0] : 'Nama pelanggan')
+    ).trim();
 
     const result = await sendMarkaEvent(eventId, 'inquiry.submitted', {
       customer: {
-        name: nameClean,
-        email: emailClean,
+        name: customerNameClean,
+        email: customerEmailClean,
       },
       requirements: {
-        subject: `[Support Ticket] ${String(subject).trim()}`,
-        description: `${String(description).trim()}${serialNumber ? `\n\nSerial Number: ${serialNumber}` : ''}`,
+        subject: String(subject).trim(),
+        description: String(description).trim(),
       },
     });
 

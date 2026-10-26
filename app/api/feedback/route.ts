@@ -6,7 +6,9 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json().catch(() => ({}));
+    const rawBody = await req.json().catch(() => ({}));
+    const body = (typeof rawBody.data === 'object' && rawBody.data !== null) ? rawBody.data : rawBody;
+    const providedEventId = rawBody.event_id || rawBody.eventId;
 
     // Customer code is strictly required by Marka CRM contract
     const customerCode =
@@ -64,7 +66,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const eventId = `fb-${Date.now()}-${randomUUID().slice(0, 8)}`;
+    const eventId = providedEventId ? String(providedEventId).trim() : `fb-${Date.now()}-${randomUUID().slice(0, 8)}`;
 
     const eventData: Record<string, unknown> = {
       customer_code: customerCode.trim(),
