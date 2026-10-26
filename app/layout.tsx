@@ -102,11 +102,27 @@ export const metadata: Metadata = {
   },
 };
 
+import JsonLd from '@/components/seo/JsonLd';
+import {
+  buildOrganizationJsonLd,
+  buildWebSiteJsonLd,
+  buildSiteNavigationElementJsonLd,
+} from '@/lib/seo';
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const rootSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      buildOrganizationJsonLd(),
+      buildWebSiteJsonLd(),
+      ...buildSiteNavigationElementJsonLd(),
+    ],
+  };
+
   return (
     <html lang="id" className={manrope.variable} data-scroll-behavior="smooth">
       <head>
@@ -122,6 +138,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <JsonLd id="root-entity-graph" data={rootSchema} />
         <HashScrollHandler />
         <WebKitBackgroundPreloader />
         <Navbar />

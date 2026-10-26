@@ -101,8 +101,17 @@ export function buildWebSiteJsonLd() {
     publisher: { '@id': `${SITE_URL}/#organization` },
     about: { '@id': `${SITE_URL}/#organization` },
     inLanguage: 'id-ID',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_URL}/our-works?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
     hasPart: SITE_NAVIGATION_ITEMS.map((item) => ({
       '@type': 'WebPage',
+      '@id': `${SITE_URL}${item.href}#webpage`,
       name: item.name,
       url: `${SITE_URL}${item.href}`,
       description: item.description,

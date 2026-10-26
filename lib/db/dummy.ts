@@ -73,7 +73,7 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     backgroundPosition: 'center center',
     primaryCta: {
       label: 'EXPLORE ERP SOLUTION',
-      href: '/our-solution/enterprise-resource-planning',
+      href: '/our-solution/enterprise-solution',
     },
     secondaryCta: {
       label: 'ECOSYSTEM PHILOSOPHY',
@@ -90,7 +90,7 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     backgroundPosition: 'center center',
     primaryCta: {
       label: 'EXPLORE IOT SOLUTION',
-      href: '/our-solution/internet-of-things',
+      href: '/our-solution/smart-iot-system',
     },
     secondaryCta: {
       label: 'CONTACT US',

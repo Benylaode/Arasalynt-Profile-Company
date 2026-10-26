@@ -4,11 +4,13 @@ import { SITE_URL } from '@/lib/constants';
 /** Only mount on index pages. Detail pages have their own breadcrumbs. */
 const SECTIONS = {
   'about-us': {path:'/about-us',title:'About Us',type:'AboutPage',description:'Mengenal Arsalynk, ekosistem teknologi enterprise, data analytics, dan kapabilitas bisnis terintegrasi di Indonesia.',ancestors:[] as {name:string;path:string}[]},
+  'our-solution': {path:'/our-solution',title:'Our Solution',type:'CollectionPage',description:'Layanan solusi teknologi enterprise Arsalynk: implementasi ERP, integrasi IoT hardware, POS retail, HRMS, dan otomasi proses bisnis.',ancestors:[] as {name:string;path:string}[]},
   'our-business': {path:'/our-business',title:'Our Business',type:'CollectionPage',description:'Ekosistem bisnis Arsalynk dengan spesialisasi teknologi, riset, data analytics, digital media, dan konsultasi bisnis.',ancestors:[] as {name:string;path:string}[]},
   'our-works': {path:'/our-works',title:'Our Works',type:'CollectionPage',description:'Portofolio Arsalynk: ERP, IoT, pengembangan perangkat lunak, analitik data, dan produksi media.',ancestors:[] as {name:string;path:string}[]},
   'insight-programs': {path:'/insight-programs',title:'Insight & Programs',type:'CollectionPage',description:'Studi kasus dan perspektif kepemimpinan Arsalynk tentang teknologi enterprise dan strategi bisnis.',ancestors:[] as {name:string;path:string}[]},
   'case-studies': {path:'/insight-programs/case-studies',title:'Case Studies',type:'CollectionPage',description:'Studi kasus implementasi solusi teknologi dan proyek Arsalynk untuk kebutuhan bisnis enterprise.',ancestors:[{name:'Insight & Programs',path:'/insight-programs'}]},
   'leadership-thoughts': {path:'/insight-programs/leadership-thoughts',title:'Leadership Thoughts',type:'Blog',description:'Perspektif kepemimpinan, strategi organisasi, dan transformasi digital dari ekosistem Arsalynk.',ancestors:[{name:'Insight & Programs',path:'/insight-programs'}]},
+  'contact-us': {path:'/contact-us',title:'Contact Us',type:'ContactPage',description:'Konsultasikan kebutuhan proyek teknologi enterprise Anda bersama tim ahli Arsalynk via WhatsApp, email, atau kantor kami di Jakarta.',ancestors:[] as {name:string;path:string}[]},
 } as const;
 
 export default function SectionPageJsonLd({section}:{section:keyof typeof SECTIONS}) {

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import { CORE_SOLUTIONS, OUR_SOLUTION_CHALLENGE, OUR_SOLUTION_CHALLENGES, SOLUTION_SERVICES } from '@/lib/our-solution.data';
 import SolutionWorksExplorer from '@/components/sections/SolutionWorksExplorer/SolutionWorksExplorer';
+import JsonLd from '@/components/seo/JsonLd';
 import { SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -81,11 +82,7 @@ export default function OurSolutionPage() {
 
   return (
     <main className="relative w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
-      <script
-        id="solution-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(solutionSchema).replace(/</g, '\\u003c') }}
-      />
+      <JsonLd id="solution-schema" data={solutionSchema} />
       <section className="relative isolate flex h-[clamp(560px,41.666vw,800px)] items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-[#101010]">
         <img src="/images/our-works/our-works-hero-bg.webp" alt="Arsalynk Enterprise Solutions Hero Background" className="absolute left-1/2 top-1/2 z-0 h-auto min-h-[166%] w-[104%] min-w-[1100px] max-w-none object-cover" style={{ transform: 'translate(-50%, calc(-50% + clamp(90px, 9.74vw, 187px)))' }} />
         <img src="/images/specialized/specialized-network.webp" alt="Network technology overlay background" className="pointer-events-none absolute bottom-[-90px] left-1/2 z-[1] w-[134.8vw] min-w-[1450px] max-w-none -translate-x-1/2 scale-y-[-1] md:bottom-[-140px] xl:bottom-[-204px]" style={{ mixBlendMode: 'plus-lighter' }} />

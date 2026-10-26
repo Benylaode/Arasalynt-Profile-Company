@@ -150,8 +150,8 @@ export default async function SolutionServicePage({ params }: PageProps) {
             {service.industry}
           </span>
 
-          <h1 className="mt-6 max-w-[980px] font-heading text-[clamp(36px,4.5vw,72px)] font-medium leading-[1.08] text-[#F7F7F7]">
-            {service.title}
+          <h1 className="mt-6 max-w-[980px] font-heading text-[clamp(32px,3.8vw,64px)] font-medium leading-[1.12] text-[#F7F7F7]">
+            {service.heroHeadline ? `“${service.heroHeadline}”` : service.title}
           </h1>
 
           <p className="mt-5 max-w-[760px] font-body text-[clamp(15px,1.15vw,20px)] font-light leading-[1.65] text-white/90">
@@ -163,15 +163,15 @@ export default async function SolutionServicePage({ params }: PageProps) {
               href="/contact-us#contact-form"
               className="inline-flex h-[50px] items-center justify-center gap-2.5 rounded-full bg-[#E6FF2A] px-7 font-body text-[14px] font-bold tracking-[0.02em] text-[#101010] transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_8px_25px_rgba(230,255,42,0.35)]"
             >
-              <span>Konsultasi Solusi</span>
+              <span>{service.ctaPrimary ?? 'Konsultasi Solusi'}</span>
               <IconArrowRight />
             </Link>
 
             <Link
-              href={`/insight-programs/case-studies/${service.caseStudySlug}`}
+              href={service.relatedWork ? `/our-works/${service.relatedWork.slug}` : `/insight-programs/case-studies/${service.caseStudySlug}`}
               className="inline-flex h-[50px] items-center justify-center gap-2.5 rounded-full border border-white/30 bg-white/5 px-7 font-body text-[14px] font-semibold text-white backdrop-blur-[4px] transition duration-300 hover:border-[#E6FF2A] hover:bg-white/15 hover:text-[#E6FF2A]"
             >
-              <span>Lihat Case Study Terkait</span>
+              <span>{service.ctaSecondary ?? 'Lihat Case Study Terkait'}</span>
               <IconArrowRight />
             </Link>
           </div>
@@ -307,11 +307,19 @@ export default async function SolutionServicePage({ params }: PageProps) {
               <span>INTEGRATION ARCHITECTURE</span>
             </div>
             <h2 className="font-heading text-[clamp(28px,2.6vw,46px)] font-medium leading-[1.15]">
-              Terhubung Mulus dengan Sistem Anda
+              {service.partnerIntegration ? `Integration with ${service.partnerIntegration.partnerName}` : 'Terhubung Mulus dengan Sistem Anda'}
             </h2>
-            <p className="font-body text-[15px] leading-[1.65] text-[#555]">
-              Tidak perlu membuang infrastruktur yang sudah berjalan. Kami membangun konektor API dan protokol sinkronisasi yang menjamin kontinuitas data secara real-time.
-            </p>
+            {service.partnerIntegration ? (
+              <div className="rounded-2xl border border-[#1A3E9E]/20 bg-[linear-gradient(79deg,rgba(26,62,158,0.06),rgba(133,166,255,0.12))] p-6">
+                <p className="font-body text-[15px] font-medium leading-[1.65] text-[#101010]">
+                  {service.partnerIntegration.text}
+                </p>
+              </div>
+            ) : (
+              <p className="font-body text-[15px] leading-[1.65] text-[#555]">
+                Tidak perlu membuang infrastruktur yang sudah berjalan. Kami membangun konektor API dan protokol sinkronisasi yang menjamin kontinuitas data secara real-time.
+              </p>
+            )}
             <ul className="mt-2 flex flex-col gap-3 p-0">
               {service.integration.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3 rounded-xl border border-black/5 bg-white p-4 shadow-sm">

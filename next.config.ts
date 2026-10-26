@@ -102,12 +102,22 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/our-solution/erp',
-        destination: '/our-solution/enterprise-resource-planning',
+        destination: '/our-solution/enterprise-solution',
+        permanent: true,
+      },
+      {
+        source: '/our-solution/enterprise-resource-planning',
+        destination: '/our-solution/enterprise-solution',
         permanent: true,
       },
       {
         source: '/our-solution/iot',
-        destination: '/our-solution/internet-of-things',
+        destination: '/our-solution/smart-iot-system',
+        permanent: true,
+      },
+      {
+        source: '/our-solution/internet-of-things',
+        destination: '/our-solution/smart-iot-system',
         permanent: true,
       },
     ];

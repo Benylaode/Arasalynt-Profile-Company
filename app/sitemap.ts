@@ -20,6 +20,10 @@ const WORK_DATES: Record<string, string> = {
 };
 
 const SOLUTION_DATES: Record<string, string> = {
+  'enterprise-solution': '2026-10-26',
+  'data-ai-integration': '2026-10-26',
+  'smart-iot-system': '2026-10-26',
+  'digital-development': '2026-10-26',
   'enterprise-resource-planning': '2026-10-06',
   'internet-of-things': '2026-10-06',
   'point-of-sale-pos': '2026-10-04',

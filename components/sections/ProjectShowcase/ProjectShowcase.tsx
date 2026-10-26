@@ -17,7 +17,12 @@ const AUTOPLAY_DURATION = 6000;
 const PROGRESS_UPDATE_INTERVAL = 50;
 const LOOP_COUNT = 30;
 
-const CATEGORIES = ['ERP SYSTEMS', 'OPERATIONS', 'CONNECTED IOT'] as const;
+const CATEGORIES = [
+  'ENTERPRISE SOLUTION',
+  'DATA & AI INTEGRATION',
+  'SMART IOT SYSTEM',
+  'DIGITAL DEVELOPMENT',
+] as const;
 
 type ProjectCategory = (typeof CATEGORIES)[number];
 
@@ -34,81 +39,99 @@ type Project = {
 const MOCK_PROJECTS: Project[] = [
   {
     id: 1,
-    slug: 'point-of-sale-pos',
-    client: 'RETAIL OPERATIONS',
-    title: 'Point of Sale (POS)',
-    category: 'BRANDING • SURVEY AND ANALYTICS',
-    tabCategory: 'ERP SYSTEMS',
-    image: '/images/our-business/kaluna-technology/services/point-of-sales-system.webp',
-  },
-  {
-    id: 2,
-    slug: 'hr-talent-management-engine',
-    client: 'PEOPLE OPERATIONS',
-    title: 'HR & Talent Management Engine (HRMS)',
-    category: 'COMPLEX WEB • DATA PLATFORM',
-    tabCategory: 'ERP SYSTEMS',
-    image: '/images/our-business/kaluna-technology/services/appointment-system.webp',
-  },
-  {
-    id: 3,
-    slug: 'financial-accounting-automation-hub',
-    client: 'FINANCE OPERATIONS',
-    title: 'Financial & Accounting Automation Hub',
-    category: 'IOT SYSTEM • IT INFRASTRUCTURE',
-    tabCategory: 'ERP SYSTEMS',
+    slug: 'enterprise-solution',
+    client: 'ENTERPRISE SYSTEM MANAGEMENT',
+    title: 'Marka ERP Centralized Operations',
+    category: 'ENTERPRISE SOLUTION • MARKA ERP',
+    tabCategory: 'ENTERPRISE SOLUTION',
     image: '/images/our-business/kaluna-technology/services/finance-system.webp',
   },
   {
+    id: 2,
+    slug: 'enterprise-solution',
+    client: 'RETAIL OPERATIONS',
+    title: 'Point of Sale (POS) Engine',
+    category: 'ENTERPRISE SOLUTION • RETAIL',
+    tabCategory: 'ENTERPRISE SOLUTION',
+    image: '/images/our-business/kaluna-technology/services/point-of-sales-system.webp',
+  },
+  {
+    id: 3,
+    slug: 'enterprise-solution',
+    client: 'PEOPLE OPERATIONS',
+    title: 'HR & Talent Management Engine',
+    category: 'ENTERPRISE SOLUTION • HRMS',
+    tabCategory: 'ENTERPRISE SOLUTION',
+    image: '/images/our-business/kaluna-technology/services/appointment-system.webp',
+  },
+  {
     id: 4,
-    slug: 'supply-chain-inventory-control',
-    client: 'SUPPLY CHAIN',
-    title: 'Supply Chain & Inventory Control System',
-    category: 'SURVEY & DATA • ANALYTICS PLATFORM',
-    tabCategory: 'OPERATIONS',
-    image: '/images/our-business/kaluna-technology/services/e-commerce-website.webp',
+    slug: 'data-ai-integration',
+    client: 'STRATEGIC DECISION MAKING',
+    title: 'AI-Powered Business Intelligence Hub',
+    category: 'DATA & AI • PREDICTIVE DEMAND',
+    tabCategory: 'DATA & AI INTEGRATION',
+    image: '/images/specialized/specialized-intelligence.webp',
   },
   {
     id: 5,
-    slug: 'warehouse-management-system',
-    client: 'WAREHOUSE OPERATIONS',
-    title: 'Warehouse Management System',
-    category: 'MEDIA • CORPORATE PROFILE',
-    tabCategory: 'OPERATIONS',
-    image: '/images/our-business/kaluna-technology/services/warehouse-management.webp',
+    slug: 'data-ai-integration',
+    client: 'FINANCIAL INTELLIGENCE',
+    title: 'Automated Financial Data Ecosystem',
+    category: 'DATA & AI • AUTOMATION',
+    tabCategory: 'DATA & AI INTEGRATION',
+    image: '/images/our-business/kaluna-technology/services/finance-system.webp',
   },
   {
     id: 6,
-    slug: 'logistics-fleet-operations-tracker',
-    client: 'CONNECTED OPERATIONS',
-    title: 'Logistics & Fleet Operations Tracker',
-    category: 'IOT / FLEET VISIBILITY',
-    tabCategory: 'CONNECTED IOT',
+    slug: 'smart-iot-system',
+    client: 'KALUNA TECHNOLOGY',
+    title: 'Smart IOT Hardware & Device System',
+    category: 'SMART IOT • INDUSTRIAL AUTOMATION',
+    tabCategory: 'SMART IOT SYSTEM',
     image: '/images/projects/myboss-iot-system/1.webp',
+  },
+  {
+    id: 7,
+    slug: 'smart-iot-system',
+    client: 'FLEET & ASSET MONITORING',
+    title: 'Logistics & Fleet Operations Tracker',
+    category: 'SMART IOT • REAL-TIME SENSORS',
+    tabCategory: 'SMART IOT SYSTEM',
+    image: '/images/case-studies/myboss-logistics/cover.webp',
+  },
+  {
+    id: 8,
+    slug: 'digital-development',
+    client: 'WEB2UP PARTNERSHIP',
+    title: 'High-Performance Websites & Web Apps',
+    category: 'DIGITAL DEVELOPMENT • CONVERSION UX',
+    tabCategory: 'DIGITAL DEVELOPMENT',
+    image: '/images/our-business/kaluna-technology/services/software-development.webp',
+  },
+  {
+    id: 9,
+    slug: 'digital-development',
+    client: 'ENTERPRISE COMMERCE',
+    title: 'Modern Digital Commerce Platform',
+    category: 'DIGITAL DEVELOPMENT • WEBAPPS',
+    tabCategory: 'DIGITAL DEVELOPMENT',
+    image: '/images/our-business/kaluna-technology/services/e-commerce-website.webp',
   },
 ];
 
-/*
- * Ukuran tombol kategori 17% lebih kecil
- * daripada ukuran desain awal:
- *
- * TECHNOLOGY     168px → 139.5px
- * SURVEY & DATA  166px → 138px
- * MEDIA           97px → 80.5px
- */
 const CATEGORY_WIDTH: Record<ProjectCategory, string> = {
-  'ERP SYSTEMS': 'w-[clamp(113px,7.263vw,139.5px)]',
-  OPERATIONS: 'w-[clamp(114.5px,7.176vw,138px)]',
-  'CONNECTED IOT': 'w-[clamp(120px,8vw,154px)]',
+  'ENTERPRISE SOLUTION': 'w-auto px-[14px]',
+  'DATA & AI INTEGRATION': 'w-auto px-[14px]',
+  'SMART IOT SYSTEM': 'w-auto px-[14px]',
+  'DIGITAL DEVELOPMENT': 'w-auto px-[14px]',
 };
 
 const SERVICE_CATEGORY_LABELS: Record<string, string> = {
-  'point-of-sale-pos': 'ERP / RETAIL MANAGEMENT',
-  'hr-talent-management-engine': 'ERP / PEOPLE & TALENT',
-  'financial-accounting-automation-hub': 'ERP / FINANCE AUTOMATION',
-  'supply-chain-inventory-control': 'OPERATIONS / INVENTORY',
-  'warehouse-management-system': 'OPERATIONS / FULFILLMENT',
-  'logistics-fleet-operations-tracker': 'IOT / FLEET VISIBILITY',
+  'enterprise-solution': 'ENTERPRISE SOLUTION • MARKA ERP',
+  'data-ai-integration': 'DATA & AI • ARTIFICIAL INTELLIGENCE',
+  'smart-iot-system': 'SMART IOT • KALUNA TECHNOLOGY',
+  'digital-development': 'DIGITAL DEVELOPMENT • WEB2UP',
 };
 
 /* =========================================================
@@ -161,7 +184,7 @@ function IconChevronRight({ size = 24 }: { size?: number }) {
 
 export default function ProjectShowcase() {
   const [activeCategory, setActiveCategory] =
-    useState<ProjectCategory>('ERP SYSTEMS');
+    useState<ProjectCategory>('ENTERPRISE SOLUTION');
 
   const filteredProjects = MOCK_PROJECTS.filter(
     (project) => project.tabCategory === activeCategory,
