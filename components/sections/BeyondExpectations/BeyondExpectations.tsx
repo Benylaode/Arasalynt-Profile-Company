@@ -22,16 +22,6 @@ const ArrowRight = () => (
 );
 
 export default function BeyondExpectations() {
-  const handleOpenConsultation = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(
-        new CustomEvent('open-crm-consultation', {
-          detail: { solution: 'Enterprise Solution (Marka ERP)' },
-        })
-      );
-    }
-  };
   return (
     <section
       id="beyond-expectations"
@@ -77,7 +67,6 @@ export default function BeyondExpectations() {
         <div className="mt-[clamp(24px,1.667vw,32px)] flex w-full flex-wrap items-center justify-center gap-[12px] max-[480px]:flex-col max-[480px]:gap-[10px]">
           <Link
             href="/contact-us#contact-form"
-            onClick={handleOpenConsultation}
             className="group inline-flex h-[clamp(47px,3.125vw,60px)] min-w-[clamp(175px,11.979vw,230px)] items-center justify-center gap-[10px] rounded-full bg-[#E6FF2A] px-[clamp(24px,1.667vw,32px)] text-[clamp(14px,0.833vw,16px)] font-extrabold leading-[1.2] text-[#101010] transition-transform duration-300 hover:-translate-y-1 max-[480px]:w-full max-[480px]:max-w-[280px]"
             style={{
               fontFamily: '"Manrope", Arial, sans-serif',

@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import JsonLd from '@/components/seo/JsonLd';
-import CrmConsultationButton from '@/components/crm/CrmConsultationButton';
 import { getSolutionService, SOLUTION_SERVICES } from '@/lib/our-solution.data';
 import { SITE_URL } from '@/lib/constants';
 
@@ -160,13 +159,13 @@ export default async function SolutionServicePage({ params }: PageProps) {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-            <CrmConsultationButton
-              solutionTitle={service.title}
-              className="inline-flex h-[50px] items-center justify-center gap-2.5 rounded-full bg-[#E6FF2A] px-7 font-body text-[14px] font-bold tracking-[0.02em] text-[#101010] transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_8px_25px_rgba(230,255,42,0.35)] cursor-pointer"
+            <Link
+              href="/contact-us#contact-form"
+              className="inline-flex h-[50px] items-center justify-center gap-2.5 rounded-full bg-[#E6FF2A] px-7 font-body text-[14px] font-bold tracking-[0.02em] text-[#101010] transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_8px_25px_rgba(230,255,42,0.35)]"
             >
               <span>{service.ctaPrimary ?? 'Konsultasi Solusi'}</span>
               <IconArrowRight />
-            </CrmConsultationButton>
+            </Link>
 
             <Link
               href={service.relatedWork ? `/our-works/${service.relatedWork.slug}` : `/insight-programs/case-studies/${service.caseStudySlug}`}

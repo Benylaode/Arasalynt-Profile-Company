@@ -617,58 +617,6 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
   };
 
   const handleQuickActionClick = (item: QuickActionItem) => {
-    if (item.id === 'crm-consultation') {
-      if (typeof window !== 'undefined') {
-        window.dispatchEvent(
-          new CustomEvent('open-crm-consultation', {
-            detail: { solution: 'Enterprise Solution (Marka ERP)' },
-          })
-        );
-      }
-      const userMsg: ChatMessage = {
-        id: `user-${Date.now()}`,
-        role: 'user',
-        content: item.prompt,
-        timestamp: formatCurrentTime(),
-      };
-      const assistantMsg: ChatMessage = {
-        id: `assistant-${Date.now() + 1}`,
-        role: 'assistant',
-        content:
-          '📋 **Formulir Konsultasi CRM telah dibuka di layar Anda.**\n\nSilakan isi detail perusahaan dan solusi yang Anda butuhkan. Data Anda akan langsung tercatat di database dan diteruskan ke sistem Marka CRM untuk ditindaklanjuti oleh konsultan kami.',
-        timestamp: formatCurrentTime(),
-      };
-      setMessages((prev) => [...prev, userMsg, assistantMsg]);
-      scrollChatToBottom();
-      return;
-    }
-
-    if (item.id === 'crm-tracking') {
-      if (typeof window !== 'undefined') {
-        window.dispatchEvent(
-          new CustomEvent('open-crm-tracking', {
-            detail: { type: 'tickets' },
-          })
-        );
-      }
-      const userMsg: ChatMessage = {
-        id: `user-${Date.now()}`,
-        role: 'user',
-        content: item.prompt,
-        timestamp: formatCurrentTime(),
-      };
-      const assistantMsg: ChatMessage = {
-        id: `assistant-${Date.now() + 1}`,
-        role: 'assistant',
-        content:
-          '🔍 **Portal Pelacakan CRM telah dibuka di layar Anda.**\n\nAnda dapat memasukkan Nomor/ID Tiket atau Quotation beserta Token Akses Klien Anda untuk memeriksa status real-time langsung dari Marka ERP.',
-        timestamp: formatCurrentTime(),
-      };
-      setMessages((prev) => [...prev, userMsg, assistantMsg]);
-      scrollChatToBottom();
-      return;
-    }
-
     handleSendMessage(item.prompt);
   };
 
