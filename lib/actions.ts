@@ -636,6 +636,27 @@ export async function submitLead(
 
     const leadId = Number(info.lastInsertRowid);
 
+    // Also persist in CRM inquiries repository for production inquiry tracking
+    try {
+      const { inquiriesRepo } = await import('@/lib/repositories/inquiries');
+      inquiriesRepo.create({
+        name,
+        company,
+        email,
+        phone,
+        contact: phone || email,
+        service: inquiry || 'Contact Us Form',
+        packageChoice: inquiry || 'General Contact',
+        billingCycle: '-',
+        price: '-',
+        message,
+        brandDescription: message,
+        source: 'contact_form',
+      });
+    } catch (inqErr) {
+      console.warn('[Inquiry Save Warning]', inqErr);
+    }
+
     console.log(
       `[Lead #${leadId}] Lead berhasil disimpan ke database dari ${email}`,
     );
