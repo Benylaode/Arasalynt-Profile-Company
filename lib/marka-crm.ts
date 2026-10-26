@@ -77,19 +77,12 @@ export async function sendMarkaEvent(
     // fallback path
   }
 
-  // Ensure origin_domain is present in payload data
-  const finalData: Record<string, unknown> = {
-    origin_domain: config.publicOriginDomain,
-    ...data,
-  };
-
   const bodyObj = {
     event_id: eventId,
     event_type: eventType,
     schema_version: 1,
     occurred_at: new Date().toISOString(),
-    timestamp: Math.floor(Date.now() / 1000),
-    data: finalData,
+    data,
   };
 
   const body = JSON.stringify(bodyObj);

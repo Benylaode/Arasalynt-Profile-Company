@@ -7,61 +7,80 @@ export const dynamic = 'force-dynamic';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const {
-      name,
-      phone,
-      email,
-      contact,
-      company,
-      service,
-      packageChoice,
-      billingCycle,
-      price,
-      message,
-      brandDescription,
-      source,
-      inquiry: inquiryField,
-      subject,
-      description,
-      targetBudget,
-    } = body;
+    const rawCustomer = typeof body.customer === 'object' && body.customer !== null ? body.customer : {};
+    const rawRequirements = typeof body.requirements === 'object' && body.requirements !== null ? body.requirements : {};
 
-    const effectiveName = String(name || '').trim();
-    const effectivePhone = String(phone || '').trim();
-    const effectiveEmail = String(email || '').trim();
-    const effectiveContact = (contact || phone || email || '').trim();
-    const effectiveService = String(service || packageChoice || inquiryField || subject || 'General Inquiry').trim();
-    const effectivePackage = String(packageChoice || service || inquiryField || subject || '').trim();
-    const effectiveMessage = String(message || brandDescription || description || '').trim();
-    const effectivePrice = price || (targetBudget ? `Rp ${Number(targetBudget).toLocaleString('id-ID')}` : '');
+    const extractedEmail = String(
+      body.email ||
+      body.customerEmail ||
+      body.customer_email ||
+      rawCustomer.email ||
+      ''
+    ).trim();
 
-    if (!effectiveName) {
-      return NextResponse.json(
-        { success: false, error: 'Nama wajib diisi' },
-        { status: 400 }
-      );
-    }
+    const extractedPhone = String(
+      body.phone ||
+      body.customerPhone ||
+      body.customer_phone ||
+      rawCustomer.phone ||
+      ''
+    ).trim();
+
+    const extractedName = String(
+      body.name ||
+      body.customerName ||
+      body.customer_name ||
+      rawCustomer.name ||
+      (extractedEmail ? extractedEmail.split('@')[0] : '') ||
+      'Calon Klien'
+    ).trim();
+
+    const effectiveContact = (body.contact || extractedPhone || extractedEmail || '').trim();
+    const effectiveCompany = String(body.company || rawCustomer.company || '').trim();
+    const effectiveService = String(
+      rawRequirements.subject ||
+      body.service ||
+      body.packageChoice ||
+      body.inquiry ||
+      body.subject ||
+      'General Inquiry'
+    ).trim();
+    const effectivePackage = String(
+      body.packageChoice ||
+      body.service ||
+      body.inquiry ||
+      body.subject ||
+      ''
+    ).trim();
+    const effectiveMessage = String(
+      rawRequirements.description ||
+      body.message ||
+      body.brandDescription ||
+      body.description ||
+      ''
+    ).trim();
+    const effectivePrice = body.price || (body.targetBudget ? `Rp ${Number(body.targetBudget).toLocaleString('id-ID')}` : '');
 
     if (!effectiveContact) {
       return NextResponse.json(
-        { success: false, error: 'Nomor WhatsApp atau Email wajib diisi' },
+        { success: false, error: 'Email atau Nomor WhatsApp wajib diisi' },
         { status: 400 }
       );
     }
 
     const inquiry = inquiriesRepo.create({
-      name: effectiveName,
-      phone: effectivePhone,
-      email: effectiveEmail,
+      name: extractedName,
+      phone: extractedPhone,
+      email: extractedEmail,
       contact: effectiveContact,
-      company: String(company || '').trim(),
+      company: effectiveCompany,
       service: effectiveService,
       packageChoice: effectivePackage,
-      billingCycle: String(billingCycle || '').trim(),
+      billingCycle: String(body.billingCycle || '').trim(),
       price: String(effectivePrice || '').trim(),
       message: effectiveMessage,
       brandDescription: effectiveMessage,
-      source: String(source || 'contact_form').trim(),
+      source: String(body.source || 'contact_form').trim(),
     });
 
     // Synchronize to external Marka CRM

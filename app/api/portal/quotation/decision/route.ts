@@ -47,12 +47,6 @@ export async function POST(req: NextRequest) {
     const eventData: Record<string, unknown> = {
       quotation_code: cleanCode,
       decision: cleanDecision,
-      ...(decisionNotes && String(decisionNotes).trim()
-        ? { decision_notes: String(decisionNotes).trim() }
-        : {}),
-      ...(signature && String(signature).trim()
-        ? { signature: String(signature).trim() }
-        : {}),
     };
 
     // Forward signed event to Marka CRM

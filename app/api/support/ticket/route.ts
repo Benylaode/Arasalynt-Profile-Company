@@ -31,12 +31,19 @@ export async function POST(req: NextRequest) {
       console.warn('Failed to save local ticket:', dbErr);
     }
 
-    // Send event to Marka CRM
-    const result = await sendMarkaEvent(eventId, 'ticket.created', {
-      subject: String(subject).trim(),
-      description: String(description).trim(),
-      ...(serialNumber ? { serial_number: String(serialNumber).trim() } : {}),
-      ...(customerEmail ? { customer_email: String(customerEmail).trim() } : {}),
+    // Send event to Marka CRM using official inquiry.submitted contract
+    const emailClean = customerEmail ? String(customerEmail).trim() : 'support@arsalynk.com';
+    const nameClean = emailClean.includes('@') ? emailClean.split('@')[0] : 'Pelanggan Layanan';
+
+    const result = await sendMarkaEvent(eventId, 'inquiry.submitted', {
+      customer: {
+        name: nameClean,
+        email: emailClean,
+      },
+      requirements: {
+        subject: `[Support Ticket] ${String(subject).trim()}`,
+        description: `${String(description).trim()}${serialNumber ? `\n\nSerial Number: ${serialNumber}` : ''}`,
+      },
     });
 
     return NextResponse.json(
