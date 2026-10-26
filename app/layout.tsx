@@ -109,6 +109,8 @@ import {
   buildSiteNavigationElementJsonLd,
 } from '@/lib/seo';
 
+import CrmLandingIntegration from '@/components/crm/CrmLandingIntegration';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -146,6 +148,7 @@ export default function RootLayout({
         <Footer />
         <WhatsAppFloatingButton />
         <ArsAIWidget />
+        <CrmLandingIntegration />
       </body>
     </html>
   );

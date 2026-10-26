@@ -1109,6 +1109,12 @@ export default function Navbar() {
                   `
               }
             `}
+            onClick={(e) => {
+              if (typeof window !== 'undefined') {
+                e.preventDefault();
+                window.dispatchEvent(new CustomEvent('open-crm-consultation'));
+              }
+            }}
           >
             CONTACT US
             <ButtonChevron />
@@ -1301,7 +1307,13 @@ export default function Navbar() {
 
           <Link
             href="/contact-us"
-            onClick={closeMobileMenu}
+            onClick={(e) => {
+              closeMobileMenu();
+              if (typeof window !== 'undefined') {
+                e.preventDefault();
+                window.dispatchEvent(new CustomEvent('open-crm-consultation'));
+              }
+            }}
             className="
               mt-[25px]
               flex h-[44px] w-full

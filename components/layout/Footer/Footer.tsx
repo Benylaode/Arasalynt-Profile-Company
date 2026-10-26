@@ -23,6 +23,8 @@ const COMPANY_LINKS = [
   { name: 'Our Business', href: '/our-business' },
   { name: 'Our Works', href: '/our-works' },
   { name: 'Contact Us', href: '/contact-us' },
+  { name: 'Client Portal', href: '/portal' },
+  { name: 'Feedback & Rating', href: '/feedback' },
   { name: 'Privacy Policy', href: '/privacy-policy' },
 ];
 

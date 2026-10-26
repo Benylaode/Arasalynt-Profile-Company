@@ -19,6 +19,16 @@ export const DEFAULT_CALLER_CONFIG = {
 
 export const ARSAI_QUICK_ACTIONS: QuickActionItem[] = [
   {
+    id: 'crm-consultation',
+    label: '📋 Jadwalkan Konsultasi CRM',
+    prompt: 'Saya ingin menjadwalkan konsultasi solusi enterprise dan terhubung dengan tim CRM Arsalynk.',
+  },
+  {
+    id: 'crm-tracking',
+    label: '🔍 Lacak Tiket / Penawaran',
+    prompt: 'Bagaimana cara melacak status tiket support atau penawaran quotation saya di sistem CRM?',
+  },
+  {
     id: 'about-company',
     label: '🏢 Profil & Visi Misi Arsalynk',
     prompt: 'Bisa jelaskan secara ringkas mengenai profil perusahaan PT Sinergi Muda Arsa (Arsalynk), visi misi, dan keunggulannya?',
@@ -27,11 +37,6 @@ export const ARSAI_QUICK_ACTIONS: QuickActionItem[] = [
     id: 'solutions-services',
     label: '⚙️ Solusi Teknologi & Layanan IT',
     prompt: 'Apa saja pilar solusi teknologi dan layanan IT enterprise yang ditawarkan oleh Arsalynk?',
-  },
-  {
-    id: 'case-studies-portfolio',
-    label: '💼 Portofolio & Studi Kasus Proyek',
-    prompt: 'Tolong berikan contoh studi kasus dan portofolio proyek teknologi yang pernah dikerjakan oleh Arsalynk.',
   },
   {
     id: 'consultation-contact',
