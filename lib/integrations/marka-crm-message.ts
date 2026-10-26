@@ -58,7 +58,6 @@ export async function sendMarkaMessageReceived(input: MarkaMessageInput): Promis
     event_id: eventId,
     event_type: 'message.received',
     schema_version: 1,
-    timestamp: Math.floor(occurredAt.getTime() / 1000),
     occurred_at: occurredAt.toISOString(),
     data: {
       thread_id: input.threadId,
@@ -69,6 +68,7 @@ export async function sendMarkaMessageReceived(input: MarkaMessageInput): Promis
         type: input.senderType,
       },
       message: { type: 'TEXT', text: input.text },
+      origin_domain: process.env.PUBLIC_ORIGIN_DOMAIN || 'arsalynk.com',
     },
   });
   const rawBody = Buffer.from(body, 'utf8');

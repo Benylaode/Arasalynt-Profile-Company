@@ -120,7 +120,7 @@ export default function ClientPortalPage() {
                 Client Portal
               </h1>
               <p className="max-w-[580px] font-body text-[14px] leading-[1.6] text-white/75 sm:text-[16px]">
-                Lacak status pengerjaan tiket dukungan teknis dan lakukan persetujuan dokumen penawaran (quotation) secara digital melalui integrasi resmi Marka CRM.
+                Persetujuan dokumen penawaran (quotation) resmi dan pelaporan tiket dukungan teknis secara digital melalui integrasi aman server Marka CRM.
               </p>
             </div>
           </div>
@@ -157,7 +157,7 @@ export default function ClientPortalPage() {
               </h2>
 
               <p className="font-body text-[14px] leading-[1.65] text-[#717171] md:text-[15px]">
-                Setiap tiket pengerjaan teknis dan dokumen quotation yang diterbitkan oleh Arsalynk dilengkapi dengan token akses aman. Anda dapat memverifikasi status pengerjaan terkini secara langsung dari database sistem ERP kami.
+                Setiap keputusan penawaran (quotation) dan tiket dukungan teknis yang Anda kirimkan diproses langsung ke sistem Marka CRM melalui integrasi bertanda tangan server (HMAC-SHA256). Pembaruan pengerjaan tiket akan disampaikan langsung oleh tim teknisi kami secara berkala.
               </p>
 
               <div className="flex flex-col gap-4 rounded-[16px] md:gap-5">

@@ -88,7 +88,6 @@ export async function sendMarkaEvent(
     event_type: eventType,
     schema_version: 1,
     occurred_at: new Date().toISOString(),
-    timestamp: Math.floor(Date.now() / 1000),
     data: finalData,
   };
 
