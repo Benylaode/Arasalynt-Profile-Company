@@ -53,6 +53,8 @@ export default function ClientPortalClient() {
         body: JSON.stringify({
           quotation_code: quotationCode.trim(),
           decision,
+          signature: signatureName.trim(),
+          decision_notes: decisionNotes.trim(),
         }),
       });
 
@@ -178,6 +180,9 @@ export default function ClientPortalClient() {
             <p className="font-body text-[13px] text-[#717171]">
               Kirimkan persetujuan atau catatan penyesuaian untuk penawaran kerja sama yang telah dikirimkan oleh tim Arsalynk kepada perusahaan Anda.
             </p>
+            <div className="mt-2 rounded-[8px] border border-blue-100 bg-blue-50/60 p-2.5 font-body text-[12px] text-[#1A3E9E]">
+              ℹ️ <strong>Integrasi Marka ERP:</strong> Dokumen penawaran harus berada dalam status <strong>SENT</strong> dan terhubung ke <strong>Opportunity</strong> aktif di sistem Marka ERP agar persetujuan (ACCEPTED) dapat diproses.
+            </div>
           </div>
 
           <div className="space-y-4">

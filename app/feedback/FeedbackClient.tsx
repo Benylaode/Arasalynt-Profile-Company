@@ -39,13 +39,12 @@ function RequiredLabel({ children }: { children: React.ReactNode }) {
 }
 
 export default function FeedbackClient() {
+  // Hanya menyimpan state field yang benar-benar dibutuhkan
   const [customerCode, setCustomerCode] = useState('');
   const [rating, setRating] = useState<number>(5);
   const [feedbackText, setFeedbackText] = useState('');
   const [feedbackType, setFeedbackType] = useState('CUSTOMER_REVIEW');
-  const [salesOrderId, setSalesOrderId] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -69,8 +68,7 @@ export default function FeedbackClient() {
           customer_code: customerCode.trim(),
           rating,
           feedback_text: feedbackText.trim(),
-          feedback_type: feedbackType || 'SERVICE_EVALUATION',
-          sales_order_id: salesOrderId.trim() || undefined,
+          feedback_type: feedbackType || 'CUSTOMER_REVIEW',
         }),
       });
 
@@ -105,7 +103,6 @@ export default function FeedbackClient() {
             onClick={() => {
               setIsSuccess(false);
               setFeedbackText('');
-              setSalesOrderId('');
             }}
             className="inline-flex h-[48px] items-center justify-center rounded-full border border-[#C8C8C8] bg-white px-6 font-body text-[13px] font-bold uppercase tracking-[0.04em] text-[#505050] transition hover:bg-gray-100 hover:text-[#101010]"
           >
@@ -138,7 +135,7 @@ export default function FeedbackClient() {
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4.5">
-        {/* Customer Code */}
+        {/* 1. Customer Code (Wajib) */}
         <div className="flex flex-col gap-1.5">
           <RequiredLabel>Kode Klien / ID Perusahaan</RequiredLabel>
           <input
@@ -154,7 +151,7 @@ export default function FeedbackClient() {
           </span>
         </div>
 
-        {/* Star Rating Section */}
+        {/* 2. Star Rating (Wajib) */}
         <div className="flex flex-col gap-2 rounded-[12px] bg-[#F7F7F7] p-4 border border-[#EAEAEA]">
           <RequiredLabel>Tingkat Kepuasan Layanan</RequiredLabel>
           <div className="flex items-center gap-2 pt-1">
@@ -183,86 +180,42 @@ export default function FeedbackClient() {
           </span>
         </div>
 
-        {/* Feedback Type & Optional Order ID */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div className="flex flex-col gap-1.5">
-            <label className="font-body text-[13px] font-medium text-[#292929]">
-              Bidang Layanan
-            </label>
-            <div className="relative">
-              <select
-                value={feedbackType}
-                onChange={(e) => setFeedbackType(e.target.value)}
-                className="h-[46px] w-full appearance-none rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
-              >
-                <option value="CUSTOMER_REVIEW">Ulasan Kerja Sama Proyek</option>
-                <option value="SERVICE_EVALUATION">Kinerja Solusi Sistem &amp; Software</option>
-                <option value="PROJECT_FEEDBACK">Komunikasi &amp; Manajemen Proyek</option>
-                <option value="SUPPORT_FEEDBACK">Kualitas Dukungan Teknis</option>
-              </select>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden="true"
-                className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#717171]"
-              >
-                <path
-                  d="m7 10 5 5 5-5"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-1.5">
-            <label className="font-body text-[13px] font-medium text-[#292929]">
-              Nomor Kontrak / Proyek (Opsional)
-            </label>
-            <input
-              type="text"
-              value={salesOrderId}
-              onChange={(e) => setSalesOrderId(e.target.value)}
-              placeholder="Contoh: SO-2026-0045"
-              className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
-            />
+        {/* 3. Bidang Layanan (Wajib/Pilihan) */}
+        <div className="flex flex-col gap-1.5">
+          <label className="font-body text-[13px] font-medium text-[#292929]">
+            Bidang Layanan
+          </label>
+          <div className="relative">
+            <select
+              value={feedbackType}
+              onChange={(e) => setFeedbackType(e.target.value)}
+              className="h-[46px] w-full appearance-none rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
+            >
+              <option value="CUSTOMER_REVIEW">Ulasan Kerja Sama Proyek</option>
+              <option value="SERVICE_EVALUATION">Kinerja Solusi Sistem &amp; Software</option>
+              <option value="PROJECT_FEEDBACK">Komunikasi &amp; Manajemen Proyek</option>
+              <option value="SUPPORT_FEEDBACK">Kualitas Dukungan Teknis</option>
+            </select>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+              className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#717171]"
+            >
+              <path
+                d="m7 10 5 5 5-5"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </div>
         </div>
 
-        {/* Sender Info (Supporting details) */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div className="flex flex-col gap-1.5">
-            <label className="font-body text-[13px] font-medium text-[#292929]">
-              Nama Perwakilan (Opsional)
-            </label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Budi Santoso"
-              className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
-            />
-          </div>
-
-          <div className="flex flex-col gap-1.5">
-            <label className="font-body text-[13px] font-medium text-[#292929]">
-              Email Resmi (Opsional)
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="budi@perusahaan.co.id"
-              className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
-            />
-          </div>
-        </div>
-
-        {/* Feedback Text */}
+        {/* 4. Feedback Text / Pesan (Wajib) */}
         <div className="flex flex-col gap-1.5">
           <RequiredLabel>Pesan, Masukan, atau Saran</RequiredLabel>
           <textarea

@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import FeedbackClient from './FeedbackClient';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import {
   SITE_NAME,
   WHATSAPP_PHONE_DISPLAY,
   WHATSAPP_LINK,
+  // SITE_EMAIL, // Opsional: Tambahkan jika sudah didefinisikan di constants
 } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -67,15 +69,15 @@ export default function FeedbackPage() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#F7F7F7]">
       <main>
-        {/* ================================================================
-            HERO — Standard Height Matching About Us & Contact Us
-        ================================================================= */}
+        {/* HERO SECTION */}
         <section className="relative isolate flex h-[clamp(560px,41.666vw,800px)] items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-[#05070A]">
           <div className="absolute inset-0 -z-30">
-            <img
+            <Image
               src="/images/our-business/kaluna-technology/hero.webp"
-              alt=""
-              className="h-full w-full object-cover object-center"
+              alt="Hero Background"
+              fill
+              priority
+              className="object-cover object-center"
             />
           </div>
 
@@ -136,9 +138,7 @@ export default function FeedbackPage() {
           </a>
         </section>
 
-        {/* ================================================================
-            FEEDBACK SECTION — Authentic 2-Column Arsalynk Layout
-        ================================================================= */}
+        {/* FEEDBACK SECTION */}
         <section
           id="feedback-content"
           className="scroll-mt-8 w-full bg-[#F7F7F7] px-[clamp(24px,13.333vw,256px)] py-[clamp(48px,4.5vw,76px)]"
@@ -210,9 +210,7 @@ export default function FeedbackPage() {
           </div>
         </section>
 
-        {/* ================================================================
-            BOTTOM CTA — Beyond Expectations Section
-        ================================================================= */}
+        {/* BOTTOM CTA */}
         <BeyondExpectations />
       </main>
     </div>
