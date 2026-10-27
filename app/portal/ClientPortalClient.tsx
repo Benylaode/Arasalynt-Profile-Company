@@ -15,7 +15,10 @@ export default function ClientPortalClient() {
   const [signatureName, setSignatureName] = useState('');
   const [decisionNotes, setDecisionNotes] = useState('');
   const [isSubmittingQuote, setIsSubmittingQuote] = useState(false);
-  const [quoteFeedback, setQuoteFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [quoteFeedback, setQuoteFeedback] = useState<{
+    type: 'success' | 'error' | 'info';
+    message: string;
+  } | null>(null);
 
   // Ticket Creation State
   const [customerName, setCustomerName] = useState('');
@@ -24,10 +27,16 @@ export default function ClientPortalClient() {
   const [ticketDescription, setTicketDescription] = useState('');
   const [serialNumber, setSerialNumber] = useState('');
   const [isSubmittingTicket, setIsSubmittingTicket] = useState(false);
-  const [ticketFeedback, setTicketFeedback] = useState<{ type: 'success' | 'error'; message: string; eventId?: string } | null>(null);
+  const [ticketFeedback, setTicketFeedback] = useState<{
+    type: 'success' | 'error';
+    message: string;
+    eventId?: string;
+  } | null>(null);
 
   const handleQuotationDecision = async (decision: 'ACCEPTED' | 'REJECTED') => {
-    if (!quotationCode.trim()) {
+    const cleanCode = quotationCode.trim();
+
+    if (!cleanCode) {
       setQuoteFeedback({
         type: 'error',
         message: 'Nomor dokumen penawaran (contoh: QUO-2026-00125) wajib diisi.',
@@ -44,36 +53,106 @@ export default function ClientPortalClient() {
     }
 
     setIsSubmittingQuote(true);
-    setQuoteFeedback(null);
+    setQuoteFeedback({
+      type: 'info',
+      message: 'Mendaftarkan keputusan ke antrean Marka CRM...',
+    });
 
     try {
-      const res = await fetch('/api/portal/quotation/decision', {
+      // 1. Submit Keputusan ke Route Handler
+      const res = await fetch('/api/quotation/decision', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          quotation_code: quotationCode.trim(),
+          quotation_code: cleanCode,
           decision,
-          signature: signatureName.trim(),
-          decision_notes: decisionNotes.trim(),
         }),
       });
 
       const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Gagal mengirimkan keputusan penawaran.');
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Gagal mengirimkan konfirmasi penawaran.');
       }
 
-      setQuoteFeedback({
-        type: 'success',
-        message:
-          decision === 'ACCEPTED'
-            ? `Persetujuan penawaran ${quotationCode.trim()} telah berhasil kami terima. Tim Arsalynk akan segera menghubungi Anda untuk langkah selanjutnya.`
-            : `Catatan penyesuaian penawaran ${quotationCode.trim()} telah kami terima dan diteruskan ke tim kami untuk tindak lanjut.`,
-      });
+      // 2. Tangani status duplikat
+      if (data.processing_status === 'DUPLICATE') {
+        setQuoteFeedback({
+          type: 'info',
+          message: data.message || `Keputusan untuk dokumen ${cleanCode} sudah pernah diterima sebelumnya.`,
+        });
+        setIsSubmittingQuote(false);
+        return;
+      }
+
+      // 3. Jika status 202 (QUEUED), jalankan polling status worker
+      if (data.status === 202 && data.status_check_url) {
+        setQuoteFeedback({
+          type: 'info',
+          message: 'Keputusan diterima. Menunggu pemrosesan oleh worker Marka ERP...',
+        });
+
+        const checkUrl = data.status_check_url;
+        let attempts = 0;
+        const maxAttempts = 15; // Maksimal polling ~22 detik
+
+        const pollStatus = async (): Promise<void> => {
+          attempts++;
+          try {
+            const statusRes = await fetch(checkUrl);
+            const statusData = await statusRes.json();
+
+            if (statusData.completed) {
+              if (statusData.success && statusData.processing_status === 'COMPLETED') {
+                setQuoteFeedback({
+                  type: 'success',
+                  message:
+                    statusData.message ||
+                    (decision === 'ACCEPTED'
+                      ? `Persetujuan penawaran ${cleanCode} telah berhasil diproses oleh sistem Marka ERP. Tim Arsalynk akan segera menghubungi Anda.`
+                      : `Catatan penyesuaian penawaran ${cleanCode} telah berhasil diproses oleh sistem Marka ERP.`),
+                });
+              } else {
+                setQuoteFeedback({
+                  type: 'error',
+                  message: statusData.error || 'Pemrosesan keputusan gagal pada worker Marka ERP.',
+                });
+              }
+              setIsSubmittingQuote(false);
+              return;
+            }
+
+            if (attempts >= maxAttempts) {
+              setQuoteFeedback({
+                type: 'info',
+                message: `Event keputusan telah diterima (ID: ${data.eventId}), namun pemrosesan membutuhkan waktu lebih lama. Hasil akhir akan diperbarui otomatis di sistem.`,
+              });
+              setIsSubmittingQuote(false);
+              return;
+            }
+
+            // Lanjutkan polling berikutnya setelah 1.5 detik
+            setTimeout(pollStatus, 1500);
+          } catch {
+            setQuoteFeedback({
+              type: 'error',
+              message: 'Terjadi kendala jaringan saat memantau status pemrosesan.',
+            });
+            setIsSubmittingQuote(false);
+          }
+        };
+
+        setTimeout(pollStatus, 1000);
+      } else {
+        setQuoteFeedback({
+          type: 'success',
+          message: data.message || `Keputusan penawaran ${cleanCode} berhasil dikirimkan.`,
+        });
+        setIsSubmittingQuote(false);
+      }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Terjadi kendala saat mengirim konfirmasi.';
       setQuoteFeedback({ type: 'error', message: msg });
-    } finally {
       setIsSubmittingQuote(false);
     }
   };
@@ -237,10 +316,14 @@ export default function ClientPortalClient() {
                 className={`rounded-[10px] p-4 font-body text-[13px] ${
                   quoteFeedback.type === 'success'
                     ? 'border border-emerald-300 bg-emerald-50 text-emerald-900'
+                    : quoteFeedback.type === 'info'
+                    ? 'border border-blue-300 bg-blue-50 text-blue-900'
                     : 'border border-red-300 bg-red-50 text-red-900'
                 }`}
               >
-                {quoteFeedback.type === 'success' ? '✓ ' : '✕ '}
+                {quoteFeedback.type === 'success' && '✓ '}
+                {quoteFeedback.type === 'info' && 'ℹ️ '}
+                {quoteFeedback.type === 'error' && '✕ '}
                 {quoteFeedback.message}
               </div>
             )}
@@ -252,7 +335,7 @@ export default function ClientPortalClient() {
                 onClick={() => handleQuotationDecision('ACCEPTED')}
                 className="inline-flex h-[48px] items-center justify-center gap-2 rounded-full bg-[#1A3E9E] px-8 font-body text-[13px] font-bold uppercase tracking-[0.04em] text-white transition hover:bg-[#14347F] disabled:cursor-wait disabled:opacity-50 md:h-[50px]"
               >
-                <span>{isSubmittingQuote ? 'MENGIRIMKAN...' : '✓ SETUJUI PENAWARAN'}</span>
+                <span>{isSubmittingQuote ? 'MEMPROSES...' : '✓ SETUJUI PENAWARAN'}</span>
               </button>
 
               <button

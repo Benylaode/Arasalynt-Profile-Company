@@ -6,45 +6,55 @@ export interface MarkaConfig {
   integrationId: string;
   keyId: string;
   signingSecret: string;
-  publicOriginDomain: string;
+  publicOriginDomain?: string;
   outboundSecret?: string;
 }
 
 export function getMarkaConfig(): MarkaConfig {
+  // Parsing domain secara fleksibel dari PUBLIC_ORIGIN_DOMAIN atau NEXT_PUBLIC_SITE_URL
+  const rawDomain =
+    process.env.PUBLIC_ORIGIN_DOMAIN ||
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    '';
+
+  const cleanDomain = rawDomain
+    .trim()
+    .replace(/^https?:\/\//, '')
+    .replace(/\/.*$/, '')
+    .replace(/^["']|["']$/g, '');
+
   return {
-    webhookUrl: (
-      process.env.MARKA_CRM_WEBHOOK_URL ||
-      'https://darkturquoise-mandrill-787280.hostingersite.com/api/v1/integrations/webhooks/events'
-    )
+    webhookUrl: (process.env.MARKA_CRM_WEBHOOK_URL || '')
       .trim()
       .replace(/^["']|["']$/g, ''),
-    integrationId: (
-      process.env.MARKA_CRM_INTEGRATION_ID ||
-      'b6ff9390-2436-4a3f-841c-7966098651fc'
-    )
+    integrationId: (process.env.MARKA_CRM_INTEGRATION_ID || '')
       .trim()
       .replace(/^["']|["']$/g, ''),
-    keyId: (process.env.MARKA_CRM_KEY_ID || 'k_ea725e71b365ebd3')
+    keyId: (process.env.MARKA_CRM_KEY_ID || '')
       .trim()
       .replace(/^["']|["']$/g, ''),
-    signingSecret: (
-      process.env.MARKA_CRM_SIGNING_SECRET ||
-      'aGYo57-YHvKY6W9tLpcX7_VIrKCguCuFgNOLRvBz9pk'
-    )
+    signingSecret: (process.env.MARKA_CRM_SIGNING_SECRET || '')
       .trim()
       .replace(/^["']|["']$/g, ''),
-    publicOriginDomain: (
-      process.env.PUBLIC_ORIGIN_DOMAIN || 'arsalynk.com'
-    )
-      .trim()
-      .replace(/^["']|["']$/g, ''),
-    outboundSecret: (
-      process.env.MARKA_OUTBOUND_SIGNING_SECRET ||
-      'arsalynt_marka_outbound_secret_prod'
-    )
+    publicOriginDomain: cleanDomain || undefined,
+    outboundSecret: (process.env.MARKA_OUTBOUND_SIGNING_SECRET || '')
       .trim()
       .replace(/^["']|["']$/g, ''),
   };
+}
+
+/**
+ * Helper: Mengambil base URL utama dari Marka CRM berbasis environment variable
+ */
+export function getMarkaBaseUrl(customConfig?: Partial<MarkaConfig>): string {
+  const config = { ...getMarkaConfig(), ...customConfig };
+  if (!config.webhookUrl) return '';
+  try {
+    const urlObj = new URL(config.webhookUrl);
+    return urlObj.origin;
+  } catch {
+    return '';
+  }
 }
 
 export interface MarkaSendResult {
@@ -69,12 +79,29 @@ export async function sendMarkaEvent(
   const config = { ...getMarkaConfig(), ...customConfig };
   const startTime = Date.now();
 
+  if (!config.webhookUrl) {
+    return {
+      success: false,
+      status: 500,
+      event_id: eventId,
+      error: 'MARKA_CRM_WEBHOOK_URL belum dikonfigurasi pada environment variable.',
+      attempts: 0,
+      latencyMs: Date.now() - startTime,
+    };
+  }
+
   let path = '/api/v1/integrations/webhooks/events';
   try {
     const urlObj = new URL(config.webhookUrl);
     path = urlObj.pathname || path;
   } catch {
-    // fallback path
+    // Standard path fallback jika parsing URL gagal
+  }
+
+  // Sisipkan origin_domain HANYA JIKA tersedia dan belum ditentukan di data
+  const finalData: Record<string, unknown> = { ...data };
+  if (config.publicOriginDomain && !finalData.origin_domain) {
+    finalData.origin_domain = config.publicOriginDomain;
   }
 
   const bodyObj = {
@@ -82,7 +109,7 @@ export async function sendMarkaEvent(
     event_type: eventType,
     schema_version: 1,
     occurred_at: new Date().toISOString(),
-    data,
+    data: finalData,
   };
 
   const body = JSON.stringify(bodyObj);
@@ -142,7 +169,6 @@ export async function sendMarkaEvent(
           requestPayload: bodyObj,
         };
 
-        // Log to local DB
         try {
           crmRepo.logEvent({
             eventId,
@@ -160,7 +186,6 @@ export async function sendMarkaEvent(
         return result;
       }
 
-      // Do not retry 4xx errors except 408 (timeout) and 429 (rate limit)
       if (
         response.status < 500 &&
         response.status !== 408 &&
@@ -177,7 +202,6 @@ export async function sendMarkaEvent(
       if (attempt === 3) break;
     }
 
-    // Exponential backoff: 300ms, 600ms
     await new Promise((resolve) =>
       setTimeout(resolve, 300 * Math.pow(2, attempt - 1))
     );
@@ -243,10 +267,16 @@ export async function fetchMarkaPortalData(
   id: string,
   token: string
 ) {
-  const baseUrl = getMarkaConfig().webhookUrl.replace(
-    /\/api\/v1\/integrations\/webhooks\/events.*/,
-    ''
-  );
+  const baseUrl = getMarkaBaseUrl();
+
+  if (!baseUrl) {
+    return {
+      status: 500,
+      ok: false,
+      data: { error: 'MARKA_CRM_WEBHOOK_URL belum dikonfigurasi' },
+    };
+  }
+
   const endpoint = `${baseUrl}/api/v1/portal/${type}/${id}`;
 
   const res = await fetch(endpoint, {
@@ -284,17 +314,20 @@ export async function sendMarkaInquiry(input: {
   message?: string;
 }): Promise<MarkaInquirySyncStatus> {
   const eventId = `inq-${Date.now()}-${randomBytes(4).toString('hex')}`;
-  
-  // Format customer data according to Marka CRM schema requirements
+
   const cleanName = String(input.name || 'Calon Klien').trim().slice(0, 200);
   const rawEmail = String(input.email || '').trim().toLowerCase();
   const rawPhone = String(input.phone || '').trim();
   const phoneDigits = rawPhone.replace(/\D/g, '');
 
-  // Marka requires customer.email; if only phone was provided, use virtual phone-lead alias
-  const effectiveEmail = rawEmail && rawEmail.includes('@')
-    ? rawEmail.slice(0, 320)
-    : (phoneDigits ? `${phoneDigits}@phone.arsalynk.com` : 'leads@arsalynk.com');
+  const domain = getMarkaConfig().publicOriginDomain || 'lead.internal';
+
+  const effectiveEmail =
+    rawEmail && rawEmail.includes('@')
+      ? rawEmail.slice(0, 320)
+      : phoneDigits
+      ? `${phoneDigits}@phone.${domain}`
+      : `leads@${domain}`;
 
   const cleanPhone = rawPhone ? rawPhone.slice(0, 40) : undefined;
   const cleanCompany = input.company ? String(input.company).trim().slice(0, 200) : undefined;
@@ -302,7 +335,7 @@ export async function sendMarkaInquiry(input: {
   const cleanDesc = String(
     input.message
       ? `${input.message}${cleanCompany ? `\n\nPerusahaan: ${cleanCompany}` : ''}`
-      : `Inquiry dari formulir website Arsalynk.${cleanCompany ? ` Perusahaan: ${cleanCompany}` : ''}`
+      : `Inquiry dari formulir website.${cleanCompany ? ` Perusahaan: ${cleanCompany}` : ''}`
   ).slice(0, 20000);
 
   const result = await sendMarkaEvent(eventId, 'inquiry.submitted', {
@@ -319,4 +352,59 @@ export async function sendMarkaInquiry(input: {
   });
 
   return result.success ? 'DELIVERED' : 'FAILED';
+}
+
+/**
+ * Mengecek status eksekusi event pada Marka CRM / Event Bus
+ */
+export async function getMarkaEventStatus(eventId: string) {
+  const config = getMarkaConfig();
+  const baseUrl = process.env.MARKA_CRM_API_URL || getMarkaBaseUrl();
+  const apiKey = process.env.MARKA_CRM_API_KEY || '';
+
+  if (!baseUrl) {
+    return {
+      success: false,
+      status: 500,
+      data: null,
+      error: 'Base URL Marka CRM (MARKA_CRM_WEBHOOK_URL / MARKA_CRM_API_URL) belum dikonfigurasi pada .env',
+    };
+  }
+
+  const endpoint = `${baseUrl.replace(/\/$/, '')}/api/v1/events/status/${encodeURIComponent(eventId)}`;
+
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    'X-Integration-Id': config.integrationId,
+    'X-Integration-Key-Id': config.keyId,
+  };
+
+  if (apiKey) {
+    headers['Authorization'] = `Bearer ${apiKey}`;
+  }
+
+  try {
+    const response = await fetch(endpoint, {
+      method: 'GET',
+      headers,
+      cache: 'no-store',
+      signal: AbortSignal.timeout(8000),
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    return {
+      success: response.ok,
+      status: response.status,
+      data,
+      error: response.ok ? null : (data.message || data.error || 'Failed to fetch event status'),
+    };
+  } catch (error: unknown) {
+    return {
+      success: false,
+      status: 500,
+      data: null,
+      error: error instanceof Error ? error.message : 'Network error checking event status',
+    };
+  }
 }
