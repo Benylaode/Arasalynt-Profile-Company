@@ -69,7 +69,7 @@ export default function ClientPortalClient() {
 
     try {
       // 1. Submit Keputusan ke Route Handler
-      const res = await fetch('/api/quotation/decision', {
+      const res = await fetch('/api/portal/quotation/decision', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
