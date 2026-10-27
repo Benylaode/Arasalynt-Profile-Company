@@ -11,19 +11,25 @@ const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-
 /**
  * Helper: Pemetaan error pemrosesan worker Marka CRM menjadi pesan ramah pengguna.
  */
-function mapWorkerErrorToMessage(rawError: string, targetIdentifier: string): string {
+function mapWorkerErrorToMessage(rawError: string, targetIdentifier: string, currentStatus?: string): string {
   const normalizedError = String(rawError).toUpperCase().trim();
+  const statusInfo = currentStatus ? ` Status saat ini: ${currentStatus}.` : '';
+
+  if (normalizedError === 'QUOTATION_NOT_SENT') {
+    return `Penawaran '${targetIdentifier}' belum dikirim ke klien (belum berstatus SENT), sehingga belum dapat diputuskan.${statusInfo} Silakan hubungi tim Arsalynk.`;
+  }
+  if (normalizedError.startsWith('QUOTATION_ALREADY_DECIDED')) {
+    return `Penawaran '${targetIdentifier}' sudah diputuskan sebelumnya dengan keputusan berbeda, sehingga tidak dapat diubah lagi.${statusInfo}`;
+  }
 
   if (
-    normalizedError === 'QUOTATION_ALREADY_DECIDED' ||
     normalizedError === 'QUOTATION_ALREADY_ACCEPTED' ||
     normalizedError === 'QUOTATION_ALREADY_PROCESSED' ||
     normalizedError === 'QUOTATION_ALREADY_SIGNED' ||
     normalizedError === 'QUOTATION_ALREADY_REJECTED' ||
-    normalizedError.includes('ALREADY_ACCEPTED') ||
-    normalizedError.includes('ALREADY_DECIDED')
+    normalizedError.includes('ALREADY_ACCEPTED')
   ) {
-    return `Dokumen penawaran '${targetIdentifier}' sudah tidak berstatus SENT (sudah disetujui / diproses sebelumnya di Marka ERP) sehingga keputusan tidak dapat diubah lagi.`;
+    return `Dokumen penawaran '${targetIdentifier}' sudah diproses sebelumnya sehingga keputusan tidak dapat diubah lagi.${statusInfo}`;
   }
   if (normalizedError === 'QUOTATION_EXPIRED') {
     return `Dokumen penawaran '${targetIdentifier}' telah melewati masa berlaku (expired) di Marka ERP.`;
@@ -38,7 +44,13 @@ function mapWorkerErrorToMessage(rawError: string, targetIdentifier: string): st
     return `Dokumen penawaran '${targetIdentifier}' belum terhubung ke Opportunity di Marka CRM. Keputusan 'ACCEPTED' memerlukan data Opportunity yang terhubung.`;
   }
   if (normalizedError === 'INVALID_QUOTATION_DECISION') {
-    return `Quotation '${targetIdentifier}' tidak dapat diproses. Pastikan dokumen berstatus 'SENT' dan terhubung dengan Opportunity di Marka ERP.`;
+    return `Data keputusan untuk quotation '${targetIdentifier}' ditolak validator Marka. Pastikan nomor quotation benar.`;
+  }
+  if (normalizedError === 'ORIGIN_DOMAIN_NOT_ALLOWED') {
+    return 'Domain asal tidak diizinkan oleh Integration Source di Marka CRM.';
+  }
+  if (normalizedError === 'EVENT_TYPE_NOT_ALLOWED') {
+    return "Integration Source di Marka CRM belum mengizinkan event 'quotation.decision'.";
   }
 
   return rawError || 'Gagal memproses keputusan penawaran pada worker Marka CRM.';
@@ -115,27 +127,11 @@ export async function POST(req: NextRequest) {
     const quotationCode = typeof rawCode === 'string' ? rawCode.trim() : '';
     const quotationId = typeof rawId === 'string' ? rawId.trim() : '';
 
-    if (quotationCode && quotationId) {
-      return NextResponse.json(
-        { error: 'Kirimkan salah satu saja: quotation_code ATAU quotation_id, tidak boleh keduanya.' },
-        { status: 400 }
-      );
-    }
-
     if (!quotationCode && !quotationId) {
       return NextResponse.json(
         { error: 'Wajib mengisi salah satu: Kode Quotation (quotation_code) atau ID Quotation (quotation_id)' },
         { status: 400 }
       );
-    }
-
-    if (quotationId) {
-      if (!UUID_REGEX.test(quotationId)) {
-        return NextResponse.json(
-          { error: 'Format ID Quotation (quotation_id) harus berupa UUID valid (contoh: 123e4567-e89b-12d3-a456-426614174000)' },
-          { status: 400 }
-        );
-      }
     }
 
     if (quotationCode && quotationCode.length > 100) {
@@ -162,39 +158,30 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 5. Payload Event Data
-    const eventData: Record<string, unknown> = {
-      decision: cleanDecision,
-    };
-
-    if (quotationCode) {
-      eventData.quotation_code = quotationCode;
-    } else {
-      eventData.quotation_id = quotationId;
+    // 5. Payload Event Data — persis kontrak Marka:
+    //    { quotation_code, decision } (atau quotation_id UUID asli dari Marka).
+    //    JANGAN mengarang quotation_id dari kode QUO-..., dan JANGAN kirim origin_domain.
+    let effectiveCode = quotationCode;
+    let effectiveId = '';
+    if (!effectiveCode) {
+      if (UUID_REGEX.test(quotationId)) {
+        effectiveId = quotationId;
+      } else {
+        // UI lama mengirim nomor QUO-... lewat field quotation_id
+        effectiveCode = quotationId;
+      }
     }
 
-    // Menyertakan data penandatangan dan catatan jika dikirimkan oleh UI
-    const signedBy = body.signed_by ?? body.signature ?? body.signature_name;
-    if (signedBy && typeof signedBy === 'string' && signedBy.trim()) {
-      eventData.signed_by = signedBy.trim();
-    }
+    const eventData: Record<string, unknown> = effectiveCode
+      ? { quotation_code: effectiveCode, decision: cleanDecision }
+      : { quotation_id: effectiveId, decision: cleanDecision };
 
-    const notes = body.decision_notes ?? body.notes ?? body.catatan;
-    if (notes && typeof notes === 'string' && notes.trim()) {
-      eventData.decision_notes = notes.trim();
-    }
+    const targetIdentifier = effectiveCode || effectiveId;
 
-    const targetIdentifier = quotationCode || quotationId;
-
-    // Sisipkan origin_domain dari request headers jika belum tersedia
-    const hostHeader = req.headers.get('x-forwarded-host') || req.headers.get('host') || '';
-    const cleanHost = hostHeader.split(':')[0].trim();
-    if (cleanHost && !eventData.origin_domain) {
-      eventData.origin_domain = cleanHost;
-    }
-
-    // Kirimkan event ke Marka CRM Queue
-    const result = await sendMarkaEvent(eventId, 'quotation.decision', eventData);
+    // Kirimkan event ke Marka CRM (HMAC-signed, tanpa origin_domain)
+    const result = await sendMarkaEvent(eventId, 'quotation.decision', eventData, undefined, {
+      omitOriginDomain: true,
+    });
 
     // 6. Tangani Event Duplikat
     const isDuplicate = result.status === 200 || Boolean((result.data as any)?.duplicate);
@@ -216,31 +203,34 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 7. Respons Berhasil: Event Diterima dan Masuk ke Antrean Marka CRM
+    // 7. 202 = event lolos pemeriksaan status quotation dan masuk antrean worker Marka
     if (result.success) {
       return NextResponse.json(
         {
           success: true,
           duplicate: false,
           eventId,
-          status: 200,
+          status: 202,
           decision: cleanDecision,
           quotation_identifier: targetIdentifier,
-          processing_status: 'COMPLETED',
-          completed: true,
-          message: `Event keputusan '${cleanDecision}' untuk dokumen ${targetIdentifier} berhasil diterima dan dicatat oleh sistem Marka CRM.`,
-          status_check_url: `/api/portal/quotation/decision?eventId=${encodeURIComponent(eventId)}&identifier=${encodeURIComponent(targetIdentifier)}`,
+          processing_status: 'QUEUED',
+          message:
+            cleanDecision === 'ACCEPTED'
+              ? `Persetujuan penawaran ${targetIdentifier} telah diterima oleh sistem Marka. Tim Arsalynk akan segera menghubungi Anda.`
+              : `Keputusan penolakan penawaran ${targetIdentifier} telah diterima oleh sistem Marka.`,
           markaResponse: result.data,
         },
-        { status: 200 }
+        { status: 202 }
       );
     }
 
-    // 8. Error Penyerahan Event Ke Gateway
+    // 8. Error dari Marka (400 validasi / 409 status quotation)
+    const errObj =
+      typeof result.error === 'object' && result.error !== null ? (result.error as Record<string, any>) : {};
     const rawError =
-      (typeof result.data === 'object' && result.data !== null ? (result.data as any).error || (result.data as any).message : '') ||
-      (typeof result.error === 'string' ? result.error : (result.error as any)?.error || (result.error as any)?.message) ||
-      '';
+      (typeof result.error === 'string' ? result.error : errObj.error || errObj.code || errObj.message) || '';
+    const currentStatus =
+      errObj.current_status ?? errObj.currentStatus ?? errObj.quotation_status ?? errObj.status ?? errObj.details?.current_status;
 
     return NextResponse.json(
       {
@@ -248,7 +238,12 @@ export async function POST(req: NextRequest) {
         eventId,
         status: result.status || 500,
         markaError: rawError,
-        error: mapWorkerErrorToMessage(String(rawError), targetIdentifier),
+        currentStatus: typeof currentStatus === 'string' ? currentStatus : undefined,
+        error: mapWorkerErrorToMessage(
+          String(rawError),
+          targetIdentifier,
+          typeof currentStatus === 'string' ? currentStatus : undefined
+        ),
       },
       { status: result.status || 500 }
     );

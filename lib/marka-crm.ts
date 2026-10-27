@@ -74,7 +74,8 @@ export async function sendMarkaEvent(
   eventId: string,
   eventType: string,
   data: Record<string, unknown>,
-  customConfig?: Partial<MarkaConfig>
+  customConfig?: Partial<MarkaConfig>,
+  options?: { omitOriginDomain?: boolean }
 ): Promise<MarkaSendResult> {
   const config = { ...getMarkaConfig(), ...customConfig };
   const startTime = Date.now();
@@ -100,7 +101,9 @@ export async function sendMarkaEvent(
 
   // Sisipkan origin_domain HANYA JIKA tersedia dan belum ditentukan di data
   const finalData: Record<string, unknown> = { ...data };
-  if (config.publicOriginDomain && !finalData.origin_domain) {
+  if (options?.omitOriginDomain) {
+    delete finalData.origin_domain;
+  } else if (config.publicOriginDomain && !finalData.origin_domain) {
     finalData.origin_domain = config.publicOriginDomain;
   }
 
