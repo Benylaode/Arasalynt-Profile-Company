@@ -10,7 +10,9 @@ export default function ClientPortalClient() {
 
   const [activeTab, setActiveTab] = useState<'quotation' | 'ticket'>(initialType);
 
-  // Quotation State
+  // ==========================================
+  // 1. QUOTATION STATE
+  // ==========================================
   const [quotationCode, setQuotationCode] = useState(initialCode);
   const [signatureName, setSignatureName] = useState('');
   const [decisionNotes, setDecisionNotes] = useState('');
@@ -20,12 +22,16 @@ export default function ClientPortalClient() {
     message: string;
   } | null>(null);
 
-  // Ticket Creation State
+  // ==========================================
+  // 2. TICKET CREATION STATE (MARKA ERP SCHEMA)
+  // ==========================================
+  const [ticketSubject, setTicketSubject] = useState('');
+  const [serialNumber, setSerialNumber] = useState('');
+  const [priority, setPriority] = useState<'LOW' | 'NORMAL' | 'HIGH' | 'URGENT'>('NORMAL');
+  const [customerCode, setCustomerCode] = useState('');
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
-  const [ticketSubject, setTicketSubject] = useState('');
   const [ticketDescription, setTicketDescription] = useState('');
-  const [serialNumber, setSerialNumber] = useState('');
   const [isSubmittingTicket, setIsSubmittingTicket] = useState(false);
   const [ticketFeedback, setTicketFeedback] = useState<{
     type: 'success' | 'error';
@@ -33,6 +39,9 @@ export default function ClientPortalClient() {
     eventId?: string;
   } | null>(null);
 
+  // ==========================================
+  // HANDLER: QUOTATION DECISION (ACCEPTED/REJECTED)
+  // ==========================================
   const handleQuotationDecision = async (decision: 'ACCEPTED' | 'REJECTED') => {
     const cleanCode = quotationCode.trim();
 
@@ -66,10 +75,21 @@ export default function ClientPortalClient() {
         body: JSON.stringify({
           quotation_code: cleanCode,
           decision,
+          signed_by: signatureName.trim(),
+          decision_notes: decisionNotes.trim(),
         }),
       });
 
-      const data = await res.json();
+      // Safe Response Parsing: Ambil teks dahulu sebelum parse JSON
+      const resText = await res.text();
+      let data;
+      try {
+        data = JSON.parse(resText);
+      } catch {
+        throw new Error(
+          `Server merespons format non-JSON (Status ${res.status}). Pastikan API Route '/api/quotation/decision' aktif.`
+        );
+      }
 
       if (!res.ok) {
         throw new Error(data.error || 'Gagal mengirimkan konfirmasi penawaran.');
@@ -100,7 +120,14 @@ export default function ClientPortalClient() {
           attempts++;
           try {
             const statusRes = await fetch(checkUrl);
-            const statusData = await statusRes.json();
+            const statusText = await statusRes.text();
+            let statusData;
+            try {
+              statusData = JSON.parse(statusText);
+            } catch {
+              setIsSubmittingQuote(false);
+              return;
+            }
 
             if (statusData.completed) {
               if (statusData.success && statusData.processing_status === 'COMPLETED') {
@@ -131,7 +158,6 @@ export default function ClientPortalClient() {
               return;
             }
 
-            // Lanjutkan polling berikutnya setelah 1.5 detik
             setTimeout(pollStatus, 1500);
           } catch {
             setQuoteFeedback({
@@ -157,12 +183,26 @@ export default function ClientPortalClient() {
     }
   };
 
+  // ==========================================
+  // HANDLER: CREATE SUPPORT TICKET
+  // ==========================================
   const handleTicketSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!customerName.trim() || !customerEmail.trim() || !ticketSubject.trim() || !ticketDescription.trim()) {
+
+    if (!ticketSubject.trim()) {
+      setTicketFeedback({ type: 'error', message: 'Subject / Judul Tiket wajib diisi.' });
+      return;
+    }
+
+    if (!ticketDescription.trim()) {
+      setTicketFeedback({ type: 'error', message: 'Deskripsi kendala wajib diisi.' });
+      return;
+    }
+
+    if (!customerCode.trim() && (!customerName.trim() || !customerEmail.trim())) {
       setTicketFeedback({
         type: 'error',
-        message: 'Nama, email, topik, dan rincian permohonan wajib diisi.',
+        message: 'Isi Nama & Email Anda, atau masukkan Kode Pelanggan.',
       });
       return;
     }
@@ -175,36 +215,49 @@ export default function ClientPortalClient() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          subject: ticketSubject.trim(),
+          serial_number: serialNumber.trim() || undefined,
+          priority,
+          customer_code: customerCode.trim() || undefined,
           customer: {
-            name: customerName.trim(),
-            email: customerEmail.trim(),
+            name: customerName.trim() || undefined,
+            email: customerEmail.trim() || undefined,
           },
-          requirements: {
-            subject: ticketSubject.trim(),
-            description: ticketDescription.trim(),
-          },
+          description: ticketDescription.trim(),
         }),
       });
 
-      const data = await res.json();
+      // Safe Response Parsing
+      const resText = await res.text();
+      let data;
+      try {
+        data = JSON.parse(resText);
+      } catch {
+        throw new Error(
+          `Server merespons format non-JSON (Status ${res.status}). Pastikan API Route '/api/support/ticket' aktif.`
+        );
+      }
+
       if (!res.ok || !data.success) {
-        throw new Error(data.error || data.message || 'Gagal mengirimkan permohonan bantuan.');
+        throw new Error(data.error || data.message || 'Gagal membuat tiket bantuan.');
       }
 
       setTicketFeedback({
         type: 'success',
-        message: 'Permohonan bantuan teknis Anda telah berhasil dikirimkan kepada tim Arsalynk.',
+        message: 'Tiket bantuan teknis Anda telah berhasil dikirimkan ke Marka ERP.',
         eventId: data.eventId,
       });
 
-      // Reset form on success
+      // Reset form tiket
+      setTicketSubject('');
+      setSerialNumber('');
+      setPriority('NORMAL');
+      setCustomerCode('');
       setCustomerName('');
       setCustomerEmail('');
-      setTicketSubject('');
       setTicketDescription('');
-      setSerialNumber('');
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Terjadi kendala saat mengirim permohonan.';
+      const msg = err instanceof Error ? err.message : 'Terjadi kendala saat membuat tiket.';
       setTicketFeedback({ type: 'error', message: msg });
     } finally {
       setIsSubmittingTicket(false);
@@ -360,29 +413,62 @@ export default function ClientPortalClient() {
               <span>LAYANAN DUKUNGAN KLIEN</span>
             </div>
             <h3 className="font-heading text-[20px] font-medium text-[#101010]">
-              Permohonan Bantuan Teknis
+              Buat Tiket Support Baru
             </h3>
             <p className="font-body text-[13px] text-[#717171]">
-              Sampaikan kendala operasional atau kebutuhan bantuan teknis proyek Anda agar tim spesialis kami dapat segera membantu.
+              Sampaikan permohonan bantuan teknis atau garansi produk Anda untuk diproses oleh tim spesialis Arsalynk di sistem Marka ERP.
             </p>
           </div>
 
           <form onSubmit={handleTicketSubmit} className="space-y-4">
+            {/* 1. Subject */}
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
                 <span className="font-bold text-[#FF5050] mr-1">*</span>
-                Perihal / Topik Bantuan
+                Subject
               </label>
               <input
                 type="text"
                 required
                 value={ticketSubject}
                 onChange={(e) => setTicketSubject(e.target.value)}
-                placeholder="Contoh: Bantuan sinkronisasi data transaksi atau akun pengguna"
+                placeholder="Judul tiket..."
                 className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
               />
             </div>
 
+            {/* 2. Nomor Seri Produk */}
+            <div className="flex flex-col gap-1.5">
+              <label className="font-body text-[13px] font-medium text-[#292929]">
+                Nomor seri produk (untuk pemeriksaan garansi)
+              </label>
+              <input
+                type="text"
+                value={serialNumber}
+                onChange={(e) => setSerialNumber(e.target.value)}
+                placeholder="Nomor seri pada label produk..."
+                className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
+              />
+            </div>
+
+            {/* 3. Prioritas Tiket */}
+            <div className="flex flex-col gap-1.5">
+              <label className="font-body text-[13px] font-medium text-[#292929]">
+                Prioritas
+              </label>
+              <select
+                value={priority}
+                onChange={(e) => setPriority(e.target.value as any)}
+                className="h-[46px] w-full cursor-pointer rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
+              >
+                <option value="LOW">LOW (Rendah)</option>
+                <option value="NORMAL">NORMAL (Biasa)</option>
+                <option value="HIGH">HIGH (Tinggi)</option>
+                <option value="URGENT">URGENT (Mendesak)</option>
+              </select>
+            </div>
+
+            {/* 4. Data Pemohon (Nama & Email / Kode Pelanggan) */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="flex flex-col gap-1.5">
                 <label className="font-body text-[13px] font-medium text-[#292929]">
@@ -391,7 +477,6 @@ export default function ClientPortalClient() {
                 </label>
                 <input
                   type="text"
-                  required
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
                   placeholder="Contoh: Budi Santoso"
@@ -406,7 +491,6 @@ export default function ClientPortalClient() {
                 </label>
                 <input
                   type="email"
-                  required
                   value={customerEmail}
                   onChange={(e) => setCustomerEmail(e.target.value)}
                   placeholder="nama@perusahaan.co.id"
@@ -415,17 +499,32 @@ export default function ClientPortalClient() {
               </div>
             </div>
 
+            {/* Optional Kode Pelanggan */}
+            <div className="flex flex-col gap-1.5">
+              <label className="font-body text-[13px] font-medium text-[#292929]">
+                Kode Pelanggan (Opsional - Jika Terdaftar di Database Marka ERP)
+              </label>
+              <input
+                type="text"
+                value={customerCode}
+                onChange={(e) => setCustomerCode(e.target.value.toUpperCase())}
+                placeholder="Contoh: CUST-00125"
+                className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
+              />
+            </div>
+
+            {/* 5. Deskripsi */}
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
                 <span className="font-bold text-[#FF5050] mr-1">*</span>
-                Rincian Kendala atau Kebutuhan
+                Deskripsi
               </label>
               <textarea
                 required
                 rows={4}
                 value={ticketDescription}
                 onChange={(e) => setTicketDescription(e.target.value)}
-                placeholder="Ceritakan kendala yang Anda hadapi secara singkat dan jelas..."
+                placeholder="Rincikan kendala operasional atau pertanyaan Anda..."
                 className="w-full resize-none rounded-[8px] border border-[#C8C8C8] bg-white p-3.5 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10"
               />
             </div>
@@ -442,7 +541,7 @@ export default function ClientPortalClient() {
                 {ticketFeedback.message}
                 {ticketFeedback.eventId && (
                   <span className="block mt-1 font-body text-[12px] text-emerald-700">
-                    Nomor Referensi: {ticketFeedback.eventId}
+                    Nomor Referensi Tiket: {ticketFeedback.eventId}
                   </span>
                 )}
               </div>
@@ -454,27 +553,18 @@ export default function ClientPortalClient() {
                 disabled={isSubmittingTicket}
                 className="inline-flex h-[48px] items-center justify-center gap-2 rounded-full bg-[#1A3E9E] px-8 font-body text-[13px] font-bold uppercase tracking-[0.04em] text-white transition hover:bg-[#14347F] disabled:cursor-wait disabled:opacity-60 md:h-[50px]"
               >
-                <span>{isSubmittingTicket ? 'MENGIRIMKAN...' : 'KIRIM PERMOHONAN BANTUAN'}</span>
-                <svg width="6" height="10" viewBox="0 0 8 14" fill="none" aria-hidden="true">
-                  <path
-                    d="M1 1L7 7L1 13"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <span>{isSubmittingTicket ? 'MEMPROSES...' : 'BUAT TIKET SUPPORT'}</span>
               </button>
             </div>
           </form>
 
           {/* User-friendly info box */}
-          <div className="mt-6 rounded-[12px] bg-[#F7F7F7] p-4 border border-[#EAEAEA]">
+          <div className="mt-6 rounded-[12px] border border-[#EAEAEA] bg-[#F7F7F7] p-4">
             <div className="flex items-center gap-2 font-body text-[11px] font-bold uppercase tracking-wider text-[#1A3E9E]">
               <span>ℹ INFORMASI PENANGANAN</span>
             </div>
             <p className="mt-1 font-body text-[12px] leading-[1.6] text-[#717171]">
-              Permohonan Anda akan langsung ditindaklanjuti oleh tim teknis kami. Perkembangan dan solusi penanganan akan dikabarkan secara berkala ke kontak resmi perusahaan Anda.
+              Permohonan Anda akan langsung ditindaklanjuti oleh tim teknis kami di Marka ERP. Perkembangan dan solusi penanganan akan dikabarkan secara berkala ke kontak resmi Anda.
             </p>
           </div>
         </div>

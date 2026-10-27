@@ -18,6 +18,7 @@ function mapWorkerErrorToMessage(rawError: string, targetIdentifier: string): st
     normalizedError === 'QUOTATION_ALREADY_ACCEPTED' ||
     normalizedError === 'QUOTATION_ALREADY_PROCESSED' ||
     normalizedError === 'QUOTATION_ALREADY_SIGNED' ||
+    normalizedError === 'QUOTATION_ALREADY_REJECTED' ||
     normalizedError.includes('ALREADY_ACCEPTED') ||
     normalizedError.includes('ALREADY_DECIDED')
   ) {
@@ -171,9 +172,20 @@ export async function POST(req: NextRequest) {
       eventData.quotation_id = quotationId;
     }
 
+    // Menyertakan data penandatangan dan catatan jika dikirimkan oleh UI
+    const signedBy = body.signed_by ?? body.signature ?? body.signature_name;
+    if (signedBy && typeof signedBy === 'string' && signedBy.trim()) {
+      eventData.signed_by = signedBy.trim();
+    }
+
+    const notes = body.decision_notes ?? body.notes ?? body.catatan;
+    if (notes && typeof notes === 'string' && notes.trim()) {
+      eventData.decision_notes = notes.trim();
+    }
+
     const targetIdentifier = quotationCode || quotationId;
 
-    // Send event to Marka CRM Queue
+    // Kirimkan event ke Marka CRM Queue
     const result = await sendMarkaEvent(eventId, 'quotation.decision', eventData);
 
     // 6. Tangani Event Duplikat
@@ -215,12 +227,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 8. Error Penyerahan Event Ke Gateway (HTTP 4xx/5xx dari API Gate Marka)
+    // 8. Error Penyerahan Event Ke Gateway
     const rawError =
-      (result.data as any)?.error ||
-      (result.data as any)?.message ||
-      (result.error as any)?.error ||
-      (result.error as any)?.message ||
+      (typeof result.data === 'object' && result.data !== null ? (result.data as any).error || (result.data as any).message : '') ||
+      (typeof result.error === 'string' ? result.error : (result.error as any)?.error || (result.error as any)?.message) ||
       '';
 
     return NextResponse.json(
@@ -229,7 +239,7 @@ export async function POST(req: NextRequest) {
         eventId,
         status: result.status || 500,
         markaError: rawError,
-        error: mapWorkerErrorToMessage(rawError, targetIdentifier),
+        error: mapWorkerErrorToMessage(String(rawError), targetIdentifier),
       },
       { status: result.status || 500 }
     );
@@ -270,10 +280,13 @@ export async function GET(req: NextRequest) {
     }
 
     const markaData = statusResult.data || {};
-    const workerStatus = String(markaData.status || markaData.event_status || 'QUEUED').toUpperCase();
+    const workerStatus = String(
+      markaData.status || markaData.event_status || markaData.state || (markaData.data as any)?.status || 'QUEUED'
+    ).toUpperCase();
+
     const lastError = markaData.last_error || markaData.error || markaData.errorMessage || '';
 
-    // Status Worker: QUEUED / PROCESSING
+    // Status Worker: QUEUED / PROCESSING / PENDING
     if (workerStatus === 'QUEUED' || workerStatus === 'PROCESSING' || workerStatus === 'PENDING') {
       return NextResponse.json({
         success: true,
@@ -285,9 +298,9 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    // Status Worker: FAILED / ERROR
+    // Status Worker: FAILED / ERROR atau terdapat lastError
     if (workerStatus === 'FAILED' || workerStatus === 'ERROR' || Boolean(lastError)) {
-      const friendlyError = mapWorkerErrorToMessage(lastError, identifier);
+      const friendlyError = mapWorkerErrorToMessage(String(lastError), identifier);
 
       return NextResponse.json(
         {
@@ -303,7 +316,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Status Worker: COMPLETED / SUCCESS
+    // Status Worker: COMPLETED / SUCCESS / ACCEPTED / PROCESSED
     return NextResponse.json({
       success: true,
       eventId,

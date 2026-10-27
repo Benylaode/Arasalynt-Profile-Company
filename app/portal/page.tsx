@@ -10,9 +10,9 @@ import {
 } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: `Client Portal & Pelacakan Dokumen — ${SITE_NAME}`,
+  title: `Client Portal & Support Tiket — ${SITE_NAME}`,
   description:
-    'Portal klien resmi Arsalynk. Lacak status tiket support teknis dan verifikasi persetujuan dokumen penawaran (quotation) secara real-time terintegrasi dengan Marka ERP.',
+    'Portal klien resmi Arsalynk. Pengajuan tiket support teknis dan verifikasi persetujuan dokumen penawaran (quotation) terintegrasi langsung dengan Marka ERP.',
   alternates: { canonical: '/portal' },
   robots: { index: false, follow: true },
 };
@@ -70,7 +70,7 @@ export default function ClientPortalPage() {
     <div className="min-h-screen overflow-x-hidden bg-[#F7F7F7]">
       <main>
         {/* ================================================================
-            HERO — Standard Height Matching About Us, Contact Us & Business
+            HERO — Standard Height Matching Corporate Pages
         ================================================================= */}
         <section className="relative isolate flex h-[clamp(560px,41.666vw,800px)] items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-[#05070A]">
           <div className="absolute inset-0 -z-30">
@@ -120,7 +120,7 @@ export default function ClientPortalPage() {
                 Portal Klien
               </h1>
               <p className="max-w-[580px] font-body text-[14px] leading-[1.6] text-white/75 sm:text-[16px]">
-                Akses resmi untuk mengonfirmasi dokumen penawaran kerja sama dan mengajukan permohonan bantuan teknis kepada tim Arsalynk.
+                Akses resmi untuk mengonfirmasi dokumen penawaran kerja sama dan mengajukan tiket bantuan teknis proyek Anda secara terintegrasi.
               </p>
             </div>
           </div>
@@ -139,14 +139,14 @@ export default function ClientPortalPage() {
         </section>
 
         {/* ================================================================
-            PORTAL INTERFACE SECTION — Authentic 2-Column Arsalynk Layout
+            PORTAL INTERFACE SECTION — 2-Column Responsive Layout
         ================================================================= */}
         <section
           id="portal-content"
-          className="scroll-mt-8 w-full bg-[#F7F7F7] px-[clamp(24px,13.333vw,256px)] py-[clamp(48px,4.5vw,76px)]"
+          className="w-full scroll-mt-8 bg-[#F7F7F7] px-[clamp(24px,13.333vw,256px)] py-[clamp(48px,4.5vw,76px)]"
         >
           <div className="mx-auto flex w-full max-w-[1408px] items-start justify-between gap-[clamp(36px,4vw,72px)] max-[1024px]:flex-col">
-            {/* LEFT COLUMN: Arsalynk Context & Support Info */}
+            {/* LEFT COLUMN: Context & Support Info */}
             <div className="flex w-[38%] shrink-0 flex-col gap-[clamp(20px,2vw,32px)] max-[1024px]:w-full">
               <h2 className="font-heading text-[clamp(28px,2.4vw,42px)] font-medium leading-[1.15] tracking-[-0.03em] text-[#101010]">
                 Transparansi &amp;
@@ -157,7 +157,7 @@ export default function ClientPortalPage() {
               </h2>
 
               <p className="font-body text-[14px] leading-[1.65] text-[#717171] md:text-[15px]">
-                Kami memastikan setiap dokumen penawaran dan permohonan bantuan teknis diproses secara tepat waktu. Tim kami siap mendampingi Anda di setiap tahapan proyek.
+                Kami memastikan setiap persetujuan penawaran dan tiket permohonan bantuan teknis diproses secara real-time. Tim operasional Arsalynk siap mendampingi seluruh kebutuhan Anda.
               </p>
 
               <div className="flex flex-col gap-4 rounded-[16px] md:gap-5">
@@ -195,22 +195,25 @@ export default function ClientPortalPage() {
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>LAYANAN RESMI</span>
+                    <span>INTEGRASI MARKA ERP</span>
                   </div>
 
                   <p className="font-body text-[13px] leading-[1.5] tracking-[0.01em] text-[#717171]">
-                    Terhubung langsung dengan tim operasional Arsalynk untuk menjamin keamanan data dan ketepatan tindak lanjut.
+                    Seluruh permohonan tiket support dan konfirmasi penawaran akan langsung tercatat dan ditindaklanjuti oleh sistem Marka ERP resmi.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* RIGHT COLUMN: Interactive Client Portal Component */}
+            {/* RIGHT COLUMN: Interactive Client Portal Client Component */}
             <div className="w-[58%] shrink-0 max-[1024px]:w-full">
               <Suspense
                 fallback={
-                  <div className="flex h-64 items-center justify-center rounded-[16px] border border-[#D9D9D9] bg-white font-body text-sm text-[#717171]">
-                    Memuat data Client Portal Arsalynk...
+                  <div className="flex h-64 items-center justify-center rounded-[20px] border border-[#D9D9D9] bg-white font-body text-sm text-[#717171] shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#1A3E9E] border-t-transparent" />
+                      <span>Memuat data Client Portal &amp; Modul Support Tiket...</span>
+                    </div>
                   </div>
                 }
               >
