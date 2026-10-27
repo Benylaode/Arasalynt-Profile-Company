@@ -7,20 +7,20 @@ import JsonLd from '@/components/seo/JsonLd';
 import { SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Solusi ERP, IoT & Sistem Enterprise Indonesia',
+  title: 'Enterprise ERP, IoT & System Solutions | Arsalynk',
   description:
-    'Layanan solusi teknologi enterprise Arsalynk di Indonesia: Pengembangan sistem ERP, integrasi hardware IoT, POS retail, HRMS, otomasi keuangan & supply chain.',
+    'Arsalynk enterprise technology solutions: ERP systems development, IoT hardware integration, retail POS, HRMS, finance & supply chain automation.',
   alternates: { canonical: '/our-solution' },
   openGraph: {
-    title: 'Solusi Teknologi Enterprise — ERP, IoT & Operational Systems | Arsalynk',
-    description: 'Sistem operasional enterprise terintegrasi yang dirancang sesuai kebutuhan alur kerja bisnis Indonesia.',
+    title: 'Enterprise Technology Solutions — ERP, IoT & Operational Systems | Arsalynk',
+    description: 'Integrated enterprise operational systems custom-engineered to elevate efficiency and workflow scale.',
     url: '/our-solution',
     images: ['/images/our-works/our-works-hero-bg.webp'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Solusi Teknologi Enterprise — ERP, IoT & Operational Systems | Arsalynk',
-    description: 'Sistem operasional enterprise terintegrasi yang dirancang sesuai kebutuhan alur kerja bisnis Indonesia.',
+    title: 'Enterprise Technology Solutions — ERP, IoT & Operational Systems | Arsalynk',
+    description: 'Integrated enterprise operational systems custom-engineered to elevate efficiency and workflow scale.',
     images: ['/images/our-works/our-works-hero-bg.webp'],
   },
 };
@@ -54,7 +54,7 @@ export default function OurSolutionPage() {
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
         breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
-        inLanguage: 'id-ID',
+        inLanguage: 'en-US',
       },
       {
         '@type': 'Service',
@@ -109,7 +109,7 @@ export default function OurSolutionPage() {
             Our Solution
           </h1>
           <p className="max-w-[650px] font-body text-[clamp(14px,1.042vw,20px)] font-light leading-[1.6] tracking-[0.02em] text-white/95">
-            Sistem teknologi terpadu untuk mengoptimalkan efisiensi dan alur operasional enterprise Anda
+            Integrated enterprise technology systems engineered to optimize efficiency and operational workflows
           </p>
         </div>
         
@@ -139,17 +139,31 @@ export default function OurSolutionPage() {
             {OUR_SOLUTION_CHALLENGES.map((challenge, index) => (
               <article
                 key={challenge.title}
-                className="group flex min-h-[290px] flex-col rounded-[16px] border border-transparent bg-[linear-gradient(79deg,rgba(26,62,158,.05),rgba(133,166,255,.12))] p-[clamp(20px,1.6vw,30px)] backdrop-blur-[8px] transition-[transform,border-color,background-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[#7F9CFF] hover:shadow-[0_12px_42px_rgba(26,62,158,.2)]"
+                className="group flex flex-col overflow-hidden rounded-[24px] border border-[#E4E4E4] bg-white shadow-[0_12px_36px_rgba(26,62,158,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#7F9CFF] hover:shadow-[0_22px_45px_rgba(26,62,158,0.16)]"
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-[#99A6E7] bg-[#99A6E7]/35 font-body text-[13px] font-bold text-[#1A3E9E]">
-                  0{index + 1}
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#101010]/5">
+                  <img
+                    src={challenge.image}
+                    alt={challenge.title}
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
                 </div>
-                <h3 className="mt-7 font-heading text-[clamp(25px,2vw,38px)] font-medium leading-[1.08]">
-                  {challenge.title}
-                </h3>
-                <p className="mt-4 font-body text-[clamp(13px,.85vw,16px)] leading-[1.6] text-[#424242]">
-                  {challenge.description}
-                </p>
+                <div className="flex flex-1 flex-col justify-between bg-gradient-to-b from-[#101010] to-[#155A99] p-6 text-white">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="inline-flex items-center rounded-full bg-[#E6FF2A] px-3 py-1 font-body text-[11px] font-bold text-[#101010]">
+                        0{index + 1}
+                      </span>
+                    </div>
+                    <h3 className="mt-3.5 font-heading text-[20px] font-medium leading-snug text-[#F7F7F7]">
+                      {challenge.title}
+                    </h3>
+                    <p className="mt-2.5 font-body text-[13px] leading-[1.65] text-white/85">
+                      {challenge.description}
+                    </p>
+                  </div>
+                </div>
               </article>
             ))}
           </div>
@@ -163,10 +177,10 @@ export default function OurSolutionPage() {
           <div className="mb-14 text-center">
             <p className="font-body text-[13px] font-bold tracking-[.08em] text-[#E6FF2A]">▪ OUR ARCHITECTURE</p>
             <h2 className="mt-4 font-heading text-[clamp(44px,4.375vw,84px)] font-medium leading-[1.05]">
-              4 Pilar Ekosistem Solusi Enterprise
+              4 Pillars of Enterprise Solution Ecosystem
             </h2>
             <p className="mx-auto mt-4 max-w-[720px] font-body text-[15px] leading-[1.65] text-white/75 sm:text-[16px]">
-              Arsitektur terintegrasi yang menghubungkan operasional bisnis, intelijen analitik, automasi sensor perangkat keras, serta platform digital performa tinggi.
+              An integrated architecture connecting business operations, analytics intelligence, hardware sensor automation, and high-performance digital platforms.
             </p>
           </div>
 
@@ -196,7 +210,7 @@ export default function OurSolutionPage() {
                     href={`/our-solution/${solution.slug}`}
                     className="inline-flex items-center gap-2 font-body text-[12px] font-bold uppercase tracking-[0.06em] text-[#E6FF2A] transition group-hover:underline"
                   >
-                    <span>Rincian Kapabilitas</span>
+                    <span>Explore Capabilities</span>
                     <span>→</span>
                   </Link>
                 </div>
@@ -213,14 +227,14 @@ export default function OurSolutionPage() {
             <div>
               <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase tracking-[0.06em] text-[#1A3E9E]">
                 <span className="h-1.5 w-1.5 bg-[#1A3E9E]" />
-                <span>SPESIALISASI TERFOKUS</span>
+                <span>FOCUSED SPECIALIZATIONS</span>
               </div>
               <h2 className="mt-2 font-heading text-[clamp(44px,4.375vw,84px)] font-medium leading-[1.04]">
                 Explore<br />Our Services
               </h2>
             </div>
             <p className="max-w-[460px] font-body text-[15px] leading-[1.65] text-[#424242]">
-              Fokus mendalam pada 4 layanan utama yang dirancang untuk kebutuhan nyata operasional industri dan bisnis Anda.
+              In-depth focus across 4 core services engineered to solve real-world industrial and enterprise operational challenges.
             </p>
           </div>
           <SolutionWorksExplorer services={SOLUTION_SERVICES} />

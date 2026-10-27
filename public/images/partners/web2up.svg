@@ -1,0 +1,14 @@
+<svg width="220" height="60" viewBox="0 0 220 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Web2Up modern tech logo -->
+  <rect x="2" y="10" width="40" height="40" rx="10" fill="#0072BE" />
+  <path d="M12 22L17 38L22 25L27 38L32 22" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="36" cy="14" r="4" fill="#E6FF2A" />
+  
+  <!-- Text Web2Up -->
+  <text x="52" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="800" fill="#101010" letter-spacing="-0.03em">
+    Web<tspan fill="#0072BE">2</tspan>Up
+  </text>
+  <text x="53" y="49" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#888888" letter-spacing="0.16em">
+    DIGITAL PLATFORM
+  </text>
+</svg>
