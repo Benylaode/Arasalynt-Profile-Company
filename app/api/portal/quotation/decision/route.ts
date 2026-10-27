@@ -220,7 +220,7 @@ export async function POST(req: NextRequest) {
           quotation_identifier: targetIdentifier,
           processing_status: 'QUEUED',
           message: `Event keputusan '${cleanDecision}' untuk dokumen ${targetIdentifier} berhasil diterima dan masuk ke antrean pemrosesan Marka CRM.`,
-          status_check_url: `/api/quotation/decision?eventId=${encodeURIComponent(eventId)}&identifier=${encodeURIComponent(targetIdentifier)}`,
+          status_check_url: `/api/portal/quotation/decision?eventId=${encodeURIComponent(eventId)}&identifier=${encodeURIComponent(targetIdentifier)}`,
           markaResponse: result.data,
         },
         { status: 202 }
