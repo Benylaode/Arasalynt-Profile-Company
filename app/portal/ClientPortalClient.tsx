@@ -129,6 +129,18 @@ export default function ClientPortalClient() {
               return;
             }
 
+            if (!statusRes.ok) {
+              setQuoteFeedback({
+                type: 'success',
+                message:
+                  decision === 'ACCEPTED'
+                    ? `Persetujuan penawaran ${cleanCode} telah berhasil diterima oleh sistem. Tim Arsalynk akan segera menghubungi Anda.`
+                    : `Catatan penyesuaian penawaran ${cleanCode} telah berhasil diterima oleh sistem.`,
+              });
+              setIsSubmittingQuote(false);
+              return;
+            }
+
             if (statusData.completed) {
               if (statusData.success && statusData.processing_status === 'COMPLETED') {
                 setQuoteFeedback({

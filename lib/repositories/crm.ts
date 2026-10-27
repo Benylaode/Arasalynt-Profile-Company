@@ -83,6 +83,26 @@ export const crmRepo = {
     }
   },
 
+  getEventByEventId(eventId: string): CrmEventLog | null {
+    try {
+      const db = getDb();
+      const row = db
+        .prepare(
+          `SELECT id, event_id AS eventId, event_type AS eventType, direction, 
+                  status_code AS statusCode, success, payload_json AS payloadJson, 
+                  response_json AS responseJson, created_at AS createdAt 
+           FROM crm_events_log 
+           WHERE event_id = ?
+           ORDER BY id DESC LIMIT 1`
+        )
+        .get(eventId) as CrmEventLog | undefined;
+      return row || null;
+    } catch (err) {
+      console.error('[CRM Repo] Failed to get event by eventId:', err);
+      return null;
+    }
+  },
+
   clearEventLogs(): void {
     const db = getDb();
     db.prepare(`DELETE FROM crm_events_log`).run();

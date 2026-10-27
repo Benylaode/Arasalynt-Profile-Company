@@ -21,58 +21,57 @@ export async function POST(req: NextRequest) {
         ? rawBody.data
         : rawBody;
 
-    // 1. Validasi Wajib: subject & description (non-empty string)
+    // 1. Validasi Wajib: subject & description
     const subject = String(body.subject || body.requirements?.subject || '').trim();
     const description = String(body.description || body.requirements?.description || '').trim();
 
     if (!subject) {
       return NextResponse.json(
-        { error: 'Field "subject" wajib diisi dengan teks tidak kosong.' },
+        { error: 'Field "subject" wajib diisi.' },
         { status: 400 }
       );
     }
 
     if (!description) {
       return NextResponse.json(
-        { error: 'Field "description" wajib diisi dengan teks tidak kosong.' },
+        { error: 'Field "description" wajib diisi.' },
         { status: 400 }
       );
     }
 
-    // 2. Validasi Opsional: serial_number (1-200 karakter. HILANGKAN TOTAL JIKA KOSONG)
+    // 2. Normalisasi Priority (Mendukung lowercase & uppercase untuk Marka ERP)
+    const rawPriority = String(body.priority || 'normal').toLowerCase().trim();
+    const validPriorities = ['low', 'normal', 'high', 'urgent'];
+    const priority = validPriorities.includes(rawPriority) ? rawPriority : 'normal';
+
+    // 3. Serial Number (Hanya dimasukkan jika ada & bernilai string valid)
     const rawSerial = body.serial_number ?? body.serialNumber;
     let serialNumber: string | undefined = undefined;
 
     if (rawSerial !== undefined && rawSerial !== null) {
       const cleanSerial = String(rawSerial).trim();
-      if (cleanSerial.length > 0) {
-        if (cleanSerial.length > 200) {
-          return NextResponse.json(
-            { error: 'Field "serial_number" tidak boleh melebihi 200 karakter.' },
-            { status: 400 }
-          );
-        }
+      if (cleanSerial.length > 0 && cleanSerial.length <= 200) {
         serialNumber = cleanSerial;
       }
     }
 
-    // 3. ID Event Unik
+    // 4. ID Event
     const eventId = String(
       body.event_id || body.eventId || `ticket-${Date.now()}-${randomUUID().slice(0, 8)}`
     ).trim();
 
-    // 4. Konstruksi Payload Persis Kontrak 'ticket.created'
+    // 5. Body Payload Presisi
     const eventData: Record<string, unknown> = {
       subject,
       description,
+      priority, // Format lowercase ("high", "normal", dll)
     };
 
-    // HANYA sertakan serial_number jika ADA dan TIDAK KOSONG (menghindari error "" / null)
     if (serialNumber) {
       eventData.serial_number = serialNumber;
     }
 
-    // Sertakan informasi pelanggan/prioritas jika ada
+    // Identitas Customer
     const customerName = String(body.customer?.name || body.customer_name || body.name || '').trim();
     const customerEmail = String(body.customer?.email || body.customer_email || body.email || '').trim().toLowerCase();
     const customerCode = String(body.customer_code || body.customerCode || body.customer?.code || '').trim();
@@ -85,14 +84,7 @@ export async function POST(req: NextRequest) {
       eventData.customer = customerObj;
     }
 
-    if (body.priority) {
-      const p = String(body.priority).toUpperCase().trim();
-      if (['LOW', 'NORMAL', 'HIGH', 'URGENT'].includes(p)) {
-        eventData.priority = p;
-      }
-    }
-
-    // 5. Logging DB Lokal Opsional
+    // Logging Lokal
     try {
       crmRepo.saveTicket({
         eventId,
@@ -102,10 +94,10 @@ export async function POST(req: NextRequest) {
         customerEmail: customerEmail || 'guest@database.internal',
       });
     } catch {
-      // Abaikan error DB lokal
+      // Abaikan jika DB lokal opsional
     }
 
-    // 6. Kirim Event 'ticket.created' ke Marka ERP Gateway
+    // 6. Kirim Event 'ticket.created' ke Marka ERP
     const result = await sendMarkaEvent(eventId, 'ticket.created', eventData);
 
     if (result.success || result.status === 202) {
@@ -114,14 +106,13 @@ export async function POST(req: NextRequest) {
           success: true,
           eventId,
           status: 202,
-          message: 'Tiket berhasil diterima oleh antrean Marka ERP.',
+          message: 'Tiket berhasil diterima oleh Marka ERP.',
           markaResponse: result.data,
         },
         { status: 202 }
       );
     }
 
-    // 7. Error Handling Penolakan Validator Marka
     const rawError =
       (typeof result.data === 'object' && result.data !== null ? (result.data as any).error || (result.data as any).message : '') ||
       (typeof result.error === 'string' ? result.error : (result.error as any)?.error || (result.error as any)?.message) ||
