@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: canonicalUrl,
       images: [
         {
-          url: service.image.startsWith('/') ? service.image : '/images/our-works/our-works-hero-bg.webp',
+          url: service.heroSvg || (service.image.startsWith('/') ? service.image : '/images/our-works/our-works-hero-bg.webp'),
           width: 1200,
           height: 630,
           alt: service.title,
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: 'summary_large_image',
       title: `${service.title} | Arsalynk Enterprise Solution`,
       description: service.description,
-      images: [service.image.startsWith('/') ? service.image : '/images/our-works/our-works-hero-bg.webp'],
+      images: [service.heroSvg || (service.image.startsWith('/') ? service.image : '/images/our-works/our-works-hero-bg.webp')],
     },
   };
 }
@@ -124,15 +124,20 @@ export default async function SolutionServicePage({ params }: PageProps) {
       />
 
       {/* ── HERO SECTION ── */}
-      <section className="relative isolate flex min-h-[580px] items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-[#101010] pb-20 pt-[140px] text-white">
+      <section className="relative isolate flex min-h-[600px] lg:min-h-[660px] items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-black pb-24 pt-[150px] text-white">
+        {/* Bespoke Vector Hero Background for each solution */}
         <img
-          src="/images/our-works/our-works-hero-bg.webp"
+          src={service.heroSvg || '/images/our-works/our-works-hero-bg.webp'}
           alt=""
           aria-hidden="true"
-          className="absolute left-1/2 top-1/2 z-0 h-auto min-h-[160%] w-[105%] min-w-[1100px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover opacity-50"
+          className="absolute inset-0 z-0 h-full w-full object-cover object-center pointer-events-none select-none"
         />
-        <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_top,_rgba(26,62,158,0.55),_transparent_70%)]" />
-        <div className="absolute inset-x-0 bottom-0 z-[2] h-48 bg-gradient-to-t from-[#101010] to-transparent" />
+
+        {/* Subtle center-radial vignette behind content for maximum text contrast */}
+        <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.4)_0%,transparent_70%)] pointer-events-none" />
+
+        {/* Smooth bottom gradient fade to seamlessly blend with the rounded section base */}
+        <div className="absolute inset-x-0 bottom-0 z-[2] h-40 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none" />
 
         <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col items-center px-6 text-center">
           {/* Breadcrumb text */}
@@ -144,18 +149,18 @@ export default async function SolutionServicePage({ params }: PageProps) {
             <span className="text-white/80">{service.shortTitle}</span>
           </nav>
 
-          <h1 className="mt-6 max-w-[980px] font-heading text-[clamp(32px,3.8vw,64px)] font-medium leading-[1.12] text-[#F7F7F7]">
+          <h1 className="mt-6 max-w-[980px] font-heading text-[clamp(32px,3.8vw,64px)] font-medium leading-[1.12] text-[#F7F7F7] drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
             {service.heroHeadline ? service.heroHeadline.replace(/^["“]+|["”]+$/g, '') : service.title}
           </h1>
 
-          <p className="mt-5 max-w-[760px] font-body text-[clamp(15px,1.15vw,20px)] font-light leading-[1.65] text-white/90">
+          <p className="mt-5 max-w-[760px] font-body text-[clamp(15px,1.15vw,20px)] font-light leading-[1.65] text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
             {service.description}
           </p>
 
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/contact-us#contact-form"
-              className="inline-flex h-[50px] items-center justify-center gap-2.5 rounded-full bg-[#E6FF2A] px-7 font-body text-[14px] font-bold tracking-[0.02em] text-[#101010] transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_8px_25px_rgba(230,255,42,0.35)]"
+              className="inline-flex h-[50px] items-center justify-center gap-2.5 rounded-full bg-[#E6FF2A] px-7 font-body text-[14px] font-bold tracking-[0.02em] text-[#101010] shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_8px_25px_rgba(230,255,42,0.35)]"
             >
               <span>{service.ctaPrimary ?? 'Consult Solution'}</span>
               <IconArrowRight />
@@ -163,7 +168,7 @@ export default async function SolutionServicePage({ params }: PageProps) {
 
             <Link
               href={service.relatedWork ? `/our-works/${service.relatedWork.slug}` : `/insight-programs/case-studies/${service.caseStudySlug}`}
-              className="inline-flex h-[50px] items-center justify-center gap-2.5 rounded-full border border-white/30 bg-white/5 px-7 font-body text-[14px] font-semibold text-white backdrop-blur-[4px] transition duration-300 hover:border-[#E6FF2A] hover:bg-white/15 hover:text-[#E6FF2A]"
+              className="inline-flex h-[50px] items-center justify-center gap-2.5 rounded-full border border-white/30 bg-white/10 px-7 font-body text-[14px] font-semibold text-white shadow-[0_4px_20px_rgba(0,0,0,0.2)] backdrop-blur-[6px] transition duration-300 hover:border-[#E6FF2A] hover:bg-white/20 hover:text-[#E6FF2A]"
             >
               <span>{service.ctaSecondary ?? 'View Related Case Study'}</span>
               <IconArrowRight />

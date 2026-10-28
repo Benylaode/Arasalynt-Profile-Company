@@ -15,6 +15,7 @@ export type SolutionService = {
   heroHeadline?: string;
   description: string;
   image: string;
+  heroSvg?: string;
   whatItIs: string;
   challenge: string;
   challengeCards?: ChallengeCard[];
@@ -130,6 +131,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     description:
       'Integrate operational workflows across divisions into a unified ecosystem with real-time visibility and sustainable enterprise scalability.',
     image: '/images/our-business/kaluna-technology/services/finance-system.webp',
+    heroSvg: '/images/our-solution/hero-enterprise-solution.svg',
     whatItIs:
       'A comprehensive system management service designed to integrate various operational lines of large enterprises. We help simplify complex workflows, enhance real-time data visibility, and ensure sustainable business scalability in the digital era.',
     challenge:
@@ -215,6 +217,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     description:
       'Consolidate multi-source corporate data into a unified ecosystem with predictive AI modeling, demand forecasting, and automated insights.',
     image: '/images/specialized/specialized-intelligence.webp',
+    heroSvg: '/images/our-solution/hero-data-ai-integration.svg',
     whatItIs:
       'An intelligent data integration service that consolidates diverse corporate information sources into a unified ecosystem. Backed by advanced AI technology, we help you analyze trends, predict market demands, and automate business insights with precision.',
     challenge:
@@ -300,6 +303,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     description:
       'Remotely monitor, control, and automate physical assets with real-time sensor telemetry and industrial-grade security.',
     image: '/images/projects/myboss-iot-system/1.webp',
+    heroSvg: '/images/our-solution/hero-smart-iot-system.svg',
     whatItIs:
       'An Internet of Things (IoT) and smart system integration solution designed to remotely monitor, control, and optimize physical devices. Boost your operational efficiency and infrastructure security through real-time, sensor-driven insights.',
     challenge:
@@ -385,6 +389,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     description:
       'Engineered for superior UX, blazing-fast performance, and enterprise-grade security to accelerate digital conversions and growth.',
     image: '/images/our-business/kaluna-technology/services/software-development.webp',
+    heroSvg: '/images/our-solution/hero-digital-development.svg',
     whatItIs:
       'Professional web development services ranging from high-converting landing pages to complex, responsive web-based applications. We focus on optimal user experience (UX), fast loading speeds, and robust system security to accelerate your brand’s digital growth.',
     challenge:
