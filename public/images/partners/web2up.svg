@@ -1,14 +1,31 @@
-<svg width="220" height="60" viewBox="0 0 220 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Web2Up modern tech logo -->
-  <rect x="2" y="10" width="40" height="40" rx="10" fill="#0072BE" />
-  <path d="M12 22L17 38L22 25L27 38L32 22" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="36" cy="14" r="4" fill="#E6FF2A" />
-  
-  <!-- Text Web2Up -->
-  <text x="52" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="800" fill="#101010" letter-spacing="-0.03em">
-    Web<tspan fill="#0072BE">2</tspan>Up
-  </text>
-  <text x="53" y="49" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#888888" letter-spacing="0.16em">
-    DIGITAL PLATFORM
-  </text>
+<svg width="1746" height="1069" viewBox="0 0 1746 1069" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<use xlink:href="#stroke0_1560_310" fill="url(#paint0_linear_1560_310)"/>
+<use xlink:href="#stroke0_1560_310" fill="url(#paint1_linear_1560_310)"/>
+<path d="M275.183 350.282C344.146 354.152 405.136 397.514 431.166 462.142L581.42 859H581L620.414 956.858C645.241 1018.5 701.874 1060.79 766.895 1067.93L766.58 1069H381L381.314 1067.93C316.294 1060.79 259.661 1018.5 234.834 956.858L0 350H275L275.183 350.282Z" fill="url(#paint2_linear_1560_310)"/>
+<use xlink:href="#stroke1_1560_310" fill="url(#paint3_linear_1560_310)"/>
+<use xlink:href="#stroke1_1560_310" fill="url(#paint4_linear_1560_310)"/>
+<defs>
+<linearGradient id="paint0_linear_1560_310" x1="1119.98" y1="-3277.21" x2="-1404.56" y2="-742.538" gradientUnits="userSpaceOnUse">
+<stop offset="0.749244" stop-color="#FF994B"/>
+<stop offset="0.924859" stop-color="#D500FF"/>
+</linearGradient>
+<linearGradient id="paint1_linear_1560_310" x1="1119.98" y1="-3277.21" x2="-1488.94" y2="-732.578" gradientUnits="userSpaceOnUse">
+<stop offset="0.624744" stop-color="#E6FF2A"/>
+<stop offset="0.939202" stop-color="#155A99"/>
+</linearGradient>
+<linearGradient id="paint2_linear_1560_310" x1="104.389" y1="-2527.01" x2="2181.46" y2="-217.34" gradientUnits="userSpaceOnUse">
+<stop offset="0.658654" stop-color="#155A99"/>
+<stop offset="0.946173" stop-color="#E6FF2A"/>
+</linearGradient>
+<linearGradient id="paint3_linear_1560_310" x1="953.807" y1="-4277.49" x2="4040.07" y2="-1517.78" gradientUnits="userSpaceOnUse">
+<stop offset="0.749244" stop-color="#FF994B"/>
+<stop offset="0.924859" stop-color="#D500FF"/>
+</linearGradient>
+<linearGradient id="paint4_linear_1560_310" x1="953.807" y1="-4277.49" x2="4132.61" y2="-1516.16" gradientUnits="userSpaceOnUse">
+<stop offset="0.763632" stop-color="#E6FF2A"/>
+<stop offset="0.939202" stop-color="#155A99"/>
+</linearGradient>
+<path id="stroke0_1560_310" d="M958.712 200.282C889.748 204.152 828.758 247.514 802.729 312.142L582.475 859H582.895L543.48 956.858C518.653 1018.5 462.02 1060.79 397 1067.93L397.314 1069H782.895L782.58 1067.93C847.6 1060.79 904.233 1018.5 929.061 956.858L1233.89 200H958.895L958.712 200.282Z"/>
+<path id="stroke1_1560_310" d="M1745.89 0L1361.06 956.858C1336.23 1018.5 1279.6 1060.79 1214.58 1067.93L1214.89 1069H1100.42L1100.18 1068.19C1149.47 1062.78 1192.41 1030.71 1211.24 983.977L1241.12 909.783H1240.8L1372.24 582.842L1436.97 588.398L1392 372L1209.96 568.913L1266.7 573.783L1131.62 909.783H1131.94L1102.06 983.977C1083.24 1030.71 1040.3 1062.78 991 1068.19L991.238 1069H829.314L829 1067.93C894.02 1060.79 950.653 1018.5 975.48 956.858L1014.89 859H1014.47L1314.73 112.142C1340.76 47.5138 1401.75 4.15221 1470.71 0.282227L1470.89 0H1745.89Z"/>
+</defs>
 </svg>

@@ -178,18 +178,16 @@ export default async function SolutionServicePage({ params }: PageProps) {
       </section>
 
       {/* ── SECTION 1: WHAT IT IS & OVERVIEW ── */}
-      <section className="relative isolate overflow-hidden px-[6vw] py-[clamp(70px,7vw,130px)] max-[1199px]:px-[4vw]">
-        {/* Background / Bleed Dashboard Stack Graphic (Desktop lg+) */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none select-none hidden lg:block absolute -right-[4vw] xl:-right-[2vw] 2xl:right-0 top-1/2 -translate-y-1/2 w-[36vw] min-w-[516px] xl:w-[34vw] xl:min-w-[578px] 2xl:w-[32.6vw] 2xl:min-w-[640px] z-0"
-        >
+      <section className="relative isolate overflow-hidden bg-[#F7F7F7] px-[6vw] py-[clamp(70px,7vw,130px)] max-[1199px]:px-[4vw]">
+        {/* Full-bleed Service Section SVG Background (Desktop lg+) */}
+        {service.serviceSectionSvg && (
           <img
-            src="/images/our-solution/gambar-kanan.svg"
+            src={service.serviceSectionSvg}
             alt=""
-            className="w-full h-auto object-contain translate-x-[6%] drop-shadow-[0_25px_60px_rgba(26,62,158,0.14)]"
+            aria-hidden="true"
+            className="pointer-events-none select-none hidden lg:block absolute inset-0 z-0 h-full w-full object-cover object-right"
           />
-        </div>
+        )}
 
         <div className="mx-auto flex max-w-[1600px] flex-col lg:flex-row items-center justify-between min-h-[500px]">
           {/* Left Content Column */}
@@ -221,14 +219,16 @@ export default async function SolutionServicePage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Right Visual for Tablet / Mobile (< lg): also scaled and bleeding right */}
-          <div className="relative z-0 mt-10 flex w-full items-center justify-end overflow-hidden lg:hidden">
-            <img
-              src="/images/our-solution/gambar-kanan.svg"
-              alt="Operational Dashboard Stack"
-              className="w-[78%] max-w-none translate-x-[8%] h-auto object-contain drop-shadow-[0_20px_45px_rgba(26,62,158,0.12)]"
-            />
-          </div>
+          {/* Right Visual for Tablet / Mobile (< lg) */}
+          {service.serviceSectionSvg && (
+            <div className="relative z-0 mt-8 w-full aspect-[16/11] sm:aspect-[16/9] overflow-hidden rounded-2xl lg:hidden">
+              <img
+                src={service.serviceSectionSvg}
+                alt="Service Architecture Overview"
+                className="h-full w-full object-cover object-right pointer-events-none select-none scale-[1.3] origin-right"
+              />
+            </div>
+          )}
         </div>
       </section>
 
@@ -357,7 +357,7 @@ export default async function SolutionServicePage({ params }: PageProps) {
               <div>
                 <div className="flex flex-col justify-between gap-6 pb-2 sm:flex-row sm:items-center">
                   {service.partnerIntegration?.logo && (
-                    <div className="flex h-12 max-w-[200px] items-center">
+                    <div className="flex h-12 max-w-[240px] shrink-0 items-center">
                       <img
                         src={service.partnerIntegration.logo}
                         alt={service.partnerIntegration.partnerName}
