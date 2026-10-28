@@ -63,28 +63,28 @@ export const OUR_SOLUTION_CHALLENGES = [
     title: 'Legacy Hardware & Outdated Infrastructure',
     description:
       'Aging physical servers and legacy equipment severely limit business expansion, carry high maintenance costs, and resist modern IoT or cloud integration.',
-    image: '/images/projects/myboss-iot-system/2.webp',
+    image: '/images/our-solution/projects/iot/mybos-iot.svg',
   },
   {
     number: '02',
     title: 'Stuck Software & Fragmented ERP',
     description:
       'Operating on disjointed platforms creates data silos, forces manual workarounds, and leads to expensive duplicate tasks across enterprise departments.',
-    image: '/images/projects/sinau-print-erp/1.webp',
+    image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
   },
   {
     number: '03',
     title: 'Operational Blind Spots & Data Lag',
     description:
       'Without real-time data flow from the shop floor to the executive dashboard, leaders rely on outdated reports and cannot make proactive decisions.',
-    image: '/images/projects/altatic-analytic/1.webp',
+    image: '/images/our-solution/projects/data-ai/markaplus.svg',
   },
   {
     number: '04',
     title: 'Unplanned Downtime & Reactive Maintenance',
     description:
       'Limited machine and system monitoring results in sudden equipment failures, costly operational halts, and escalating emergency IT expenses.',
-    image: '/images/projects/artic-complex-web/1.webp',
+    image: '/images/our-solution/projects/digital/presstis.svg',
   },
 ] as const;
 
@@ -95,7 +95,7 @@ export const CORE_SOLUTIONS = [
     heroHeadline: 'Streamline Enterprise Operations with Centralized System Management',
     description:
       'Integrate operational workflows across divisions into a unified ecosystem with real-time visibility and sustainable enterprise scalability.',
-    image: '/images/our-business/kaluna-technology/services/finance-system.webp',
+    image: '/images/our-solution/projects/enterprise/marka-finance.png',
   },
   {
     slug: 'data-ai-integration',
@@ -103,7 +103,7 @@ export const CORE_SOLUTIONS = [
     heroHeadline: 'Turn Raw Data into Strategic Business Decisions Powered by AI',
     description:
       'Consolidate multi-source corporate data into a unified ecosystem with predictive AI modeling, demand forecasting, and automated insights.',
-    image: '/images/specialized/specialized-intelligence.webp',
+    image: '/images/our-solution/projects/data-ai/markaplus.svg',
   },
   {
     slug: 'smart-iot-system',
@@ -111,7 +111,7 @@ export const CORE_SOLUTIONS = [
     heroHeadline: 'Connect Physical Devices for Smarter Operational Automation',
     description:
       'Remotely monitor, control, and automate physical assets with real-time sensor telemetry and industrial-grade security.',
-    image: '/images/projects/myboss-iot-system/1.webp',
+    image: '/images/our-solution/projects/iot/mybos-iot.svg',
   },
   {
     slug: 'digital-development',
@@ -119,7 +119,7 @@ export const CORE_SOLUTIONS = [
     heroHeadline: 'Build High-Performance Websites and Enterprise Web Apps',
     description:
       'Engineered for superior UX, blazing-fast performance, and enterprise-grade security to accelerate digital conversions and growth.',
-    image: '/images/our-business/kaluna-technology/services/software-development.webp',
+    image: '/images/our-solution/projects/digital/adsvar.svg',
   },
 ] as const;
 
@@ -131,7 +131,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     heroHeadline: 'Streamline Enterprise Operations with Centralized System Management',
     description:
       'Integrate operational workflows across divisions into a unified ecosystem with real-time visibility and sustainable enterprise scalability.',
-    image: '/images/our-business/kaluna-technology/services/finance-system.webp',
+    image: '/images/our-solution/projects/enterprise/marka-finance.png',
     heroSvg: '/images/our-solution/hero-enterprise-solution.svg',
     serviceSectionSvg: '/images/our-solution/service-section-enterprise-solution.svg',
     whatItIs:
@@ -141,27 +141,43 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     challengeCards: [
       {
         number: '01',
-        badge: 'Siloed Operations',
-        title: 'Fragmented ERP & Data Silos',
+        badge: 'Financial Consolidation',
+        title: 'MARKA Finance — Ledger Disconnect & Cashflow Latency',
         description:
-          'Operating on disjointed platforms creates cross-department silos, forcing tedious manual workarounds between finance, inventory, and HR.',
-        image: '/images/projects/sinau-print-erp/1.webp',
+          'Operating across multi-entity branches with fragmented accounting tools causes delayed financial statements, tax discrepancies, and poor executive cashflow visibility.',
+        image: '/images/our-solution/projects/enterprise/marka-finance.png',
       },
       {
         number: '02',
-        badge: 'Process Friction',
-        title: 'Workflow Bottlenecks & Delay',
+        badge: 'Human Capital',
+        title: 'MARKA HRMS — Siloed Personnel Data & Payroll Gaps',
         description:
-          'Unsynchronized departmental systems trigger administrative friction, duplicate ledger entries, and slow managerial approvals.',
-        image: '/images/projects/sinau-print-erp/2.webp',
+          'Disjointed employee records, manual leave approvals, and disconnected attendance systems lead to payroll calculation errors and regulatory audit exposure.',
+        image: '/images/our-solution/projects/enterprise/marka-hrms.png',
       },
       {
         number: '03',
-        badge: 'Audit & Control',
-        title: 'Scalability & Compliance Gaps',
+        badge: 'Project Governance',
+        title: 'MARKA Project Manager — Milestone Slippage & Silos',
         description:
-          'Legacy software lacks unified audit trails and role-based permissions, creating compliance risks as enterprise operations expand.',
-        image: '/images/projects/sinau-print-erp/3.webp',
+          'Lack of unified milestone tracking between operational and engineering teams leads to communication silos, unexpected project delays, and budget overruns.',
+        image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
+      },
+      {
+        number: '04',
+        badge: 'Supply Chain & Assets',
+        title: 'MARKA Resource — Unsynchronized Warehouse Stocks',
+        description:
+          'Inaccurate inventory counts and isolated procurement workflows cause stockouts, excessive warehouse holding costs, and material supply chain bottlenecks.',
+        image: '/images/our-solution/projects/enterprise/marka-resource.png',
+      },
+      {
+        number: '05',
+        badge: 'Commercial Pipeline',
+        title: 'MARKA Sales — Pipeline Friction & Fulfillment Delays',
+        description:
+          'Disconnected quotation-to-cash workflows create friction between commercial reps and fulfillment teams, resulting in lost deals and delayed billing.',
+        image: '/images/our-solution/projects/enterprise/marka-sales.png',
       },
     ],
     approach: [
@@ -197,7 +213,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     relatedWork: {
       slug: 'sinau-print-erp',
       title: 'Sinau Print ERP & Centralized System Management',
-      image: '/images/projects/sinau-print-erp/1.webp',
+      image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
       relationship: 'direct',
     },
     caseStudySlug: 'sinau-print-pos-system',
@@ -218,7 +234,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     heroHeadline: 'Turn Raw Data into Strategic Business Decisions Powered by AI',
     description:
       'Consolidate multi-source corporate data into a unified ecosystem with predictive AI modeling, demand forecasting, and automated insights.',
-    image: '/images/specialized/specialized-intelligence.webp',
+    image: '/images/our-solution/projects/data-ai/markaplus.svg',
     heroSvg: '/images/our-solution/hero-data-ai-integration.svg',
     serviceSectionSvg: '/images/our-solution/service-section-data-ai-integration.svg',
     whatItIs:
@@ -228,27 +244,19 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     challengeCards: [
       {
         number: '01',
-        badge: 'Data Disconnect',
-        title: 'Information Fragmentation',
+        badge: 'Campus Intelligence',
+        title: 'Civitas Analytic — Academic Data Silos & Retention Blind Spots',
         description:
-          'Corporate data trapped across disconnected databases and spreadsheets prevents teams from achieving a single source of operational truth.',
-        image: '/images/projects/altatic-analytic/1.webp',
+          'Educational institutions struggle with disconnected student information systems, hindering predictive intervention for student retention, academic tracking, and institutional resource allocation.',
+        image: '/images/our-solution/projects/data-ai/civitas-analytic.svg',
       },
       {
         number: '02',
-        badge: 'Decision Lag',
-        title: 'Data Lag & Reactive Decisions',
+        badge: 'Predictive Business AI',
+        title: 'MarkaPlus — Static Historical Reports & Decision Lag',
         description:
-          'Delayed batch reports leave leadership reacting after problems happen instead of proactively forecasting market trends and demands.',
-        image: '/images/projects/altatic-analytic/2.webp',
-      },
-      {
-        number: '03',
-        badge: 'Resource Drain',
-        title: 'Manual Administrative Burden',
-        description:
-          'Valuable workforce hours are consumed by repetitive data cleaning, manual reconciliations, and error-prone reporting pipelines.',
-        image: '/images/projects/altatic-analytic/3.webp',
+          'Traditional enterprise reporting only reflects backward-looking records. MarkaPlus embeds predictive AI algorithms into core workflows to forecast market demands and automate business insights.',
+        image: '/images/our-solution/projects/data-ai/markaplus.svg',
       },
     ],
     approach: [
@@ -305,7 +313,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     heroHeadline: 'Connect Physical Devices for Smarter Operational Automation',
     description:
       'Remotely monitor, control, and automate physical assets with real-time sensor telemetry and industrial-grade security.',
-    image: '/images/projects/myboss-iot-system/1.webp',
+    image: '/images/our-solution/projects/iot/mybos-iot.svg',
     heroSvg: '/images/our-solution/hero-smart-iot-system.svg',
     serviceSectionSvg: '/images/our-solution/service-section-smart-iot-system.svg',
     whatItIs:
@@ -315,27 +323,27 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     challengeCards: [
       {
         number: '01',
-        badge: 'Hardware Blind Spots',
-        title: 'Disconnected Physical Assets',
+        badge: 'Fleet & Hardware Telemetry',
+        title: 'MyBOS — Unconnected Fleet Assets & Unplanned Downtime',
         description:
-          'Distributed industrial machinery and fleet devices operate without real-time telemetry, leaving operations blind to live field conditions.',
-        image: '/images/projects/myboss-iot-system/1.webp',
+          'Distributed commercial vehicles and industrial field equipment lack real-time telemetry, leaving operations blind to live engine diagnostics and fuel efficiency.',
+        image: '/images/our-solution/projects/iot/mybos-iot.svg',
       },
       {
         number: '02',
-        badge: 'Operational Downtime',
-        title: 'Unplanned Downtime & Outages',
+        badge: 'Smart Shopfloor IoT',
+        title: 'Sinau Print — Production Queue Bottlenecks & Idle Machines',
         description:
-          'Lack of predictive hardware health monitoring leads to sudden equipment failure, emergency halts, and escalating maintenance costs.',
-        image: '/images/projects/myboss-iot-system/2.webp',
+          'High-volume printing and fabrication facilities struggle with manual job routing and unmonitored equipment, causing queue bottlenecks and delayed client dispatch.',
+        image: '/images/our-solution/projects/iot/sinau-print-iot.svg',
       },
       {
         number: '03',
-        badge: 'Alerting & Security',
-        title: 'Delayed Field Anomaly Response',
+        badge: 'Connected Hardware Hub',
+        title: 'ASPOO Marketplace — Fragmented Industrial Hardware Commerce',
         description:
-          'Without automated threshold alerts and edge sensor monitoring, critical safety hazards and system breaches remain undetected until damage occurs.',
-        image: '/images/projects/myboss-iot-system/3.webp',
+          'Suppliers and facility operators lack a synchronized marketplace ecosystem to monitor, trade, and automate device hardware procurement and smart sensor deployment.',
+        image: '/images/our-solution/projects/iot/aspoo-marketplace.svg',
       },
     ],
     approach: [
@@ -392,7 +400,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     heroHeadline: 'Build High-Performance Websites and Enterprise Web Apps',
     description:
       'Engineered for superior UX, blazing-fast performance, and enterprise-grade security to accelerate digital conversions and growth.',
-    image: '/images/our-business/kaluna-technology/services/software-development.webp',
+    image: '/images/our-solution/projects/digital/adsvar.svg',
     heroSvg: '/images/our-solution/hero-digital-development.svg',
     serviceSectionSvg: '/images/our-solution/service-section-digital-development.svg',
     whatItIs:
@@ -402,27 +410,43 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     challengeCards: [
       {
         number: '01',
-        badge: 'Performance Lag',
-        title: 'Slow Speeds & High Bounce Rates',
+        badge: 'Digital Advertising',
+        title: 'Adsvar — Ad Yield Drop & Multi-Channel Distribution Lag',
         description:
-          'Sluggish loading times and clunky UI fail to retain visitors, significantly hurting conversion rates and digital brand credibility.',
-        image: '/images/projects/artic-complex-web/1.webp',
+          'Digital media and advertising networks struggle to deliver high-converting, lightning-fast dynamic ad units that capture user attention across diverse devices.',
+        image: '/images/our-solution/projects/digital/adsvar.svg',
       },
       {
         number: '02',
-        badge: 'Architecture Gaps',
-        title: 'Rigid Legacy Web Platforms',
+        badge: 'Research & Policy Hub',
+        title: 'Artic Analytica — High-Latency Data Presentation & UX Friction',
         description:
-          'Monolithic web architectures resist third-party API integrations, payment gateways, and modern marketing analytics tools.',
-        image: '/images/projects/artic-complex-web/2.webp',
+          'Complex policy research and public data portals often overwhelm users with slow loading times, rigid navigation, and non-responsive visualization architectures.',
+        image: '/images/our-solution/projects/digital/artic-analytica.svg',
       },
       {
         number: '03',
-        badge: 'Security Risks',
-        title: 'Vulnerability & Data Exposures',
+        badge: 'Creative Brand Commerce',
+        title: 'Craftivation — Clunky Catalog UX & Lost Brand Storytelling',
         description:
-          'Outdated web standards leave enterprise platforms exposed to data breaches, compliance violations, and unexpected downtime.',
-        image: '/images/projects/artic-complex-web/3.webp',
+          'Artisan and creative enterprise brands require immersive visual storytelling and fluid web interactions without sacrificing mobile performance or e-commerce conversion rates.',
+        image: '/images/our-solution/projects/digital/craftivation.svg',
+      },
+      {
+        number: '04',
+        badge: 'Digital Media & Press',
+        title: 'Presstis — Traffic Spikes & Publishing Infrastructure Crashes',
+        description:
+          'High-volume journalism and digital publication platforms risk downtime during breaking news spikes, requiring resilient serverless architecture and instant article indexing.',
+        image: '/images/our-solution/projects/digital/presstis.svg',
+      },
+      {
+        number: '05',
+        badge: 'Automotive Digital Retail',
+        title: 'X1 Tire — Complex Fitment Filtering & High Mobile Bounce',
+        description:
+          'Automotive aftermarket retailers struggle with multi-tier tyre sizing and fitment filters, leading to customer drop-offs and abandoned booking pipelines.',
+        image: '/images/our-solution/projects/digital/x1-tire.svg',
       },
     ],
     approach: [
@@ -458,7 +482,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     relatedWork: {
       slug: 'web2up-digital',
       title: 'Web2Up Digital Platform & High-Performance WebApps',
-      image: '/images/our-business/kaluna-technology/services/software-development.webp',
+      image: '/images/our-solution/projects/digital/adsvar.svg',
       relationship: 'direct',
     },
     caseStudySlug: 'sinau-print-pos-system',

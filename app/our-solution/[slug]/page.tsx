@@ -130,7 +130,7 @@ export default async function SolutionServicePage({ params }: PageProps) {
           src={service.heroSvg || '/images/our-works/our-works-hero-bg.webp'}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 z-0 h-full w-full object-cover object-center pointer-events-none select-none"
+          className="absolute inset-0 z-0 h-full w-full object-cover object-center pointer-events-none select-none blur-[8px] scale-105"
         />
 
         {/* Subtle center-radial vignette behind content for maximum text contrast */}
@@ -179,19 +179,24 @@ export default async function SolutionServicePage({ params }: PageProps) {
 
       {/* ── SECTION 1: WHAT IT IS & OVERVIEW ── */}
       <section className="relative isolate overflow-hidden bg-[#F7F7F7] px-[6vw] py-[clamp(70px,7vw,130px)] max-[1199px]:px-[4vw]">
-        {/* Full-bleed Service Section SVG Background (Desktop lg+) */}
+        {/* Service Section SVG Right Visual (Desktop lg+) */}
         {service.serviceSectionSvg && (
-          <img
-            src={service.serviceSectionSvg}
-            alt=""
+          <div
             aria-hidden="true"
-            className="pointer-events-none select-none hidden lg:block absolute inset-0 z-0 h-full w-full object-cover object-right"
-          />
+            className="pointer-events-none select-none hidden lg:block absolute right-0 top-0 bottom-0 w-[68%] xl:w-[64%] 2xl:w-[60%] z-0 overflow-hidden"
+          >
+            <img
+              src={service.serviceSectionSvg}
+              alt=""
+              aria-hidden="true"
+              className="absolute right-[-2%] xl:right-0 top-1/2 -translate-y-1/2 h-[112%] xl:h-[118%] w-auto max-w-none object-contain object-right scale-[1.25] origin-right"
+            />
+          </div>
         )}
 
         <div className="mx-auto flex max-w-[1600px] flex-col lg:flex-row items-center justify-between min-h-[500px]">
           {/* Left Content Column */}
-          <div className="relative z-10 flex w-full max-w-[680px] flex-col gap-6 lg:w-[52%] lg:shrink-0 lg:pr-8">
+          <div className="relative z-10 flex w-full max-w-[640px] flex-col gap-6 lg:w-[48%] lg:shrink-0 lg:pr-6">
             <div className="flex items-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.08em] text-[#1A3E9E]">
               <span className="h-2 w-2 bg-[#1A3E9E]" />
               <span>WHAT SERVICE IS THIS ?</span>
@@ -225,7 +230,7 @@ export default async function SolutionServicePage({ params }: PageProps) {
               <img
                 src={service.serviceSectionSvg}
                 alt="Service Architecture Overview"
-                className="h-full w-full object-cover object-right pointer-events-none select-none scale-[1.3] origin-right"
+                className="h-full w-full object-cover object-right pointer-events-none select-none scale-[1.55] origin-right"
               />
             </div>
           )}
@@ -248,7 +253,13 @@ export default async function SolutionServicePage({ params }: PageProps) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div
+            className={`grid grid-cols-1 gap-6 ${
+              (service.challengeCards?.length ?? 3) === 2
+                ? 'md:grid-cols-2 max-w-[1100px] mx-auto w-full'
+                : 'md:grid-cols-2 lg:grid-cols-3'
+            }`}
+          >
             {(service.challengeCards ?? [
               {
                 number: '01',
