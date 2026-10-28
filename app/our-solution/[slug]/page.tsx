@@ -177,7 +177,7 @@ export default async function SolutionServicePage({ params }: PageProps) {
         {/* Background / Bleed Dashboard Stack Graphic (Desktop lg+) */}
         <div
           aria-hidden="true"
-          className="pointer-events-none select-none hidden lg:block absolute -right-[4vw] xl:-right-[2vw] 2xl:right-0 top-1/2 -translate-y-1/2 w-[42vw] min-w-[608px] xl:w-[40vw] xl:min-w-[680px] 2xl:w-[38.4vw] 2xl:min-w-[752px] z-0"
+          className="pointer-events-none select-none hidden lg:block absolute -right-[4vw] xl:-right-[2vw] 2xl:right-0 top-1/2 -translate-y-1/2 w-[36vw] min-w-[516px] xl:w-[34vw] xl:min-w-[578px] 2xl:w-[32.6vw] 2xl:min-w-[640px] z-0"
         >
           <img
             src="/images/our-solution/gambar-kanan.svg"
@@ -194,9 +194,7 @@ export default async function SolutionServicePage({ params }: PageProps) {
               <span>WHAT SERVICE IS THIS ?</span>
             </div>
             <h2 className="font-heading text-[clamp(32px,3.2vw,56px)] font-medium leading-[1.12] text-[#101010]">
-              {service.language === 'en-US'
-                ? 'Integrated & Precision Operational Architecture'
-                : 'Arsitektur Operasional yang Terintegrasi & Presisi'}
+              Integrated &amp; Precision Operational Architecture
             </h2>
             <p className="font-body text-[clamp(15px,1vw,18px)] leading-[1.7] text-[#424242]">
               {service.whatItIs}
@@ -212,9 +210,7 @@ export default async function SolutionServicePage({ params }: PageProps) {
                   Beyond Generic Solution
                 </h3>
                 <p className="font-body text-[14px] leading-[1.65] text-[#555]">
-                  {service.language === 'en-US'
-                    ? 'We do not deploy rigid, one-size-fits-all solutions. Every module is tailored to align with industry regulations, internal team workflows, and long-term enterprise scalability.'
-                    : 'Kami tidak menerapkan solusi generik yang kaku. Setiap modul dirancang adaptif mengikuti regulasi bisnis Indonesia, alur operasional internal tim, serta skalabilitas ekspansi jangka panjang.'}
+                  We do not deploy rigid, one-size-fits-all solutions. Every module is tailored to align with industry regulations, internal team workflows, and long-term enterprise scalability.
                 </p>
               </div>
             </div>
@@ -225,7 +221,7 @@ export default async function SolutionServicePage({ params }: PageProps) {
             <img
               src="/images/our-solution/gambar-kanan.svg"
               alt="Operational Dashboard Stack"
-              className="w-[92%] max-w-none translate-x-[8%] h-auto object-contain drop-shadow-[0_20px_45px_rgba(26,62,158,0.12)]"
+              className="w-[78%] max-w-none translate-x-[8%] h-auto object-contain drop-shadow-[0_20px_45px_rgba(26,62,158,0.12)]"
             />
           </div>
         </div>
