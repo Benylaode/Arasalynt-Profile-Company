@@ -173,20 +173,35 @@ export default async function SolutionServicePage({ params }: PageProps) {
       </section>
 
       {/* ── SECTION 1: WHAT IT IS & OVERVIEW ── */}
-      <section className="px-[6vw] py-[clamp(70px,6.5vw,120px)] max-[1199px]:px-[4vw]">
-        <div className="mx-auto grid max-w-[1600px] grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="flex flex-col gap-6">
+      <section className="relative isolate overflow-hidden px-[6vw] py-[clamp(70px,7vw,130px)] max-[1199px]:px-[4vw]">
+        {/* Background / Bleed Dashboard Stack Graphic (Desktop lg+) */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none select-none hidden lg:block absolute -right-[4vw] xl:-right-[2vw] 2xl:right-0 top-1/2 -translate-y-1/2 w-[42vw] min-w-[608px] xl:w-[40vw] xl:min-w-[680px] 2xl:w-[38.4vw] 2xl:min-w-[752px] z-0"
+        >
+          <img
+            src="/images/our-solution/gambar-kanan.svg"
+            alt=""
+            className="w-full h-auto object-contain translate-x-[6%] drop-shadow-[0_25px_60px_rgba(26,62,158,0.14)]"
+          />
+        </div>
+
+        <div className="mx-auto flex max-w-[1600px] flex-col lg:flex-row items-center justify-between min-h-[500px]">
+          {/* Left Content Column */}
+          <div className="relative z-10 flex w-full max-w-[680px] flex-col gap-6 lg:w-[52%] lg:shrink-0 lg:pr-8">
             <div className="flex items-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.08em] text-[#1A3E9E]">
               <span className="h-2 w-2 bg-[#1A3E9E]" />
               <span>WHAT SERVICE IS THIS ?</span>
             </div>
             <h2 className="font-heading text-[clamp(32px,3.2vw,56px)] font-medium leading-[1.12] text-[#101010]">
-              Integrated &amp; Precision Operational Architecture
+              {service.language === 'en-US'
+                ? 'Integrated & Precision Operational Architecture'
+                : 'Arsitektur Operasional yang Terintegrasi & Presisi'}
             </h2>
             <p className="font-body text-[clamp(15px,1vw,18px)] leading-[1.7] text-[#424242]">
               {service.whatItIs}
             </p>
-            <div className="mt-2 flex flex-col sm:flex-row items-center gap-6 rounded-[22px] border border-black/10 bg-white p-6 sm:p-7 shadow-[0_10px_30px_rgba(26,62,158,0.05)]">
+            <div className="mt-2 flex flex-col sm:flex-row items-center gap-6 rounded-[22px] border border-black/10 bg-white/95 backdrop-blur-sm p-6 sm:p-7 shadow-[0_10px_30px_rgba(26,62,158,0.05)]">
               <img
                 src="/images/our-solution/gambar-kecil-bawah.svg"
                 alt="Beyond Generic Solution"
@@ -197,17 +212,20 @@ export default async function SolutionServicePage({ params }: PageProps) {
                   Beyond Generic Solution
                 </h3>
                 <p className="font-body text-[14px] leading-[1.65] text-[#555]">
-                  We do not deploy rigid, one-size-fits-all solutions. Every module is tailored to align with industry regulations, internal team workflows, and long-term enterprise scalability.
+                  {service.language === 'en-US'
+                    ? 'We do not deploy rigid, one-size-fits-all solutions. Every module is tailored to align with industry regulations, internal team workflows, and long-term enterprise scalability.'
+                    : 'Kami tidak menerapkan solusi generik yang kaku. Setiap modul dirancang adaptif mengikuti regulasi bisnis Indonesia, alur operasional internal tim, serta skalabilitas ekspansi jangka panjang.'}
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="relative flex items-center justify-center lg:justify-end">
+          {/* Right Visual for Tablet / Mobile (< lg): also scaled and bleeding right */}
+          <div className="relative z-0 mt-10 flex w-full items-center justify-end overflow-hidden lg:hidden">
             <img
               src="/images/our-solution/gambar-kanan.svg"
               alt="Operational Dashboard Stack"
-              className="w-full max-w-[680px] h-auto object-contain drop-shadow-[0_20px_45px_rgba(26,62,158,0.12)]"
+              className="w-[92%] max-w-none translate-x-[8%] h-auto object-contain drop-shadow-[0_20px_45px_rgba(26,62,158,0.12)]"
             />
           </div>
         </div>
