@@ -236,11 +236,11 @@ export default function Footer() {
                   </a>
 
                   <a
-                    href="mailto:corporate.arsalynk@gmail.com"
+                    href="mailto:corporate@arsalynk.com"
                     className="flex items-center gap-[9px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
                   >
                     <MailIcon />
-                    <span>corporate.arsalynk@gmail.com</span>
+                    <span>corporate@arsalynk.com</span>
                   </a>
                 </div>
               </div>

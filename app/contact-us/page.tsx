@@ -487,13 +487,13 @@ export default function ContactUsPage() {
                     </a>
 
                     <a
-                      href="mailto:corporate.arsalynk@gmail.com"
+                      href="mailto:corporate@arsalynk.com"
                       className="flex items-center gap-2.5 font-body text-[14px] leading-[1.5] tracking-[0.02em] text-[#717171] transition hover:text-[#101010] md:text-[15px]"
                     >
                       <span className="shrink-0">
                         <MailIcon size={18} />
                       </span>
-                      <span>corporate.arsalynk@gmail.com</span>
+                      <span>corporate@arsalynk.com</span>
                     </a>
                   </div>
                 </div>

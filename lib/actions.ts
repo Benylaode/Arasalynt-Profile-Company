@@ -28,7 +28,7 @@ export type SubmitLeadResult = {
 const emailUser = process.env.EMAIL_USER;
 const emailPass = process.env.EMAIL_PASS?.replace(/\s+/g, '');
 const emailReceiver =
-  process.env.EMAIL_RECEIVER || 'halo@arsalynk.com';
+  process.env.EMAIL_RECEIVER || 'corporate@arsalynk.com';
 
 /**
  * Nodemailer transporter
