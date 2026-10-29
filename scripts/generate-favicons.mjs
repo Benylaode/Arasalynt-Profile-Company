@@ -40,7 +40,7 @@ async function generate() {
 
   // Normalize SVG with viewBox and dimensions
   if (!svgContent.includes('viewBox')) {
-    svgContent = svgContent.replace(/<svg\b([^>]*)>/i, '<svg $1 viewBox="0 0 128 127">');
+    svgContent = svgContent.replace(/<svg\b([^>]*)>/i, '<svg $1 viewBox="0 0 512 512">');
   }
 
   const svgBuffer = Buffer.from(svgContent);
@@ -106,7 +106,7 @@ async function generate() {
     console.log(`✓ Wrote ${path.relative(rootDir, w.dest)} (${w.data.length} bytes)`);
   }
 
-  console.log('\nAll favicons generated successfully from yellow logo.svg!');
+  console.log('\nAll favicons generated successfully from blue logo.svg!');
 }
 
 generate().catch((err) => {

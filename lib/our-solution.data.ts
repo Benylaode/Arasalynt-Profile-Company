@@ -49,6 +49,9 @@ export type SolutionService = {
   language?: 'id-ID' | 'en-US';
   seoTitle?: string;
   seoDescription?: string;
+  whatServiceTitle?: string;
+  valuePropTitle?: string;
+  valuePropDescription?: string;
 };
 
 export const OUR_SOLUTION_CHALLENGE = {
@@ -62,28 +65,28 @@ export const OUR_SOLUTION_CHALLENGES = [
     number: '01',
     title: 'Legacy Hardware & Outdated Infrastructure',
     description:
-      'Aging physical servers and legacy equipment severely limit business expansion, carry high maintenance costs, and resist modern IoT or cloud integration.',
+      'Aging servers and legacy hardware limit growth, hike maintenance costs, and block cloud adoption.',
     image: '/images/our-solution/projects/iot/mybos-iot.svg',
   },
   {
     number: '02',
     title: 'Stuck Software & Fragmented ERP',
     description:
-      'Operating on disjointed platforms creates data silos, forces manual workarounds, and leads to expensive duplicate tasks across enterprise departments.',
+      'Disconnected platforms create data silos, manual workarounds, and redundant enterprise tasks.',
     image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
   },
   {
     number: '03',
     title: 'Operational Blind Spots & Data Lag',
     description:
-      'Without real-time data flow from the shop floor to the executive dashboard, leaders rely on outdated reports and cannot make proactive decisions.',
+      'Without real-time operational data, leaders rely on stale reports and face blind spots in decisions.',
     image: '/images/our-solution/projects/data-ai/markaplus.svg',
   },
   {
     number: '04',
     title: 'Unplanned Downtime & Reactive Maintenance',
     description:
-      'Limited machine and system monitoring results in sudden equipment failures, costly operational halts, and escalating emergency IT expenses.',
+      'Unmonitored systems cause sudden equipment breakdowns, costly operational halts, and emergency repairs.',
     image: '/images/our-solution/projects/digital/presstis.svg',
   },
 ] as const;
@@ -92,34 +95,74 @@ export const CORE_SOLUTIONS = [
   {
     slug: 'enterprise-solution',
     title: 'Enterprise Solution',
+    titleLine1: 'Enterprise',
+    titleLine2: 'Solution',
     heroHeadline: 'Streamline Enterprise Operations with Centralized System Management',
     description:
-      'Integrate operational workflows across divisions into a unified ecosystem with real-time visibility and sustainable enterprise scalability.',
-    image: '/images/our-solution/projects/enterprise/marka-finance.png',
+      'Integrate corporate workflows into a single system for real-time visibility and scalable growth.',
+    image: '/images/our-solution/projects/enterprise/marka-sales.png',
+    cardBg: '#090D16',
+    cardBorder: 'rgba(77, 139, 255, 0.28)',
+    glowStart: '#3B82F6',
+    glowStartOpacity: 0.45,
+    glowEnd: '#1A3E9E',
+    glowEndOpacity: 0.05,
+    textColor: '#FFFFFF',
+    descColor: 'rgba(255, 255, 255, 0.82)',
   },
   {
     slug: 'data-ai-integration',
     title: 'Data & AI Integration',
+    titleLine1: 'Data & AI',
+    titleLine2: 'Integration',
     heroHeadline: 'Turn Raw Data into Strategic Business Decisions Powered by AI',
     description:
-      'Consolidate multi-source corporate data into a unified ecosystem with predictive AI modeling, demand forecasting, and automated insights.',
-    image: '/images/our-solution/projects/data-ai/markaplus.svg',
+      'Consolidate corporate data and leverages AI to automate insights, predict trends, and guide smart decisions.',
+    image: '/images/our-solution/projects/data-ai/civitas-analytic.svg',
+    cardBg: '#0D140F',
+    cardBorder: 'rgba(230, 255, 42, 0.3)',
+    glowStart: '#E6FF2A',
+    glowStartOpacity: 0.48,
+    glowEnd: '#10B981',
+    glowEndOpacity: 0.05,
+    textColor: '#FFFFFF',
+    descColor: 'rgba(255, 255, 255, 0.82)',
   },
   {
     slug: 'smart-iot-system',
     title: 'Smart IOT System',
+    titleLine1: 'Smart IOT',
+    titleLine2: 'System',
     heroHeadline: 'Connect Physical Devices for Smarter Operational Automation',
     description:
-      'Remotely monitor, control, and automate physical assets with real-time sensor telemetry and industrial-grade security.',
-    image: '/images/our-solution/projects/iot/mybos-iot.svg',
+      'Connect physical devices for real-time operational automation.',
+    image: '/images/our-solution/projects/iot/sinau-print-iot.svg',
+    cardBg: '#10326A',
+    cardBorder: 'rgba(56, 189, 248, 0.45)',
+    glowStart: '#38BDF8',
+    glowStartOpacity: 0.55,
+    glowEnd: '#155A99',
+    glowEndOpacity: 0.1,
+    textColor: '#FFFFFF',
+    descColor: 'rgba(255, 255, 255, 0.88)',
   },
   {
     slug: 'digital-development',
     title: 'Digital Development',
+    titleLine1: 'Digital',
+    titleLine2: 'Development',
     heroHeadline: 'Build High-Performance Websites and Enterprise Web Apps',
     description:
-      'Engineered for superior UX, blazing-fast performance, and enterprise-grade security to accelerate digital conversions and growth.',
-    image: '/images/our-solution/projects/digital/adsvar.svg',
+      'Build high-performance websites and digital solutions.',
+    image: '/images/our-solution/projects/digital/craftivation.svg',
+    cardBg: '#0E121D',
+    cardBorder: 'rgba(56, 189, 248, 0.28)',
+    glowStart: '#38BDF8',
+    glowStartOpacity: 0.45,
+    glowEnd: '#818CF8',
+    glowEndOpacity: 0.05,
+    textColor: '#FFFFFF',
+    descColor: 'rgba(255, 255, 255, 0.82)',
   },
 ] as const;
 
@@ -136,6 +179,10 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     serviceSectionSvg: '/images/our-solution/service-section-enterprise-solution.svg',
     whatItIs:
       'A comprehensive system management service designed to integrate various operational lines of large enterprises. We help simplify complex workflows, enhance real-time data visibility, and ensure sustainable business scalability in the digital era.',
+    whatServiceTitle: 'Integrated & Precision Operational Architecture',
+    valuePropTitle: 'Beyond Generic ERP Systems',
+    valuePropDescription:
+      'We do not deploy rigid, one-size-fits-all ERPs. Every operational module is custom-tailored to align with your industry regulations, internal workflows, and long-term enterprise scalability.',
     challenge:
       'Operating on disjointed platforms creates data silos, forces manual workarounds, and leads to expensive duplicate tasks across enterprise departments.',
     challengeCards: [
@@ -239,6 +286,10 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     serviceSectionSvg: '/images/our-solution/service-section-data-ai-integration.svg',
     whatItIs:
       'An intelligent data integration service that consolidates diverse corporate information sources into a unified ecosystem. Backed by advanced AI technology, we help you analyze trends, predict market demands, and automate business insights with precision.',
+    whatServiceTitle: 'Intelligent Data Pipelines & Predictive AI Modeling',
+    valuePropTitle: 'Beyond Static Historical Reports',
+    valuePropDescription:
+      'We do not build passive data dumps. We embed self-learning predictive models directly into your core business pipelines to forecast demand, spot anomalies, and trigger automated decision logic.',
     challenge:
       'Corporate information trapped in disconnected databases leaves leadership with delayed reports, blind spots, and reactive rather than proactive decisions.',
     challengeCards: [
@@ -318,6 +369,10 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     serviceSectionSvg: '/images/our-solution/service-section-smart-iot-system.svg',
     whatItIs:
       'An Internet of Things (IoT) and smart system integration solution designed to remotely monitor, control, and optimize physical devices. Boost your operational efficiency and infrastructure security through real-time, sensor-driven insights.',
+    whatServiceTitle: 'Industrial IoT Telemetry & Hardware Device Automation',
+    valuePropTitle: 'Beyond Isolated Sensor Hardware',
+    valuePropDescription:
+      'We do not install disconnected hardware gadgets. We engineer end-to-end telemetry bridges connecting shopfloor machinery, fleet sensors, and central enterprise dashboards with fail-safe reliability.',
     challenge:
       'Physical devices and remote operational assets operate without real-time connectivity, resulting in unexpected equipment failure, delayed maintenance, and security vulnerabilities.',
     challengeCards: [
@@ -405,6 +460,10 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     serviceSectionSvg: '/images/our-solution/service-section-digital-development.svg',
     whatItIs:
       'Professional web development services ranging from high-converting landing pages to complex, responsive web-based applications. We focus on optimal user experience (UX), fast loading speeds, and robust system security to accelerate your brand’s digital growth.',
+    whatServiceTitle: 'High-Performance Web Platforms & Enterprise Applications',
+    valuePropTitle: 'Beyond Off-the-Shelf Templates',
+    valuePropDescription:
+      'We do not rely on bloated generic templates. We handcraft high-speed, secure, and SEO-engineered web platforms and digital products built to scale user traffic and maximize business conversions.',
     challenge:
       'Slow, rigid, or outdated websites compromise user trust, suffer from security risks, and fail to convert visitors into loyal customers in a competitive digital landscape.',
     challengeCards: [

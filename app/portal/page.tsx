@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description:
     'Portal klien resmi Arsalynk. Pengajuan tiket support teknis dan verifikasi persetujuan dokumen penawaran (quotation) terintegrasi langsung dengan Marka ERP.',
   alternates: { canonical: '/portal' },
-  robots: { index: false, follow: true },
+  robots: { index: false, follow: false, nocache: true },
 };
 
 function DownIcon() {

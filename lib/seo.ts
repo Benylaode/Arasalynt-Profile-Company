@@ -26,12 +26,6 @@ export const SITE_NAVIGATION_ITEMS = [
       'Mengenal profil, visi, dan ekosistem bisnis Arsalynk sebagai partner transformasi digital dan rekayasa teknologi enterprise di Indonesia.',
   },
   {
-    name: 'Our Business',
-    href: '/our-business',
-    description:
-      'Ekosistem unit bisnis terintegrasi Arsalynk: infrastruktur IT, riset strategis, survey data analytics, hingga media digital enterprise.',
-  },
-  {
     name: 'Insight & Programs',
     href: '/insight-programs',
     description:

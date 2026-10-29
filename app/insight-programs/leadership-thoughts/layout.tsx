@@ -4,21 +4,20 @@ import { SITE_NAME } from '@/lib/constants';
 export const metadata: Metadata = {
   title: 'Leadership Thoughts',
   description:
-    'Perspektif dan pemikiran para pemimpin Arsalynk tentang transformasi enterprise, kepemimpinan berbasis data, desain organisasi, dan komunikasi bisnis.',
+    'Executive perspectives and strategic insights from Arsalynk leadership on enterprise transformation, data architecture, and organizational resilience.',
   keywords: [
-    'kepemimpinan enterprise',
-    'wawasan strategi bisnis',
-    'transformasi digital indonesia',
-    'pemikiran leadership IT',
+    'enterprise leadership',
+    'strategic business insights',
+    'enterprise digital transformation',
+    'technology leadership',
     'arsalynk leadership thoughts',
-    'artikel strategi enterprise',
-    'organisasi berbasis data',
+    'evidence-based decision making',
   ],
   alternates: { canonical: '/insight-programs/leadership-thoughts' },
   openGraph: {
     title: `Leadership Thoughts | ${SITE_NAME}`,
     description:
-      'Perspektif kepemimpinan mengenai transformasi digital, data, dan strategi organisasi enterprise.',
+      'Executive leadership perspectives on digital transformation, data strategy, and enterprise resilience.',
     url: '/insight-programs/leadership-thoughts',
     images: [
       {
@@ -32,7 +31,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Leadership Thoughts | ${SITE_NAME}`,
-    description: 'Perspektif enterprise dari para pemimpin Arsalynk.',
+    description: 'Enterprise leadership perspectives from Arsalynk.',
     images: ['/images/leadership-thoughts/hero-leadership-thoughts-v2.webp'],
   },
 };

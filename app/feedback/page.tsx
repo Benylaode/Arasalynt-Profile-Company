@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   description:
     'Sampaikan masukan, penilaian kualitas layanan IT, dan evaluasi kepuasan proyek Anda kepada tim Arsalynk & Marka ERP.',
   alternates: { canonical: '/feedback' },
+  robots: { index: false, follow: false, nocache: true },
 };
 
 function DownIcon() {

@@ -2,7 +2,6 @@ import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/constants';
 import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
 import {
-  BUSINESS_DUMMY_DATA,
   CASE_STUDIES_DUMMY_DATA,
   LEADERSHIP_THOUGHTS_DUMMY_DATA,
 } from '@/lib/db/dummy';
@@ -62,11 +61,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ── Halaman Utama ──────────────────────────────────────────────────────
     entry('/', '2026-10-13', 1.0, 'weekly'),
 
-    // ── 6-Pack Core Sitelinks (Priority 0.9) ────────────────────────────────
+    // ── Core Public Sitelinks (Priority 0.9) ────────────────────────────────
     entry('/our-works', '2026-10-13', 0.9, 'weekly'),
     entry('/our-solution', '2026-10-13', 0.9, 'weekly'),
     entry('/about-us', '2026-10-13', 0.9, 'weekly'),
-    entry('/our-business', '2026-10-13', 0.9, 'weekly'),
     entry('/insight-programs', '2026-10-13', 0.9, 'weekly'),
     entry('/contact-us', '2026-10-13', 0.9, 'weekly'),
 
@@ -86,11 +84,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ── Kontak & Legal ─────────────────────────────────────────────────────
     entry('/privacy-policy', '2026-01-15', 0.5, 'yearly'),
-
-    // ── Halaman Dinamis: Business Units ────────────────────────────────────
-    ...BUSINESS_DUMMY_DATA.map(({ slug }) =>
-      entry(`/our-business/${slug}`, '2026-08-25', 0.8, 'monthly')
-    ),
 
     // ── Halaman Dinamis: Our Works ─────────────────────────────────────────
     ...Object.entries(WORK_DATES).map(([slug, date]) =>

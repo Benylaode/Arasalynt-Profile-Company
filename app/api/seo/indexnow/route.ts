@@ -3,7 +3,6 @@ import { submitToIndexNow } from '@/lib/seo/indexnow';
 import { SITE_URL } from '@/lib/constants';
 import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
 import {
-  BUSINESS_DUMMY_DATA,
   CASE_STUDIES_DUMMY_DATA,
   LEADERSHIP_THOUGHTS_DUMMY_DATA,
 } from '@/lib/db/dummy';
@@ -29,8 +28,6 @@ function getAllCanonicalUrls(): string[] {
     `${SITE_URL}/about-us/ecosystem-philosophy`,
     `${SITE_URL}/our-solution`,
     ...SOLUTION_SERVICES.map((s) => `${SITE_URL}/our-solution/${s.slug}`),
-    `${SITE_URL}/our-business`,
-    ...BUSINESS_DUMMY_DATA.map((b) => `${SITE_URL}/our-business/${b.slug}`),
     `${SITE_URL}/insight-programs`,
     `${SITE_URL}/insight-programs/case-studies`,
     ...CASE_STUDIES_DUMMY_DATA.map(

@@ -189,7 +189,7 @@ export default async function SolutionServicePage({ params }: PageProps) {
               src={service.serviceSectionSvg}
               alt=""
               aria-hidden="true"
-              className="absolute right-[-2%] xl:right-0 top-1/2 -translate-y-1/2 h-[112%] xl:h-[118%] w-auto max-w-none object-contain object-right scale-[1.25] origin-right"
+              className="absolute right-0 xl:right-[1.5%] top-1/2 -translate-y-1/2 h-[110%] xl:h-[116%] w-auto max-w-none object-contain object-right scale-[1.18] xl:scale-[1.22] origin-right"
             />
           </div>
         )}
@@ -202,7 +202,7 @@ export default async function SolutionServicePage({ params }: PageProps) {
               <span>WHAT SERVICE IS THIS ?</span>
             </div>
             <h2 className="font-heading text-[clamp(32px,3.2vw,56px)] font-medium leading-[1.12] text-[#101010]">
-              Integrated &amp; Precision Operational Architecture
+              {service.whatServiceTitle ?? 'Integrated & Precision Operational Architecture'}
             </h2>
             <p className="font-body text-[clamp(15px,1vw,18px)] leading-[1.7] text-[#424242]">
               {service.whatItIs}
@@ -210,15 +210,16 @@ export default async function SolutionServicePage({ params }: PageProps) {
             <div className="mt-2 flex flex-col sm:flex-row items-center gap-6 rounded-[22px] border border-black/10 bg-white/95 backdrop-blur-sm p-6 sm:p-7 shadow-[0_10px_30px_rgba(26,62,158,0.05)]">
               <img
                 src="/images/our-solution/gambar-kecil-bawah.svg"
-                alt="Beyond Generic Solution"
+                alt={service.valuePropTitle ?? 'Beyond Generic Solution'}
                 className="w-[120px] sm:w-[140px] h-auto flex-shrink-0 object-contain"
               />
               <div className="flex flex-col gap-2">
                 <h3 className="font-heading text-[18px] font-semibold text-[#101010]">
-                  Beyond Generic Solution
+                  {service.valuePropTitle ?? 'Beyond Generic Solution'}
                 </h3>
                 <p className="font-body text-[14px] leading-[1.65] text-[#555]">
-                  We do not deploy rigid, one-size-fits-all solutions. Every module is tailored to align with industry regulations, internal team workflows, and long-term enterprise scalability.
+                  {service.valuePropDescription ??
+                    'We do not deploy rigid, one-size-fits-all solutions. Every module is tailored to align with industry regulations, internal team workflows, and long-term enterprise scalability.'}
                 </p>
               </div>
             </div>
