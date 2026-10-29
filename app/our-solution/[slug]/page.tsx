@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
+import { ServiceHighlightCardSvg } from '@/components/our-solution/ServiceHighlightCardSvg';
 import JsonLd from '@/components/seo/JsonLd';
 import { getSolutionService, SOLUTION_SERVICES } from '@/lib/our-solution.data';
 import { SITE_URL } from '@/lib/constants';
@@ -196,33 +197,22 @@ export default async function SolutionServicePage({ params }: PageProps) {
 
         <div className="mx-auto flex max-w-[1600px] flex-col lg:flex-row items-center justify-between min-h-[500px]">
           {/* Left Content Column */}
-          <div className="relative z-10 flex w-full max-w-[640px] flex-col gap-6 lg:w-[48%] lg:shrink-0 lg:pr-6">
+          <div className="relative z-10 flex w-full max-w-[820px] xl:max-w-[880px] flex-col gap-6 lg:w-[56%] lg:shrink-0">
             <div className="flex items-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.08em] text-[#1A3E9E]">
               <span className="h-2 w-2 bg-[#1A3E9E]" />
               <span>WHAT SERVICE IS THIS ?</span>
             </div>
-            <h2 className="font-heading text-[clamp(32px,3.2vw,56px)] font-medium leading-[1.12] text-[#101010]">
+            <h2 className="max-w-[640px] font-heading text-[clamp(32px,3.2vw,56px)] font-medium leading-[1.12] text-[#101010]">
               {service.whatServiceTitle ?? 'Integrated & Precision Operational Architecture'}
             </h2>
-            <p className="font-body text-[clamp(15px,1vw,18px)] leading-[1.7] text-[#424242]">
+            <p className="max-w-[640px] font-body text-[clamp(15px,1vw,18px)] leading-[1.7] text-[#424242]">
               {service.whatItIs}
             </p>
-            <div className="mt-2 flex flex-col sm:flex-row items-center gap-6 rounded-[22px] border border-black/10 bg-white/95 backdrop-blur-sm p-6 sm:p-7 shadow-[0_10px_30px_rgba(26,62,158,0.05)]">
-              <img
-                src="/images/our-solution/gambar-kecil-bawah.svg"
-                alt={service.valuePropTitle ?? 'Beyond Generic Solution'}
-                className="w-[120px] sm:w-[140px] h-auto flex-shrink-0 object-contain"
-              />
-              <div className="flex flex-col gap-2">
-                <h3 className="font-heading text-[18px] font-semibold text-[#101010]">
-                  {service.valuePropTitle ?? 'Beyond Generic Solution'}
-                </h3>
-                <p className="font-body text-[14px] leading-[1.65] text-[#555]">
-                  {service.valuePropDescription ??
-                    'We do not deploy rigid, one-size-fits-all solutions. Every module is tailored to align with industry regulations, internal team workflows, and long-term enterprise scalability.'}
-                </p>
-              </div>
-            </div>
+            <ServiceHighlightCardSvg
+              slug={service.slug}
+              title={service.valuePropTitle}
+              description={service.valuePropDescription}
+            />
           </div>
 
           {/* Right Visual for Tablet / Mobile (< lg) */}

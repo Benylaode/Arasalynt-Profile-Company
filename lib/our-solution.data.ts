@@ -52,6 +52,7 @@ export type SolutionService = {
   whatServiceTitle?: string;
   valuePropTitle?: string;
   valuePropDescription?: string;
+  valuePropIcon?: string;
 };
 
 export const OUR_SOLUTION_CHALLENGE = {
@@ -178,11 +179,12 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     heroSvg: '/images/our-solution/hero-enterprise-solution.svg',
     serviceSectionSvg: '/images/our-solution/service-section-enterprise-solution.svg',
     whatItIs:
-      'A comprehensive system management service designed to integrate various operational lines of large enterprises. We help simplify complex workflows, enhance real-time data visibility, and ensure sustainable business scalability in the digital era.',
-    whatServiceTitle: 'Integrated & Precision Operational Architecture',
-    valuePropTitle: 'Beyond Generic ERP Systems',
+      'A streamlined enterprise management service designed to unify complex operational workflows, optimize resource allocation, and ensure sustainable business scalability.',
+    whatServiceTitle: 'Integrated Enterprise Architecture',
+    valuePropTitle: 'Beyond Generic Solutions',
     valuePropDescription:
-      'We do not deploy rigid, one-size-fits-all ERPs. Every operational module is custom-tailored to align with your industry regulations, internal workflows, and long-term enterprise scalability.',
+      'We avoid rigid, one-size-fits-all platforms. Every ERP module is custom-engineered to align with your corporate governance, internal workflows, and long-term expansion goals.',
+    valuePropIcon: '/images/our-solution/icon-highlight-enterprise.svg',
     challenge:
       'Operating on disjointed platforms creates data silos, forces manual workarounds, and leads to expensive duplicate tasks across enterprise departments.',
     challengeCards: [
@@ -285,11 +287,12 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     heroSvg: '/images/our-solution/hero-data-ai-integration.svg',
     serviceSectionSvg: '/images/our-solution/service-section-data-ai-integration.svg',
     whatItIs:
-      'An intelligent data integration service that consolidates diverse corporate information sources into a unified ecosystem. Backed by advanced AI technology, we help you analyze trends, predict market demands, and automate business insights with precision.',
-    whatServiceTitle: 'Intelligent Data Pipelines & Predictive AI Modeling',
-    valuePropTitle: 'Beyond Static Historical Reports',
+      'Advanced data engineering and AI integration services designed to transform raw enterprise data into actionable intelligence, predictive analytics, and automated decision-making.',
+    whatServiceTitle: 'Intelligent Data & Deep Learning Infrastructure',
+    valuePropTitle: 'Beyond Static Analytics',
     valuePropDescription:
-      'We do not build passive data dumps. We embed self-learning predictive models directly into your core business pipelines to forecast demand, spot anomalies, and trigger automated decision logic.',
+      'We move past basic dashboards. Our custom deep learning models and data pipelines are built specifically to adapt to your unique business logic and industry ecosystem.',
+    valuePropIcon: '/images/our-solution/icon-highlight-data-ai.svg',
     challenge:
       'Corporate information trapped in disconnected databases leaves leadership with delayed reports, blind spots, and reactive rather than proactive decisions.',
     challengeCards: [
@@ -368,11 +371,12 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     heroSvg: '/images/our-solution/hero-smart-iot-system.svg',
     serviceSectionSvg: '/images/our-solution/service-section-smart-iot-system.svg',
     whatItIs:
-      'An Internet of Things (IoT) and smart system integration solution designed to remotely monitor, control, and optimize physical devices. Boost your operational efficiency and infrastructure security through real-time, sensor-driven insights.',
-    whatServiceTitle: 'Industrial IoT Telemetry & Hardware Device Automation',
-    valuePropTitle: 'Beyond Isolated Sensor Hardware',
+      'Comprehensive IoT integration services designed to bridge physical hardware with enterprise software, enabling real-time telemetry, remote monitoring, and automated asset control.',
+    whatServiceTitle: 'Connected Operational IoT Ecosystem',
+    valuePropTitle: 'Beyond Standard Automation',
     valuePropDescription:
-      'We do not install disconnected hardware gadgets. We engineer end-to-end telemetry bridges connecting shopfloor machinery, fleet sensors, and central enterprise dashboards with fail-safe reliability.',
+      'We do not use generic plug-and-play tools. Each device architecture is securely tailored to your physical infrastructure, security protocols, and operational requirements.',
+    valuePropIcon: '/images/our-solution/icon-highlight-smart-iot.svg',
     challenge:
       'Physical devices and remote operational assets operate without real-time connectivity, resulting in unexpected equipment failure, delayed maintenance, and security vulnerabilities.',
     challengeCards: [
@@ -459,11 +463,12 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     heroSvg: '/images/our-solution/hero-digital-development.svg',
     serviceSectionSvg: '/images/our-solution/service-section-digital-development.svg',
     whatItIs:
-      'Professional web development services ranging from high-converting landing pages to complex, responsive web-based applications. We focus on optimal user experience (UX), fast loading speeds, and robust system security to accelerate your brand’s digital growth.',
-    whatServiceTitle: 'High-Performance Web Platforms & Enterprise Applications',
-    valuePropTitle: 'Beyond Off-the-Shelf Templates',
+      'High-performance web development services focused on building secure, responsive, and custom web applications that elevate user engagement and streamline digital operations.',
+    whatServiceTitle: 'Scalable Digital Application Development',
+    valuePropTitle: 'Beyond Template Builds',
     valuePropDescription:
-      'We do not rely on bloated generic templates. We handcraft high-speed, secure, and SEO-engineered web platforms and digital products built to scale user traffic and maximize business conversions.',
+      'We reject cookie-cutter templates. Every digital platform is custom-coded from the ground up to guarantee optimal performance, robust security, and seamless brand alignment.',
+    valuePropIcon: '/images/our-solution/icon-highlight-digital-dev.svg',
     challenge:
       'Slow, rigid, or outdated websites compromise user trust, suffer from security risks, and fail to convert visitors into loyal customers in a competitive digital landscape.',
     challengeCards: [
