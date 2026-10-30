@@ -6,18 +6,6 @@ import {
   LEADERSHIP_THOUGHTS_DUMMY_DATA,
 } from '@/lib/db/dummy';
 
-const WORK_DATES: Record<string, string> = {
-  'sinau-print-erp': '2026-06-25',
-  'artic-complex-web': '2026-06-10',
-  'myboss-iot-system': '2026-05-30',
-  'altatic-analytic': '2025-11-20',
-  'web-media-profile': '2025-12-15',
-  'kajian-kelayakan-gik': '2026-04-15',
-  'panduan-perubahan-perilaku-stunting': '2026-03-25',
-  'desain-pelatihan-wasit-semarang': '2026-02-18',
-  'video-portret-padel-arena': '2026-02-12',
-};
-
 const SOLUTION_DATES: Record<string, string> = {
   'enterprise-solution': '2026-10-26',
   'data-ai-integration': '2026-10-26',
@@ -61,12 +49,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ── Halaman Utama ──────────────────────────────────────────────────────
     entry('/', '2026-10-13', 1.0, 'weekly'),
 
-    // ── Core Public Sitelinks (Priority 0.9) ────────────────────────────────
-    entry('/our-works', '2026-10-13', 0.9, 'weekly'),
-    entry('/our-solution', '2026-10-13', 0.9, 'weekly'),
-    entry('/about-us', '2026-10-13', 0.9, 'weekly'),
-    entry('/insight-programs', '2026-10-13', 0.9, 'weekly'),
-    entry('/contact-us', '2026-10-13', 0.9, 'weekly'),
+    // ── Core 6-Pack Sitelinks (Priority 0.9) ────────────────────────────────
+    entry('/our-solution', '2026-10-30', 0.9, 'weekly'),
+    entry('/about-us', '2026-10-30', 0.9, 'weekly'),
+    entry('/insight-programs/case-studies', '2026-10-30', 0.9, 'weekly'),
+    entry('/insight-programs/leadership-thoughts', '2026-10-30', 0.9, 'weekly'),
+    entry('/contact-us', '2026-10-30', 0.9, 'weekly'),
+
+    // ── Hub & Pillar Pages ──────────────────────────────────────────────────
+    entry('/insight-programs', '2026-10-30', 0.85, 'weekly'),
 
     // ── Sub-Pages About Us ─────────────────────────────────────────────────
     entry('/about-us/corporate-profile', '2026-09-15', 0.8, 'monthly'),
@@ -78,17 +69,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       entry(`/our-solution/${slug}`, SOLUTION_DATES[slug] ?? '2026-10-06', 0.85, 'weekly')
     ),
 
-    // ── Insight & Programs Sub-Sections ────────────────────────────────────
-    entry('/insight-programs/case-studies', '2026-10-08', 0.8, 'weekly'),
-    entry('/insight-programs/leadership-thoughts', '2026-10-08', 0.8, 'weekly'),
-
     // ── Kontak & Legal ─────────────────────────────────────────────────────
     entry('/privacy-policy', '2026-01-15', 0.5, 'yearly'),
-
-    // ── Halaman Dinamis: Our Works ─────────────────────────────────────────
-    ...Object.entries(WORK_DATES).map(([slug, date]) =>
-      entry(`/our-works/${slug}`, date)
-    ),
 
     // ── Halaman Dinamis: Case Studies ──────────────────────────────────────
     ...Array.from(caseStudyDateMap.entries()).map(([slug, date]) =>

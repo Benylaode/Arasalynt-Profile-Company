@@ -16,6 +16,8 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/api/',
           '/admin/',
+          '/our-works',
+          '/our-works/',
           '/our-business',
           '/our-business/',
           '/crm',

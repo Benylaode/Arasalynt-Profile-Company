@@ -8,7 +8,7 @@ export const BRAND = {
   phone: '+62-821-3939-569',
   email: 'corporate@arsalynk.com',
   logo: `${SITE_URL}/images/logos/arsalynk-mark-512.png`,
-  heroImage: `${SITE_URL}/images/our-works/our-works-hero-bg.webp`,
+  heroImage: `${SITE_URL}/images/about-us/corporate-profile-hero.webp`,
   social: {
     instagram: 'https://www.instagram.com/arsalynk',
     linkedin: 'https://www.linkedin.com/company/arsalynk-group/',

@@ -475,7 +475,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
-  ctaSecondaryHref: '/our-works',
+  ctaSecondaryHref: '/our-solution',
 },
 {
   id: 4,
@@ -601,7 +601,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
-  ctaSecondaryHref: '/our-works',
+  ctaSecondaryHref: '/our-solution',
 },
  {
   id: 5,
@@ -714,7 +714,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
-  ctaSecondaryHref: '/our-works',
+  ctaSecondaryHref: '/our-solution',
 }
 ,
   {
@@ -828,7 +828,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
-  ctaSecondaryHref: '/our-works',
+  ctaSecondaryHref: '/our-solution',
 },
 
  {
@@ -942,7 +942,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
-  ctaSecondaryHref: '/our-works',
+  ctaSecondaryHref: '/our-solution',
 },
   /* ─────────────────────────────────────────────────────────────────────────
      8. PERSONICE — Strategic PR & Executive Talent
@@ -1058,7 +1058,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
-  ctaSecondaryHref: '/our-works',
+  ctaSecondaryHref: '/our-solution',
 },
 ];
 

@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     url: '/',
     images: [
       {
-        url: '/images/our-works/our-works-hero-bg.webp',
+        url: '/images/about-us/corporate-profile-hero.webp',
         width: 1200,
         height: 630,
         alt: 'Arsalynk enterprise technology ecosystem',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     title: `${SITE_NAME} | Solusi Teknologi Enterprise Indonesia`,
     description:
       'Solusi teknologi enterprise terintegrasi: ERP, IoT, Data Intelligence, dan Software Development Indonesia.',
-    images: ['/images/our-works/our-works-hero-bg.webp'],
+    images: ['/images/about-us/corporate-profile-hero.webp'],
   },
 };
 

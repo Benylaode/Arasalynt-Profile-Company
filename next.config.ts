@@ -30,7 +30,9 @@ const nextConfig: NextConfig = {
       { source: '/our-business', destination: '/our-solution', permanent: true },
       { source: '/our-business/:path*', destination: '/our-solution', permanent: true },
       { source: '/services', destination: '/our-solution', permanent: true },
-      { source: '/portfolio', destination: '/our-works', permanent: true },
+      { source: '/our-works', destination: '/our-solution', permanent: true },
+      { source: '/our-works/:path*', destination: '/our-solution', permanent: true },
+      { source: '/portfolio', destination: '/our-solution', permanent: true },
       { source: '/contact', destination: '/contact-us', permanent: true },
 
       // ── P0: Legacy Case Study URLs (Google Indexed -> Canonical 200 OK) ──

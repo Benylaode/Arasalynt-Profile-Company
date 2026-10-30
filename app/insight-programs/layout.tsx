@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import { SITE_NAME } from '@/lib/constants';
-import { SITE_NAVIGATION_ITEMS } from '@/lib/seo';
 
-const PAGE_DEF = SITE_NAVIGATION_ITEMS.find((item) => item.href === '/insight-programs')!;
+const PAGE_DESCRIPTION =
+  'Studi kasus implementasi nyata dan pemikiran kepemimpinan strategis transformasi teknologi enterprise dari ekosistem Arsalynk.';
 
 export const metadata: Metadata = {
   title: 'Insight & Programs',
-  description: PAGE_DEF.description,
+  description: PAGE_DESCRIPTION,
   keywords: [
     'insight and programs',
     'studi kasus arsalynk',
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/insight-programs' },
   openGraph: {
     title: `Insight & Programs | ${SITE_NAME}`,
-    description: PAGE_DEF.description,
+    description: PAGE_DESCRIPTION,
     url: '/insight-programs',
     images: [
       {
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Insight & Programs | ${SITE_NAME}`,
-    description: PAGE_DEF.description,
+    description: PAGE_DESCRIPTION,
     images: ['/images/insight-programs/case-studies/hero-case-studies.webp'],
   },
 };

@@ -20,10 +20,8 @@ const ABOUT_LINKS = [
 ];
 
 const COMPANY_LINKS = [
-  { name: 'Our Works', href: '/our-works' },
+  { name: 'Our Solution', href: '/our-solution' },
   { name: 'Contact Us', href: '/contact-us' },
-  { name: 'Client Portal', href: '/portal' },
-  { name: 'Feedback & Rating', href: '/feedback' },
   { name: 'Privacy Policy', href: '/privacy-policy' },
 ];
 

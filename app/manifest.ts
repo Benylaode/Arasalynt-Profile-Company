@@ -24,9 +24,9 @@ export default function manifest(): MetadataRoute.Manifest {
     ],
     shortcuts: [
       {
-        name: 'Portofolio & Karya',
-        url: '/our-works',
-        description: 'Jelajahi proyek dan karya terbaik Arsalynk',
+        name: 'Studi Kasus Proyek',
+        url: '/insight-programs/case-studies',
+        description: 'Jelajahi studi kasus implementasi proyek enterprise Arsalynk',
         icons: [{ src: '/favicon-192x192.png', sizes: '192x192' }],
       },
       {
