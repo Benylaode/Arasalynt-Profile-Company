@@ -20,21 +20,16 @@ const ABOUT_LINKS = [
 ];
 
 const COMPANY_LINKS = [
-  { name: 'Our Business', href: '/our-business' },
-  { name: 'Our Works', href: '/our-works' },
+  { name: 'Our Solution', href: '/our-solution' },
   { name: 'Contact Us', href: '/contact-us' },
   { name: 'Privacy Policy', href: '/privacy-policy' },
 ];
 
 const SOLUTION_LINKS = [
-  { name: 'Enterprise Resource Planning', href: '/our-solution/enterprise-resource-planning' },
-  { name: 'Internet of Things', href: '/our-solution/internet-of-things' },
-  { name: 'Point of Sale (POS)', href: '/our-solution/point-of-sale-pos' },
-  { name: 'HR & Talent Management', href: '/our-solution/hr-talent-management-engine' },
-  { name: 'Financial Automation', href: '/our-solution/financial-accounting-automation-hub' },
-  { name: 'Supply Chain Control', href: '/our-solution/supply-chain-inventory-control' },
-  { name: 'Logistics & Fleet Tracker', href: '/our-solution/logistics-fleet-operations-tracker' },
-  { name: 'Warehouse Management', href: '/our-solution/warehouse-management-system' },
+  { name: 'Enterprise Solution', href: '/our-solution/enterprise-solution' },
+  { name: 'Data & AI Integration', href: '/our-solution/data-ai-integration' },
+  { name: 'Smart IOT System', href: '/our-solution/smart-iot-system' },
+  { name: 'Digital Development', href: '/our-solution/digital-development' },
 ];
 
 const INSIGHT_LINKS = [
@@ -239,11 +234,11 @@ export default function Footer() {
                   </a>
 
                   <a
-                    href="mailto:corporate.arsalynk@gmail.com"
+                    href="mailto:corporate@arsalynk.com"
                     className="flex items-center gap-[9px] text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
                   >
                     <MailIcon />
-                    <span>corporate.arsalynk@gmail.com</span>
+                    <span>corporate@arsalynk.com</span>
                   </a>
                 </div>
               </div>

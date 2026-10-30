@@ -73,7 +73,7 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     backgroundPosition: 'center center',
     primaryCta: {
       label: 'EXPLORE ERP SOLUTION',
-      href: '/our-solution/enterprise-resource-planning',
+      href: '/our-solution/enterprise-solution',
     },
     secondaryCta: {
       label: 'ECOSYSTEM PHILOSOPHY',
@@ -90,7 +90,7 @@ export const HERO_SLIDES_DUMMY_DATA: HeroSlide[] = [
     backgroundPosition: 'center center',
     primaryCta: {
       label: 'EXPLORE IOT SOLUTION',
-      href: '/our-solution/internet-of-things',
+      href: '/our-solution/smart-iot-system',
     },
     secondaryCta: {
       label: 'CONTACT US',
@@ -475,7 +475,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
-  ctaSecondaryHref: '/our-works',
+  ctaSecondaryHref: '/our-solution',
 },
 {
   id: 4,
@@ -601,7 +601,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
-  ctaSecondaryHref: '/our-works',
+  ctaSecondaryHref: '/our-solution',
 },
  {
   id: 5,
@@ -714,7 +714,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
-  ctaSecondaryHref: '/our-works',
+  ctaSecondaryHref: '/our-solution',
 }
 ,
   {
@@ -828,7 +828,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
-  ctaSecondaryHref: '/our-works',
+  ctaSecondaryHref: '/our-solution',
 },
 
  {
@@ -942,7 +942,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
-  ctaSecondaryHref: '/our-works',
+  ctaSecondaryHref: '/our-solution',
 },
   /* ─────────────────────────────────────────────────────────────────────────
      8. PERSONICE — Strategic PR & Executive Talent
@@ -1058,7 +1058,7 @@ export const BUSINESS_DUMMY_DATA: BusinessPage[] = [
   ctaPrimaryLabel: 'GET IN TOUCH',
   ctaPrimaryHref: '/contact-us',
   ctaSecondaryLabel: 'EXPLORE WORKS',
-  ctaSecondaryHref: '/our-works',
+  ctaSecondaryHref: '/our-solution',
 },
 ];
 
@@ -1090,314 +1090,301 @@ const LEGACY_TESTIMONIALS_DUMMY_DATA = [
    CASE STUDIES DUMMY DATA (6 Articles aligned 1-to-1 with Our Solution)
    ───────────────────────────────────────────────────────────────────────── */
 export const CASE_STUDIES_DUMMY_DATA: CaseStudyArticle[] = [
-  /* ── 1. Sinau Print — POS ── */
+  /* ── 1. Sinau Print ── */
   {
     id: 1,
     slug: 'sinau-print-pos-system',
-    title: 'Sinau Print (Point of Sale)',
-    category: 'TECHNOLOGY',
-    tags: ['POINT OF SALE', 'ERP', 'RETAIL OPERATIONS'],
+    title: 'Sinau Print',
+    category: 'ENTERPRISE SOLUTION',
+    tags: ['POINT OF SALE', 'ERP ARCHITECTURE', 'RETAIL AUTOMATION'],
     dateLabel: 'APRIL 2026',
     dateValue: '2026-04-22',
-    description: 'A centralized Point of Sale solution designed to streamline sales operations, order management, payment processing, and customer communication—from the initial order to final completion.',
-    coverImage: '/images/case-studies/sinau-print-pos/cover.webp',
-    coverImageAlt: 'Operations team managing sales and order workflows on the Sinau Print POS system',
+    description: 'A centralized Point of Sale and retail operations ERP solution designed to streamline multi-branch sales, order flows, payment handling, and automated WhatsApp invoice dispatch.',
+    coverImage: '/images/case-studies/sinau-print.svg',
+    coverImageAlt: 'Sinau Print Point of Sale and Operations Management System',
     sections: [
       {
         eyebrow: 'THE CHALLENGE',
-        mainTitle: 'Managing Sales Across Multiple Teams Without a Centralized System',
+        mainTitle: 'Managing High-Volume Orders Across Teams Without Unified Operational Flow',
         paragraphs: [
-          'Managing sales and customer orders across multiple teams can quickly become complex, especially when transactions involve deposits, installment payments, production processes, and different levels of user access.',
-          'Without a centralized system, businesses face limited visibility into real-time sales performance, manual and fragmented order management, difficulty tracking deposits and outstanding balances, time-consuming invoice creation, lack of clear authorization across purchasing and production teams, inconsistent customer communication, and a high risk of errors when multiple teams access the same order data.',
+          'Managing custom retail orders, print production, and customer fulfillment across multiple branch teams creates friction when transactions involve variable down payments, installment schedules, and multi-stage production.',
+          'Without a centralized architecture, businesses experience data silos between counters, delayed invoice delivery, payment tracking discrepancies, and limited visibility into daily operational revenue.',
         ],
       },
       {
-        mainTitle: 'Bringing Sales, Orders, and Payments into One Operational Platform',
+        mainTitle: 'Connecting Sales, Order Processing, and Fulfillment into One Ecosystem',
         paragraphs: [
-          'We developed an integrated Point of Sale system that connects sales, order management, payments, production, and customer communication within a single platform, ensuring every transaction and workflow step is visible, controlled, and consistent.',
+          'We engineered a tailored enterprise POS and workflow management system that synchronizes front-counter cashier desks, production queues, accounting reconciliations, and customer communication into a unified platform.',
         ],
-        image: { src: '/images/case-studies/sinau-print-pos/case-study-angle-02.webp', alt: 'Centralized POS platform connecting sales, payments, and production teams' },
+        image: { src: '/images/case-studies/sinau-print.svg', alt: 'Centralized POS platform connecting sales, payments, and production teams' },
       },
       {
         eyebrow: 'OUR SOLUTION',
-        mainTitle: 'An Integrated System Built Around Every Stage of the Sales Workflow',
+        mainTitle: 'An Integrated Architecture Designed Around Every Stage of the Retail Workflow',
         subsections: [
-          { subtitle: '01', content: 'Real-Time Sales Dashboard: A centralized dashboard provides key sales metrics and performance insights, allowing teams and management to monitor business performance and make informed decisions based on real-time data.' },
-          { subtitle: '02', content: 'Direct Order Input & Management: Sales and customer service teams can create, update, and manage orders directly within the system, ensuring order information remains centralized, accurate, and accessible to authorized users.' },
-          { subtitle: '03', content: 'Split Bill & Installment Management: The system supports flexible payment structures, including deposits and final payments, making it easier to manage transactions where customers pay in multiple stages.' },
-          { subtitle: '04', content: 'Save Order for Credit & Installment Transactions: Orders can be saved and managed for customers who purchase on credit or through installment plans, allowing teams to track outstanding payments without losing the original order details.' },
-          { subtitle: '05', content: 'Midtrans Integration & Automated Invoicing: Payment processing is integrated with Midtrans, while invoices are generated automatically based on transaction data, reducing manual administrative work and minimizing payment-related errors.' },
-          { subtitle: '06', content: 'Role-Based Access Control: The system provides different access levels for Superadmin, Admin, Customer Service, and Production teams, ensuring each role accesses only the functions and information relevant to their responsibilities.' },
-          { subtitle: '07', content: 'Authorized Purchase, Production & Order Completion Workflow: Business processes are structured into controlled stages—from purchasing and production to order completion—managed by authorized users, creating a clearer workflow and reducing unauthorized actions.' },
-          { subtitle: '08', content: 'Automated Invoice Delivery via WhatsApp: Invoices are automatically delivered to customers through WhatsApp, providing a faster and more convenient way to communicate payment information while reducing manual follow-ups.' },
+          { subtitle: '01', content: 'Real-Time Sales & Transaction Dashboard: Delivers live multi-counter sales performance, transaction velocity, and revenue analytics for instant leadership visibility.' },
+          { subtitle: '02', content: 'Direct Order Dispatch & Tracking: Sales and customer service teams register, update, and route custom print orders with granular status logging.' },
+          { subtitle: '03', content: 'Split Bill & Multi-Stage Payment Processing: Native support for partial deposits, installment schedules, and final settlement reconciliations.' },
+          { subtitle: '04', content: 'Automated Midtrans Payment Gateway Integration: Seamless digital payments via virtual accounts, QRIS, and e-wallets with instant status callbacks.' },
+          { subtitle: '05', content: 'Role-Based Operational Access Control: Strictly isolates counter cashiers, production staff, inventory handlers, and branch managers with assigned permission boundaries.' },
+          { subtitle: '06', content: 'Automated Invoice Delivery via WhatsApp API: Dispatches digital PDF receipts and payment reminders directly to customers upon checkout, reducing counter wait times.' },
         ],
       },
       {
         eyebrow: 'THE OUTCOME',
-        mainTitle: 'A More Connected, Efficient, and Transparent Sales Operation',
+        mainTitle: 'Transparent, Efficient, and Accelerated Store Operations',
         paragraphs: [
-          'The POS system creates a more connected and efficient operational workflow by bringing sales, payments, orders, production, and customer communication into one platform.',
-          'As a result, the business benefits from greater operational efficiency through centralized order and sales management, improved financial visibility with clearer tracking of deposits and outstanding balances, reduced manual processes through automated invoicing and payment integration, better accountability with role-based access and authorized workflows, faster customer communication through automated invoice delivery via WhatsApp, and more accurate order management by maintaining consistent information across teams.',
+          'The Sinau Print deployment eliminated manual receipt handling, reduced transaction cycle times by over 45%, and gave management absolute visibility into daily branch revenue and production bottlenecks.',
         ],
       },
     ],
   },
 
-  /* ── 2. Sinau Print — WMS ── */
+  /* ── 2. Presstis ── */
   {
     id: 2,
-    slug: 'sinau-print-warehouse-management-wms',
-    title: 'Sinau Print (Warehouse Management)',
-    category: 'TECHNOLOGY',
-    tags: ['WAREHOUSE MANAGEMENT', 'INVENTORY', 'SUPPLY CHAIN'],
-    dateLabel: 'APRIL 2026',
-    dateValue: '2026-04-22',
-    description: 'A Warehouse Management System built to provide complete visibility and control over inventory—from purchase orders and inbound stock to production consumption and stock reconciliation.',
-    coverImage: '/images/case-studies/sinau-print-wms/cover.webp',
-    coverImageAlt: 'Warehouse operations team conducting stock opname and inventory inspection at Sinau Print',
-    sections: [
-      {
-        eyebrow: 'THE CHALLENGE',
-        mainTitle: 'Inaccurate Inventory and Limited Visibility Across Warehouse Operations',
-        paragraphs: [
-          'Managing warehouse operations manually often leads to inaccurate inventory records, inefficient stock movement, and limited visibility into material usage. As production scales, businesses need a reliable system to ensure that inventory remains accurate, procurement is well-documented, and stock levels support uninterrupted operations.',
-          'Common operational challenges include manual tracking of incoming and outgoing inventory, difficulty monitoring raw material consumption for each production order, limited visibility into vendor purchasing history, unexpected stock shortages due to late replenishment, poor estimation of material waste during production, and time-consuming stock audits and inventory adjustments.',
-        ],
-      },
-      {
-        mainTitle: 'A Central Inventory System from Purchase Order to Production Floor',
-        paragraphs: [
-          'We developed a centralized Warehouse Management System that automates inventory movement, improves material traceability, and helps businesses maintain accurate stock records across every stage of warehouse operations.',
-        ],
-        image: { src: '/images/case-studies/sinau-print-wms/case-study-angle-02.webp', alt: 'Industrial warehouse facility with high-bay racking system and inventory management operations' },
-      },
-      {
-        eyebrow: 'OUR SOLUTION',
-        mainTitle: 'Automating Inventory Accuracy from Receiving to Production',
-        subsections: [
-          { subtitle: '01', content: 'Automated Purchase Orders & Stock Movement: The system automatically records purchase orders, inbound inventory, and outbound stock transactions, ensuring every stock movement is reflected in real time while reducing manual data entry.' },
-          { subtitle: '02', content: 'Material Consumption Tracking per Production Order: Raw material usage is tracked for each production order, providing clear visibility into how inventory is consumed throughout the manufacturing process and supporting more accurate production planning.' },
-          { subtitle: '03', content: 'Vendor Transaction History: A complete history of purchases and transactions is maintained for every vendor, making it easier to review procurement activities, evaluate supplier performance, and access historical purchasing data whenever needed.' },
-          { subtitle: '04', content: 'Low Stock Alerts: The system proactively monitors inventory levels and sends alerts when stock reaches predefined thresholds, allowing teams to replenish inventory before shortages impact production.' },
-          { subtitle: '05', content: 'Material Waste Estimation: Built-in waste estimation helps businesses monitor expected material loss during production, enabling better cost control and more informed inventory planning.' },
-          { subtitle: '06', content: 'Stock Opname & Manual Adjustments: The WMS supports physical inventory counts along with authorized manual adjustments, ensuring that warehouse records remain aligned with actual inventory conditions.' },
-        ],
-      },
-      {
-        eyebrow: 'THE OUTCOME',
-        mainTitle: 'Greater Inventory Accuracy, Stronger Production Support, and Efficient Warehouse Management',
-        paragraphs: [
-          'By centralizing warehouse operations into a single platform, the WMS helps businesses achieve greater inventory accuracy, stronger production support, and more efficient warehouse management.',
-          'Key outcomes include improved inventory accuracy through automated stock movement recording, greater production visibility with material consumption tracking for every order, better procurement insights through comprehensive vendor transaction history, fewer stock shortages with proactive low-stock alerts, more effective cost control through waste estimation and inventory monitoring, and faster inventory reconciliation with streamlined stock opname and adjustment processes.',
-        ],
-      },
-    ],
-  },
-
-  /* ── 3. PT Sinergi Muda Arsa — HRMS ── */
-  {
-    id: 3,
-    slug: 'pt-sinergi-muda-arsa-hr-management',
-    title: 'PT Sinergi Muda Arsa (HR Management)',
-    category: 'TECHNOLOGY & DATA',
-    tags: ['HRMS', 'ENTERPRISE PORTAL', 'WORKFORCE MANAGEMENT'],
-    dateLabel: 'JUNE 2026',
-    dateValue: '2026-06-24',
-    description: 'An integrated ERP solution designed to streamline Human Resources management, employee development, and organizational processes through a centralized and structured platform.',
-    coverImage: '/images/case-studies/sinergi-muda-arsa-hr/cover.webp',
-    coverImageAlt: 'HR team reviewing employee assessment and development data on the integrated ERP portal',
-    sections: [
-      {
-        eyebrow: 'THE CHALLENGE',
-        mainTitle: 'Fragmented HR Data and Inconsistent Evaluation Processes Limiting Workforce Visibility',
-        paragraphs: [
-          'Managing human resources effectively requires more than maintaining employee records. Organizations need a structured approach to managing employee performance, development, assessments, and HR processes while ensuring that relevant information is accessible to the right people.',
-          'As organizations grow, HR teams face challenges such as employee information scattered across different systems, manual and time-consuming HR administration, difficulty monitoring employee development and assessment results, inconsistent processes for periodic employee evaluations, limited visibility into employee potential and competencies, difficulty maintaining structured assessment histories, and a lack of centralized HR data to support management decision-making.',
-        ],
-      },
-      {
-        mainTitle: 'Centralizing People Data, Processes, and Annual Assessments in One ERP Platform',
-        paragraphs: [
-          'We developed an ERP solution with an integrated Human Resources Management system that centralizes employee information, HR processes, and annual psychological assessments within a single platform, enabling more structured, data-driven, and sustainable people management.',
-        ],
-        image: { src: '/images/case-studies/sinergi-muda-arsa-hr/cover.webp', alt: 'HR professionals managing employee lifecycle data, assessments, and development insights on the ERP portal' },
-      },
-      {
-        eyebrow: 'OUR SOLUTION',
-        mainTitle: 'An Integrated HR Platform Built Around Employee Lifecycle and Annual Assessment',
-        subsections: [
-          { subtitle: '01', content: 'Centralized Employee Management: The system provides a centralized employee database where HR teams can manage employee profiles, organizational information, employment records, and relevant HR data in a structured and easily accessible environment.' },
-          { subtitle: '02', content: 'Annual Psychological Assessment: The ERP provides a dedicated platform for conducting annual psychological assessments (psychotests) for employees, allowing organizations to conduct periodic evaluations and maintain assessment records as part of their employee development and HR management processes.' },
-          { subtitle: '03', content: 'Employee Assessment History: Psychological assessment results and employee evaluation records are stored systematically, creating a historical overview that HR teams can use to monitor employee development over time.' },
-          { subtitle: '04', content: 'Structured HR Management: The system helps standardize HR processes across the organization, reducing reliance on manual administration and ensuring that employee-related activities follow a consistent workflow.' },
-          { subtitle: '05', content: 'Employee Development & Potential Mapping: Assessment data provides HR teams and management with additional insights into employee characteristics, competencies, and development areas, supporting more informed decisions regarding employee development, training, and organizational planning.' },
-          { subtitle: '06', content: 'Role-Based HR Access: Access to employee and assessment information is controlled according to user roles and responsibilities, helping protect sensitive HR data while ensuring that authorized users have access to the information they need.' },
-          { subtitle: '07', content: 'Centralized HR Data & Reporting: By consolidating HR information and assessment data into one platform, management can access more structured information to support workforce planning, evaluation, and strategic decision-making.' },
-        ],
-      },
-      {
-        eyebrow: 'THE OUTCOME',
-        mainTitle: 'A More Structured, Centralized, and Data-Driven HR Workflow',
-        paragraphs: [
-          'The ERP solution transforms HR management from a fragmented and administrative process into a more structured, centralized, and data-driven workflow.',
-          'Key outcomes include more efficient HR administration through centralized employee management, structured annual psychological assessments with digital workflows and records, better visibility into employee development through historical assessment data, more informed workforce decisions supported by centralized HR information, improved data organization and accessibility across HR processes, stronger data governance through controlled access to employee information, and a more consistent HR workflow that can scale alongside organizational growth.',
-        ],
-      },
-    ],
-  },
-
-  /* ── 4. Financial Management System ── */
-  {
-    id: 4,
-    slug: 'financial-management-system',
-    title: 'Financial Management System',
-    category: 'TECHNOLOGY & DATA',
-    tags: ['FINANCE', 'ACCOUNTING AUTOMATION', 'CASH FLOW'],
+    slug: 'presstis-digital-platform',
+    title: 'Presstis',
+    category: 'DIGITAL DEVELOPMENT',
+    tags: ['WEB DEVELOPMENT', 'DIGITAL PLATFORM', 'MEDIA ARCHITECTURE'],
     dateLabel: 'MAY 2026',
     dateValue: '2026-05-15',
-    description: 'An integrated financial management solution designed to provide real-time visibility into cash flow, cost structures, accounting transactions, taxation, payments, and project financing—helping businesses manage their financial operations with greater accuracy and control.',
-    coverImage: '/images/case-studies/financial-management/cover.webp',
-    coverImageAlt: 'Development team building the integrated financial management system architecture',
+    description: 'A high-performance digital publishing and media distribution platform engineered for multi-publication networks, editorial collaboration, and high-concurrency reader engagement.',
+    coverImage: '/images/case-studies/presstis.svg',
+    coverImageAlt: 'Presstis Scalable Digital Media and Web Platform',
     sections: [
       {
         eyebrow: 'THE CHALLENGE',
-        mainTitle: 'Fragmented Financial Processes Limiting Visibility, Accuracy, and Management Decisions',
+        mainTitle: 'Fragmented Editorial Pipelines and Sluggish Delivery Under Traffic Surges',
         paragraphs: [
-          'Managing financial operations across multiple projects, vendors, transactions, and payment schedules can become increasingly complex as a business grows.',
-          'Without an integrated financial management system, finance teams face challenges such as limited visibility into real-time cash flow and financial conditions, difficulty calculating and monitoring Cost of Goods Sold for each business unit or project, manual recording and reconciliation of accounting transactions, complex tax administration and period-end closing processes, time-consuming vendor invoice processing, inefficient management of bulk and recurring payments, limited visibility into project capital allocation, and difficulty tracking and allocating overhead costs accurately.',
+          'Modern media networks operating across diverse niche publications face recurring technical hurdles: slow page render speeds that hurt search ranking, disjointed content management systems for editorial teams, and security vulnerabilities during breaking-news traffic spikes.',
+          'Legacy monolithic web frameworks proved too rigid to support real-time syndication across multiple domain properties while maintaining modern UX standards.',
         ],
       },
       {
-        mainTitle: 'Connecting Accounting, Cash Flow, Taxation, and Project Finance in One Platform',
+        mainTitle: 'A Custom Engineered Web Architecture Built for Speed and Uncompromising Scalability',
         paragraphs: [
-          'We developed an integrated financial management solution that connects accounting, cash flow, taxation, payments, project financing, and cost management within a centralized platform, enabling finance teams to work from one consistent source of financial truth.',
+          'We designed and coded a modern digital platform from the ground up, utilizing edge-rendered web technologies, distributed CDN caching, and an intuitive unified newsroom backend tailored to high-velocity editorial operations.',
         ],
-        image: { src: '/images/case-studies/financial-management/case-study-angle-02.webp', alt: 'Backend architecture powering the integrated financial management system with clean enterprise code structure' },
+        image: { src: '/images/case-studies/presstis.svg', alt: 'Presstis high-performance digital media platform architecture' },
       },
       {
-        eyebrow: 'OUR APPROACH',
-        mainTitle: 'A Comprehensive Financial Engine for Enterprise Accuracy and Control',
+        eyebrow: 'OUR SOLUTION',
+        mainTitle: 'Headless Scalability, Edge Acceleration, and Unified Editorial Governance',
         subsections: [
-          { subtitle: '01', content: "Real-Time Cash Flow Monitoring: The system provides real-time visibility into cash inflows and outflows, allowing finance teams and management to monitor the company's current cash position and better manage liquidity." },
-          { subtitle: '02', content: 'Unit-Level COGS Management: The system enables businesses to calculate and monitor Cost of Goods Sold at the business-unit or project level, providing greater visibility into direct costs and helping management evaluate profitability more accurately.' },
-          { subtitle: '03', content: 'Journal Entries & Transaction Records: Financial transactions are recorded systematically through journal entries, creating a structured accounting trail for income, expenses, payments, adjustments, and other financial activities.' },
-          { subtitle: '04', content: 'Tax Management & Period-End Closing: The system supports structured tax management and period-end closing processes, helping finance teams organize tax-related transactions and complete accounting periods in a more controlled and consistent manner.' },
-          { subtitle: '05', content: 'Vendor Invoice Management: Vendor invoices are recorded and managed centrally, providing better visibility into outstanding payables, payment schedules, and vendor-related financial obligations.' },
-          { subtitle: '06', content: 'Batch Payment Processing: The system supports batch payments, allowing multiple payment transactions to be processed efficiently in a single workflow, reducing repetitive administrative tasks and improving payment processing efficiency.' },
-          { subtitle: '07', content: 'Recurring Payment Management: Recurring payments can be scheduled and monitored for regular financial obligations such as subscriptions, operational expenses, service fees, or other recurring commitments.' },
-          { subtitle: '08', content: 'Project Capital & Overhead Cost Management: The system provides visibility into project capital allocation and funding while also enabling systematic tracking and allocation of overhead costs, supporting more accurate profitability analysis.' },
+          { subtitle: '01', content: 'Ultra-Low Latency Content Delivery: Edge-cached distribution guaranteeing sub-second page load times across tens of thousands of concurrent readers.' },
+          { subtitle: '02', content: 'Multi-Publication Editorial Workspace: A centralized publishing CMS enabling journalists and editors to draft, review, and syndicate content across multiple brand domains.' },
+          { subtitle: '03', content: 'Real-Time Engagement Telemetry: Integrated audience interaction analytics measuring dwell time, scroll depth, and trending articles to guide editorial strategy.' },
+          { subtitle: '04', content: 'Enterprise-Grade Security Protocols: Proactive DDoS shielding, automated SSL rotation, and granular role permissions ensuring continuous platform availability.' },
+          { subtitle: '05', content: 'Dynamic Monetization & Ad Placement: Native, non-intrusive sponsor and ad slots engineered to maximize revenue yield without sacrificing Core Web Vitals.' },
+          { subtitle: '06', content: 'SEO-First Semantic Architecture: Structured JSON-LD schemas, automated XML sitemaps, and optimized open-graph metadata driving organic search prominence.' },
         ],
       },
       {
         eyebrow: 'THE OUTCOME',
-        mainTitle: 'A Centralized, Transparent, and Data-Driven Financial Ecosystem',
+        mainTitle: 'Exceptional Reader Retention and 100% Availability Under Surge Conditions',
         paragraphs: [
-          'By integrating financial operations into a centralized platform, the system helps businesses improve financial visibility, strengthen accounting accuracy, and streamline day-to-day finance processes.',
-          'Key outcomes include real-time financial visibility through centralized cash flow monitoring, more accurate profitability analysis with unit-level COGS tracking, improved accounting accuracy through structured journal entries and transaction records, more efficient tax and period-end processes through centralized financial data, streamlined accounts payable management with centralized vendor invoices, greater payment efficiency through batch and recurring payment capabilities, better project financial control through centralized capital allocation, and more accurate cost management through structured overhead allocation.',
+          'Presstis delivered a 300% improvement in Core Web Vitals performance, slashed infrastructure operating costs by 40%, and empowered editorial staff to publish and syndicate breaking stories in seconds.',
         ],
       },
     ],
   },
 
-  /* ── 5. MyBoss — Logistics & Fleet Management ── */
+  /* ── 3. MarkaPlus ── */
+  {
+    id: 3,
+    slug: 'markaplus-ai-assistant',
+    title: 'MarkaPlus',
+    category: 'DATA & AI INTEGRATION',
+    tags: ['AI ERP ASSISTANT', 'DEEP LEARNING', 'DATA PIPELINES'],
+    dateLabel: 'JUNE 2026',
+    dateValue: '2026-06-20',
+    description: 'An intelligent AI deep learning assistant integrated directly into enterprise ERP software, converting complex multi-database queries into instant operational guidance and automated decisions.',
+    coverImage: '/images/case-studies/markaplus.svg',
+    coverImageAlt: 'MarkaPlus Intelligent AI Chat Assistant and ERP Deep Learning Infrastructure',
+    sections: [
+      {
+        eyebrow: 'THE CHALLENGE',
+        mainTitle: 'Data Latency and Information Overload in Complex Corporate Systems',
+        paragraphs: [
+          'Enterprise ERP databases store millions of transactional records across finance, inventory, logistics, and personnel. Yet, when leaders and operational staff need critical answers, they face cumbersome SQL reporting, manual spreadsheet downloads, and hour-long delays.',
+          'Without real-time conversational intelligence, executives make decisions on outdated summaries while front-line teams struggle to navigate complicated software menus.',
+        ],
+      },
+      {
+        mainTitle: 'Embedding Context-Aware AI Directly into Daily Operational Workflows',
+        paragraphs: [
+          'We built MarkaPlus—a secure deep learning conversational engine embedded natively within the enterprise platform. Operating on custom retrieval pipelines, MarkaPlus transforms complex multi-table ERP relationships into natural, instant dialogue.',
+        ],
+        image: { src: '/images/case-studies/markaplus.svg', alt: 'MarkaPlus AI Assistant embedded in enterprise ERP' },
+      },
+      {
+        eyebrow: 'OUR SOLUTION',
+        mainTitle: 'From Passive Databases to Proactive Operational Intelligence',
+        subsections: [
+          { subtitle: '01', content: 'Natural Language Business Queries: Employees ask everyday questions—such as "Summarize today’s pending approvals" or "Forecast stock replenishment for next week"—and receive verified live data in seconds.' },
+          { subtitle: '02', content: 'Predictive Demand & Anomaly Detection: Deep learning models continuously analyze historical consumption and order patterns to alert managers of supply irregularities.' },
+          { subtitle: '03', content: 'Automated Executive Briefings: Synthesizes multi-department metrics into concise morning executive digests delivered via secure enterprise chat.' },
+          { subtitle: '04', content: 'Zero-Leakage Role Security: Built-in permission filters guarantee the AI respects corporate access hierarchies, strictly isolating sensitive financial and executive records.' },
+          { subtitle: '05', content: 'Interactive Task Execution: Beyond answering questions, MarkaPlus assists authorized users in initiating approval requests, scheduling tasks, and dispatching notifications.' },
+          { subtitle: '06', content: 'Self-Optimizing Query Intelligence: Learns from ongoing user feedback and domain vocabulary to continually enhance semantic precision across business divisions.' },
+        ],
+      },
+      {
+        eyebrow: 'THE OUTCOME',
+        mainTitle: 'Frictionless Data Access and Autonomous Operational Speed',
+        paragraphs: [
+          'MarkaPlus reduced routine operational query time by 85%, eliminated dependence on IT staff for custom reporting, and fostered data-driven decision-making across all managerial tiers.',
+        ],
+      },
+    ],
+  },
+
+  /* ── 4. MARKA - Finance ── */
+  {
+    id: 4,
+    slug: 'marka-finance-accounting',
+    title: 'MARKA - Finance',
+    category: 'ENTERPRISE SOLUTION',
+    tags: ['FINANCE ERP', 'CORPORATE ACCOUNTING', 'CASH FLOW GOVERNANCE'],
+    dateLabel: 'JULY 2026',
+    dateValue: '2026-07-08',
+    description: 'An integrated financial management architecture designed to unify corporate banking, multi-branch general ledgers, batch disbursements, and real-time cash flow governance.',
+    coverImage: '/images/case-studies/marka-finance.svg',
+    coverImageAlt: 'MARKA Corporate Finance and Accounting Platform by Arsalynk',
+    sections: [
+      {
+        eyebrow: 'THE CHALLENGE',
+        mainTitle: 'Fragmented Financial Records and Slow Month-End Reconciliation Cycles',
+        paragraphs: [
+          'As mid-to-large enterprises scale across multiple subsidiaries and project entities, financial governance becomes vulnerable to data fragmentation. Disjointed accounting tools lead to delayed journal entries, manual bank reconciliations, and slow month-end closures.',
+          'Without an integrated financial command center, CFOs and finance controllers cannot forecast liquidity accurately or enforce rigorous budget discipline across distributed operations.',
+        ],
+      },
+      {
+        mainTitle: 'Unifying Banking, Ledgering, and Expense Controls into One Financial Core',
+        paragraphs: [
+          'We engineered MARKA - Finance as an enterprise-grade financial management platform that automates transaction journalizing, reconciles banking feeds in real-time, and provides audit-ready reporting across all business units.',
+        ],
+        image: { src: '/images/case-studies/marka-finance.svg', alt: 'MARKA Finance and Corporate Accounting dashboard' },
+      },
+      {
+        eyebrow: 'OUR SOLUTION',
+        mainTitle: 'Precision Financial Engineering with Real-Time Cash Flow Governance',
+        subsections: [
+          { subtitle: '01', content: 'Multi-Account Corporate Banking Integration: Connects bank feeds directly to the general ledger, synchronizing incoming and outgoing transactions automatically.' },
+          { subtitle: '02', content: 'Automated General Ledger & Journalizing: Rules-based engines generate double-entry journal records upon transaction completion, eliminating manual spreadsheet entry.' },
+          { subtitle: '03', content: 'Multi-Level Approval Workflows: Tiered authorization protocols for expenditures and disbursements enforce compliance with corporate governance bylaws.' },
+          { subtitle: '04', content: 'Batch Payment & Payroll Disbursement: Streamlines mass vendor payouts and employee payroll schedules into single, verified transaction batches.' },
+          { subtitle: '05', content: 'Real-Time Cash Flow & Liquidity Analytics: Live visual dashboards monitor operating runway, accounts receivable aging, and capital expenditure burn rates.' },
+          { subtitle: '06', content: 'Tax & Audit Compliance Readiness: Built-in tax calculation engines and immutable audit logs ensure seamless year-end tax filings and audit verifications.' },
+        ],
+      },
+      {
+        eyebrow: 'THE OUTCOME',
+        mainTitle: 'Flawless Financial Control, Accelerated Closures, and Total Transparency',
+        paragraphs: [
+          'Implementing MARKA - Finance reduced month-end closing times from 14 days to just 3 days, eliminated reconciliation discrepancies, and provided executive leadership with real-time liquidity visibility.',
+        ],
+      },
+    ],
+  },
+
+  /* ── 5. MARKA - Project Manager ── */
   {
     id: 5,
-    slug: 'myboss-logistics-fleet-management',
-    title: 'MyBoss (Logistics & Fleet Management)',
-    category: 'TECHNOLOGY',
-    tags: ['LOGISTICS', 'FLEET MANAGEMENT', 'IOT OPERATIONS'],
-    dateLabel: 'MAY 2026',
-    dateValue: '2026-05-30',
-    description: 'An integrated Logistics & Fleet Management System powered by MyBoss IoT infrastructure, designed to streamline transportation, delivery operations, real-time shipment tracking, and logistics costs while providing complete visibility over field assets and driver activity.',
-    coverImage: '/images/case-studies/myboss-logistics/cover.webp',
-    coverImageAlt: 'BSP Track dashboard showing real-time fleet management, vehicle status, and delivery operations for MyBoss',
+    slug: 'marka-project-manager',
+    title: 'MARKA - Project Manager',
+    category: 'ENTERPRISE SOLUTION',
+    tags: ['PROJECT MANAGEMENT', 'WORKFLOW GOVERNANCE', 'RESOURCE SCHEDULING'],
+    dateLabel: 'AUGUST 2026',
+    dateValue: '2026-08-12',
+    description: 'A comprehensive operational management platform coordinating multi-tier project milestones, resource allocation, task dependencies, and budget compliance across enterprise teams.',
+    coverImage: '/images/case-studies/marka-project-manager.svg',
+    coverImageAlt: 'MARKA Project Management and Operations Platform by Arsalynk',
     sections: [
       {
         eyebrow: 'THE CHALLENGE',
-        mainTitle: 'Operational Blind Spots Between the Control Room, Drivers, and Customers',
+        mainTitle: 'Project Delays, Resource Bottlenecks, and Opaque Execution Pipelines',
         paragraphs: [
-          'Managing field logistics and fleet operations manually creates blind spots between the control room, drivers, and customers. Disconnected communication and lack of real-time telemetry lead to operational delays, high fuel costs, and poor delivery accountability.',
-          'Common operational challenges include the inability to track fleet location, delivery progress, and vehicle status in real time, inefficient dispatch scheduling and unoptimized transport routes, reliance on paper-based delivery orders and manual proof of handover, uncontrolled transportation and fuel expenses without live operational data, difficulty monitoring driver behavior and idle time, and customer dissatisfaction due to inaccurate estimated time of arrival.',
+          'Executing large-scale corporate initiatives across dispersed teams often suffers from fragmented task management. Deadlines slip when dependencies are not clearly mapped, team workloads become imbalanced, and management lacks real-time insight into project progress.',
+          'Relying on generic task boards fails to account for contract milestones, procurement deadlines, and budget tracking required in high-stakes enterprise projects.',
         ],
       },
       {
-        mainTitle: 'A Centralized Logistics Command Layer Integrated with MyBoss IoT Telemetry',
+        mainTitle: 'A Structured Command Layer Aligning Strategy, Deadlines, and Team Execution',
         paragraphs: [
-          'We engineered a centralized Logistics & Fleet Management layer directly connected to MyBoss IoT telemetry, integrating shipment planning, routing, driver management, and tracking into a single command dashboard—making every vehicle, delivery, and route visible in real time.',
+          'We architected MARKA - Project Manager to bridge corporate leadership expectations with on-the-ground operational delivery, providing clear dependency mapping, capacity planning, and automated milestone verification.',
         ],
-        image: { src: '/images/case-studies/myboss-logistics/cover.webp', alt: 'BSP Track fleet management dashboard showing vehicle types, driver assignments, and delivery status for the MyBoss logistics operation' },
+        image: { src: '/images/case-studies/marka-project-manager.svg', alt: 'MARKA Project Manager and resource scheduling interface' },
       },
       {
-        eyebrow: 'OUR APPROACH',
-        mainTitle: 'From Disconnected Field Assets to a Unified Operational Command Dashboard',
+        eyebrow: 'OUR SOLUTION',
+        mainTitle: 'End-to-End Operational Control from Milestone Inception to Final Handover',
         subsections: [
-          { subtitle: '01', content: 'Automated Delivery Order Management: Teams can generate, assign, and track digital delivery orders through a structured workflow, eliminating lost paperwork and ensuring clear task assignment for every driver and vehicle.' },
-          { subtitle: '02', content: 'IoT-Powered Real-Time Shipment & Fleet Tracking: Live telemetry and GPS data from MyBoss hardware provide continuous visibility into vehicle coordinates, movement status, and delivery milestones across all active routes.' },
-          { subtitle: '03', content: 'Dynamic Delivery Scheduling & Dispatch: Dispatchers can organize delivery queues based on destination priorities, fleet payload capacity, and urgent shipment requirements, reducing idle time and improving fleet utilization.' },
-          { subtitle: '04', content: 'Smart Route Optimization: The system recommends optimal delivery routes to minimize mileage, avoid bottlenecks, and reduce fuel consumption across the entire fleet.' },
-          { subtitle: '05', content: 'Driver & Vehicle Performance Monitoring: Centralized logging of driver activity, operating hours, vehicle health, and idle time improves safety, operational discipline, and proactive fleet maintenance scheduling.' },
-          { subtitle: '06', content: 'Digital Proof of Delivery (e-POD): Delivery completion is recorded digitally with recipient confirmations and condition documentation at the point of delivery, providing instant reconciliation and eliminating paper disputes.' },
-          { subtitle: '07', content: 'Logistics Cost & Fuel Analytics: Transit expenses, toll fees, and fuel usage per trip are recorded and monitored, giving management accurate cost-per-delivery insights to support financial and operational decisions.' },
+          { subtitle: '01', content: 'Dynamic Gantt & Milestone Dependency Mapping: Visual timeline modeling that highlights critical paths and alerts project managers to emerging delivery risks.' },
+          { subtitle: '02', content: 'Capacity & Workload Allocation: Real-time resource balancing prevents employee burnout and ensures specialized skills are assigned to high-priority deliverables.' },
+          { subtitle: '03', content: 'Integrated Project Budget & Cost Tracking: Links billable hours, software licenses, and external vendor expenses directly against project cost centers.' },
+          { subtitle: '04', content: 'Automated Deliverable Sign-Off Workflows: Digital handoff checklists and client review approvals establish clear accountability for milestone completion.' },
+          { subtitle: '05', content: 'Cross-Department Collaboration Hub: Centralizes project documentation, task discussions, and file versions within context-rich project threads.' },
+          { subtitle: '06', content: 'Executive Progress & SLA Dashboards: Consolidated executive overviews summarizing on-time delivery rates, budget variance, and department performance.' },
         ],
       },
       {
         eyebrow: 'THE OUTCOME',
-        mainTitle: 'Full Operational Visibility from Field Assets to Control Room',
+        mainTitle: 'Predictable Delivery, Optimized Resource Utilization, and Scalable Execution',
         paragraphs: [
-          'The integration of MyBoss IoT with the logistics management layer delivers total control over transportation operations—replacing fragmented manual processes with a connected, data-driven fleet command system.',
-          'Key outcomes include full operational visibility with live map tracking and status updates from the field, lower transport operating costs through optimized routes and idle-time reduction, faster delivery turnaround and higher on-time fulfillment rates, elimination of paper disputes through instant verifiable digital Proof of Delivery, improved driver accountability, and proactive fleet maintenance scheduling supported by real-time vehicle health data.',
+          'Deploying MARKA - Project Manager elevated on-time project completion rates to 96%, reduced administrative status meetings by half, and empowered teams with transparent, accountable workflow discipline.',
         ],
       },
     ],
   },
 
-  /* ── 6. MyBoss — Supply Chain & Distribution System ── */
+  /* ── 6. MyBOS ── */
   {
     id: 6,
-    slug: 'myboss-supply-chain-distribution-system',
-    title: 'MyBoss (Supply Chain & Distribution System)',
-    category: 'TECHNOLOGY & DATA',
-    tags: ['SUPPLY CHAIN', 'PROCUREMENT', 'DISTRIBUTION'],
-    dateLabel: 'MAY 2026',
-    dateValue: '2026-05-30',
-    description: 'An end-to-end Supply Chain & Distribution Management solution integrated with MyBoss operational data, connecting suppliers, procurement, distribution hubs, demand forecasting, and fulfillment into a unified ecosystem.',
-    coverImage: '/images/case-studies/myboss-supply-chain/cover.webp',
-    coverImageAlt: 'Container cargo ship at an international port terminal representing global supply chain and distribution management',
+    slug: 'myboss-logistics-fleet-management',
+    title: 'MyBOS',
+    category: 'SMART IOT SYSTEM',
+    tags: ['IOT TELEMETRY', 'FLEET LOGISTICS', 'DEVICE INTEGRATION'],
+    dateLabel: 'SEPTEMBER 2026',
+    dateValue: '2026-09-24',
+    description: 'Connected IoT hardware and command telemetry bridging commercial vehicle fleets, remote sensors, and logistics hubs into real-time operational transport intelligence.',
+    coverImage: '/images/case-studies/mybos.svg',
+    coverImageAlt: 'MyBOS Connected Operational IoT Ecosystem and Fleet Telemetry',
     sections: [
       {
         eyebrow: 'THE CHALLENGE',
-        mainTitle: 'Fragmented Supply Chain Processes Creating Inventory Mismatches and Supplier Blind Spots',
+        mainTitle: 'Operational Blind Spots Between Control Rooms, Drivers, and Field Assets',
         paragraphs: [
-          'Managing a multi-point supply chain without connected data creates significant inventory mismatches, delayed replenishment, and weak supplier accountability. When procurement and distribution operate in silos, businesses struggle to match field demand with warehouse supply.',
-          'Common challenges include fragmented communication between central procurement, regional distribution hubs, and suppliers, inaccurate demand forecasting leading to overstocking or sudden stockouts in the field, lack of supplier performance tracking regarding delivery punctuality and fulfillment quality, inefficient purchasing approval workflows causing procurement bottlenecks, limited financial visibility into total landed costs and supply chain overheads, and delayed response to sudden shifts in customer order volume and seasonal demand.',
+          'Managing commercial logistics fleets across vast regional routes without IoT integration leaves dispatchers in the dark regarding actual vehicle locations, driver idling, transit delays, and fuel loss.',
+          'Legacy paper manifests and manual phone calls delay delivery confirmations, cause customer disputes, and prevent timely emergency response to unexpected mechanical breakdowns.',
         ],
       },
       {
-        mainTitle: 'Synchronizing Supplier Networks, Procurement, and Field Inventory with MyBoss Distribution Data',
+        mainTitle: 'Bridging Physical Vehicles with Intelligent Enterprise Software',
         paragraphs: [
-          'We developed an integrated Supply Chain Management System that synchronizes supplier networks, procurement workflows, and field inventory levels with MyBoss distribution telemetry, creating a connected and demand-driven supply chain from procurement to final delivery.',
+          'We deployed the MyBOS IoT ecosystem—integrating onboard telematics sensors, GPS tracking units, and an automated central dispatch command center that monitors every vehicle movement in real time.',
         ],
-        image: { src: '/images/case-studies/myboss-supply-chain/case-study-angle-02.webp', alt: 'Global supply chain network visualization representing multi-hub distribution connectivity and operational visibility' },
+        image: { src: '/images/case-studies/mybos.svg', alt: 'MyBOS IoT Fleet Telemetry and Command Center' },
       },
       {
-        eyebrow: 'OUR APPROACH',
-        mainTitle: 'A Connected Supply Chain Ecosystem from Supplier to Distribution Hub',
+        eyebrow: 'OUR SOLUTION',
+        mainTitle: 'Real-Time Hardware Telemetry, Smart Dispatch, and Digital Proof of Delivery',
         subsections: [
-          { subtitle: '01', content: 'Centralized Supplier & Vendor Management: Maintains complete supplier profiles, contract terms, pricing agreements, and transaction history to streamline vendor relations and enable data-driven sourcing decisions.' },
-          { subtitle: '02', content: 'Structured Procurement & Purchase Request Workflows: Multi-level approval workflows for purchase requisitions and purchase orders ensure strict budget compliance, operational alignment, and full audit readiness.' },
-          { subtitle: '03', content: 'Data-Driven Demand & Inventory Planning: Analyzes historical order trends and field consumption rates to forecast replenishment needs accurately across all distribution hubs and inventory locations.' },
-          { subtitle: '04', content: 'Multi-Hub Supply & Demand Visibility: Provides a unified view of inventory across central warehouses, transit hubs, and regional distribution points, helping businesses maintain appropriate stock levels and avoid overstocking.' },
-          { subtitle: '05', content: 'Supplier Performance & SLA Evaluation: Supplier performance is evaluated based on lead times, order completeness, and delivery reliability, helping businesses make better strategic sourcing decisions and hold suppliers accountable.' },
-          { subtitle: '06', content: 'End-to-End Supply Chain Cost Tracking: Tracks purchase costs, freight charges, holding costs, and distribution expenses to provide management with accurate product margins and total landed cost visibility.' },
-          { subtitle: '07', content: 'Executive Supply Chain Analytics & Reporting: Consolidated dashboards deliver actionable metrics on procurement cycles, inventory turnover, supplier performance, and fulfillment efficiency to support senior management decisions.' },
+          { subtitle: '01', content: 'Live IoT Telemetry & GPS Tracking: Real-time satellite positioning and vehicle sensor feeds deliver continuous route visibility to central dispatch controllers.' },
+          { subtitle: '02', content: 'Automated Digital Delivery Orders: Eliminates paper manifests by routing digital delivery tasks directly to drivers with navigation instructions.' },
+          { subtitle: '03', content: 'Intelligent Route & Fuel Optimization: Recommends optimal routes based on traffic density and cargo load, substantially reducing fleet fuel consumption.' },
+          { subtitle: '04', content: 'Driver Behavior & Safety Monitoring: Tracks harsh braking, excessive idling, and operating hours to foster safety discipline and schedule preventive maintenance.' },
+          { subtitle: '05', content: 'Digital Proof of Delivery (e-POD): Captures digital signatures, timestamped GPS coordinates, and recipient photos upon delivery for instant billing reconciliation.' },
+          { subtitle: '06', content: 'Fleet Maintenance & Diagnostic Telemetry: Real-time engine telemetry alerts workshop managers to impending component wear before sudden roadside breakdowns.' },
         ],
       },
       {
         eyebrow: 'THE OUTCOME',
-        mainTitle: 'A Synchronized, Demand-Driven Distribution Network',
+        mainTitle: 'Full Operational Control, Lower Transit Costs, and Guaranteed Reliability',
         paragraphs: [
-          'The system transforms disconnected supply chain operations into a synchronized, demand-driven distribution network—connecting suppliers, procurement, inventory, and fulfillment into one coordinated operational ecosystem.',
-          'Key outcomes include seamless alignment between supplier procurement, inventory availability, and customer fulfillment, minimized stockouts and reduced carrying costs through intelligent demand planning, greater procurement transparency with controlled approval hierarchies, stronger supplier accountability backed by objective SLA performance data, better cost control through end-to-end supply chain cost visibility, and agile supply chain decision-making powered by real-time inventory and logistics data.',
+          'MyBOS delivered a 22% reduction in fleet fuel expenditure, cut delivery dispute resolutions to zero with e-POD, and empowered logistics dispatchers with complete real-time command over distributed transit assets.',
         ],
       },
     ],
@@ -1418,7 +1405,7 @@ export const LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
     dateModified: '2026-07-12',
     language: 'en-US',
     description: 'Lessons from building integrated platforms: sustainable transformation begins by understanding how work truly moves before selecting the technology.',
-    coverImage: '/images/insight-programs/leadership-thoughts/real-workflow.webp',
+    coverImage: '/images/insight-programs/leadership-thoughts/real-workflow.svg',
     coverImageAlt: 'Cross-functional leaders mapping a real operational workflow',
     sections: [
       { eyebrow: 'THE CENTRAL IDEA', mainTitle: 'Technology Cannot Repair an Undefined Process', paragraphs: ['The Sinau Print platform reinforced a recurring lesson: software becomes useful only after teams agree on ownership, handoffs, exceptions, and the meaning of completion.', 'Leaders create momentum by making the real workflow visible, including the informal steps that rarely appear in standard operating procedures. A process map is valuable not because it looks orderly, but because it makes disagreement discussable.'], image: { src: '/images/projects/sinau-print-erp/case-study-angle-02.webp', alt: 'Digital ordering connected with the production workflow' } },
@@ -1440,7 +1427,7 @@ export const LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
     dateModified: '2026-06-18',
     language: 'en-US',
     description: 'Dashboards do not create alignment by themselves. Leaders must establish shared definitions and connect every metric to a decision.',
-    coverImage: '/images/insight-programs/leadership-thoughts/data-leadership.webp',
+    coverImage: '/images/insight-programs/leadership-thoughts/data-leadership.svg',
     coverImageAlt: 'Leadership team debating the meaning of performance metrics',
     sections: [
       { eyebrow: 'THE CENTRAL IDEA', mainTitle: 'More Data Is Not the Same as More Clarity', paragraphs: ['The Altatic dashboard work showed that the strongest analytical systems begin with management questions. When indicators have no decision attached, they add noise rather than confidence.', 'A dashboard can display precision while hiding uncertainty in definitions, source quality, or timing. Data leadership begins when executives treat those assumptions as part of the decision.'], image: { src: '/images/projects/altatic-analytic/case-study-angle-02.webp', alt: 'Executive team reviewing governed performance indicators' } },
@@ -1462,7 +1449,7 @@ export const LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
     dateModified: '2026-05-20',
     language: 'en-US',
     description: 'What connected operations teach leaders about visibility, escalation, and building systems that remain dependable when conditions change.',
-    coverImage: '/images/insight-programs/leadership-thoughts/resilient-organisation.webp',
+    coverImage: '/images/insight-programs/leadership-thoughts/resilient-organisation.svg',
     coverImageAlt: 'Operations leader coordinating a calm resilience response',
     sections: [
       { eyebrow: 'THE CENTRAL IDEA', mainTitle: 'Visibility Is a Leadership Capability', paragraphs: ['MyBoss demonstrated that resilience depends on timely signals and clear escalation paths. The same principle applies to organisations: people need to know what changed, what matters, and who can act.', 'Visibility is not constant surveillance. It is a deliberately shared picture of current conditions, emerging risk, and decision ownership.'], image: { src: '/images/projects/myboss-iot-system/case-study-angle-02.webp', alt: 'Connected operational visibility from field to control room' } },
@@ -1484,7 +1471,7 @@ export const LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
     dateModified: '2026-04-16',
     language: 'en-US',
     description: 'A feasibility study is valuable only when evidence, assumptions, and implementation choices are connected in one decision framework.',
-    coverImage: '/images/insight-programs/leadership-thoughts/credible-strategy.webp',
+    coverImage: '/images/insight-programs/leadership-thoughts/credible-strategy.svg',
     coverImageAlt: 'Decision makers comparing evidence and development scenarios',
     sections: [
       { eyebrow: 'THE CENTRAL IDEA', mainTitle: 'Move Beyond the Single Forecast', paragraphs: ['The GIK study required market demand, visitor behaviour, spatial opportunity, and operating assumptions to be considered together. Strategy becomes credible when leaders can see how those factors interact.', 'A forecast is one possible expression of assumptions. Leadership responsibility is to understand those assumptions, decide which risks are acceptable, and create a way to learn before committing irreversibly.'], image: { src: '/images/projects/kajian-kelayakan-gik/case-study-angle-02.webp', alt: 'Field evidence supporting a Semarang development strategy' } },
@@ -1506,7 +1493,7 @@ export const LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
     dateModified: '2026-03-22',
     language: 'en-US',
     description: 'Evidence creates impact only when people can understand it, trust it, and use it within the realities of everyday life.',
-    coverImage: '/images/insight-programs/leadership-thoughts/communication-design.webp',
+    coverImage: '/images/insight-programs/leadership-thoughts/communication-design.svg',
     coverImageAlt: 'Frontline facilitators and families co-designing communication material',
     sections: [
       { eyebrow: 'THE CENTRAL IDEA', mainTitle: 'Accuracy and Accessibility Must Coexist', paragraphs: ['The stunting risk reduction guide showed why public communication cannot be treated as the final formatting step. Language, sequence, examples, and facilitator prompts shape whether knowledge becomes action.', 'Leaders are accountable not only for whether information is correct, but whether it can be understood and used by people facing different constraints.'], image: { src: '/images/projects/panduan-perubahan-perilaku-stunting/case-study-angle-02.webp', alt: 'Practical family nutrition communication in a neighbourhood setting' } },
@@ -1528,7 +1515,7 @@ export const LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [
     dateModified: '2026-02-14',
     language: 'en-US',
     description: 'From corporate platforms to sports films, trust grows when every audience touchpoint expresses the same promise with clarity.',
-    coverImage: '/images/insight-programs/leadership-thoughts/brand-trust.webp',
+    coverImage: '/images/insight-programs/leadership-thoughts/brand-trust.svg',
     coverImageAlt: 'Brand, video, and digital leads reviewing a consistent experience',
     sections: [
       { eyebrow: 'THE CENTRAL IDEA', mainTitle: 'Consistency Is More Than Visual Repetition', paragraphs: ['The Padel Arena and Web Media projects demonstrate that brand consistency is the alignment of story, interface, service expectations, and delivery quality.', 'Audiences do not experience a brand guideline. They experience promises across moments: an article, a proposal, a platform, a support interaction, or a delivered event. Trust grows when those moments reinforce one another.'], image: { src: '/images/projects/web-media-profile/case-study-angle-02.webp', alt: 'Editorial team reviewing a consistent responsive brand experience' } },

@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
+  /* Set root tracing directory to silence multi-lockfile workspace root warning */
+  outputFileTracingRoot: path.join(__dirname),
+
   /* better-sqlite3 adalah native module — jangan di-bundle oleh webpack */
   serverExternalPackages: ['better-sqlite3'],
   experimental: {
@@ -23,8 +27,12 @@ const nextConfig: NextConfig = {
       },
 
       // Noncanonical aliases redirect to actual indexable pages.
+      { source: '/our-business', destination: '/our-solution', permanent: true },
+      { source: '/our-business/:path*', destination: '/our-solution', permanent: true },
       { source: '/services', destination: '/our-solution', permanent: true },
-      { source: '/portfolio', destination: '/our-works', permanent: true },
+      { source: '/our-works', destination: '/our-solution', permanent: true },
+      { source: '/our-works/:path*', destination: '/our-solution', permanent: true },
+      { source: '/portfolio', destination: '/our-solution', permanent: true },
       { source: '/contact', destination: '/contact-us', permanent: true },
 
       // ── P0: Legacy Case Study URLs (Google Indexed -> Canonical 200 OK) ──
@@ -45,17 +53,37 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/insight-programs/case-studies/warehouse-management-wms',
-        destination: '/insight-programs/case-studies/sinau-print-warehouse-management-wms',
+        destination: '/insight-programs/case-studies/sinau-print-pos-system',
         permanent: true,
       },
       {
         source: '/insight-programs/case-studies/sinau-print-wms',
-        destination: '/insight-programs/case-studies/sinau-print-warehouse-management-wms',
+        destination: '/insight-programs/case-studies/sinau-print-pos-system',
+        permanent: true,
+      },
+      {
+        source: '/insight-programs/case-studies/sinau-print-warehouse-management-wms',
+        destination: '/insight-programs/case-studies/sinau-print-pos-system',
         permanent: true,
       },
       {
         source: '/insight-programs/case-studies/hr-management',
-        destination: '/insight-programs/case-studies/pt-sinergi-muda-arsa-hr-management',
+        destination: '/insight-programs/case-studies/marka-project-manager',
+        permanent: true,
+      },
+      {
+        source: '/insight-programs/case-studies/pt-sinergi-muda-arsa-hr-management',
+        destination: '/insight-programs/case-studies/marka-project-manager',
+        permanent: true,
+      },
+      {
+        source: '/insight-programs/case-studies/financial-management-system',
+        destination: '/insight-programs/case-studies/marka-finance-accounting',
+        permanent: true,
+      },
+      {
+        source: '/insight-programs/case-studies/pt-sinergi-muda-arsa-finance-accounting',
+        destination: '/insight-programs/case-studies/marka-finance-accounting',
         permanent: true,
       },
       {
@@ -65,7 +93,22 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/insight-programs/case-studies/supply-chain-distribution-system',
-        destination: '/insight-programs/case-studies/myboss-supply-chain-distribution-system',
+        destination: '/insight-programs/case-studies/myboss-logistics-fleet-management',
+        permanent: true,
+      },
+      {
+        source: '/insight-programs/case-studies/myboss-supply-chain-distribution-system',
+        destination: '/insight-programs/case-studies/myboss-logistics-fleet-management',
+        permanent: true,
+      },
+      {
+        source: '/insight-programs/case-studies/presstis',
+        destination: '/insight-programs/case-studies/presstis-digital-platform',
+        permanent: true,
+      },
+      {
+        source: '/insight-programs/case-studies/markaplus',
+        destination: '/insight-programs/case-studies/markaplus-ai-assistant',
         permanent: true,
       },
 
@@ -102,12 +145,22 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/our-solution/erp',
-        destination: '/our-solution/enterprise-resource-planning',
+        destination: '/our-solution/enterprise-solution',
+        permanent: true,
+      },
+      {
+        source: '/our-solution/enterprise-resource-planning',
+        destination: '/our-solution/enterprise-solution',
         permanent: true,
       },
       {
         source: '/our-solution/iot',
-        destination: '/our-solution/internet-of-things',
+        destination: '/our-solution/smart-iot-system',
+        permanent: true,
+      },
+      {
+        source: '/our-solution/internet-of-things',
+        destination: '/our-solution/smart-iot-system',
         permanent: true,
       },
     ];

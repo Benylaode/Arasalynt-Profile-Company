@@ -29,48 +29,27 @@ const BUSINESS_COLUMNS = [
     category: 'OUR SOLUTION',
     items: [
       {
-        name: 'Enterprise Resource Planning',
-        href: '/our-solution/enterprise-resource-planning',
+        name: 'Enterprise Solution',
+        href: '/our-solution/enterprise-solution',
       },
-    ],
-  },
-  {
-    category: 'CONNECTED ENTERPRISE',
-    items: [
       {
-        name: 'Internet of Things',
-        href: '/our-solution/internet-of-things',
+        name: 'Data & AI Integration',
+        href: '/our-solution/data-ai-integration',
       },
     ],
   },
 ];
 
 const BUSINESS_MEDIA = {
-  category: 'EXPLORE OUR SERVICES',
+  category: 'OUR SOLUTION',
   items: [
     {
-      name: 'POS & Retail Management',
-      href: '/our-solution/point-of-sale-pos',
+      name: 'Smart IOT System',
+      href: '/our-solution/smart-iot-system',
     },
     {
-      name: 'HR & Talent Management',
-      href: '/our-solution/hr-talent-management-engine',
-    },
-    {
-      name: 'Financial Automation',
-      href: '/our-solution/financial-accounting-automation-hub',
-    },
-    {
-      name: 'Supply Chain Control',
-      href: '/our-solution/supply-chain-inventory-control',
-    },
-    {
-      name: 'Logistics & Fleet Tracker',
-      href: '/our-solution/logistics-fleet-operations-tracker',
-    },
-    {
-      name: 'Warehouse Management',
-      href: '/our-solution/warehouse-management-system',
+      name: 'Digital Development',
+      href: '/our-solution/digital-development',
     },
   ],
 };

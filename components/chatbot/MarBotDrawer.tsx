@@ -430,6 +430,18 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
         setChatMode('human_cs');
         sessionStartTimeRef.current = Date.now();
 
+        // Also synchronize to Marka CRM inbox
+        fetch('/api/chat/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            visitorId: sessionId,
+            visitorName: 'Pengunjung Website',
+            messageId: userMessage.id,
+            messageText: messageContent,
+          }),
+        }).catch(() => null);
+
         const ticketTag = activeCode ? ` (Kode Tiket: **#${activeCode}**)` : '';
         const autoHandoverMessage: ChatMessage = {
           id: `bot-handover-${Date.now()}`,
@@ -456,6 +468,18 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
     if (chatMode === 'human_cs') {
       setMessages((prev) => [...prev, userMessage]);
       setInputValue('');
+
+      // Dispatch to Marka CRM inbox
+      fetch('/api/chat/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          visitorId: sessionId,
+          visitorName: 'Pengunjung Website',
+          messageId: userMessage.id,
+          messageText: messageContent,
+        }),
+      }).catch(() => null);
 
       try {
         const handoffRes = await fetch('/api/whatsapp/handoff', {

@@ -1,17 +1,37 @@
 import type { CaseStudyArticle } from '@/types';
 
+export type ChallengeCard = {
+  number: string;
+  badge: string;
+  title: string;
+  description: string;
+  image: string;
+};
+
 export type SolutionService = {
   slug: string;
   title: string;
   shortTitle: string;
+  heroHeadline?: string;
   description: string;
   image: string;
+  heroSvg?: string;
+  serviceSectionSvg?: string;
   whatItIs: string;
   challenge: string;
+  challengeCards?: ChallengeCard[];
   approach: string[];
   outcomes: string[];
   integration: string[];
+  partnerIntegration?: {
+    partnerName: string;
+    logo?: string;
+    text: string;
+  };
   whoItIsFor: string[];
+  ctaPrimary?: string;
+  ctaSecondary?: string;
+  ctaSecondaryHref?: string;
   relatedWork?: {
     slug: string;
     title: string;
@@ -29,6 +49,10 @@ export type SolutionService = {
   language?: 'id-ID' | 'en-US';
   seoTitle?: string;
   seoDescription?: string;
+  whatServiceTitle?: string;
+  valuePropTitle?: string;
+  valuePropDescription?: string;
+  valuePropIcon?: string;
 };
 
 export const OUR_SOLUTION_CHALLENGE = {
@@ -39,428 +63,505 @@ export const OUR_SOLUTION_CHALLENGE = {
 
 export const OUR_SOLUTION_CHALLENGES = [
   {
+    number: '01',
     title: 'Legacy Hardware & Outdated Infrastructure',
     description:
-      'Aging physical servers and legacy equipment severely limit business expansion, carry high maintenance costs, and resist modern IoT or cloud integration.',
+      'Aging servers and legacy hardware limit growth, hike maintenance costs, and block cloud adoption.',
+    image: '/images/our-solution/projects/iot/mybos-iot.svg',
   },
   {
+    number: '02',
     title: 'Stuck Software & Fragmented ERP',
     description:
-      'Operating on disjointed platforms creates data silos, forces manual workarounds, and leads to expensive duplicate tasks across enterprise departments.',
+      'Disconnected platforms create data silos, manual workarounds, and redundant enterprise tasks.',
+    image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
   },
   {
+    number: '03',
     title: 'Operational Blind Spots & Data Lag',
     description:
-      'Without real-time data flow from the shop floor to the executive dashboard, leaders rely on outdated reports and cannot make proactive decisions.',
+      'Without real-time operational data, leaders rely on stale reports and face blind spots in decisions.',
+    image: '/images/our-solution/projects/data-ai/markaplus.svg',
   },
   {
+    number: '04',
     title: 'Unplanned Downtime & Reactive Maintenance',
     description:
-      'Limited machine and system monitoring results in sudden equipment failures, costly operational halts, and escalating emergency IT expenses.',
+      'Unmonitored systems cause sudden equipment breakdowns, costly operational halts, and emergency repairs.',
+    image: '/images/our-solution/projects/digital/presstis.svg',
   },
 ] as const;
 
 export const CORE_SOLUTIONS = [
   {
-    slug: 'enterprise-resource-planning',
-    title: 'Enterprise Resource Planning',
+    slug: 'enterprise-solution',
+    title: 'Enterprise Solution',
+    titleLine1: 'Enterprise',
+    titleLine2: 'Solution',
+    heroHeadline: 'Streamline Enterprise Operations with Centralized System Management',
     description:
-      'Centralizing core business functions into a unified digital platform, automating finance, supply chain, inventory, and HR workflows to eliminate operational problems and boost enterprise productivity.',
-    image: '/images/our-business/kaluna-technology/services/finance-system.webp',
+      'Integrate corporate workflows into a single system for real-time visibility and scalable growth.',
+    image: '/images/our-solution/projects/enterprise/marka-sales.png',
+    cardBg: '#090D16',
+    cardBorder: 'rgba(77, 139, 255, 0.28)',
+    glowStart: '#3B82F6',
+    glowStartOpacity: 0.45,
+    glowEnd: '#1A3E9E',
+    glowEndOpacity: 0.05,
+    textColor: '#FFFFFF',
+    descColor: 'rgba(255, 255, 255, 0.82)',
   },
   {
-    slug: 'internet-of-things',
-    title: 'Internet of Things',
+    slug: 'data-ai-integration',
+    title: 'Data & AI Integration',
+    titleLine1: 'Data & AI',
+    titleLine2: 'Integration',
+    heroHeadline: 'Turn Raw Data into Strategic Business Decisions Powered by AI',
     description:
-      'Connecting physical machinery, smart sensors, and edge devices to digital networks, providing real-time asset monitoring, automated data collection, and predictive insight across your operations.',
-    image: '/images/our-business/kaluna-technology/services/software-development.webp',
+      'Consolidate corporate data and leverages AI to automate insights, predict trends, and guide smart decisions.',
+    image: '/images/our-solution/projects/data-ai/civitas-analytic.svg',
+    cardBg: '#0D140F',
+    cardBorder: 'rgba(230, 255, 42, 0.3)',
+    glowStart: '#E6FF2A',
+    glowStartOpacity: 0.48,
+    glowEnd: '#10B981',
+    glowEndOpacity: 0.05,
+    textColor: '#FFFFFF',
+    descColor: 'rgba(255, 255, 255, 0.82)',
+  },
+  {
+    slug: 'smart-iot-system',
+    title: 'Smart IOT System',
+    titleLine1: 'Smart IOT',
+    titleLine2: 'System',
+    heroHeadline: 'Connect Physical Devices for Smarter Operational Automation',
+    description:
+      'Connect physical devices for real-time operational automation.',
+    image: '/images/our-solution/projects/iot/sinau-print-iot.svg',
+    cardBg: '#10326A',
+    cardBorder: 'rgba(56, 189, 248, 0.45)',
+    glowStart: '#38BDF8',
+    glowStartOpacity: 0.55,
+    glowEnd: '#155A99',
+    glowEndOpacity: 0.1,
+    textColor: '#FFFFFF',
+    descColor: 'rgba(255, 255, 255, 0.88)',
+  },
+  {
+    slug: 'digital-development',
+    title: 'Digital Development',
+    titleLine1: 'Digital',
+    titleLine2: 'Development',
+    heroHeadline: 'Build High-Performance Websites and Enterprise Web Apps',
+    description:
+      'Build high-performance websites and digital solutions.',
+    image: '/images/our-solution/projects/digital/craftivation.svg',
+    cardBg: '#0E121D',
+    cardBorder: 'rgba(56, 189, 248, 0.28)',
+    glowStart: '#38BDF8',
+    glowStartOpacity: 0.45,
+    glowEnd: '#818CF8',
+    glowEndOpacity: 0.05,
+    textColor: '#FFFFFF',
+    descColor: 'rgba(255, 255, 255, 0.82)',
   },
 ] as const;
 
 export const SOLUTION_SERVICES: SolutionService[] = [
   {
-    slug: 'enterprise-resource-planning',
-    title: 'Enterprise Resource Planning (ERP)',
-    shortTitle: 'Enterprise Resource Planning',
+    slug: 'enterprise-solution',
+    title: 'Enterprise Solution',
+    shortTitle: 'Enterprise Solution',
+    heroHeadline: 'Streamline Enterprise Operations with Centralized System Management',
     description:
-      'Centralize finance, inventory, supply chain, and human resources into a unified enterprise operating system.',
-    image: '/images/our-business/kaluna-technology/services/finance-system.webp',
+      'Integrate operational workflows across divisions into a unified ecosystem with real-time visibility and sustainable enterprise scalability.',
+    image: '/images/our-solution/projects/enterprise/marka-finance.png',
+    heroSvg: '/images/our-solution/hero-enterprise-solution.svg',
+    serviceSectionSvg: '/images/our-solution/service-section-enterprise-solution.svg',
     whatItIs:
-      'A comprehensive digital operating backbone that unifies business operations—from procurement, inventory, and sales to general ledger accounting and human capital—eliminating data silos and enabling real-time executive decision making.',
+      'A streamlined enterprise management service designed to unify complex operational workflows, optimize resource allocation, and ensure sustainable business scalability.',
+    whatServiceTitle: 'Integrated Enterprise Architecture',
+    valuePropTitle: 'Beyond Generic Solutions',
+    valuePropDescription:
+      'We avoid rigid, one-size-fits-all platforms. Every ERP module is custom-engineered to align with your corporate governance, internal workflows, and long-term expansion goals.',
+    valuePropIcon: '/images/our-solution/icon-highlight-enterprise.svg',
     challenge:
-      'Legacy systems and disjointed spreadsheets force employees into manual data re-entry, create operational blind spots, and delay financial closing by weeks.',
+      'Operating on disjointed platforms creates data silos, forces manual workarounds, and leads to expensive duplicate tasks across enterprise departments.',
+    challengeCards: [
+      {
+        number: '01',
+        badge: 'Financial Consolidation',
+        title: 'MARKA Finance — Ledger Disconnect & Cashflow Latency',
+        description:
+          'Operating across multi-entity branches with fragmented accounting tools causes delayed financial statements, tax discrepancies, and poor executive cashflow visibility.',
+        image: '/images/our-solution/projects/enterprise/marka-finance.png',
+      },
+      {
+        number: '02',
+        badge: 'Human Capital',
+        title: 'MARKA HRMS — Siloed Personnel Data & Payroll Gaps',
+        description:
+          'Disjointed employee records, manual leave approvals, and disconnected attendance systems lead to payroll calculation errors and regulatory audit exposure.',
+        image: '/images/our-solution/projects/enterprise/marka-hrms.png',
+      },
+      {
+        number: '03',
+        badge: 'Project Governance',
+        title: 'MARKA Project Manager — Milestone Slippage & Silos',
+        description:
+          'Lack of unified milestone tracking between operational and engineering teams leads to communication silos, unexpected project delays, and budget overruns.',
+        image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
+      },
+      {
+        number: '04',
+        badge: 'Supply Chain & Assets',
+        title: 'MARKA Resource — Unsynchronized Warehouse Stocks',
+        description:
+          'Inaccurate inventory counts and isolated procurement workflows cause stockouts, excessive warehouse holding costs, and material supply chain bottlenecks.',
+        image: '/images/our-solution/projects/enterprise/marka-resource.png',
+      },
+      {
+        number: '05',
+        badge: 'Commercial Pipeline',
+        title: 'MARKA Sales — Pipeline Friction & Fulfillment Delays',
+        description:
+          'Disconnected quotation-to-cash workflows create friction between commercial reps and fulfillment teams, resulting in lost deals and delayed billing.',
+        image: '/images/our-solution/projects/enterprise/marka-sales.png',
+      },
+    ],
     approach: [
-      'Centralized architecture connecting finance, procurement, warehouse, and sales',
-      'Automated inter-departmental transactions and reconciliations',
-      'Configurable multi-level approval workflows and audit trails',
-      'Multi-branch and multi-warehouse consolidated reporting',
+      'Centralized enterprise workflow architecture connecting all operating units',
+      'Seamless unified platform for finance, inventory, HR, and supply chain',
+      'Real-time data visibility and multi-department consolidated reporting pipelines',
+      'Enterprise-grade system management designed for sustainable scalability',
     ],
     outcomes: [
-      'Unified single source of truth across all business divisions',
-      'Up to 70% faster financial close and reporting cycles',
-      'Elimination of duplicate manual entries and human calculation errors',
+      'Streamlined business operations across finance, inventory, HR, and supply chain',
+      'Real-time data visibility and accelerated executive decision making',
+      'Elimination of operational silos and redundant manual workflows',
+      'Sustainable enterprise scalability across all organizational divisions',
     ],
+    partnerIntegration: {
+      partnerName: 'MarkaSuites',
+      logo: '/images/partners/markasuites.svg',
+      text: 'Fully integrated with Marka ERP, a leading ERP solution for enterprises that unifies finance, inventory, HR, and supply chain into a single, smart, and easily manageable platform.',
+    },
     integration: [
-      'REST & GraphQL APIs for third-party platforms',
-      'Direct bank reconciliation & payment gateways',
-      'Warehouse hardware and barcode scanner connectivity',
-      'Custom reporting pipelines and BI dashboards',
+      'Fully integrated with Marka ERP platform',
+      'Unified finance, inventory, HR, and supply chain management',
+      'REST & GraphQL enterprise API connectors and ledger sync',
+      'Custom role-based access control and comprehensive audit trails',
     ],
     whoItIsFor: [
-      'Mid-market and enterprise companies operating across multiple branches',
-      'Retail chains and FMCG distributors requiring consolidated control',
-      'Manufacturing and industrial enterprises needing inventory traceability',
+      'Large enterprises managing multiple operational divisions',
+      'Organizations seeking centralized, enterprise-grade system management',
+      'Companies needing unified ERP control across finance, HR, inventory, and supply chain',
     ],
+    ctaPrimary: 'Schedule an Enterprise Consultation',
+    ctaSecondary: 'Start Your Transformation',
     relatedWork: {
       slug: 'sinau-print-erp',
-      title: 'Sinau Print ERP & Marketplace Platform',
-      image: '/images/projects/sinau-print-erp/1.webp',
+      title: 'Sinau Print ERP & Centralized System Management',
+      image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
       relationship: 'direct',
     },
     caseStudySlug: 'sinau-print-pos-system',
-    articleCategory: 'TECHNOLOGY',
+    articleCategory: 'ENTERPRISE SOLUTION',
     articleDateLabel: 'APRIL 2026',
     articleDateValue: '2026-04-22',
-    articleTags: ['ERP', 'ENTERPRISE', 'WORKFLOW'],
-    industry: 'Enterprise Operations & Manufacturing',
-    keywords: ['erp', 'enterprise resource planning', 'workflow', 'operations', 'automation'],
-    updatedAt: '2026-10-06',
+    articleTags: ['ENTERPRISE SOLUTION', 'MARKA ERP', 'ERP MANAGEMENT', 'SCALABILITY'],
+    industry: 'Enterprise Operations & System Management',
+    keywords: ['enterprise solution', 'marka erp', 'system management', 'enterprise workflows', 'scalability'],
+    updatedAt: '2026-10-26',
     language: 'id-ID',
-    seoTitle: 'Enterprise Resource Planning (ERP)',
+    seoTitle: 'Enterprise Solution — Centralized Enterprise System Management',
   },
   {
-    slug: 'internet-of-things',
-    title: 'Internet of Things (IoT) Integration',
-    shortTitle: 'Internet of Things',
+    slug: 'data-ai-integration',
+    title: 'Data & AI Integration',
+    shortTitle: 'Data & AI Integration',
+    heroHeadline: 'Turn Raw Data into Strategic Business Decisions Powered by AI',
     description:
-      'Bridge physical machinery, smart sensors, and operational hardware with intelligent software systems.',
-    image: '/images/our-business/kaluna-technology/services/software-development.webp',
+      'Consolidate multi-source corporate data into a unified ecosystem with predictive AI modeling, demand forecasting, and automated insights.',
+    image: '/images/our-solution/projects/data-ai/markaplus.svg',
+    heroSvg: '/images/our-solution/hero-data-ai-integration.svg',
+    serviceSectionSvg: '/images/our-solution/service-section-data-ai-integration.svg',
     whatItIs:
-      'An end-to-end telemetry and edge computing platform that connects physical assets, industrial sensors, and remote equipment to central dashboards, providing continuous visibility and automated triggers.',
+      'Advanced data engineering and AI integration services designed to transform raw enterprise data into actionable intelligence, predictive analytics, and automated decision-making.',
+    whatServiceTitle: 'Intelligent Data & Deep Learning Infrastructure',
+    valuePropTitle: 'Beyond Static Analytics',
+    valuePropDescription:
+      'We move past basic dashboards. Our custom deep learning models and data pipelines are built specifically to adapt to your unique business logic and industry ecosystem.',
+    valuePropIcon: '/images/our-solution/icon-highlight-data-ai.svg',
     challenge:
-      'Physical equipment and remote assets operate as unmonitored black boxes, leading to unexpected breakdowns, high reactive maintenance costs, and inaccurate field reporting.',
+      'Corporate information trapped in disconnected databases leaves leadership with delayed reports, blind spots, and reactive rather than proactive decisions.',
+    challengeCards: [
+      {
+        number: '01',
+        badge: 'Campus Intelligence',
+        title: 'Civitas Analytic — Academic Data Silos & Retention Blind Spots',
+        description:
+          'Educational institutions struggle with disconnected student information systems, hindering predictive intervention for student retention, academic tracking, and institutional resource allocation.',
+        image: '/images/our-solution/projects/data-ai/civitas-analytic.svg',
+      },
+      {
+        number: '02',
+        badge: 'Predictive Business AI',
+        title: 'MarkaPlus — Static Historical Reports & Decision Lag',
+        description:
+          'Traditional enterprise reporting only reflects backward-looking records. MarkaPlus embeds predictive AI algorithms into core workflows to forecast market demands and automate business insights.',
+        image: '/images/our-solution/projects/data-ai/markaplus.svg',
+      },
+    ],
     approach: [
-      'Edge device engineering and industrial sensor deployment',
-      'Ultra-reliable MQTT and cellular communication protocols',
-      'Real-time anomaly detection and predictive alerting algorithms',
-      'Direct integration with central ERP maintenance workflows',
+      'Consolidation of diverse corporate information into a unified data ecosystem',
+      'Deployment of advanced AI models for trend analysis and demand forecasting',
+      'Automated business insights generation with high mathematical precision',
+      'Secure enterprise data warehousing with real-time streaming pipelines',
     ],
     outcomes: [
-      'Zero unrecorded machine hours or unmonitored asset movements',
-      'Up to 45% reduction in unplanned maintenance downtime',
-      'Real-time operational alerts sent directly to operators and supervisors',
+      'Raw corporate data converted into high-value strategic business decisions',
+      'Accurate market demand prediction and trend identification',
+      'Automated precision insights delivered directly to executive dashboards',
+      'Agile data-driven operational decision making across the entire business',
     ],
-    integration: [
-      'Industrial PLC, OBD-II, GPS, and custom microcontrollers',
-      'Cloud time-series databases for high-frequency telemetry',
-      'Automated work order creation in maintenance software',
-      'Mobile operator dashboards with offline queuing support',
-    ],
-    whoItIsFor: [
-      'Logistics, transportation, and fleet operators',
-      'Manufacturing plants managing heavy industrial machinery',
-      'Cold-chain logistics, agriculture, and warehouse facilities',
-    ],
-    relatedWork: {
-      slug: 'myboss-iot-system',
-      title: 'MyBoss Connected IoT Hardware & Control System',
-      image: '/images/case-studies/myboss-logistics/cover.webp',
-      relationship: 'direct',
+    partnerIntegration: {
+      partnerName: 'Artic Analytica',
+      logo: '/images/our-business/artic-analytica/logo.svg',
+      text: 'Backed by advanced AI technology, we help you analyze trends, predict market demands, and automate business insights with precision across all corporate information sources.',
     },
-    caseStudySlug: 'myboss-logistics-fleet-management',
-    articleCategory: 'TECHNOLOGY & IOT',
-    articleDateLabel: 'MAY 2026',
-    articleDateValue: '2026-05-30',
-    articleTags: ['IOT', 'HARDWARE', 'SENSORS', 'CONNECTED ENTERPRISE'],
-    industry: 'Manufacturing, Logistics & Infrastructure',
-    keywords: ['iot', 'internet of things', 'hardware integration', 'sensors', 'telemetry', 'connectivity'],
-    updatedAt: '2026-10-06',
-    language: 'id-ID',
-    seoTitle: 'Internet of Things (IoT) Integration',
-  },
-  {
-    slug: 'point-of-sale-pos',
-    title: 'Point of Sale (POS)',
-    shortTitle: 'Point of Sale',
-    description:
-      'Connect checkout, product, promotion, customer, and store performance data in one retail operating system.',
-    image: '/images/Expertise/pos-retail.svg',
-    whatItIs:
-      'An omni-channel retail transaction platform designed for speed, accuracy, and unified inventory synchronization across single and multi-outlet retail environments.',
-    challenge:
-      'Disconnected transaction and inventory records make retail decisions slower and less reliable.',
-    approach: [
-      'Centralized product and pricing controls',
-      'Real-time sales and stock synchronization',
-      'Multi-outlet reporting and role management',
-    ],
-    outcomes: [
-      'Faster checkout workflows',
-      'Accurate inventory visibility',
-      'Consistent retail reporting',
-    ],
     integration: [
-      'Midtrans, QRIS, and EDC payment terminals',
-      'Automated WhatsApp and email invoice dispatch',
-      'Central ERP catalog and stock ledger integration',
-      'Thermal receipt printers and cash drawer hardware',
+      'Real-time streaming pipelines connecting ERP, CRM, and cloud databases',
+      'AI-driven predictive algorithms for demand forecasting & market trends',
+      'Automated executive insights delivery and anomaly alerting',
+      'Enterprise security and strict data governance compliance',
     ],
     whoItIsFor: [
-      'Multi-branch retail stores, supermarkets, and specialty shops',
-      'Printing and custom fabrication businesses with deposits and installment workflows',
-      'Food & beverage chains requiring fast counter service',
+      'Enterprises with multi-source corporate data seeking unified intelligence',
+      'Executive leaders requiring automated, precision-crafted market insights',
+      'Companies aiming to transform historical data into proactive AI strategies',
     ],
+    ctaPrimary: 'Explore Our AI Solutions',
+    ctaSecondary: 'Request a Data Demo',
     relatedWork: {
-      slug: 'sinau-print-erp',
-      title: 'Sinau Print ERP & Marketplace Platform',
-      image: '/images/projects/sinau-print-erp/1.webp',
-      relationship: 'direct',
-    },
-    caseStudySlug: 'sinau-print-pos-system',
-    articleCategory: 'TECHNOLOGY',
-    articleDateLabel: 'APRIL 2026',
-    articleDateValue: '2026-04-22',
-    articleTags: ['ERP', 'RETAIL', 'POINT OF SALE'],
-    industry: 'Retail & Commerce',
-    keywords: ['pos', 'point of sale', 'retail', 'marketplace', 'checkout', 'erp', 'inventory'],
-    updatedAt: '2026-10-06',
-    language: 'id-ID',
-    seoTitle: 'Point of Sale (POS)',
-  },
-  {
-    slug: 'hr-talent-management-engine',
-    title: 'HR & Talent Management Engine (HRMS)',
-    shortTitle: 'HR & Talent Management',
-    description:
-      'Manage employee records, attendance, performance, payroll workflows, and talent development from one platform.',
-    image: '/images/Expertise/hrms.svg',
-    whatItIs:
-      'A unified human capital management solution automating employee lifecycles—from onboarding and GPS/biometric attendance to payroll calculation, tax compliance, and KPI reviews.',
-    challenge:
-      'Scattered employee information creates repetitive administration and weak workforce visibility.',
-    approach: [
-      'Unified employee lifecycle records',
-      'Automated attendance and approval workflows',
-      'Performance and talent dashboards',
-    ],
-    outcomes: [
-      'Lower administrative workload',
-      'Clearer workforce decisions',
-      'Consistent employee experience',
-    ],
-    integration: [
-      'Biometric fingerprint/face attendance hardware',
-      'Bank corporate payroll batch disbursement systems',
-      'Company calendar and Google Workspace / Microsoft 365',
-      'Accounting ledger automated payroll journal entries',
-    ],
-    whoItIsFor: [
-      'Growing enterprise organizations with 50 to 5,000+ employees',
-      'Companies with distributed field, remote, or shift-based workforces',
-      'Enterprises seeking regulatory compliance and audit-ready HR records',
-    ],
-    caseStudySlug: 'pt-sinergi-muda-arsa-hr-management',
-    articleCategory: 'TECHNOLOGY & DATA',
-    articleDateLabel: 'JUNE 2026',
-    articleDateValue: '2026-06-24',
-    articleTags: ['HRMS', 'ENTERPRISE PORTAL', 'WORKFLOW'],
-    industry: 'Enterprise Operations',
-    keywords: ['hr', 'hrms', 'human resources', 'talent', 'employee', 'workflow', 'portal'],
-    updatedAt: '2026-10-06',
-    language: 'id-ID',
-    seoTitle: 'HR & Talent Management Engine (HRMS)',
-  },
-  {
-    slug: 'financial-accounting-automation-hub',
-    title: 'Financial & Accounting Automation Hub',
-    shortTitle: 'Financial Automation',
-    description:
-      'Automate transaction recording, reconciliation, approvals, reporting, and enterprise financial controls.',
-    image: '/images/Expertise/financial-accounting.svg',
-    whatItIs:
-      'An intelligent financial governance platform that automates journal entries, multi-currency accounting, automated bank reconciliation, and real-time P&L reporting.',
-    challenge:
-      'Manual reconciliation and isolated financial records delay reporting and increase operational risk.',
-    approach: [
-      'Automated journals and reconciliation',
-      'Configurable approval controls',
-      'Live financial reporting',
-    ],
-    outcomes: [
-      'Faster closing cycles',
-      'Stronger financial governance',
-      'Reliable management reporting',
-    ],
-    integration: [
-      'Direct bank statement feeds (BCA, Mandiri, BRI, BNI)',
-      'Core POS, Procurement, and Payroll modules',
-      'Tax e-Faktur and corporate fiscal reporting standards',
-      'Granular financial audit logs for enterprise compliance',
-    ],
-    whoItIsFor: [
-      'CFOs and finance directors managing multi-entity operations',
-      'Enterprises seeking strict financial governance and internal audit readiness',
-      'Fast-growing businesses wanting automated cash flow oversight',
-    ],
-    caseStudySlug: 'financial-management-system',
-    articleCategory: 'DATA & ANALYTICS',
-    articleDateLabel: 'MARCH 2026',
-    articleDateValue: '2026-03-19',
-    articleTags: ['FINANCE', 'AUTOMATION', 'DASHBOARD'],
-    industry: 'Finance & Analytics',
-    keywords: ['finance', 'accounting', 'automation', 'reconciliation', 'dashboard', 'analytics'],
-    updatedAt: '2026-10-06',
-    language: 'id-ID',
-    seoTitle: 'Financial & Accounting Automation Hub',
-  },
-  {
-    slug: 'supply-chain-inventory-control',
-    title: 'Supply Chain & Inventory Control System',
-    shortTitle: 'Supply Chain Control',
-    description:
-      'Coordinate procurement, suppliers, stock movement, replenishment, and demand visibility across operations.',
-    image: '/images/Expertise/supply-chain.svg',
-    whatItIs:
-      'An end-to-end supply chain orchestration platform that connects supplier purchase orders, lead time tracking, safety stock formulas, and warehouse replenishment.',
-    challenge:
-      'Limited coordination between purchasing and stock operations causes shortages, delays, and excess inventory.',
-    approach: [
-      'Supplier and procurement workflows',
-      'Demand-aware replenishment',
-      'End-to-end stock movement visibility',
-    ],
-    outcomes: [
-      'Healthier inventory levels',
-      'More predictable procurement',
-      'Reduced operational waste',
-    ],
-    integration: [
-      'Supplier ERP systems via EDI or secure API',
-      'Barcode and RFID scanning devices in distribution centers',
-      'Sales forecasting engines and ERP production schedules',
-      'Logistics tracking and freight carrier updates',
-    ],
-    whoItIsFor: [
-      'Distributors, wholesalers, and multi-location retail networks',
-      'Manufacturing businesses reliant on raw material continuity',
-      'Import/export enterprises managing extended supply lead times',
-    ],
-    relatedWork: {
-      slug: 'sinau-print-erp',
-      title: 'Sinau Print ERP & Marketplace Platform',
-      image: '/images/projects/sinau-print-erp/1.webp',
-      relationship: 'supporting',
-    },
-    caseStudySlug: 'myboss-supply-chain-distribution-system',
-    articleCategory: 'TECHNOLOGY',
-    articleDateLabel: 'APRIL 2026',
-    articleDateValue: '2026-04-22',
-    articleTags: ['ERP', 'SUPPLY CHAIN', 'INVENTORY'],
-    industry: 'Supply Chain',
-    keywords: ['supply chain', 'procurement', 'supplier', 'inventory', 'stock', 'erp'],
-    updatedAt: '2026-10-06',
-    language: 'id-ID',
-    seoTitle: 'Supply Chain & Inventory Control System',
-  },
-  {
-    slug: 'logistics-fleet-operations-tracker',
-    title: 'Logistics & Fleet Operations Tracker',
-    shortTitle: 'Logistics & Fleet Tracker',
-    description:
-      'Track vehicles, assignments, routes, maintenance, and delivery performance through connected operations.',
-    image: '/images/Expertise/logistics-fleet.svg',
-    whatItIs:
-      'An integrated fleet intelligence and delivery management platform providing real-time GPS tracking, automated driver dispatch, fuel monitoring, and digital proof-of-delivery (e-POD).',
-    challenge:
-      'Fragmented fleet information limits delivery control, asset utilization, and timely intervention.',
-    approach: [
-      'Live fleet and assignment monitoring',
-      'Route and delivery status tracking',
-      'Maintenance and utilization records',
-    ],
-    outcomes: [
-      'Improved fleet utilization',
-      'More reliable deliveries',
-      'Faster operational response',
-    ],
-    integration: [
-      'OBD-II hardware, CAN-bus vehicle sensors, and GPS trackers',
-      'Mobile Driver App (Android/iOS) with turn-by-turn guidance',
-      'WMS & ERP delivery order synchronization',
-      'Customer delivery tracking links via SMS/WhatsApp',
-    ],
-    whoItIsFor: [
-      'Logistics and third-party freight providers (3PL)',
-      'Enterprise distribution fleets and field service companies',
-      'Cold-chain transport requiring temperature sensor tracking',
-    ],
-    relatedWork: {
-      slug: 'myboss-iot-system',
-      title: 'MyBoss Connected IoT Hardware & Control System',
-      image: '/images/case-studies/myboss-logistics/cover.webp',
-      relationship: 'direct',
-    },
-    caseStudySlug: 'myboss-logistics-fleet-management',
-    articleCategory: 'TECHNOLOGY',
-    articleDateLabel: 'MAY 2026',
-    articleDateValue: '2026-05-30',
-    articleTags: ['IOT', 'LOGISTICS', 'FLEET OPERATIONS'],
-    industry: 'Logistics & IoT',
-    keywords: ['logistics', 'fleet', 'vehicle', 'tracking', 'route', 'iot', 'delivery'],
-    updatedAt: '2026-10-06',
-    language: 'id-ID',
-    seoTitle: 'Logistics & Fleet Operations Tracker',
-  },
-  {
-    slug: 'warehouse-management-system',
-    title: 'Warehouse Management System',
-    shortTitle: 'Warehouse Management',
-    description:
-      'Orchestrate receiving, put-away, storage, picking, packing, and dispatch with accurate real-time inventory.',
-    image: '/images/Expertise/warehouse-management.svg',
-    whatItIs:
-      'A high-performance warehouse execution engine that maximizes floor space utilization, guides staff through optimal picking paths, and provides 99.9% inventory accuracy.',
-    challenge:
-      'Manual warehouse processes create inventory discrepancies and slow order fulfillment.',
-    approach: [
-      'Structured inbound and storage workflows',
-      'Barcode-ready picking and packing',
-      'Real-time warehouse inventory control',
-    ],
-    outcomes: [
-      'Higher stock accuracy',
-      'Faster fulfillment',
-      'Traceable warehouse operations',
-    ],
-    integration: [
-      'Industrial handheld Android RF barcode scanners',
-      'Conveyor belt systems, electronic scales, and label printers',
-      'E-commerce order channels and enterprise ERP backends',
-      'Courier shipping label generation APIs',
-    ],
-    whoItIsFor: [
-      'Distribution centers handling high daily SKU volumes',
-      'Fulfillment centers serving omnichannel e-commerce and retail',
-      'Manufacturing warehouses managing spare parts and raw materials',
-    ],
-    relatedWork: {
-      slug: 'sinau-print-erp',
-      title: 'Sinau Print ERP & Marketplace Platform',
-      image: '/images/case-studies/sinau-print-wms/cover.webp',
+      slug: 'artic-analytica',
+      title: 'Artic Analytica Strategic Decision & AI Hub',
+      image: '/images/specialized/specialized-intelligence.webp',
       relationship: 'direct',
     },
     caseStudySlug: 'sinau-print-warehouse-management-wms',
-    articleCategory: 'TECHNOLOGY',
+    articleCategory: 'DATA & AI',
     articleDateLabel: 'APRIL 2026',
     articleDateValue: '2026-04-22',
-    articleTags: ['ERP', 'WAREHOUSE', 'FULFILLMENT'],
-    industry: 'Warehouse & Fulfillment',
-    keywords: ['warehouse', 'wms', 'storage', 'picking', 'packing', 'dispatch', 'inventory'],
-    updatedAt: '2026-10-06',
+    articleTags: ['DATA INTEGRATION', 'ARTIFICIAL INTELLIGENCE', 'PREDICTIVE ANALYTICS', 'AUTOMATION'],
+    industry: 'Data & AI Strategic Integration',
+    keywords: ['data integration', 'artificial intelligence', 'ai solutions', 'predictive insights', 'machine learning'],
+    updatedAt: '2026-10-26',
     language: 'id-ID',
-    seoTitle: 'Warehouse Management System',
+    seoTitle: 'Data & AI Integration — Turn Raw Data into Strategic Decisions',
+  },
+  {
+    slug: 'smart-iot-system',
+    title: 'Smart IOT System',
+    shortTitle: 'Smart IOT System',
+    heroHeadline: 'Connect Physical Devices for Smarter Operational Automation',
+    description:
+      'Remotely monitor, control, and automate physical assets with real-time sensor telemetry and industrial-grade security.',
+    image: '/images/our-solution/projects/iot/mybos-iot.svg',
+    heroSvg: '/images/our-solution/hero-smart-iot-system.svg',
+    serviceSectionSvg: '/images/our-solution/service-section-smart-iot-system.svg',
+    whatItIs:
+      'Comprehensive IoT integration services designed to bridge physical hardware with enterprise software, enabling real-time telemetry, remote monitoring, and automated asset control.',
+    whatServiceTitle: 'Connected Operational IoT Ecosystem',
+    valuePropTitle: 'Beyond Standard Automation',
+    valuePropDescription:
+      'We do not use generic plug-and-play tools. Each device architecture is securely tailored to your physical infrastructure, security protocols, and operational requirements.',
+    valuePropIcon: '/images/our-solution/icon-highlight-smart-iot.svg',
+    challenge:
+      'Physical devices and remote operational assets operate without real-time connectivity, resulting in unexpected equipment failure, delayed maintenance, and security vulnerabilities.',
+    challengeCards: [
+      {
+        number: '01',
+        badge: 'Fleet & Hardware Telemetry',
+        title: 'MyBOS — Unconnected Fleet Assets & Unplanned Downtime',
+        description:
+          'Distributed commercial vehicles and industrial field equipment lack real-time telemetry, leaving operations blind to live engine diagnostics and fuel efficiency.',
+        image: '/images/our-solution/projects/iot/mybos-iot.svg',
+      },
+      {
+        number: '02',
+        badge: 'Smart Shopfloor IoT',
+        title: 'Sinau Print — Production Queue Bottlenecks & Idle Machines',
+        description:
+          'High-volume printing and fabrication facilities struggle with manual job routing and unmonitored equipment, causing queue bottlenecks and delayed client dispatch.',
+        image: '/images/our-solution/projects/iot/sinau-print-iot.svg',
+      },
+      {
+        number: '03',
+        badge: 'Connected Hardware Hub',
+        title: 'ASPOO Marketplace — Fragmented Industrial Hardware Commerce',
+        description:
+          'Suppliers and facility operators lack a synchronized marketplace ecosystem to monitor, trade, and automate device hardware procurement and smart sensor deployment.',
+        image: '/images/our-solution/projects/iot/aspoo-marketplace.svg',
+      },
+    ],
+    approach: [
+      'Deployment of smart IoT sensors and connected hardware gateways',
+      'Continuous remote monitoring, control, and telemetry tracking of physical devices',
+      'Automated threshold alerts and sensor-driven operational workflows',
+      'Industrial automation integration engineered with Kaluna Technology',
+    ],
+    outcomes: [
+      'Seamless connection of physical devices to the digital operating ecosystem',
+      'Elevated operational efficiency and smarter automated workflows',
+      'Enhanced infrastructure security via 24/7 sensor-driven surveillance',
+      'Significant reduction in unexpected equipment downtime and maintenance overhead',
+    ],
+    partnerIntegration: {
+      partnerName: 'Kaluna Technology',
+      logo: '/images/our-business/kaluna-technology/logo.svg',
+      text: 'Powered by the expertise of Kaluna Technology, a trusted provider of IoT and integrated device system services to bring next-generation industrial automation to life.',
+    },
+    integration: [
+      'Powered by the expertise of Kaluna Technology',
+      'Industrial PLC, telemetry sensors, GPS, and custom IoT edge microcontrollers',
+      'Ultra-reliable MQTT and low-latency cloud data streaming',
+      'Direct integration with central enterprise management & dispatch systems',
+    ],
+    whoItIsFor: [
+      'Industrial, logistics, fleet, and manufacturing enterprises',
+      'Facilities managing distributed machinery and physical infrastructure',
+      'Organizations seeking remote device control, monitoring, and smart automation',
+    ],
+    ctaPrimary: 'Consult Your IoT Project',
+    ctaSecondary: 'Start Smart Automation',
+    relatedWork: {
+      slug: 'myboss-iot-system',
+      title: 'Kaluna Technology MyBoss Connected IoT System',
+      image: '/images/projects/myboss-iot-system/1.webp',
+      relationship: 'direct',
+    },
+    caseStudySlug: 'myboss-logistics-fleet-management',
+    articleCategory: 'SMART IOT',
+    articleDateLabel: 'MAY 2026',
+    articleDateValue: '2026-05-30',
+    articleTags: ['SMART IOT', 'KALUNA TECHNOLOGY', 'AUTOMATION', 'SENSORS', 'CONNECTED DEVICES'],
+    industry: 'IoT & Smart Industrial Automation',
+    keywords: ['smart iot system', 'kaluna technology', 'iot integration', 'industrial automation', 'sensor insights'],
+    updatedAt: '2026-10-26',
+    language: 'id-ID',
+    seoTitle: 'Smart IOT System — Connect Physical Devices to Digital Automation',
+  },
+  {
+    slug: 'digital-development',
+    title: 'Digital Development',
+    shortTitle: 'Digital Development',
+    heroHeadline: 'Build High-Performance Websites and Enterprise Web Apps',
+    description:
+      'Engineered for superior UX, blazing-fast performance, and enterprise-grade security to accelerate digital conversions and growth.',
+    image: '/images/our-solution/projects/digital/adsvar.svg',
+    heroSvg: '/images/our-solution/hero-digital-development.svg',
+    serviceSectionSvg: '/images/our-solution/service-section-digital-development.svg',
+    whatItIs:
+      'High-performance web development services focused on building secure, responsive, and custom web applications that elevate user engagement and streamline digital operations.',
+    whatServiceTitle: 'Scalable Digital Application Development',
+    valuePropTitle: 'Beyond Template Builds',
+    valuePropDescription:
+      'We reject cookie-cutter templates. Every digital platform is custom-coded from the ground up to guarantee optimal performance, robust security, and seamless brand alignment.',
+    valuePropIcon: '/images/our-solution/icon-highlight-digital-dev.svg',
+    challenge:
+      'Slow, rigid, or outdated websites compromise user trust, suffer from security risks, and fail to convert visitors into loyal customers in a competitive digital landscape.',
+    challengeCards: [
+      {
+        number: '01',
+        badge: 'Digital Advertising',
+        title: 'Adsvar — Ad Yield Drop & Multi-Channel Distribution Lag',
+        description:
+          'Digital media and advertising networks struggle to deliver high-converting, lightning-fast dynamic ad units that capture user attention across diverse devices.',
+        image: '/images/our-solution/projects/digital/adsvar.svg',
+      },
+      {
+        number: '02',
+        badge: 'Research & Policy Hub',
+        title: 'Artic Analytica — High-Latency Data Presentation & UX Friction',
+        description:
+          'Complex policy research and public data portals often overwhelm users with slow loading times, rigid navigation, and non-responsive visualization architectures.',
+        image: '/images/our-solution/projects/digital/artic-analytica.svg',
+      },
+      {
+        number: '03',
+        badge: 'Creative Brand Commerce',
+        title: 'Craftivation — Clunky Catalog UX & Lost Brand Storytelling',
+        description:
+          'Artisan and creative enterprise brands require immersive visual storytelling and fluid web interactions without sacrificing mobile performance or e-commerce conversion rates.',
+        image: '/images/our-solution/projects/digital/craftivation.svg',
+      },
+      {
+        number: '04',
+        badge: 'Digital Media & Press',
+        title: 'Presstis — Traffic Spikes & Publishing Infrastructure Crashes',
+        description:
+          'High-volume journalism and digital publication platforms risk downtime during breaking news spikes, requiring resilient serverless architecture and instant article indexing.',
+        image: '/images/our-solution/projects/digital/presstis.svg',
+      },
+      {
+        number: '05',
+        badge: 'Automotive Digital Retail',
+        title: 'X1 Tire — Complex Fitment Filtering & High Mobile Bounce',
+        description:
+          'Automotive aftermarket retailers struggle with multi-tier tyre sizing and fitment filters, leading to customer drop-offs and abandoned booking pipelines.',
+        image: '/images/our-solution/projects/digital/x1-tire.svg',
+      },
+    ],
+    approach: [
+      'Modern web engineering optimized for blazing-fast loading speeds and responsive UX',
+      'High-converting landing pages and bespoke enterprise web applications',
+      'Rigorous security standards, data encryption, and resilient cloud architecture',
+      'Brand digitalization and conversion optimization in partnership with Web2Up',
+    ],
+    outcomes: [
+      'Powerful, high-converting digital presence across all devices and platforms',
+      'Superior UX and ultra-fast page speeds boosting search rankings and engagement',
+      'Robust enterprise-grade system security and data integrity protection',
+      'Accelerated brand growth and measurable business conversion performance',
+    ],
+    partnerIntegration: {
+      partnerName: 'Web2Up',
+      logo: '/images/partners/web2up.svg',
+      text: 'In partnership with Web2Up, specialists in business and brand digitalization through modern, functional website and WebApp development designed to drive conversions.',
+    },
+    integration: [
+      'In partnership with Web2Up brand digitalization specialists',
+      'Modern Next.js, React, and serverless cloud infrastructure',
+      'High-converting landing pages and responsive corporate web applications',
+      'Seamless API integrations with payment gateways, CRMs, and analytics tools',
+    ],
+    whoItIsFor: [
+      'Businesses requiring modern, high-converting websites and landing pages',
+      'Enterprises seeking complex, secure, and responsive web-based applications',
+      'Brands aiming to accelerate digital growth through speed, UX, and security',
+    ],
+    ctaPrimary: 'Build Your Website Now',
+    ctaSecondary: 'Start Your Digital Project',
+    relatedWork: {
+      slug: 'web2up-digital',
+      title: 'Web2Up Digital Platform & High-Performance WebApps',
+      image: '/images/our-solution/projects/digital/adsvar.svg',
+      relationship: 'direct',
+    },
+    caseStudySlug: 'sinau-print-pos-system',
+    articleCategory: 'DIGITAL DEVELOPMENT',
+    articleDateLabel: 'APRIL 2026',
+    articleDateValue: '2026-04-22',
+    articleTags: ['DIGITAL DEVELOPMENT', 'WEB2UP', 'HIGH PERFORMANCE', 'WEB APPS', 'UX'],
+    industry: 'Digital Engineering & Web Development',
+    keywords: ['digital development', 'web2up', 'web development', 'web apps', 'conversion ux'],
+    updatedAt: '2026-10-26',
+    language: 'id-ID',
+    seoTitle: 'Digital Development — High-Performance Websites & Web Apps',
   },
 ];
+
 
 export const SOLUTION_CASE_STUDIES: CaseStudyArticle[] = SOLUTION_SERVICES.map((service, index) => ({
   id: `solution-service-${index + 1}`,
@@ -506,5 +607,22 @@ export const SOLUTION_CASE_STUDIES: CaseStudyArticle[] = SOLUTION_SERVICES.map((
 }));
 
 export function getSolutionService(slug: string) {
+  if (
+    slug === 'enterprise-resource-planning' ||
+    slug === 'retail-pos-inventory' ||
+    slug === 'finance-accounting-system' ||
+    slug === 'hr-payroll-management'
+  ) {
+    return SOLUTION_SERVICES.find((service) => service.slug === 'enterprise-solution');
+  }
+  if (slug === 'internet-of-things' || slug === 'fleet-logistics-tracking') {
+    return SOLUTION_SERVICES.find((service) => service.slug === 'smart-iot-system');
+  }
+  if (slug === 'warehouse-management-wms') {
+    return SOLUTION_SERVICES.find((service) => service.slug === 'data-ai-integration');
+  }
+  if (slug === 'custom-software-engineering') {
+    return SOLUTION_SERVICES.find((service) => service.slug === 'digital-development');
+  }
   return SOLUTION_SERVICES.find((service) => service.slug === slug);
 }

@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     url: '/',
     images: [
       {
-        url: '/images/our-works/our-works-hero-bg.webp',
+        url: '/images/about-us/corporate-profile-hero.webp',
         width: 1200,
         height: 630,
         alt: 'Arsalynk enterprise technology ecosystem',
@@ -57,108 +57,32 @@ export const metadata: Metadata = {
     title: `${SITE_NAME} | Solusi Teknologi Enterprise Indonesia`,
     description:
       'Solusi teknologi enterprise terintegrasi: ERP, IoT, Data Intelligence, dan Software Development Indonesia.',
-    images: ['/images/our-works/our-works-hero-bg.webp'],
+    images: ['/images/about-us/corporate-profile-hero.webp'],
   },
 };
 
 export default function Home() {
   const homeSchema = {
     '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': ['Organization', 'Corporation'],
-        '@id': `${SITE_URL}/#organization`,
-        name: BRAND.name,
-        legalName: BRAND.legalName,
-        alternateName: BRAND.alternateNames,
-        url: `${SITE_URL}/`,
-        logo: {
-          '@type': 'ImageObject',
-          '@id': `${SITE_URL}/#logo`,
-          url: BRAND.logo,
-          contentUrl: BRAND.logo,
-          width: 512,
-          height: 512,
-          caption: BRAND.name,
-        },
-        image: {
-          '@type': 'ImageObject',
-          url: BRAND.heroImage,
-          width: 1200,
-          height: 630,
-        },
-        description:
-          'Arsalynk adalah ekosistem bisnis teknologi enterprise terintegrasi di Indonesia, menyediakan solusi ERP, IoT, data analytics, software development, HRMS, POS, riset strategis, dan transformasi digital.',
-        address: BRAND.addresses.map((addr) => ({
-          '@type': 'PostalAddress',
-          ...addr,
-        })),
-        telephone: BRAND.phone,
-        email: BRAND.email,
-        contactPoint: [
-          {
-            '@type': 'ContactPoint',
-            telephone: BRAND.phone,
-            contactType: 'customer service',
-            areaServed: 'ID',
-            availableLanguage: ['Indonesian', 'English'],
-          },
-          {
-            '@type': 'ContactPoint',
-            email: BRAND.email,
-            contactType: 'sales',
-            areaServed: 'ID',
-            availableLanguage: ['Indonesian', 'English'],
-          },
-        ],
-        areaServed: {
-          '@type': 'Country',
-          name: 'Indonesia',
-        },
-        knowsAbout: [...BRAND.knowsAbout],
-        sameAs: [
-          BRAND.social.instagram,
-          BRAND.social.linkedin,
-        ],
-        hasOfferCatalog: {
-          '@type': 'OfferCatalog',
-          name: 'Arsalynk Enterprise Solutions',
-          itemListElement: SOLUTION_SERVICES.map((service) => ({
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              '@id': `${SITE_URL}/our-solution/${service.slug}#service`,
-              name: service.title,
-              url: `${SITE_URL}/our-solution/${service.slug}`,
-              provider: { '@id': `${SITE_URL}/#organization` },
-            },
-          })),
-        },
-      },
-      buildWebSiteJsonLd(),
-      ...buildSiteNavigationElementJsonLd(),
-      {
-        '@type': 'WebPage',
-        '@id': `${SITE_URL}/#webpage`,
-        url: `${SITE_URL}/`,
-        name: 'Arsalynk — Solusi Teknologi Enterprise & Software House',
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        about: { '@id': `${SITE_URL}/#organization` },
-        mainEntity: { '@id': `${SITE_URL}/#organization` },
-        description:
-          'Arsalynk adalah penyedia solusi teknologi enterprise & software house di Indonesia. Menghubungkan sistem ERP, integrasi IoT, data analytics, POS, HRMS & transformasi digital bisnis.',
-        breadcrumb: {
-          '@id': `${SITE_URL}/#breadcrumb`,
-          ...buildBreadcrumbJsonLd([{ name: 'Home', url: `${SITE_URL}/` }]),
-        },
-        inLanguage: 'id-ID',
-      },
-    ],
+    '@type': 'WebPage',
+    '@id': `${SITE_URL}/#webpage`,
+    url: `${SITE_URL}/`,
+    name: 'Arsalynk — Solusi Teknologi Enterprise & Software House',
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    about: { '@id': `${SITE_URL}/#organization` },
+    mainEntity: { '@id': `${SITE_URL}/#organization` },
+    description:
+      'Arsalynk adalah penyedia solusi teknologi enterprise & software house di Indonesia. Menghubungkan sistem ERP, integrasi IoT, data analytics, POS, HRMS & transformasi digital bisnis.',
+    breadcrumb: {
+      '@id': `${SITE_URL}/#breadcrumb`,
+      ...buildBreadcrumbJsonLd([{ name: 'Home', url: `${SITE_URL}/` }]),
+    },
+    inLanguage: 'id-ID',
   };
 
   return (
     <main>
-      <JsonLd id="home-website-schema" data={homeSchema} />
+      <JsonLd id="home-webpage-schema" data={homeSchema} />
 
       <HeroSection />
 
@@ -197,13 +121,10 @@ export default function Home() {
                 className="group flex flex-col justify-between rounded-xl border border-black/10 bg-white p-4 font-body no-underline transition-all duration-200 hover:border-[#1A3E9E] hover:shadow-md"
               >
                 <div>
-                  <span
-                    itemProp="name"
-                    className="flex items-center justify-between text-[14px] font-semibold text-[#101010] transition-colors group-hover:text-[#1A3E9E]"
-                  >
-                    {item.name}
+                  <div className="flex items-center justify-between text-[14px] font-semibold text-[#101010] transition-colors group-hover:text-[#1A3E9E]">
+                    <span itemProp="name">{item.name}</span>
                     <span className="text-[12px] opacity-0 transition-opacity group-hover:opacity-100">→</span>
-                  </span>
+                  </div>
                   <p
                     itemProp="description"
                     className="mt-1.5 text-[12px] leading-[1.5] text-[#666]"

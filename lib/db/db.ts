@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    DB.TS â€” SQLite Connection, Schema & Auto-Seed
    Menggunakan better-sqlite3 (sinkronus, cocok untuk Next.js Server Components)
    ========================================================================== */
@@ -195,7 +195,71 @@ function initSchema(db: Database.Database): void {
       created_at      TEXT    NOT NULL DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (session_id) REFERENCES live_chat_sessions(id) ON DELETE CASCADE
     );
+
+    CREATE TABLE IF NOT EXISTS inquiries (
+      id                INTEGER PRIMARY KEY AUTOINCREMENT,
+      name              TEXT NOT NULL,
+      phone             TEXT NOT NULL DEFAULT '',
+      email             TEXT NOT NULL DEFAULT '',
+      contact           TEXT NOT NULL DEFAULT '',
+      company           TEXT NOT NULL DEFAULT '',
+      service           TEXT NOT NULL DEFAULT '',
+      package_choice    TEXT NOT NULL DEFAULT '',
+      billing_cycle     TEXT NOT NULL DEFAULT '',
+      price             TEXT NOT NULL DEFAULT '',
+      message           TEXT NOT NULL DEFAULT '',
+      brand_description TEXT NOT NULL DEFAULT '',
+      source            TEXT NOT NULL DEFAULT 'contact_form',
+      created_at        TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      status            TEXT NOT NULL DEFAULT 'pending'
+    );
+
+    CREATE TABLE IF NOT EXISTS crm_events_log (
+      id            INTEGER PRIMARY KEY AUTOINCREMENT,
+      event_id      TEXT NOT NULL,
+      event_type    TEXT NOT NULL,
+      direction     TEXT NOT NULL,
+      status_code   INTEGER NOT NULL,
+      success       INTEGER NOT NULL DEFAULT 0,
+      payload_json  TEXT NOT NULL DEFAULT '{}',
+      response_json TEXT NOT NULL DEFAULT '{}',
+      created_at    TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS crm_chat_messages (
+      id          INTEGER PRIMARY KEY AUTOINCREMENT,
+      thread_id   TEXT NOT NULL,
+      message_id  TEXT NOT NULL UNIQUE,
+      sender_type TEXT NOT NULL,
+      sender_name TEXT NOT NULL DEFAULT '',
+      text        TEXT NOT NULL,
+      created_at  TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS crm_support_tickets (
+      id             INTEGER PRIMARY KEY AUTOINCREMENT,
+      event_id       TEXT NOT NULL UNIQUE,
+      subject        TEXT NOT NULL,
+      description    TEXT NOT NULL,
+      serial_number  TEXT NOT NULL DEFAULT '',
+      customer_email TEXT NOT NULL DEFAULT '',
+      status         TEXT NOT NULL DEFAULT 'OPEN',
+      created_at     TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
   `);
+
+  try { db.exec(`ALTER TABLE inquiries ADD COLUMN company TEXT NOT NULL DEFAULT '';`); } catch {}
+  try { db.exec(`ALTER TABLE inquiries ADD COLUMN phone TEXT NOT NULL DEFAULT '';`); } catch {}
+  try { db.exec(`ALTER TABLE inquiries ADD COLUMN email TEXT NOT NULL DEFAULT '';`); } catch {}
+  try { db.exec(`ALTER TABLE inquiries ADD COLUMN contact TEXT NOT NULL DEFAULT '';`); } catch {}
+  try { db.exec(`ALTER TABLE inquiries ADD COLUMN service TEXT NOT NULL DEFAULT '';`); } catch {}
+  try { db.exec(`ALTER TABLE inquiries ADD COLUMN package_choice TEXT NOT NULL DEFAULT '';`); } catch {}
+  try { db.exec(`ALTER TABLE inquiries ADD COLUMN billing_cycle TEXT NOT NULL DEFAULT '';`); } catch {}
+  try { db.exec(`ALTER TABLE inquiries ADD COLUMN price TEXT NOT NULL DEFAULT '';`); } catch {}
+  try { db.exec(`ALTER TABLE inquiries ADD COLUMN brand_description TEXT NOT NULL DEFAULT '';`); } catch {}
+  try { db.exec(`ALTER TABLE inquiries ADD COLUMN source TEXT NOT NULL DEFAULT 'contact_form';`); } catch {}
+  try { db.exec(`ALTER TABLE inquiries ADD COLUMN status TEXT NOT NULL DEFAULT 'pending';`); } catch {}
+
 
   /* Ensure columns exist if database was created previously */
   try { db.exec(`ALTER TABLE businesses ADD COLUMN logo TEXT;`); } catch {}

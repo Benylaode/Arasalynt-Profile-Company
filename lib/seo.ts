@@ -8,40 +8,40 @@ import { BRAND } from '@/lib/seo/brand';
  */
 export const SITE_NAVIGATION_ITEMS = [
   {
-    name: 'Our Works',
-    href: '/our-works',
-    description:
-      'Eksplorasi portofolio proyek teknologi enterprise Arsalynk: implementasi ERP, integrasi IoT, data intelligence, dan platform digital modern.',
-  },
-  {
     name: 'Our Solution',
     href: '/our-solution',
     description:
-      'Layanan solusi teknologi enterprise Arsalynk: implementasi ERP, integrasi IoT hardware, POS retail, HRMS, dan otomasi proses bisnis.',
+      'Layanan solusi teknologi enterprise Arsalynk: implementasi ERP kustom, deep learning AI, sistem Smart IoT, dan pengembangan aplikasi digital scalable.',
   },
   {
     name: 'About Us',
     href: '/about-us',
     description:
-      'Mengenal profil, visi, dan ekosistem bisnis Arsalynk sebagai partner transformasi digital dan rekayasa teknologi enterprise di Indonesia.',
-  },
-  {
-    name: 'Our Business',
-    href: '/our-business',
-    description:
-      'Ekosistem unit bisnis terintegrasi Arsalynk: infrastruktur IT, riset strategis, survey data analytics, hingga media digital enterprise.',
+      'Mengenal profil, visi, tata kelola kepemimpinan, dan filosofi ekosistem Arsalynk sebagai partner transformasi digital enterprise terpercaya.',
   },
   {
     name: 'Insight & Programs',
     href: '/insight-programs',
     description:
-      'Studi kasus implementasi nyata dan pemikiran kepemimpinan strategis transformasi teknologi enterprise dari ekosistem Arsalynk.',
+      'Wadah pengetahuan transformasi digital Arsalynk: menghubungkan studi kasus lapangan, analisis arsitektur, dan kepemimpinan strategis.',
+  },
+  {
+    name: 'Case Studies',
+    href: '/insight-programs/case-studies',
+    description:
+      'Dokumentasi mendalam implementasi proyek nyata: Sinau Print POS, Presstis media platform, MarkaPlus AI, MARKA finance, dan MyBOS IoT telemetri.',
+  },
+  {
+    name: 'Leadership Thoughts',
+    href: '/insight-programs/leadership-thoughts',
+    description:
+      'Perspektif dan gagasan kepemimpinan eksekutif seputar arsitektur alur kerja, tata kelola data, ketahanan organisasi, dan strategi teknologi.',
   },
   {
     name: 'Contact Us',
     href: '/contact-us',
     description:
-      'Konsultasikan kebutuhan proyek teknologi enterprise Anda bersama tim ahli Arsalynk via WhatsApp, email, atau kantor kami di Jakarta.',
+      'Konsultasikan kebutuhan proyek teknologi enterprise Anda bersama tim ahli Arsalynk via WhatsApp resmi, email, atau kantor kami di Jakarta.',
   },
 ] as const;
 
@@ -101,8 +101,17 @@ export function buildWebSiteJsonLd() {
     publisher: { '@id': `${SITE_URL}/#organization` },
     about: { '@id': `${SITE_URL}/#organization` },
     inLanguage: 'id-ID',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_URL}/insight-programs/case-studies?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
     hasPart: SITE_NAVIGATION_ITEMS.map((item) => ({
       '@type': 'WebPage',
+      '@id': `${SITE_URL}${item.href}#webpage`,
       name: item.name,
       url: `${SITE_URL}${item.href}`,
       description: item.description,

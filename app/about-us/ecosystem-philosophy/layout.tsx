@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
+import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -49,12 +49,7 @@ export default function EcosystemPhilosophyLayout({ children }: Readonly<{ child
 
   return (
     <>
-      <Script
-        id="ecosystem-philosophy-schema"
-        type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }}
-      />
+      <JsonLd id="ecosystem-philosophy-schema" data={schema} />
       {children}
     </>
   );

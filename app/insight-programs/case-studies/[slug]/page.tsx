@@ -167,18 +167,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
                 >
                   {relatedSolution.title} →
                 </Link>
-                {relatedSolution.relatedWork && (
-                  <>
-                    <span aria-hidden="true" className="text-[#1A3E9E]/30">|</span>
-                    <span className="font-bold uppercase tracking-wider">Proof of Work:</span>
-                    <Link
-                      href={`/our-works/${relatedSolution.relatedWork.slug}`}
-                      className="font-semibold underline hover:opacity-80"
-                    >
-                      {relatedSolution.relatedWork.title} →
-                    </Link>
-                  </>
-                )}
+                
               </div>
             )}
           </div>

@@ -93,7 +93,7 @@ export default function InsightProgramsHubPage() {
         </div>
 
         <a
-          href="#beyond-expectations"
+          href="#explore-pillars"
           aria-label="Scroll to explore pillars"
           className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20"
           style={{
@@ -108,7 +108,7 @@ export default function InsightProgramsHubPage() {
       {/* ── PILLARS OVERVIEW ── */}
       <section
         id="explore-pillars"
-        className="sr-only"
+        className="scroll-mt-8 w-full bg-[#F7F7F7] px-[clamp(24px,6vw,120px)] py-[clamp(80px,7vw,130px)]"
       >
         <div className="mx-auto flex max-w-[1600px] flex-col gap-16">
           {/* Header */}
@@ -118,13 +118,13 @@ export default function InsightProgramsHubPage() {
               <span>KNOWLEDGE &amp; EXECUTION</span>
             </div>
             <h2 className="font-heading text-[clamp(34px,3.5vw,60px)] font-medium leading-[1.1] text-[#101010]">
-              Dua Jalur Pembelajaran &amp; Pembuktian Enterprise
+              Dual Pathways of Enterprise Insight &amp; Proven Execution
             </h2>
             <p className="font-body text-[clamp(15px,1vw,18px)] leading-[1.7] text-[#555]">
-              Kami percaya transformasi digital tidak cukup hanya dibicarakan
-              sebagai konsep abstrak. Melalui studi kasus faktual dan refleksi
-              kepemimpinan, kami membagikan cara kerja nyata dalam menghubungkan
-              proses bisnis, teknologi, dan manusia.
+              We believe digital transformation cannot remain an abstract concept.
+              Through factual case studies and executive leadership reflections,
+              we share proven operational methodologies connecting business
+              processes, modern technology, and people.
             </p>
           </div>
 
@@ -147,10 +147,10 @@ export default function InsightProgramsHubPage() {
                 </h3>
 
                 <p className="font-body text-[15px] leading-[1.7] text-[#555]">
-                  Dokumentasi mendalam mengenai implementasi solusi ERP, IoT,
-                  manajemen pergudangan, armada logistik, dan HRMS di lapangan.
-                  Menunjukkan tantangan awal, pendekatan arsitektur, dan dampak
-                  terukur pada operasional klien.
+                  In-depth documentation of real-world deployments across ERP, IoT
+                  telemetry, warehouse operations, logistics fleet management, and
+                  enterprise HRMS. Showcasing initial challenges, architectural
+                  approaches, and measurable operational impacts.
                 </p>
 
                 {/* Micro previews */}
@@ -203,10 +203,9 @@ export default function InsightProgramsHubPage() {
                 </h3>
 
                 <p className="font-body text-[15px] leading-[1.7] text-[#555]">
-                  Perspektif dan gagasan kepemimpinan seputar arsitektur alur kerja,
-                  tata kelola data, ketahanan organisasi di tengah ketidakpastian,
-                  dan pengambilan keputusan berbasis bukti dari eksekutif
-                  Arsalynk.
+                  Executive leadership perspectives on workflow architecture,
+                  data governance, organizational resilience amidst uncertainty,
+                  and evidence-based decision-making from Arsalynk leaders.
                 </p>
 
                 {/* Micro previews */}

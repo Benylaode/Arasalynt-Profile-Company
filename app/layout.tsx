@@ -60,8 +60,22 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  alternates: {
+    canonical: '/',
+  },
+  appleWebApp: {
+    capable: true,
+    title: 'Arsalynk',
+    statusBarStyle: 'default',
+  },
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
+  },
   icons: {
     icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
       { url: '/favicon.ico', sizes: 'any' },
       { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
       { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
@@ -72,6 +86,7 @@ export const metadata: Metadata = {
     shortcut: ['/favicon.ico'],
     apple: [
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
     ],
   },
   openGraph: {
@@ -84,7 +99,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: '/images/our-works/our-works-hero-bg.webp',
+        url: '/images/about-us/corporate-profile-hero.webp',
         width: 1200,
         height: 630,
         type: 'image/webp',
@@ -98,15 +113,31 @@ export const metadata: Metadata = {
     creator: '@arsalynk',
     title: `${SITE_NAME} — Enterprise Technology & Software House Indonesia`,
     description: SITE_DESCRIPTION,
-    images: ['/images/our-works/our-works-hero-bg.webp'],
+    images: ['/images/about-us/corporate-profile-hero.webp'],
   },
 };
+
+import JsonLd from '@/components/seo/JsonLd';
+import {
+  buildOrganizationJsonLd,
+  buildWebSiteJsonLd,
+  buildSiteNavigationElementJsonLd,
+} from '@/lib/seo';
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const rootSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      buildOrganizationJsonLd(),
+      buildWebSiteJsonLd(),
+      ...buildSiteNavigationElementJsonLd(),
+    ],
+  };
+
   return (
     <html lang="id" className={manrope.variable} data-scroll-behavior="smooth">
       <head>
@@ -122,6 +153,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <JsonLd id="root-entity-graph" data={rootSchema} />
         <HashScrollHandler />
         <WebKitBackgroundPreloader />
         <Navbar />

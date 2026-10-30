@@ -114,6 +114,16 @@ export async function generateMetadata({
   const canonical = `/our-business/${biz.slug}`;
 
   return {
+    robots: {
+      index: false,
+      follow: false,
+      nocache: true,
+      googleBot: {
+        index: false,
+        follow: false,
+        noimageindex: true,
+      },
+    },
     title: biz.name,
     description: biz.aboutDesc.slice(0, 155),
     alternates: { canonical },

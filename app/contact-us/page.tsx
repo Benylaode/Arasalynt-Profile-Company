@@ -77,34 +77,6 @@ function MailIcon({ size = 20 }: { size?: number }) {
   );
 }
 
-function InstagramIcon() {
-  return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6Zm9.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
-    </svg>
-  );
-}
-
-function LinkedinIcon() {
-  return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M5.34 3.25A2.35 2.35 0 1 1 5.33 7.95a2.35 2.35 0 0 1 .01-4.7ZM3.32 9.63h4.03V21H3.32V9.63Zm6.54 0h3.86v1.56h.05c.54-1.02 1.85-2.1 3.81-2.1 4.08 0 4.83 2.69 4.83 6.18V21h-4.02v-5.08c0-1.21-.02-2.77-1.69-2.77-1.69 0-1.95 1.32-1.95 2.68V21h-4.02V9.63Z" />
-    </svg>
-  );
-}
-
 function WhatsAppIcon() {
   return (
     <svg
@@ -220,100 +192,6 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
     </div>
   );
 }
-
-type BusinessCard = {
-  name: string;
-  slug: string;
-  logo: string;
-  email: string;
-  instagram: string;
-  linkedin: string;
-  actionLabel: 'VISIT WEB' | 'PHONE US';
-  actionHref: string;
-};
-
-const COMPANY_CARDS: BusinessCard[] = [
-  {
-    name: 'Kaluna Technology',
-    slug: 'kaluna-technology',
-    logo: '/images/our-business/kaluna-technology/logo.svg',
-    email: 'kalunatechnology@gmail.com',
-    instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
-    linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
-    actionLabel: 'VISIT WEB',
-    actionHref: '/our-business/kaluna-technology',
-  },
-  {
-    name: 'Artic Analytica',
-    slug: 'artic-analytica',
-    logo: '/images/our-business/artic-analytica/logo.svg',
-    email: 'arsanalytic@gmail.com',
-    instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
-    linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
-    actionLabel: 'VISIT WEB',
-    actionHref: '/our-business/artic-analytica',
-  },
-  {
-    name: 'LoxLive',
-    slug: 'loxlive',
-    logo: '/images/our-business/loxlive/logo.svg',
-    email: 'loxlive.corporate@gmail.com',
-    instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
-    linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
-    actionLabel: 'PHONE US',
-    actionHref: WHATSAPP_LINK,
-  },
-  {
-    name: 'TheDrafroom',
-    slug: 'the-drafroom',
-    logo: '/images/our-business/the-drafroom/logo.svg',
-    email: 'thedrafroom@gmail.com',
-    instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
-    linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
-    actionLabel: 'PHONE US',
-    actionHref: WHATSAPP_LINK,
-  },
-  {
-    name: 'Ilusia Studio',
-    slug: 'ilusia',
-    logo: '/images/our-business/ilusia/logo.svg',
-    email: 'ilusiacreative@gmail.com',
-    instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
-    linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
-    actionLabel: 'PHONE US',
-    actionHref: WHATSAPP_LINK,
-  },
-  {
-    name: 'Seveny',
-    slug: 'seveny',
-    logo: '/images/our-business/seveny/logo.svg',
-    email: 'sevenycorporate@gmail.com',
-    instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
-    linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
-    actionLabel: 'PHONE US',
-    actionHref: WHATSAPP_LINK,
-  },
-  {
-    name: 'AdsVar',
-    slug: 'adsvar',
-    logo: '/images/our-business/adsvar/logo.svg',
-    email: 'adsvarcorporate@gmail.com',
-    instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
-    linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
-    actionLabel: 'PHONE US',
-    actionHref: WHATSAPP_LINK,
-  },
-  {
-    name: 'Personice',
-    slug: 'personice',
-    logo: '/images/our-business/personice/logo.svg',
-    email: 'personicecorporate@gmail.com',
-    instagram: 'https://www.instagram.com/arsalynk?igsh=am8xZ3FpMncweXYz',
-    linkedin: 'https://www.linkedin.com/company/arsalynk-group/',
-    actionLabel: 'PHONE US',
-    actionHref: WHATSAPP_LINK,
-  },
-];
 
 export default function ContactUsPage() {
   const [formData, setFormData] = useState({
@@ -487,13 +365,13 @@ export default function ContactUsPage() {
                     </a>
 
                     <a
-                      href="mailto:corporate.arsalynk@gmail.com"
+                      href="mailto:corporate@arsalynk.com"
                       className="flex items-center gap-2.5 font-body text-[14px] leading-[1.5] tracking-[0.02em] text-[#717171] transition hover:text-[#101010] md:text-[15px]"
                     >
                       <span className="shrink-0">
                         <MailIcon size={18} />
                       </span>
-                      <span>corporate.arsalynk@gmail.com</span>
+                      <span>corporate@arsalynk.com</span>
                     </a>
                   </div>
                 </div>
@@ -744,117 +622,6 @@ export default function ContactUsPage() {
                 )}
               </div>
             </form>
-          </div>
-        </section>
-
-        {/* ================================================================
-            OTHER COMPANIES — Compact Height & Sizing
-        ================================================================= */}
-        <section className="w-full bg-[rgba(153,166,231,0.10)] py-[54px] md:py-[64px]">
-          <div className="site-shell flex flex-col gap-[clamp(24px,2vw,38px)] px-0">
-            <div className="flex flex-col items-center gap-3 text-center">
-              <div className="flex items-center justify-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.6] tracking-[0.02em] text-[#1A3E9E] md:text-[13px]">
-                <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                <span>COMPANY CONTACT</span>
-              </div>
-
-              <h2 className="max-w-[1050px] font-heading text-[clamp(30px,2.5vw,48px)] font-medium leading-[1.12] tracking-[-0.03em] text-[#101010]">
-                Connect with Arsalynk
-                <br />
-                Other Companies
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-4 gap-[clamp(14px,1vw,20px)] max-[1280px]:grid-cols-2 max-[640px]:grid-cols-1">
-              {COMPANY_CARDS.map((card) => (
-                <article
-                  key={card.slug}
-                  className="group flex h-full min-h-[210px] w-full flex-col rounded-[16px] p-4 pb-5 transition duration-300 hover:-translate-y-1 sm:min-h-[225px]"
-                  style={{
-                    background:
-                      'linear-gradient(79deg, rgba(26,62,158,0.0375) 13.31%, rgba(133,166,255,0.075) 132.94%)',
-                    backdropFilter: 'blur(8px)',
-                  }}
-                >
-                  <div className="flex h-[26px] w-[95px] items-center">
-                    <img
-                      src={card.logo}
-                      alt={`${card.name} logo`}
-                      className="max-h-[26px] max-w-[95px] object-contain object-left"
-                    />
-                  </div>
-
-                  <h3 className="mt-3 font-body text-[clamp(17px,1.2vw,21px)] font-semibold leading-[1.3] tracking-[-0.02em] text-[#424242]">
-                    {card.name}
-                  </h3>
-
-                  <div className="mt-2.5 flex flex-1 flex-col gap-3.5">
-                    <div className="flex flex-col gap-1.5">
-                      <div className="flex items-center gap-1.5 font-body text-[11px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E]">
-                        <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                        <span>CONTACT</span>
-                      </div>
-
-                      <a
-                        href={`mailto:${card.email}`}
-                        className="flex min-w-0 items-center gap-2 font-body text-[13px] leading-[1.5] tracking-[0.02em] text-[#717171] transition hover:text-[#101010]"
-                      >
-                        <span className="shrink-0">
-                          <MailIcon size={16} />
-                        </span>
-                        <span className="truncate">{card.email}</span>
-                      </a>
-                    </div>
-
-                    <div className="mt-auto flex items-center gap-2">
-                      <div className="flex shrink-0 items-center gap-1">
-                        <a
-                          href={card.instagram}
-                          target="_blank"
-                          rel="noreferrer"
-                          aria-label={`${card.name} Instagram`}
-                          className="flex h-[38px] w-[38px] items-center justify-center rounded-[8px] bg-[rgba(153,166,231,0.15)] text-[#3248B4] transition hover:bg-[#1A3E9E] hover:text-white md:h-[40px] md:w-[40px]"
-                        >
-                          <InstagramIcon />
-                        </a>
-
-                        <a
-                          href={card.linkedin}
-                          target="_blank"
-                          rel="noreferrer"
-                          aria-label={`${card.name} LinkedIn`}
-                          className="flex h-[38px] w-[38px] items-center justify-center rounded-[8px] bg-[rgba(153,166,231,0.15)] text-[#3248B4] transition hover:bg-[#1A3E9E] hover:text-white md:h-[40px] md:w-[40px]"
-                        >
-                          <LinkedinIcon />
-                        </a>
-                      </div>
-
-                      {card.actionHref.startsWith('/') ? (
-                        <Link
-                          href={card.actionHref}
-                          className="inline-flex h-[38px] min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full bg-[#1A3E9E] px-3 font-body text-[12px] font-semibold leading-[1.6] tracking-[0.01em] text-[#F7F7F7] transition hover:bg-[#14347F] md:h-[40px] md:text-[13px]"
-                        >
-                          <span className="whitespace-nowrap">
-                            {card.actionLabel}
-                          </span>
-                          <ArrowRightIcon />
-                        </Link>
-                      ) : (
-                        <a
-                          href={card.actionHref}
-                          className="inline-flex h-[38px] min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full bg-[#1A3E9E] px-3 font-body text-[12px] font-semibold leading-[1.6] tracking-[0.01em] text-[#F7F7F7] transition hover:bg-[#14347F] md:h-[40px] md:text-[13px]"
-                        >
-                          <span className="whitespace-nowrap">
-                            {card.actionLabel}
-                          </span>
-                          <ArrowRightIcon />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
           </div>
         </section>
 

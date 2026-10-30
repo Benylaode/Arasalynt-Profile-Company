@@ -2,10 +2,10 @@ import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/constants';
 
 /**
- * Keep public pages and rendering assets crawlable.
+ * Konfigurasi Robots Next.js
  *
- * Do not block /_next/: Googlebot needs Next.js JavaScript, CSS and image
- * resources to render the page the same way a browser does.
+ * Memblokir seluruh route non-publik dan sub-brand / our-business dari perayapan bot
+ * agar tidak diindeks di hasil pencarian Google/mesin pencari lainnya.
  */
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -13,7 +13,22 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/admin/'],
+        disallow: [
+          '/api/',
+          '/admin/',
+          '/our-works',
+          '/our-works/',
+          '/our-business',
+          '/our-business/',
+          '/crm',
+          '/crm/',
+          '/portal',
+          '/portal/',
+          '/feedback',
+          '/feedback/',
+          '/profile',
+          '/profile/',
+        ],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

@@ -17,7 +17,12 @@ const AUTOPLAY_DURATION = 6000;
 const PROGRESS_UPDATE_INTERVAL = 50;
 const LOOP_COUNT = 30;
 
-const CATEGORIES = ['ERP SYSTEMS', 'OPERATIONS', 'CONNECTED IOT'] as const;
+const CATEGORIES = [
+  'ENTERPRISE SOLUTION',
+  'DATA & AI INTEGRATION',
+  'SMART IOT SYSTEM',
+  'DIGITAL DEVELOPMENT',
+] as const;
 
 type ProjectCategory = (typeof CATEGORIES)[number];
 
@@ -34,81 +39,135 @@ type Project = {
 const MOCK_PROJECTS: Project[] = [
   {
     id: 1,
-    slug: 'point-of-sale-pos',
-    client: 'RETAIL OPERATIONS',
-    title: 'Point of Sale (POS)',
-    category: 'BRANDING • SURVEY AND ANALYTICS',
-    tabCategory: 'ERP SYSTEMS',
-    image: '/images/our-business/kaluna-technology/services/point-of-sales-system.webp',
+    slug: 'enterprise-solution',
+    client: 'ENTERPRISE SYSTEM MANAGEMENT',
+    title: 'Unified Operational Governance & System Synthesis',
+    category: 'ENTERPRISE SOLUTION • MARKA ERP',
+    tabCategory: 'ENTERPRISE SOLUTION',
+    image: '/images/our-solution/projects/enterprise/marka-finance.png',
   },
   {
     id: 2,
-    slug: 'hr-talent-management-engine',
-    client: 'PEOPLE OPERATIONS',
-    title: 'HR & Talent Management Engine (HRMS)',
-    category: 'COMPLEX WEB • DATA PLATFORM',
-    tabCategory: 'ERP SYSTEMS',
-    image: '/images/our-business/kaluna-technology/services/appointment-system.webp',
+    slug: 'enterprise-solution',
+    client: 'CROSS-DIVISION WORKFLOW',
+    title: 'Autonomous Modules, Cohesive Enterprise Core',
+    category: 'ENTERPRISE SOLUTION • WORKFLOW ARCHITECTURE',
+    tabCategory: 'ENTERPRISE SOLUTION',
+    image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
   },
   {
     id: 3,
-    slug: 'financial-accounting-automation-hub',
-    client: 'FINANCE OPERATIONS',
-    title: 'Financial & Accounting Automation Hub',
-    category: 'IOT SYSTEM • IT INFRASTRUCTURE',
-    tabCategory: 'ERP SYSTEMS',
-    image: '/images/our-business/kaluna-technology/services/finance-system.webp',
+    slug: 'enterprise-solution',
+    client: 'PEOPLE & RESOURCE ECOSYSTEM',
+    title: 'Continuous Workflow Synchronization Across Divisions',
+    category: 'ENTERPRISE SOLUTION • HRMS & TALENT',
+    tabCategory: 'ENTERPRISE SOLUTION',
+    image: '/images/our-solution/projects/enterprise/marka-hrms.png',
   },
   {
     id: 4,
-    slug: 'supply-chain-inventory-control',
-    client: 'SUPPLY CHAIN',
-    title: 'Supply Chain & Inventory Control System',
-    category: 'SURVEY & DATA • ANALYTICS PLATFORM',
-    tabCategory: 'OPERATIONS',
-    image: '/images/our-business/kaluna-technology/services/e-commerce-website.webp',
+    slug: 'enterprise-solution',
+    client: 'SUPPLY CHAIN HARMONY',
+    title: 'End-to-End Enterprise Resource Balance',
+    category: 'ENTERPRISE SOLUTION • ASSET MANAGEMENT',
+    tabCategory: 'ENTERPRISE SOLUTION',
+    image: '/images/our-solution/projects/enterprise/marka-resource.png',
   },
   {
     id: 5,
-    slug: 'warehouse-management-system',
-    client: 'WAREHOUSE OPERATIONS',
-    title: 'Warehouse Management System',
-    category: 'MEDIA • CORPORATE PROFILE',
-    tabCategory: 'OPERATIONS',
-    image: '/images/our-business/kaluna-technology/services/warehouse-management.webp',
+    slug: 'data-ai-integration',
+    client: 'PREDICTIVE REASONING',
+    title: 'Transforming Raw Operational Entropy into Strategic Foresight',
+    category: 'DATA & AI • PREDICTIVE DEMAND',
+    tabCategory: 'DATA & AI INTEGRATION',
+    image: '/images/our-solution/projects/data-ai/markaplus.svg',
   },
   {
     id: 6,
-    slug: 'logistics-fleet-operations-tracker',
-    client: 'CONNECTED OPERATIONS',
-    title: 'Logistics & Fleet Operations Tracker',
-    category: 'IOT / FLEET VISIBILITY',
-    tabCategory: 'CONNECTED IOT',
-    image: '/images/projects/myboss-iot-system/1.webp',
+    slug: 'data-ai-integration',
+    client: 'INSTITUTIONAL INTELLIGENCE',
+    title: 'Unified Data Harmonization & Strategic Decision Engineering',
+    category: 'DATA & AI • UNIFIED INTELLIGENCE',
+    tabCategory: 'DATA & AI INTEGRATION',
+    image: '/images/our-solution/projects/data-ai/civitas-analytic.svg',
+  },
+  {
+    id: 7,
+    slug: 'smart-iot-system',
+    client: 'CONNECTED TELEMETRY',
+    title: 'Bridging Physical Assets & Digital Realities in Real-Time',
+    category: 'SMART IOT • INDUSTRIAL TELEMETRY',
+    tabCategory: 'SMART IOT SYSTEM',
+    image: '/images/our-solution/projects/iot/mybos-iot.svg',
+  },
+  {
+    id: 8,
+    slug: 'smart-iot-system',
+    client: 'EDGE AUTOMATION',
+    title: 'Intelligent Edge Telemetry & Hardware Workflow Automation',
+    category: 'SMART IOT • SMART SHOPFLOOR',
+    tabCategory: 'SMART IOT SYSTEM',
+    image: '/images/our-solution/projects/iot/sinau-print-iot.svg',
+  },
+  {
+    id: 9,
+    slug: 'smart-iot-system',
+    client: 'DEVICE ECOSYSTEM',
+    title: 'Synchronized Connected Infrastructure for Resilient Scale',
+    category: 'SMART IOT • HARDWARE HUB',
+    tabCategory: 'SMART IOT SYSTEM',
+    image: '/images/our-solution/projects/iot/aspoo-marketplace.svg',
+  },
+  {
+    id: 10,
+    slug: 'digital-development',
+    client: 'DIGITAL PERFORMANCE',
+    title: 'Architectural Excellence & Conversion-Driven Digital Experiences',
+    category: 'DIGITAL DEVELOPMENT • ARCHITECTURAL UX',
+    tabCategory: 'DIGITAL DEVELOPMENT',
+    image: '/images/our-solution/projects/digital/adsvar.svg',
+  },
+  {
+    id: 11,
+    slug: 'digital-development',
+    client: 'RESILIENT PLATFORMS',
+    title: 'High-Density Cloud Architectures Engineered for Scale',
+    category: 'DIGITAL DEVELOPMENT • CLOUD RESILIENCE',
+    tabCategory: 'DIGITAL DEVELOPMENT',
+    image: '/images/our-solution/projects/digital/presstis.svg',
+  },
+  {
+    id: 12,
+    slug: 'digital-development',
+    client: 'IMMERSIVE STORYTELLING',
+    title: 'Fluid Visual Aesthetics Balanced with High-Speed Precision',
+    category: 'DIGITAL DEVELOPMENT • CREATIVE COMMERCE',
+    tabCategory: 'DIGITAL DEVELOPMENT',
+    image: '/images/our-solution/projects/digital/craftivation.svg',
+  },
+  {
+    id: 13,
+    slug: 'digital-development',
+    client: 'SCALABLE PORTALS',
+    title: 'Complex Enterprise Interfaces Crafted for Effortless Clarity',
+    category: 'DIGITAL DEVELOPMENT • ENTERPRISE PORTALS',
+    tabCategory: 'DIGITAL DEVELOPMENT',
+    image: '/images/our-solution/projects/digital/artic-analytica.svg',
   },
 ];
 
-/*
- * Ukuran tombol kategori 17% lebih kecil
- * daripada ukuran desain awal:
- *
- * TECHNOLOGY     168px → 139.5px
- * SURVEY & DATA  166px → 138px
- * MEDIA           97px → 80.5px
- */
 const CATEGORY_WIDTH: Record<ProjectCategory, string> = {
-  'ERP SYSTEMS': 'w-[clamp(113px,7.263vw,139.5px)]',
-  OPERATIONS: 'w-[clamp(114.5px,7.176vw,138px)]',
-  'CONNECTED IOT': 'w-[clamp(120px,8vw,154px)]',
+  'ENTERPRISE SOLUTION': 'w-auto px-[14px]',
+  'DATA & AI INTEGRATION': 'w-auto px-[14px]',
+  'SMART IOT SYSTEM': 'w-auto px-[14px]',
+  'DIGITAL DEVELOPMENT': 'w-auto px-[14px]',
 };
 
 const SERVICE_CATEGORY_LABELS: Record<string, string> = {
-  'point-of-sale-pos': 'ERP / RETAIL MANAGEMENT',
-  'hr-talent-management-engine': 'ERP / PEOPLE & TALENT',
-  'financial-accounting-automation-hub': 'ERP / FINANCE AUTOMATION',
-  'supply-chain-inventory-control': 'OPERATIONS / INVENTORY',
-  'warehouse-management-system': 'OPERATIONS / FULFILLMENT',
-  'logistics-fleet-operations-tracker': 'IOT / FLEET VISIBILITY',
+  'enterprise-solution': 'ENTERPRISE SOLUTION • MARKA ERP',
+  'data-ai-integration': 'DATA & AI • ARTIFICIAL INTELLIGENCE',
+  'smart-iot-system': 'SMART IOT • KALUNA TECHNOLOGY',
+  'digital-development': 'DIGITAL DEVELOPMENT • WEB2UP',
 };
 
 /* =========================================================
@@ -161,7 +220,7 @@ function IconChevronRight({ size = 24 }: { size?: number }) {
 
 export default function ProjectShowcase() {
   const [activeCategory, setActiveCategory] =
-    useState<ProjectCategory>('ERP SYSTEMS');
+    useState<ProjectCategory>('ENTERPRISE SOLUTION');
 
   const filteredProjects = MOCK_PROJECTS.filter(
     (project) => project.tabCategory === activeCategory,

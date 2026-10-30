@@ -499,7 +499,7 @@ export default function CaseStudiesPage() {
                     href={`/insight-programs/case-studies/${item.slug}`}
                     className="group block"
                   >
-                    <div className="relative flex aspect-[546/400] w-full overflow-hidden rounded-3xl max-[480px]:rounded-[18px]">
+                    <div className="relative flex aspect-[1396/936] w-full overflow-hidden rounded-3xl bg-[#0B0F19] max-[480px]:rounded-[18px]">
                       <img
                         src={item.image}
                         alt={item.imageAlt}
