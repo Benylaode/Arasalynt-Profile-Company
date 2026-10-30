@@ -21,27 +21,34 @@ import {
 import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
 
 export const metadata: Metadata = {
-  title: { absolute: `${SITE_NAME} — Solusi Teknologi Enterprise & Software House` },
+  title: { absolute: `${SITE_NAME} — Enterprise Technology Ecosystem & Solutions` },
   description:
-    'Arsalynk adalah penyedia solusi teknologi enterprise dan software house di Indonesia. Menghubungkan ekosistem bisnis dengan sistem ERP, IoT, dan data analytics.',
+    'Arsalynk (PT Sinergi Muda Arsa) delivers integrated enterprise technology solutions: custom ERP architecture, deep learning infrastructure, smart IoT telemetry, and digital engineering. Solusi teknologi enterprise dan software house di Indonesia.',
   keywords: [
+    // Bilingual High-Impact Keywords
+    'Arsalynk',
+    'PT Sinergi Muda Arsa',
     'software house indonesia',
-    'enterprise technology indonesia',
-    'ERP indonesia',
-    'solusi teknologi bisnis',
-    'IoT integration',
-    'data analytics indonesia',
-    'arsalynk',
-    'transformasi digital',
-    'sistem HRMS',
-    'POS sistem retail',
+    'solusi teknologi enterprise',
+    'konsultan ERP indonesia',
+    'sistem ERP custom enterprise',
+    'integrasi IoT industri',
+    'enterprise software development',
+    'custom ERP architecture',
+    'deep learning infrastructure',
+    'smart IoT telemetry',
+    'predictive data analytics',
+    'transformasi digital bisnis',
+    'digital transformation indonesia',
+    'enterprise HRMS',
+    'retail POS systems',
   ],
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
-    title: `${SITE_NAME} — Solusi Teknologi Enterprise & Software House`,
+    title: `${SITE_NAME} — Enterprise Technology Ecosystem & Solutions`,
     description:
-      'Penyedia solusi teknologi enterprise, software house, sistem ERP, integrasi IoT, dan data analytics terintegrasi di Indonesia.',
+      'Integrated enterprise technology solutions: custom ERP architecture, IoT telemetry, deep learning infrastructure, and custom digital development.',
     url: '/',
     images: [
       {
@@ -54,9 +61,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${SITE_NAME} | Solusi Teknologi Enterprise Indonesia`,
+    title: `${SITE_NAME} | Enterprise Technology Ecosystem`,
     description:
-      'Solusi teknologi enterprise terintegrasi: ERP, IoT, Data Intelligence, dan Software Development Indonesia.',
+      'Integrated enterprise technology solutions: ERP, IoT, Data Intelligence, and Scalable Digital Development.',
     images: ['/images/about-us/corporate-profile-hero.webp'],
   },
 };
@@ -67,17 +74,17 @@ export default function Home() {
     '@type': 'WebPage',
     '@id': `${SITE_URL}/#webpage`,
     url: `${SITE_URL}/`,
-    name: 'Arsalynk — Solusi Teknologi Enterprise & Software House',
+    name: 'Arsalynk — Enterprise Technology Ecosystem & Solutions',
     isPartOf: { '@id': `${SITE_URL}/#website` },
     about: { '@id': `${SITE_URL}/#organization` },
     mainEntity: { '@id': `${SITE_URL}/#organization` },
     description:
-      'Arsalynk adalah penyedia solusi teknologi enterprise & software house di Indonesia. Menghubungkan sistem ERP, integrasi IoT, data analytics, POS, HRMS & transformasi digital bisnis.',
+      'Arsalynk provides integrated enterprise technology solutions: custom ERP systems, IoT device connectivity, deep learning pipelines, and digital development. Solusi teknologi enterprise & software house di Indonesia.',
     breadcrumb: {
       '@id': `${SITE_URL}/#breadcrumb`,
       ...buildBreadcrumbJsonLd([{ name: 'Home', url: `${SITE_URL}/` }]),
     },
-    inLanguage: 'id-ID',
+    inLanguage: ['en-US', 'id-ID'],
   };
 
   return (
@@ -102,8 +109,7 @@ export default function Home() {
               Enterprise technology solutions, connected through one ecosystem.
             </h2>
             <p className="mt-3 font-body text-[14px] leading-[1.75] text-[#555] md:text-[15px]">
-              Arsalynk adalah ekosistem teknologi enterprise Indonesia yang menghubungkan ERP, IoT,
-              data analytics, software development, riset, dan kapabilitas bisnis untuk transformasi digital yang terukur.
+              Arsalynk is an integrated enterprise technology ecosystem connecting custom ERP platforms, IoT telemetry, deep learning intelligence, web development, and strategic research for measurable digital transformation.
             </p>
           </div>
 

@@ -20,23 +20,23 @@ export const DEFAULT_CALLER_CONFIG = {
 export const ARSAI_QUICK_ACTIONS: QuickActionItem[] = [
   {
     id: 'about-company',
-    label: '🏢 Profil & Visi Misi Arsalynk',
-    prompt: 'Bisa jelaskan secara ringkas mengenai profil perusahaan PT Sinergi Muda Arsa (Arsalynk), visi misi, dan keunggulannya?',
+    label: 'Company Profile & Vision',
+    prompt: 'Could you briefly explain Arsalynk (PT Sinergi Muda Arsa) company profile, foundational vision, and core capabilities?',
   },
   {
     id: 'solutions-services',
-    label: '⚙️ Solusi Teknologi & Layanan IT',
-    prompt: 'Apa saja pilar solusi teknologi dan layanan IT enterprise yang ditawarkan oleh Arsalynk?',
+    label: 'Enterprise Solutions & Services',
+    prompt: 'What are the core enterprise technology solution pillars and software engineering services provided by Arsalynk?',
   },
   {
     id: 'case-studies-portfolio',
-    label: '💼 Portofolio & Studi Kasus Proyek',
-    prompt: 'Tolong berikan contoh studi kasus dan portofolio proyek teknologi yang pernah dikerjakan oleh Arsalynk.',
+    label: 'Project Case Studies',
+    prompt: 'Could you share examples of real-world implementation case studies and projects delivered by Arsalynk?',
   },
   {
     id: 'consultation-contact',
-    label: '💬 Hubungi Tim CS (WhatsApp)',
-    prompt: 'Saya ingin berkonsultasi langsung dengan Tim Customer Service Arsalynk via WhatsApp.',
+    label: 'Contact Support Team (WhatsApp)',
+    prompt: 'I would like to consult directly with the Arsalynk Customer Service team via WhatsApp.',
   },
 ];
 

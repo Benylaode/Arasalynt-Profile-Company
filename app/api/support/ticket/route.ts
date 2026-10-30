@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
 
     if (!rawBody || typeof rawBody !== 'object' || Array.isArray(rawBody)) {
       return NextResponse.json(
-        { error: 'Body request harus berupa JSON object yang valid' },
+        { error: 'Request body must be a valid JSON object' },
         { status: 400 }
       );
     }
@@ -106,7 +106,7 @@ export async function POST(req: NextRequest) {
           success: true,
           eventId,
           status: 202,
-          message: 'Tiket berhasil diterima oleh Marka ERP.',
+          message: 'Ticket successfully received by Marka ERP.',
           markaResponse: result.data,
         },
         { status: 202 }
@@ -129,7 +129,7 @@ export async function POST(req: NextRequest) {
       { status: result.status || 400 }
     );
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : 'Gagal memproses tiket';
+    const msg = err instanceof Error ? err.message : 'Failed to process ticket';
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }

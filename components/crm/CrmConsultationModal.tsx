@@ -84,13 +84,13 @@ export default function CrmConsultationModal({
       const result = await response.json();
 
       if (!response.ok || !result.success) {
-        throw new Error(result.error || 'Gagal mengirim formulir konsultasi CRM.');
+        throw new Error(result.error || 'Failed to submit CRM consultation form.');
       }
 
       setIsSuccess(true);
     } catch (err: unknown) {
       const errObj = err as Error;
-      setErrorMessage(errObj.message || 'Terjadi kendala saat mengirim data. Silakan coba kembali.');
+      setErrorMessage(errObj.message || 'An error occurred while submitting data. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -124,7 +124,7 @@ export default function CrmConsultationModal({
         <button
           type="button"
           onClick={handleResetAndClose}
-          aria-label="Tutup form"
+          aria-label="Close modal"
           className="absolute right-5 top-5 flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-white/20 hover:text-white transition"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -143,10 +143,10 @@ export default function CrmConsultationModal({
             </div>
 
             <h3 id="crm-modal-title" className="font-heading text-2xl font-bold tracking-tight text-white">
-              Konsultasi Berhasil Terjadwal!
+              Consultation Successfully Scheduled!
             </h3>
             <p className="mx-auto mt-3 max-w-[440px] text-sm leading-relaxed text-white/70">
-              Data kebutuhan enterprise Anda telah tersimpan dan terhubung langsung ke sistem <strong className="text-white">Marka ERP CRM</strong> kami. Tim representatif kami akan segera menghubungi Anda.
+              Your enterprise project requirements have been recorded and synchronized directly with our <strong className="text-white">Marka ERP CRM</strong> system. Our engineering representatives will contact you shortly.
             </p>
 
             <button
@@ -154,7 +154,7 @@ export default function CrmConsultationModal({
               onClick={handleResetAndClose}
               className="mt-6 inline-flex h-11 items-center justify-center rounded-full bg-[#1A3E9E] px-8 text-xs font-bold tracking-wider uppercase text-white hover:bg-[#14347F] transition"
             >
-              Tutup &amp; Lanjutkan Eksplorasi
+              Close &amp; Continue Exploring
             </button>
           </div>
         ) : (
@@ -164,10 +164,10 @@ export default function CrmConsultationModal({
                 Enterprise CRM Consultation
               </span>
               <h2 id="crm-modal-title" className="mt-1 font-heading text-2xl font-bold tracking-tight text-white md:text-3xl">
-                Jadwalkan Konsultasi Solusi
+                Schedule a Solution Consultation
               </h2>
               <p className="mt-1.5 text-xs text-white/60">
-                Hubungkan kebutuhan transformasi digital bisnis Anda langsung dengan representatif kami via Marka CRM.
+                Connect your digital transformation initiatives directly with our engineering representatives via Marka CRM.
               </p>
             </div>
 
@@ -181,27 +181,27 @@ export default function CrmConsultationModal({
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
                   <label className="block text-xs font-medium text-white/80 mb-1">
-                    Nama Lengkap <span className="text-[#FF5050]">*</span>
+                    Full Name <span className="text-[#FF5050]">*</span>
                   </label>
                   <input
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Budi Santoso"
+                    placeholder="e.g. John Doe"
                     className="h-10 w-full rounded-lg border border-white/15 bg-white/5 px-3 text-xs text-white placeholder-white/30 focus:border-[#1A3E9E] focus:outline-none"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-medium text-white/80 mb-1">
-                    Nama Perusahaan / Organisasi
+                    Company / Organization
                   </label>
                   <input
                     type="text"
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
-                    placeholder="PT Sinergi Muda Arsa"
+                    placeholder="e.g. Acme Corporation"
                     className="h-10 w-full rounded-lg border border-white/15 bg-white/5 px-3 text-xs text-white placeholder-white/30 focus:border-[#1A3E9E] focus:outline-none"
                   />
                 </div>
@@ -210,28 +210,28 @@ export default function CrmConsultationModal({
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
                   <label className="block text-xs font-medium text-white/80 mb-1">
-                    Email Bisnis <span className="text-[#FF5050]">*</span>
+                    Business Email <span className="text-[#FF5050]">*</span>
                   </label>
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="budi@perusahaan.com"
+                    placeholder="john@company.com"
                     className="h-10 w-full rounded-lg border border-white/15 bg-white/5 px-3 text-xs text-white placeholder-white/30 focus:border-[#1A3E9E] focus:outline-none"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-medium text-white/80 mb-1">
-                    Nomor WhatsApp / Telepon <span className="text-[#FF5050]">*</span>
+                    WhatsApp / Phone Number <span className="text-[#FF5050]">*</span>
                   </label>
                   <input
                     type="tel"
                     required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+62 812-3456-7890"
+                    placeholder="+1 (555) 000-0000"
                     className="h-10 w-full rounded-lg border border-white/15 bg-white/5 px-3 text-xs text-white placeholder-white/30 focus:border-[#1A3E9E] focus:outline-none"
                   />
                 </div>
@@ -240,14 +240,14 @@ export default function CrmConsultationModal({
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
                   <label className="block text-xs font-medium text-white/80 mb-1">
-                    Pilihan Solusi Utama
+                    Primary Solution Focus
                   </label>
                   <select
                     value={solutionChoice}
                     onChange={(e) => setSolutionChoice(e.target.value)}
                     className="h-10 w-full rounded-lg border border-white/15 bg-[#0A0D14] px-3 text-xs text-white focus:border-[#1A3E9E] focus:outline-none"
                   >
-                    <option value="">Pilih Solusi...</option>
+                    <option value="">Select a Solution...</option>
                     {SOLUTIONS.map((s) => (
                       <option key={s} value={s}>
                         {s}
@@ -258,13 +258,13 @@ export default function CrmConsultationModal({
 
                 <div>
                   <label className="block text-xs font-medium text-white/80 mb-1">
-                    Target Estimasi Budget (Opsional)
+                    Estimated Target Budget (Optional)
                   </label>
                   <input
                     type="number"
                     value={targetBudget}
                     onChange={(e) => setTargetBudget(e.target.value)}
-                    placeholder="Cth: 50000000"
+                    placeholder="e.g. 50000"
                     className="h-10 w-full rounded-lg border border-white/15 bg-white/5 px-3 text-xs text-white placeholder-white/30 focus:border-[#1A3E9E] focus:outline-none"
                   />
                 </div>
@@ -272,14 +272,14 @@ export default function CrmConsultationModal({
 
               <div>
                 <label className="block text-xs font-medium text-white/80 mb-1">
-                  Deskripsi Kebutuhan Proyek <span className="text-[#FF5050]">*</span>
+                  Project Scope &amp; Description <span className="text-[#FF5050]">*</span>
                 </label>
                 <textarea
                   required
                   rows={3}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Ceritakan gambaran sistem atau proses bisnis yang ingin diintegrasikan..."
+                  placeholder="Describe your system architecture, business workflows, or goals..."
                   className="w-full resize-none rounded-lg border border-white/15 bg-white/5 p-3 text-xs text-white placeholder-white/30 focus:border-[#1A3E9E] focus:outline-none"
                 />
               </div>
@@ -289,15 +289,13 @@ export default function CrmConsultationModal({
                   type="button"
                   onClick={handleResetAndClose}
                   className="h-10 rounded-lg px-4 text-xs font-medium text-white/70 hover:text-white transition"
-                >
-                  Batal
-                </button>
+                >Cancel</button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
                   className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-[#1A3E9E] px-6 text-xs font-bold uppercase tracking-wider text-white hover:bg-[#14347F] transition disabled:opacity-50"
                 >
-                  {isSubmitting ? 'Mengirim ke CRM...' : 'Kirim Konsultasi'}
+                  {isSubmitting ? 'Submitting to CRM...' : 'Submit Consultation'}
                 </button>
               </div>
             </form>

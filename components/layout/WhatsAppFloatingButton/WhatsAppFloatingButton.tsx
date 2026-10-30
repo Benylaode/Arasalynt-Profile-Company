@@ -21,8 +21,8 @@ export default function WhatsAppFloatingButton() {
       href={WHATSAPP_LINK}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Hubungi Arsalynk melalui WhatsApp"
-      title="Hubungi kami melalui WhatsApp"
+      aria-label="Contact Arsalynk via WhatsApp"
+      title="Contact us via WhatsApp"
     >
       <WhatsAppIcon />
     </a>

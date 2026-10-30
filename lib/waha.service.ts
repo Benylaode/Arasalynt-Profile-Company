@@ -268,11 +268,11 @@ export async function forwardGuestInquiryToWhatsApp(
     `🔔 *[CHAT BARU DARI WEBSITE ARSALYNK]*\n\n` +
     `👤 *Pengirim:* ${name}\n` +
     `🆔 *Sesi:* #${sessionId}\n` +
-    `💬 *Pesan:* "${guestMessage}"\n\n` +
+    `💬 *Message:* "${guestMessage}"\n\n` +
     `──────────────────────\n` +
-    `👉 *Cara Membalas:* Cukup balas chat ini dengan awalan format:\n` +
-    `*[#${sessionId}] Balasan anda...*\n\n` +
-    `_Balasan Anda akan langsung muncul di layar obrolan website pengunjung secara otomatis._`;
+    `👉 *How to Reply:* Reply to this message using format:\n` +
+    `*[#${sessionId}] Your reply...*\n\n` +
+    `_Your reply will automatically appear on the visitor's website chat screen._`;
 
   return await sendWahaMessage(WAHA_CONFIG.csPhone, notificationText);
 }

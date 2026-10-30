@@ -96,7 +96,7 @@ export default function CrmPublicHub() {
               messageId: 'welcome-arsalynk',
               senderType: 'BOT',
               senderName: 'Arsalynk Assistant',
-              text: 'Halo! Selamat datang di layanan live customer support Arsalynk. Pesan Anda akan langsung diteruskan ke tim Commercial & Marka CRM kami.',
+              text: 'Hello! Welcome to Arsalynk Live Support. Your inquiry is routed directly to our solutions engineering team. How can we assist you today?',
               createdAt: new Date().toISOString(),
             },
           ]);
@@ -263,7 +263,7 @@ export default function CrmPublicHub() {
 
       const result = await res.json();
       if (!res.ok || !result.success) {
-        throw new Error(result.error || 'Gagal mengirim formulir konsultasi.');
+        throw new Error(result.error || 'Failed to submit consultation inquiry.');
       }
 
       setInquirySuccess(true);
@@ -279,7 +279,7 @@ export default function CrmPublicHub() {
   const handleTrackingQuery = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!docId.trim() || !docToken.trim()) {
-      setTrackingError('Mohon isi Nomor ID Dokumen dan Token Akses.');
+      setTrackingError('Please provide Document ID and Access Token.');
       return;
     }
 
@@ -299,7 +299,7 @@ export default function CrmPublicHub() {
       setTrackingResult(data.data || data);
     } catch (err: unknown) {
       const errObj = err as Error;
-      setTrackingError(errObj.message || 'Gagal mengambil data dari Marka CRM.');
+      setTrackingError(errObj.message || 'Failed to retrieve data from Marka CRM.');
     } finally {
       setIsLoadingTracking(false);
     }
@@ -308,7 +308,7 @@ export default function CrmPublicHub() {
   // ── SUBMIT QUOTATION DECISION ──
   const handleDecisionSubmit = async (decision: 'accepted' | 'rejected') => {
     if (!signatureName.trim()) {
-      setDecisionFeedback('Nama penandatangan wajib diisi.');
+      setDecisionFeedback('Signatory name is required.');
       return;
     }
     setIsSubmittingDecision(true);
@@ -329,13 +329,13 @@ export default function CrmPublicHub() {
 
       const resData = await res.json();
       if (!res.ok || !resData.success) {
-        throw new Error(resData.error || 'Gagal memproses keputusan.');
+        throw new Error(resData.error || 'Failed to process decision.');
       }
 
       setDecisionFeedback(
         decision === 'accepted'
-          ? '🎉 Penawaran berhasil disetujui (Accepted) di sistem Marka CRM.'
-          : 'Catatan penolakan telah diteruskan ke tim Commercial.'
+          ? '🎉 Quotation approved (Accepted) successfully in Marka CRM.'
+          : 'Decline / revision note dispatched to Arsalynk team.'
       );
 
       // Re-fetch
@@ -470,7 +470,7 @@ export default function CrmPublicHub() {
               <div className="flex flex-1 flex-col justify-between p-3">
                 {/* Visitor Name Ribbon */}
                 <div className="mb-2 flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-2.5 py-1.5 text-[11px]">
-                  <span className="text-white/50">Identitas:</span>
+                  <span className="text-white/50">Identity:</span>
                   <input
                     type="text"
                     value={visitorName}
@@ -480,7 +480,7 @@ export default function CrmPublicHub() {
                         localStorage.setItem('arsalynk_crm_visitor_name', e.target.value);
                       }
                     }}
-                    placeholder="Ketik nama Anda..."
+                    placeholder="Your name..."
                     className="flex-1 bg-transparent text-white outline-none placeholder-white/30"
                   />
                 </div>
@@ -495,7 +495,7 @@ export default function CrmPublicHub() {
                         className={`flex flex-col ${isMe ? 'items-end' : 'items-start'}`}
                       >
                         <div className="mb-0.5 text-[10px] text-white/40">
-                          {isMe ? 'Anda' : m.senderName || 'Marka CS'}
+                          {isMe ? 'You' : m.senderName || 'Arsalynk Support'}
                         </div>
                         <div
                           className={`max-w-[85%] rounded-2xl px-3.5 py-2 text-xs leading-relaxed ${
@@ -508,9 +508,9 @@ export default function CrmPublicHub() {
                         </div>
                         {isMe && m.status && (
                           <span className="mt-0.5 text-[9px] text-white/40">
-                            {m.status === 'sending' && 'Mengirim...'}
-                            {m.status === 'sent' && '✓ Terkirim ke CRM'}
-                            {m.status === 'error' && '✕ Gagal'}
+                            {m.status === 'sending' && 'Sending...'}
+                            {m.status === 'sent' && '✓ Sent to CRM'}
+                            {m.status === 'error' && '✕ Failed'}
                           </span>
                         )}
                       </div>
@@ -525,14 +525,14 @@ export default function CrmPublicHub() {
                     type="text"
                     value={chatInput}
                     onChange={(e) => setChatInput(e.target.value)}
-                    placeholder="Ketik pesan untuk tim CRM..."
+                    placeholder="Type a message for our engineering team..."
                     className="flex-1 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs text-white placeholder-white/40 focus:border-[#E6FF2A] focus:outline-none"
                   />
                   <button
                     type="submit"
                     disabled={isSendingChat || !chatInput.trim()}
                     className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E6FF2A] text-[#101010] transition hover:bg-white disabled:opacity-40"
-                    aria-label="Kirim Pesan"
+                    aria-label="Send Message"
                   >
                     ➔
                   </button>
@@ -549,24 +549,24 @@ export default function CrmPublicHub() {
                       ✓
                     </div>
                     <h4 className="font-heading text-base font-semibold text-white">
-                      Inquiry Berhasil Disimpan!
+                      Inquiry Successfully Saved!
                     </h4>
                     <p className="mt-1 text-xs text-white/70">
-                      Data Anda telah tersinkronisasi ke Marka ERP. Konsultan Arsalynk akan segera menghubungi Anda.
+                      Your inquiry is synchronized with Marka ERP. An Arsalynk consultant will contact you shortly.
                     </p>
                     <button
                       type="button"
                       onClick={() => setInquirySuccess(false)}
                       className="mt-4 rounded-lg bg-white/10 px-4 py-2 text-xs font-semibold text-white hover:bg-white/20"
                     >
-                      Kirim Inquiry Lain
+                      Submit Another Inquiry
                     </button>
                   </div>
                 ) : (
                   <form onSubmit={handleInquirySubmit} className="space-y-3">
                     <div>
                       <label className="block text-[11px] font-medium text-white/70 mb-1">
-                        Nama Lengkap *
+                        Full Name *
                       </label>
                       <input
                         type="text"
@@ -575,29 +575,27 @@ export default function CrmPublicHub() {
                         onChange={(e) =>
                           setInquiryForm((p) => ({ ...p, name: e.target.value }))
                         }
-                        placeholder="Nama PIC"
+                        placeholder="Contact Person Name"
                         className="w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-xs text-white placeholder-white/30 focus:border-[#E6FF2A] focus:outline-none"
                       />
                     </div>
 
                     <div className="grid grid-cols-2 gap-2">
                       <div>
-                        <label className="block text-[11px] font-medium text-white/70 mb-1">
-                          Perusahaan
-                        </label>
+                        <label className="block text-[11px] font-medium text-white/70 mb-1">Company</label>
                         <input
                           type="text"
                           value={inquiryForm.company}
                           onChange={(e) =>
                             setInquiryForm((p) => ({ ...p, company: e.target.value }))
                           }
-                          placeholder="PT / Instansi"
+                          placeholder="Company / Institution"
                           className="w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-xs text-white placeholder-white/30 focus:border-[#E6FF2A] focus:outline-none"
                         />
                       </div>
                       <div>
                         <label className="block text-[11px] font-medium text-white/70 mb-1">
-                          WhatsApp / Telepon *
+                          WhatsApp / Phone *
                         </label>
                         <input
                           type="tel"
@@ -606,7 +604,7 @@ export default function CrmPublicHub() {
                           onChange={(e) =>
                             setInquiryForm((p) => ({ ...p, phone: e.target.value }))
                           }
-                          placeholder="08123456789"
+                          placeholder="+1 555-0199"
                           className="w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-xs text-white placeholder-white/30 focus:border-[#E6FF2A] focus:outline-none"
                         />
                       </div>
@@ -614,7 +612,7 @@ export default function CrmPublicHub() {
 
                     <div>
                       <label className="block text-[11px] font-medium text-white/70 mb-1">
-                        Email Bisnis *
+                        Business Email *
                       </label>
                       <input
                         type="email"
@@ -623,14 +621,14 @@ export default function CrmPublicHub() {
                         onChange={(e) =>
                           setInquiryForm((p) => ({ ...p, email: e.target.value }))
                         }
-                        placeholder="pic@perusahaan.com"
+                        placeholder="contact@company.com"
                         className="w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-xs text-white placeholder-white/30 focus:border-[#E6FF2A] focus:outline-none"
                       />
                     </div>
 
                     <div>
                       <label className="block text-[11px] font-medium text-white/70 mb-1">
-                        Kebutuhan Solusi *
+                        Solution Required *
                       </label>
                       <select
                         value={inquiryForm.solution}
@@ -649,7 +647,7 @@ export default function CrmPublicHub() {
 
                     <div>
                       <label className="block text-[11px] font-medium text-white/70 mb-1">
-                        Pesan Kebutuhan / Spesifikasi *
+                        Project Requirements / Specifications *
                       </label>
                       <textarea
                         rows={2}
@@ -658,7 +656,7 @@ export default function CrmPublicHub() {
                         onChange={(e) =>
                           setInquiryForm((p) => ({ ...p, message: e.target.value }))
                         }
-                        placeholder="Jelaskan alur atau modul sistem yang dibutuhkan..."
+                        placeholder="Describe required workflows, features, or system scale..."
                         className="w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-xs text-white placeholder-white/30 focus:border-[#E6FF2A] focus:outline-none"
                       />
                     </div>
@@ -674,7 +672,7 @@ export default function CrmPublicHub() {
                       disabled={isSubmittingInquiry}
                       className="w-full rounded-lg bg-[#E6FF2A] py-2.5 text-xs font-bold uppercase tracking-wider text-[#101010] transition hover:bg-white disabled:opacity-50"
                     >
-                      {isSubmittingInquiry ? 'Menyimpan ke Marka CRM...' : 'Kirim Inquiry Konsultasi'}
+                      {isSubmittingInquiry ? 'Saving to Marka CRM...' : 'Submit Consultation Inquiry'}
                     </button>
                   </form>
                 )}
@@ -695,8 +693,7 @@ export default function CrmPublicHub() {
                       trackingType === 'tickets' ? 'bg-[#1A3E9E] text-white' : 'text-white/60'
                     }`}
                   >
-                    Tiket Support
-                  </button>
+                    Support Ticket</button>
                   <button
                     type="button"
                     onClick={() => {
@@ -714,7 +711,7 @@ export default function CrmPublicHub() {
                 <form onSubmit={handleTrackingQuery} className="space-y-2.5">
                   <div>
                     <label className="block text-[11px] font-medium text-white/70 mb-1">
-                      {trackingType === 'tickets' ? 'Nomor Tiket' : 'Nomor Quotation'}
+                      {trackingType === 'tickets' ? 'Ticket Number' : 'Quotation Number'}
                     </label>
                     <input
                       type="text"
@@ -728,14 +725,14 @@ export default function CrmPublicHub() {
 
                   <div>
                     <label className="block text-[11px] font-medium text-white/70 mb-1">
-                      Token Akses Dokumen
+                      Document Access Token
                     </label>
                     <input
                       type="text"
                       required
                       value={docToken}
                       onChange={(e) => setDocToken(e.target.value)}
-                      placeholder="Token rahasia dokumen"
+                      placeholder="Document access token"
                       className="w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-xs text-white placeholder-white/30"
                     />
                   </div>
@@ -751,7 +748,7 @@ export default function CrmPublicHub() {
                     disabled={isLoadingTracking}
                     className="w-full rounded-lg bg-[#E6FF2A] py-2 text-xs font-bold uppercase tracking-wider text-[#101010] transition hover:bg-white disabled:opacity-50"
                   >
-                    {isLoadingTracking ? 'Memeriksa...' : 'Cek Status Dokumen'}
+                    {isLoadingTracking ? 'Checking...' : 'Check Document Status'}
                   </button>
                 </form>
 
@@ -763,20 +760,20 @@ export default function CrmPublicHub() {
                         {trackingResult.code || trackingResult.ticket_number || docId}
                       </span>
                       <span className="rounded bg-[#1A3E9E] px-2 py-0.5 text-[10px] uppercase font-bold text-white">
-                        {trackingResult.status || 'Aktif'}
+                        {trackingResult.status || 'Active'}
                       </span>
                     </div>
 
                     <div className="mt-2 space-y-1.5 text-white/80 text-[11px]">
                       {trackingResult.title && (
                         <div>
-                          <span className="text-white/40">Judul: </span>
+                          <span className="text-white/40">Title: </span>
                           {trackingResult.title}
                         </div>
                       )}
                       {trackingResult.total_amount && (
                         <div>
-                          <span className="text-white/40">Nilai: </span>
+                          <span className="text-white/40">Value: </span>
                           <span className="text-[#E6FF2A] font-bold">
                             Rp {Number(trackingResult.total_amount).toLocaleString('id-ID')}
                           </span>
@@ -796,7 +793,7 @@ export default function CrmPublicHub() {
                           type="text"
                           value={signatureName}
                           onChange={(e) => setSignatureName(e.target.value)}
-                          placeholder="Nama Penandatangan *"
+                          placeholder="Signatory Name *"
                           className="w-full rounded border border-white/15 bg-white/5 px-2 py-1.5 text-xs text-white"
                         />
                         <div className="flex gap-2">

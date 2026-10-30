@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
     const result = await fetchMarkaPortalData(type, id, token);
     return NextResponse.json(result, { status: result.status || 200 });
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : 'Gagal membaca data portal Marka';
+    const msg = err instanceof Error ? err.message : 'Failed to read Marka portal data';
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }

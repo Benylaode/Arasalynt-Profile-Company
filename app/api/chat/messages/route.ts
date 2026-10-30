@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
     const messages = crmRepo.getChatMessages(threadId);
     return NextResponse.json({ success: true, messages });
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : 'Gagal memuat pesan chat';
+    const msg = err instanceof Error ? err.message : 'Failed to load chat messages';
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }

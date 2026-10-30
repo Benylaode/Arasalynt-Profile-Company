@@ -10,9 +10,9 @@ import {
 } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: `Client Portal & Support Tiket — ${SITE_NAME}`,
+  title: `Client Portal & Support Tickets — ${SITE_NAME}`,
   description:
-    'Portal klien resmi Arsalynk. Pengajuan tiket support teknis dan verifikasi persetujuan dokumen penawaran (quotation) terintegrasi langsung dengan Marka ERP.',
+    'Official Arsalynk Client Portal. Direct support ticket submission and quotation verification integrated seamlessly with Marka ERP.',
   alternates: { canonical: '/portal' },
   robots: { index: false, follow: false, nocache: true },
 };
@@ -69,19 +69,25 @@ export default function ClientPortalPage() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#F7F7F7]">
       <main>
-        {/* ================================================================
-            HERO — Standard Height Matching Corporate Pages
-        ================================================================= */}
+        {/* HERO SECTION */}
         <section className="relative isolate flex h-[clamp(560px,41.666vw,800px)] items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-[#05070A]">
           <div className="absolute inset-0 -z-30">
-            <img
-              src="/images/our-business/kaluna-technology/hero.webp"
-              alt=""
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
               className="h-full w-full object-cover object-center"
-            />
+              poster="/images/our-works/our-works-hero-bg.webp"
+            >
+              <source
+                src="/videos/our-solution/our-solution-hero-video.mp4"
+                type="video/mp4"
+              />
+            </video>
           </div>
 
-          <div className="pointer-events-none absolute inset-0 -z-20 bg-black/20" />
+          <div className="pointer-events-none absolute inset-0 -z-20 bg-black/40" />
 
           <div
             className="pointer-events-none absolute -inset-x-[17.4%] bottom-[-55.63%] top-[31%] -z-20 bg-cover bg-center opacity-100 mix-blend-plus-lighter"
@@ -117,10 +123,10 @@ export default function ClientPortalPage() {
               </div>
 
               <h1 className="font-heading text-[clamp(44px,4.5vw,84px)] font-medium leading-[1.05] tracking-[-0.02em] text-[#F7F7F7]">
-                Portal Klien
+                Client Portal
               </h1>
               <p className="max-w-[580px] font-body text-[14px] leading-[1.6] text-white/75 sm:text-[16px]">
-                Akses resmi untuk mengonfirmasi dokumen penawaran kerja sama dan mengajukan tiket bantuan teknis proyek Anda secara terintegrasi.
+                Official client hub for reviewing commercial quotations, confirming agreements, and logging engineering support tickets directly with Marka ERP.
               </p>
             </div>
           </div>
@@ -138,33 +144,31 @@ export default function ClientPortalPage() {
           </a>
         </section>
 
-        {/* ================================================================
-            PORTAL INTERFACE SECTION — 2-Column Responsive Layout
-        ================================================================= */}
+        {/* PORTAL INTERFACE SECTION */}
         <section
           id="portal-content"
           className="w-full scroll-mt-8 bg-[#F7F7F7] px-[clamp(24px,13.333vw,256px)] py-[clamp(48px,4.5vw,76px)]"
         >
           <div className="mx-auto flex w-full max-w-[1408px] items-start justify-between gap-[clamp(36px,4vw,72px)] max-[1024px]:flex-col">
-            {/* LEFT COLUMN: Context & Support Info */}
+            {/* LEFT COLUMN */}
             <div className="flex w-[38%] shrink-0 flex-col gap-[clamp(20px,2vw,32px)] max-[1024px]:w-full">
               <h2 className="font-heading text-[clamp(28px,2.4vw,42px)] font-medium leading-[1.15] tracking-[-0.03em] text-[#101010]">
-                Transparansi &amp;
+                Transparency &amp;
                 <br />
-                Kemudahan
+                Seamless
                 <br />
-                Kolaborasi
+                Collaboration
               </h2>
 
               <p className="font-body text-[14px] leading-[1.65] text-[#717171] md:text-[15px]">
-                Kami memastikan setiap persetujuan penawaran dan tiket permohonan bantuan teknis diproses secara real-time. Tim operasional Arsalynk siap mendampingi seluruh kebutuhan Anda.
+                We ensure every proposal verification and technical support ticket is processed in real time. Arsalynk's operations team is always dedicated to supporting your ongoing business needs.
               </p>
 
               <div className="flex flex-col gap-4 rounded-[16px] md:gap-5">
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>BANTUAN &amp; INFORMASI</span>
+                    <span>HELP &amp; INFORMATION</span>
                   </div>
 
                   <div className="flex flex-col gap-1.5">
@@ -195,24 +199,24 @@ export default function ClientPortalPage() {
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>INTEGRASI MARKA ERP</span>
+                    <span>MARKA ERP INTEGRATION</span>
                   </div>
 
                   <p className="font-body text-[13px] leading-[1.5] tracking-[0.01em] text-[#717171]">
-                    Seluruh permohonan tiket support dan konfirmasi penawaran akan langsung tercatat dan ditindaklanjuti oleh sistem Marka ERP resmi.
+                    All support tickets and quotation decisions are synchronized directly and handled transparently by the official Marka ERP system.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* RIGHT COLUMN: Interactive Client Portal Client Component */}
+            {/* RIGHT COLUMN */}
             <div className="w-[58%] shrink-0 max-[1024px]:w-full">
               <Suspense
                 fallback={
                   <div className="flex h-64 items-center justify-center rounded-[20px] border border-[#D9D9D9] bg-white font-body text-sm text-[#717171] shadow-sm">
                     <div className="flex items-center gap-2">
                       <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#1A3E9E] border-t-transparent" />
-                      <span>Memuat data Client Portal &amp; Modul Support Tiket...</span>
+                      <span>Loading Client Portal &amp; Support Ticket Module...</span>
                     </div>
                   </div>
                 }
@@ -223,9 +227,7 @@ export default function ClientPortalPage() {
           </div>
         </section>
 
-        {/* ================================================================
-            BOTTOM CTA — Beyond Expectations Section
-        ================================================================= */}
+        {/* BOTTOM CTA */}
         <BeyondExpectations />
       </main>
     </div>

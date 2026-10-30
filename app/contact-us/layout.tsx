@@ -10,12 +10,14 @@ export const metadata: Metadata = {
   title: 'Contact Us',
   description: PAGE_DEF.description,
   keywords: [
-    'konsultasi IT enterprise',
+    'contact arsalynk',
     'hubungi arsalynk',
+    'konsultasi IT enterprise',
     'kontak software house indonesia',
     'konsultan ERP indonesia',
     'project IT consultation',
     'digital transformation consultation',
+    'enterprise technology advisory',
   ],
   alternates: { canonical: '/contact-us' },
   openGraph: {
@@ -60,7 +62,7 @@ export default function ContactLayout({ children }: Readonly<{ children: React.R
         about: { '@id': `${SITE_URL}/#organization` },
         breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
         description: PAGE_DEF.description,
-        inLanguage: 'id-ID',
+        inLanguage: ['en-US', 'id-ID'],
         mainEntity: {
           '@type': 'Organization',
           '@id': `${SITE_URL}/#organization`,
