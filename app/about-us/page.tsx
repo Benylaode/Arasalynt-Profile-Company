@@ -34,14 +34,14 @@ const HUB_SECTIONS = [
     ctaText: 'Explore Ecosystem Philosophy',
   },
   {
-    slug: 'our-business',
-    href: '/our-business',
-    title: 'Our Business Ecosystem',
-    eyebrow: '04 · SPECIALIZED BUSINESS UNITS',
+    slug: 'our-solution',
+    href: '/our-solution',
+    title: 'Our Solution',
+    eyebrow: '04 · ENTERPRISE SOLUTIONS',
     image: '/images/about-us/company-leadership/leadership-intro-office.webp',
     summary:
-      'An integrated portfolio of specialized business units within the Arsalynk ecosystem: from Kaluna Technology’s ERP engineering to Artic Analytica’s data intelligence and strategic media.',
-    ctaText: 'Explore Our Business',
+      'An integrated suite of custom enterprise solutions: from ERP operational architecture and AI deep learning to connected IoT ecosystems and scalable web development.',
+    ctaText: 'Explore Our Solution',
   },
 ] as const;
 
@@ -156,7 +156,7 @@ export default function AboutUsPage() {
                 <span className="font-heading text-[clamp(36px,3.2vw,54px)] font-medium text-[#1A3E9E]">4+</span>
                 <div>
                   <h3 className="font-heading text-[18px] font-medium text-[#101010]">Strategic Pillars</h3>
-                  <p className="mt-1 font-body text-[13px] leading-relaxed text-[#666]">Unified foundations: Profile, Leadership, Philosophy &amp; Business.</p>
+                  <p className="mt-1 font-body text-[13px] leading-relaxed text-[#666]">Unified foundations: Profile, Leadership, Philosophy &amp; Solution.</p>
                 </div>
               </div>
               <div className="flex flex-col justify-between rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
@@ -197,7 +197,7 @@ export default function AboutUsPage() {
               Explore Our Foundations &amp; Ecosystem
             </h2>
             <p className="max-w-[700px] font-body text-[clamp(15px,1vw,18px)] leading-[1.65] text-[#555]">
-              Discover the structural architecture behind Arsalynk through four core pillars that define our corporate vision, executive leadership, operating philosophy, and specialized business units.
+              Discover the structural architecture behind Arsalynk through four core pillars that define our corporate vision, executive leadership, operating philosophy, and enterprise solutions.
             </p>
           </div>
 

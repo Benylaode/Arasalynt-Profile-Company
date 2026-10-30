@@ -23,6 +23,8 @@ const nextConfig: NextConfig = {
       },
 
       // Noncanonical aliases redirect to actual indexable pages.
+      { source: '/our-business', destination: '/our-solution', permanent: true },
+      { source: '/our-business/:path*', destination: '/our-solution', permanent: true },
       { source: '/services', destination: '/our-solution', permanent: true },
       { source: '/portfolio', destination: '/our-works', permanent: true },
       { source: '/contact', destination: '/contact-us', permanent: true },
