@@ -11,41 +11,39 @@ export const SITE_NAVIGATION_ITEMS = [
     name: 'Our Solution',
     href: '/our-solution',
     description:
-      'Layanan solusi teknologi enterprise Arsalynk: implementasi ERP kustom, deep learning AI, sistem Smart IoT, dan pengembangan aplikasi digital scalable.',
+      'Layanan ERP, IoT, data intelligence, dan solusi digital enterprise terintegrasi Arsalynk.',
   },
   {
     name: 'About Us',
     href: '/about-us',
     description:
-      'Mengenal profil, visi, tata kelola kepemimpinan, dan filosofi ekosistem Arsalynk sebagai partner transformasi digital enterprise terpercaya.',
+      'Mengenal profil, visi, jajaran kepemimpinan, dan ekosistem bisnis teknologi Arsalynk.',
   },
   {
     name: 'Insight & Programs',
     href: '/insight-programs',
     description:
-      'Wadah pengetahuan transformasi digital Arsalynk: menghubungkan studi kasus lapangan, analisis arsitektur, dan kepemimpinan strategis.',
+      'Pusat wawasan, studi kasus implementasi proyek, dan pemikiran kepemimpinan teknologi.',
   },
   {
     name: 'Case Studies',
     href: '/insight-programs/case-studies',
     description:
-      'Dokumentasi mendalam implementasi proyek nyata: Sinau Print POS, Presstis media platform, MarkaPlus AI, MARKA finance, dan MyBOS IoT telemetri.',
+      'Studi kasus implementasi: Sinau Print POS, Presstis media, MarkaPlus AI, MARKA finance, dan MyBOS IoT.',
   },
   {
     name: 'Leadership Thoughts',
     href: '/insight-programs/leadership-thoughts',
     description:
-      'Perspektif dan gagasan kepemimpinan eksekutif seputar arsitektur alur kerja, tata kelola data, ketahanan organisasi, dan strategi teknologi.',
+      'Pandangan kepemimpinan tentang arsitektur alur kerja, integrasi data, dan tata kelola organisasi.',
   },
   {
     name: 'Contact Us',
     href: '/contact-us',
     description:
-      'Konsultasikan kebutuhan proyek teknologi enterprise Anda bersama tim ahli Arsalynk via WhatsApp resmi, email, atau kantor kami di Jakarta.',
+      'Konsultasikan kebutuhan transformasi digital dan arsitektur sistem enterprise Anda bersama Arsalynk.',
   },
-] as const;
-
-export type NavigationItem = (typeof SITE_NAVIGATION_ITEMS)[number];
+];
 
 /**
  * Membangun Schema BreadcrumbList terstandar untuk Google Search Console & SERP.
@@ -97,10 +95,10 @@ export function buildWebSiteJsonLd() {
     name: BRAND.name,
     alternateName: BRAND.alternateNames,
     description:
-      'Arsalynk menyediakan solusi teknologi enterprise terintegrasi di Indonesia, meliputi ERP, IoT, data analytics, POS, HRMS, dan transformasi digital bisnis.',
+      'Arsalynk (PT Sinergi Muda Arsa) provides integrated enterprise technology solutions: custom ERP architecture, deep learning AI, connected IoT ecosystems, and scalable web development. Solusi teknologi enterprise dan software house terpercaya di Indonesia.',
     publisher: { '@id': `${SITE_URL}/#organization` },
     about: { '@id': `${SITE_URL}/#organization` },
-    inLanguage: 'id-ID',
+    inLanguage: ['en-US', 'id-ID'],
     potentialAction: {
       '@type': 'SearchAction',
       target: {
@@ -146,7 +144,7 @@ export function buildOrganizationJsonLd() {
       height: 630,
     },
     description:
-      'Arsalynk adalah ekosistem bisnis teknologi enterprise terintegrasi di Indonesia, menyediakan solusi ERP, IoT, data analytics, software development, HRMS, POS, riset strategis, dan transformasi digital.',
+      'Arsalynk (PT Sinergi Muda Arsa) is an integrated enterprise technology ecosystem providing custom ERP architecture, deep learning AI, smart IoT telemetry, scalable web development, and strategic digital transformation. Ekosistem solusi teknologi enterprise dan software house terkemuka di Indonesia.',
     address: BRAND.addresses.map((addr) => ({
       '@type': 'PostalAddress',
       ...addr,

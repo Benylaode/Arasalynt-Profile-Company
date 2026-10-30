@@ -91,7 +91,7 @@ function generateEmailHTML({
   const safePhone = escapeHtml(phone || '-');
   const safeInquiry = escapeHtml(inquiry || 'General Inquiry');
   const safeMessage = escapeHtml(
-    message || 'Tidak ada pesan tambahan.',
+    message || 'No additional message provided.',
   );
 
   return `
@@ -215,7 +215,7 @@ function generateEmailHTML({
                   color: #101010;
                 "
               >
-                Pesan Baru dari Form Kontak
+                New Message from Contact Form
               </h1>
 
               <p
@@ -226,7 +226,7 @@ function generateEmailHTML({
                   line-height: 1.5;
                 "
               >
-                Berikut adalah rincian calon klien yang telah
+                Here are the details from the prospective client inquiry who
                 mengisi formulir pada website Arsalynk.
               </p>
 
@@ -255,9 +255,7 @@ function generateEmailHTML({
                       font-weight: 600;
                       color: #64748B;
                     "
-                  >
-                    Nama Pengirim
-                  </td>
+                  >Sender Name</td>
 
                   <td
                     style="
@@ -281,9 +279,7 @@ function generateEmailHTML({
                       font-weight: 600;
                       color: #64748B;
                     "
-                  >
-                    Perusahaan
-                  </td>
+                  >Company</td>
 
                   <td
                     style="
@@ -340,9 +336,7 @@ function generateEmailHTML({
                       font-weight: 600;
                       color: #64748B;
                     "
-                  >
-                    Nomor Telepon
-                  </td>
+                  >Phone Number</td>
 
                   <td
                     style="
@@ -364,9 +358,7 @@ function generateEmailHTML({
                       font-weight: 600;
                       color: #64748B;
                     "
-                  >
-                    Layanan / Kebutuhan
-                  </td>
+                  >Service / Scope</td>
 
                   <td
                     style="
@@ -407,7 +399,7 @@ function generateEmailHTML({
                     margin-bottom: 8px;
                   "
                 >
-                  Pesan / Pertanyaan:
+                  Message / Inquiry:
                 </label>
 
                 <div
@@ -457,7 +449,7 @@ function generateEmailHTML({
                         font-weight: 600;
                       "
                     >
-                      Balas Pesan Klien &rarr;
+                      Reply to Client &rarr;
                     </a>
 
                   </td>
@@ -658,7 +650,7 @@ export async function submitLead(
     }
 
     console.log(
-      `[Lead #${leadId}] Lead berhasil disimpan ke database dari ${email}`,
+      `[Lead #${leadId}] Lead successfully saved to database from ${email}`,
     );
 
     const markaSyncStatus = await sendMarkaInquiry({
@@ -689,7 +681,7 @@ export async function submitLead(
       return {
         success: false,
         message:
-          'Inquiry berhasil disimpan, tetapi email notification gagal dikonfigurasi.',
+          'Inquiry received successfully, but email notification is not configured.',
         id: leadId,
         markaSyncStatus,
       };
@@ -733,7 +725,7 @@ export async function submitLead(
     });
 
     console.log(
-      `[Lead #${leadId}] Email notification berhasil dikirim ke ${emailReceiver}`,
+      `[Lead #${leadId}] Email notification successfully sent to ${emailReceiver}`,
     );
 
     return {

@@ -19,23 +19,41 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Arsalynk — Solusi Teknologi Enterprise & Software House',
+    default: 'Arsalynk — Enterprise Technology Solutions & Software House',
     template: `%s | ${SITE_NAME}`,
   },
-  description: SITE_DESCRIPTION,
+  description:
+    'Arsalynk delivers integrated enterprise technology solutions: custom ERP architecture, deep learning infrastructure, smart IoT telemetry, and digital engineering. Solusi teknologi enterprise dan software house di Indonesia.',
   keywords: [
-    'arsalynk',
+    // Brand & Corporate Identity
+    'Arsalynk',
+    'Arsalynk Group',
+    'PT Sinergi Muda Arsa',
+    // Indonesian High-Intent Commercial Keywords
+    'solusi teknologi enterprise indonesia',
     'software house indonesia',
-    'enterprise technology',
-    'ERP system indonesia',
-    'solusi teknologi bisnis',
-    'IoT integration indonesia',
-    'data analytics',
-    'digital transformation',
-    'HRMS indonesia',
-    'POS retail system',
-    'konsultan IT indonesia',
-    'custom software development',
+    'software house jakarta',
+    'software house semarang',
+    'konsultan ERP indonesia',
+    'sistem ERP custom enterprise',
+    'integrasi IoT industri indonesia',
+    'pengembangan aplikasi web enterprise',
+    'data analytics indonesia',
+    'deep learning data engineering',
+    'transformasi digital bisnis',
+    'jasa pembuatan ERP',
+    'vendor software enterprise',
+    'sistem POS retail indonesia',
+    'HRMS enterprise indonesia',
+    // English Enterprise Global Keywords
+    'enterprise technology ecosystem',
+    'enterprise software development',
+    'custom ERP architecture',
+    'smart IoT systems',
+    'deep learning infrastructure',
+    'data intelligence pipelines',
+    'scalable digital engineering',
+    'digital transformation consulting',
   ],
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
@@ -91,8 +109,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    locale: 'id_ID',
-    alternateLocale: 'en_US',
+    locale: 'en_US',
+    alternateLocale: 'id_ID',
     siteName: SITE_NAME,
     url: '/',
     title: `${SITE_NAME} — Enterprise Technology Solutions & Software House Indonesia`,
@@ -139,7 +157,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="id" className={manrope.variable} data-scroll-behavior="smooth">
+    <html lang="en" className={manrope.variable} data-scroll-behavior="smooth">
       <head>
         {/* Apple Safari & WebKit Performance Hints */}
         <meta name="apple-mobile-web-app-capable" content="yes" />

@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
       body.customer_name ||
       rawCustomer.name ||
       (extractedEmail ? extractedEmail.split('@')[0] : '') ||
-      'Calon Klien'
+      'Prospective Client'
     ).trim();
 
     const effectiveContact = (body.contact || extractedPhone || extractedEmail || '').trim();
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
 
     if (!effectiveContact) {
       return NextResponse.json(
-        { success: false, error: 'Email atau Nomor WhatsApp wajib diisi' },
+        { success: false, error: 'Email or WhatsApp phone number is required' },
         { status: 400 }
       );
     }
@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Failed to record inquiry:', error);
     return NextResponse.json(
-      { success: false, error: 'Gagal menyimpan data ke sistem CRM' },
+      { success: false, error: 'Failed to record data in CRM system' },
       { status: 500 }
     );
   }
@@ -141,7 +141,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('Failed to fetch inquiries:', error);
     return NextResponse.json(
-      { success: false, error: 'Gagal memuat data konsultasi CRM' },
+      { success: false, error: 'Failed to load CRM consultation data' },
       { status: 500 }
     );
   }
@@ -171,7 +171,7 @@ export async function PATCH(request: NextRequest) {
   } catch (error) {
     console.error('Failed to update inquiry status:', error);
     return NextResponse.json(
-      { success: false, error: 'Gagal memperbarui status inquiry' },
+      { success: false, error: 'Failed to update inquiry status' },
       { status: 500 }
     );
   }
@@ -194,7 +194,7 @@ export async function DELETE(request: NextRequest) {
   } catch (error) {
     console.error('Failed to delete inquiry:', error);
     return NextResponse.json(
-      { success: false, error: 'Gagal menghapus data inquiry' },
+      { success: false, error: 'Failed to delete inquiry record' },
       { status: 500 }
     );
   }

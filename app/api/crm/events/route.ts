@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
     const logs = crmRepo.getEventLogs(limit);
     return NextResponse.json({ success: true, logs });
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : 'Gagal memuat log events';
+    const msg = err instanceof Error ? err.message : 'Failed to load log events';
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
@@ -18,9 +18,9 @@ export async function GET(req: NextRequest) {
 export async function DELETE() {
   try {
     crmRepo.clearEventLogs();
-    return NextResponse.json({ success: true, message: 'Log events berhasil dibersihkan' });
+    return NextResponse.json({ success: true, message: 'Log events successfully cleared' });
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : 'Gagal membersihkan log';
+    const msg = err instanceof Error ? err.message : 'Failed to clear log';
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }

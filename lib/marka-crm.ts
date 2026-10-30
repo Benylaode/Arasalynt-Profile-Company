@@ -318,7 +318,7 @@ export async function sendMarkaInquiry(input: {
 }): Promise<MarkaInquirySyncStatus> {
   const eventId = `inq-${Date.now()}-${randomBytes(4).toString('hex')}`;
 
-  const cleanName = String(input.name || 'Calon Klien').trim().slice(0, 200);
+  const cleanName = String(input.name || 'Prospective Client').trim().slice(0, 200);
   const rawEmail = String(input.email || '').trim().toLowerCase();
   const rawPhone = String(input.phone || '').trim();
   const phoneDigits = rawPhone.replace(/\D/g, '');
@@ -334,11 +334,11 @@ export async function sendMarkaInquiry(input: {
 
   const cleanPhone = rawPhone ? rawPhone.slice(0, 40) : undefined;
   const cleanCompany = input.company ? String(input.company).trim().slice(0, 200) : undefined;
-  const cleanSubject = String(input.inquiry || 'Inquiry Layanan').trim().slice(0, 300);
+  const cleanSubject = String(input.inquiry || 'Service Inquiry').trim().slice(0, 300);
   const cleanDesc = String(
     input.message
       ? `${input.message}${cleanCompany ? `\n\nPerusahaan: ${cleanCompany}` : ''}`
-      : `Inquiry dari formulir website.${cleanCompany ? ` Perusahaan: ${cleanCompany}` : ''}`
+      : `Inquiry from website form.${cleanCompany ? ` Company: ${cleanCompany}` : ''}`
   ).slice(0, 20000);
 
   const result = await sendMarkaEvent(eventId, 'inquiry.submitted', {

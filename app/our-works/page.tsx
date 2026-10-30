@@ -88,7 +88,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: 6,
-    title: 'Kajian Kelayakan Pengembangan Gedung Industri Kreatif (GIK) sebagai Destinasi Wisata Belanja Oleh-Oleh Khas Kota Semarang',
+    title: 'Kajian Kelayakan Pengembangan Creative Industry Building (GIK) as a Tourism and Retail Destination Oleh-Oleh Khas Kota Semarang',
     slug: 'kajian-kelayakan-gik',
     image: '/images/projects/kajian-kelayakan-gik/1.webp',
     corporation: 'Artic Analytica',

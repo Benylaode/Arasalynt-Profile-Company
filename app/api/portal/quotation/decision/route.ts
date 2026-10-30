@@ -16,10 +16,10 @@ function mapWorkerErrorToMessage(rawError: string, targetIdentifier: string, cur
   const statusInfo = currentStatus ? ` Status saat ini: ${currentStatus}.` : '';
 
   if (normalizedError === 'QUOTATION_NOT_SENT') {
-    return `Penawaran '${targetIdentifier}' belum dikirim ke klien (belum berstatus SENT), sehingga belum dapat diputuskan.${statusInfo} Silakan hubungi tim Arsalynk.`;
+    return `Quotation '${targetIdentifier}' has not been marked as SENT, therefore cannot be approved yet.`;
   }
   if (normalizedError.startsWith('QUOTATION_ALREADY_DECIDED')) {
-    return `Penawaran '${targetIdentifier}' sudah diputuskan sebelumnya dengan keputusan berbeda, sehingga tidak dapat diubah lagi.${statusInfo}`;
+    return `Quotation '${targetIdentifier}' has already been decided with a different resolution.`;
   }
 
   if (
@@ -29,22 +29,22 @@ function mapWorkerErrorToMessage(rawError: string, targetIdentifier: string, cur
     normalizedError === 'QUOTATION_ALREADY_REJECTED' ||
     normalizedError.includes('ALREADY_ACCEPTED')
   ) {
-    return `Dokumen penawaran '${targetIdentifier}' sudah diproses sebelumnya sehingga keputusan tidak dapat diubah lagi.${statusInfo}`;
+    return `Quotation document '${targetIdentifier}' has already been processed and cannot be altered.`;
   }
   if (normalizedError === 'QUOTATION_EXPIRED') {
-    return `Dokumen penawaran '${targetIdentifier}' telah melewati masa berlaku (expired) di Marka ERP.`;
+    return `Quotation document '${targetIdentifier}' has expired in Marka ERP.`;
   }
   if (normalizedError === 'QUOTATION_NOT_FOUND') {
-    return `Dokumen penawaran '${targetIdentifier}' tidak ditemukan pada akun perusahaan Marka ERP. Pastikan nomor quotation atau ID sesuai.`;
+    return `Quotation document '${targetIdentifier}' was not found in Marka ERP.`;
   }
   if (normalizedError === 'QUOTATION_NOT_DECIDABLE') {
-    return `Dokumen penawaran '${targetIdentifier}' tidak dapat diputuskan. Di sistem Marka ERP, pastikan status quotation berstatus 'SENT' (bukan Draft, Cancelled, atau sudah diputuskan).`;
+    return `Quotation '${targetIdentifier}' cannot be finalized. Ensure it is in SENT status.`;
   }
   if (normalizedError === 'QUOTATION_OPPORTUNITY_MISSING') {
-    return `Dokumen penawaran '${targetIdentifier}' belum terhubung ke Opportunity di Marka CRM. Keputusan 'ACCEPTED' memerlukan data Opportunity yang terhubung.`;
+    return `Quotation '${targetIdentifier}' is not linked to an active Opportunity in Marka CRM.`;
   }
   if (normalizedError === 'INVALID_QUOTATION_DECISION') {
-    return `Data keputusan untuk quotation '${targetIdentifier}' ditolak validator Marka. Pastikan nomor quotation benar.`;
+    return `Decision data for quotation '${targetIdentifier}' was rejected by Marka validator.`;
   }
   if (normalizedError === 'ORIGIN_DOMAIN_NOT_ALLOWED') {
     return 'Domain asal tidak diizinkan oleh Integration Source di Marka CRM.';
@@ -53,7 +53,7 @@ function mapWorkerErrorToMessage(rawError: string, targetIdentifier: string, cur
     return "Integration Source di Marka CRM belum mengizinkan event 'quotation.decision'.";
   }
 
-  return rawError || 'Gagal memproses keputusan penawaran pada worker Marka CRM.';
+  return rawError || 'Failed to process quotation decision on Marka CRM worker.';
 }
 
 /**
@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
 
     if (!rawBody || typeof rawBody !== 'object' || Array.isArray(rawBody)) {
       return NextResponse.json(
-        { error: 'Body request harus berupa JSON object yang valid' },
+        { error: 'Request body must be a valid JSON object' },
         { status: 400 }
       );
     }
@@ -145,7 +145,7 @@ export async function POST(req: NextRequest) {
     const rawDecision = body.decision;
     if (!rawDecision || typeof rawDecision !== 'string') {
       return NextResponse.json(
-        { error: 'Keputusan (decision) wajib diisi dengan ACCEPTED atau REJECTED' },
+        { error: 'Decision must be either ACCEPTED or REJECTED' },
         { status: 400 }
       );
     }
@@ -217,7 +217,7 @@ export async function POST(req: NextRequest) {
           message:
             cleanDecision === 'ACCEPTED'
               ? `Persetujuan penawaran ${targetIdentifier} telah diterima oleh sistem Marka. Tim Arsalynk akan segera menghubungi Anda.`
-              : `Keputusan penolakan penawaran ${targetIdentifier} telah diterima oleh sistem Marka.`,
+              : `Revision request for quotation ${targetIdentifier} has been received by Marka ERP.`,
           markaResponse: result.data,
         },
         { status: 202 }
@@ -248,7 +248,7 @@ export async function POST(req: NextRequest) {
       { status: result.status || 500 }
     );
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : 'Gagal memproses keputusan quotation';
+    const msg = err instanceof Error ? err.message : 'Failed to process quotation decision';
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
@@ -279,7 +279,7 @@ export async function GET(req: NextRequest) {
         eventId: cleanEventId,
         processing_status: 'COMPLETED',
         completed: true,
-        message: `Keputusan untuk dokumen '${identifier}' telah berhasil diproses dan dicatat dalam sistem Marka ERP.`,
+        message: `Decision for document '${identifier}' has been successfully processed in Marka ERP.`,
         dispatchedAt: localLog.createdAt,
       });
     }
@@ -301,7 +301,7 @@ export async function GET(req: NextRequest) {
           eventId: cleanEventId,
           processing_status: 'COMPLETED',
           completed: true,
-          message: `Keputusan untuk dokumen '${identifier}' telah berhasil diterima dan masuk ke sistem Marka ERP.`,
+          message: `Decision for document '${identifier}' has been received by Marka ERP.`,
         });
       }
 
@@ -309,7 +309,7 @@ export async function GET(req: NextRequest) {
         {
           success: false,
           eventId: cleanEventId,
-          error: statusResult.error || 'Gagal mengambil status event dari Marka CRM',
+          error: statusResult.error || 'Failed to retrieve event status from Marka CRM',
         },
         { status: statusResult.status || 500 }
       );
@@ -358,11 +358,11 @@ export async function GET(req: NextRequest) {
       eventId: cleanEventId,
       processing_status: 'COMPLETED',
       completed: true,
-      message: `Keputusan untuk dokumen '${identifier}' telah berhasil diproses dan diperbarui pada sistem Marka ERP.`,
+      message: `Decision for document '${identifier}' has been processed and updated in Marka ERP.`,
       markaData,
     });
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : 'Gagal mengecek status event';
+    const msg = err instanceof Error ? err.message : 'Failed to check event status';
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }

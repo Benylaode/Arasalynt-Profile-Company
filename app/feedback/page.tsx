@@ -11,9 +11,9 @@ import {
 } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: `Feedback & Rating Layanan — ${SITE_NAME}`,
+  title: `Customer Feedback & Service Evaluation — ${SITE_NAME}`,
   description:
-    'Sampaikan masukan, penilaian kualitas layanan IT, dan evaluasi kepuasan proyek Anda kepada tim Arsalynk & Marka ERP.',
+    'Submit your feedback, IT service quality evaluation, and project satisfaction review directly to the Arsalynk management team.',
   alternates: { canonical: '/feedback' },
   robots: { index: false, follow: false, nocache: true },
 };
@@ -121,7 +121,7 @@ export default function FeedbackPage() {
                 Customer Feedback
               </h1>
               <p className="max-w-[580px] font-body text-[14px] leading-[1.6] text-white/75 sm:text-[16px]">
-                Evaluasi dan ulasan kepuasan Anda mendorong kami untuk terus meningkatkan standar mutu implementasi teknologi dan layanan purna jual Arsalynk.
+                Your evaluation and satisfaction reviews drive us to continually elevate technology implementation quality and ongoing support standards.
               </p>
             </div>
           </div>
@@ -148,22 +148,22 @@ export default function FeedbackPage() {
             {/* LEFT COLUMN */}
             <div className="flex w-[42%] shrink-0 flex-col gap-[clamp(20px,2vw,32px)] max-[1024px]:w-full">
               <h2 className="font-heading text-[clamp(28px,2.4vw,42px)] font-medium leading-[1.15] tracking-[-0.03em] text-[#101010]">
-                Suara Anda
+                Your Voice
                 <br />
-                Membentuk Masa Depan
+                Shapes the Future
                 <br />
-                Solusi Kami
+                of Our Solutions
               </h2>
 
               <p className="font-body text-[14px] leading-[1.65] text-[#717171] md:text-[15px]">
-                Setiap masukan, kritik konstruktif, dan penilaian kepuasan langsung dianalisis oleh tim Quality Assurance dan Management Arsalynk untuk perbaikan berkelanjutan.
+                Every review, constructive feedback, and satisfaction rating is directly analyzed by Arsalynk Quality Assurance and Management for continuous engineering refinement.
               </p>
 
               <div className="flex flex-col gap-4 rounded-[16px] md:gap-5">
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>LAYANAN KLIEN RESMI</span>
+                    <span>OFFICIAL CLIENT SERVICE</span>
                   </div>
 
                   <div className="flex flex-col gap-1.5">
@@ -194,11 +194,11 @@ export default function FeedbackPage() {
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>KEAMANAN DATA</span>
+                    <span>DATA CONFIDENTIALITY</span>
                   </div>
 
                   <p className="font-body text-[13px] leading-[1.5] tracking-[0.01em] text-[#717171]">
-                    Identitas dan evaluasi Anda diperlakukan secara rahasia untuk keperluan audit internal dan peningkatan layanan proyek.
+                    Your corporate identity and review details are handled with strict privacy protocols for internal audits and ongoing quality improvement.
                   </p>
                 </div>
               </div>

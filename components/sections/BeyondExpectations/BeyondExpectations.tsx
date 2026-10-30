@@ -80,13 +80,13 @@ export default function BeyondExpectations() {
           </Link>
 
           <Link
-            href="/our-works"
+            href="/our-solution"
             className="inline-flex h-[clamp(47px,3.125vw,60px)] min-w-[clamp(171px,11.719vw,225px)] items-center justify-center rounded-full border border-[#E6FF2A] px-[clamp(24px,1.667vw,32px)] text-[clamp(14px,0.833vw,16px)] font-extrabold leading-[1.2] text-[#F7F7F7] transition-colors duration-300 hover:bg-[#E6FF2A] hover:text-[#101010] max-[480px]:w-full max-[480px]:max-w-[280px]"
             style={{
               fontFamily: '"Manrope", Arial, sans-serif',
             }}
           >
-            EXPLORE WORKS
+            EXPLORE SOLUTIONS
           </Link>
         </div>
       </div>

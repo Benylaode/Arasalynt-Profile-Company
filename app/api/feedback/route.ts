@@ -47,14 +47,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Kode Klien / Customer Code wajib diisi sesuai identitas mitra aktif di Marka ERP (contoh: CUST-MP-01).',
+          error: 'Client Code is required according to your active enterprise ID in Marka ERP (e.g. CUST-MP-01).',
         },
         { status: 400 }
       );
     }
     if (customerCode.length > 100) {
       return NextResponse.json(
-        { success: false, error: 'Kode Klien tidak boleh melebihi 100 karakter.' },
+        { success: false, error: 'Client Code must not exceed 100 characters.' },
         { status: 400 }
       );
     }
@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
     // B. Rating (Wajib Integer 1 - 5)
     if (rating === undefined || rating === null || rating === '') {
       return NextResponse.json(
-        { success: false, error: 'Penilaian skala kepuasan (rating 1-5) wajib dipilih.' },
+        { success: false, error: 'Satisfaction rating (scale 1-5) is required.' },
         { status: 400 }
       );
     }
@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
     // C. Feedback Text (Wajib, Max 2.000 Karakter)
     if (!feedbackText) {
       return NextResponse.json(
-        { success: false, error: 'Isi feedback / ulasan evaluasi wajib diisi.' },
+        { success: false, error: 'Feedback comments or review text is required.' },
         { status: 400 }
       );
     }
@@ -132,7 +132,7 @@ export async function POST(req: NextRequest) {
             success: true,
             eventId,
             status: 200,
-            message: 'Event feedback dengan ID ini sudah pernah diterima sebelumnya.',
+            message: 'Feedback event with this ID has already been recorded.',
             markaResponse: result.data,
           },
           { status: 200 }
@@ -145,7 +145,7 @@ export async function POST(req: NextRequest) {
           success: true,
           eventId,
           status: 202,
-          message: 'Feedback diterima untuk diproses Marka CRM.',
+          message: 'Feedback received for Marka CRM processing.',
           markaResponse: result.data,
         },
         { status: 202 }
@@ -160,9 +160,9 @@ export async function POST(req: NextRequest) {
       (resErr.message as string) ||
       '';
 
-    let errorMessage = rawError || 'Gagal meneruskan feedback ke Marka CRM.';
+    let errorMessage = rawError || 'Failed to dispatch feedback to Marka CRM.';
     if (rawError === 'CUSTOMER_PARTY_NOT_FOUND') {
-      errorMessage = `Kode Klien '${customerCode.toUpperCase()}' tidak ditemukan atau belum aktif di database Marka CRM. Pastikan kode klien sesuai dengan data rekanan Customer di Marka ERP.`;
+      errorMessage = `Client Code '${customerCode.toUpperCase()}' was not found or is not active in Marka ERP. Please ensure code matches your proposal or contract document.`;
     } else if (rawError === 'INVALID_FEEDBACK_EVENT') {
       errorMessage = 'Format atau panjang karakter payload feedback tidak memenuhi spesifikasi Marka CRM.';
     }
@@ -178,7 +178,7 @@ export async function POST(req: NextRequest) {
       { status: result.status || 500 }
     );
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : 'Gagal mengirim feedback';
+    const msg = err instanceof Error ? err.message : 'Failed to submit feedback';
     return NextResponse.json({ success: false, error: msg }, { status: 500 });
   }
 }

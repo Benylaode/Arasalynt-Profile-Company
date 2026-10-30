@@ -1074,14 +1074,14 @@ const LEGACY_TESTIMONIALS_DUMMY_DATA = [
     id: 2,
     name: "NINA PRATIWI",
     role: "IT Director at Sinar Mas",
-    text: "Sangat puas dengan layanan IT Solution dari Arsalynk. Sistem kami sekarang jauh lebih stabil dan cepat. Tim support-nya juga sangat responsif dan professional. Sangat direkomendasikan untuk enterprise!",
+    text: "Extremely satisfied with Arsalynk's enterprise IT solutions. Our systems are now significantly more stable, faster, and reliable. The engineering and support team is proactive and highly professional. Strongly recommended for enterprise operations!",
     avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop",
   },
   {
     id: 3,
     name: "BUDI SETIAWAN",
     role: "Chief Technology Officer at GOTO Logistics",
-    text: "Arsalynk membantu kami melakukan integrasi sistem logistik nasional secara mulus. Arsitektur cloud mereka sangat tangguh dan andal untuk menangani beban transaksi dengan volume sangat tinggi.",
+    text: "Arsalynk helped us execute a seamless national logistics system integration. Their cloud and telematics architecture is exceptionally robust, handling immense transaction volumes without downtime.",
     avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop",
   },
 ];

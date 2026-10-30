@@ -182,7 +182,7 @@ export default function CrmDashboardPage() {
   };
 
   const handleDeleteInquiry = async (id: number) => {
-    if (!confirm('Hapus data inquiry ini dari database?')) return;
+    if (!confirm('Delete this inquiry record from database?')) return;
     try {
       const res = await fetch(`/api/inquiries?id=${id}`, { method: 'DELETE' });
       if (res.ok) {
@@ -195,7 +195,7 @@ export default function CrmDashboardPage() {
 
   const handleExportCsv = () => {
     if (inquiries.length === 0) return;
-    const headers = ['ID', 'Tanggal', 'Nama', 'Perusahaan', 'Phone', 'Email', 'Layanan', 'Status', 'Pesan'];
+    const headers = ['ID', 'Date', 'Name', 'Company', 'Phone', 'Email', 'Service', 'Status', 'Message'];
     const rows = filteredInquiries.map((i) => [
       i.id,
       i.createdAt,
@@ -352,7 +352,7 @@ export default function CrmDashboardPage() {
               <div className="flex flex-1 items-center gap-3">
                 <input
                   type="text"
-                  placeholder="Cari nama, perusahaan, email, atau phone..."
+                  placeholder="Search by name, company, email, or phone..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="h-10 w-full max-w-md rounded-lg border border-white/15 bg-white/5 px-3 text-sm text-white placeholder-white/40 focus:border-[#1A3E9E] focus:outline-none"
@@ -362,7 +362,7 @@ export default function CrmDashboardPage() {
                   onChange={(e) => setStatusFilter(e.target.value)}
                   className="h-10 rounded-lg border border-white/15 bg-[#05070A] px-3 text-sm text-white focus:border-[#1A3E9E] focus:outline-none"
                 >
-                  <option value="all">Semua Status</option>
+                  <option value="all">All Statuses</option>
                   <option value="pending">Pending</option>
                   <option value="contacted">Contacted</option>
                   <option value="deal">Deal</option>
@@ -386,12 +386,12 @@ export default function CrmDashboardPage() {
               <table className="w-full text-left text-sm text-white/80">
                 <thead className="border-b border-white/10 bg-white/[0.03] text-xs uppercase tracking-wider text-white/50">
                   <tr>
-                    <th className="px-4 py-3.5">Nama &amp; Perusahaan</th>
-                    <th className="px-4 py-3.5">Kontak</th>
-                    <th className="px-4 py-3.5">Layanan / Subjek</th>
-                    <th className="px-4 py-3.5">Waktu</th>
+                    <th className="px-4 py-3.5">Name &amp; Company</th>
+                    <th className="px-4 py-3.5">Contact</th>
+                    <th className="px-4 py-3.5">Service / Subject</th>
+                    <th className="px-4 py-3.5">Timestamp</th>
                     <th className="px-4 py-3.5">Status</th>
-                    <th className="px-4 py-3.5 text-right">Aksi</th>
+                    <th className="px-4 py-3.5 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5 font-normal">
@@ -404,7 +404,7 @@ export default function CrmDashboardPage() {
                   ) : filteredInquiries.length === 0 ? (
                     <tr>
                       <td colSpan={6} className="px-4 py-8 text-center text-white/40">
-                        Tidak ada inquiry yang sesuai filter.
+                        No inquiries match current filter.
                       </td>
                     </tr>
                   ) : (
@@ -462,7 +462,7 @@ export default function CrmDashboardPage() {
                           <button
                             onClick={() => handleDeleteInquiry(inq.id)}
                             className="rounded p-1 text-red-400 hover:bg-red-500/10 hover:text-red-300 transition"
-                            title="Hapus"
+                            title="Delete"
                           >
                             <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                               <polyline points="3 6 5 6 21 6" />
@@ -487,12 +487,11 @@ export default function CrmDashboardPage() {
                 Pencarian Percakapan
               </h3>
               <p className="mb-4 text-xs text-white/50">
-                Pesan yang masuk dari live-chat web atau WhatsApp secara otomatis tersinkronisasi dua arah dengan webhook Marka CRM.
-              </p>
+                Inbound messages from web live-chat or WhatsApp are automatically synchronized in real time with Marka CRM communication threads.</p>
               <div className="flex flex-col gap-2">
                 <input
                   type="text"
-                  placeholder="Masukkan thread ID (cth: webchat:guest_123)..."
+                  placeholder="Enter thread ID (e.g. webchat:guest_123)..."
                   value={selectedThread}
                   onChange={(e) => setSelectedThread(e.target.value)}
                   className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-xs text-white focus:border-[#1A3E9E] focus:outline-none"
@@ -518,7 +517,7 @@ export default function CrmDashboardPage() {
                 <div className="py-12 text-center text-xs text-white/40">Memuat riwayat chat...</div>
               ) : threadMessages.length === 0 ? (
                 <div className="py-12 text-center text-xs text-white/40">
-                  {selectedThread ? 'Tidak ada pesan dalam thread ini.' : 'Pilih atau masukkan thread ID untuk melihat percakapan.'}
+                  {selectedThread ? 'No messages found in this thread.' : 'Select or enter a thread ID above to view conversation history.'}
                 </div>
               ) : (
                 <div className="flex max-h-[500px] flex-col gap-3 overflow-y-auto pr-2">
@@ -551,7 +550,7 @@ export default function CrmDashboardPage() {
               <div>
                 <h3 className="font-heading text-base font-semibold text-white">Audit Log Integrasi Webhook Marka CRM</h3>
                 <p className="text-xs text-white/50">
-                  Riwayat transmisi event outward ke Marka CRM dan event callback inbound yang diterima secara live.
+                  Outward event transmission log to Marka CRM and live inbound callback events.
                 </p>
               </div>
             </div>
@@ -565,7 +564,7 @@ export default function CrmDashboardPage() {
                     <th className="px-4 py-3.5">Direction</th>
                     <th className="px-4 py-3.5">Status Code</th>
                     <th className="px-4 py-3.5">Waktu</th>
-                    <th className="px-4 py-3.5 text-right">Detail</th>
+                    <th className="px-4 py-3.5 text-right">Details</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5 text-xs font-mono">
@@ -578,7 +577,7 @@ export default function CrmDashboardPage() {
                   ) : logs.length === 0 ? (
                     <tr>
                       <td colSpan={6} className="px-4 py-8 text-center text-white/40">
-                        Belum ada riwayat webhook event yang tercatat.
+                        No webhook event history recorded yet.
                       </td>
                     </tr>
                   ) : (
@@ -695,8 +694,8 @@ export default function CrmDashboardPage() {
               <table className="w-full text-left text-sm text-white/80">
                 <thead className="border-b border-white/10 bg-white/[0.03] text-xs uppercase tracking-wider text-white/50">
                   <tr>
-                    <th className="px-4 py-3.5">Tiket ID</th>
-                    <th className="px-4 py-3.5">Subjek</th>
+                    <th className="px-4 py-3.5">Ticket ID</th>
+                    <th className="px-4 py-3.5">Subject</th>
                     <th className="px-4 py-3.5">Customer Email</th>
                     <th className="px-4 py-3.5">Serial Number</th>
                     <th className="px-4 py-3.5">Status</th>
@@ -707,13 +706,13 @@ export default function CrmDashboardPage() {
                   {loadingTickets ? (
                     <tr>
                       <td colSpan={6} className="px-4 py-8 text-center text-white/40">
-                        Memuat data tiket...
+                        Loading ticket data...
                       </td>
                     </tr>
                   ) : tickets.length === 0 ? (
                     <tr>
                       <td colSpan={6} className="px-4 py-8 text-center text-white/40">
-                        Belum ada tiket support yang tercatat.
+                        No support tickets recorded yet.
                       </td>
                     </tr>
                   ) : (

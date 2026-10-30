@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
       { status: result.success ? 202 : result.status || 500 }
     );
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : 'Gagal mengirim chat ke Marka CRM';
+    const msg = err instanceof Error ? err.message : 'Failed to send chat to Marka CRM';
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
