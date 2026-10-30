@@ -1,16 +1,9 @@
 import Link from 'next/link';
-import { Manrope } from 'next/font/google';
 import type { ReactNode } from 'react';
 import {
   WHATSAPP_LINK,
   WHATSAPP_PHONE_DISPLAY,
 } from '@/lib/constants';
-
-const manrope = Manrope({
-  subsets: ['latin'],
-  weight: ['400', '600'],
-  display: 'swap',
-});
 
 const ABOUT_LINKS = [
   { name: 'About Arsalynk', href: '/about-us' },
@@ -131,7 +124,7 @@ export default function Footer() {
   return (
     <footer
       role="contentinfo"
-      className={`${manrope.className} w-full bg-[#101010] text-[#D9D9D9]`}
+      className={`w-full bg-[#101010] text-[#D9D9D9]`}
       style={{ fontSynthesis: 'none', textRendering: 'geometricPrecision' }}
     >
       <div className="site-shell px-0 pt-[60px] max-[767px]:pt-[40px]">

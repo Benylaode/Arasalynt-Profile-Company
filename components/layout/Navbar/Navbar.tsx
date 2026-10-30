@@ -9,14 +9,6 @@ import {
 } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  display: 'swap',
-});
-
 const SCROLL_THRESHOLD = 40;
 
 type NavItem = {
@@ -900,7 +892,6 @@ export default function Navbar() {
       <header
         role="banner"
         className={`
-          ${inter.className}
           fixed inset-x-0 top-0
           z-50
           h-[64px] max-[1199px]:h-[80px]
@@ -1203,7 +1194,6 @@ export default function Navbar() {
       {/* Mobile drawer */}
       <div
         className={`
-          ${inter.className}
           fixed inset-x-0 bottom-0
           top-[80px]
           z-40
