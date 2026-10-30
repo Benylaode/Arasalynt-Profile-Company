@@ -487,7 +487,7 @@ export default function LeadershipThoughtsPage() {
                     href={`/insight-programs/leadership-thoughts/${article.slug}`}
                     className="group block"
                   >
-                    <div className="relative flex aspect-[546/400] w-full overflow-hidden rounded-3xl max-[480px]:rounded-[18px]">
+                    <div className="relative flex aspect-[4/3] w-full overflow-hidden rounded-3xl bg-[#0E131F] max-[480px]:rounded-[18px]">
                       <img
                         src={article.image}
                         alt={article.title}
