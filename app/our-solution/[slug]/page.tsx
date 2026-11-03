@@ -234,13 +234,13 @@ export default async function SolutionServicePage({ params }: PageProps) {
           <div className="flex max-w-[900px] flex-col gap-4">
             <div className="flex items-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.08em] text-[#1A3E9E]">
               <span className="h-2 w-2 bg-[#1A3E9E]" />
-              <span>THE CHALLENGE</span>
+              <span>{service.modulesSectionTag ?? 'CORE MODULES & SERVICES'}</span>
             </div>
             <h2 className="font-heading text-[clamp(32px,3.2vw,56px)] font-medium leading-[1.12]">
-              Real Challenges We Solve
+              {service.modulesSectionTitle ?? 'Real Challenges We Solve'}
             </h2>
             <p className="font-body text-[clamp(15px,1vw,18px)] leading-[1.65] text-[#424242]">
-              {service.challenge}
+              {service.modulesSectionDescription ?? service.challenge}
             </p>
           </div>
 
@@ -254,23 +254,23 @@ export default async function SolutionServicePage({ params }: PageProps) {
             {(service.challengeCards ?? [
               {
                 number: '01',
-                badge: 'Data Disconnect',
-                title: 'Information Fragmentation',
-                description: 'Corporate data trapped across disconnected databases and spreadsheets prevents teams from achieving a single source of operational truth.',
+                badge: 'System Architecture',
+                title: 'Enterprise Architecture & Workflows',
+                description: 'Integrated corporate infrastructure designed to unify cross-department operations, optimize system performance, and eliminate data silos.',
                 image: '/images/projects/altatic-analytic/1.webp',
               },
               {
                 number: '02',
-                badge: 'Decision Lag',
-                title: 'Data Lag & Reactive Decisions',
-                description: 'Delayed batch reports leave leadership reacting after problems happen instead of proactively forecasting market trends and demands.',
+                badge: 'Data & Intelligence',
+                title: 'Data Intelligence & Automated Analytics',
+                description: 'Advanced data engineering and analytics pipelines that convert raw operational metrics into actionable executive decision intelligence.',
                 image: '/images/projects/altatic-analytic/2.webp',
               },
               {
                 number: '03',
-                badge: 'Resource Drain',
-                title: 'Manual Administrative Burden',
-                description: 'Valuable workforce hours are consumed by repetitive data cleaning, manual reconciliations, and error-prone reporting pipelines.',
+                badge: 'Automation & Controls',
+                title: 'Operational Automation & Cloud Scalability',
+                description: 'High-availability operational automation that accelerates enterprise throughput, minimizes manual overhead, and scales securely.',
                 image: '/images/projects/altatic-analytic/3.webp',
               },
             ]).map((card) => (
@@ -367,9 +367,17 @@ export default async function SolutionServicePage({ params }: PageProps) {
                       />
                     </div>
                   )}
-                  <h3 className="font-heading text-[clamp(26px,2.4vw,40px)] font-bold leading-tight text-[#101010]">
-                    Integration with {service.partnerIntegration?.partnerName ?? 'Ecosystem'}
-                  </h3>
+                  <div className="flex flex-col gap-1.5">
+                    {service.partnerIntegration?.badge && (
+                      <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#1A3E9E]">
+                        {service.partnerIntegration.badge}
+                      </span>
+                    )}
+                    <h3 className="font-heading text-[clamp(26px,2.4vw,40px)] font-bold leading-tight text-[#101010]">
+                      {service.partnerIntegration?.heading ??
+                        `Integration with ${service.partnerIntegration?.partnerName ?? 'Ecosystem'}`}
+                    </h3>
+                  </div>
                 </div>
 
                 <div className="mt-6 rounded-2xl border border-[#0072BE]/10 bg-[#F2FCFF] p-5 sm:mt-8 sm:p-6">

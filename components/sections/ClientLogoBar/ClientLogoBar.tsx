@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 const BRANDS = [
   { name: 'Nasmoco', src: '/images/client-logos/nasmoco.webp' },
+  { name: 'Artic Analytica', src: '/images/client-logos/artic-analytica.png' },
   { name: 'Kota Semarang', src: '/images/client-logos/kota-semarang.webp' },
   { name: 'BSP', src: '/images/client-logos/bsp.webp' },
   { name: 'Suara Merdeka', src: '/images/client-logos/suara-merdeka.webp' },

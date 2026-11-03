@@ -184,10 +184,10 @@ export default function GrowthMetrics() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-8 max-[639px]:gap-y-0 lg:gap-y-0">
             {[
-              { value: "50+", label: "Enterprise Projects" },
-              { value: "10+", label: "Industry Sectors" },
-              { value: "7+",  label: "Specialized Company" },
-              { value: "25+", label: "Digital Solutions Delivered" },
+              { value: "20+", label: "Enterprise Projects" },
+              { value: "6+", label: "Industry Sectors" },
+              { value: "4+",  label: "Specialized Companies" },
+              { value: "18+", label: "Digital Solutions Delivered" },
             ].map((stat, index) => (
               <div 
                 key={index} 
