@@ -1,4 +1,4 @@
-/* ─── Types for Arsalynt Website ─── */
+/* ─── Types for Arsalynk Website ─── */
 
 export interface NavItem {
   label: string;

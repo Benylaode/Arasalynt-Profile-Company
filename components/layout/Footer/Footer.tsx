@@ -18,6 +18,12 @@ const COMPANY_LINKS = [
   { name: 'Privacy Policy', href: '/privacy-policy' },
 ];
 
+const USER_LINKS = [
+  { name: 'Client Portal', href: '/portal' },
+  { name: 'General CRM Hub', href: '/crm' },
+  { name: 'Feedback & Rating', href: '/feedback' },
+];
+
 const SOLUTION_LINKS = [
   { name: 'Enterprise Solution', href: '/our-solution/enterprise-solution' },
   { name: 'Data & AI Integration', href: '/our-solution/data-ai-integration' },
@@ -153,6 +159,17 @@ export default function Footer() {
                 <FooterTitle>COMPANY</FooterTitle>
                 <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
                   {COMPANY_LINKS.map((link) => (
+                    <li key={link.href}>
+                      <FooterLink href={link.href}>{link.name}</FooterLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="flex flex-col gap-3.5">
+                <FooterTitle href="/portal">USER &amp; CLIENT</FooterTitle>
+                <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
+                  {USER_LINKS.map((link) => (
                     <li key={link.href}>
                       <FooterLink href={link.href}>{link.name}</FooterLink>
                     </li>

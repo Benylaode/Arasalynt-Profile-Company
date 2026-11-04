@@ -341,7 +341,6 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     partnerIntegration: {
       partnerName: 'Artic Analytica',
       heading: 'Client Portfolio Collaboration: Artic Analytica',
-      badge: 'FEATURED CLIENT PORTFOLIO',
       logo: '/images/client-logos/artic-analytica.png',
       text: 'Artic Analytica is one of our key client portfolios. As their trusted technology partner, we collaborate extensively in enterprise data management, advanced AI pipeline architecture, and predictive intelligence modeling to power their data-driven research and strategic institutional decision making.',
     },
