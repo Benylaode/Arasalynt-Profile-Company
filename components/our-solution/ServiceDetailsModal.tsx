@@ -117,13 +117,13 @@ export default function ServiceDetailsModal({
 
         {/* ── HERO ILLUSTRATION / SCREENSHOT ── */}
         <div className="mt-6 overflow-hidden rounded-[22px] border border-black/10 bg-[#0C1222] shadow-[0_16px_40px_rgba(0,0,0,0.08)] sm:mt-8 sm:rounded-[24px]">
-          <div className="relative aspect-[16/9] w-full max-h-[500px] overflow-hidden bg-gradient-to-b from-[#10192D] to-[#0A101D]">
+          <div className="relative aspect-[1396/936] w-full max-h-[500px] overflow-hidden bg-gradient-to-b from-[#10192D] to-[#0A101D]">
             <img
               src={card.image}
               alt={card.title}
-              className="h-full w-full object-contain sm:object-cover"
+              className="h-full w-full object-contain"
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent" />
           </div>
         </div>
 
@@ -205,11 +205,11 @@ export default function ServiceDetailsModal({
           <div className="flex flex-col gap-6 lg:col-span-5 xl:col-span-4">
             {/* Abstract Service Architecture Illustration */}
             <div className="group overflow-hidden rounded-[24px] border border-black/10 bg-white p-3 shadow-[0_12px_30px_rgba(26,62,158,0.06)] transition-all duration-300 hover:border-[#1A3E9E] hover:shadow-[0_18px_40px_rgba(26,62,158,0.12)]">
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[18px] bg-[#0A101D] flex items-center justify-center">
+              <div className="relative aspect-[1396/936] w-full overflow-hidden rounded-[18px] bg-[#0A101D] flex items-center justify-center">
                 <img
                   src={detail.abstractImage ?? card.image}
                   alt={`${card.title} Architecture Overview`}
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="h-full w-full object-contain"
                 />
               </div>
             </div>

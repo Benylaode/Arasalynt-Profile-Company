@@ -71,13 +71,12 @@ export default function ChallengeCardsSection({
                 }}
                 className="group flex cursor-pointer flex-col overflow-hidden rounded-[26px] border border-[#E4E4E4] bg-white shadow-[0_12px_36px_rgba(26,62,158,0.06)] transition-all duration-300 hover:-translate-y-2 hover:border-[#1A3E9E] hover:shadow-[0_24px_50px_rgba(26,62,158,0.18)]"
               >
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#101010]/5">
+                <div className="relative aspect-[1396/936] w-full overflow-hidden bg-[#001830]">
                   <img
                     src={card.image}
                     alt={card.title}
-                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="h-full w-full object-contain"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-80 transition-opacity group-hover:opacity-100" />
                   
                   {/* Subtle hover pill overlay */}
                   <div className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 font-body text-[11px] font-bold text-[#101010] shadow-md backdrop-blur-sm transition-all duration-300 group-hover:bg-[#E6FF2A]">
