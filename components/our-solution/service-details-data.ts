@@ -184,7 +184,7 @@ export const SERVICE_CARD_DETAILS: Record<string, ServiceCardDetail> = {
   // ── DATA & AI INTEGRATION ──
   'Agentic AI Management & Enterprise Assistants': {
     category: 'Data & AI Integration',
-    suiteName: 'MARKA PLUS AI',
+    suiteName: 'ARSALYNK PLUS AI',
     suiteLogo: '/images/client-logos/artic-analytica.png',
     paragraphs: [
       'Agentic AI Management & Enterprise Assistants bridges traditional enterprise databases with state-of-the-art autonomous conversational AI agents. Built on secure local and cloud LLM architectures, these agents connect directly to ERP, CRM, and internal repositories to assist employees with contextual answers and workflow execution.',

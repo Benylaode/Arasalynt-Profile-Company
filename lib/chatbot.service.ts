@@ -42,6 +42,7 @@ export const ARSAI_QUICK_ACTIONS: QuickActionItem[] = [
 
 // Alias for backwards compatibility
 export const MARBOT_QUICK_ACTIONS = ARSAI_QUICK_ACTIONS;
+export const ARSALYNK_PLUS_QUICK_ACTIONS = ARSAI_QUICK_ACTIONS;
 
 const getBaseUrl = (): string => {
   return (process.env.NEXT_PUBLIC_CHATBOT_API_URL || 'https://chatbot-arsalynk.vercel.app').replace(/\/$/, '');
