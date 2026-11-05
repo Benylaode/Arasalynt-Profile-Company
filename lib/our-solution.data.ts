@@ -79,7 +79,7 @@ export const OUR_SOLUTION_CHALLENGES = [
     title: 'Stuck Software & Fragmented ERP',
     description:
       'Disconnected platforms create data silos, manual workarounds, and redundant enterprise tasks.',
-    image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
+    image: '/images/our-solution/projects/enterprise/marka-project-manager.svg',
   },
   {
     number: '03',
@@ -106,7 +106,7 @@ export const CORE_SOLUTIONS = [
     heroHeadline: 'Streamline Enterprise Operations with Centralized System Management',
     description:
       'Integrate corporate workflows into a single system for real-time visibility and scalable growth.',
-    image: '/images/our-solution/projects/enterprise/marka-sales.png',
+    image: '/images/our-solution/projects/enterprise/marka-sales.svg',
     cardBg: '#090D16',
     cardBorder: 'rgba(77, 139, 255, 0.28)',
     glowStart: '#3B82F6',
@@ -180,7 +180,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     heroHeadline: 'Streamline Enterprise Operations with Centralized System Management',
     description:
       'Integrate operational workflows across divisions into a unified ecosystem with real-time visibility and sustainable enterprise scalability.',
-    image: '/images/our-solution/projects/enterprise/marka-finance.png',
+    image: '/images/our-solution/projects/enterprise/marka-finance.svg',
     heroSvg: '/images/our-solution/hero-enterprise-solution.svg',
     serviceSectionSvg: '/images/our-solution/service-section-enterprise-solution.svg',
     whatItIs:
@@ -203,7 +203,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
         title: 'Financial Accounting & Consolidation',
         description:
           'Multi-entity general ledger, automated real-time cashflow management, tax compliance reporting, and executive balance sheets.',
-        image: '/images/our-solution/projects/enterprise/marka-finance.png',
+        image: '/images/our-solution/projects/enterprise/marka-finance.svg',
       },
       {
         number: '02',
@@ -211,7 +211,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
         title: 'HR Management & Automated Payroll',
         description:
           'Centralized employee records, automated payroll calculation, KPI & attendance tracking, digital leave approvals, and talent management.',
-        image: '/images/our-solution/projects/enterprise/marka-hrms.png',
+        image: '/images/our-solution/projects/enterprise/marka-hrms.svg',
       },
       {
         number: '03',
@@ -219,7 +219,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
         title: 'Project Management & Governance',
         description:
           'Cross-department milestone tracking, task scheduling, resource allocation, real-time budget burn-down monitoring, and operational team collaboration.',
-        image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
+        image: '/images/our-solution/projects/enterprise/marka-project-manager.svg',
       },
       {
         number: '04',
@@ -227,7 +227,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
         title: 'Inventory & Supply Chain Management',
         description:
           'Multi-warehouse stock control, automated procurement reorder points, asset lifecycle tracking, vendor logistics, and material dispatch.',
-        image: '/images/our-solution/projects/enterprise/marka-resource.png',
+        image: '/images/our-solution/projects/enterprise/marka-resource.svg',
       },
       {
         number: '05',
@@ -235,7 +235,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
         title: 'Sales Pipeline & CRM Automation',
         description:
           'End-to-end quotation-to-cash workflows, lead capture, customer relationship management, deal pipeline forecasting, and automated billing.',
-        image: '/images/our-solution/projects/enterprise/marka-sales.png',
+        image: '/images/our-solution/projects/enterprise/marka-sales.svg',
       },
     ],
     approach: [
@@ -271,7 +271,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     relatedWork: {
       slug: 'sinau-print-erp',
       title: 'Sinau Print ERP & Centralized System Management',
-      image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
+      image: '/images/our-solution/projects/enterprise/marka-project-manager.svg',
       relationship: 'direct',
     },
     caseStudySlug: 'sinau-print-pos-system',
@@ -315,7 +315,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
         title: 'Agentic AI Management & Enterprise Assistants',
         description:
           'Autonomous conversational AI agents connected directly to ERP and enterprise databases to assist teams, query real-time project metrics, and execute role-based operational tasks.',
-        image: '/images/our-solution/projects/data-ai/markaplus.svg',
+        image: '/images/our-solution/projects/data-ai/agentic-ai-management.svg',
       },
       {
         number: '02',
@@ -323,7 +323,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
         title: 'Machine Learning & Enterprise Data Management',
         description:
           'End-to-end data pipeline orchestration, multi-source data consolidation, and predictive machine learning models to forecast trends and optimize institutional decision making.',
-        image: '/images/our-solution/projects/data-ai/civitas-analytic.svg',
+        image: '/images/our-solution/projects/data-ai/machine-learning-data-management.svg',
       },
     ],
     approach: [
@@ -404,7 +404,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
         title: 'Industrial Automation & Edge Computing',
         description:
           'Connecting plant machinery, industrial PLCs, and edge gateways to automate manufacturing workflows, monitor equipment status in real-time, and prevent unplanned downtime.',
-        image: '/images/corporate-profile/capabilities/scalable-systems-iot.webp',
+        image: '/images/our-solution/projects/iot/industrial-automation-edge.svg',
       },
       {
         number: '02',
@@ -412,15 +412,15 @@ export const SOLUTION_SERVICES: SolutionService[] = [
         title: 'Smart Facility & Energy Management',
         description:
           'Multi-sensor environmental telemetry, automated power and energy consumption tracking, ambient climate monitoring, and digital facility safety compliance.',
-        image: '/images/insight-programs/case-studies/case-enterprise-iot.webp',
+        image: '/images/our-solution/projects/iot/smart-facility-energy.svg',
       },
       {
         number: '03',
-        badge: 'Asset Telemetry',
+        badge: 'GPS Fleet Tracking',
         title: 'Connected Asset & Fleet Telemetry',
         description:
-          'Continuous telemetry for distributed physical assets, high-precision GPS positioning, engine diagnostics, cold-chain temperature tracking, and instant geofencing alerts.',
-        image: '/images/our-solution/projects/iot/mybos-iot.svg',
+          'Real-time GPS vehicle tracking powered by MyBOS, continuous fleet telemetry, engine diagnostics, fuel theft detection, and instant geofencing alerts.',
+        image: '/images/our-solution/projects/iot/mybos-fleet-tracking.svg',
       },
     ],
     approach: [
@@ -500,7 +500,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
         title: 'Dynamic & Responsive Web Engineering',
         description:
           'Building fast, fluid, and mobile-responsive websites that adapt seamlessly across every screen size, powered by modern frameworks with interactive real-time capabilities.',
-        image: '/images/our-solution/projects/digital/adsvar.svg',
+        image: '/images/our-solution/projects/digital/dynamic-responsive-web.svg',
       },
       {
         number: '02',
@@ -508,7 +508,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
         title: 'Enterprise Content Management & CMS',
         description:
           'Intuitive headless CMS architectures and publishing workflows that give corporate teams effortless control over digital content, instant updates, and multi-channel publishing.',
-        image: '/images/our-solution/projects/digital/presstis.svg',
+        image: '/images/our-solution/projects/digital/enterprise-content-cms.svg',
       },
       {
         number: '03',
@@ -516,7 +516,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
         title: 'Modern Brand Identity & UI/UX Design',
         description:
           'Contemporary visual aesthetics crafted to mirror your corporate identity, creating immersive digital storytelling, engaging interactive elements, and high-converting user journeys.',
-        image: '/images/our-solution/projects/digital/craftivation.svg',
+        image: '/images/our-solution/projects/digital/modern-brand-identity.svg',
       },
       {
         number: '04',
@@ -524,7 +524,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
         title: 'Advanced SEO Engineering & Optimization',
         description:
           'Technical search engine optimization, semantic HTML structure, schema markup, and Core Web Vitals optimization engineered to achieve top search rankings and organic visibility.',
-        image: '/images/our-solution/projects/digital/artic-analytica.svg',
+        image: '/images/our-solution/projects/digital/advanced-seo-engineering.svg',
       },
       {
         number: '05',
@@ -532,7 +532,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
         title: 'Custom Web Applications & Portal Systems',
         description:
           'Tailored enterprise web applications with complex interactive filtering, secure authentication, and seamless third-party API and database integrations.',
-        image: '/images/our-solution/projects/digital/x1-tire.svg',
+        image: '/images/our-solution/projects/digital/custom-web-applications.svg',
       },
     ],
     approach: [

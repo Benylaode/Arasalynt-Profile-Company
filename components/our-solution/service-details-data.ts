@@ -319,14 +319,14 @@ export const SERVICE_CARD_DETAILS: Record<string, ServiceCardDetail> = {
 
   'Connected Asset & Fleet Telemetry': {
     category: 'Smart IoT System',
-    suiteName: 'KALUNA TECHNOLOGY',
+    suiteName: 'MYBOS & KALUNA TECHNOLOGY',
     paragraphs: [
-      'Connected Asset & Fleet Telemetry provides continuous real-time oversight of moving logistics assets, industrial machinery, and field service fleets. Utilizing multi-constellation GNSS, OBD-II telemetry, and cellular/LoRaWAN modules, vehicles transmit location, speed, fuel burn, and diagnostic trouble codes.',
+      'Powered by MyBOS IoT tracking, Connected Asset & Fleet Telemetry provides continuous real-time GPS positioning and telematics oversight for moving logistics assets, heavy machinery, and commercial vehicle fleets. Utilizing multi-constellation GNSS, OBD-II telemetry, and cellular/LoRaWAN modules, vehicles transmit location, speed, fuel consumption, and diagnostic trouble codes directly to a unified dashboard.',
       'Intelligent geofencing triggers automated dispatch notifications when vehicles enter or leave logistics hubs, while driver behavior algorithms analyze harsh braking, excessive idling, and speeding to safeguard fleet safety and lower insurance premiums.',
       'Direct integration with supply chain dispatch modules provides clients with accurate live estimated delivery times, instant delivery confirmation, and automated maintenance scheduling based on engine hours rather than arbitrary calendar dates.',
     ],
     capabilities: [
-      'Real-time GPS tracking with cellular and LoRaWAN fallback connectivity',
+      'High-precision real-time GPS tracking with cellular and LoRaWAN fallback connectivity',
       'OBD-II engine diagnostics, automated fuel theft detection, and idle logging',
       'Dynamic geofencing with automated arrival/departure logistics alerts',
       'Condition-based fleet maintenance scheduling calculated by engine run-hours',
