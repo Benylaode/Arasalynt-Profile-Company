@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { ChallengeCard } from '@/lib/our-solution.data';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 import ServiceDetailsModal from './ServiceDetailsModal';
 
 type ChallengeCardsSectionProps = {
@@ -21,6 +22,8 @@ export default function ChallengeCardsSection({
   challengeFallback,
   solutionTitle,
 }: ChallengeCardsSectionProps) {
+  const { locale } = useLanguage();
+  const isId = locale === 'id';
   const [selectedCard, setSelectedCard] = useState<ChallengeCard | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -40,10 +43,10 @@ export default function ChallengeCardsSection({
           <div className="flex max-w-[900px] flex-col gap-4">
             <div className="flex items-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.08em] text-[#1A3E9E]">
               <span className="h-2 w-2 bg-[#1A3E9E]" />
-              <span>{modulesSectionTag ?? 'CORE MODULES & SERVICES'}</span>
+              <span>{modulesSectionTag ?? (isId ? 'MODUL & LAYANAN INTI' : 'CORE MODULES & SERVICES')}</span>
             </div>
             <h2 className="font-heading text-[clamp(32px,3.2vw,56px)] font-medium leading-[1.12] text-[#101010]">
-              {modulesSectionTitle ?? 'Real Challenges We Solve'}
+              {modulesSectionTitle ?? (isId ? 'Tantangan Nyata yang Kami Selesaikan' : 'Real Challenges We Solve')}
             </h2>
             <p className="font-body text-[clamp(15px,1vw,18px)] leading-[1.65] text-[#424242]">
               {modulesSectionDescription ?? challengeFallback}
@@ -80,7 +83,7 @@ export default function ChallengeCardsSection({
                   
                   {/* Subtle hover pill overlay */}
                   <div className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 font-body text-[11px] font-bold text-[#101010] shadow-md backdrop-blur-sm transition-all duration-300 group-hover:bg-[#E6FF2A]">
-                    <span>View Details</span>
+                    <span>{isId ? 'Lihat Detail' : 'View Details'}</span>
                     <svg
                       className="h-3 w-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                       viewBox="0 0 24 24"

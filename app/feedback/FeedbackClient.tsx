@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 function StarburstCheckBadge() {
   return (
@@ -39,6 +40,7 @@ function RequiredLabel({ children }: { children: React.ReactNode }) {
 }
 
 export default function FeedbackClient() {
+  const { locale, t } = useLanguage();
   const [customerCode, setCustomerCode] = useState('');
   const [rating, setRating] = useState<number>(5);
   const [feedbackText, setFeedbackText] = useState('');
@@ -54,7 +56,7 @@ export default function FeedbackClient() {
     setErrorMessage('');
 
     if (!customerCode.trim()) {
-      setErrorMessage('Client Code is required to link this evaluation to your enterprise project.');
+      setErrorMessage(t.feedback.errorRequiredClientCode);
       setIsSubmitting(false);
       return;
     }
@@ -73,13 +75,13 @@ export default function FeedbackClient() {
 
       const json = await res.json();
       if (!res.ok || !json.success) {
-        throw new Error(json.error || 'Failed to submit feedback.');
+        throw new Error(json.error || t.feedback.errorFallback);
       }
 
       setIsSuccess(true);
     } catch (err: unknown) {
       const errObj = err as Error;
-      setErrorMessage(errObj.message || 'An error occurred while submitting your review.');
+      setErrorMessage(errObj.message || t.feedback.errorFallback);
     } finally {
       setIsSubmitting(false);
     }
@@ -90,10 +92,18 @@ export default function FeedbackClient() {
       <div className="rounded-[20px] border border-[#D9D9D9] bg-white p-8 sm:p-12 text-center shadow-sm">
         <StarburstCheckBadge />
         <h3 className="font-heading text-[26px] font-semibold text-[#101010]">
-          Thank You for Your Feedback!
+          {t.feedback.successTitle}
         </h3>
         <p className="mx-auto mt-3 max-w-[480px] font-body text-[14px] leading-[1.6] text-[#717171]">
-          Your evaluation for client code <strong className="text-[#1A3E9E]">{customerCode}</strong> has been successfully recorded. We sincerely appreciate your valuable insight as we continually enhance our service standards.
+          {locale === 'id' ? (
+            <>
+              Evaluasi Anda untuk kode klien <strong className="text-[#1A3E9E]">{customerCode}</strong> telah berhasil dicatat. Kami sangat menghargai wawasan berharga Anda seiring kami terus meningkatkan standar layanan kami.
+            </>
+          ) : (
+            <>
+              Your evaluation for client code <strong className="text-[#1A3E9E]">{customerCode}</strong> has been successfully recorded. We sincerely appreciate your valuable insight as we continually enhance our service standards.
+            </>
+          )}
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -105,13 +115,13 @@ export default function FeedbackClient() {
             }}
             className="inline-flex h-[48px] items-center justify-center rounded-full border border-[#C8C8C8] bg-white px-6 font-body text-[13px] font-bold uppercase tracking-[0.04em] text-[#505050] transition hover:bg-gray-100 hover:text-[#101010]"
           >
-            SUBMIT ANOTHER REVIEW
+            {t.feedback.submitAnotherReviewButton}
           </button>
           <Link
             href="/"
             className="inline-flex h-[48px] items-center justify-center rounded-full bg-[#1A3E9E] px-8 font-body text-[13px] font-bold uppercase tracking-[0.04em] text-white transition hover:bg-[#14347F]"
           >
-            BACK TO HOME
+            {t.feedback.backToHomeButton}
           </Link>
         </div>
       </div>
@@ -123,36 +133,36 @@ export default function FeedbackClient() {
       <div className="mb-6 flex flex-col gap-1">
         <div className="flex items-center gap-2 font-body text-[11px] font-extrabold uppercase tracking-[0.06em] text-[#1A3E9E]">
           <span className="h-1.5 w-1.5 bg-[#1A3E9E]" />
-          <span>CLIENT SATISFACTION EVALUATION</span>
+          <span>{t.feedback.formEyebrow}</span>
         </div>
         <h3 className="font-heading text-[20px] font-medium text-[#101010]">
-          Service Quality &amp; Feedback Form
+          {t.feedback.formTitle}
         </h3>
         <p className="font-body text-[13px] text-[#717171]">
-          Your feedback is reviewed directly by Arsalynk management to ensure optimal execution and support standards across every client engagement.
+          {t.feedback.formDescription}
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4.5">
         {/* 1. Customer Code */}
         <div className="flex flex-col gap-1.5">
-          <RequiredLabel>Client Code / Company ID</RequiredLabel>
+          <RequiredLabel>{t.feedback.clientCodeLabel}</RequiredLabel>
           <input
             type="text"
             required
             value={customerCode}
             onChange={(e) => setCustomerCode(e.target.value.toUpperCase())}
-            placeholder="e.g. CUST-MP-01 or from your proposal/invoice"
+            placeholder={t.feedback.clientCodePlaceholder}
             className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
           />
           <span className="font-body text-[11px] text-[#717171]">
-            * Unique identifier listed on your proposal document, invoice, or master agreement with Arsalynk.
+            {t.feedback.clientCodeHelp}
           </span>
         </div>
 
         {/* 2. Star Rating */}
         <div className="flex flex-col gap-2 rounded-[12px] bg-[#F7F7F7] p-4 border border-[#EAEAEA]">
-          <RequiredLabel>Satisfaction Level</RequiredLabel>
+          <RequiredLabel>{t.feedback.satisfactionLevelLabel}</RequiredLabel>
           <div className="flex items-center gap-2 pt-1">
             {[1, 2, 3, 4, 5].map((star) => (
               <button
@@ -171,18 +181,18 @@ export default function FeedbackClient() {
             ))}
           </div>
           <span className="font-body text-[12px] font-semibold text-[#1A3E9E]">
-            {rating === 5 && 'Outstanding (5/5) — Exceeded Expectations'}
-            {rating === 4 && 'Satisfied (4/5) — Professional Standards Fully Met'}
-            {rating === 3 && 'Average (3/5) — Adequate, Room for Improvement'}
-            {rating === 2 && 'Needs Improvement (2/5) — Below Expectations'}
-            {rating === 1 && 'Unsatisfactory (1/5) — Requires Immediate Attention'}
+            {rating === 5 && t.feedback.rating5}
+            {rating === 4 && t.feedback.rating4}
+            {rating === 3 && t.feedback.rating3}
+            {rating === 2 && t.feedback.rating2}
+            {rating === 1 && t.feedback.rating1}
           </span>
         </div>
 
         {/* 3. Service Category */}
         <div className="flex flex-col gap-1.5">
           <label className="font-body text-[13px] font-medium text-[#292929]">
-            Service Category
+            {t.feedback.serviceCategoryLabel}
           </label>
           <div className="relative">
             <select
@@ -190,10 +200,10 @@ export default function FeedbackClient() {
               onChange={(e) => setFeedbackType(e.target.value)}
               className="h-[46px] w-full appearance-none rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
             >
-              <option value="CUSTOMER_REVIEW">Project Collaboration Review</option>
-              <option value="SERVICE_EVALUATION">System &amp; Software Performance</option>
-              <option value="PROJECT_FEEDBACK">Project Management &amp; Communication</option>
-              <option value="SUPPORT_FEEDBACK">Technical Support Quality</option>
+              <option value="CUSTOMER_REVIEW">{t.feedback.categoryOptionReview}</option>
+              <option value="SERVICE_EVALUATION">{t.feedback.categoryOptionEvaluation}</option>
+              <option value="PROJECT_FEEDBACK">{t.feedback.categoryOptionManagement}</option>
+              <option value="SUPPORT_FEEDBACK">{t.feedback.categoryOptionSupport}</option>
             </select>
             <svg
               width="20"
@@ -216,13 +226,13 @@ export default function FeedbackClient() {
 
         {/* 4. Feedback Text */}
         <div className="flex flex-col gap-1.5">
-          <RequiredLabel>Feedback, Comments, or Suggestions</RequiredLabel>
+          <RequiredLabel>{t.feedback.feedbackTextLabel}</RequiredLabel>
           <textarea
             required
             rows={4}
             value={feedbackText}
             onChange={(e) => setFeedbackText(e.target.value)}
-            placeholder="Share your experience working with Arsalynk's engineering and operations team..."
+            placeholder={t.feedback.feedbackTextPlaceholder}
             className="w-full resize-none rounded-[8px] border border-[#C8C8C8] bg-white p-3.5 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10"
           />
         </div>
@@ -237,9 +247,9 @@ export default function FeedbackClient() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex h-[48px] w-full sm:w-[220px] items-center justify-center gap-2 rounded-full bg-[#1A3E9E] px-8 font-body text-[13px] font-bold uppercase tracking-[0.04em] text-white transition hover:bg-[#14347F] disabled:cursor-wait disabled:opacity-60 md:h-[50px]"
+            className="inline-flex h-[48px] w-full sm:w-[240px] items-center justify-center gap-2 rounded-full bg-[#1A3E9E] px-8 font-body text-[13px] font-bold uppercase tracking-[0.04em] text-white transition hover:bg-[#14347F] disabled:cursor-wait disabled:opacity-60 md:h-[50px]"
           >
-            <span>{isSubmitting ? 'SUBMITTING...' : 'SUBMIT FEEDBACK'}</span>
+            <span>{isSubmitting ? t.feedback.submittingButton : t.feedback.submitButton}</span>
             <svg width="6" height="10" viewBox="0 0 8 14" fill="none" aria-hidden="true">
               <path
                 d="M1 1L7 7L1 13"

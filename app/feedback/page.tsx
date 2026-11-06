@@ -1,22 +1,14 @@
-import type { Metadata } from 'next';
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import FeedbackClient from './FeedbackClient';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import {
-  SITE_NAME,
   WHATSAPP_PHONE_DISPLAY,
   WHATSAPP_LINK,
-  // SITE_EMAIL, // Opsional: Tambahkan jika sudah didefinisikan di constants
 } from '@/lib/constants';
-
-export const metadata: Metadata = {
-  title: `Customer Feedback & Service Evaluation — ${SITE_NAME}`,
-  description:
-    'Submit your feedback, IT service quality evaluation, and project satisfaction review directly to the Arsalynk management team.',
-  alternates: { canonical: '/feedback' },
-  robots: { index: false, follow: false, nocache: true },
-};
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 function DownIcon() {
   return (
@@ -67,6 +59,8 @@ function MailIcon({ size = 18 }: { size?: number }) {
 }
 
 export default function FeedbackPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#F7F7F7]">
       <main>
@@ -75,7 +69,7 @@ export default function FeedbackPage() {
           <div className="absolute inset-0 -z-30">
             <Image
               src="/images/our-business/kaluna-technology/hero.webp"
-              alt="Hero Background"
+              alt={t.feedback.heroTitle}
               fill
               priority
               className="object-cover object-center"
@@ -111,24 +105,24 @@ export default function FeedbackPage() {
             <div className="flex flex-col items-center gap-3 text-center sm:gap-4">
               <div className="flex items-center justify-center gap-2 font-body text-[11px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] sm:text-[13px]">
                 <Link href="/" className="transition-opacity hover:opacity-70">
-                  HOME
+                  {t.common.home}
                 </Link>
                 <span>/</span>
-                <span>CUSTOMER FEEDBACK</span>
+                <span>{t.feedback.heroBreadcrumb}</span>
               </div>
 
               <h1 className="font-heading text-[clamp(44px,4.5vw,84px)] font-medium leading-[1.05] tracking-[-0.02em] text-[#F7F7F7]">
-                Customer Feedback
+                {t.feedback.heroTitle}
               </h1>
               <p className="max-w-[580px] font-body text-[14px] leading-[1.6] text-white/75 sm:text-[16px]">
-                Your evaluation and satisfaction reviews drive us to continually elevate technology implementation quality and ongoing support standards.
+                {t.feedback.heroDescription}
               </p>
             </div>
           </div>
 
           <a
             href="#feedback-content"
-            aria-label="Scroll to Feedback Form"
+            aria-label={t.feedback.scrollAriaLabel}
             className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20"
             style={{
               background:
@@ -148,22 +142,22 @@ export default function FeedbackPage() {
             {/* LEFT COLUMN */}
             <div className="flex w-[42%] shrink-0 flex-col gap-[clamp(20px,2vw,32px)] max-[1024px]:w-full">
               <h2 className="font-heading text-[clamp(28px,2.4vw,42px)] font-medium leading-[1.15] tracking-[-0.03em] text-[#101010]">
-                Your Voice
+                {t.feedback.leftTitleLine1}
                 <br />
-                Shapes the Future
+                {t.feedback.leftTitleLine2}
                 <br />
-                of Our Solutions
+                {t.feedback.leftTitleLine3}
               </h2>
 
               <p className="font-body text-[14px] leading-[1.65] text-[#717171] md:text-[15px]">
-                Every review, constructive feedback, and satisfaction rating is directly analyzed by Arsalynk Quality Assurance and Management for continuous engineering refinement.
+                {t.feedback.leftDescription}
               </p>
 
               <div className="flex flex-col gap-4 rounded-[16px] md:gap-5">
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>OFFICIAL CLIENT SERVICE</span>
+                    <span>{t.feedback.officialClientServiceLabel}</span>
                   </div>
 
                   <div className="flex flex-col gap-1.5">
@@ -194,11 +188,11 @@ export default function FeedbackPage() {
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>DATA CONFIDENTIALITY</span>
+                    <span>{t.feedback.dataConfidentialityLabel}</span>
                   </div>
 
                   <p className="font-body text-[13px] leading-[1.5] tracking-[0.01em] text-[#717171]">
-                    Your corporate identity and review details are handled with strict privacy protocols for internal audits and ongoing quality improvement.
+                    {t.feedback.dataConfidentialityDescription}
                   </p>
                 </div>
               </div>

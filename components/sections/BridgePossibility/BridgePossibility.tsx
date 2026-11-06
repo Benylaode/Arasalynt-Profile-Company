@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 import styles from './BridgePossibility.module.css';
 
-const PILLARS_DATA = [
+const PILLARS_DATA_EN = [
   {
     id: 0,
     number: "01",
@@ -27,7 +28,35 @@ const PILLARS_DATA = [
   },
 ];
 
+const PILLARS_DATA_ID = [
+  {
+    id: 0,
+    number: "01",
+    category: "TEMUKAN",
+    action: "POTENSINYA",
+    description: "Temukan peluang di seluruh ekosistem perusahaan Anda.",
+  },
+  {
+    id: 1,
+    number: "02",
+    category: "RANCANG",
+    action: "SOLUSINYA",
+    description: "Rekayasa integrasi ERP dan IoT berdampak tinggi.",
+  },
+  {
+    id: 2,
+    number: "03",
+    category: "HUBUNGKAN",
+    action: "MASA DEPAN",
+    description: "Hubungkan operasional saat ini dengan sistem masa depan.",
+  },
+];
+
 export default function BridgePossibility() {
+  const { locale } = useLanguage();
+  const isId = locale === 'id';
+  const PILLARS_DATA = isId ? PILLARS_DATA_ID : PILLARS_DATA_EN;
+
   return (
     <section
       id="about-us"
@@ -221,7 +250,7 @@ export default function BridgePossibility() {
               {/* SVG Preserved Glass Card Surface (328x164px Scaled 0.74 -> 242x121px) */}
               <div className={`${styles.cardViewport} relative h-[121px] w-[242px] overflow-hidden rounded-[12px]`}>
                 <div 
-                  className={`${styles.cardSurface} safari-motion-layer relative z-[2] h-[164px] w-[328px] origin-top-left border border-[rgba(198,198,198,0.45)] bg-[rgba(255,255,255,0.15)] px-[24px] py-[24px] backdrop-blur-[12.5px]`}
+                  className={`${styles.cardSurface} safari-motion-layer relative z-[2] h-[164px] w-[328px] origin-top-left border border-[rgba(198,198,198,0.45)] bg-[rgba(255,255,255,0.15)] px-[24px] py-[20px] backdrop-blur-[12.5px]`}
                   style={{
                     transform: 'scale(0.74)',
                     transformOrigin: 'top left',
@@ -232,7 +261,7 @@ export default function BridgePossibility() {
                     {PILLARS_DATA[0].category}
                   </span>
 
-                  <div className="mt-[12px] flex items-start gap-[12px] font-body text-[20px] font-semibold uppercase leading-[24px] tracking-[0.4px] text-[#E6FF2A]">
+                  <div className="mt-[10px] flex items-start gap-[12px] font-body text-[20px] font-semibold uppercase leading-[24px] tracking-[0.4px] text-[#E6FF2A]">
                     <span
                       className="mt-[6px] h-[8px] w-[8px] shrink-0 bg-[#E6FF2A]"
                       aria-hidden="true"
@@ -240,7 +269,7 @@ export default function BridgePossibility() {
                     <span>{PILLARS_DATA[0].action}</span>
                   </div>
 
-                  <p className="mt-[12px] max-w-[280px] font-body text-[18px] font-normal leading-[27px] tracking-normal text-white">
+                  <p className="mt-[10px] max-w-[280px] font-body text-[16px] font-normal leading-[22px] tracking-normal text-white">
                     {PILLARS_DATA[0].description}
                   </p>
                 </div>
@@ -260,7 +289,7 @@ export default function BridgePossibility() {
               {/* SVG Preserved Glass Card Surface (328x164px Scaled 0.74 -> 242x121px) */}
               <div className={`${styles.cardViewport} relative h-[121px] w-[242px] overflow-hidden rounded-[12px]`}>
                 <div 
-                  className={`${styles.cardSurface} safari-motion-layer relative z-[2] h-[164px] w-[328px] origin-top-left border border-[rgba(198,198,198,0.45)] bg-[rgba(255,255,255,0.15)] px-[24px] py-[24px] backdrop-blur-[12.5px]`}
+                  className={`${styles.cardSurface} safari-motion-layer relative z-[2] h-[164px] w-[328px] origin-top-left border border-[rgba(198,198,198,0.45)] bg-[rgba(255,255,255,0.15)] px-[24px] py-[20px] backdrop-blur-[12.5px]`}
                   style={{
                     transform: 'scale(0.74)',
                     transformOrigin: 'top left',
@@ -271,7 +300,7 @@ export default function BridgePossibility() {
                     {PILLARS_DATA[1].category}
                   </span>
 
-                  <div className="mt-[12px] flex items-start gap-[12px] font-body text-[20px] font-semibold uppercase leading-[24px] tracking-[0.4px] text-[#E6FF2A]">
+                  <div className="mt-[10px] flex items-start gap-[12px] font-body text-[20px] font-semibold uppercase leading-[24px] tracking-[0.4px] text-[#E6FF2A]">
                     <span
                       className="mt-[6px] h-[8px] w-[8px] shrink-0 bg-[#E6FF2A]"
                       aria-hidden="true"
@@ -279,7 +308,7 @@ export default function BridgePossibility() {
                     <span>{PILLARS_DATA[1].action}</span>
                   </div>
 
-                  <p className="mt-[12px] max-w-[280px] font-body text-[18px] font-normal leading-[27px] tracking-normal text-white">
+                  <p className="mt-[10px] max-w-[280px] font-body text-[16px] font-normal leading-[22px] tracking-normal text-white">
                     {PILLARS_DATA[1].description}
                   </p>
                 </div>
@@ -299,7 +328,7 @@ export default function BridgePossibility() {
               {/* SVG Preserved Glass Card Surface (328x164px Scaled 0.74 -> 242x121px) */}
               <div className={`${styles.cardViewport} relative h-[121px] w-[242px] overflow-hidden rounded-[12px]`}>
                 <div 
-                  className={`${styles.cardSurface} safari-motion-layer relative z-[2] h-[164px] w-[328px] origin-top-left border border-[rgba(198,198,198,0.45)] bg-[rgba(255,255,255,0.15)] px-[24px] py-[24px] backdrop-blur-[12.5px]`}
+                  className={`${styles.cardSurface} safari-motion-layer relative z-[2] h-[164px] w-[328px] origin-top-left border border-[rgba(198,198,198,0.45)] bg-[rgba(255,255,255,0.15)] px-[24px] py-[20px] backdrop-blur-[12.5px]`}
                   style={{
                     transform: 'scale(0.74)',
                     transformOrigin: 'top left',
@@ -310,7 +339,7 @@ export default function BridgePossibility() {
                     {PILLARS_DATA[2].category}
                   </span>
 
-                  <div className="mt-[12px] flex items-start gap-[12px] font-body text-[20px] font-semibold uppercase leading-[24px] tracking-[0.4px] text-[#E6FF2A]">
+                  <div className="mt-[10px] flex items-start gap-[12px] font-body text-[20px] font-semibold uppercase leading-[24px] tracking-[0.4px] text-[#E6FF2A]">
                     <span
                       className="mt-[6px] h-[8px] w-[8px] shrink-0 bg-[#E6FF2A]"
                       aria-hidden="true"
@@ -318,7 +347,7 @@ export default function BridgePossibility() {
                     <span>{PILLARS_DATA[2].action}</span>
                   </div>
 
-                  <p className="mt-[12px] max-w-[280px] font-body text-[18px] font-normal leading-[27px] tracking-normal text-white">
+                  <p className="mt-[10px] max-w-[280px] font-body text-[16px] font-normal leading-[22px] tracking-normal text-white">
                     {PILLARS_DATA[2].description}
                   </p>
                 </div>
@@ -332,27 +361,38 @@ export default function BridgePossibility() {
         <div className="flex w-full max-w-[470px] flex-col gap-4">
           <div className="flex items-center gap-2.5 text-[#E6FF2A] font-body text-[13px] font-bold uppercase tracking-wider">
             <span className="w-2 h-2 bg-[#E6FF2A] shrink-0" />
-            <span className="font-normal text-[10px]">ABOUT US</span>
+            <span className="font-normal text-[10px]">{isId ? 'TENTANG KAMI' : 'ABOUT US'}</span>
           </div>
 
           <h2
             id="bridge-possibility-heading"
             className="font-heading text-[72px] max-[1280px]:text-[68px] max-[1024px]:text-[64px] max-[640px]:text-[60px] font-normal leading-[1.02] tracking-tight text-white"
           >
-            Bridge Every
-            <br />
-            Possibility
+            {isId ? (
+              <>
+                Jembatani Setiap
+                <br />
+                Kemungkinan
+              </>
+            ) : (
+              <>
+                Bridge Every
+                <br />
+                Possibility
+              </>
+            )}
           </h2>
 
           <p className="w-full max-w-[400px] font-body text-[14px] font-normal leading-relaxed text-white/85 max-[100px]:text-[11px]">
-            We connect discovery, architecture, and deployment into one continuous transformation path&mdash;turning fragmented enterprise operations into integrated, future-ready capabilities.
+            {isId
+              ? 'Kami menghubungkan penemuan, arsitektur, dan penerapan ke dalam satu jalur transformasi berkelanjutan—mengubah operasional perusahaan yang terfragmentasi menjadi kapabilitas terintegrasi yang siap menghadapi masa depan.'
+              : 'We connect discovery, architecture, and deployment into one continuous transformation path—turning fragmented enterprise operations into integrated, future-ready capabilities.'}
           </p>
 
           <p className="hidden">
-            Arsalynk was built on a singular belief: the greatest challenge
-            facing modern organizations isn&apos;t ambition — it&apos;s
-            fragmentation. As complexity grows, disconnected capabilities
-            weaken execution and limit long-term value.
+            {isId
+              ? 'Arsalynk dibangun di atas satu keyakinan: tantangan terbesar yang dihadapi organisasi modern bukanlah ambisi — melainkan fragmentasi. Seiring meningkatnya kompleksitas, kapabilitas yang terputus melemahkan eksekusi dan membatasi nilai jangka panjang.'
+              : 'Arsalynk was built on a singular belief: the greatest challenge facing modern organizations isn’t ambition — it’s fragmentation. As complexity grows, disconnected capabilities weaken execution and limit long-term value.'}
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-4">
@@ -360,13 +400,13 @@ export default function BridgePossibility() {
               href="/about-us"
               className="inline-flex items-center justify-center rounded-full bg-[#E6FF2A] px-7 py-3.5 font-body text-[13px] font-extrabold uppercase tracking-wider text-[#101010] no-underline transition-[background-color,transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-[#d8f21d] hover:shadow-[0_8px_25px_rgba(230,255,42,0.35)]"
             >
-              ABOUT ARSALYNK
+              {isId ? 'TENTANG ARSALYNK' : 'ABOUT ARSALYNK'}
             </Link>
             <Link 
               href="/our-solution"
               className="inline-flex items-center justify-center rounded-full border border-white/30 bg-transparent px-7 py-3.5 font-body text-[13px] font-bold uppercase tracking-wider text-white no-underline transition-[border-color,background-color] duration-200 hover:border-white hover:bg-white/10"
             >
-              OUR SOLUTION
+              {isId ? 'SOLUSI KAMI' : 'OUR SOLUTION'}
             </Link>
           </div>
         </div>

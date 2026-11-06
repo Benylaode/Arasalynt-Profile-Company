@@ -3,6 +3,7 @@
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 const ASSET_BASE = '/images/company-leadership';
 
@@ -68,7 +69,7 @@ const PrincipleIcon = ({ type }: { type: 'technical' | 'roi' | 'expertise' | 'le
   );
 };
 
-const PRINCIPLES = [
+const PRINCIPLES_EN = [
   {
     title: 'Technical\nExcellence',
     desc: 'Every architectural decision is grounded in deep systems engineering expertise, strict security protocols, and measurable operational performance.',
@@ -91,7 +92,30 @@ const PRINCIPLES = [
   },
 ];
 
-const TRUST_SLIDES = [
+const PRINCIPLES_ID = [
+  {
+    title: 'Keunggulan\nTeknis',
+    desc: 'Setiap keputusan arsitektur didasarkan pada keahlian rekayasa sistem yang mendalam, protokol keamanan yang ketat, dan kinerja operasional yang terukur.',
+    icon: 'technical' as const,
+  },
+  {
+    title: 'Eksekusi\nBerorientasi ROI',
+    desc: 'Kami berfokus pada penerapan teknologi berdampak tinggi—menghadirkan peningkatan efisiensi yang nyata, kecepatan implementasi tinggi, dan optimalisasi biaya terukur bagi mitra perusahaan kami.',
+    icon: 'roi' as const,
+  },
+  {
+    title: 'Keahlian TI\nLintas Disiplin',
+    desc: 'Menyatukan para spesialis di bidang arsitektur ERP, integrasi perangkat keras IoT, rekayasa data, dan keamanan sistem untuk menyelesaikan tantangan teknis yang kompleks.',
+    icon: 'expertise' as const,
+  },
+  {
+    title: 'Kepemimpinan\nBerbasis Keberlanjutan',
+    desc: 'Tim yang tangguh dan pengaman teknis menjaga setiap sistem serta operasional penting tetap berjalan tanpa satu pun titik kegagalan.',
+    icon: 'leadership' as const,
+  },
+];
+
+const TRUST_SLIDES_EN = [
   {
     text: 'We earn lasting partnerships through proven system reliability, clear communication, and precise execution across every project lifecycle.',
     image: `${ASSET_BASE}/building-trust-reference-01.webp`
@@ -110,6 +134,25 @@ const TRUST_SLIDES = [
   },
 ];
 
+const TRUST_SLIDES_ID = [
+  {
+    text: 'Kami membangun kemitraan jangka panjang melalui keandalan sistem yang terbukti, komunikasi yang jelas, dan eksekusi presisi di setiap siklus proyek.',
+    image: `${ASSET_BASE}/building-trust-reference-01.webp`
+  },
+  {
+    text: 'Kami memadukan pengetahuan teknis mendalam di bidang sistem perusahaan, arsitektur data, dan rekayasa IoT menjadi solusi terintegrasi penuh dari satu sumber.',
+    image: `${ASSET_BASE}/building-trust-reference-02.webp`
+  },
+  {
+    text: 'Kerangka pengiriman dan manajemen kami berkembang secara berkelanjutan, memastikan operasional berketahanan tinggi tanpa hambatan maupun titik kegagalan tunggal.',
+    image: '/images/about-us/company-leadership/building-trust.webp'
+  },
+  {
+    text: 'Tim kami dirancang untuk beroperasi secara berkelanjutan tanpa menciptakan ketergantungan pada satu titik kepemimpinan atau kegagalan operasional.',
+    image: `${ASSET_BASE}/building-trust-2.webp`
+  },
+];
+
 const WideContainer = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
   <div className={`w-full ${className}`}>
     {children}
@@ -123,11 +166,15 @@ const NarrowContainer = ({ children, className = '' }: { children: React.ReactNo
 );
 
 export default function CompanyLeadershipPage() {
+  const { locale } = useLanguage();
+  const isId = locale === 'id';
+  const PRINCIPLES = isId ? PRINCIPLES_ID : PRINCIPLES_EN;
+  const TRUST_SLIDES = isId ? TRUST_SLIDES_ID : TRUST_SLIDES_EN;
   const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % TRUST_SLIDES.length);
+      setActiveSlide((current) => (current + 1) % TRUST_SLIDES_EN.length);
     }, 6500);
 
     return () => window.clearInterval(timer);
@@ -189,10 +236,12 @@ export default function CompanyLeadershipPage() {
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
           <div className="flex flex-col items-center gap-6 max-[768px]:gap-4">
            <div className="font-body text-[10px] font-normal uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
-              Home&nbsp;&nbsp;&gt;&nbsp;&nbsp;About Us&nbsp;&nbsp;&gt;&nbsp;&nbsp;Company Leadership
+              {isId
+                ? 'Beranda  >  Tentang Kami  >  Kepemimpinan Perusahaan'
+                : 'Home  >  About Us  >  Company Leadership'}
             </div>
             <h1 className="font-heading text-[clamp(56px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
-              Company Leadership
+              {isId ? 'Kepemimpinan Perusahaan' : 'Company Leadership'}
             </h1>
           </div>
         </div>
@@ -203,7 +252,7 @@ export default function CompanyLeadershipPage() {
             e.preventDefault();
             handleScrollDown();
           }}
-          aria-label="Scroll to CTA"
+          aria-label={isId ? 'Gulir ke CTA' : 'Scroll to CTA'}
           className="absolute bottom-[clamp(34px,4.5vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-[rgba(175,175,175,.25)] text-white backdrop-blur-[4px] transition-transform duration-300 hover:scale-105"
           style={{ background: 'linear-gradient(230.45deg, rgba(247,247,247,.21) -7.74%, rgba(247,247,247,.105) 81.5%)' }}
         >
@@ -221,17 +270,29 @@ export default function CompanyLeadershipPage() {
             <div className="flex flex-col gap-[clamp(24px,2.188vw,42px)]">
               <div className="flex items-center gap-[10px] font-body text-[14px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] max-[768px]:text-[12px]">
                 <span className="h-2 w-2 shrink-0 bg-[#1A3E9E]" />
-                Leadership Foundation
+                {isId ? 'Fondasi Kepemimpinan' : 'Leadership Foundation'}
               </div>
 
               <h2 className="font-heading text-[clamp(40px,3.333vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#101010]">
-                Driven by Technical Mastery
-                <br />
-                &amp; Strategic Execution
+                {isId ? (
+                  <>
+                    Didorong oleh Penguasaan Teknis
+                    <br />
+                    &amp; Eksekusi Strategis
+                  </>
+                ) : (
+                  <>
+                    Driven by Technical Mastery
+                    <br />
+                    &amp; Strategic Execution
+                  </>
+                )}
               </h2>
 
               <p className="font-body text-[clamp(15px,1.042vw,20px)] font-normal leading-[1.6] tracking-[0.02em] text-[#292929]">
-                At Arsalynk, leadership is anchored in deep industry expertise and rigorous engineering discipline. Guided by seasoned systems architects and enterprise technology leaders, we ensure every deployment&mdash;from core ERP integration to complex IoT infrastructure&mdash;is built on performance, security, and scalability.
+                {isId
+                  ? 'Di Arsalynk, kepemimpinan berakar pada keahlian industri yang mendalam dan disiplin rekayasa yang ketat. Dipandu oleh para arsitek sistem berpengalaman serta pemimpin teknologi perusahaan, kami memastikan setiap penerapan—mulai dari integrasi ERP inti hingga infrastruktur IoT yang kompleks—dibangun di atas kinerja, keamanan, dan skalabilitas.'
+                  : 'At Arsalynk, leadership is anchored in deep industry expertise and rigorous engineering discipline. Guided by seasoned systems architects and enterprise technology leaders, we ensure every deployment—from core ERP integration to complex IoT infrastructure—is built on performance, security, and scalability.'}
               </p>
             </div>
           </div>
@@ -280,7 +341,7 @@ export default function CompanyLeadershipPage() {
           <div className="w-full max-w-[60%] max-[1280px]:max-w-[75%] max-[1024px]:max-w-full">
             <div className="mb-[clamp(20px,1.667vw,32px)] flex items-center gap-[10px] font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[10px]">
               <span className="h-1.5 w-1.5 shrink-0 bg-[#E6FF2A]" />
-              Building Trust
+              {isId ? 'Membangun Kepercayaan' : 'Building Trust'}
             </div>
 
             <div className="relative flex">
@@ -363,12 +424,22 @@ export default function CompanyLeadershipPage() {
           <div className="mb-[clamp(32px,2.5vw,48px)] flex flex-col items-center gap-[clamp(20px,1.667vw,32px)] text-center">
             <div className="flex items-center justify-center gap-[10px] font-body text-[14px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] max-[768px]:text-[12px]">
               <span className="h-2 w-2 shrink-0 bg-[#1A3E9E]" />
-              Our Leadership Principles
+              {isId ? 'Prinsip Kepemimpinan Kami' : 'Our Leadership Principles'}
             </div>
             <h2 className="font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
-              The Standards That
-              <br />
-              Guide Every Decision
+              {isId ? (
+                <>
+                  Standar yang Memandu
+                  <br />
+                  Setiap Keputusan
+                </>
+              ) : (
+                <>
+                  The Standards That
+                  <br />
+                  Guide Every Decision
+                </>
+              )}
             </h2>
           </div>
 
@@ -400,7 +471,7 @@ export default function CompanyLeadershipPage() {
       <section className="w-full bg-[rgba(153,166,231,.10)] px-[6vw] py-[clamp(80px,6.563vw,126px)] max-[1199px]:px-[4vw]">
         <WideContainer>
           <h2 className="mb-[clamp(32px,2.5vw,48px)] text-center font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
-            Explore Other Information
+            {isId ? 'Jelajahi Informasi Lainnya' : 'Explore Other Information'}
           </h2>
 
           <div className="grid grid-cols-2 gap-[clamp(20px,1.563vw,30px)] max-[768px]:grid-cols-1">
@@ -410,14 +481,18 @@ export default function CompanyLeadershipPage() {
             >
               <img
                 src="/images/about-us/cards/corporate-profile-card.webp"
-                alt="Corporate Profile"
+                alt={isId ? 'Profil Korporat' : 'Corporate Profile'}
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
               <div className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-black/30 group-focus-visible:bg-black/30" />
               <div className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-b from-transparent to-black" />
               <div className="absolute inset-x-[clamp(24px,2.5vw,48px)] bottom-[clamp(24px,2vw,38px)] z-10 flex flex-col items-start gap-[18px]">
-                <h3 className="font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">Corporate Profile</h3>
-                <span className="flex max-h-0 items-center gap-3 overflow-hidden rounded-full bg-[#E6FF2A] px-0 py-0 font-body text-[clamp(13px,0.938vw,18px)] font-semibold text-[#101010] opacity-0 transition-all duration-500 group-hover:max-h-16 group-hover:px-7 group-hover:py-3 group-hover:opacity-100 group-focus-visible:max-h-16 group-focus-visible:px-7 group-focus-visible:py-3 group-focus-visible:opacity-100">LEARN MORE <span aria-hidden="true">›</span></span>
+                <h3 className="font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">
+                  {isId ? 'Profil Korporat' : 'Corporate Profile'}
+                </h3>
+                <span className="flex max-h-0 items-center gap-3 overflow-hidden rounded-full bg-[#E6FF2A] px-0 py-0 font-body text-[clamp(13px,0.938vw,18px)] font-semibold text-[#101010] opacity-0 transition-all duration-500 group-hover:max-h-16 group-hover:px-7 group-hover:py-3 group-hover:opacity-100 group-focus-visible:max-h-16 group-focus-visible:px-7 group-focus-visible:py-3 group-focus-visible:opacity-100">
+                  {isId ? 'PELAJARI LEBIH LANJUT' : 'LEARN MORE'} <span aria-hidden="true">›</span>
+                </span>
               </div>
             </Link>
 
@@ -427,14 +502,18 @@ export default function CompanyLeadershipPage() {
             >
               <img
                 src="/images/about-us/cards/ecosystem-philosophy-card.webp"
-                alt="Ecosystem Philosophy"
+                alt={isId ? 'Filosofi Ekosistem' : 'Ecosystem Philosophy'}
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
               <div className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-black/30 group-focus-visible:bg-black/30" />
               <div className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-b from-transparent to-black" />
               <div className="absolute inset-x-[clamp(24px,2.5vw,48px)] bottom-[clamp(24px,2vw,38px)] z-10 flex flex-col items-start gap-[18px]">
-                <h3 className="font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">Ecosystem Philosophy</h3>
-                <span className="flex max-h-0 items-center gap-3 overflow-hidden rounded-full bg-[#E6FF2A] px-0 py-0 font-body text-[clamp(13px,0.938vw,18px)] font-semibold text-[#101010] opacity-0 transition-all duration-500 group-hover:max-h-16 group-hover:px-7 group-hover:py-3 group-hover:opacity-100 group-focus-visible:max-h-16 group-focus-visible:px-7 group-focus-visible:py-3 group-focus-visible:opacity-100">LEARN MORE <span aria-hidden="true">›</span></span>
+                <h3 className="font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">
+                  {isId ? 'Filosofi Ekosistem' : 'Ecosystem Philosophy'}
+                </h3>
+                <span className="flex max-h-0 items-center gap-3 overflow-hidden rounded-full bg-[#E6FF2A] px-0 py-0 font-body text-[clamp(13px,0.938vw,18px)] font-semibold text-[#101010] opacity-0 transition-all duration-500 group-hover:max-h-16 group-hover:px-7 group-hover:py-3 group-hover:opacity-100 group-focus-visible:max-h-16 group-focus-visible:px-7 group-focus-visible:py-3 group-focus-visible:opacity-100">
+                  {isId ? 'PELAJARI LEBIH LANJUT' : 'LEARN MORE'} <span aria-hidden="true">›</span>
+                </span>
               </div>
             </Link>
           </div>

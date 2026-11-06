@@ -1,4 +1,7 @@
+'use client';
+
 import { WHATSAPP_LINK } from '@/lib/constants';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 import styles from './WhatsAppFloatingButton.module.css';
 
 function WhatsAppIcon() {
@@ -15,14 +18,17 @@ function WhatsAppIcon() {
 }
 
 export default function WhatsAppFloatingButton() {
+  const { locale } = useLanguage();
+  const isId = locale === 'id';
+
   return (
     <a
       className={styles.button}
       href={WHATSAPP_LINK}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Contact Arsalynk via WhatsApp"
-      title="Contact us via WhatsApp"
+      aria-label={isId ? 'Hubungi Arsalynk via WhatsApp' : 'Contact Arsalynk via WhatsApp'}
+      title={isId ? 'Hubungi kami via WhatsApp' : 'Contact us via WhatsApp'}
     >
       <WhatsAppIcon />
     </a>

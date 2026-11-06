@@ -2,6 +2,7 @@
 
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import Link from 'next/link';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 const ASSET = '/images/ecosystem-philosophy';
 
@@ -11,7 +12,7 @@ const IconChevronDown = () => (
   </svg>
 );
 
-const PILLARS = [
+const PILLARS_EN = [
   {
     label: 'TECHNOLOGY',
     title: ['WE BUILD BETTER', 'IT SYSTEM'],
@@ -29,6 +30,24 @@ const PILLARS = [
   },
 ];
 
+const PILLARS_ID = [
+  {
+    label: 'TEKNOLOGI',
+    title: ['KAMI MEMBANGUN SISTEM', 'TI YANG LEBIH BAIK'],
+    description: 'Membangun infrastruktur teknologi & IoT menyeluruh yang tangguh',
+  },
+  {
+    label: 'DATA & SURVEI',
+    title: ['KAMI MENGUNGKAP DATA', 'TERUKUR BERWAWASAN'],
+    description: 'Mengubah data berwawasan menjadi keputusan bisnis strategis',
+  },
+  {
+    label: 'MEDIA',
+    title: ['KAMI MENGHADIRKAN EKSEKUSI', 'KREATIF UNGGULAN'],
+    description: 'Menghadirkan ide dan konten kreatif dengan dampak yang terukur',
+  },
+];
+
 const WideContainer = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
   <div className={`mx-auto w-full max-w-[1700px] ${className}`}>
     {children}
@@ -42,6 +61,10 @@ const NarrowContainer = ({ children, className = '' }: { children: React.ReactNo
 );
 
 export default function EcosystemPhilosophyPage() {
+  const { locale } = useLanguage();
+  const isId = locale === 'id';
+  const PILLARS = isId ? PILLARS_ID : PILLARS_EN;
+
   const handleScrollDown = () => {
     document.getElementById('beyond-expectations')?.scrollIntoView({
       behavior: 'smooth',
@@ -91,16 +114,18 @@ export default function EcosystemPhilosophyPage() {
 
         <div className="absolute left-1/2 top-1/2 z-10 flex w-full max-w-[948px] -translate-x-1/2 -translate-y-[60%] flex-col items-center gap-6 text-center max-[640px]:px-4 max-[640px]:gap-4">
           <div className="font-body text-[10px] font-normal uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
-            HOME&nbsp;&nbsp;&gt;&nbsp;&nbsp;ABOUT US&nbsp;&nbsp;&gt;&nbsp;&nbsp;ECOSYSTEM PHYLOSOPHY
+            {isId
+              ? 'BERANDA  >  TENTANG KAMI  >  FILOSOFI EKOSISTEM'
+              : 'HOME  >  ABOUT US  >  ECOSYSTEM PHILOSOPHY'}
           </div>
           <h1 className="font-heading text-[clamp(56px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
-            Ecosystem Philosophy
+            {isId ? 'Filosofi Ekosistem' : 'Ecosystem Philosophy'}
           </h1>
         </div>
 
         <a
           href="#beyond-expectations"
-          aria-label="Scroll to CTA"
+          aria-label={isId ? 'Gulir ke CTA' : 'Scroll to CTA'}
           onClick={(e) => {
             e.preventDefault();
             const target = document.getElementById('beyond-expectations');
@@ -132,20 +157,34 @@ export default function EcosystemPhilosophyPage() {
               <div className="flex items-center gap-[10px]">
                 <span className="h-2 w-2 shrink-0 bg-[#1A3E9E]" />
                 <p className="font-body text-[14px] font-extrabold uppercase leading-[130%] tracking-[0.06em] text-[#1A3E9E] max-[640px]:text-[13px]">
-                  OUR ECOSYSTEM PHILOSOPHY
+                  {isId ? 'FILOSOFI EKOSISTEM KAMI' : 'OUR ECOSYSTEM PHILOSOPHY'}
                 </p>
               </div>
 
               <h2 className="font-heading text-[clamp(40px,3.333vw,64px)] font-medium leading-[120%] tracking-[-0.02em] text-[#101010]">
-                Specialized
-                <br />
-                Industry,
-                <br />
-                Unified Integration
+                {isId ? (
+                  <>
+                    Industri
+                    <br />
+                    Terspesialisasi,
+                    <br />
+                    Integrasi Terpadu
+                  </>
+                ) : (
+                  <>
+                    Specialized
+                    <br />
+                    Industry,
+                    <br />
+                    Unified Integration
+                  </>
+                )}
               </h2>
 
               <p className="font-body text-[clamp(15px,1.042vw,20px)] font-normal leading-[160%] tracking-[0.02em] text-[#292929]">
-                We recognize that broad, generalist agencies lack the depth required to solve highly complex technical problems, while isolated niche boutiques lack the scale to handle cross-border enterprise demands.
+                {isId
+                  ? 'Kami menyadari bahwa agensi generalis sering kali kurang memiliki kedalaman yang dibutuhkan untuk menyelesaikan masalah teknis yang sangat kompleks, sementara butik spesialis yang terisolasi kurang memiliki skala untuk menangani tuntutan perusahaan lintas disiplin.'
+                  : 'We recognize that broad, generalist agencies lack the depth required to solve highly complex technical problems, while isolated niche boutiques lack the scale to handle cross-border enterprise demands.'}
               </p>
             </div>
           </div>
@@ -153,7 +192,7 @@ export default function EcosystemPhilosophyPage() {
           <div className="relative w-[54.3%] shrink-0 overflow-hidden rounded-[24px] bg-[#071C3D] max-[1024px]:w-full aspect-[764/670]">
             <img
               src={`${ASSET}/intro-hand.webp`}
-              alt="Integrated digital ecosystem"
+              alt={isId ? 'Ekosistem digital terintegrasi' : 'Integrated digital ecosystem'}
               className="absolute inset-0 h-full w-full object-cover object-[93%_50%]"
             />
           </div>
@@ -183,12 +222,14 @@ export default function EcosystemPhilosophyPage() {
             <div className="flex items-center gap-[10px]">
               <span className="h-2 w-2 shrink-0 bg-[#E6FF2A]" />
               <p className="font-body text-[14px] font-semibold uppercase leading-[130%] tracking-[0.06em] text-[#E6FF2A] max-[640px]:text-[13px]">
-                ONE UNIFIED ECOSYSTEM
+                {isId ? 'SATU EKOSISTEM TERPADU' : 'ONE UNIFIED ECOSYSTEM'}
               </p>
             </div>
 
             <h2 className="font-heading text-[clamp(12px,2.917vw,28px)] font-normal leading-[110%] tracking-[-0.01em] text-[#F7F7F7]">
-              This is not a collection of individual vendors—it is a synchronized corporate ecosystem designed to strengthen operations, optimize assets, and help businesses execute with confidence.
+              {isId
+                ? 'Ini bukan sekadar kumpulan vendor terpisah—melainkan ekosistem korporat yang tersinkronisasi untuk memperkuat operasional, mengoptimalkan aset, dan membantu bisnis mengeksekusi dengan penuh keyakinan.'
+                : 'This is not a collection of individual vendors—it is a synchronized corporate ecosystem designed to strengthen operations, optimize assets, and help businesses execute with confidence.'}
             </h2>
           </div>
 
@@ -232,7 +273,7 @@ export default function EcosystemPhilosophyPage() {
       <section className="w-full bg-[rgba(153,166,231,.10)] px-[6vw] py-[clamp(80px,6.563vw,126px)] max-[1199px]:px-[4vw]">
         <WideContainer>
           <h2 className="mb-[clamp(32px,2.5vw,48px)] text-center font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
-            Explore Other Information
+            {isId ? 'Jelajahi Informasi Lainnya' : 'Explore Other Information'}
           </h2>
 
           <div className="grid grid-cols-2 gap-[clamp(20px,1.563vw,30px)] max-[768px]:grid-cols-1">
@@ -242,14 +283,18 @@ export default function EcosystemPhilosophyPage() {
             >
               <img
                 src="/images/about-us/company-leadership/leadership-portrait.webp"
-                alt="Company Leadership"
+                alt={isId ? 'Kepemimpinan Perusahaan' : 'Company Leadership'}
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
               <div className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-black/30 group-focus-visible:bg-black/30" />
               <div className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-b from-transparent to-black" />
               <div className="absolute inset-x-[clamp(24px,2.5vw,48px)] bottom-[clamp(24px,2vw,38px)] z-10 flex flex-col items-start gap-[18px]">
-                <h3 className="font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">Company Leadership</h3>
-                <span className="flex max-h-0 items-center gap-3 overflow-hidden rounded-full bg-[#E6FF2A] px-0 py-0 font-body text-[clamp(13px,0.938vw,18px)] font-semibold text-[#101010] opacity-0 transition-all duration-500 group-hover:max-h-16 group-hover:px-7 group-hover:py-3 group-hover:opacity-100 group-focus-visible:max-h-16 group-focus-visible:px-7 group-focus-visible:py-3 group-focus-visible:opacity-100">LEARN MORE <span aria-hidden="true">›</span></span>
+                <h3 className="font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">
+                  {isId ? 'Kepemimpinan Perusahaan' : 'Company Leadership'}
+                </h3>
+                <span className="flex max-h-0 items-center gap-3 overflow-hidden rounded-full bg-[#E6FF2A] px-0 py-0 font-body text-[clamp(13px,0.938vw,18px)] font-semibold text-[#101010] opacity-0 transition-all duration-500 group-hover:max-h-16 group-hover:px-7 group-hover:py-3 group-hover:opacity-100 group-focus-visible:max-h-16 group-focus-visible:px-7 group-focus-visible:py-3 group-focus-visible:opacity-100">
+                  {isId ? 'PELAJARI LEBIH LANJUT' : 'LEARN MORE'} <span aria-hidden="true">›</span>
+                </span>
               </div>
             </Link>
 
@@ -259,14 +304,18 @@ export default function EcosystemPhilosophyPage() {
             >
               <img
                 src="/images/about-us/cards/corporate-profile-card.webp"
-                alt="Corporate Profile"
+                alt={isId ? 'Profil Korporat' : 'Corporate Profile'}
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
               <div className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-black/30 group-focus-visible:bg-black/30" />
               <div className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-b from-transparent to-black" />
               <div className="absolute inset-x-[clamp(24px,2.5vw,48px)] bottom-[clamp(24px,2vw,38px)] z-10 flex flex-col items-start gap-[18px]">
-                <h3 className="font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">Corporate Profile</h3>
-                <span className="flex max-h-0 items-center gap-3 overflow-hidden rounded-full bg-[#E6FF2A] px-0 py-0 font-body text-[clamp(13px,0.938vw,18px)] font-semibold text-[#101010] opacity-0 transition-all duration-500 group-hover:max-h-16 group-hover:px-7 group-hover:py-3 group-hover:opacity-100 group-focus-visible:max-h-16 group-focus-visible:px-7 group-focus-visible:py-3 group-focus-visible:opacity-100">LEARN MORE <span aria-hidden="true">›</span></span>
+                <h3 className="font-heading text-[clamp(28px,2.917vw,56px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#F7F7F7]">
+                  {isId ? 'Profil Korporat' : 'Corporate Profile'}
+                </h3>
+                <span className="flex max-h-0 items-center gap-3 overflow-hidden rounded-full bg-[#E6FF2A] px-0 py-0 font-body text-[clamp(13px,0.938vw,18px)] font-semibold text-[#101010] opacity-0 transition-all duration-500 group-hover:max-h-16 group-hover:px-7 group-hover:py-3 group-hover:opacity-100 group-focus-visible:max-h-16 group-focus-visible:px-7 group-focus-visible:py-3 group-focus-visible:opacity-100">
+                  {isId ? 'PELAJARI LEBIH LANJUT' : 'LEARN MORE'} <span aria-hidden="true">›</span>
+                </span>
               </div>
             </Link>
           </div>

@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 const BRANDS = [
   { name: 'Nasmoco', src: '/images/client-logos/nasmoco.webp' },
@@ -24,19 +27,22 @@ const BRANDS = [
 ];
 
 export default function ClientLogoBar() {
+  const { locale } = useLanguage();
   const doubledBrands = [...BRANDS, ...BRANDS];
 
   return (
     <section
       className="relative z-[2] -mb-[2px] isolate overflow-hidden border-0 bg-[#F7F7F7] py-[48px] shadow-none outline-none after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:z-20 after:h-[3px] after:bg-[#F7F7F7] after:content-[''] max-[768px]:py-[36px]"
-      aria-label="Trusted by leading companies"
+      aria-label={locale === 'id' ? 'Dipercaya oleh perusahaan terkemuka' : 'Trusted by leading companies'}
     >
       <div className="site-shell flex flex-col items-center gap-[32px] px-0 max-[768px]:gap-[24px]">
         <div className="text-center">
           <div className="inline-flex items-center gap-[5px] text-[#1A3E9E]">
             <span className="h-[7px] w-[7px] shrink-0 bg-[#1A3E9E]" aria-hidden="true" />
             <span className="font-body text-[11px] font-extrabold uppercase leading-[1.6] tracking-[0.02em]">
-              PROVEN TRACKS, TRUSTED BY THE BEST
+              {locale === 'id'
+                ? 'REKAM JEJAK TERBUKTI, DIPERCAYA OLEH YANG TERBAIK'
+                : 'PROVEN TRACKS, TRUSTED BY THE BEST'}
             </span>
           </div>
         </div>

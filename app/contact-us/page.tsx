@@ -8,6 +8,7 @@ import {
   WHATSAPP_PHONE_DISPLAY,
   WHATSAPP_LINK,
 } from '@/lib/constants';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 function DownIcon() {
   return (
@@ -77,20 +78,6 @@ function MailIcon({ size = 20 }: { size?: number }) {
   );
 }
 
-function WhatsAppIcon() {
-  return (
-    <svg
-      width="38"
-      height="38"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M12.04 2a9.84 9.84 0 0 0-8.51 14.76L2 22l5.38-1.41A9.86 9.86 0 1 0 12.04 2Zm0 17.9a8 8 0 0 1-4.08-1.12l-.29-.17-3.19.84.85-3.11-.19-.31a7.99 7.99 0 1 1 6.9 3.87Zm4.39-5.99c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.19-.71-.64-1.19-1.42-1.33-1.66-.14-.24-.02-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.47-.39-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z" />
-    </svg>
-  );
-}
-
 function RequiredLabel({ children }: { children: ReactNode }) {
   return (
     <label className="flex items-start gap-1 font-body text-[14px] font-normal leading-[1.5] tracking-[0.02em] text-[#292929] sm:text-[15px]">
@@ -127,6 +114,7 @@ function StarburstCheckBadge() {
 }
 
 function SuccessModal({ onClose }: { onClose: () => void }) {
+  const { t } = useLanguage();
   return (
     <div
       role="dialog"
@@ -142,7 +130,7 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close success message"
+          aria-label={t.contactUs.successCloseAriaLabel}
           className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center rounded-full bg-[#B0B0B0] text-white transition hover:bg-[#888888]"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -163,12 +151,12 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
           id="contact-success-title"
           className="font-heading text-[28px] font-bold leading-[1.18] tracking-[-0.02em] text-[#101010] md:text-[38px]"
         >
-          Thank You for Reaching Out!
+          {t.contactUs.successTitle}
         </h2>
 
         {/* Description */}
         <p className="mx-auto mt-4 max-w-[460px] font-body text-[14px] leading-[1.65] text-[#717171] md:text-[16px]">
-          Your form has been successfully submitted. Our team will get back to you as soon as possible. Don&apos;t forget to check your inbox and spam folder for our response.
+          {t.contactUs.successDescription}
         </p>
 
         {/* Action Button */}
@@ -177,7 +165,7 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
           onClick={onClose}
           className="mx-auto mt-8 inline-flex h-[50px] items-center justify-center gap-2 rounded-full bg-[#1A3E9E] px-8 font-body text-[13px] font-bold tracking-[0.04em] text-white transition hover:bg-[#14347F]"
         >
-          <span>BACK TO HOME</span>
+          <span>{t.contactUs.successBackToHome}</span>
           <svg width="6" height="10" viewBox="0 0 8 14" fill="none" aria-hidden="true">
             <path
               d="M1 1L7 7L1 13"
@@ -194,6 +182,7 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
 }
 
 export default function ContactUsPage() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -232,10 +221,7 @@ export default function ContactUsPage() {
       const result = await submitLead(payload);
 
       if (!result.success) {
-        setSubmitError(
-          result.message ||
-            'Your inquiry could not be submitted. Please try again.',
-        );
+        setSubmitError(result.message || t.contactUs.submitErrorFallback);
         return;
       }
 
@@ -243,9 +229,7 @@ export default function ContactUsPage() {
       setShowSuccessModal(true);
     } catch (error) {
       console.error('Contact form submission failed:', error);
-      setSubmitError(
-        'A server error occurred while sending your inquiry. Please try again.',
-      );
+      setSubmitError(t.contactUs.serverErrorFallback);
     } finally {
       setIsSubmitting(false);
     }
@@ -295,14 +279,14 @@ export default function ContactUsPage() {
             <div className="flex flex-col items-center gap-3 text-center sm:gap-4">
               <div className="flex items-center justify-center gap-2 font-body text-[11px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] sm:text-[13px]">
                 <Link href="/" className="transition-opacity hover:opacity-70">
-                  HOME
+                  {t.common.home}
                 </Link>
                 <span>/</span>
-                <span>CONTACT US</span>
+                <span>{t.contactUs.heroBreadcrumb}</span>
               </div>
 
               <h1 className="font-heading text-[clamp(52px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
-                Contact Us
+                {t.contactUs.heroTitle}
               </h1>
             </div>
           </div>
@@ -317,7 +301,7 @@ export default function ContactUsPage() {
                 window.scrollTo({ top, behavior: 'smooth' });
               }
             }}
-            aria-label="Scroll to CTA"
+            aria-label={t.contactUs.scrollAriaLabel}
             className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20"
             style={{
               background:
@@ -339,18 +323,18 @@ export default function ContactUsPage() {
             {/* LEFT */}
             <div className="flex w-[42%] shrink-0 flex-col gap-[clamp(20px,2vw,32px)] max-[1024px]:w-full">
               <h2 className="font-heading text-[clamp(32px,2.8vw,48px)] font-medium leading-[1.12] tracking-[-0.03em] text-[#101010]">
-                Let&apos;s Build
+                {t.contactUs.leftHeadingLine1}
                 <br />
-                Something Great
+                {t.contactUs.leftHeadingLine2}
                 <br />
-                Together
+                {t.contactUs.leftHeadingLine3}
               </h2>
 
               <div className="flex flex-col gap-4 rounded-[16px] md:gap-5">
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>CONTACT</span>
+                    <span>{t.contactUs.contactLabel}</span>
                   </div>
 
                   <div className="flex flex-col gap-1.5">
@@ -381,12 +365,11 @@ export default function ContactUsPage() {
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>JAKARTA OFFICE</span>
+                    <span>{t.contactUs.jakartaOfficeLabel}</span>
                   </div>
 
                   <p className="font-body text-[14px] leading-[1.5] tracking-[0.02em] text-[#717171] md:text-[15px]">
-                    Menara Rajawali 26th Floor Jl. DR. Ide Anak Agung Gde
-                    Agung, Jakarta, Indonesia 12950 →
+                    {t.contactUs.jakartaOfficeAddress}
                   </p>
                 </div>
 
@@ -395,13 +378,11 @@ export default function ContactUsPage() {
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>SEMARANG OFFICE</span>
+                    <span>{t.contactUs.semarangOfficeLabel}</span>
                   </div>
 
                   <p className="font-body text-[14px] leading-[1.5] tracking-[0.02em] text-[#717171] md:text-[15px]">
-                    MG Setos, Jl. Inspeksi, 3rd Floor Kembangsari
-                    Subdistrict, Semarang Tengah District, Semarang City,
-                    Central Java 50133, Indonesia →
+                    {t.contactUs.semarangOfficeAddress}
                   </p>
                 </div>
               </div>
@@ -414,7 +395,7 @@ export default function ContactUsPage() {
             >
               <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                 <div className="flex flex-col gap-1.5">
-                  <RequiredLabel>Your Name</RequiredLabel>
+                  <RequiredLabel>{t.contactUs.yourNameLabel}</RequiredLabel>
                   <input
                     id="name"
                     name="name"
@@ -428,13 +409,13 @@ export default function ContactUsPage() {
                         name: event.target.value,
                       }))
                     }
-                    placeholder="John Doe"
+                    placeholder={t.contactUs.yourNamePlaceholder}
                     className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-transparent px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#C8C8C8] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
                   />
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <RequiredLabel>Company Name</RequiredLabel>
+                  <RequiredLabel>{t.contactUs.companyNameLabel}</RequiredLabel>
                   <input
                     id="company"
                     name="company"
@@ -448,7 +429,7 @@ export default function ContactUsPage() {
                         company: event.target.value,
                       }))
                     }
-                    placeholder="PT Timedoer Indonesia"
+                    placeholder={t.contactUs.companyNamePlaceholder}
                     className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-transparent px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#C8C8C8] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
                   />
                 </div>
@@ -456,7 +437,7 @@ export default function ContactUsPage() {
 
               <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                 <div className="flex flex-col gap-1.5">
-                  <RequiredLabel>E-mail</RequiredLabel>
+                  <RequiredLabel>{t.contactUs.emailLabel}</RequiredLabel>
                   <input
                     id="email"
                     name="email"
@@ -470,13 +451,13 @@ export default function ContactUsPage() {
                         email: event.target.value,
                       }))
                     }
-                    placeholder="youremail@gmail.com"
+                    placeholder={t.contactUs.emailPlaceholder}
                     className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-transparent px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#C8C8C8] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
                   />
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <RequiredLabel>Phone Number</RequiredLabel>
+                  <RequiredLabel>{t.contactUs.phoneNumberLabel}</RequiredLabel>
                   <input
                     id="phone"
                     name="phone"
@@ -490,14 +471,14 @@ export default function ContactUsPage() {
                         phone: event.target.value,
                       }))
                     }
-                    placeholder="+62 8920-2090-298"
+                    placeholder={t.contactUs.phoneNumberPlaceholder}
                     className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-transparent px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#C8C8C8] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
                   />
                 </div>
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <RequiredLabel>Inquiry</RequiredLabel>
+                <RequiredLabel>{t.contactUs.inquiryLabel}</RequiredLabel>
                 <div className="relative">
                   <select
                     id="inquiry"
@@ -515,21 +496,21 @@ export default function ContactUsPage() {
                     }`}
                   >
                     <option value="" disabled>
-                      Choose Inquiry
+                      {t.contactUs.inquiryPlaceholder}
                     </option>
                     <option value="Technology & Digital Solutions">
-                      Technology &amp; Digital Solutions
+                      {t.contactUs.inquiryOptionTech}
                     </option>
                     <option value="Data, Survey & Analytics">
-                      Data, Survey &amp; Analytics
+                      {t.contactUs.inquiryOptionData}
                     </option>
                     <option value="Media, Creative & Communication">
-                      Media, Creative &amp; Communication
+                      {t.contactUs.inquiryOptionMedia}
                     </option>
                     <option value="Strategic Partnership">
-                      Strategic Partnership
+                      {t.contactUs.inquiryOptionPartnership}
                     </option>
-                    <option value="Other">Other</option>
+                    <option value="Other">{t.contactUs.inquiryOptionOther}</option>
                   </select>
 
                   <svg
@@ -552,7 +533,7 @@ export default function ContactUsPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <RequiredLabel>Message</RequiredLabel>
+                <RequiredLabel>{t.contactUs.messageLabel}</RequiredLabel>
                 <textarea
                   id="message"
                   name="message"
@@ -564,7 +545,7 @@ export default function ContactUsPage() {
                       message: event.target.value,
                     }))
                   }
-                  placeholder="Write your message here..."
+                  placeholder={t.contactUs.messagePlaceholder}
                   className="h-[110px] w-full resize-none rounded-[8px] border border-[#C8C8C8] bg-transparent px-4 py-3 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#C8C8C8] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[125px]"
                 />
               </div>
@@ -574,10 +555,10 @@ export default function ContactUsPage() {
                   type="submit"
                   disabled={isSubmitting}
                   aria-busy={isSubmitting}
-                  className="inline-flex h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[#1A3E9E] px-6 font-body text-[14px] font-semibold leading-[1.6] tracking-[0.01em] text-[#F7F7F7] transition hover:bg-[#14347F] disabled:cursor-wait disabled:opacity-60 sm:w-[200px] md:h-[50px]"
+                  className="inline-flex h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[#1A3E9E] px-6 font-body text-[14px] font-semibold leading-[1.6] tracking-[0.01em] whitespace-nowrap text-[#F7F7F7] transition hover:bg-[#14347F] disabled:cursor-wait disabled:opacity-60 sm:w-auto sm:min-w-[220px] md:h-[50px]"
                 >
                   <span>
-                    {isSubmitting ? 'SUBMITTING...' : 'SUBMIT INQUIRY'}
+                    {isSubmitting ? t.contactUs.submittingButton : t.contactUs.submitButton}
                   </span>
 
                   <span className="flex h-6 w-6 items-center justify-center">
@@ -628,9 +609,6 @@ export default function ContactUsPage() {
         {/* Global BeyondExpectations callout */}
         <BeyondExpectations />
       </main>
-
-      {/* Global Footer */}
-      {/* <Footer /> */}
 
       {showSuccessModal && (
         <SuccessModal onClose={() => setShowSuccessModal(false)} />

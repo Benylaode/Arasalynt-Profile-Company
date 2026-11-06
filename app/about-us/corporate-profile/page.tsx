@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 const IconChevronDown = () => (
   <svg width="32" height="22" viewBox="0 0 32 22" fill="none" aria-hidden="true">
@@ -23,7 +24,7 @@ const IconSliderArrow = ({ direction }: { direction: 'left' | 'right' }) => (
   </svg>
 );
 
-const FOUNDATION_SLIDES = [
+const FOUNDATION_SLIDES_EN = [
   {
     src: '/images/corporate-profile/team-discussion.webp',
     alt: 'Arsalynk team discussing a project',
@@ -47,7 +48,31 @@ const FOUNDATION_SLIDES = [
   },
 ];
 
-const SERVICES = [
+const FOUNDATION_SLIDES_ID = [
+  {
+    src: '/images/corporate-profile/team-discussion.webp',
+    alt: 'Tim Arsalynk mendiskusikan proyek',
+    position: 'center 47%',
+    title: 'Keandalan sebagai Prioritas Utama',
+    description: 'Kami membangun kemitraan jangka panjang melalui keandalan sistem yang terbukti, komunikasi yang jelas, dan eksekusi presisi di setiap siklus proyek.',
+  },
+  {
+    src: '/images/corporate-profile/team-collaboration.webp',
+    alt: 'Tim Arsalynk berkolaborasi di depan laptop',
+    position: 'center 56%',
+    title: 'Keahlian TI Lintas Disiplin',
+    description: 'Kami memadukan pengetahuan teknis mendalam di bidang sistem perusahaan, arsitektur data, dan rekayasa IoT menjadi solusi terintegrasi penuh dari satu sumber.',
+  },
+  {
+    src: '/images/corporate-profile/team-event.webp',
+    alt: 'Tim Arsalynk dalam acara perusahaan',
+    position: 'center 52%',
+    title: 'Dirancang untuk Keberlanjutan Sistem',
+    description: 'Kerangka pengiriman dan manajemen kami dibangun untuk berkembang secara berkelanjutan, memastikan operasional berketahanan tinggi tanpa hambatan maupun titik kegagalan tunggal.',
+  },
+];
+
+const SERVICES_EN = [
   {
     title: ['Enterprise Data', '& Intelligence'],
     description: 'Unifying data pipelines, advanced analytics, and actionable operational insights.',
@@ -74,7 +99,34 @@ const SERVICES = [
   },
 ];
 
-const OTHER_INFORMATION = [
+const SERVICES_ID = [
+  {
+    title: ['Data & Inteligensi', 'Perusahaan'],
+    description: 'Menyatukan pipeline data, analitik tingkat lanjut, dan wawasan operasional yang dapat ditindaklanjuti.',
+    image: '/images/corporate-profile/capabilities/enterprise-data-intelligence.webp',
+    alt: 'Ilustrasi data dan inteligensi perusahaan',
+  },
+  {
+    title: ['Sistem Terukur', '& Integrasi IoT'],
+    description: 'Menghubungkan perangkat, perangkat keras, dan jaringan ke dalam lingkungan digital berkinerja tinggi.',
+    image: '/images/corporate-profile/capabilities/scalable-systems-iot.webp',
+    alt: 'Ilustrasi sistem terukur dan integrasi IoT',
+  },
+  {
+    title: ['Infrastruktur TI', 'Kritis'],
+    description: 'Membangun jaringan aman berketahanan tinggi serta sistem cloud yang dirancang untuk waktu aktif tanpa henti.',
+    image: '/images/corporate-profile/capabilities/mission-critical-infrastructure.webp',
+    alt: 'Ilustrasi infrastruktur TI kritis',
+  },
+  {
+    title: ['Eksekusi', 'Terintegrasi'],
+    description: 'Menerapkan alur kerja ERP terpadu yang mengurangi hambatan dan meningkatkan produktivitas perusahaan.',
+    image: '/images/corporate-profile/capabilities/integrated-execution.webp',
+    alt: 'Ilustrasi eksekusi terintegrasi',
+  },
+];
+
+const OTHER_INFORMATION_EN = [
   {
     href: '/about-us/company-leadership',
     title: 'Company Leadership',
@@ -84,6 +136,21 @@ const OTHER_INFORMATION = [
   {
     href: '/about-us/ecosystem-philosophy',
     title: 'Ecosystem Philosophy',
+    image: '/images/about-us/cards/ecosystem-philosophy-card.webp',
+    imagePosition: 'center center',
+  },
+];
+
+const OTHER_INFORMATION_ID = [
+  {
+    href: '/about-us/company-leadership',
+    title: 'Kepemimpinan Perusahaan',
+    image: '/images/about-us/company-leadership/leadership-portrait.webp',
+    imagePosition: 'center 53%',
+  },
+  {
+    href: '/about-us/ecosystem-philosophy',
+    title: 'Filosofi Ekosistem',
     image: '/images/about-us/cards/ecosystem-philosophy-card.webp',
     imagePosition: 'center center',
   },
@@ -114,6 +181,12 @@ function SectionLabel({ children, theme = 'blue' }: { children: React.ReactNode;
 }
 
 export default function CorporateProfilePage() {
+  const { locale } = useLanguage();
+  const isId = locale === 'id';
+  const FOUNDATION_SLIDES = isId ? FOUNDATION_SLIDES_ID : FOUNDATION_SLIDES_EN;
+  const SERVICES = isId ? SERVICES_ID : SERVICES_EN;
+  const OTHER_INFORMATION = isId ? OTHER_INFORMATION_ID : OTHER_INFORMATION_EN;
+
   const [activeSlide, setActiveSlide] = useState(1);
   const [isSliderPaused, setIsSliderPaused] = useState(false);
   const [wrappingSlideIndex, setWrappingSlideIndex] = useState<number | null>(null);
@@ -208,11 +281,13 @@ export default function CorporateProfilePage() {
 
         <div className="absolute left-1/2 top-1/2 z-10 flex w-full max-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-6 text-center">
           <div className="font-body text-[10px] font-normal uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
-            HOME&nbsp;&nbsp;&gt;&nbsp;&nbsp;ABOUT US&nbsp;&nbsp;&gt;&nbsp;&nbsp;CORPORATE PROFILE
+            {isId
+              ? 'BERANDA  >  TENTANG KAMI  >  PROFIL KORPORAT'
+              : 'HOME  >  ABOUT US  >  CORPORATE PROFILE'}
           </div>
 
           <h1 className="font-heading text-[clamp(56px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
-            Corporate Profile
+            {isId ? 'Profil Korporat' : 'Corporate Profile'}
           </h1>
         </div>
 
@@ -222,7 +297,7 @@ export default function CorporateProfilePage() {
             e.preventDefault();
             handleScrollDown();
           }}
-          aria-label="Scroll to CTA"
+          aria-label={isId ? 'Gulir ke CTA' : 'Scroll to CTA'}
           className="absolute left-1/2 bottom-[clamp(34px,4.5vw,71px)] z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white backdrop-blur-[4px] transition-transform duration-300 hover:scale-105"
           style={{ background: 'linear-gradient(230.45deg, rgba(247,247,247,.21) -7.74%, rgba(247,247,247,.105) 81.5%)' }}
         >
@@ -233,12 +308,22 @@ export default function CorporateProfilePage() {
       {/* OUR FOUNDATION */}
       <section id="our-foundation" className="relative flex w-full scroll-mt-20 flex-col items-center bg-[#F7F7F7] pt-[clamp(72px,5.729vw,110px)] pb-[clamp(72px,5.729vw,110px)]">
         <div className="flex w-full max-w-[896px] px-6 flex-col items-center gap-[clamp(20px,1.667vw,32px)] text-center">
-          <SectionLabel>OUR FOUNDATION</SectionLabel>
+          <SectionLabel>{isId ? 'FONDASI KAMI' : 'OUR FOUNDATION'}</SectionLabel>
           <h2 className="font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
-            The Backbone<br />of Modern Enterprise
+            {isId ? (
+              <>
+                Tulang Punggung<br />Perusahaan Modern
+              </>
+            ) : (
+              <>
+                The Backbone<br />of Modern Enterprise
+              </>
+            )}
           </h2>
           <p className="font-body w-full text-[clamp(15px,1.042vw,20px)] font-normal leading-[1.6] tracking-[0.02em] text-[#292929]">
-            Arsalynk was founded on a singular realization: modern enterprises do not fail due to a lack of ambition; they stall due to fragmented technology.
+            {isId
+              ? 'Arsalynk didirikan atas satu kesadaran tunggal: perusahaan modern tidak gagal karena kurangnya ambisi; mereka terhambat karena teknologi yang terfragmentasi.'
+              : 'Arsalynk was founded on a singular realization: modern enterprises do not fail due to a lack of ambition; they stall due to fragmented technology.'}
           </p>
         </div>
 
@@ -301,7 +386,7 @@ export default function CorporateProfilePage() {
                 <div className={`absolute inset-x-[clamp(24px,3vw,56px)] bottom-[clamp(30px,3vw,58px)] z-[4] max-w-[760px] transition-[opacity,transform] duration-700 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
                   <div className="mb-4 flex items-center gap-2.5 font-body text-[10px] font-bold uppercase tracking-[0.08em] text-[#E6FF2A] sm:text-[12px]">
                     <span className="h-2 w-2 shrink-0 bg-[#E6FF2A]" />
-                    Foundation Principle
+                    {isId ? 'Prinsip Fondasi' : 'Foundation Principle'}
                   </div>
                   <h3 className="font-heading text-[clamp(30px,3.2vw,60px)] font-medium leading-[1.02] tracking-[-0.025em] text-white">
                     {slide.title}
@@ -389,16 +474,20 @@ export default function CorporateProfilePage() {
 
         <NarrowContainer className="relative z-10 flex flex-col items-center gap-[clamp(64px,5.2vw,100px)]">
           <div className="flex w-full flex-col items-center gap-[clamp(20px,1.667vw,32px)] text-center">
-            <SectionLabel theme="lime">OUR VISION</SectionLabel>
+            <SectionLabel theme="lime">{isId ? 'VISI KAMI' : 'OUR VISION'}</SectionLabel>
             <h2 className="font-heading text-[clamp(40px,3.333vw,64px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#F7F7F7]">
-              We envision a future where enterprises thrive through seamlessly integrated ERP and IT needs built for growth, resilience, and operational precision.
+              {isId
+                ? 'Kami membayangkan masa depan di mana perusahaan berkembang melalui kebutuhan ERP dan TI yang terintegrasi secara mulus, dibangun untuk pertumbuhan, ketahanan, dan presisi operasional.'
+                : 'We envision a future where enterprises thrive through seamlessly integrated ERP and IT needs built for growth, resilience, and operational precision.'}
             </h2>
           </div>
 
           <div className="flex w-full flex-col items-center gap-[clamp(20px,1.667vw,32px)] text-center">
-            <SectionLabel theme="lime">MISSION</SectionLabel>
+            <SectionLabel theme="lime">{isId ? 'MISI' : 'MISSION'}</SectionLabel>
             <p className="font-body text-[clamp(18px,1.458vw,28px)] font-normal leading-[1.6] tracking-[-0.02em] text-[#F7F7F7]">
-              Our mission is to make enterprise IT execution flawless, predictable, and remarkably capital-efficient.
+              {isId
+                ? 'Misi kami adalah menjadikan eksekusi TI perusahaan berjalan sempurna, terukur, dan sangat efisien secara modal.'
+                : 'Our mission is to make enterprise IT execution flawless, predictable, and remarkably capital-efficient.'}
             </p>
           </div>
         </NarrowContainer>
@@ -417,9 +506,17 @@ export default function CorporateProfilePage() {
 
         <WideContainer className="relative z-10 flex flex-col gap-12">
           <div className="flex flex-col items-center gap-[clamp(20px,1.667vw,32px)] text-center">
-            <SectionLabel>OUR CAPABILITIES</SectionLabel>
+            <SectionLabel>{isId ? 'KAPABILITAS KAMI' : 'OUR CAPABILITIES'}</SectionLabel>
             <h2 className="font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
-              Enabling Sustainable<br />Digital Excellence
+              {isId ? (
+                <>
+                  Mewujudkan Keunggulan<br />Digital yang Berkelanjutan
+                </>
+              ) : (
+                <>
+                  Enabling Sustainable<br />Digital Excellence
+                </>
+              )}
             </h2>
           </div>
 
@@ -462,7 +559,7 @@ export default function CorporateProfilePage() {
       <section className="w-full bg-[rgba(153,166,231,0.10)] px-[6vw] py-[clamp(80px,6.563vw,126px)] max-[1199px]:px-[4vw]">
         <WideContainer className="flex flex-col gap-[clamp(32px,2.5vw,48px)]">
           <h2 className="text-center font-heading text-[clamp(48px,4.375vw,84px)] font-medium leading-none tracking-[-0.03em] text-[#101010]">
-            Explore Other Information
+            {isId ? 'Jelajahi Informasi Lainnya' : 'Explore Other Information'}
           </h2>
 
           <div className="grid grid-cols-2 gap-[clamp(20px,1.563vw,30px)] max-[768px]:grid-cols-1">
@@ -485,7 +582,7 @@ export default function CorporateProfilePage() {
                     {item.title}
                   </h3>
                   <span className="flex max-h-0 items-center gap-3 overflow-hidden rounded-full bg-[#E6FF2A] px-0 py-0 font-body text-[clamp(13px,0.938vw,18px)] font-semibold text-[#101010] opacity-0 transition-all duration-500 group-hover:max-h-16 group-hover:px-7 group-hover:py-3 group-hover:opacity-100 group-focus-visible:max-h-16 group-focus-visible:px-7 group-focus-visible:py-3 group-focus-visible:opacity-100">
-                    LEARN MORE <span aria-hidden="true">›</span>
+                    {isId ? 'PELAJARI LEBIH LANJUT' : 'LEARN MORE'} <span aria-hidden="true">›</span>
                   </span>
                 </div>
               </Link>

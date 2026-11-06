@@ -1,4 +1,7 @@
+'use client'
+
 import React from 'react'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 interface ServiceHighlightCardSvgProps {
   slug: string
@@ -6,7 +9,7 @@ interface ServiceHighlightCardSvgProps {
   description?: string
 }
 
-const CARD_TEXT_BY_SLUG: Record<
+const CARD_TEXT_BY_SLUG_EN: Record<
   string,
   {
     title: string
@@ -47,12 +50,54 @@ const CARD_TEXT_BY_SLUG: Record<
   },
 }
 
+const CARD_TEXT_BY_SLUG_ID: Record<
+  string,
+  {
+    title: string
+    lines: [string, string, string]
+  }
+> = {
+  'enterprise-solution': {
+    title: 'Melampaui Solusi Generik',
+    lines: [
+      'Kami menghindari platform kaku yang seragam. Setiap modul ERP',
+      'dirancang khusus agar selaras dengan tata kelola korporat, alur',
+      'kerja internal, serta tujuan ekspansi jangka panjang Anda.',
+    ],
+  },
+  'data-ai-integration': {
+    title: 'Melampaui Analitik Statis',
+    lines: [
+      'Kami melampaui dasbor dasar. Model deep learning dan pipeline',
+      'data kustom kami dibangun khusus untuk beradaptasi dengan logika',
+      'bisnis unik serta ekosistem industri perusahaan Anda.',
+    ],
+  },
+  'smart-iot-system': {
+    title: 'Melampaui Otomatisasi Standar',
+    lines: [
+      'Kami tidak memakai perangkat plug-and-play generik. Setiap arsitektur',
+      'perangkat disesuaikan secara aman dengan infrastruktur fisik, protokol',
+      'keamanan, serta kebutuhan operasional spesifik Anda.',
+    ],
+  },
+  'digital-development': {
+    title: 'Melampaui Pembuatan Berbasis Template',
+    lines: [
+      'Kami menolak template seragam. Setiap platform digital dikodekan',
+      'khusus dari awal untuk menjamin performa optimal, keamanan',
+      'tangguh, serta keselarasan brand yang mulus.',
+    ],
+  },
+}
+
 export function ServiceHighlightCardSvg({
   slug,
   title,
 }: ServiceHighlightCardSvgProps) {
-  const cardData =
-    CARD_TEXT_BY_SLUG[slug] ?? CARD_TEXT_BY_SLUG['enterprise-solution']
+  const { locale } = useLanguage()
+  const dict = locale === 'id' ? CARD_TEXT_BY_SLUG_ID : CARD_TEXT_BY_SLUG_EN
+  const cardData = dict[slug] ?? dict['enterprise-solution']
   const resolvedTitle = title ?? cardData.title
 
   return (

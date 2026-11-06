@@ -4,13 +4,8 @@ import SectionPageJsonLd from '@/components/seo/SectionPageJsonLd';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
-import { LEADERSHIP_THOUGHTS_DUMMY_DATA } from '@/lib/db/dummy';
-
-/* ==========================================================================
-   ASSET PATHS
-   Extract the provided asset package into:
-   public/images/leadership-thoughts/
-   ========================================================================== */
+import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { getLocalizedLeadershipThoughts } from '@/lib/i18n/localized-data';
 
 const ASSETS = {
   hero: '/images/leadership-thoughts/hero-leadership-thoughts-v2.webp',
@@ -167,30 +162,33 @@ function FilterDropdown({
   );
 }
 
-/* ── Data normalization ─────────────────────────────────────────────────── */
-
-const LEADERSHIP_THOUGHTS = LEADERSHIP_THOUGHTS_DUMMY_DATA.map(
-  (item) => ({
-    id: item.id,
-    slug: item.slug,
-    title: item.title,
-    category: item.category || 'LEADERSHIP THOUGHTS',
-    author: item.author || 'CEO Arsalynk',
-    readTime: item.readTime,
-    date: item.date,
-    description: item.description,
-    image: item.coverImage,
-    featuredImage: item.coverImage,
-  }),
-);
-
-const FEATURED_ARTICLES = LEADERSHIP_THOUGHTS.slice(0, 3);
-
 /* ── Page ───────────────────────────────────────────────────────────────── */
 
 export default function LeadershipThoughtsPage() {
+  const { locale, t } = useLanguage();
   const CAROUSEL_DURATION = 6000;
   const CAROUSEL_TICK = 50;
+
+  const localizedThoughts = useMemo(() => getLocalizedLeadershipThoughts(locale), [locale]);
+
+  const LEADERSHIP_THOUGHTS = useMemo(
+    () =>
+      localizedThoughts.map((item) => ({
+        id: item.id,
+        slug: item.slug,
+        title: item.title,
+        category: item.category || t.insightPrograms.leadershipThoughtsHeroTitle.toUpperCase(),
+        author: item.author || 'CEO Arsalynk',
+        readTime: item.readTime,
+        date: item.date,
+        description: item.description,
+        image: item.coverImage,
+        featuredImage: item.coverImage,
+      })),
+    [localizedThoughts, t.insightPrograms.leadershipThoughtsHeroTitle],
+  );
+
+  const FEATURED_ARTICLES = useMemo(() => LEADERSHIP_THOUGHTS.slice(0, 3), [LEADERSHIP_THOUGHTS]);
 
   const [activeSlide, setActiveSlide] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -211,12 +209,12 @@ export default function LeadershipThoughtsPage() {
   const handleNext = useCallback(() => {
     resetProgress();
     setActiveSlide((current) => (current === FEATURED_ARTICLES.length - 1 ? 0 : current + 1));
-  }, [resetProgress]);
+  }, [resetProgress, FEATURED_ARTICLES.length]);
 
   const handlePrevious = useCallback(() => {
     resetProgress();
     setActiveSlide((current) => (current === 0 ? FEATURED_ARTICLES.length - 1 : current - 1));
-  }, [resetProgress]);
+  }, [resetProgress, FEATURED_ARTICLES.length]);
 
   useEffect(() => {
     if (FEATURED_ARTICLES.length <= 1 || isPaused) {
@@ -244,7 +242,7 @@ export default function LeadershipThoughtsPage() {
       setProgress(nextProgress);
     }, CAROUSEL_TICK);
     return () => window.clearInterval(id);
-  }, [isPaused]);
+  }, [isPaused, FEATURED_ARTICLES.length]);
 
   const filteredArticles = useMemo(() => {
     const keyword = searchTerm.trim().toLowerCase();
@@ -265,19 +263,11 @@ export default function LeadershipThoughtsPage() {
 
     if (sortOrder === 'oldest') return [...result].reverse();
     return result;
-  }, [searchTerm, sortOrder]);
+  }, [LEADERSHIP_THOUGHTS, searchTerm, sortOrder]);
 
   const visibleArticles = filteredArticles.slice(0, visibleCount);
   const hasMore = visibleCount < filteredArticles.length;
   const featured = FEATURED_ARTICLES[activeSlide] ?? LEADERSHIP_THOUGHTS[0];
-
-  const handleScrollDown = () => {
-    document
-      .getElementById('beyond-expectations')
-      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
-  // Already defined above via useCallback
 
   return (
     <main className="w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
@@ -287,27 +277,26 @@ export default function LeadershipThoughtsPage() {
           ================================================================== */}
       <section
         id="leadership-thoughts-hero"
-        aria-label="Leadership Thoughts Hero"
+        aria-label={t.insightPrograms.leadershipThoughtsHeroTitle}
         className="relative isolate flex h-[clamp(560px,41.666vw,800px)] w-full items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-[#101010]"
       >
         <img
           src={ASSETS.hero}
-          alt="Leadership thoughts hero background"
+          alt={t.insightPrograms.leadershipThoughtsHeroTitle}
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
 
         <div className="relative z-10 mx-auto flex w-full max-w-[900px] flex-col items-center px-6 text-center">
           <div className="font-body text-[10.5px] font-normal uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
-              Home&nbsp;&nbsp;&gt;&nbsp;&nbsp;Insight &amp; Programs&nbsp;&nbsp;&gt;&nbsp;&nbsp;Leadership Thoughts
-            </div>
+            {t.common.home}&nbsp;&nbsp;&gt;&nbsp;&nbsp;{t.insightPrograms.heroTitle}&nbsp;&nbsp;&gt;&nbsp;&nbsp;{t.insightPrograms.leadershipThoughtsHeroTitle}
+          </div>
 
           <h1 className="font-heading mt-5 text-[clamp(52px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
-            Leadership Thoughts
+            {t.insightPrograms.leadershipThoughtsHeroTitle}
           </h1>
 
           <p className="mt-6 max-w-[650px] font-body text-[clamp(14px,1.042vw,20px)] font-light leading-[1.6] tracking-[0.02em] text-white/95">
-            Perspectives, principles, and strategic insights from the Arsalynk leadership team —
-            shaping the way we think about business, technology, and human potential.
+            {t.insightPrograms.leadershipThoughtsHeroDescription}
           </p>
         </div>
 
@@ -338,7 +327,7 @@ export default function LeadershipThoughtsPage() {
           ================================================================== */}
       <section
         id="featured-thoughts"
-        aria-label="Featured Thoughts"
+        aria-label={t.insightPrograms.leadershipThoughtsFeaturedEyebrow}
         className="bg-[#F7F7F7] px-[6vw] py-16 max-[1199px]:px-[4vw] max-[768px]:py-10"
       >
         <div className="mx-auto w-full max-w-[1600px]">
@@ -350,7 +339,7 @@ export default function LeadershipThoughtsPage() {
             <img
               key={`${featured?.id}-${activeSlide}`}
               src={featured?.featuredImage}
-              alt={featured?.title ?? 'Featured leadership thought'}
+              alt={featured?.title ?? t.insightPrograms.leadershipThoughtsFeaturedEyebrow}
               className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
             />
 
@@ -368,7 +357,7 @@ export default function LeadershipThoughtsPage() {
             <div className="absolute bottom-[118px] left-[74px] right-[284px] z-10 flex flex-col items-start max-[1200px]:bottom-[105px] max-[1200px]:left-[54px] max-[1200px]:right-[216px] max-[768px]:bottom-[112px] max-[768px]:left-7 max-[768px]:right-7">
               <div className="mb-2.5 flex items-center gap-2.5 font-body text-[16px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[1200px]:text-[14px] max-[768px]:text-[11px]">
                 <span className="h-2 w-2 shrink-0 bg-[#E6FF2A]" />
-                <span>Featured Thoughts</span>
+                <span>{t.insightPrograms.leadershipThoughtsFeaturedEyebrow}</span>
               </div>
 
               <h2 className="max-w-[1180px] font-heading text-[clamp(32px,3vw,58px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#F7F7F7] transition-colors duration-300 group-hover:text-[#E6FF2A]">
@@ -381,7 +370,7 @@ export default function LeadershipThoughtsPage() {
               </h2>
 
               <div className="mt-5 flex min-h-[54px] items-center rounded-full border border-[#717171] px-7 font-body text-[16px] leading-[1.5] tracking-[0.02em] text-white max-[1200px]:min-h-[48px] max-[1200px]:px-6 max-[1200px]:text-[14px] max-[768px]:mt-4 max-[768px]:min-h-[42px] max-[768px]:px-5 max-[768px]:text-[12px]">
-                by {featured?.author}
+                {t.insightPrograms.leadershipThoughtsByPrefix} {featured?.author}
               </div>
             </div>
 
@@ -414,7 +403,7 @@ export default function LeadershipThoughtsPage() {
               <button
                 type="button"
                 onClick={handlePrevious}
-                aria-label="Previous featured thought"
+                aria-label={t.common.previousSlide}
                 className="flex h-[58px] w-[58px] items-center justify-center rounded-[11px] border border-[#D9D9D9] text-[#D9D9D9] transition-colors duration-200 hover:bg-white hover:text-black max-[768px]:h-12 max-[768px]:w-12 max-[768px]:rounded-lg"
               >
                 <IconArrowLeft size={24} />
@@ -423,7 +412,7 @@ export default function LeadershipThoughtsPage() {
               <button
                 type="button"
                 onClick={handleNext}
-                aria-label="Next featured thought"
+                aria-label={t.common.nextSlide}
                 className="flex h-[58px] w-[58px] items-center justify-center rounded-[11px] border border-[#D9D9D9] text-[#D9D9D9] transition-colors duration-200 hover:bg-white hover:text-black max-[768px]:h-12 max-[768px]:w-12 max-[768px]:rounded-lg"
               >
                 <IconArrowRight size={24} />
@@ -438,13 +427,13 @@ export default function LeadershipThoughtsPage() {
           ================================================================== */}
       <section
         id="explore-thoughts"
-        aria-label="Explore Our Thoughts"
+        aria-label={t.insightPrograms.leadershipThoughtsExploreTitle}
         className="bg-[rgba(153,166,231,0.10)] px-[6vw] py-[110px] max-[1199px]:px-[4vw] max-[1024px]:py-20 max-[768px]:py-16"
       >
         <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-16 max-[768px]:gap-10">
           <header className="flex w-full items-end justify-between gap-8 max-[1050px]:flex-col max-[1050px]:items-start">
             <h2 className="font-heading text-[clamp(46px,3.75vw,72px)] font-medium leading-[1.1] tracking-[-0.02em] text-[#101010]">
-              Explore Our Thoughts
+              {t.insightPrograms.leadershipThoughtsExploreTitle}
             </h2>
 
             <div className="flex items-center justify-end gap-2 max-[700px]:w-full max-[700px]:flex-col max-[700px]:items-stretch">
@@ -457,8 +446,8 @@ export default function LeadershipThoughtsPage() {
                     setSearchTerm(event.target.value);
                     setVisibleCount(PAGE_SIZE);
                   }}
-                  placeholder="Search Thoughts..."
-                  aria-label="Search thoughts"
+                  placeholder={t.insightPrograms.leadershipThoughtsSearchPlaceholder}
+                  aria-label={t.insightPrograms.leadershipThoughtsSearchPlaceholder}
                   className="h-full w-full cursor-pointer appearance-none rounded-full border border-[#D9D9D9] bg-transparent pl-5 pr-10 font-body text-[13px] font-medium tracking-[0.02em] text-[#101010] outline-none placeholder:text-[#717171] hover:border-[#1A3E9E] hover:text-[#1A3E9E] focus:border-[#1A3E9E]"
                 />
                 <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#717171]">
@@ -471,10 +460,10 @@ export default function LeadershipThoughtsPage() {
                 value={sortOrder}
                 onChange={(val) => { setSortOrder(val as 'newest' | 'oldest'); setVisibleCount(PAGE_SIZE); }}
                 options={[
-                  { label: 'Newest', value: 'newest' },
-                  { label: 'Oldest', value: 'oldest' },
+                  { label: t.common.newest, value: 'newest' },
+                  { label: t.common.oldest, value: 'oldest' },
                 ]}
-                ariaLabel="Sort thoughts"
+                ariaLabel={t.insightPrograms.leadershipThoughtsSortAriaLabel}
               />
             </div>
           </header>
@@ -500,7 +489,7 @@ export default function LeadershipThoughtsPage() {
                         <div className="flex min-w-0 items-center gap-2.5">
                           <span className="h-2 w-2 shrink-0 bg-[#1A3E9E]" />
                           <span className="truncate">
-                            {article.category || 'LEADERSHIP THOUGHTS'}
+                            {article.category}
                           </span>
                         </div>
                         <span className="shrink-0">{article.date}</span>
@@ -537,7 +526,7 @@ export default function LeadershipThoughtsPage() {
           ) : (
             <div className="flex min-h-[320px] items-center justify-center rounded-3xl border border-dashed border-[#B9BED9] px-6 text-center">
               <p className="font-body text-lg text-[#717171]">
-                No leadership thoughts match your search.
+                {t.insightPrograms.leadershipThoughtsNoMatch}
               </p>
             </div>
           )}
@@ -549,7 +538,7 @@ export default function LeadershipThoughtsPage() {
                 onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
                 className="flex h-14 min-w-[180px] items-center justify-center rounded-full border border-[#152571] px-8 font-body text-[20px] font-semibold leading-[1.2] tracking-[0.02em] text-[#101010] transition-colors duration-200 hover:bg-[#152571] hover:text-white max-[768px]:text-[16px]"
               >
-                LOAD MORE
+                {t.common.loadMore}
               </button>
             </div>
           )}

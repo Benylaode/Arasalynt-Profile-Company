@@ -1,40 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import {
   WHATSAPP_LINK,
   WHATSAPP_PHONE_DISPLAY,
 } from '@/lib/constants';
-
-const ABOUT_LINKS = [
-  { name: 'About Arsalynk', href: '/about-us' },
-  { name: 'Corporate Profile', href: '/about-us/corporate-profile' },
-  { name: 'Company Leadership', href: '/about-us/company-leadership' },
-  { name: 'Ecosystem Philosophy', href: '/about-us/ecosystem-philosophy' },
-];
-
-const COMPANY_LINKS = [
-  { name: 'Our Solution', href: '/our-solution' },
-  { name: 'Contact Us', href: '/contact-us' },
-  { name: 'Privacy Policy', href: '/privacy-policy' },
-];
-
-const USER_LINKS = [
-  { name: 'Client Portal', href: '/portal' },
-  { name: 'General CRM Hub', href: '/crm' },
-  { name: 'Feedback & Rating', href: '/feedback' },
-];
-
-const SOLUTION_LINKS = [
-  { name: 'Enterprise Solution', href: '/our-solution/enterprise-solution' },
-  { name: 'Data & AI Integration', href: '/our-solution/data-ai-integration' },
-  { name: 'Smart IOT System', href: '/our-solution/smart-iot-system' },
-  { name: 'Digital Development', href: '/our-solution/digital-development' },
-];
-
-const INSIGHT_LINKS = [
-  { name: 'Case Studies', href: '/insight-programs/case-studies' },
-  { name: 'Leadership Thoughts', href: '/insight-programs/leadership-thoughts' },
-];
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 const BrandLogo = () => (
   <svg
@@ -127,10 +99,44 @@ const SocialLink = ({ href, label, children }: { href: string; label: string; ch
 );
 
 export default function Footer() {
+  const { locale } = useLanguage();
+  const isId = locale === 'id';
+
+  const aboutLinks = [
+    { name: isId ? 'Tentang Arsalynk' : 'About Arsalynk', href: '/about-us' },
+    { name: isId ? 'Profil Korporat' : 'Corporate Profile', href: '/about-us/corporate-profile' },
+    { name: isId ? 'Kepemimpinan Perusahaan' : 'Company Leadership', href: '/about-us/company-leadership' },
+    { name: isId ? 'Filosofi Ekosistem' : 'Ecosystem Philosophy', href: '/about-us/ecosystem-philosophy' },
+  ];
+
+  const companyLinks = [
+    { name: isId ? 'Solusi Kami' : 'Our Solution', href: '/our-solution' },
+    { name: isId ? 'Hubungi Kami' : 'Contact Us', href: '/contact-us' },
+    { name: isId ? 'Kebijakan Privasi' : 'Privacy Policy', href: '/privacy-policy' },
+  ];
+
+  const userLinks = [
+    { name: isId ? 'Portal Klien' : 'Client Portal', href: '/portal' },
+    { name: isId ? 'Pusat CRM Umum' : 'General CRM Hub', href: '/crm' },
+    { name: isId ? 'Umpan Balik & Penilaian' : 'Feedback & Rating', href: '/feedback' },
+  ];
+
+  const solutionLinks = [
+    { name: isId ? 'Solusi Enterprise' : 'Enterprise Solution', href: '/our-solution/enterprise-solution' },
+    { name: isId ? 'Integrasi Data & AI' : 'Data & AI Integration', href: '/our-solution/data-ai-integration' },
+    { name: isId ? 'Sistem Smart IoT' : 'Smart IOT System', href: '/our-solution/smart-iot-system' },
+    { name: isId ? 'Pengembangan Digital' : 'Digital Development', href: '/our-solution/digital-development' },
+  ];
+
+  const insightLinks = [
+    { name: isId ? 'Studi Kasus' : 'Case Studies', href: '/insight-programs/case-studies' },
+    { name: isId ? 'Pemikiran Kepemimpinan' : 'Leadership Thoughts', href: '/insight-programs/leadership-thoughts' },
+  ];
+
   return (
     <footer
       role="contentinfo"
-      className={`w-full bg-[#101010] text-[#D9D9D9]`}
+      className="w-full bg-[#101010] text-[#D9D9D9]"
       style={{ fontSynthesis: 'none', textRendering: 'geometricPrecision' }}
     >
       <div className="site-shell px-0 pt-[60px] max-[767px]:pt-[40px]">
@@ -145,9 +151,9 @@ export default function Footer() {
             {/* Column 1: ABOUT & COMPANY */}
             <div className="flex flex-col gap-8">
               <div className="flex flex-col gap-3.5">
-                <FooterTitle href="/about-us">ABOUT</FooterTitle>
+                <FooterTitle href="/about-us">{isId ? 'TENTANG KAMI' : 'ABOUT'}</FooterTitle>
                 <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
-                  {ABOUT_LINKS.map((link) => (
+                  {aboutLinks.map((link) => (
                     <li key={link.href}>
                       <FooterLink href={link.href}>{link.name}</FooterLink>
                     </li>
@@ -156,9 +162,9 @@ export default function Footer() {
               </div>
 
               <div className="flex flex-col gap-3.5">
-                <FooterTitle>COMPANY</FooterTitle>
+                <FooterTitle>{isId ? 'PERUSAHAAN' : 'COMPANY'}</FooterTitle>
                 <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
-                  {COMPANY_LINKS.map((link) => (
+                  {companyLinks.map((link) => (
                     <li key={link.href}>
                       <FooterLink href={link.href}>{link.name}</FooterLink>
                     </li>
@@ -167,9 +173,9 @@ export default function Footer() {
               </div>
 
               <div className="flex flex-col gap-3.5">
-                <FooterTitle href="/portal">USER &amp; CLIENT</FooterTitle>
+                <FooterTitle href="/portal">{isId ? 'PENGGUNA & KLIEN' : 'USER & CLIENT'}</FooterTitle>
                 <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
-                  {USER_LINKS.map((link) => (
+                  {userLinks.map((link) => (
                     <li key={link.href}>
                       <FooterLink href={link.href}>{link.name}</FooterLink>
                     </li>
@@ -180,9 +186,9 @@ export default function Footer() {
 
             {/* Column 2: SOLUTIONS */}
             <div className="flex flex-col gap-3.5">
-              <FooterTitle href="/our-solution">SOLUTIONS</FooterTitle>
+              <FooterTitle href="/our-solution">{isId ? 'SOLUSI' : 'SOLUTIONS'}</FooterTitle>
               <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
-                {SOLUTION_LINKS.map((link) => (
+                {solutionLinks.map((link) => (
                   <li key={link.href}>
                     <FooterLink href={link.href}>{link.name}</FooterLink>
                   </li>
@@ -193,9 +199,9 @@ export default function Footer() {
             {/* Column 3: INSIGHTS & OFFICE */}
             <div className="flex flex-col gap-7">
               <div className="flex flex-col gap-3.5">
-                <FooterTitle href="/insight-programs">INSIGHTS</FooterTitle>
+                <FooterTitle href="/insight-programs">{isId ? 'WAWASAN' : 'INSIGHTS'}</FooterTitle>
                 <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
-                  {INSIGHT_LINKS.map((link) => (
+                  {insightLinks.map((link) => (
                     <li key={link.href}>
                       <FooterLink href={link.href}>{link.name}</FooterLink>
                     </li>
@@ -204,34 +210,46 @@ export default function Footer() {
               </div>
 
               <div className="flex flex-col gap-3">
-                <FooterTitle>JAKARTA OFFICE</FooterTitle>
+                <FooterTitle>{isId ? 'KANTOR JAKARTA' : 'JAKARTA OFFICE'}</FooterTitle>
                 <a
                   href="https://www.google.com/maps/search/?api=1&query=Menara+Rajawali+Mega+Kuningan+Jakarta"
                   target="_blank"
                   rel="noreferrer"
                   className="m-0 text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
                 >
-                  <span className="block max-[1799px]:inline">Menara Rajawali 26th Floor Jl. DR. Ide Anak Agung Gde</span>{' '}
+                  <span className="block max-[1799px]:inline">
+                    {isId
+                      ? 'Menara Rajawali Lantai 26 Jl. DR. Ide Anak Agung Gde'
+                      : 'Menara Rajawali 26th Floor Jl. DR. Ide Anak Agung Gde'}
+                  </span>{' '}
                   <span className="block max-[1799px]:inline">Agung, Jakarta, Indonesia 12950 →</span>
                 </a>
               </div>
 
               <div className="flex flex-col gap-3">
-                <FooterTitle>SEMARANG OFFICE</FooterTitle>
+                <FooterTitle>{isId ? 'KANTOR SEMARANG' : 'SEMARANG OFFICE'}</FooterTitle>
                 <a
                   href="https://www.google.com/maps/search/?api=1&query=MG+Setos+Semarang+Indonesia"
                   target="_blank"
                   rel="noreferrer"
                   className="m-0 text-[13px] font-normal leading-[19.3px] tracking-[0.26px] text-[#D9D9D9] no-underline transition-colors hover:text-[#E6FF2A]"
                 >
-                  <span className="block max-[1799px]:inline">MG Setos, Jl. Inspeksi, 3rd Floor Kembangsari Subdistrict,</span>{' '}
-                  <span className="block max-[1799px]:inline">Semarang Tengah District, Semarang City, Central Java</span>{' '}
+                  <span className="block max-[1799px]:inline">
+                    {isId
+                      ? 'MG Setos, Jl. Inspeksi, Lantai 3 Kel. Kembangsari,'
+                      : 'MG Setos, Jl. Inspeksi, 3rd Floor Kembangsari Subdistrict,'}
+                  </span>{' '}
+                  <span className="block max-[1799px]:inline">
+                    {isId
+                      ? 'Kec. Semarang Tengah, Kota Semarang, Jawa Tengah'
+                      : 'Semarang Tengah District, Semarang City, Central Java'}
+                  </span>{' '}
                   <span className="block max-[1799px]:inline">50133, Indonesia →</span>
                 </a>
               </div>
 
               <div className="flex flex-col gap-3">
-                <FooterTitle>CONTACT</FooterTitle>
+                <FooterTitle>{isId ? 'KONTAK' : 'CONTACT'}</FooterTitle>
                 <div className="flex flex-col gap-2.5">
                   <a
                     href={WHATSAPP_LINK}

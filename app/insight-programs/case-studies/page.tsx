@@ -4,10 +4,11 @@ import SectionPageJsonLd from '@/components/seo/SectionPageJsonLd';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
-import { CASE_STUDIES_DUMMY_DATA } from '@/lib/db/dummy';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { getLocalizedCaseStudies } from '@/lib/i18n/localized-data';
 
 /* ========================================================================== 
-   CASE STUDIES PAGE (/insight-programs/Case-Studies)
+   CASE STUDIES PAGE (/insight-programs/case-studies)
    ========================================================================== */
 
 const ASSETS = {
@@ -17,27 +18,6 @@ const ASSETS = {
 const PAGE_SIZE = 9;
 
 type SortOption = 'newest' | 'oldest' | 'title';
-
-type CaseStudy = {
-  id: number | string;
-  slug: string;
-  title: string;
-  category: string;
-  dateLabel: string;
-  dateValue: string;
-  description: string;
-  image: string;
-  imageAlt: string;
-};
-
-type FeaturedStudy = {
-  id: number | string;
-  slug: string;
-  eyebrow: string;
-  title: string;
-  image: string;
-  imageAlt: string;
-};
 
 function IconChevronDown() {
   return (
@@ -187,30 +167,41 @@ function FilterDropdown({
   );
 }
 
-const FEATURED_STUDIES: FeaturedStudy[] = CASE_STUDIES_DUMMY_DATA.slice(0, 3).map((item) => ({
-  id: item.id,
-  slug: item.slug,
-  eyebrow: 'FEATURED STORIES',
-  title: item.title,
-  image: item.coverImage,
-  imageAlt: item.coverImageAlt,
-}));
-
-const ALL_CASES: CaseStudy[] = CASE_STUDIES_DUMMY_DATA.map((item) => ({
-  id: item.id,
-  slug: item.slug,
-  title: item.title,
-  category: item.category,
-  dateLabel: item.dateLabel,
-  dateValue: item.dateValue,
-  description: item.description,
-  image: item.coverImage,
-  imageAlt: item.coverImageAlt,
-}));
-
 export default function CaseStudiesPage() {
+  const { locale, t } = useLanguage();
   const CAROUSEL_DURATION = 6000;
   const CAROUSEL_TICK = 50;
+
+  const localizedCases = useMemo(() => getLocalizedCaseStudies(locale), [locale]);
+
+  const FEATURED_STUDIES = useMemo(
+    () =>
+      localizedCases.slice(0, 3).map((item) => ({
+        id: item.id,
+        slug: item.slug,
+        eyebrow: t.insightPrograms.caseStudiesFeaturedEyebrow,
+        title: item.title,
+        image: item.coverImage,
+        imageAlt: item.coverImageAlt,
+      })),
+    [localizedCases, t.insightPrograms.caseStudiesFeaturedEyebrow],
+  );
+
+  const ALL_CASES = useMemo(
+    () =>
+      localizedCases.map((item) => ({
+        id: item.id,
+        slug: item.slug,
+        title: item.title,
+        category: item.category,
+        dateLabel: item.dateLabel,
+        dateValue: item.dateValue,
+        description: item.description,
+        image: item.coverImage,
+        imageAlt: item.coverImageAlt,
+      })),
+    [localizedCases],
+  );
 
   const [activeSlide, setActiveSlide] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -230,12 +221,12 @@ export default function CaseStudiesPage() {
   const handleNext = useCallback(() => {
     resetProgress();
     setActiveSlide((current) => (current === FEATURED_STUDIES.length - 1 ? 0 : current + 1));
-  }, [resetProgress]);
+  }, [resetProgress, FEATURED_STUDIES.length]);
 
   const handlePrevious = useCallback(() => {
     resetProgress();
     setActiveSlide((current) => (current === 0 ? FEATURED_STUDIES.length - 1 : current - 1));
-  }, [resetProgress]);
+  }, [resetProgress, FEATURED_STUDIES.length]);
 
   useEffect(() => {
     if (FEATURED_STUDIES.length <= 1 || isPaused) {
@@ -263,7 +254,7 @@ export default function CaseStudiesPage() {
       setProgress(nextProgress);
     }, CAROUSEL_TICK);
     return () => window.clearInterval(id);
-  }, [isPaused]);
+  }, [isPaused, FEATURED_STUDIES.length]);
 
   const filteredCases = useMemo(() => {
     const keyword = searchQuery.trim().toLowerCase();
@@ -280,19 +271,11 @@ export default function CaseStudiesPage() {
       const db = new Date(b.dateValue).getTime();
       return sortBy === 'oldest' ? da - db : db - da;
     });
-  }, [searchQuery, sortBy]);
+  }, [ALL_CASES, searchQuery, sortBy]);
 
   const visibleCases = filteredCases.slice(0, visibleCount);
   const hasMore = visibleCount < filteredCases.length;
   const featured = FEATURED_STUDIES[activeSlide] ?? FEATURED_STUDIES[0];
-
-  const handleScrollDown = () => {
-    document
-      .getElementById('beyond-expectations')
-      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
-  // Already defined above via useCallback
 
   return (
     <main className="w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
@@ -302,28 +285,26 @@ export default function CaseStudiesPage() {
           ================================================================== */}
       <section
         id="case-studies-hero"
-        aria-label="Case Studies Hero"
+        aria-label={t.insightPrograms.caseStudiesHeroTitle}
         className="relative isolate flex h-[clamp(560px,41.666vw,800px)] w-full items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-[#101010]"
       >
         <img
           src={ASSETS.hero}
-          alt="Case studies hero background"
+          alt={t.insightPrograms.caseStudiesHeroTitle}
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
 
         <div className="relative z-10 mx-auto flex w-full max-w-[900px] flex-col items-center px-6 text-center">
           <div className="font-body text-[10.5px] font-normal uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] max-[768px]:text-[7px]">
-            Home&nbsp;&nbsp;&gt;&nbsp;&nbsp;Insight &amp; Programs&nbsp;&nbsp;&gt;&nbsp;&nbsp;Case Studies
+            {t.common.home}&nbsp;&nbsp;&gt;&nbsp;&nbsp;{t.insightPrograms.heroTitle}&nbsp;&nbsp;&gt;&nbsp;&nbsp;{t.insightPrograms.caseStudiesHeroTitle}
           </div>
 
           <h1 className="font-heading mt-5 text-[clamp(52px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
-            Case Studies
+            {t.insightPrograms.caseStudiesHeroTitle}
           </h1>
 
           <p className="mt-6 max-w-[650px] font-body text-[clamp(14px,1.042vw,20px)] font-light leading-[1.6] tracking-[0.02em] text-white/95">
-            Explore in-depth breakdowns of our projects, from business
-            challenges and solution strategies to implementation &amp;
-            measurable results delivered for our clients.
+            {t.insightPrograms.caseStudiesHeroDescription}
           </p>
         </div>
 
@@ -354,7 +335,7 @@ export default function CaseStudiesPage() {
           ================================================================== */}
       <section
         id="featured-case-studies"
-        aria-label="Featured Case Studies"
+        aria-label={t.insightPrograms.caseStudiesFeaturedEyebrow}
         className="bg-[#F7F7F7] px-[6vw] py-16 max-[1199px]:px-[4vw] max-[768px]:py-10"
       >
         <div className="mx-auto w-full max-w-[1600px]">
@@ -426,7 +407,7 @@ export default function CaseStudiesPage() {
               <button
                 type="button"
                 onClick={handlePrevious}
-                aria-label="Previous featured story"
+                aria-label={t.common.previousSlide}
                 className="flex h-[58px] w-[58px] items-center justify-center rounded-[11px] border border-[#D9D9D9] text-[#D9D9D9] transition-colors duration-200 hover:bg-white hover:text-black max-[768px]:h-12 max-[768px]:w-12 max-[768px]:rounded-lg"
               >
                 <IconArrowLeft size={24} />
@@ -435,7 +416,7 @@ export default function CaseStudiesPage() {
               <button
                 type="button"
                 onClick={handleNext}
-                aria-label="Next featured story"
+                aria-label={t.common.nextSlide}
                 className="flex h-[58px] w-[58px] items-center justify-center rounded-[11px] border border-[#D9D9D9] text-[#D9D9D9] transition-colors duration-200 hover:bg-white hover:text-black max-[768px]:h-12 max-[768px]:w-12 max-[768px]:rounded-lg"
               >
                 <IconArrowRight size={24} />
@@ -450,13 +431,13 @@ export default function CaseStudiesPage() {
           ================================================================== */}
       <section
         id="explore-case-studies"
-        aria-label="Explore Case Studies"
+        aria-label={t.insightPrograms.caseStudiesExploreTitle}
         className="bg-[rgba(153,166,231,0.10)] px-[6vw] py-[110px] max-[1199px]:px-[4vw] max-[1024px]:py-20 max-[768px]:py-16"
       >
         <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-16 max-[768px]:gap-10">
           <header className="flex w-full items-end justify-between gap-8 max-[1050px]:flex-col max-[1050px]:items-start">
             <h2 className="font-heading text-[clamp(46px,3.75vw,72px)] font-medium leading-[1.1] tracking-[-0.02em] text-[#101010]">
-              Explore Case Studies
+              {t.insightPrograms.caseStudiesExploreTitle}
             </h2>
 
             <div className="flex items-center justify-end gap-2 max-[700px]:w-full max-[700px]:flex-col max-[700px]:items-stretch">
@@ -469,8 +450,8 @@ export default function CaseStudiesPage() {
                     setSearchQuery(event.target.value);
                     setVisibleCount(PAGE_SIZE);
                   }}
-                  placeholder="Search Case..."
-                  aria-label="Search case studies"
+                  placeholder={t.insightPrograms.caseStudiesSearchPlaceholder}
+                  aria-label={t.insightPrograms.caseStudiesSearchPlaceholder}
                   className="h-full w-full cursor-pointer appearance-none rounded-full border border-[#D9D9D9] bg-transparent pl-5 pr-10 font-body text-[13px] font-medium tracking-[0.02em] text-[#101010] outline-none placeholder:text-[#717171] hover:border-[#1A3E9E] hover:text-[#1A3E9E] focus:border-[#1A3E9E]"
                 />
                 <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#717171]">
@@ -483,10 +464,10 @@ export default function CaseStudiesPage() {
                 value={sortBy}
                 onChange={(val) => { setSortBy(val as SortOption); setVisibleCount(PAGE_SIZE); }}
                 options={[
-                  { label: 'Newest', value: 'newest' },
-                  { label: 'Oldest', value: 'oldest' },
+                  { label: t.common.newest, value: 'newest' },
+                  { label: t.common.oldest, value: 'oldest' },
                 ]}
-                ariaLabel="Sort case studies"
+                ariaLabel={t.insightPrograms.caseStudiesSortAriaLabel}
               />
             </div>
           </header>
@@ -550,7 +531,7 @@ export default function CaseStudiesPage() {
           ) : (
             <div className="flex min-h-[320px] items-center justify-center rounded-3xl border border-dashed border-[#B9BED9] px-6 text-center">
               <p className="font-body text-lg text-[#717171]">
-                No case studies match your search.
+                {t.insightPrograms.caseStudiesNoMatch}
               </p>
             </div>
           )}
@@ -562,7 +543,7 @@ export default function CaseStudiesPage() {
                 onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
                 className="flex h-14 min-w-[180px] items-center justify-center rounded-full border border-[#152571] px-8 font-body text-[20px] font-semibold leading-[1.2] tracking-[0.02em] text-[#101010] transition-colors duration-200 hover:bg-[#152571] hover:text-white max-[768px]:text-[16px]"
               >
-                LOAD MORE
+                {t.common.loadMore}
               </button>
             </div>
           )}

@@ -1,7 +1,10 @@
+'use client';
+
 import SectionPageJsonLd from '@/components/seo/SectionPageJsonLd';
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
-import { CASE_STUDIES_DUMMY_DATA, LEADERSHIP_THOUGHTS_DUMMY_DATA } from '@/lib/db/dummy';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { getLocalizedCaseStudies, getLocalizedLeadershipThoughts } from '@/lib/i18n/localized-data';
 
 function IconArrowRight() {
   return (
@@ -32,8 +35,11 @@ function ChevronDown() {
 }
 
 export default function InsightProgramsHubPage() {
-  const featuredCaseStudies = CASE_STUDIES_DUMMY_DATA.slice(0, 3);
-  const featuredThoughts = LEADERSHIP_THOUGHTS_DUMMY_DATA.slice(0, 3);
+  const { locale, t } = useLanguage();
+  const allCaseStudies = getLocalizedCaseStudies(locale);
+  const allThoughts = getLocalizedLeadershipThoughts(locale);
+  const featuredCaseStudies = allCaseStudies.slice(0, 3);
+  const featuredThoughts = allThoughts.slice(0, 3);
 
   return (
     <main className="relative w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
@@ -41,7 +47,7 @@ export default function InsightProgramsHubPage() {
       {/* ── HERO SECTION ── */}
       <section
         id="hero"
-        aria-label="Insight and Programs Hero"
+        aria-label={t.insightPrograms.heroAriaLabel}
         className="relative isolate flex h-[clamp(560px,41.666vw,800px)] w-full items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-[#020714]"
       >
         <img
@@ -72,29 +78,28 @@ export default function InsightProgramsHubPage() {
 
         <div className="relative z-10 mx-auto flex w-full max-w-[960px] flex-col items-center px-6 text-center">
           <nav
-            aria-label="Breadcrumb"
+            aria-label={t.common.breadcrumb}
             className="font-body text-[11px] font-bold uppercase tracking-[0.08em] text-[#E6FF2A]"
           >
             <Link href="/" className="transition hover:opacity-75">
-              Home
+              {t.common.home}
             </Link>
             <span className="mx-2 font-normal text-white/50">&gt;</span>
-            <span className="text-white/80">Insight &amp; Programs</span>
+            <span className="text-white/80">{t.insightPrograms.heroTitle}</span>
           </nav>
 
           <h1 className="mt-5 font-heading text-[clamp(48px,5vw,92px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
-            Insight &amp; Programs
+            {t.insightPrograms.heroTitle}
           </h1>
 
           <p className="mt-6 max-w-[700px] font-body text-[clamp(15px,1.1vw,20px)] font-light leading-[1.6] tracking-[0.02em] text-white/95">
-            Knowledge, implementation evidence, and strategic perspectives from
-            across the Arsalynk enterprise ecosystem.
+            {t.insightPrograms.heroDescription}
           </p>
         </div>
 
         <a
           href="#explore-pillars"
-          aria-label="Scroll to explore pillars"
+          aria-label={t.insightPrograms.scrollAriaLabel}
           className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20"
           style={{
             background:
@@ -115,16 +120,13 @@ export default function InsightProgramsHubPage() {
           <div className="flex max-w-[840px] flex-col gap-4">
             <div className="flex items-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.08em] text-[#1A3E9E]">
               <span className="h-2 w-2 bg-[#1A3E9E]" />
-              <span>KNOWLEDGE &amp; EXECUTION</span>
+              <span>{t.insightPrograms.pillarsEyebrow}</span>
             </div>
             <h2 className="font-heading text-[clamp(34px,3.5vw,60px)] font-medium leading-[1.1] text-[#101010]">
-              Dual Pathways of Enterprise Insight &amp; Proven Execution
+              {t.insightPrograms.pillarsTitle}
             </h2>
             <p className="font-body text-[clamp(15px,1vw,18px)] leading-[1.7] text-[#555]">
-              We believe digital transformation cannot remain an abstract concept.
-              Through factual case studies and executive leadership reflections,
-              we share proven operational methodologies connecting business
-              processes, modern technology, and people.
+              {t.insightPrograms.pillarsDescription}
             </p>
           </div>
 
@@ -135,28 +137,25 @@ export default function InsightProgramsHubPage() {
               <div className="flex flex-col gap-6">
                 <div className="flex items-center justify-between border-b border-black/10 pb-5">
                   <span className="font-body text-[12px] font-extrabold uppercase tracking-[0.1em] text-[#1A3E9E]">
-                    01 · IMPLEMENTATION STORIES
+                    {t.insightPrograms.pillar1Eyebrow}
                   </span>
                   <span className="rounded-full bg-[#1A3E9E]/10 px-3 py-1 font-body text-[12px] font-bold text-[#1A3E9E]">
-                    {CASE_STUDIES_DUMMY_DATA.length} Projects
+                    {allCaseStudies.length} {t.insightPrograms.pillar1CountSuffix}
                   </span>
                 </div>
 
                 <h3 className="font-heading text-[clamp(28px,2.2vw,40px)] font-medium leading-[1.15] text-[#101010] transition group-hover:text-[#1A3E9E]">
-                  Case Studies
+                  {t.insightPrograms.pillar1Title}
                 </h3>
 
                 <p className="font-body text-[15px] leading-[1.7] text-[#555]">
-                  In-depth documentation of real-world deployments across ERP, IoT
-                  telemetry, warehouse operations, logistics fleet management, and
-                  enterprise HRMS. Showcasing initial challenges, architectural
-                  approaches, and measurable operational impacts.
+                  {t.insightPrograms.pillar1Description}
                 </p>
 
                 {/* Micro previews */}
                 <div className="mt-2 flex flex-col gap-3">
                   <span className="font-body text-[11px] font-bold uppercase tracking-[0.06em] text-[#888]">
-                    Featured Stories:
+                    {t.insightPrograms.pillar1FeaturedLabel}
                   </span>
                   {featuredCaseStudies.map((item) => (
                     <Link
@@ -180,7 +179,7 @@ export default function InsightProgramsHubPage() {
                   href="/insight-programs/case-studies"
                   className="inline-flex items-center gap-3 rounded-full bg-[#1A3E9E] px-6 py-3.5 font-body text-[14px] font-semibold text-white no-underline transition hover:bg-[#13307D]"
                 >
-                  <span>Explore Case Studies</span>
+                  <span>{t.insightPrograms.pillar1Cta}</span>
                   <IconArrowRight />
                 </Link>
               </div>
@@ -191,27 +190,25 @@ export default function InsightProgramsHubPage() {
               <div className="flex flex-col gap-6">
                 <div className="flex items-center justify-between border-b border-black/10 pb-5">
                   <span className="font-body text-[12px] font-extrabold uppercase tracking-[0.1em] text-[#1A3E9E]">
-                    02 · STRATEGIC PERSPECTIVES
+                    {t.insightPrograms.pillar2Eyebrow}
                   </span>
                   <span className="rounded-full bg-[#1A3E9E]/10 px-3 py-1 font-body text-[12px] font-bold text-[#1A3E9E]">
-                    {LEADERSHIP_THOUGHTS_DUMMY_DATA.length} Articles
+                    {allThoughts.length} {t.insightPrograms.pillar2CountSuffix}
                   </span>
                 </div>
 
                 <h3 className="font-heading text-[clamp(28px,2.2vw,40px)] font-medium leading-[1.15] text-[#101010] transition group-hover:text-[#1A3E9E]">
-                  Leadership Thoughts
+                  {t.insightPrograms.pillar2Title}
                 </h3>
 
                 <p className="font-body text-[15px] leading-[1.7] text-[#555]">
-                  Executive leadership perspectives on workflow architecture,
-                  data governance, organizational resilience amidst uncertainty,
-                  and evidence-based decision-making from Arsalynk leaders.
+                  {t.insightPrograms.pillar2Description}
                 </p>
 
                 {/* Micro previews */}
                 <div className="mt-2 flex flex-col gap-3">
                   <span className="font-body text-[11px] font-bold uppercase tracking-[0.06em] text-[#888]">
-                    Featured Articles:
+                    {t.insightPrograms.pillar2FeaturedLabel}
                   </span>
                   {featuredThoughts.map((item) => (
                     <Link
@@ -235,7 +232,7 @@ export default function InsightProgramsHubPage() {
                   href="/insight-programs/leadership-thoughts"
                   className="inline-flex items-center gap-3 rounded-full bg-[#1A3E9E] px-6 py-3.5 font-body text-[14px] font-semibold text-white no-underline transition hover:bg-[#13307D]"
                 >
-                  <span>Explore Leadership Thoughts</span>
+                  <span>{t.insightPrograms.pillar2Cta}</span>
                   <IconArrowRight />
                 </Link>
               </div>
