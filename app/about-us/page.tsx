@@ -1,8 +1,11 @@
+'use client';
+
 import SectionPageJsonLd from '@/components/seo/SectionPageJsonLd';
 import Link from 'next/link';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
-const HUB_SECTIONS = [
+const HUB_SECTIONS_EN = [
   {
     slug: 'corporate-profile',
     href: '/about-us/corporate-profile',
@@ -45,6 +48,49 @@ const HUB_SECTIONS = [
   },
 ] as const;
 
+const HUB_SECTIONS_ID = [
+  {
+    slug: 'corporate-profile',
+    href: '/about-us/corporate-profile',
+    title: 'Profil Korporat',
+    eyebrow: '01 · FONDASI & VISI',
+    image: '/images/about-us/cards/corporate-profile-card.webp',
+    summary:
+      'Temukan visi, misi, prinsip korporat, dan komitmen institusional Arsalynk dalam merekayasa solusi teknologi perusahaan yang terukur, aman, dan berkelanjutan.',
+    ctaText: 'Jelajahi Profil Korporat',
+  },
+  {
+    slug: 'company-leadership',
+    href: '/about-us/company-leadership',
+    title: 'Kepemimpinan Perusahaan',
+    eyebrow: '02 · TATA KELOLA VISIONER',
+    image: '/images/about-us/company-leadership-hero.webp',
+    summary:
+      'Kepemimpinan eksekutif yang memadukan keahlian industri, wawasan komersial, dan standar tata kelola modern untuk memandu transformasi digital perusahaan.',
+    ctaText: 'Jelajahi Kepemimpinan',
+  },
+  {
+    slug: 'ecosystem-philosophy',
+    href: '/about-us/ecosystem-philosophy',
+    title: 'Filosofi Ekosistem',
+    eyebrow: '03 · KERANGKA KOLABORATIF',
+    image: '/images/about-us/ecosystem-philosophy-hero.webp',
+    summary:
+      'Filosofi di mana unit bisnis spesialis beroperasi secara otonom namun tetap tersinkronisasi melalui jaringan inteligensi bersama—menciptakan sinergi tanpa fragmentasi.',
+    ctaText: 'Jelajahi Filosofi Ekosistem',
+  },
+  {
+    slug: 'our-solution',
+    href: '/our-solution',
+    title: 'Solusi Kami',
+    eyebrow: '04 · SOLUSI PERUSAHAAN',
+    image: '/images/about-us/company-leadership/leadership-intro-office.webp',
+    summary:
+      'Rangkaian solusi perusahaan kustom yang terintegrasi: mulai dari arsitektur operasional ERP dan deep learning AI hingga ekosistem IoT terhubung serta pengembangan web yang terukur.',
+    ctaText: 'Jelajahi Solusi Kami',
+  },
+] as const;
+
 function IconArrowRight() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -62,13 +108,17 @@ function ChevronDown() {
 }
 
 export default function AboutUsPage() {
+  const { locale } = useLanguage();
+  const isId = locale === 'id';
+  const hubSections = isId ? HUB_SECTIONS_ID : HUB_SECTIONS_EN;
+
   return (
     <main className="relative w-full overflow-x-hidden bg-[#F7F7F7] text-[#101010]">
       <SectionPageJsonLd section="about-us" />
       {/* ── HERO SECTION ── */}
       <section
         id="hero"
-        aria-label="About Arsalynk Hero"
+        aria-label={isId ? 'Hero Tentang Arsalynk' : 'About Arsalynk Hero'}
         className="relative isolate flex h-[clamp(560px,41.666vw,800px)] w-full items-center justify-center overflow-hidden rounded-b-[clamp(24px,2.188vw,42px)] bg-[#020714]"
       >
         <img
@@ -104,23 +154,25 @@ export default function AboutUsPage() {
 
         <div className="relative z-10 mx-auto flex w-full max-w-[900px] flex-col items-center px-6 text-center">
           <nav aria-label="Breadcrumb" className="font-body text-[11px] font-bold uppercase tracking-[0.08em] text-[#E6FF2A]">
-            <Link href="/" className="transition hover:opacity-75">Home</Link>
+            <Link href="/" className="transition hover:opacity-75">{isId ? 'Beranda' : 'Home'}</Link>
             <span className="mx-2 font-normal text-white/50">&gt;</span>
-            <span className="text-white/80">About Us</span>
+            <span className="text-white/80">{isId ? 'Tentang Kami' : 'About Us'}</span>
           </nav>
 
           <h1 className="mt-5 font-heading text-[clamp(52px,5vw,96px)] font-medium leading-none tracking-[-0.02em] text-[#F7F7F7]">
-            About Arsalynk
+            {isId ? 'Tentang Arsalynk' : 'About Arsalynk'}
           </h1>
 
           <p className="mt-6 max-w-[650px] font-body text-[clamp(14px,1.042vw,20px)] font-light leading-[1.6] tracking-[0.02em] text-white/95">
-            Connecting capabilities across strategy, technology, and execution to solve complex business challenges and deliver lasting value.
+            {isId
+              ? 'Menghubungkan kapabilitas lintas strategi, teknologi, dan eksekusi untuk menyelesaikan tantangan bisnis yang kompleks serta menghadirkan nilai jangka panjang.'
+              : 'Connecting capabilities across strategy, technology, and execution to solve complex business challenges and deliver lasting value.'}
           </p>
         </div>
 
         <a
           href="#explore-pillars"
-          aria-label="Scroll to narrative"
+          aria-label={isId ? 'Gulir ke narasi' : 'Scroll to narrative'}
           className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20"
           style={{ background: 'linear-gradient(230.45deg, rgba(247,247,247,0.21) -7.74%, rgba(247,247,247,0.105) 81.5%)' }}
         >
@@ -134,52 +186,31 @@ export default function AboutUsPage() {
           <div className="flex max-w-[840px] flex-col gap-4">
             <div className="flex items-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.08em] text-[#1A3E9E]">
               <span className="h-2 w-2 bg-[#1A3E9E]" />
-              <span>WHO WE ARE</span>
+              <span>{isId ? 'SIAPA KAMI' : 'WHO WE ARE'}</span>
             </div>
             <h2 className="font-heading text-[clamp(36px,3.75vw,68px)] font-medium leading-[1.08] text-[#101010]">
-              An Integrated Ecosystem for Tangible Transformation
+              {isId ? 'Ekosistem Terintegrasi untuk Transformasi Nyata' : 'An Integrated Ecosystem for Tangible Transformation'}
             </h2>
           </div>
 
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="flex flex-col gap-6 lg:col-span-7">
               <p className="font-body text-[clamp(16px,1.15vw,21px)] font-normal leading-[1.7] text-[#292929]">
-                Arsalynk was founded on a fundamental realization: the greatest challenge modern enterprises face is not a lack of ambition, but <strong>capability fragmentation</strong>. When ERP platforms remain isolated, IoT hardware operates without central telemetry, and strategic decisions lack accurate data analytics, enterprise growth inevitably stalls.
+                {isId ? (
+                  <>
+                    Arsalynk didirikan atas satu kesadaran mendasar: tantangan terbesar yang dihadapi perusahaan modern bukanlah kurangnya ambisi, melainkan <strong>fragmentasi kapabilitas</strong>. Ketika platform ERP terisolasi, perangkat keras IoT beroperasi tanpa telemetri terpusat, dan keputusan strategis tidak didukung analitik data yang akurat, pertumbuhan perusahaan niscaya akan terhambat.
+                  </>
+                ) : (
+                  <>
+                    Arsalynk was founded on a fundamental realization: the greatest challenge modern enterprises face is not a lack of ambition, but <strong>capability fragmentation</strong>. When ERP platforms remain isolated, IoT hardware operates without central telemetry, and strategic decisions lack accurate data analytics, enterprise growth inevitably stalls.
+                  </>
+                )}
               </p>
               <p className="font-body text-[clamp(15px,1vw,18px)] leading-[1.7] text-[#555]">
-                As an integrated enterprise technology ecosystem and software house in Indonesia, Arsalynk unifies strategy, software engineering, workflow automation, in-depth research, and strategic business communication into one coordinated whole. We guide industry leaders through digital evolution with robust, scalable, and future-ready architectures.
+                {isId
+                  ? 'Sebagai ekosistem teknologi perusahaan terintegrasi dan software house di Indonesia, Arsalynk menyatukan strategi, rekayasa perangkat lunak, otomatisasi alur kerja, riset mendalam, dan komunikasi bisnis strategis ke dalam satu kesatuan yang terkoordinasi. Kami memandu para pemimpin industri melewati evolusi digital dengan arsitektur yang tangguh, terukur, dan siap menghadapi masa depan.'
+                  : 'As an integrated enterprise technology ecosystem and software house in Indonesia, Arsalynk unifies strategy, software engineering, workflow automation, in-depth research, and strategic business communication into one coordinated whole. We guide industry leaders through digital evolution with robust, scalable, and future-ready architectures.'}
               </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 lg:col-span-5 sm:gap-6">
-              <div className="flex flex-col justify-between rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-                <span className="font-heading text-[clamp(36px,3.2vw,54px)] font-medium text-[#1A3E9E]">4+</span>
-                <div>
-                  <h3 className="font-heading text-[18px] font-medium text-[#101010]">Strategic Pillars</h3>
-                  <p className="mt-1 font-body text-[13px] leading-relaxed text-[#666]">Unified foundations: Profile, Leadership, Philosophy &amp; Solution.</p>
-                </div>
-              </div>
-              <div className="flex flex-col justify-between rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-                <span className="font-heading text-[clamp(36px,3.2vw,54px)] font-medium text-[#1A3E9E]">100%</span>
-                <div>
-                  <h3 className="font-heading text-[18px] font-medium text-[#101010]">Connected Architecture</h3>
-                  <p className="mt-1 font-body text-[13px] leading-relaxed text-[#666]">Bridging operational workflows without internal data silos.</p>
-                </div>
-              </div>
-              <div className="flex flex-col justify-between rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-                <span className="font-heading text-[clamp(36px,3.2vw,54px)] font-medium text-[#1A3E9E]">8+</span>
-                <div>
-                  <h3 className="font-heading text-[18px] font-medium text-[#101010]">Enterprise Solutions</h3>
-                  <p className="mt-1 font-body text-[13px] leading-relaxed text-[#666]">ERP, IoT, POS, HRMS, Supply Chain &amp; Financials.</p>
-                </div>
-              </div>
-              <div className="flex flex-col justify-between rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-                <span className="font-heading text-[clamp(36px,3.2vw,54px)] font-medium text-[#1A3E9E]">1</span>
-                <div>
-                  <h3 className="font-heading text-[18px] font-medium text-[#101010]">Unified Ecosystem</h3>
-                  <p className="mt-1 font-body text-[13px] leading-relaxed text-[#666]">A shared vision accelerating enterprise efficiency.</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -191,18 +222,20 @@ export default function AboutUsPage() {
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.08em] text-[#1A3E9E]">
               <span className="h-2 w-2 bg-[#1A3E9E]" />
-              <span>EXPLORE ARSALYNK</span>
+              <span>{isId ? 'JELAJAHI ARSALYNK' : 'EXPLORE ARSALYNK'}</span>
             </div>
             <h2 className="max-w-[900px] font-heading text-[clamp(36px,3.75vw,68px)] font-medium leading-[1.08] text-[#101010]">
-              Explore Our Foundations &amp; Ecosystem
+              {isId ? 'Jelajahi Fondasi & Ekosistem Kami' : 'Explore Our Foundations & Ecosystem'}
             </h2>
             <p className="max-w-[700px] font-body text-[clamp(15px,1vw,18px)] leading-[1.65] text-[#555]">
-              Discover the structural architecture behind Arsalynk through four core pillars that define our corporate vision, executive leadership, operating philosophy, and enterprise solutions.
+              {isId
+                ? 'Temukan arsitektur struktural di balik Arsalynk melalui empat pilar utama yang mendefinisikan visi korporat, kepemimpinan eksekutif, filosofi operasional, dan solusi perusahaan kami.'
+                : 'Discover the structural architecture behind Arsalynk through four core pillars that define our corporate vision, executive leadership, operating philosophy, and enterprise solutions.'}
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            {HUB_SECTIONS.map((section) => (
+            {hubSections.map((section) => (
               <article
                 key={section.slug}
                 className="group relative flex flex-col justify-between overflow-hidden rounded-[26px] border border-black/10 bg-[#FAFAFA] p-7 transition duration-500 hover:-translate-y-1 hover:border-[#1A3E9E]/40 hover:bg-white hover:shadow-[0_20px_45px_rgba(26,62,158,0.12)] sm:p-8 shadow-[0_8px_30px_rgba(26,62,158,0.04)]"

@@ -8,6 +8,14 @@ import WhatsAppFloatingButton from '@/components/layout/WhatsAppFloatingButton/W
 import ArsAIWidget from '@/components/chatbot/ArsAIWidget';
 import HashScrollHandler from '@/components/ui/HashScrollHandler/HashScrollHandler';
 import WebKitBackgroundPreloader from '@/components/performance/WebKitBackgroundPreloader';
+import JsonLd from '@/components/seo/JsonLd';
+import {
+  buildOrganizationJsonLd,
+  buildWebSiteJsonLd,
+  buildSiteNavigationElementJsonLd,
+} from '@/lib/seo';
+import { getServerLocale, buildLocalizedAlternates } from '@/lib/i18n/server';
+import { LanguageProvider } from '@/lib/i18n/LanguageContext';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -16,137 +24,138 @@ const manrope = Manrope({
   weight: ['400', '500', '600', '700', '800'],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: 'Arsalynk — Enterprise Technology Solutions & Software House',
-    template: `%s | ${SITE_NAME}`,
-  },
-  description:
-    'Arsalynk delivers integrated enterprise technology solutions: custom ERP architecture, deep learning infrastructure, smart IoT telemetry, and digital engineering. Solusi teknologi enterprise dan software house di Indonesia.',
-  keywords: [
-    // Brand & Corporate Identity
-    'Arsalynk',
-    'Arsalynk Group',
-    'PT Sinergi Muda Arsa',
-    // Indonesian High-Intent Commercial Keywords
-    'solusi teknologi enterprise indonesia',
-    'software house indonesia',
-    'software house jakarta',
-    'software house semarang',
-    'konsultan ERP indonesia',
-    'sistem ERP custom enterprise',
-    'integrasi IoT industri indonesia',
-    'pengembangan aplikasi web enterprise',
-    'data analytics indonesia',
-    'deep learning data engineering',
-    'transformasi digital bisnis',
-    'jasa pembuatan ERP',
-    'vendor software enterprise',
-    'sistem POS retail indonesia',
-    'HRMS enterprise indonesia',
-    // English Enterprise Global Keywords
-    'enterprise technology ecosystem',
-    'enterprise software development',
-    'custom ERP architecture',
-    'smart IoT systems',
-    'deep learning infrastructure',
-    'data intelligence pipelines',
-    'scalable digital engineering',
-    'digital transformation consulting',
-  ],
-  applicationName: SITE_NAME,
-  authors: [{ name: SITE_NAME, url: SITE_URL }],
-  creator: SITE_NAME,
-  publisher: SITE_NAME,
-  category: 'Technology',
-  classification: 'Business/Technology',
-  // Google verification only with a real token configured by the owner.
-  ...(process.env.GOOGLE_SITE_VERIFICATION
-    ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } }
-    : {}),
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+  const isId = locale === 'id';
+
+  const defaultTitle = isId
+    ? 'Arsalynk — Solusi Teknologi Enterprise & Software House'
+    : 'Arsalynk — Enterprise Technology Solutions & Software House';
+
+  const description = isId
+    ? 'Arsalynk menghadirkan solusi teknologi enterprise terintegrasi: arsitektur ERP kustom, infrastruktur deep learning, telemetri smart IoT, dan rekayasa digital berskala tinggi.'
+    : 'Arsalynk delivers integrated enterprise technology solutions: custom ERP architecture, deep learning infrastructure, smart IoT telemetry, and digital engineering. Solusi teknologi enterprise dan software house di Indonesia.';
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: defaultTitle,
+      template: `%s | ${SITE_NAME}`,
+    },
+    description,
+    keywords: [
+      'Arsalynk',
+      'Arsalynk Group',
+      'PT Sinergi Muda Arsa',
+      'solusi teknologi enterprise indonesia',
+      'software house indonesia',
+      'software house jakarta',
+      'software house semarang',
+      'konsultan ERP indonesia',
+      'sistem ERP custom enterprise',
+      'integrasi IoT industri indonesia',
+      'pengembangan aplikasi web enterprise',
+      'data analytics indonesia',
+      'deep learning data engineering',
+      'transformasi digital bisnis',
+      'jasa pembuatan ERP',
+      'vendor software enterprise',
+      'sistem POS retail indonesia',
+      'HRMS enterprise indonesia',
+      'enterprise technology ecosystem',
+      'enterprise software development',
+      'custom ERP architecture',
+      'smart IoT systems',
+      'deep learning infrastructure',
+      'data intelligence pipelines',
+      'scalable digital engineering',
+      'digital transformation consulting',
+    ],
+    applicationName: SITE_NAME,
+    authors: [{ name: SITE_NAME, url: SITE_URL }],
+    creator: SITE_NAME,
+    publisher: SITE_NAME,
+    category: 'Technology',
+    classification: 'Business/Technology',
+    ...(process.env.GOOGLE_SITE_VERIFICATION
+      ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } }
+      : {}),
+    robots: {
       index: true,
       follow: true,
-      noimageindex: false,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  alternates: {
-    canonical: '/',
-  },
-  appleWebApp: {
-    capable: true,
-    title: 'Arsalynk',
-    statusBarStyle: 'default',
-  },
-  formatDetection: {
-    telephone: false,
-    address: false,
-    email: false,
-  },
-  icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
-      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/icon.png', sizes: '512x512', type: 'image/png' },
-      { url: '/images/logos/arsalynk-mark-512.png', sizes: '512x512', type: 'image/png' },
-    ],
-    shortcut: ['/favicon.ico'],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    alternateLocale: 'id_ID',
-    siteName: SITE_NAME,
-    url: '/',
-    title: `${SITE_NAME} — Enterprise Technology Solutions & Software House Indonesia`,
-    description: SITE_DESCRIPTION,
-    images: [
-      {
-        url: '/images/about-us/corporate-profile-hero.webp',
-        width: 1200,
-        height: 630,
-        type: 'image/webp',
-        alt: `${SITE_NAME} — Enterprise Technology & Software House Indonesia`,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
       },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@arsalynk',
-    creator: '@arsalynk',
-    title: `${SITE_NAME} — Enterprise Technology & Software House Indonesia`,
-    description: SITE_DESCRIPTION,
-    images: ['/images/about-us/corporate-profile-hero.webp'],
-  },
-};
+    },
+    alternates: buildLocalizedAlternates('/', locale),
+    appleWebApp: {
+      capable: true,
+      title: 'Arsalynk',
+      statusBarStyle: 'default',
+    },
+    formatDetection: {
+      telephone: false,
+      address: false,
+      email: false,
+    },
+    icons: {
+      icon: [
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+        { url: '/favicon.ico', sizes: 'any' },
+        { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+        { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+        { url: '/icon.svg', type: 'image/svg+xml' },
+        { url: '/icon.png', sizes: '512x512', type: 'image/png' },
+        { url: '/images/logos/arsalynk-mark-512.png', sizes: '512x512', type: 'image/png' },
+      ],
+      shortcut: ['/favicon.ico'],
+      apple: [
+        { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+        { url: '/icon.svg', type: 'image/svg+xml' },
+      ],
+    },
+    openGraph: {
+      type: 'website',
+      locale: isId ? 'id_ID' : 'en_US',
+      alternateLocale: isId ? 'en_US' : 'id_ID',
+      siteName: SITE_NAME,
+      url: isId ? '/id' : '/',
+      title: defaultTitle,
+      description: isId ? description : SITE_DESCRIPTION,
+      images: [
+        {
+          url: '/images/about-us/corporate-profile-hero.webp',
+          width: 1200,
+          height: 630,
+          type: 'image/webp',
+          alt: defaultTitle,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@arsalynk',
+      creator: '@arsalynk',
+      title: defaultTitle,
+      description: isId ? description : SITE_DESCRIPTION,
+      images: ['/images/about-us/corporate-profile-hero.webp'],
+    },
+  };
+}
 
-import JsonLd from '@/components/seo/JsonLd';
-import {
-  buildOrganizationJsonLd,
-  buildWebSiteJsonLd,
-  buildSiteNavigationElementJsonLd,
-} from '@/lib/seo';
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getServerLocale();
+
   const rootSchema = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -157,7 +166,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={manrope.variable} data-scroll-behavior="smooth">
+    <html lang={locale} className={manrope.variable} data-scroll-behavior="smooth">
       <head>
         {/* Apple Safari & WebKit Performance Hints */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -172,13 +181,15 @@ export default function RootLayout({
       </head>
       <body>
         <JsonLd id="root-entity-graph" data={rootSchema} />
-        <HashScrollHandler />
-        <WebKitBackgroundPreloader />
-        <Navbar />
-        {children}
-        <Footer />
-        <WhatsAppFloatingButton />
-        <ArsAIWidget />
+        <LanguageProvider initialLocale={locale}>
+          <HashScrollHandler />
+          <WebKitBackgroundPreloader />
+          <Navbar />
+          {children}
+          <Footer />
+          <WhatsAppFloatingButton />
+          <ArsAIWidget />
+        </LanguageProvider>
       </body>
     </html>
   );

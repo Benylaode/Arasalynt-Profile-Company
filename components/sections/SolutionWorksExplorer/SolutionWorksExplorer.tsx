@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import type { SolutionService } from '@/lib/our-solution.data';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 function normalize(value: string) {
   return value.toLocaleLowerCase('en-US').normalize('NFKD').replace(/[^a-z0-9]+/g, ' ').trim();
@@ -28,6 +29,8 @@ const IconArrow = ({ size = 20 }: { size?: number }) => (
 );
 
 export default function SolutionWorksExplorer({ services }: { services: SolutionService[] }) {
+  const { locale } = useLanguage();
+  const isId = locale === 'id';
   const [query, setQuery] = useState('');
   const [appliedQuery, setAppliedQuery] = useState('');
   const normalizedQuery = normalize(appliedQuery);
@@ -57,8 +60,8 @@ export default function SolutionWorksExplorer({ services }: { services: Solution
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             onKeyDown={(event) => { if (event.key === 'Enter') setAppliedQuery(query); }}
-            placeholder="Search service or capability"
-            aria-label="Search services and capabilities"
+            placeholder={isId ? 'Cari layanan atau kapabilitas' : 'Search service or capability'}
+            aria-label={isId ? 'Cari layanan dan kapabilitas' : 'Search services and capabilities'}
             className={`h-full w-full rounded-full border bg-transparent pl-10 pr-5 font-body text-[12px] font-medium tracking-[0.02em] outline-none transition-colors placeholder:text-[#717171] md:pl-11 md:text-[13px] ${appliedQuery ? 'border-[#1A3E9E] bg-[rgba(153,166,231,0.22)] font-semibold text-[#1A3E9E]' : 'border-[#D9D9D9] text-[#717171] hover:border-[#1A3E9E] focus:border-[#1A3E9E] focus:text-[#1A3E9E]'}`}
           />
         </div>
@@ -70,7 +73,9 @@ export default function SolutionWorksExplorer({ services }: { services: Solution
           }}
           className="flex h-[42px] min-w-[110px] items-center justify-center rounded-full bg-[#1A3E9E] px-5 font-body text-[13px] font-medium tracking-[0.02em] text-white transition-colors hover:bg-[#152571] md:h-[44px] md:px-6 md:text-[14px]"
         >
-          {appliedQuery ? 'Reset Filter' : 'Search'}
+          {appliedQuery
+            ? (isId ? 'Atur Ulang Filter' : 'Reset Filter')
+            : (isId ? 'Cari' : 'Search')}
         </button>
       </div>
 
@@ -112,14 +117,16 @@ export default function SolutionWorksExplorer({ services }: { services: Solution
               {service.relatedWork && (
                 <div className="mt-3 flex flex-wrap items-center justify-between gap-3 px-1 font-body text-[12px] text-[#424242] sm:text-[13px]">
                   <span>
-                    {service.relatedWork.relationship === 'direct' ? 'Implemented in' : 'Supported by'}{' '}
+                    {service.relatedWork.relationship === 'direct'
+                      ? (isId ? 'Diimplementasikan pada' : 'Implemented in')
+                      : (isId ? 'Didukung oleh' : 'Supported by')}{' '}
                     <strong>{service.relatedWork.title}</strong>
                   </span>
                   <Link
                     href={`/our-works/${service.relatedWork.slug}`}
                     className="inline-flex items-center gap-2 font-semibold text-[#1A3E9E] no-underline hover:underline"
                   >
-                    View related work <IconArrow size={16} />
+                    {isId ? 'Lihat karya terkait' : 'View related work'} <IconArrow size={16} />
                   </Link>
                 </div>
               )}
@@ -128,8 +135,14 @@ export default function SolutionWorksExplorer({ services }: { services: Solution
         </div>
       ) : (
         <div className="rounded-[24px] border border-[#CAD0DF] bg-white px-6 py-16 text-center">
-          <h3 className="font-heading text-[32px] font-medium text-[#1A3E9E]">No matching service found</h3>
-          <p className="mt-3 font-body text-[14px] text-[#555]">Try a service name, workflow, industry, or technology such as ERP, POS, IoT, finance, fleet, or warehouse.</p>
+          <h3 className="font-heading text-[32px] font-medium text-[#1A3E9E]">
+            {isId ? 'Layanan yang cocok tidak ditemukan' : 'No matching service found'}
+          </h3>
+          <p className="mt-3 font-body text-[14px] text-[#555]">
+            {isId
+              ? 'Coba nama layanan, alur kerja, industri, atau teknologi seperti ERP, POS, IoT, keuangan, armada, atau gudang.'
+              : 'Try a service name, workflow, industry, or technology such as ERP, POS, IoT, finance, fleet, or warehouse.'}
+          </p>
         </div>
       )}
     </div>

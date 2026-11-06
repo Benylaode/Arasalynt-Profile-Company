@@ -1,21 +1,14 @@
-import type { Metadata } from 'next';
+'use client';
+
 import Link from 'next/link';
 import { Suspense } from 'react';
 import ClientPortalClient from './ClientPortalClient';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import {
-  SITE_NAME,
   WHATSAPP_PHONE_DISPLAY,
   WHATSAPP_LINK,
 } from '@/lib/constants';
-
-export const metadata: Metadata = {
-  title: `Client Portal & Support Tickets — ${SITE_NAME}`,
-  description:
-    'Official Arsalynk Client Portal. Direct support ticket submission and quotation verification integrated seamlessly with Marka ERP.',
-  alternates: { canonical: '/portal' },
-  robots: { index: false, follow: false, nocache: true },
-};
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 function DownIcon() {
   return (
@@ -66,6 +59,8 @@ function MailIcon({ size = 18 }: { size?: number }) {
 }
 
 export default function ClientPortalPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#F7F7F7]">
       <main>
@@ -116,24 +111,24 @@ export default function ClientPortalPage() {
             <div className="flex flex-col items-center gap-3 text-center sm:gap-4">
               <div className="flex items-center justify-center gap-2 font-body text-[11px] font-bold uppercase leading-[1.3] tracking-[0.06em] text-[#E6FF2A] sm:text-[13px]">
                 <Link href="/" className="transition-opacity hover:opacity-70">
-                  HOME
+                  {t.common.home}
                 </Link>
                 <span>/</span>
-                <span>CLIENT PORTAL</span>
+                <span>{t.portal.heroBreadcrumb}</span>
               </div>
 
               <h1 className="font-heading text-[clamp(44px,4.5vw,84px)] font-medium leading-[1.05] tracking-[-0.02em] text-[#F7F7F7]">
-                Client Portal
+                {t.portal.heroTitle}
               </h1>
               <p className="max-w-[580px] font-body text-[14px] leading-[1.6] text-white/75 sm:text-[16px]">
-                Official client hub for reviewing commercial quotations, confirming agreements, and logging engineering support tickets directly with Marka ERP.
+                {t.portal.heroDescription}
               </p>
             </div>
           </div>
 
           <a
             href="#portal-content"
-            aria-label="Scroll to Portal Content"
+            aria-label={t.portal.scrollAriaLabel}
             className="absolute bottom-[clamp(34px,3.698vw,71px)] left-1/2 z-20 flex h-[clamp(56px,4.167vw,80px)] w-[clamp(56px,4.167vw,80px)] -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-[4px] transition duration-300 hover:-translate-y-1 hover:bg-white/20"
             style={{
               background:
@@ -153,22 +148,22 @@ export default function ClientPortalPage() {
             {/* LEFT COLUMN */}
             <div className="flex w-[38%] shrink-0 flex-col gap-[clamp(20px,2vw,32px)] max-[1024px]:w-full">
               <h2 className="font-heading text-[clamp(28px,2.4vw,42px)] font-medium leading-[1.15] tracking-[-0.03em] text-[#101010]">
-                Transparency &amp;
+                {t.portal.leftTitleLine1}
                 <br />
-                Seamless
+                {t.portal.leftTitleLine2}
                 <br />
-                Collaboration
+                {t.portal.leftTitleLine3}
               </h2>
 
               <p className="font-body text-[14px] leading-[1.65] text-[#717171] md:text-[15px]">
-                We ensure every proposal verification and technical support ticket is processed in real time. Arsalynk's operations team is always dedicated to supporting your ongoing business needs.
+                {t.portal.leftDescription}
               </p>
 
               <div className="flex flex-col gap-4 rounded-[16px] md:gap-5">
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>HELP &amp; INFORMATION</span>
+                    <span>{t.portal.helpInfoLabel}</span>
                   </div>
 
                   <div className="flex flex-col gap-1.5">
@@ -199,11 +194,11 @@ export default function ClientPortalPage() {
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>MARKA ERP INTEGRATION</span>
+                    <span>{t.portal.markaIntegrationLabel}</span>
                   </div>
 
                   <p className="font-body text-[13px] leading-[1.5] tracking-[0.01em] text-[#717171]">
-                    All support tickets and quotation decisions are synchronized directly and handled transparently by the official Marka ERP system.
+                    {t.portal.markaIntegrationDescription}
                   </p>
                 </div>
               </div>
@@ -216,7 +211,7 @@ export default function ClientPortalPage() {
                   <div className="flex h-64 items-center justify-center rounded-[20px] border border-[#D9D9D9] bg-white font-body text-sm text-[#717171] shadow-sm">
                     <div className="flex items-center gap-2">
                       <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#1A3E9E] border-t-transparent" />
-                      <span>Loading Client Portal &amp; Support Ticket Module...</span>
+                      <span>{t.portal.loadingPortal}</span>
                     </div>
                   </div>
                 }

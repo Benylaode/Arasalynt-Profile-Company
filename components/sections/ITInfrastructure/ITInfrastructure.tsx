@@ -9,6 +9,7 @@ import {
 } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 import styles from './ITInfrastructure.module.css';
 
 type PillarKey = 'it' | 'media' | 'data';
@@ -69,7 +70,7 @@ const SCENE_HREFS: Record<number, string> = {
   2: '/our-solution/smart-iot-system',
 };
 
-const SCENES: Scene[] = [
+const SCENES_EN: Scene[] = [
   {
     id: 0,
     number: '01',
@@ -105,6 +106,45 @@ const SCENES: Scene[] = [
     ),
     tags: ['INDUSTRIAL IOT', 'SMART SENSORS', 'ASSET TELEMETRY'],
     description: 'Bridging physical hardware with enterprise software for real-time asset control.',
+  },
+];
+
+const SCENES_ID: Scene[] = [
+  {
+    id: 0,
+    number: '01',
+    title: 'Solusi Perusahaan',
+    titleLines: (
+      <>
+        Solusi<br />Perusahaan
+      </>
+    ),
+    tags: ['ERP PERUSAHAAN', 'ALUR KERJA', 'SKALABILITAS'],
+    description: 'Manajemen perusahaan terpusat yang menyatukan alur kerja operasional dan tata kelola sumber daya.',
+  },
+  {
+    id: 1,
+    number: '02',
+    title: 'Integrasi Data & AI',
+    titleLines: (
+      <>
+        Integrasi<br />Data &amp; AI
+      </>
+    ),
+    tags: ['AGENTIC AI', 'MACHINE LEARNING', 'PIPELINE DATA'],
+    description: 'Rekayasa data tingkat lanjut yang mengubah data mentah perusahaan menjadi inteligensi yang dapat ditindaklanjuti.',
+  },
+  {
+    id: 2,
+    number: '03',
+    title: 'Sistem IoT Cerdas',
+    titleLines: (
+      <>
+        Sistem<br />IoT Cerdas
+      </>
+    ),
+    tags: ['IOT INDUSTRI', 'SENSOR CERDAS', 'TELEMETRI ASET'],
+    description: 'Menjembatani perangkat keras fisik dengan perangkat lunak perusahaan untuk kendali aset real-time.',
   },
 ];
 
@@ -426,7 +466,7 @@ function Artwork({
         priority={!mobile}
       />
 
-      {SCENES.map((scene) => (
+      {SCENES_EN.map((scene) => (
         <LayerImage
           key={scene.id}
           src={numberAsset(scene.id)}
@@ -453,6 +493,8 @@ function Artwork({
 }
 
 export default function ITInfrastructure() {
+  const { locale } = useLanguage();
+  const scenes = locale === 'id' ? SCENES_ID : SCENES_EN;
   const [settledScene, setSettledScene] = useState(0);
   const [motion, setMotion] = useState<MotionState | null>(null);
   const [hoveredPillar, setHoveredPillar] = useState<PillarKey | null>(null);
@@ -494,7 +536,7 @@ export default function ITInfrastructure() {
     if (!isMountedRef.current) return;
     autoTimerRef.current = setTimeout(() => {
       if (!isMountedRef.current) return;
-      beginTransitionRef.current((settledRef.current + 1) % SCENES.length);
+      beginTransitionRef.current((settledRef.current + 1) % SCENES_EN.length);
     }, AUTO_ROTATE_MS);
   }, [clearAutoTimer]);
 
@@ -526,7 +568,7 @@ export default function ITInfrastructure() {
   const beginTransition = useCallback(
     (nextScene: number) => {
       if (!isMountedRef.current) return;
-      const normalized = ((nextScene % SCENES.length) + SCENES.length) % SCENES.length;
+      const normalized = ((nextScene % SCENES_EN.length) + SCENES_EN.length) % SCENES_EN.length;
 
       if (motionRef.current) {
         queuedSceneRef.current = normalized;
@@ -587,22 +629,25 @@ export default function ITInfrastructure() {
   }, [beginTransition, clearAutoTimer, clearFinishTimer, clearRaf, scheduleAutoRotate]);
 
   const targetScene = motion?.to ?? settledScene;
-  const currentScene = SCENES[targetScene];
+  const currentScene = scenes[targetScene];
 
   const preload = useMemo(
     () => [
       `${ASSET_ROOT}/globe.svg`,
-      ...SCENES.map((scene) => numberAsset(scene.id)),
+      ...SCENES_EN.map((scene) => numberAsset(scene.id)),
       ...PILLARS.flatMap((pillar) => [...pillar.holograms]),
     ],
     [],
   );
 
+  const pillarsLabel = locale === 'id' ? 'TIGA PILAR INTEGRASI' : 'THREE PILLARS OF INTEGRATION';
+  const learnMoreLabel = locale === 'id' ? 'PELAJARI LEBIH LANJUT' : 'LEARN MORE';
+
   return (
     <section
       id="services"
       className={styles.section}
-      aria-label="One ecosystem, three pillars"
+      aria-label={locale === 'id' ? 'Satu ekosistem, tiga pilar' : 'One ecosystem, three pillars'}
     >
       <div
         className={styles.desktopStage}
@@ -618,22 +663,22 @@ export default function ITInfrastructure() {
         <div className={styles.desktopCopyArea}>
           <div className={styles.desktopLabel}>
             <span aria-hidden="true" />
-            THREE PILLARS OF INTEGRATION
+            {pillarsLabel}
           </div>
 
           <div className={styles.desktopCopyViewport}>
             {!motion ? (
-              <SceneCopy scene={SCENES[settledScene]} />
+              <SceneCopy scene={scenes[settledScene]} />
             ) : (
               <>
                 <SceneCopy
                   key={`${motion.key}-copy-out`}
-                  scene={SCENES[motion.from]}
+                  scene={scenes[motion.from]}
                   className={styles.copyOutgoing}
                 />
                 <SceneCopy
                   key={`${motion.key}-copy-in`}
-                  scene={SCENES[motion.to]}
+                  scene={scenes[motion.to]}
                   className={styles.copyIncoming}
                 />
               </>
@@ -644,15 +689,15 @@ export default function ITInfrastructure() {
         <Link
           href={SCENE_HREFS[targetScene] ?? '/our-solution'}
           className={styles.desktopLearnMore}
-          aria-label={`Learn more about ${currentScene.title}`}
+          aria-label={locale === 'id' ? `Pelajari lebih lanjut tentang ${currentScene.title}` : `Learn more about ${currentScene.title}`}
         >
-          LEARN MORE
+          {learnMoreLabel}
         </Link>
 
         <div
           className={styles.hotspotLayer}
           data-disabled={Boolean(motion)}
-          aria-label="Choose service pillar"
+          aria-label={locale === 'id' ? 'Pilih pilar layanan' : 'Choose service pillar'}
         >
           {PILLARS.filter(
             (pillar) => ACTIVE_PILLAR[targetScene] !== pillar.key,
@@ -670,7 +715,7 @@ export default function ITInfrastructure() {
               <button
                 key={`${targetScene}-${pillar.key}`}
                 type="button"
-                aria-label={`Show ${SCENES[scene].title}`}
+                aria-label={locale === 'id' ? `Tampilkan ${scenes[scene].title}` : `Show ${scenes[scene].title}`}
                 className={styles.hotspot}
                 style={hotspotStyle}
                 disabled={Boolean(motion)}
@@ -693,23 +738,23 @@ export default function ITInfrastructure() {
         <div className={styles.mobileCopyArea}>
           <div className={styles.mobileLabel}>
             <span aria-hidden="true" />
-            THREE PILLARS OF INTEGRATION
+            {pillarsLabel}
           </div>
 
           <div className={styles.mobileCopyViewport}>
             {!motion ? (
-              <SceneCopy scene={SCENES[settledScene]} mobile />
+              <SceneCopy scene={scenes[settledScene]} mobile />
             ) : (
               <>
                 <SceneCopy
                   key={`${motion.key}-mobile-copy-out`}
-                  scene={SCENES[motion.from]}
+                  scene={scenes[motion.from]}
                   className={styles.mobileCopyOutgoing}
                   mobile
                 />
                 <SceneCopy
                   key={`${motion.key}-mobile-copy-in`}
-                  scene={SCENES[motion.to]}
+                  scene={scenes[motion.to]}
                   className={styles.mobileCopyIncoming}
                   mobile
                 />
@@ -718,7 +763,7 @@ export default function ITInfrastructure() {
           </div>
 
           <Link href={SCENE_HREFS[targetScene] ?? '/our-solution'} className={styles.mobileLearnMore}>
-            LEARN MORE
+            {learnMoreLabel}
           </Link>
         </div>
 
@@ -733,8 +778,8 @@ export default function ITInfrastructure() {
           </div>
         </div>
 
-        <div className={styles.mobileControls} aria-label="Choose service pillar">
-          {SCENES.map((scene) => (
+        <div className={styles.mobileControls} aria-label={locale === 'id' ? 'Pilih pilar layanan' : 'Choose service pillar'}>
+          {scenes.map((scene) => (
             <button
               key={scene.id}
               type="button"
@@ -742,7 +787,7 @@ export default function ITInfrastructure() {
               data-active={targetScene === scene.id}
               disabled={Boolean(motion)}
               onClick={() => beginTransition(scene.id)}
-              aria-label={`Show ${scene.title}`}
+              aria-label={locale === 'id' ? `Tampilkan ${scene.title}` : `Show ${scene.title}`}
               aria-current={targetScene === scene.id ? 'true' : undefined}
             >
               {scene.number}
@@ -758,7 +803,7 @@ export default function ITInfrastructure() {
       </div>
 
       <p className={styles.srOnly} aria-live="polite">
-        Showing {currentScene.title}
+        {locale === 'id' ? `Menampilkan ${currentScene.title}` : `Showing ${currentScene.title}`}
       </p>
     </section>
   );

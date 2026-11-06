@@ -1,27 +1,37 @@
 import type { Metadata } from 'next';
 import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
+import { getServerLocale, buildLocalizedAlternates } from '@/lib/i18n/server';
+import { getDictionary } from '@/lib/i18n/dictionaries';
 
-export const metadata: Metadata = {
-  title: 'Ecosystem Philosophy',
-  description:
-    'Learn how Arsalynk connects specialised businesses and disciplines into one collaborative ecosystem for long-term enterprise impact.',
-  alternates: { canonical: '/about-us/ecosystem-philosophy' },
-  openGraph: {
-    title: 'Ecosystem Philosophy | Arsalynk',
-    description: 'How specialised businesses collaborate through the Arsalynk ecosystem.',
-    url: '/about-us/ecosystem-philosophy',
-    images: ['/images/about-us/ecosystem-philosophy-hero.webp'],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Ecosystem Philosophy | Arsalynk',
-    description: 'How specialised businesses collaborate through the Arsalynk ecosystem.',
-    images: ['/images/about-us/ecosystem-philosophy-hero.webp'],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+  const dict = getDictionary(locale);
+  const alternates = buildLocalizedAlternates('/about-us/ecosystem-philosophy', locale);
 
-export default function EcosystemPhilosophyLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return {
+    title: dict.seo.ecosystemPhilosophy.title,
+    description: dict.seo.ecosystemPhilosophy.description,
+    alternates,
+    openGraph: {
+      title: dict.seo.ecosystemPhilosophy.title,
+      description: dict.seo.ecosystemPhilosophy.description,
+      url: alternates.canonical,
+      locale: locale === 'id' ? 'id_ID' : 'en_US',
+      images: ['/images/about-us/ecosystem-philosophy-hero.webp'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: dict.seo.ecosystemPhilosophy.title,
+      description: dict.seo.ecosystemPhilosophy.description,
+      images: ['/images/about-us/ecosystem-philosophy-hero.webp'],
+    },
+  };
+}
+
+export default async function EcosystemPhilosophyLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const locale = await getServerLocale();
+  const isId = locale === 'id';
   const canonicalUrl = `${SITE_URL}/about-us/ecosystem-philosophy`;
   const schema = {
     '@context': 'https://schema.org',
@@ -30,19 +40,20 @@ export default function EcosystemPhilosophyLayout({ children }: Readonly<{ child
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'About Us', item: `${SITE_URL}/about-us` },
-          { '@type': 'ListItem', position: 3, name: 'Ecosystem Philosophy', item: canonicalUrl },
+          { '@type': 'ListItem', position: 1, name: isId ? 'Beranda' : 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: isId ? 'Tentang Kami' : 'About Us', item: `${SITE_URL}/about-us` },
+          { '@type': 'ListItem', position: 3, name: isId ? 'Filosofi Ekosistem' : 'Ecosystem Philosophy', item: canonicalUrl },
         ],
       },
       {
         '@type': 'AboutPage',
         '@id': `${canonicalUrl}#webpage`,
         url: canonicalUrl,
-        name: `Ecosystem Philosophy | ${SITE_NAME}`,
+        name: `${isId ? 'Filosofi Ekosistem' : 'Ecosystem Philosophy'} | ${SITE_NAME}`,
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
         breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
+        inLanguage: isId ? 'id-ID' : 'en-US',
       },
     ],
   };

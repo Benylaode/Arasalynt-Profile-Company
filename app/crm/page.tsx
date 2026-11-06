@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 interface Inquiry {
   id: number;
@@ -55,6 +56,7 @@ interface CrmTicket {
 }
 
 export default function CrmDashboardPage() {
+  const { locale, t } = useLanguage();
   const [activeTab, setActiveTab] = useState<'inquiries' | 'inbox' | 'webhooks' | 'tickets'>('inquiries');
 
   // Inquiries State
@@ -70,7 +72,6 @@ export default function CrmDashboardPage() {
   const [selectedLog, setSelectedLog] = useState<CrmEventLog | null>(null);
 
   // Inbox State
-  const [chatThreads, setChatThreads] = useState<string[]>([]);
   const [selectedThread, setSelectedThread] = useState<string>('');
   const [threadMessages, setThreadMessages] = useState<CrmChatMessage[]>([]);
   const [loadingChat, setLoadingChat] = useState(false);
@@ -152,10 +153,7 @@ export default function CrmDashboardPage() {
     if (activeTab === 'webhooks') fetchLogs();
     if (activeTab === 'tickets') fetchTickets();
     if (activeTab === 'inbox') {
-      // Extract unique threads from recent logs or inquiries
-      fetchLogs().then(() => {
-        // also fetch first thread if available
-      });
+      fetchLogs();
     }
   }, [activeTab, fetchLogs, fetchTickets]);
 
@@ -182,7 +180,7 @@ export default function CrmDashboardPage() {
   };
 
   const handleDeleteInquiry = async (id: number) => {
-    if (!confirm('Delete this inquiry record from database?')) return;
+    if (!confirm(locale === 'id' ? 'Hapus data pertanyaan ini dari basis data?' : 'Delete this inquiry record from database?')) return;
     try {
       const res = await fetch(`/api/inquiries?id=${id}`, { method: 'DELETE' });
       if (res.ok) {
@@ -250,7 +248,7 @@ export default function CrmDashboardPage() {
               ARSALYNK<span className="text-[#1A3E9E]">.</span>
             </Link>
             <span className="rounded-full bg-[#1A3E9E]/30 px-2.5 py-0.5 font-mono text-[11px] font-semibold tracking-wider text-[#99A6E7] border border-[#1A3E9E]/50">
-              PRODUCTION CRM
+              {t.crm.dashboardBadge}
             </span>
           </div>
 
@@ -266,13 +264,13 @@ export default function CrmDashboardPage() {
               <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
               </svg>
-              <span>Refresh</span>
+              <span>{t.crm.dashboardRefresh}</span>
             </button>
             <Link
               href="/"
               className="rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/70 hover:text-white hover:bg-white/10 transition"
             >
-              &larr; Back to Website
+              {t.crm.dashboardBackToWebsite}
             </Link>
           </div>
         </div>
@@ -287,7 +285,7 @@ export default function CrmDashboardPage() {
                 : 'border-transparent text-white/60 hover:text-white'
             }`}
           >
-            Inquiries &amp; Leads ({inquiries.length})
+            {t.crm.dashboardTabInquiries} ({inquiries.length})
           </button>
           <button
             onClick={() => setActiveTab('inbox')}
@@ -297,7 +295,7 @@ export default function CrmDashboardPage() {
                 : 'border-transparent text-white/60 hover:text-white'
             }`}
           >
-            Live Chat / Inbox
+            {t.crm.dashboardTabInbox}
           </button>
           <button
             onClick={() => setActiveTab('webhooks')}
@@ -307,7 +305,7 @@ export default function CrmDashboardPage() {
                 : 'border-transparent text-white/60 hover:text-white'
             }`}
           >
-            Marka Webhook Logs ({logs.length})
+            {t.crm.dashboardTabWebhooks} ({logs.length})
           </button>
           <button
             onClick={() => setActiveTab('tickets')}
@@ -317,7 +315,7 @@ export default function CrmDashboardPage() {
                 : 'border-transparent text-white/60 hover:text-white'
             }`}
           >
-            Support Tickets ({tickets.length})
+            {t.crm.dashboardTabTickets} ({tickets.length})
           </button>
         </div>
       </header>
@@ -330,19 +328,19 @@ export default function CrmDashboardPage() {
             {/* KPI Cards */}
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
               <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-                <span className="text-xs uppercase tracking-wider text-white/50">Total Inquiries</span>
+                <span className="text-xs uppercase tracking-wider text-white/50">{t.crm.dashboardKpiTotal}</span>
                 <p className="mt-2 text-3xl font-bold text-white">{stats.total}</p>
               </div>
               <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.03] p-5">
-                <span className="text-xs uppercase tracking-wider text-amber-400">Pending Review</span>
+                <span className="text-xs uppercase tracking-wider text-amber-400">{t.crm.dashboardKpiPending}</span>
                 <p className="mt-2 text-3xl font-bold text-amber-300">{stats.pending}</p>
               </div>
               <div className="rounded-xl border border-blue-500/20 bg-blue-500/[0.03] p-5">
-                <span className="text-xs uppercase tracking-wider text-blue-400">Contacted</span>
+                <span className="text-xs uppercase tracking-wider text-blue-400">{t.crm.dashboardKpiContacted}</span>
                 <p className="mt-2 text-3xl font-bold text-blue-300">{stats.contacted}</p>
               </div>
               <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-5">
-                <span className="text-xs uppercase tracking-wider text-emerald-400">Deals Closed</span>
+                <span className="text-xs uppercase tracking-wider text-emerald-400">{t.crm.dashboardKpiDeals}</span>
                 <p className="mt-2 text-3xl font-bold text-emerald-300">{stats.deal}</p>
               </div>
             </div>
@@ -352,7 +350,7 @@ export default function CrmDashboardPage() {
               <div className="flex flex-1 items-center gap-3">
                 <input
                   type="text"
-                  placeholder="Search by name, company, email, or phone..."
+                  placeholder={t.crm.dashboardSearchPlaceholder}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="h-10 w-full max-w-md rounded-lg border border-white/15 bg-white/5 px-3 text-sm text-white placeholder-white/40 focus:border-[#1A3E9E] focus:outline-none"
@@ -362,11 +360,11 @@ export default function CrmDashboardPage() {
                   onChange={(e) => setStatusFilter(e.target.value)}
                   className="h-10 rounded-lg border border-white/15 bg-[#05070A] px-3 text-sm text-white focus:border-[#1A3E9E] focus:outline-none"
                 >
-                  <option value="all">All Statuses</option>
-                  <option value="pending">Pending</option>
-                  <option value="contacted">Contacted</option>
-                  <option value="deal">Deal</option>
-                  <option value="closed">Closed</option>
+                  <option value="all">{t.crm.dashboardStatusAll}</option>
+                  <option value="pending">{t.crm.dashboardStatusPending}</option>
+                  <option value="contacted">{t.crm.dashboardStatusContacted}</option>
+                  <option value="deal">{t.crm.dashboardStatusDeal}</option>
+                  <option value="closed">{t.crm.dashboardStatusClosed}</option>
                 </select>
               </div>
 
@@ -376,7 +374,7 @@ export default function CrmDashboardPage() {
                   disabled={inquiries.length === 0}
                   className="inline-flex h-10 items-center gap-1.5 rounded-lg border border-white/20 bg-white/10 px-4 text-xs font-semibold uppercase tracking-wider text-white hover:bg-white/20 transition disabled:opacity-40"
                 >
-                  Export CSV
+                  {t.crm.dashboardExportCsv}
                 </button>
               </div>
             </div>
@@ -386,25 +384,25 @@ export default function CrmDashboardPage() {
               <table className="w-full text-left text-sm text-white/80">
                 <thead className="border-b border-white/10 bg-white/[0.03] text-xs uppercase tracking-wider text-white/50">
                   <tr>
-                    <th className="px-4 py-3.5">Name &amp; Company</th>
-                    <th className="px-4 py-3.5">Contact</th>
-                    <th className="px-4 py-3.5">Service / Subject</th>
-                    <th className="px-4 py-3.5">Timestamp</th>
-                    <th className="px-4 py-3.5">Status</th>
-                    <th className="px-4 py-3.5 text-right">Actions</th>
+                    <th className="px-4 py-3.5">{t.crm.dashboardColNameCompany}</th>
+                    <th className="px-4 py-3.5">{t.crm.dashboardColContact}</th>
+                    <th className="px-4 py-3.5">{t.crm.dashboardColService}</th>
+                    <th className="px-4 py-3.5">{t.crm.dashboardColTimestamp}</th>
+                    <th className="px-4 py-3.5">{t.crm.dashboardColStatus}</th>
+                    <th className="px-4 py-3.5 text-right">{t.crm.dashboardColActions}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5 font-normal">
                   {loadingInquiries ? (
                     <tr>
                       <td colSpan={6} className="px-4 py-8 text-center text-white/40">
-                        Memuat data inquiries...
+                        {t.crm.dashboardLoadingInquiries}
                       </td>
                     </tr>
                   ) : filteredInquiries.length === 0 ? (
                     <tr>
                       <td colSpan={6} className="px-4 py-8 text-center text-white/40">
-                        No inquiries match current filter.
+                        {t.crm.dashboardNoInquiriesMatch}
                       </td>
                     </tr>
                   ) : (
@@ -429,7 +427,7 @@ export default function CrmDashboardPage() {
                           )}
                         </td>
                         <td className="px-4 py-3.5 text-xs text-white/50 whitespace-nowrap">
-                          {new Date(inq.createdAt).toLocaleDateString('id-ID', {
+                          {new Date(inq.createdAt).toLocaleDateString(locale === 'id' ? 'id-ID' : 'en-US', {
                             day: 'numeric',
                             month: 'short',
                             year: 'numeric',
@@ -452,10 +450,10 @@ export default function CrmDashboardPage() {
                                 : 'bg-gray-500/20 text-gray-300 border border-gray-500/30'
                             }`}
                           >
-                            <option value="pending" className="bg-[#05070A] text-white">Pending</option>
-                            <option value="contacted" className="bg-[#05070A] text-white">Contacted</option>
-                            <option value="deal" className="bg-[#05070A] text-white">Deal</option>
-                            <option value="closed" className="bg-[#05070A] text-white">Closed</option>
+                            <option value="pending" className="bg-[#05070A] text-white">{t.crm.dashboardStatusPending}</option>
+                            <option value="contacted" className="bg-[#05070A] text-white">{t.crm.dashboardStatusContacted}</option>
+                            <option value="deal" className="bg-[#05070A] text-white">{t.crm.dashboardStatusDeal}</option>
+                            <option value="closed" className="bg-[#05070A] text-white">{t.crm.dashboardStatusClosed}</option>
                           </select>
                         </td>
                         <td className="px-4 py-3.5 text-right">
@@ -484,14 +482,15 @@ export default function CrmDashboardPage() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
               <h3 className="mb-3 font-heading text-sm font-semibold uppercase tracking-wider text-white/70">
-                Pencarian Percakapan
+                {t.crm.dashboardInboxSearchTitle}
               </h3>
               <p className="mb-4 text-xs text-white/50">
-                Inbound messages from web live-chat or WhatsApp are automatically synchronized in real time with Marka CRM communication threads.</p>
+                {t.crm.dashboardInboxSearchDescription}
+              </p>
               <div className="flex flex-col gap-2">
                 <input
                   type="text"
-                  placeholder="Enter thread ID (e.g. webchat:guest_123)..."
+                  placeholder={t.crm.dashboardInboxThreadPlaceholder}
                   value={selectedThread}
                   onChange={(e) => setSelectedThread(e.target.value)}
                   className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-xs text-white focus:border-[#1A3E9E] focus:outline-none"
@@ -501,7 +500,7 @@ export default function CrmDashboardPage() {
                   disabled={!selectedThread.trim()}
                   className="rounded-lg bg-[#1A3E9E] py-2 text-xs font-semibold text-white hover:bg-[#14347F] transition disabled:opacity-50"
                 >
-                  Buka Percakapan
+                  {t.crm.dashboardInboxOpenButton}
                 </button>
               </div>
             </div>
@@ -509,15 +508,15 @@ export default function CrmDashboardPage() {
             <div className="col-span-2 rounded-xl border border-white/10 bg-white/[0.02] p-5">
               <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-3">
                 <h3 className="font-heading text-sm font-semibold text-white">
-                  Thread Message Viewer: <span className="font-mono text-[#99A6E7]">{selectedThread || 'Belum dipilih'}</span>
+                  {t.crm.dashboardInboxViewerTitle} <span className="font-mono text-[#99A6E7]">{selectedThread || t.crm.dashboardInboxNoneSelected}</span>
                 </h3>
               </div>
 
               {loadingChat ? (
-                <div className="py-12 text-center text-xs text-white/40">Memuat riwayat chat...</div>
+                <div className="py-12 text-center text-xs text-white/40">{t.crm.dashboardInboxLoading}</div>
               ) : threadMessages.length === 0 ? (
                 <div className="py-12 text-center text-xs text-white/40">
-                  {selectedThread ? 'No messages found in this thread.' : 'Select or enter a thread ID above to view conversation history.'}
+                  {selectedThread ? t.crm.dashboardInboxEmpty : t.crm.dashboardInboxSelectPrompt}
                 </div>
               ) : (
                 <div className="flex max-h-[500px] flex-col gap-3 overflow-y-auto pr-2">
@@ -532,7 +531,7 @@ export default function CrmDashboardPage() {
                     >
                       <div className="mb-1 flex items-center justify-between gap-2 text-[10px] opacity-75">
                         <span className="font-semibold">{msg.senderName || msg.senderType}</span>
-                        <span>{new Date(msg.createdAt).toLocaleTimeString('id-ID')}</span>
+                        <span>{new Date(msg.createdAt).toLocaleTimeString(locale === 'id' ? 'id-ID' : 'en-US')}</span>
                       </div>
                       <p className="whitespace-pre-wrap">{msg.text}</p>
                     </div>
@@ -548,9 +547,9 @@ export default function CrmDashboardPage() {
           <div className="flex flex-col gap-6">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-heading text-base font-semibold text-white">Audit Log Integrasi Webhook Marka CRM</h3>
+                <h3 className="font-heading text-base font-semibold text-white">{t.crm.dashboardWebhooksTitle}</h3>
                 <p className="text-xs text-white/50">
-                  Outward event transmission log to Marka CRM and live inbound callback events.
+                  {t.crm.dashboardWebhooksDescription}
                 </p>
               </div>
             </div>
@@ -563,21 +562,21 @@ export default function CrmDashboardPage() {
                     <th className="px-4 py-3.5">Event Type</th>
                     <th className="px-4 py-3.5">Direction</th>
                     <th className="px-4 py-3.5">Status Code</th>
-                    <th className="px-4 py-3.5">Waktu</th>
-                    <th className="px-4 py-3.5 text-right">Details</th>
+                    <th className="px-4 py-3.5">{t.crm.dashboardColTime}</th>
+                    <th className="px-4 py-3.5 text-right">{t.crm.dashboardColDetails}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5 text-xs font-mono">
                   {loadingLogs ? (
                     <tr>
                       <td colSpan={6} className="px-4 py-8 text-center text-white/40">
-                        Memuat event logs...
+                        {t.crm.dashboardWebhooksLoading}
                       </td>
                     </tr>
                   ) : logs.length === 0 ? (
                     <tr>
                       <td colSpan={6} className="px-4 py-8 text-center text-white/40">
-                        No webhook event history recorded yet.
+                        {t.crm.dashboardWebhooksEmpty}
                       </td>
                     </tr>
                   ) : (
@@ -613,7 +612,7 @@ export default function CrmDashboardPage() {
                             onClick={() => setSelectedLog(item)}
                             className="rounded bg-white/10 px-2 py-1 text-[11px] font-sans text-white hover:bg-white/20 transition"
                           >
-                            Inspect
+                            {t.crm.dashboardInspectButton}
                           </button>
                         </td>
                       </tr>
@@ -689,7 +688,7 @@ export default function CrmDashboardPage() {
         {/* TAB 4: SUPPORT TICKETS */}
         {activeTab === 'tickets' && (
           <div className="flex flex-col gap-6">
-            <h3 className="font-heading text-base font-semibold text-white">Support Tickets Sinkron Marka CRM</h3>
+            <h3 className="font-heading text-base font-semibold text-white">{t.crm.dashboardTicketsTitle}</h3>
             <div className="overflow-x-auto rounded-xl border border-white/10 bg-white/[0.02]">
               <table className="w-full text-left text-sm text-white/80">
                 <thead className="border-b border-white/10 bg-white/[0.03] text-xs uppercase tracking-wider text-white/50">
@@ -698,36 +697,36 @@ export default function CrmDashboardPage() {
                     <th className="px-4 py-3.5">Subject</th>
                     <th className="px-4 py-3.5">Customer Email</th>
                     <th className="px-4 py-3.5">Serial Number</th>
-                    <th className="px-4 py-3.5">Status</th>
-                    <th className="px-4 py-3.5">Waktu</th>
+                    <th className="px-4 py-3.5">{t.crm.dashboardColStatus}</th>
+                    <th className="px-4 py-3.5">{t.crm.dashboardColTime}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5 text-xs">
                   {loadingTickets ? (
                     <tr>
                       <td colSpan={6} className="px-4 py-8 text-center text-white/40">
-                        Loading ticket data...
+                        {t.crm.dashboardTicketsLoading}
                       </td>
                     </tr>
                   ) : tickets.length === 0 ? (
                     <tr>
                       <td colSpan={6} className="px-4 py-8 text-center text-white/40">
-                        No support tickets recorded yet.
+                        {t.crm.dashboardTicketsEmpty}
                       </td>
                     </tr>
                   ) : (
-                    tickets.map((t) => (
-                      <tr key={t.id} className="hover:bg-white/[0.02] transition">
-                        <td className="px-4 py-3 font-mono text-white/80">{t.eventId}</td>
-                        <td className="px-4 py-3 font-semibold text-white">{t.subject}</td>
-                        <td className="px-4 py-3 text-[#99A6E7]">{t.customerEmail || '-'}</td>
-                        <td className="px-4 py-3 font-mono text-white/60">{t.serialNumber || '-'}</td>
+                    tickets.map((ticket) => (
+                      <tr key={ticket.id} className="hover:bg-white/[0.02] transition">
+                        <td className="px-4 py-3 font-mono text-white/80">{ticket.eventId}</td>
+                        <td className="px-4 py-3 font-semibold text-white">{ticket.subject}</td>
+                        <td className="px-4 py-3 text-[#99A6E7]">{ticket.customerEmail || '-'}</td>
+                        <td className="px-4 py-3 font-mono text-white/60">{ticket.serialNumber || '-'}</td>
                         <td className="px-4 py-3">
                           <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-[10px] font-bold text-emerald-300 border border-emerald-500/30">
-                            {t.status}
+                            {ticket.status}
                           </span>
                         </td>
-                        <td className="px-4 py-3 text-white/50">{t.createdAt}</td>
+                        <td className="px-4 py-3 text-white/50">{ticket.createdAt}</td>
                       </tr>
                     ))
                   )}

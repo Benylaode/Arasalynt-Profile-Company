@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 import styles from './SpecializedByNature.module.css';
 
 type CardItem = {
@@ -16,7 +17,7 @@ type CardItem = {
   imageClass: string;
 };
 
-const CARDS: CardItem[] = [
+const CARDS_EN: CardItem[] = [
   {
     id: 1,
     image: '/images/specialized/specialized-technology.webp',
@@ -52,7 +53,46 @@ const CARDS: CardItem[] = [
   },
 ];
 
+const CARDS_ID: CardItem[] = [
+  {
+    id: 1,
+    image: '/images/specialized/specialized-technology.webp',
+    imageAlt: 'Ilustrasi isometrik infrastruktur teknologi',
+    title: ['Ketahanan Fleksibel', '& Infrastruktur Modern'],
+    description:
+      'Kami merancang arsitektur TI yang tangguh, mengoptimalkan infrastruktur digital, serta menghadirkan wawasan yang dapat ditindaklanjuti—memberdayakan mitra perusahaan kami untuk beradaptasi, memperluas skala, dan berkembang di lanskap teknologi yang dinamis.',
+    label: 'CAKUPAN TEKNOLOGI FLEKSIBEL',
+    mediaSide: 'left',
+    imageClass: styles.technologyImage,
+  },
+  {
+    id: 2,
+    image: '/images/specialized/specialized-intelligence.webp',
+    imageAlt: 'Ilustrasi isometrik dasbor inteligensi strategis',
+    title: ['Didorong oleh Inteligensi', 'Strategis'],
+    description:
+      'Ekosistem terintegrasi kami mendukung jaringan inteligensi bersama, memungkinkan keahlian teknis mendalam, praktik terbaik industri, dan inovasi berkelanjutan untuk terus berkembang di setiap kolaborasi klien.',
+    label: 'PENGAMBILAN KEPUTUSAN BERBASIS DATA',
+    mediaSide: 'right',
+    imageClass: styles.intelligenceImage,
+  },
+  {
+    id: 3,
+    image: '/images/specialized/specialized-impact.webp',
+    imageAlt: 'Ilustrasi isometrik media dan dampak jangka panjang',
+    title: ['Dirancang untuk Dampak', 'Jangka Panjang'],
+    description:
+      'Kami mengubah strategi TI yang kompleks menjadi keunggulan operasional, menghadirkan integrasi ERP, IoT, dan sistem berkinerja tinggi dengan presisi teknis, konsistensi operasional, serta hasil yang terukur.',
+    label: 'HASIL BISNIS YANG TERUKUR',
+    mediaSide: 'left',
+    imageClass: styles.impactImage,
+  },
+];
+
 export default function SpecializedByNature() {
+  const { locale } = useLanguage();
+  const cards = locale === 'id' ? CARDS_ID : CARDS_EN;
+
   return (
     <section
       id="services"
@@ -68,21 +108,31 @@ export default function SpecializedByNature() {
         <header className={styles.header}>
           <div className={styles.eyebrow}>
             <span className={styles.eyebrowDot} aria-hidden="true" />
-            <span>WHY ARSALYNK</span>
+            <span>{locale === 'id' ? 'MENGAPA ARSALYNK' : 'WHY ARSALYNK'}</span>
           </div>
 
           <h2
             id="specialized-by-nature-heading"
             className={styles.heading}
           >
-            Specialized By Nature,
-            <br />
-            Unified By Design
+            {locale === 'id' ? (
+              <>
+                Terspesialisasi Secara Alami,
+                <br />
+                Terpadu Secara Desain
+              </>
+            ) : (
+              <>
+                Specialized By Nature,
+                <br />
+                Unified By Design
+              </>
+            )}
           </h2>
         </header>
 
         <div className={styles.cards}>
-          {CARDS.map((item, index) => {
+          {cards.map((item, index) => {
             const cardStyle = {
               '--card-index': index,
               '--card-z-index': 10 + index,
@@ -145,7 +195,7 @@ export default function SpecializedByNature() {
             href="/our-solution"
             className="inline-flex items-center gap-3 rounded-full border border-[#1A3E9E] bg-[#1A3E9E] px-8 py-4 font-body text-[13px] font-bold uppercase tracking-wider text-white no-underline transition hover:bg-[#152571] hover:shadow-[0_8px_25px_rgba(26,62,158,0.25)]"
           >
-            <span>EXPLORE OUR SOLUTIONS</span>
+            <span>{locale === 'id' ? 'JELAJAHI SOLUSI KAMI' : 'EXPLORE OUR SOLUTIONS'}</span>
             <span aria-hidden="true">→</span>
           </Link>
         </div>

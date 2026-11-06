@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 interface CrmConsultationModalProps {
   isOpen: boolean;
@@ -8,7 +9,7 @@ interface CrmConsultationModalProps {
   defaultSolution?: string;
 }
 
-const SOLUTIONS = [
+const SOLUTIONS_EN = [
   'Enterprise Solution (Marka ERP)',
   'Data & AI Integration',
   'Smart IOT System',
@@ -17,11 +18,23 @@ const SOLUTIONS = [
   'Other Inquiries',
 ];
 
+const SOLUTIONS_ID = [
+  'Enterprise Solution (Marka ERP)',
+  'Integrasi Data & AI',
+  'Smart IOT System',
+  'Pengembangan Digital (Web & Aplikasi)',
+  'Konsultasi Teknologi',
+  'Pertanyaan Lainnya',
+];
+
 export default function CrmConsultationModal({
   isOpen,
   onClose,
   defaultSolution = '',
 }: CrmConsultationModalProps) {
+  const { locale, t } = useLanguage();
+  const solutions = locale === 'id' ? SOLUTIONS_ID : SOLUTIONS_EN;
+
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
@@ -84,13 +97,13 @@ export default function CrmConsultationModal({
       const result = await response.json();
 
       if (!response.ok || !result.success) {
-        throw new Error(result.error || 'Failed to submit CRM consultation form.');
+        throw new Error(result.error || t.crm.consultationErrorFallback);
       }
 
       setIsSuccess(true);
     } catch (err: unknown) {
       const errObj = err as Error;
-      setErrorMessage(errObj.message || 'An error occurred while submitting data. Please try again.');
+      setErrorMessage(errObj.message || t.crm.consultationErrorFallback);
     } finally {
       setIsSubmitting(false);
     }
@@ -124,7 +137,7 @@ export default function CrmConsultationModal({
         <button
           type="button"
           onClick={handleResetAndClose}
-          aria-label="Close modal"
+          aria-label={t.common.closeModal}
           className="absolute right-5 top-5 flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-white/20 hover:text-white transition"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -143,10 +156,10 @@ export default function CrmConsultationModal({
             </div>
 
             <h3 id="crm-modal-title" className="font-heading text-2xl font-bold tracking-tight text-white">
-              Consultation Successfully Scheduled!
+              {t.crm.consultationSuccessTitle}
             </h3>
             <p className="mx-auto mt-3 max-w-[440px] text-sm leading-relaxed text-white/70">
-              Your enterprise project requirements have been recorded and synchronized directly with our <strong className="text-white">Marka ERP CRM</strong> system. Our engineering representatives will contact you shortly.
+              {t.crm.consultationSuccessDescription}
             </p>
 
             <button
@@ -154,20 +167,20 @@ export default function CrmConsultationModal({
               onClick={handleResetAndClose}
               className="mt-6 inline-flex h-11 items-center justify-center rounded-full bg-[#1A3E9E] px-8 text-xs font-bold tracking-wider uppercase text-white hover:bg-[#14347F] transition"
             >
-              Close &amp; Continue Exploring
+              {t.crm.consultationCloseButton}
             </button>
           </div>
         ) : (
           <div>
             <div className="mb-5 pr-8">
               <span className="font-mono text-[11px] font-semibold tracking-wider uppercase text-[#E6FF2A]">
-                Enterprise CRM Consultation
+                {t.crm.consultationEyebrow}
               </span>
               <h2 id="crm-modal-title" className="mt-1 font-heading text-2xl font-bold tracking-tight text-white md:text-3xl">
-                Schedule a Solution Consultation
+                {t.crm.consultationTitle}
               </h2>
               <p className="mt-1.5 text-xs text-white/60">
-                Connect your digital transformation initiatives directly with our engineering representatives via Marka CRM.
+                {t.crm.consultationDescription}
               </p>
             </div>
 
@@ -181,27 +194,27 @@ export default function CrmConsultationModal({
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
                   <label className="block text-xs font-medium text-white/80 mb-1">
-                    Full Name <span className="text-[#FF5050]">*</span>
+                    {t.crm.consultationFullNameLabel} <span className="text-[#FF5050]">*</span>
                   </label>
                   <input
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="e.g. John Doe"
+                    placeholder={t.crm.consultationFullNamePlaceholder}
                     className="h-10 w-full rounded-lg border border-white/15 bg-white/5 px-3 text-xs text-white placeholder-white/30 focus:border-[#1A3E9E] focus:outline-none"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-medium text-white/80 mb-1">
-                    Company / Organization
+                    {t.crm.consultationCompanyLabel}
                   </label>
                   <input
                     type="text"
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
-                    placeholder="e.g. Acme Corporation"
+                    placeholder={t.crm.consultationCompanyPlaceholder}
                     className="h-10 w-full rounded-lg border border-white/15 bg-white/5 px-3 text-xs text-white placeholder-white/30 focus:border-[#1A3E9E] focus:outline-none"
                   />
                 </div>
@@ -210,28 +223,28 @@ export default function CrmConsultationModal({
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
                   <label className="block text-xs font-medium text-white/80 mb-1">
-                    Business Email <span className="text-[#FF5050]">*</span>
+                    {t.crm.consultationEmailLabel} <span className="text-[#FF5050]">*</span>
                   </label>
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="john@company.com"
+                    placeholder={t.crm.consultationEmailPlaceholder}
                     className="h-10 w-full rounded-lg border border-white/15 bg-white/5 px-3 text-xs text-white placeholder-white/30 focus:border-[#1A3E9E] focus:outline-none"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-medium text-white/80 mb-1">
-                    WhatsApp / Phone Number <span className="text-[#FF5050]">*</span>
+                    {t.crm.consultationPhoneLabel} <span className="text-[#FF5050]">*</span>
                   </label>
                   <input
                     type="tel"
                     required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+1 (555) 000-0000"
+                    placeholder={t.crm.consultationPhonePlaceholder}
                     className="h-10 w-full rounded-lg border border-white/15 bg-white/5 px-3 text-xs text-white placeholder-white/30 focus:border-[#1A3E9E] focus:outline-none"
                   />
                 </div>
@@ -240,15 +253,15 @@ export default function CrmConsultationModal({
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
                   <label className="block text-xs font-medium text-white/80 mb-1">
-                    Primary Solution Focus
+                    {t.crm.consultationSolutionLabel}
                   </label>
                   <select
                     value={solutionChoice}
                     onChange={(e) => setSolutionChoice(e.target.value)}
                     className="h-10 w-full rounded-lg border border-white/15 bg-[#0A0D14] px-3 text-xs text-white focus:border-[#1A3E9E] focus:outline-none"
                   >
-                    <option value="">Select a Solution...</option>
-                    {SOLUTIONS.map((s) => (
+                    <option value="">{t.crm.consultationSolutionPlaceholder}</option>
+                    {solutions.map((s) => (
                       <option key={s} value={s}>
                         {s}
                       </option>
@@ -258,13 +271,13 @@ export default function CrmConsultationModal({
 
                 <div>
                   <label className="block text-xs font-medium text-white/80 mb-1">
-                    Estimated Target Budget (Optional)
+                    {t.crm.consultationBudgetLabel}
                   </label>
                   <input
                     type="number"
                     value={targetBudget}
                     onChange={(e) => setTargetBudget(e.target.value)}
-                    placeholder="e.g. 50000"
+                    placeholder={t.crm.consultationBudgetPlaceholder}
                     className="h-10 w-full rounded-lg border border-white/15 bg-white/5 px-3 text-xs text-white placeholder-white/30 focus:border-[#1A3E9E] focus:outline-none"
                   />
                 </div>
@@ -272,14 +285,14 @@ export default function CrmConsultationModal({
 
               <div>
                 <label className="block text-xs font-medium text-white/80 mb-1">
-                  Project Scope &amp; Description <span className="text-[#FF5050]">*</span>
+                  {t.crm.consultationScopeLabel} <span className="text-[#FF5050]">*</span>
                 </label>
                 <textarea
                   required
                   rows={3}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Describe your system architecture, business workflows, or goals..."
+                  placeholder={t.crm.consultationScopePlaceholder}
                   className="w-full resize-none rounded-lg border border-white/15 bg-white/5 p-3 text-xs text-white placeholder-white/30 focus:border-[#1A3E9E] focus:outline-none"
                 />
               </div>
@@ -289,13 +302,15 @@ export default function CrmConsultationModal({
                   type="button"
                   onClick={handleResetAndClose}
                   className="h-10 rounded-lg px-4 text-xs font-medium text-white/70 hover:text-white transition"
-                >Cancel</button>
+                >
+                  {t.crm.consultationCancelButton}
+                </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
                   className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-[#1A3E9E] px-6 text-xs font-bold uppercase tracking-wider text-white hover:bg-[#14347F] transition disabled:opacity-50"
                 >
-                  {isSubmitting ? 'Submitting to CRM...' : 'Submit Consultation'}
+                  {isSubmitting ? t.crm.consultationSubmittingButton : t.crm.consultationSubmitButton}
                 </button>
               </div>
             </form>

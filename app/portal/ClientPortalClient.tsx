@@ -2,8 +2,10 @@
 
 import React, { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 export default function ClientPortalClient() {
+  const { locale, t } = useLanguage();
   const searchParams = useSearchParams();
   const initialType = searchParams.get('type') === 'ticket' ? 'ticket' : 'quotation';
   const initialCode = searchParams.get('code') || searchParams.get('id') || '';
@@ -42,7 +44,7 @@ export default function ClientPortalClient() {
     if (!cleanCode) {
       setQuoteFeedback({
         type: 'error',
-        message: 'Quotation document number (e.g. QUO-2026-00125) is required.',
+        message: t.portal.quoteErrorRequiredCode,
       });
       return;
     }
@@ -50,7 +52,7 @@ export default function ClientPortalClient() {
     if (!signatureName.trim()) {
       setQuoteFeedback({
         type: 'error',
-        message: 'Authorized representative full name is required for confirmation.',
+        message: t.portal.quoteErrorRequiredName,
       });
       return;
     }
@@ -58,7 +60,7 @@ export default function ClientPortalClient() {
     setIsSubmittingQuote(true);
     setQuoteFeedback({
       type: 'info',
-      message: 'Submitting decision to Marka CRM queue...',
+      message: t.portal.quoteInfoSubmitting,
     });
 
     try {
@@ -79,18 +81,29 @@ export default function ClientPortalClient() {
         data = JSON.parse(resText);
       } catch {
         throw new Error(
-          `Server responded with invalid format (Status ${res.status}). Verify API Route '/api/portal/quotation/decision'.`
+          locale === 'id'
+            ? `Server merespons dengan format tidak valid (Status ${res.status}). Periksa API Route '/api/portal/quotation/decision'.`
+            : `Server responded with invalid format (Status ${res.status}). Verify API Route '/api/portal/quotation/decision'.`
         );
       }
 
       if (!res.ok) {
-        throw new Error(data.error || 'Failed to submit quotation confirmation.');
+        throw new Error(
+          data.error ||
+            (locale === 'id'
+              ? 'Gagal mengirim konfirmasi penawaran.'
+              : 'Failed to submit quotation confirmation.')
+        );
       }
 
       if (data.processing_status === 'DUPLICATE') {
         setQuoteFeedback({
           type: 'info',
-          message: data.message || `A decision for document ${cleanCode} has already been recorded.`,
+          message:
+            data.message ||
+            (locale === 'id'
+              ? `Keputusan untuk dokumen ${cleanCode} sudah tercatat sebelumnya.`
+              : `A decision for document ${cleanCode} has already been recorded.`),
         });
         setIsSubmittingQuote(false);
         return;
@@ -99,7 +112,7 @@ export default function ClientPortalClient() {
       if (data.status === 202 && data.status_check_url) {
         setQuoteFeedback({
           type: 'info',
-          message: 'Decision queued. Awaiting Marka ERP worker processing...',
+          message: t.portal.quoteInfoQueued,
         });
 
         const checkUrl = data.status_check_url;
@@ -124,7 +137,11 @@ export default function ClientPortalClient() {
                 type: 'success',
                 message:
                   decision === 'ACCEPTED'
-                    ? `Quotation approval for ${cleanCode} has been successfully recorded. Arsalynk's team will follow up promptly.`
+                    ? locale === 'id'
+                      ? `Persetujuan penawaran untuk ${cleanCode} berhasil dicatat. Tim Arsalynk akan segera menindaklanjuti.`
+                      : `Quotation approval for ${cleanCode} has been successfully recorded. Arsalynk's team will follow up promptly.`
+                    : locale === 'id'
+                    ? `Catatan revisi untuk penawaran ${cleanCode} berhasil dicatat.`
                     : `Revision notes for quotation ${cleanCode} have been successfully recorded.`,
               });
               setIsSubmittingQuote(false);
@@ -138,13 +155,21 @@ export default function ClientPortalClient() {
                   message:
                     statusData.message ||
                     (decision === 'ACCEPTED'
-                      ? `Quotation approval for ${cleanCode} has been successfully processed by Marka ERP. Arsalynk's team will follow up promptly.`
+                      ? locale === 'id'
+                        ? `Persetujuan penawaran untuk ${cleanCode} berhasil diproses oleh Marka ERP. Tim Arsalynk akan segera menindaklanjuti.`
+                        : `Quotation approval for ${cleanCode} has been successfully processed by Marka ERP. Arsalynk's team will follow up promptly.`
+                      : locale === 'id'
+                      ? `Catatan revisi untuk penawaran ${cleanCode} telah diproses oleh Marka ERP.`
                       : `Revision notes for quotation ${cleanCode} have been processed by Marka ERP.`),
                 });
               } else {
                 setQuoteFeedback({
                   type: 'error',
-                  message: statusData.error || 'Decision processing failed on Marka ERP worker.',
+                  message:
+                    statusData.error ||
+                    (locale === 'id'
+                      ? 'Pemrosesan keputusan gagal pada worker Marka ERP.'
+                      : 'Decision processing failed on Marka ERP worker.'),
                 });
               }
               setIsSubmittingQuote(false);
@@ -154,7 +179,10 @@ export default function ClientPortalClient() {
             if (attempts >= maxAttempts) {
               setQuoteFeedback({
                 type: 'info',
-                message: `Decision event accepted (ID: ${data.eventId}). Final status will automatically update in the system.`,
+                message:
+                  locale === 'id'
+                    ? `Event keputusan diterima (ID: ${data.eventId}). Status akhir akan diperbarui secara otomatis di dalam sistem.`
+                    : `Decision event accepted (ID: ${data.eventId}). Final status will automatically update in the system.`,
               });
               setIsSubmittingQuote(false);
               return;
@@ -164,7 +192,10 @@ export default function ClientPortalClient() {
           } catch {
             setQuoteFeedback({
               type: 'error',
-              message: 'Network issue encountered while polling processing status.',
+              message:
+                locale === 'id'
+                  ? 'Masalah jaringan ditemukan saat memeriksa status pemrosesan.'
+                  : 'Network issue encountered while polling processing status.',
             });
             setIsSubmittingQuote(false);
           }
@@ -174,12 +205,21 @@ export default function ClientPortalClient() {
       } else {
         setQuoteFeedback({
           type: 'success',
-          message: data.message || `Quotation decision for ${cleanCode} successfully submitted.`,
+          message:
+            data.message ||
+            (locale === 'id'
+              ? `Keputusan penawaran untuk ${cleanCode} berhasil dikirim.`
+              : `Quotation decision for ${cleanCode} successfully submitted.`),
         });
         setIsSubmittingQuote(false);
       }
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Error encountered during submission.';
+      const msg =
+        err instanceof Error
+          ? err.message
+          : locale === 'id'
+          ? 'Terjadi kesalahan saat pengiriman.'
+          : 'Error encountered during submission.';
       setQuoteFeedback({ type: 'error', message: msg });
       setIsSubmittingQuote(false);
     }
@@ -190,19 +230,19 @@ export default function ClientPortalClient() {
     e.preventDefault();
 
     if (!ticketSubject.trim()) {
-      setTicketFeedback({ type: 'error', message: 'Ticket Subject is required.' });
+      setTicketFeedback({ type: 'error', message: t.portal.ticketErrorRequiredSubject });
       return;
     }
 
     if (!ticketDescription.trim()) {
-      setTicketFeedback({ type: 'error', message: 'Issue Description is required.' });
+      setTicketFeedback({ type: 'error', message: t.portal.ticketErrorRequiredDescription });
       return;
     }
 
     if (!customerCode.trim() && (!customerName.trim() || !customerEmail.trim())) {
       setTicketFeedback({
         type: 'error',
-        message: 'Please provide your Full Name & Email, or your Client Code.',
+        message: t.portal.ticketErrorRequiredIdentity,
       });
       return;
     }
@@ -233,17 +273,23 @@ export default function ClientPortalClient() {
         data = JSON.parse(resText);
       } catch {
         throw new Error(
-          `Server responded with invalid format (Status ${res.status}). Verify API Route '/api/support/ticket'.`
+          locale === 'id'
+            ? `Server merespons dengan format tidak valid (Status ${res.status}). Periksa API Route '/api/support/ticket'.`
+            : `Server responded with invalid format (Status ${res.status}). Verify API Route '/api/support/ticket'.`
         );
       }
 
       if (!res.ok || !data.success) {
-        throw new Error(data.error || data.message || 'Failed to create support ticket.');
+        throw new Error(
+          data.error ||
+            data.message ||
+            (locale === 'id' ? 'Gagal membuat tiket dukungan.' : 'Failed to create support ticket.')
+        );
       }
 
       setTicketFeedback({
         type: 'success',
-        message: 'Your technical support ticket has been successfully registered in Marka ERP.',
+        message: t.portal.ticketSuccessRegistered,
         eventId: data.eventId,
       });
 
@@ -255,7 +301,12 @@ export default function ClientPortalClient() {
       setCustomerEmail('');
       setTicketDescription('');
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Error encountered while creating ticket.';
+      const msg =
+        err instanceof Error
+          ? err.message
+          : locale === 'id'
+          ? 'Terjadi kesalahan saat membuat tiket.'
+          : 'Error encountered while creating ticket.';
       setTicketFeedback({ type: 'error', message: msg });
     } finally {
       setIsSubmittingTicket(false);
@@ -278,7 +329,7 @@ export default function ClientPortalClient() {
               : 'text-[#505050] hover:text-[#101010]'
           }`}
         >
-          Quotation Review
+          {t.portal.tabQuotationReview}
         </button>
         <button
           type="button"
@@ -292,7 +343,7 @@ export default function ClientPortalClient() {
               : 'text-[#505050] hover:text-[#101010]'
           }`}
         >
-          Technical Support Ticket
+          {t.portal.tabSupportTicket}
         </button>
       </div>
 
@@ -302,16 +353,16 @@ export default function ClientPortalClient() {
           <div className="mb-6 flex flex-col gap-1">
             <div className="flex items-center gap-2 font-body text-[11px] font-extrabold uppercase tracking-[0.06em] text-[#1A3E9E]">
               <span className="h-1.5 w-1.5 bg-[#1A3E9E]" />
-              <span>ENTERPRISE AGREEMENTS</span>
+              <span>{t.portal.quoteEyebrow}</span>
             </div>
             <h3 className="font-heading text-[20px] font-medium text-[#101010]">
-              Official Quotation Confirmation
+              {t.portal.quoteTitle}
             </h3>
             <p className="font-body text-[13px] text-[#717171]">
-              Submit formal approval or revision requests for proposals provided by Arsalynk to your company.
+              {t.portal.quoteDescription}
             </p>
             <div className="mt-2 rounded-[8px] border border-blue-100 bg-blue-50/60 p-2.5 font-body text-[12px] text-[#1A3E9E]">
-              ℹ️ <strong>Marka ERP Integration:</strong> Proposal documents must be in <strong>SENT</strong> status and connected to an active <strong>Opportunity</strong> in Marka ERP to process approvals.
+              ℹ️ {t.portal.quoteInfoNote}
             </div>
           </div>
 
@@ -319,45 +370,45 @@ export default function ClientPortalClient() {
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
                 <span className="font-bold text-[#FF5050] mr-1">*</span>
-                Quotation Document Number
+                {t.portal.quoteDocNumberLabel}
               </label>
               <input
                 type="text"
                 required
                 value={quotationCode}
                 onChange={(e) => setQuotationCode(e.target.value.toUpperCase())}
-                placeholder="e.g. QUO-2026-00125"
+                placeholder={t.portal.quoteDocNumberPlaceholder}
                 className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
               />
               <span className="font-body text-[11px] text-[#717171]">
-                Enter the quotation reference code as stated on your official proposal document or email.
+                {t.portal.quoteDocNumberHelp}
               </span>
             </div>
 
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
                 <span className="font-bold text-[#FF5050] mr-1">*</span>
-                Authorized Representative Full Name
+                {t.portal.quoteRepNameLabel}
               </label>
               <input
                 type="text"
                 required
                 value={signatureName}
                 onChange={(e) => setSignatureName(e.target.value)}
-                placeholder="e.g. John Doe (Director / Project Lead)"
+                placeholder={t.portal.quoteRepNamePlaceholder}
                 className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
               />
             </div>
 
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
-                Additional Notes or Comments (Optional)
+                {t.portal.quoteNotesLabel}
               </label>
               <textarea
                 rows={3}
                 value={decisionNotes}
                 onChange={(e) => setDecisionNotes(e.target.value)}
-                placeholder="Notes regarding project scope, schedule adjustments, or discussion points..."
+                placeholder={t.portal.quoteNotesPlaceholder}
                 className="w-full resize-none rounded-[8px] border border-[#C8C8C8] bg-white p-3.5 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10"
               />
             </div>
@@ -386,7 +437,7 @@ export default function ClientPortalClient() {
                 onClick={() => handleQuotationDecision('ACCEPTED')}
                 className="inline-flex h-[48px] items-center justify-center gap-2 rounded-full bg-[#1A3E9E] px-8 font-body text-[13px] font-bold uppercase tracking-[0.04em] text-white transition hover:bg-[#14347F] disabled:cursor-wait disabled:opacity-50 md:h-[50px]"
               >
-                <span>{isSubmittingQuote ? 'PROCESSING...' : '✓ APPROVE QUOTATION'}</span>
+                <span>{isSubmittingQuote ? t.portal.quoteProcessingButton : t.portal.quoteApproveButton}</span>
               </button>
 
               <button
@@ -395,7 +446,7 @@ export default function ClientPortalClient() {
                 onClick={() => handleQuotationDecision('REJECTED')}
                 className="inline-flex h-[48px] items-center justify-center gap-2 rounded-full border border-[#C8C8C8] bg-white px-8 font-body text-[13px] font-bold uppercase tracking-[0.04em] text-[#505050] transition hover:bg-gray-100 hover:text-[#101010] disabled:cursor-wait disabled:opacity-50 md:h-[50px]"
               >
-                <span>✕ REQUEST REVISION</span>
+                <span>{t.portal.quoteRejectButton}</span>
               </button>
             </div>
           </div>
@@ -408,13 +459,13 @@ export default function ClientPortalClient() {
           <div className="mb-6 flex flex-col gap-1">
             <div className="flex items-center gap-2 font-body text-[11px] font-extrabold uppercase tracking-[0.06em] text-[#1A3E9E]">
               <span className="h-1.5 w-1.5 bg-[#1A3E9E]" />
-              <span>CLIENT SUPPORT SERVICES</span>
+              <span>{t.portal.ticketEyebrow}</span>
             </div>
             <h3 className="font-heading text-[20px] font-medium text-[#101010]">
-              Create New Support Ticket
+              {t.portal.ticketTitle}
             </h3>
             <p className="font-body text-[13px] text-[#717171]">
-              Submit technical assistance or maintenance inquiries to be serviced by Arsalynk engineers via Marka ERP.
+              {t.portal.ticketDescription}
             </p>
           </div>
 
@@ -423,14 +474,14 @@ export default function ClientPortalClient() {
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
                 <span className="font-bold text-[#FF5050] mr-1">*</span>
-                Subject / Title
+                {t.portal.ticketSubjectLabel}
               </label>
               <input
                 type="text"
                 required
                 value={ticketSubject}
                 onChange={(e) => setTicketSubject(e.target.value)}
-                placeholder="Brief summary of the issue..."
+                placeholder={t.portal.ticketSubjectPlaceholder}
                 className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
               />
             </div>
@@ -438,13 +489,13 @@ export default function ClientPortalClient() {
             {/* 2. Serial Number */}
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
-                Product Serial Number (Optional, for warranty verification)
+                {t.portal.ticketSerialLabel}
               </label>
               <input
                 type="text"
                 value={serialNumber}
                 onChange={(e) => setSerialNumber(e.target.value)}
-                placeholder="Serial number on hardware label..."
+                placeholder={t.portal.ticketSerialPlaceholder}
                 className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
               />
             </div>
@@ -452,17 +503,17 @@ export default function ClientPortalClient() {
             {/* 3. Priority */}
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
-                Priority Level
+                {t.portal.ticketPriorityLabel}
               </label>
               <select
                 value={priority}
-                onChange={(e) => setPriority(e.target.value as any)}
+                onChange={(e) => setPriority(e.target.value as 'LOW' | 'NORMAL' | 'HIGH' | 'URGENT')}
                 className="h-[46px] w-full cursor-pointer rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
               >
-                <option value="LOW">LOW — Minor inquiry / non-urgent</option>
-                <option value="NORMAL">NORMAL — Standard operational query</option>
-                <option value="HIGH">HIGH — High priority operational impediment</option>
-                <option value="URGENT">URGENT — Critical business outage</option>
+                <option value="LOW">{t.portal.ticketPriorityLow}</option>
+                <option value="NORMAL">{t.portal.ticketPriorityNormal}</option>
+                <option value="HIGH">{t.portal.ticketPriorityHigh}</option>
+                <option value="URGENT">{t.portal.ticketPriorityUrgent}</option>
               </select>
             </div>
 
@@ -471,13 +522,13 @@ export default function ClientPortalClient() {
               <div className="flex flex-col gap-1.5">
                 <label className="font-body text-[13px] font-medium text-[#292929]">
                   <span className="font-bold text-[#FF5050] mr-1">*</span>
-                  Your Full Name
+                  {t.portal.ticketFullNameLabel}
                 </label>
                 <input
                   type="text"
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
-                  placeholder="e.g. John Doe"
+                  placeholder={t.portal.ticketFullNamePlaceholder}
                   className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
                 />
               </div>
@@ -485,13 +536,13 @@ export default function ClientPortalClient() {
               <div className="flex flex-col gap-1.5">
                 <label className="font-body text-[13px] font-medium text-[#292929]">
                   <span className="font-bold text-[#FF5050] mr-1">*</span>
-                  Your Contact Email
+                  {t.portal.ticketEmailLabel}
                 </label>
                 <input
                   type="email"
                   value={customerEmail}
                   onChange={(e) => setCustomerEmail(e.target.value)}
-                  placeholder="name@company.com"
+                  placeholder={t.portal.ticketEmailPlaceholder}
                   className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
                 />
               </div>
@@ -500,13 +551,13 @@ export default function ClientPortalClient() {
             {/* Optional Customer Code */}
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
-                Client Code (Optional - If registered in Marka ERP)
+                {t.portal.ticketClientCodeLabel}
               </label>
               <input
                 type="text"
                 value={customerCode}
                 onChange={(e) => setCustomerCode(e.target.value.toUpperCase())}
-                placeholder="e.g. CUST-00125"
+                placeholder={t.portal.ticketClientCodePlaceholder}
                 className="h-[46px] w-full rounded-[8px] border border-[#C8C8C8] bg-white px-4 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10 md:h-[48px]"
               />
             </div>
@@ -515,14 +566,14 @@ export default function ClientPortalClient() {
             <div className="flex flex-col gap-1.5">
               <label className="font-body text-[13px] font-medium text-[#292929]">
                 <span className="font-bold text-[#FF5050] mr-1">*</span>
-                Issue Description
+                {t.portal.ticketIssueDescriptionLabel}
               </label>
               <textarea
                 required
                 rows={4}
                 value={ticketDescription}
                 onChange={(e) => setTicketDescription(e.target.value)}
-                placeholder="Detail your technical request, questions, or system behavior..."
+                placeholder={t.portal.ticketIssueDescriptionPlaceholder}
                 className="w-full resize-none rounded-[8px] border border-[#C8C8C8] bg-white p-3.5 font-body text-[14px] text-[#101010] outline-none transition placeholder:text-[#B0B0B0] focus:border-[#1A3E9E] focus:ring-2 focus:ring-[#1A3E9E]/10"
               />
             </div>
@@ -539,7 +590,7 @@ export default function ClientPortalClient() {
                 {ticketFeedback.message}
                 {ticketFeedback.eventId && (
                   <span className="block mt-1 font-body text-[12px] text-emerald-700">
-                    Ticket Reference Event ID: {ticketFeedback.eventId}
+                    {t.portal.ticketRefEventIdPrefix} {ticketFeedback.eventId}
                   </span>
                 )}
               </div>
@@ -551,7 +602,7 @@ export default function ClientPortalClient() {
                 disabled={isSubmittingTicket}
                 className="inline-flex h-[48px] items-center justify-center gap-2 rounded-full bg-[#1A3E9E] px-8 font-body text-[13px] font-bold uppercase tracking-[0.04em] text-white transition hover:bg-[#14347F] disabled:cursor-wait disabled:opacity-60 md:h-[50px]"
               >
-                <span>{isSubmittingTicket ? 'PROCESSING...' : 'CREATE SUPPORT TICKET'}</span>
+                <span>{isSubmittingTicket ? t.portal.quoteProcessingButton : t.portal.ticketCreateButton}</span>
               </button>
             </div>
           </form>
@@ -559,10 +610,10 @@ export default function ClientPortalClient() {
           {/* Info box */}
           <div className="mt-6 rounded-[12px] border border-[#EAEAEA] bg-[#F7F7F7] p-4">
             <div className="flex items-center gap-2 font-body text-[11px] font-bold uppercase tracking-wider text-[#1A3E9E]">
-              <span>ℹ SUPPORT HANDLING PROTOCOL</span>
+              <span>ℹ {t.portal.ticketProtocolTitle}</span>
             </div>
             <p className="mt-1 font-body text-[12px] leading-[1.6] text-[#717171]">
-              Your support inquiry is submitted directly to our engineering desk in Marka ERP. Real-time updates and ticket progress will be communicated promptly to your designated contact email.
+              {t.portal.ticketProtocolDescription}
             </p>
           </div>
         </div>

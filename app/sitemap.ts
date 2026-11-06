@@ -25,14 +25,26 @@ const caseStudyDateMap = new Map<string, string>(
   CASE_STUDIES_DUMMY_DATA.map((item) => [item.slug, item.dateValue])
 );
 
-function entry(
+function buildBilingualEntries(
   path: string,
   lastModified?: string | Date,
   priority?: number,
   changeFrequency?: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
-): MetadataRoute.Sitemap[number] {
-  return {
-    url: `${SITE_URL}${path}`,
+): MetadataRoute.Sitemap {
+  const cleanPath = path === '/' ? '' : path;
+  const enUrl = `${SITE_URL}/en${cleanPath}`;
+  const idUrl = `${SITE_URL}/id${cleanPath}`;
+  const canonicalUrl = `${SITE_URL}${path}`;
+
+  const alternates = {
+    languages: {
+      en: enUrl,
+      id: idUrl,
+      'x-default': canonicalUrl,
+    },
+  };
+
+  const baseProps = {
     ...(lastModified
       ? {
           lastModified:
@@ -41,45 +53,52 @@ function entry(
       : {}),
     ...(priority !== undefined ? { priority } : {}),
     ...(changeFrequency ? { changeFrequency } : {}),
+    alternates,
   };
+
+  return [
+    { url: canonicalUrl, ...baseProps },
+    { url: enUrl, ...baseProps },
+    { url: idUrl, ...baseProps },
+  ];
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [
     // ── Halaman Utama ──────────────────────────────────────────────────────
-    entry('/', '2026-10-13', 1.0, 'weekly'),
+    ...buildBilingualEntries('/', '2026-10-13', 1.0, 'weekly'),
 
     // ── Core 6-Pack Sitelinks (Priority 0.9) ────────────────────────────────
-    entry('/our-solution', '2026-10-30', 0.9, 'weekly'),
-    entry('/about-us', '2026-10-30', 0.9, 'weekly'),
-    entry('/insight-programs/case-studies', '2026-10-30', 0.9, 'weekly'),
-    entry('/insight-programs/leadership-thoughts', '2026-10-30', 0.9, 'weekly'),
-    entry('/contact-us', '2026-10-30', 0.9, 'weekly'),
+    ...buildBilingualEntries('/our-solution', '2026-10-30', 0.9, 'weekly'),
+    ...buildBilingualEntries('/about-us', '2026-10-30', 0.9, 'weekly'),
+    ...buildBilingualEntries('/insight-programs/case-studies', '2026-10-30', 0.9, 'weekly'),
+    ...buildBilingualEntries('/insight-programs/leadership-thoughts', '2026-10-30', 0.9, 'weekly'),
+    ...buildBilingualEntries('/contact-us', '2026-10-30', 0.9, 'weekly'),
 
     // ── Hub & Pillar Pages ──────────────────────────────────────────────────
-    entry('/insight-programs', '2026-10-30', 0.85, 'weekly'),
+    ...buildBilingualEntries('/insight-programs', '2026-10-30', 0.85, 'weekly'),
 
     // ── Sub-Pages About Us ─────────────────────────────────────────────────
-    entry('/about-us/corporate-profile', '2026-09-15', 0.8, 'monthly'),
-    entry('/about-us/company-leadership', '2026-09-20', 0.8, 'monthly'),
-    entry('/about-us/ecosystem-philosophy', '2026-09-10', 0.8, 'monthly'),
+    ...buildBilingualEntries('/about-us/corporate-profile', '2026-09-15', 0.8, 'monthly'),
+    ...buildBilingualEntries('/about-us/company-leadership', '2026-09-20', 0.8, 'monthly'),
+    ...buildBilingualEntries('/about-us/ecosystem-philosophy', '2026-09-10', 0.8, 'monthly'),
 
     // ── Halaman Dinamis: Our Solution Services (200 OK & Indexable) ────────
-    ...SOLUTION_SERVICES.map(({ slug }) =>
-      entry(`/our-solution/${slug}`, SOLUTION_DATES[slug] ?? '2026-10-06', 0.85, 'weekly')
+    ...SOLUTION_SERVICES.flatMap(({ slug }) =>
+      buildBilingualEntries(`/our-solution/${slug}`, SOLUTION_DATES[slug] ?? '2026-10-06', 0.85, 'weekly')
     ),
 
     // ── Kontak & Legal ─────────────────────────────────────────────────────
-    entry('/privacy-policy', '2026-01-15', 0.5, 'yearly'),
+    ...buildBilingualEntries('/privacy-policy', '2026-01-15', 0.5, 'yearly'),
 
     // ── Halaman Dinamis: Case Studies ──────────────────────────────────────
-    ...Array.from(caseStudyDateMap.entries()).map(([slug, date]) =>
-      entry(`/insight-programs/case-studies/${slug}`, date)
+    ...Array.from(caseStudyDateMap.entries()).flatMap(([slug, date]) =>
+      buildBilingualEntries(`/insight-programs/case-studies/${slug}`, date)
     ),
 
     // ── Halaman Dinamis: Leadership Thoughts ───────────────────────────────
-    ...LEADERSHIP_THOUGHTS_DUMMY_DATA.map((article) =>
-      entry(
+    ...LEADERSHIP_THOUGHTS_DUMMY_DATA.flatMap((article) =>
+      buildBilingualEntries(
         `/insight-programs/leadership-thoughts/${article.slug}`,
         article.datePublished
       )

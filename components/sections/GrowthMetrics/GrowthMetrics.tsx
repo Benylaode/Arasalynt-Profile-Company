@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useRef, useState, useEffect } from 'react';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 const ArrowIcon = () => (
   <svg
@@ -36,6 +37,8 @@ const FolderIcon = () => (
 );
 
 export default function GrowthMetrics() {
+  const { locale } = useLanguage();
+  const isId = locale === 'id';
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -66,12 +69,26 @@ export default function GrowthMetrics() {
 
   const revealBase = `transition-[opacity,transform] duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-[22px] opacity-0'}`;
 
+  const stats = isId
+    ? [
+        { value: "20+", label: "Proyek Perusahaan" },
+        { value: "6+", label: "Sektor Industri" },
+        { value: "4+", label: "Perusahaan Spesialis" },
+        { value: "18+", label: "Solusi Digital Terkirim" },
+      ]
+    : [
+        { value: "20+", label: "Enterprise Projects" },
+        { value: "6+", label: "Industry Sectors" },
+        { value: "4+", label: "Specialized Companies" },
+        { value: "18+", label: "Digital Solutions Delivered" },
+      ];
+
   return (
     <section 
       ref={sectionRef}
       className="safari-paint-section relative overflow-hidden bg-[#101010] py-[80px] font-body"
       id="growth" 
-      aria-label="Growth and Insights"
+      aria-label={isId ? 'Pertumbuhan dan Wawasan' : 'Growth and Insights'}
     >
       {/* Three Background Glows */}
       <div
@@ -106,17 +123,31 @@ export default function GrowthMetrics() {
             {/* Label */}
             <div className={`flex items-center gap-2 mb-6 ${revealBase} delay-0`}>
               <span className="w-1.5 h-1.5 bg-[#E6FF2A] shrink-0" />
-              <span className="text-[#E6FF2A] text-[10px] font-normal tracking-widest uppercase">INSIGHT AND PROGRAMS</span>
+              <span className="text-[#E6FF2A] text-[10px] font-normal tracking-widest uppercase">
+                {isId ? 'WAWASAN DAN PROGRAM' : 'INSIGHT AND PROGRAMS'}
+              </span>
             </div>
 
             <h2 className={`m-0 max-w-[740px] text-[clamp(40px,3.33vw,64px)] font-semibold leading-tight min-[1440px]:leading-[79px] text-[#F7F7F7] ${revealBase} delay-[80ms]`}>
-              Insights That Drive
-              <br />
-              Measurable Growth
+              {isId ? (
+                <>
+                  Wawasan yang Mendorong
+                  <br />
+                  Pertumbuhan Terukur
+                </>
+              ) : (
+                <>
+                  Insights That Drive
+                  <br />
+                  Measurable Growth
+                </>
+              )}
             </h2>
 
             <p className={`mt-[24px] max-w-[580px] text-[clamp(12px,1vw,14px)] font-extralight leading-relaxed min-[1440px]:leading-[24px] text-[#F7F7F7] ${revealBase} delay-[160ms]`}>
-              Discover how integrated technology, intelligence, and media transform business challenges into measurable enterprise outcomes through proven workflows, strategic leadership, and real-world execution.
+              {isId
+                ? 'Temukan bagaimana teknologi, inteligensi, dan media yang terintegrasi mengubah tantangan bisnis menjadi hasil perusahaan yang terukur melalui alur kerja terbukti, kepemimpinan strategis, dan eksekusi nyata.'
+                : 'Discover how integrated technology, intelligence, and media transform business challenges into measurable enterprise outcomes through proven workflows, strategic leadership, and real-world execution.'}
             </p>
           </div>
 
@@ -129,15 +160,17 @@ export default function GrowthMetrics() {
               
               <div className="relative z-10 flex flex-col items-start pr-[60px] min-[768px]:pr-[70px]">
                 <h3 className="text-[clamp(24px,1.8vw,32px)] font-medium leading-tight tracking-[-0.025em] text-[#F5F5F5] transition-colors duration-300 group-hover:text-[#E6FF2A]">
-                  How We Lead Differently
+                  {isId ? 'Bagaimana Kami Memimpin Secara Berbeda' : 'How We Lead Differently'}
                 </h3>
 
                 <p className="mt-[8px] text-[13px] font-extralight leading-[18px] text-[#F7F7F7]">
-                  Discover the leadership philosophy behind resilient enterprise execution.
+                  {isId
+                    ? 'Temukan filosofi kepemimpinan di balik eksekusi perusahaan yang tangguh.'
+                    : 'Discover the leadership philosophy behind resilient enterprise execution.'}
                 </p>
 
                 <Link href="/insight-programs/leadership-thoughts" className="mt-[8px] inline-flex h-[40px] items-center gap-[10px] rounded-full bg-[#E6FF2A] px-[16px] text-[12px] font-bold tracking-[-0.015em] text-[#101010] no-underline transition-[background-color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:bg-[#FBFCDC]">
-                  LEADERSHIP THOUGHTS
+                  {isId ? 'PEMIKIRAN KEPEMIMPINAN' : 'LEADERSHIP THOUGHTS'}
                   <ArrowIcon />
                 </Link>
               </div>
@@ -153,15 +186,17 @@ export default function GrowthMetrics() {
               
               <div className="relative z-10 flex flex-col items-start pr-[60px] min-[768px]:pr-[70px]">
                 <h3 className="text-[clamp(24px,1.8vw,32px)] font-medium leading-tight tracking-[-0.025em] text-[#F5F5F5] transition-colors duration-300 group-hover:text-[#E6FF2A]">
-                  Read Our Proven Work
+                  {isId ? 'Baca Karya Terbukti Kami' : 'Read Our Proven Work'}
                 </h3>
 
                 <p className="mt-[8px] text-[13px] font-extralight leading-[18px] text-[#F7F7F7]">
-                  Explore proven outcomes across the Arsalynk ecosystem.
+                  {isId
+                    ? 'Jelajahi hasil nyata yang telah terbukti di seluruh ekosistem Arsalynk.'
+                    : 'Explore proven outcomes across the Arsalynk ecosystem.'}
                 </p>
 
                 <Link href="/insight-programs/case-studies" className="mt-[8px] inline-flex h-[40px] items-center gap-[10px] rounded-full bg-[#E6FF2A] px-[16px] text-[12px] font-bold tracking-[-0.015em] text-[#101010] no-underline transition-[background-color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:bg-[#FBFCDC]">
-                  CASE STUDIES
+                  {isId ? 'STUDI KASUS' : 'CASE STUDIES'}
                   <ArrowIcon />
                 </Link>
               </div>
@@ -179,16 +214,13 @@ export default function GrowthMetrics() {
           {/* Label */}
           <div className={`flex items-center gap-2 mb-[16px] max-[639px]:mb-[20px] max-[639px]:justify-center ${revealBase} delay-[280ms]`}>
             <span className="w-1.5 h-1.5 bg-[#94A3B8] shrink-0 max-[639px]:bg-[#F7F7F7]" />
-            <span className="text-[#94A3B8] text-[10px] font-bold tracking-widest uppercase max-[639px]:text-[14px] max-[639px]:text-[#F7F7F7]">OUR PROVEN RECORDS</span>
+            <span className="text-[#94A3B8] text-[10px] font-bold tracking-widest uppercase max-[639px]:text-[14px] max-[639px]:text-[#F7F7F7]">
+              {isId ? 'REKAM JEJAK KAMI' : 'OUR PROVEN RECORDS'}
+            </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-8 max-[639px]:gap-y-0 lg:gap-y-0">
-            {[
-              { value: "20+", label: "Enterprise Projects" },
-              { value: "6+", label: "Industry Sectors" },
-              { value: "4+",  label: "Specialized Companies" },
-              { value: "18+", label: "Digital Solutions Delivered" },
-            ].map((stat, index) => (
+            {stats.map((stat, index) => (
               <div 
                 key={index} 
                 className={`relative px-[24px] py-[36px] flex flex-col justify-center max-[1024px]:py-4 max-[639px]:grid max-[639px]:min-h-[110px] max-[639px]:grid-cols-[46%_54%] max-[639px]:items-center max-[639px]:border-b max-[639px]:border-white/70 max-[639px]:px-0 max-[639px]:py-[18px] ${index === 0 ? 'pl-[24px] max-[1024px]:pl-0' : ''} ${revealBase}`}

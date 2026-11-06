@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 import styles from './MarBotTrigger.module.css';
 
 interface MarBotTriggerProps {
@@ -26,17 +27,29 @@ export const ArsAIIcon = MarBotIcon;
 export const ArsAISparkleIcon = MarBotIcon;
 
 export default function MarBotTrigger({ isOpen, onClick }: MarBotTriggerProps) {
+  const { locale } = useLanguage();
+  const isId = locale === 'id';
+  const tooltipText = isId ? 'Tanya Arsalynk Plus' : 'Ask Arsalynk Plus';
+
   return (
     <button
       type="button"
       className={styles.trigger}
       onClick={onClick}
-      aria-label={isOpen ? 'Tutup Arsalynk Plus' : 'Buka Arsalynk Plus Assistant'}
-      title="Tanya Arsalynk Plus"
+      aria-label={
+        isOpen
+          ? isId
+            ? 'Tutup Arsalynk Plus'
+            : 'Close Arsalynk Plus'
+          : isId
+            ? 'Buka Asisten Arsalynk Plus'
+            : 'Open Arsalynk Plus Assistant'
+      }
+      title={tooltipText}
       aria-expanded={isOpen}
     >
       <MarBotIcon className={styles.icon} />
-      <span className={styles.tooltip}>Tanya Arsalynk Plus</span>
+      <span className={styles.tooltip}>{tooltipText}</span>
     </button>
   );
 }

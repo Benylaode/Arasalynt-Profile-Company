@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { TESTIMONIALS_DUMMY_DATA } from '@/lib/db/dummy';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { getLocalizedTestimonials } from '@/lib/i18n/localized-data';
 
 const SLIDE_DURATION = 6000;
 
@@ -28,10 +29,11 @@ const ChevronRight = () => (
 );
 
 export default function Testimonials() {
+  const { locale } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  const testimonials = TESTIMONIALS_DUMMY_DATA;
+  const testimonials = getLocalizedTestimonials(locale);
   const totalSlides = testimonials.length;
   const active = testimonials[activeIndex];
 
@@ -101,12 +103,12 @@ export default function Testimonials() {
           <div className="absolute left-[13.2291667%] top-[34.6793349%]">
             <div className="flex items-center gap-[18px]">
               <span aria-hidden="true" className="h-[8px] w-[8px] shrink-0 bg-[#1A3E9E]" />
-              <h3 className="m-0 font-body text-[28px] font-bold leading-[1.2] tracking-[-0.025em] text-[#1A3E9E]">
+              <h3 className="m-0 font-body text-[clamp(20px,1.458vw,28px)] font-bold leading-[1.2] tracking-[-0.025em] text-[#1A3E9E]">
                 {active.name}
               </h3>
             </div>
 
-            <p className="mt-[6px] font-body text-[20px] font-normal leading-[1.25] tracking-[-0.025em] text-[#101010]">
+            <p className="mt-[6px] font-body text-[clamp(14px,1.042vw,20px)] font-normal leading-[1.25] tracking-[-0.025em] text-[#101010]">
               {active.role}
             </p>
           </div>
@@ -124,7 +126,7 @@ export default function Testimonials() {
           </div>
 
           {/* Main Quote */}
-          <blockquote className="absolute left-[13.28125%] right-[13.2291667%] top-[50.8313539%] m-0 font-body text-[clamp(28px,2.083333vw,36px)] font-medium leading-[1.2] tracking-[-0.035em] text-[#101010]">
+          <blockquote className="absolute left-[13.28125%] right-[13.2291667%] top-[50.8313539%] m-0 font-body text-[clamp(20px,1.875vw,36px)] font-medium leading-[1.2] tracking-[-0.035em] text-[#101010]">
             {active.text}
           </blockquote>
         </div>

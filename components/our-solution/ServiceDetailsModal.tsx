@@ -3,7 +3,8 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import type { ChallengeCard } from '@/lib/our-solution.data';
-import { getServiceCardDetail } from './service-details-data';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { getLocalizedServiceCardDetail } from '@/lib/i18n/localized-data';
 
 type ServiceDetailsModalProps = {
   isOpen: boolean;
@@ -22,6 +23,8 @@ export default function ServiceDetailsModal({
   solutionTitle,
   onSelectCard,
 }: ServiceDetailsModalProps) {
+  const { locale } = useLanguage();
+  const isId = locale === 'id';
   const modalScrollRef = useRef<HTMLDivElement>(null);
 
   // Lock background scroll when open
@@ -48,8 +51,9 @@ export default function ServiceDetailsModal({
 
   if (!isOpen || !card) return null;
 
-  const detail = getServiceCardDetail(card.title, solutionTitle);
-  const otherCards = allCards.filter((c) => c.number !== card.number);
+  const activeCard = allCards.find((c) => c.number === card.number) ?? card;
+  const detail = getLocalizedServiceCardDetail(activeCard.title, solutionTitle, locale);
+  const otherCards = allCards.filter((c) => c.number !== activeCard.number);
 
   const handleSwitchCard = (newCard: ChallengeCard) => {
     onSelectCard(newCard);
@@ -92,13 +96,13 @@ export default function ServiceDetailsModal({
             >
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
-            <span>Back to Services</span>
+            <span>{isId ? 'Kembali ke Layanan' : 'Back to Services'}</span>
           </button>
 
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close modal"
+            aria-label={isId ? 'Tutup modal' : 'Close modal'}
             className="flex h-9 w-9 items-center justify-center rounded-full bg-black/5 text-[#84849B] transition-all hover:bg-black/10 hover:text-[#101010]"
           >
             <svg
@@ -119,8 +123,8 @@ export default function ServiceDetailsModal({
         <div className="mt-6 overflow-hidden rounded-[22px] border border-black/10 bg-[#0C1222] shadow-[0_16px_40px_rgba(0,0,0,0.08)] sm:mt-8 sm:rounded-[24px]">
           <div className="relative aspect-[1396/936] w-full max-h-[500px] overflow-hidden bg-gradient-to-b from-[#10192D] to-[#0A101D]">
             <img
-              src={card.image}
-              alt={card.title}
+              src={activeCard.image}
+              alt={activeCard.title}
               className="h-full w-full object-contain"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent" />
@@ -137,7 +141,7 @@ export default function ServiceDetailsModal({
               id="modal-service-title"
               className="font-heading text-[clamp(26px,2.8vw,44px)] font-bold leading-tight tracking-[-0.01em] text-[#101010]"
             >
-              {card.title}
+              {activeCard.title}
             </h2>
           </div>
 
@@ -174,7 +178,7 @@ export default function ServiceDetailsModal({
             {/* Core Capabilities Box */}
             <div className="mt-4 rounded-2xl border border-[#E2E8F0] bg-[#F8FBFF] p-6 sm:p-7">
               <h4 className="font-heading text-[16px] font-bold uppercase tracking-wider text-[#101010]">
-                Core Operational Capabilities
+                {isId ? 'Kapabilitas Operasional Inti' : 'Core Operational Capabilities'}
               </h4>
               <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {detail.capabilities.map((cap, idx) => (
@@ -207,8 +211,8 @@ export default function ServiceDetailsModal({
             <div className="group overflow-hidden rounded-[24px] border border-black/10 bg-white p-3 shadow-[0_12px_30px_rgba(26,62,158,0.06)] transition-all duration-300 hover:border-[#1A3E9E] hover:shadow-[0_18px_40px_rgba(26,62,158,0.12)]">
               <div className="relative aspect-[1396/936] w-full overflow-hidden rounded-[18px] bg-[#0A101D] flex items-center justify-center">
                 <img
-                  src={detail.abstractImage ?? card.image}
-                  alt={`${card.title} Architecture Overview`}
+                  src={detail.abstractImage ?? activeCard.image}
+                  alt={`${activeCard.title} Architecture Overview`}
                   className="h-full w-full object-contain"
                 />
               </div>
@@ -217,17 +221,19 @@ export default function ServiceDetailsModal({
             {/* CTA Box */}
             <div className="rounded-[22px] border border-[#155599]/25 bg-gradient-to-br from-[#F0F7FF] via-[#E8F3FD] to-[#F8FBFF] p-6 text-left shadow-sm sm:p-7">
               <h3 className="font-heading text-[20px] font-bold text-[#101010] sm:text-[22px]">
-                Want to apply this to your business?
+                {isId ? 'Ingin menerapkan ini pada bisnis Anda?' : 'Want to apply this to your business?'}
               </h3>
               <p className="mt-2 font-body text-[13.5px] leading-relaxed text-[#475569]">
-                Connect directly with our engineering team for an architecture walkthrough and tailored implementation roadmap.
+                {isId
+                  ? 'Terhubung langsung dengan tim rekayasa kami untuk pembahasan arsitektur dan peta jalan implementasi yang disesuaikan.'
+                  : 'Connect directly with our engineering team for an architecture walkthrough and tailored implementation roadmap.'}
               </p>
               <Link
                 href="/contact-us"
                 onClick={onClose}
                 className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-[#0A2540] px-6 py-3 font-body text-[12px] font-bold uppercase tracking-wider text-white shadow-md transition-all duration-300 hover:bg-[#1A3E9E] hover:shadow-lg"
               >
-                CONTACT OUR TEAM →
+                {isId ? 'HUBUNGI TIM KAMI →' : 'CONTACT OUR TEAM →'}
               </Link>
             </div>
           </div>
@@ -238,10 +244,12 @@ export default function ServiceDetailsModal({
           <div className="mt-16 border-t border-black/[0.08] pt-12 sm:mt-20 sm:pt-14">
             <div className="text-center">
               <h3 className="font-heading text-[clamp(24px,2.4vw,34px)] font-medium text-[#101010]">
-                Other Services
+                {isId ? 'Layanan Lainnya' : 'Other Services'}
               </h3>
               <p className="mt-1.5 font-body text-[14px] text-[#64748B]">
-                Explore adjacent capabilities within {solutionTitle}
+                {isId
+                  ? `Jelajahi kapabilitas terkait dalam ${solutionTitle}`
+                  : `Explore adjacent capabilities within ${solutionTitle}`}
               </p>
             </div>
 
@@ -289,7 +297,7 @@ export default function ServiceDetailsModal({
                     </div>
 
                     <div className="mt-4 flex items-center gap-1.5 font-body text-[11px] font-bold uppercase tracking-wider text-[#E6FF2A]">
-                      <span>View Service Details</span>
+                      <span>{isId ? 'Lihat Detail Layanan' : 'View Service Details'}</span>
                       <svg
                         className="h-3 w-3 transition-transform group-hover:translate-x-1"
                         viewBox="0 0 24 24"

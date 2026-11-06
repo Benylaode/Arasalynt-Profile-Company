@@ -8,7 +8,8 @@ import {
   type CSSProperties,
 } from 'react';
 import Link from 'next/link';
-import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { getLocalizedOurSolutionData } from '@/lib/i18n/localized-data';
 
 /* =========================================================
    CONFIGURATION
@@ -27,6 +28,13 @@ const CATEGORIES = [
 
 type ProjectCategory = (typeof CATEGORIES)[number];
 
+const CATEGORY_LABELS_ID: Record<ProjectCategory, string> = {
+  'ENTERPRISE SOLUTION': 'SOLUSI PERUSAHAAN',
+  'DATA & AI INTEGRATION': 'INTEGRASI DATA & AI',
+  'SMART IOT SYSTEM': 'SISTEM IOT CERDAS',
+  'DIGITAL DEVELOPMENT': 'PENGEMBANGAN DIGITAL',
+};
+
 type Project = {
   id: number;
   slug: string;
@@ -43,24 +51,6 @@ const CATEGORY_MAP: Record<string, ProjectCategory> = {
   'smart-iot-system': 'SMART IOT SYSTEM',
   'digital-development': 'DIGITAL DEVELOPMENT',
 };
-
-/**
- * Projects are dynamically linked directly from the single source of truth in
- * `lib/our-solution.data.ts` (SOLUTION_SERVICES).
- * Any change to services or modules in Our Solution will automatically sync here.
- */
-const MOCK_PROJECTS: Project[] = SOLUTION_SERVICES.flatMap((service, sIdx) => {
-  const tabCategory = CATEGORY_MAP[service.slug] ?? 'ENTERPRISE SOLUTION';
-  return (service.challengeCards ?? []).map((card, cIdx) => ({
-    id: sIdx * 10 + cIdx + 1,
-    slug: service.slug,
-    client: card.badge,
-    title: card.title,
-    category: `${tabCategory} • ${card.badge}`,
-    tabCategory,
-    image: card.image,
-  }));
-});
 
 const CATEGORY_WIDTH: Record<ProjectCategory, string> = {
   'ENTERPRISE SOLUTION': 'w-auto px-[14px]',
@@ -118,17 +108,34 @@ function IconChevronRight({ size = 24 }: { size?: number }) {
 ========================================================= */
 
 export default function ProjectShowcase() {
+  const { locale } = useLanguage();
+  const isId = locale === 'id';
   const [activeCategory, setActiveCategory] =
     useState<ProjectCategory>('ENTERPRISE SOLUTION');
 
-  const filteredProjects = MOCK_PROJECTS.filter(
+  const localizedServices = getLocalizedOurSolutionData(locale).services;
+  const projects: Project[] = localizedServices.flatMap((service, sIdx) => {
+    const tabCategory = CATEGORY_MAP[service.slug] ?? 'ENTERPRISE SOLUTION';
+    const categoryDisplay = isId ? CATEGORY_LABELS_ID[tabCategory] : tabCategory;
+    return (service.challengeCards ?? []).map((card, cIdx) => ({
+      id: sIdx * 10 + cIdx + 1,
+      slug: service.slug,
+      client: card.badge,
+      title: card.title,
+      category: `${categoryDisplay} • ${card.badge}`,
+      tabCategory,
+      image: card.image,
+    }));
+  });
+
+  const filteredProjects = projects.filter(
     (project) => project.tabCategory === activeCategory,
   );
 
   return (
     <section
       id="portfolio"
-      aria-label="Featured works"
+      aria-label={isId ? 'Karya unggulan' : 'Featured works'}
       className="
         relative overflow-hidden
         bg-[#F7F7F7]
@@ -192,7 +199,7 @@ export default function ProjectShowcase() {
                 xl:text-[clamp(11px,0.656vw,12.6px)]
               "
             >
-              Featured Solutions
+              {isId ? 'Solusi Unggulan' : 'Featured Solutions'}
             </span>
           </div>
 
@@ -208,7 +215,7 @@ export default function ProjectShowcase() {
               xl:text-[clamp(64px,4.375vw,84px)]
             "
           >
-            Explore Our Services
+            {isId ? 'Jelajahi Layanan Kami' : 'Explore Our Services'}
           </h2>
         </div>
 
@@ -287,7 +294,9 @@ export default function ProjectShowcase() {
                   />
                 )}
 
-                <span className="whitespace-nowrap">{category}</span>
+                <span className="whitespace-nowrap">
+                  {isId ? CATEGORY_LABELS_ID[category] : category}
+                </span>
               </button>
             );
           })}
@@ -322,12 +331,13 @@ export default function ProjectShowcase() {
               md:h-[42px]
 
               xl:h-[clamp(38px,2.422vw,46.5px)]
-              xl:w-[clamp(158px,9.813vw,188.5px)]
-              xl:px-[clamp(16.5px,1.038vw,20px)]
+              xl:w-auto
+              xl:min-w-[clamp(158px,9.813vw,188.5px)]
+              xl:px-[clamp(18px,1.15vw,24px)]
               xl:text-[clamp(12px,0.779vw,15px)]
             "
           >
-            <span className="whitespace-nowrap">VIEW ALL WORKS</span>
+            <span className="whitespace-nowrap">{isId ? 'LIHAT SEMUA KARYA' : 'VIEW ALL WORKS'}</span>
 
             <span
               className="

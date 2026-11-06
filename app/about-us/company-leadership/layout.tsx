@@ -1,27 +1,37 @@
 import type { Metadata } from 'next';
 import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
+import { getServerLocale, buildLocalizedAlternates } from '@/lib/i18n/server';
+import { getDictionary } from '@/lib/i18n/dictionaries';
 
-export const metadata: Metadata = {
-  title: 'Company Leadership',
-  description:
-    'Meet the Arsalynk leadership team guiding an integrated enterprise ecosystem across technology, strategy, data, and creative capabilities.',
-  alternates: { canonical: '/about-us/company-leadership' },
-  openGraph: {
-    title: 'Company Leadership | Arsalynk',
-    description: 'Meet the leaders guiding the Arsalynk enterprise ecosystem.',
-    url: '/about-us/company-leadership',
-    images: ['/images/about-us/company-leadership-hero.webp'],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Company Leadership | Arsalynk',
-    description: 'Meet the leaders guiding the Arsalynk enterprise ecosystem.',
-    images: ['/images/about-us/company-leadership-hero.webp'],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+  const dict = getDictionary(locale);
+  const alternates = buildLocalizedAlternates('/about-us/company-leadership', locale);
 
-export default function CompanyLeadershipLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return {
+    title: dict.seo.companyLeadership.title,
+    description: dict.seo.companyLeadership.description,
+    alternates,
+    openGraph: {
+      title: dict.seo.companyLeadership.title,
+      description: dict.seo.companyLeadership.description,
+      url: alternates.canonical,
+      locale: locale === 'id' ? 'id_ID' : 'en_US',
+      images: ['/images/about-us/company-leadership-hero.webp'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: dict.seo.companyLeadership.title,
+      description: dict.seo.companyLeadership.description,
+      images: ['/images/about-us/company-leadership-hero.webp'],
+    },
+  };
+}
+
+export default async function CompanyLeadershipLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const locale = await getServerLocale();
+  const isId = locale === 'id';
   const canonicalUrl = `${SITE_URL}/about-us/company-leadership`;
   const schema = {
     '@context': 'https://schema.org',
@@ -30,19 +40,20 @@ export default function CompanyLeadershipLayout({ children }: Readonly<{ childre
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'About Us', item: `${SITE_URL}/about-us` },
-          { '@type': 'ListItem', position: 3, name: 'Company Leadership', item: canonicalUrl },
+          { '@type': 'ListItem', position: 1, name: isId ? 'Beranda' : 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: isId ? 'Tentang Kami' : 'About Us', item: `${SITE_URL}/about-us` },
+          { '@type': 'ListItem', position: 3, name: isId ? 'Kepemimpinan Perusahaan' : 'Company Leadership', item: canonicalUrl },
         ],
       },
       {
         '@type': 'AboutPage',
         '@id': `${canonicalUrl}#webpage`,
         url: canonicalUrl,
-        name: `Company Leadership | ${SITE_NAME}`,
+        name: `${isId ? 'Kepemimpinan Perusahaan' : 'Company Leadership'} | ${SITE_NAME}`,
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
         breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
+        inLanguage: isId ? 'id-ID' : 'en-US',
       },
     ],
   };

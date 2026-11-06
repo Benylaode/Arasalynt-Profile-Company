@@ -4,63 +4,21 @@ import {
   type MouseEvent,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { extractLocaleFromPathname, type Locale } from '@/lib/i18n/config';
+
 const SCROLL_THRESHOLD = 40;
 
 type NavItem = {
   name: string;
   href: string;
 };
-
-const BUSINESS_COLUMNS = [
-  {
-    category: 'OUR SOLUTION',
-    items: [
-      {
-        name: 'Enterprise Solution',
-        href: '/our-solution/enterprise-solution',
-      },
-      {
-        name: 'Data & AI Integration',
-        href: '/our-solution/data-ai-integration',
-      },
-    ],
-  },
-];
-
-const BUSINESS_MEDIA = {
-  category: 'OUR SOLUTION',
-  items: [
-    {
-      name: 'Smart IOT System',
-      href: '/our-solution/smart-iot-system',
-    },
-    {
-      name: 'Digital Development',
-      href: '/our-solution/digital-development',
-    },
-  ],
-};
-
-const INSIGHT_LINKS: NavItem[] = [
-  {
-    name: 'Leadership Thoughts',
-    href: '/insight-programs/leadership-thoughts',
-  },
-  {
-    name: 'Case Studies',
-    href: '/insight-programs/case-studies',
-  },
-];
-
-const BUSINESS_LINKS_MOBILE: NavItem[] = [
-  ...BUSINESS_COLUMNS.flatMap((column) => column.items),
-  ...BUSINESS_MEDIA.items,
-];
 
 function ChevronDown({
   className = '',
@@ -106,13 +64,6 @@ function ButtonChevron() {
   );
 }
 
-/**
- * Logo menggunakan file SVG lengkap yang sudah memuat
- * simbol dan tulisan Arsalynk.
- *
- * logo.svg      → navbar transparan/gelap
- * logo_blue.svg → navbar putih/terang
- */
 function BrandLogo({
   overlay,
 }: {
@@ -133,67 +84,63 @@ function BrandLogo({
       </span>
 
       <span className="flex shrink-0 items-center gap-[4.25px] max-[1199px]:hidden">
-      {/* Area simbol logo */}
-      <span className="relative block h-[34px] w-[34px] shrink-0">
-        {/* Simbol lime untuk navbar transparan */}
-        <img
-          src="/images/logos/logo.svg"
-          alt=""
-          aria-hidden="true"
+        <span className="relative block h-[34px] w-[34px] shrink-0">
+          <img
+            src="/images/logos/logo.svg"
+            alt=""
+            aria-hidden="true"
+            className={`
+              absolute inset-0
+              h-full w-full
+              object-contain
+              transition-[opacity,transform]
+              duration-300 ease-out
+              ${
+                overlay
+                  ? 'scale-100 opacity-100'
+                  : 'pointer-events-none scale-[0.96] opacity-0'
+              }
+            `}
+          />
+
+          <img
+            src="/images/logos/logo_blue.svg"
+            alt=""
+            aria-hidden="true"
+            className={`
+              absolute inset-0
+              h-full w-full
+              object-contain
+              transition-[opacity,transform]
+              duration-300 ease-out
+              ${
+                overlay
+                  ? 'pointer-events-none scale-[0.96] opacity-0'
+                  : 'scale-100 opacity-100'
+              }
+            `}
+          />
+        </span>
+
+        <span
           className={`
-            absolute inset-0
-            h-full w-full
-            object-contain
-            transition-[opacity,transform]
-            duration-300 ease-out
+            relative
+            -translate-y-[0.5px]
+            whitespace-nowrap
+            text-[19px]
+            font-semibold
+            leading-none
+            tracking-[-0.035em]
+            transition-colors duration-300
             ${
               overlay
-                ? 'scale-100 opacity-100'
-                : 'pointer-events-none scale-[0.96] opacity-0'
+                ? 'text-white'
+                : 'text-[#3D3D3D]'
             }
           `}
-        />
-
-        {/* Simbol biru untuk navbar putih */}
-        <img
-          src="/images/logos/logo_blue.svg"
-          alt=""
-          aria-hidden="true"
-          className={`
-            absolute inset-0
-            h-full w-full
-            object-contain
-            transition-[opacity,transform]
-            duration-300 ease-out
-            ${
-              overlay
-                ? 'pointer-events-none scale-[0.96] opacity-0'
-                : 'scale-100 opacity-100'
-            }
-          `}
-        />
-      </span>
-
-      {/* Tulisan wordmark */}
-      <span
-        className={`
-          relative
-          -translate-y-[0.5px]
-          whitespace-nowrap
-          text-[19px]
-          font-semibold
-          leading-none
-          tracking-[-0.035em]
-          transition-colors duration-300
-          ${
-            overlay
-              ? 'text-white'
-              : 'text-[#3D3D3D]'
-          }
-        `}
-      >
-        Arsalynk
-      </span>
+        >
+          Arsalynk
+        </span>
       </span>
     </>
   );
@@ -259,8 +206,109 @@ function DesktopNavLink({
       `}
     >
       {label}
-
     </Link>
+  );
+}
+
+function LanguageSwitcherPill({
+  locale,
+  onSelect,
+  overlay,
+  switchToEnLabel,
+  switchToIdLabel,
+  groupLabel,
+  mobile = false,
+}: {
+  locale: Locale;
+  onSelect: (locale: Locale) => void;
+  overlay: boolean;
+  switchToEnLabel: string;
+  switchToIdLabel: string;
+  groupLabel: string;
+  mobile?: boolean;
+}) {
+  if (mobile) {
+    return (
+      <div
+        role="group"
+        aria-label={groupLabel}
+        className="inline-flex h-[34px] shrink-0 items-center rounded-full border border-black/10 bg-black/[0.04] p-[3px]"
+      >
+        <button
+          type="button"
+          onClick={() => onSelect('en')}
+          aria-pressed={locale === 'en'}
+          aria-label={switchToEnLabel}
+          className={`h-[28px] min-w-[34px] cursor-pointer rounded-full border-0 px-[9px] text-[11px] font-semibold tracking-[0.04em] transition-all duration-200 ${
+            locale === 'en'
+              ? 'bg-[#1A3E9E] text-white shadow-sm'
+              : 'bg-transparent text-[#4F4F4F] hover:text-[#101010]'
+          }`}
+        >
+          EN
+        </button>
+        <button
+          type="button"
+          onClick={() => onSelect('id')}
+          aria-pressed={locale === 'id'}
+          aria-label={switchToIdLabel}
+          className={`h-[28px] min-w-[34px] cursor-pointer rounded-full border-0 px-[9px] text-[11px] font-semibold tracking-[0.04em] transition-all duration-200 ${
+            locale === 'id'
+              ? 'bg-[#1A3E9E] text-white shadow-sm'
+              : 'bg-transparent text-[#4F4F4F] hover:text-[#101010]'
+          }`}
+        >
+          ID
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      role="group"
+      aria-label={groupLabel}
+      className={`inline-flex h-[36px] shrink-0 items-center rounded-full p-[3px] transition-colors duration-300 ${
+        overlay
+          ? 'border border-white/20 bg-white/10 backdrop-blur-md'
+          : 'border border-black/10 bg-black/[0.04]'
+      }`}
+    >
+      <button
+        type="button"
+        onClick={() => onSelect('en')}
+        aria-pressed={locale === 'en'}
+        aria-label={switchToEnLabel}
+        className={`h-[30px] min-w-[34px] cursor-pointer rounded-full border-0 px-[10px] text-[11px] font-semibold tracking-[0.04em] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6FF2A] ${
+          locale === 'en'
+            ? overlay
+              ? 'bg-[#E6FF2A] text-[#101010] shadow-sm'
+              : 'bg-[#1A3E9E] text-white shadow-sm'
+            : overlay
+              ? 'bg-transparent text-white/75 hover:text-white'
+              : 'bg-transparent text-[#525252] hover:text-[#101010]'
+        }`}
+      >
+        EN
+      </button>
+      <button
+        type="button"
+        onClick={() => onSelect('id')}
+        aria-pressed={locale === 'id'}
+        aria-label={switchToIdLabel}
+        className={`h-[30px] min-w-[34px] cursor-pointer rounded-full border-0 px-[10px] text-[11px] font-semibold tracking-[0.04em] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6FF2A] ${
+          locale === 'id'
+            ? overlay
+              ? 'bg-[#E6FF2A] text-[#101010] shadow-sm'
+              : 'bg-[#1A3E9E] text-white shadow-sm'
+            : overlay
+              ? 'bg-transparent text-white/75 hover:text-white'
+              : 'bg-transparent text-[#525252] hover:text-[#101010]'
+        }`}
+      >
+        ID
+      </button>
+    </div>
   );
 }
 
@@ -312,7 +360,6 @@ function DropdownCardModal({
 
   return (
     <>
-      {/* Invisible backdrop to capture outside clicks */}
       <div
         className="fixed inset-0 z-[98] bg-transparent"
         onClick={onClose}
@@ -379,12 +426,10 @@ function DropdownCardModal({
             </h2>
           )}
 
-          {/* Content area with vertical border line */}
           <div className="flex border-l border-[#D6D6D6] pl-[52px]">
             {children}
           </div>
 
-          {/* Footer Area matching Figma */}
           <div className="flex items-center justify-between" style={{ marginTop: footerSpacing }}>
             <span className="font-body text-[15px] font-normal text-[#838383]">
               © 2026 PT Sinergi Muda Arsa
@@ -532,11 +577,19 @@ function SimpleDropdown({
 }
 
 function BusinessDropdown({
+  label,
+  categoryLabel,
+  columns,
+  mediaItems,
   overlay,
   active,
   activeDropdown,
   setActiveDropdown,
 }: {
+  label: string;
+  categoryLabel: string;
+  columns: { category: string; items: NavItem[] }[];
+  mediaItems: NavItem[];
   overlay: boolean;
   active: boolean;
   activeDropdown: string | null;
@@ -573,7 +626,7 @@ function BusinessDropdown({
           ${overlay ? 'text-[#F7F7F7]' : 'text-[#101010]'}
         `}
       >
-        Our Solution
+        {label}
 
         <ChevronDown
           className={`
@@ -587,7 +640,7 @@ function BusinessDropdown({
       </button>
 
       <DropdownCardModal
-        title="Our Solution"
+        title={label}
         titleHref="/our-solution"
         isOpen={isOpen}
         onClose={() => setActiveDropdown(null)}
@@ -595,7 +648,7 @@ function BusinessDropdown({
       >
         <div className="grid w-full grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-x-[56px]">
           <div>
-            {BUSINESS_COLUMNS.map((column) => (
+            {columns.map((column) => (
               <div key={column.category} className="mb-7 last:mb-0">
                 <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.14em] text-[#9A9A9A]">
                   {column.category}
@@ -630,13 +683,13 @@ function BusinessDropdown({
 
           <div>
             <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.14em] text-[#9A9A9A]">
-              {BUSINESS_MEDIA.category}
+              {categoryLabel}
             </p>
 
             <div className="flex flex-col gap-1.5">
-              {BUSINESS_MEDIA.items.map((item) => (
+              {mediaItems.map((item) => (
                 <Link
-                  key={`${BUSINESS_MEDIA.category}-${item.name}-${item.href}`}
+                  key={`${categoryLabel}-${item.name}-${item.href}`}
                   href={item.href}
                   onClick={() => setActiveDropdown(null)}
                   className="
@@ -762,21 +815,74 @@ function MobileAccordion({
 }
 
 export default function Navbar() {
-  const pathname = usePathname();
+  const rawPathname = usePathname();
   const router = useRouter();
+  const { locale, setLocale, t } = useLanguage();
+
+  const { cleanPathname: pathname } = useMemo(
+    () => extractLocaleFromPathname(rawPathname || '/'),
+    [rawPathname]
+  );
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const scrollFrameRef = useRef<number | null>(null);
 
-  /*
-   * Homepage pada bagian hero:
-   * background transparan dan logo.svg.
-   *
-   * Setelah scroll atau pada halaman internal:
-   * background putih dan logo_blue.svg.
-   */
+  const isId = locale === 'id';
+
+  const businessColumns = useMemo(
+    () => [
+      {
+        category: isId ? 'SOLUSI KAMI' : 'OUR SOLUTION',
+        items: [
+          {
+            name: isId ? 'Solusi Enterprise' : 'Enterprise Solution',
+            href: '/our-solution/enterprise-solution',
+          },
+          {
+            name: isId ? 'Integrasi Data & AI' : 'Data & AI Integration',
+            href: '/our-solution/data-ai-integration',
+          },
+        ],
+      },
+    ],
+    [isId]
+  );
+
+  const businessMediaItems = useMemo<NavItem[]>(
+    () => [
+      {
+        name: isId ? 'Sistem Smart IoT' : 'Smart IOT System',
+        href: '/our-solution/smart-iot-system',
+      },
+      {
+        name: isId ? 'Pengembangan Digital' : 'Digital Development',
+        href: '/our-solution/digital-development',
+      },
+    ],
+    [isId]
+  );
+
+  const insightLinks = useMemo<NavItem[]>(
+    () => [
+      {
+        name: isId ? 'Pemikiran Kepemimpinan' : 'Leadership Thoughts',
+        href: '/insight-programs/leadership-thoughts',
+      },
+      {
+        name: isId ? 'Studi Kasus' : 'Case Studies',
+        href: '/insight-programs/case-studies',
+      },
+    ],
+    [isId]
+  );
+
+  const businessLinksMobile = useMemo<NavItem[]>(
+    () => [...businessColumns.flatMap((col) => col.items), ...businessMediaItems],
+    [businessColumns, businessMediaItems]
+  );
+
   const overlay = pathname === '/' && !isScrolled && activeDropdown === null;
 
   const isMountedRef = useRef(false);
@@ -787,7 +893,7 @@ export default function Navbar() {
     scrollFrameRef.current = window.requestAnimationFrame(() => {
       if (!isMountedRef.current) return;
       const nextScrolled = window.scrollY > SCROLL_THRESHOLD;
-      setIsScrolled((current) => current === nextScrolled ? current : nextScrolled);
+      setIsScrolled((current) => (current === nextScrolled ? current : nextScrolled));
       scrollFrameRef.current = null;
     });
   }, []);
@@ -810,9 +916,9 @@ export default function Navbar() {
     };
   }, [readScrollPosition]);
 
-  const [prevPathname, setPrevPathname] = useState(pathname);
-  if (prevPathname !== pathname) {
-    setPrevPathname(pathname);
+  const [prevPathname, setPrevPathname] = useState(rawPathname);
+  if (prevPathname !== rawPathname) {
+    setPrevPathname(rawPathname);
     setIsMobileOpen(false);
     setActiveDropdown(null);
   }
@@ -867,12 +973,10 @@ export default function Navbar() {
 
       router.push(`/#${sectionId}`);
     },
-    [closeMobileMenu, pathname, router],
+    [closeMobileMenu, pathname, router]
   );
 
-  const handleHomeClick = (
-    event: MouseEvent<HTMLAnchorElement>,
-  ) => {
+  const handleHomeClick = (event: MouseEvent<HTMLAnchorElement>) => {
     if (pathname !== '/') return;
 
     event.preventDefault();
@@ -929,11 +1033,7 @@ export default function Navbar() {
             h-px
             bg-black/[0.05]
             transition-opacity duration-300
-            ${
-              overlay
-                ? 'opacity-0'
-                : 'opacity-100'
-            }
+            ${overlay ? 'opacity-0' : 'opacity-100'}
           `}
         />
 
@@ -979,11 +1079,7 @@ export default function Navbar() {
             <Link
               href="/"
               onClick={handleHomeClick}
-              aria-current={
-                routeIsActive('/')
-                  ? 'page'
-                  : undefined
-              }
+              aria-current={routeIsActive('/') ? 'page' : undefined}
               className={`
                 relative
                 flex h-full items-center
@@ -998,196 +1094,189 @@ export default function Navbar() {
                 focus-visible:ring-2
                 focus-visible:ring-[#E6FF2A]
                 focus-visible:ring-offset-3
-                ${
-                  overlay
-                    ? 'text-[#F7F7F7]'
-                    : 'text-[#101010]'
-                }
+                ${overlay ? 'text-[#F7F7F7]' : 'text-[#101010]'}
               `}
             >
-              Home
+              {t.navbar.home}
 
               <ActiveIndicator active={routeIsActive('/')} />
             </Link>
 
             <DesktopNavLink
               href="/about-us"
-              label="About Us"
+              label={t.navbar.aboutUs}
               overlay={overlay}
               active={routeIsActive('/about-us')}
             />
 
-            {/* 
-            <DesktopNavLink
-              href="/our-business"
-              label="Our Business"
-              overlay={overlay}
-              active={routeIsActive('/our-business')}
-            />
-            */}
-
             <BusinessDropdown
+              label={t.navbar.ourSolution}
+              categoryLabel={isId ? 'SOLUSI KAMI' : 'OUR SOLUTION'}
+              columns={businessColumns}
+              mediaItems={businessMediaItems}
               overlay={overlay}
               active={routeIsActive('/our-solution')}
               activeDropdown={activeDropdown}
               setActiveDropdown={setActiveDropdown}
             />
 
-            {/* 
-            <DesktopNavLink
-              href="/our-works"
-              label="Our Works"
-              overlay={overlay}
-              active={routeIsActive('/our-works')}
-            />
-            */}
-
             <SimpleDropdown
               id="insight"
-              label="Insight & Programs"
+              label={t.navbar.insightPrograms}
               href="/insight-programs"
-              title="Insight & Programs"
-              links={INSIGHT_LINKS}
+              title={t.navbar.insightPrograms}
+              links={insightLinks}
               overlay={overlay}
               active={routeIsActive('/insight-programs')}
               activeDropdown={activeDropdown}
               setActiveDropdown={setActiveDropdown}
             />
-
-
           </nav>
 
-          {/* Desktop Contact Us */}
-          <Link
-            href="/contact-us"
-            className={`
-              hidden
-              h-[40px]
-              cursor-pointer
-              shrink-0
-              items-center
-              justify-self-end
-              gap-[11px]
-              rounded-full
-              border-0
-              px-[20px]
-              text-[12px]
-              leading-none
-              tracking-[0.01em]
-              no-underline
-              transition-[background-color,color,transform,box-shadow]
-              duration-300
-              hover:scale-[1.02]
-              focus-visible:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-offset-3
-              xl:flex
-              ${
-                overlay
-                  ? `
-                    bg-[#E6FF2A]
-                    font-semibold
-                    text-[#101010]
-                    shadow-[0_4px_13px_rgba(230,255,42,0.16)]
-                    focus-visible:ring-[#E6FF2A]
-                  `
-                  : `
-                    bg-[#1A3E9E]
-                    font-medium
-                    text-white
-                    shadow-[0_4px_13px_rgba(26,62,158,0.16)]
-                    focus-visible:ring-[#1A3E9E]
-                  `
+          {/* Desktop Right Actions: Language Switcher + Contact Us */}
+          <div className="hidden items-center justify-self-end gap-[12px] xl:flex">
+            <LanguageSwitcherPill
+              locale={locale}
+              onSelect={setLocale}
+              overlay={overlay}
+              switchToEnLabel={t.navbar.switchToEn}
+              switchToIdLabel={t.navbar.switchToId}
+              groupLabel={t.navbar.languageLabel}
+            />
+
+            <Link
+              href="/contact-us"
+              className={`
+                flex
+                h-[40px]
+                cursor-pointer
+                shrink-0
+                items-center
+                gap-[11px]
+                rounded-full
+                border-0
+                px-[20px]
+                text-[12px]
+                leading-none
+                tracking-[0.01em]
+                no-underline
+                transition-[background-color,color,transform,box-shadow]
+                duration-300
+                hover:scale-[1.02]
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-offset-3
+                ${
+                  overlay
+                    ? `
+                      bg-[#E6FF2A]
+                      font-semibold
+                      text-[#101010]
+                      shadow-[0_4px_13px_rgba(230,255,42,0.16)]
+                      focus-visible:ring-[#E6FF2A]
+                    `
+                    : `
+                      bg-[#1A3E9E]
+                      font-medium
+                      text-white
+                      shadow-[0_4px_13px_rgba(26,62,158,0.16)]
+                      focus-visible:ring-[#1A3E9E]
+                    `
+                }
+              `}
+            >
+              {t.navbar.contactUs}
+              <ButtonChevron />
+            </Link>
+          </div>
+
+          {/* Mobile Controls: Language Switcher + Hamburger */}
+          <div className="flex items-center justify-self-end gap-[10px] xl:hidden">
+            <LanguageSwitcherPill
+              locale={locale}
+              onSelect={setLocale}
+              overlay={false}
+              switchToEnLabel={t.navbar.switchToEn}
+              switchToIdLabel={t.navbar.switchToId}
+              groupLabel={t.navbar.languageLabel}
+              mobile
+            />
+
+            <button
+              type="button"
+              aria-label={
+                isMobileOpen ? t.navbar.closeMenu : t.navbar.openMenu
               }
-            `}
-          >
-            CONTACT US
-            <ButtonChevron />
-          </Link>
+              aria-expanded={isMobileOpen}
+              onClick={() => {
+                setIsMobileOpen((current) => !current);
+                setActiveDropdown(null);
+              }}
+              className="
+                relative
+                flex h-[40px] w-[40px]
+                items-center justify-center
+                border-0
+                bg-transparent
+              "
+            >
+              <span
+                className={`
+                  absolute
+                  h-[2px] w-[23px] max-[1199px]:w-[32px]
+                  rounded-full
+                  transition-all
+                  duration-[250ms]
+                  ${
+                    overlay
+                      ? 'bg-white max-[1199px]:bg-[#101010]'
+                      : 'bg-[#101010]'
+                  }
+                  ${
+                    isMobileOpen
+                      ? 'translate-y-0 rotate-45'
+                      : '-translate-y-[6px]'
+                  }
+                `}
+              />
 
-          {/* Mobile hamburger */}
-          <button
-            type="button"
-            aria-label={
-              isMobileOpen
-                ? 'Close menu'
-                : 'Open menu'
-            }
-            aria-expanded={isMobileOpen}
-            onClick={() => {
-              setIsMobileOpen((current) => !current);
-              setActiveDropdown(null);
-            }}
-            className="
-              relative
-              flex h-[40px] w-[40px]
-              items-center justify-center
-              justify-self-end
-              border-0
-              bg-transparent
-              xl:hidden
-            "
-          >
-            <span
-              className={`
-                absolute
-                h-[2px] w-[23px] max-[1199px]:w-[32px]
-                rounded-full
-                transition-all
-                duration-[250ms]
-                ${
-                  overlay
-                    ? 'bg-white max-[1199px]:bg-[#101010]'
-                    : 'bg-[#101010]'
-                }
-                ${
-                  isMobileOpen
-                    ? 'translate-y-0 rotate-45'
-                    : '-translate-y-[6px]'
-                }
-              `}
-            />
+              <span
+                className={`
+                  absolute
+                  h-[2px] w-[23px] max-[1199px]:w-[32px]
+                  rounded-full
+                  transition-all
+                  duration-[250ms]
+                  ${
+                    overlay
+                      ? 'bg-white max-[1199px]:bg-[#101010]'
+                      : 'bg-[#101010]'
+                  }
+                  ${isMobileOpen ? 'opacity-0' : 'opacity-100'}
+                `}
+              />
 
-            <span
-              className={`
-                absolute
-                h-[2px] w-[23px] max-[1199px]:w-[32px]
-                rounded-full
-                transition-all
-                duration-[250ms]
-                ${
-                  overlay
-                    ? 'bg-white max-[1199px]:bg-[#101010]'
-                    : 'bg-[#101010]'
-                }
-                ${
-                  isMobileOpen
-                    ? 'opacity-0'
-                    : 'opacity-100'
-                }
-              `}
-            />
-
-            <span
-              className={`
-                absolute
-                h-[2px] w-[23px] max-[1199px]:w-[32px]
-                rounded-full
-                transition-all
-                duration-[250ms]
-                ${
-                  overlay
-                    ? 'bg-white max-[1199px]:bg-[#101010]'
-                    : 'bg-[#101010]'
-                }
-                ${
-                  isMobileOpen
-                    ? 'translate-y-0 -rotate-45'
-                    : 'translate-y-[6px]'
-                }
-              `}
-            />
-          </button>
+              <span
+                className={`
+                  absolute
+                  h-[2px] w-[23px] max-[1199px]:w-[32px]
+                  rounded-full
+                  transition-all
+                  duration-[250ms]
+                  ${
+                    overlay
+                      ? 'bg-white max-[1199px]:bg-[#101010]'
+                      : 'bg-[#101010]'
+                  }
+                  ${
+                    isMobileOpen
+                      ? 'translate-y-0 -rotate-45'
+                      : 'translate-y-[6px]'
+                  }
+                `}
+              />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -1228,7 +1317,7 @@ export default function Navbar() {
               no-underline
             "
           >
-            Home
+            {t.navbar.home}
           </Link>
 
           <Link
@@ -1236,53 +1325,33 @@ export default function Navbar() {
             onClick={closeMobileMenu}
             className="block border-b border-white/10 py-[14px] text-[17px] font-medium text-white no-underline"
           >
-            About Us
+            {t.navbar.aboutUs}
           </Link>
-
-          {/* 
-          <Link
-            href="/our-business"
-            onClick={closeMobileMenu}
-            className="block border-b border-white/10 py-[14px] text-[17px] font-medium text-white no-underline"
-          >
-            Our Business
-          </Link>
-          */}
 
           <MobileAccordion
             id="business"
-            label="Our Solution"
+            label={t.navbar.ourSolution}
             links={[
               {
-                name: 'View Our Solution',
+                name: isId ? 'Lihat Solusi Kami' : 'View Our Solution',
                 href: '/our-solution',
               },
-              ...BUSINESS_LINKS_MOBILE,
+              ...businessLinksMobile,
             ]}
             activeDropdown={activeDropdown}
             setActiveDropdown={setActiveDropdown}
             closeMenu={closeMobileMenu}
           />
 
-          {/* 
-          <Link
-            href="/our-works"
-            onClick={closeMobileMenu}
-            className="block border-b border-white/10 py-[14px] text-[17px] font-medium text-white no-underline"
-          >
-            Our Works
-          </Link>
-          */}
-
           <MobileAccordion
             id="insight"
-            label="Insight & Programs"
+            label={t.navbar.insightPrograms}
             links={[
               {
-                name: 'View Insight & Programs',
+                name: isId ? 'Lihat Wawasan & Program' : 'View Insight & Programs',
                 href: '/insight-programs',
               },
-              ...INSIGHT_LINKS,
+              ...insightLinks,
             ]}
             activeDropdown={activeDropdown}
             setActiveDropdown={setActiveDropdown}
@@ -1307,7 +1376,7 @@ export default function Navbar() {
               no-underline
             "
           >
-            CONTACT US
+            {t.navbar.contactUs}
             <ButtonChevron />
           </Link>
         </nav>

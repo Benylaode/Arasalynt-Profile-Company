@@ -2,16 +2,24 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { HERO_SLIDES } from '@/lib/constants';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { getLocalizedHeroSlides } from '@/lib/i18n/localized-data';
 
 const SLIDE_DURATION = 6000;
 const CONTENT_FADE_DURATION = 280;
 
-const SLIDE_EYEBROWS = [
+const SLIDE_EYEBROWS_EN = [
   'THE ARSALYNK ECOSYSTEM',
   '01 — DISCOVER',
   '02 — ARCHITECT',
   '03 — CONNECT',
+] as const;
+
+const SLIDE_EYEBROWS_ID = [
+  'EKOSISTEM ARSALYNK',
+  '01 — TEMUKAN',
+  '02 — RANCANG',
+  '03 — HUBUNGKAN',
 ] as const;
 
 type ArrowDirection = 'left' | 'right';
@@ -46,6 +54,10 @@ function ArrowIcon({ direction }: { direction: ArrowDirection }) {
 }
 
 export default function HeroSection() {
+  const { locale } = useLanguage();
+  const slides = getLocalizedHeroSlides(locale);
+  const slideEyebrows = locale === 'id' ? SLIDE_EYEBROWS_ID : SLIDE_EYEBROWS_EN;
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isContentVisible, setIsContentVisible] = useState(true);
@@ -55,7 +67,7 @@ export default function HeroSection() {
   const transitionLockRef = useRef(false);
   const isMountedRef = useRef(false);
 
-  const totalSlides = HERO_SLIDES.length;
+  const totalSlides = slides.length;
 
   useEffect(() => {
     isMountedRef.current = true;
@@ -132,12 +144,12 @@ export default function HeroSection() {
 
   if (totalSlides === 0) return null;
 
-  const slide = HERO_SLIDES[currentSlide];
+  const slide = slides[currentSlide];
 
   return (
     <section
       id="hero"
-      aria-label="Hero"
+      aria-label={locale === 'id' ? 'Bagian Utama' : 'Hero'}
       className="relative h-[clamp(650px,calc(100svh-80px),820px)] min-h-[650px] w-full overflow-hidden bg-[#101010] max-[1199px]:mt-[80px] max-[768px]:h-[821px] max-[768px]:min-h-[821px]"
     >
       {/*
@@ -146,7 +158,7 @@ export default function HeroSection() {
        * active slide is visible. Do not put one shared hero image here.
        */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
-        {HERO_SLIDES.map((item, index) => (
+        {slides.map((item, index) => (
           <picture
             key={`hero-background-${item.id ?? index}`}
             className={`absolute inset-0 block transition-opacity duration-[900ms] ease-in-out ${
@@ -204,7 +216,7 @@ export default function HeroSection() {
           }`}
         >
           <div className="flex w-full flex-col items-center max-[480px]:gap-[12px]">
-            <p className="mb-5 flex items-center gap-2.5 font-body text-[11px] font-bold uppercase tracking-[0.1em] text-[#E6FF2A] max-[480px]:mb-2 max-[480px]:text-[10px]"><span className="h-[7px] w-[7px] bg-[#E6FF2A]" />{SLIDE_EYEBROWS[currentSlide] ?? 'ARSALYNK'}</p>
+            <p className="mb-5 flex items-center gap-2.5 font-body text-[11px] font-bold uppercase tracking-[0.1em] text-[#E6FF2A] max-[480px]:mb-2 max-[480px]:text-[10px]"><span className="h-[7px] w-[7px] bg-[#E6FF2A]" />{slideEyebrows[currentSlide] ?? 'ARSALYNK'}</p>
             <h1 className="m-0 max-w-[1060px] whitespace-pre-line font-heading text-[clamp(54px,4.25vw,68px)] font-medium leading-[0.98] tracking-[-0.035em] text-[#F7F7F7] max-[768px]:max-w-[578px] max-[768px]:text-[clamp(34px,6.48vw,46px)] max-[480px]:w-full max-[480px]:text-[37px] max-[480px]:leading-[1.02] max-[480px]:tracking-[-0.025em]">
               {slide.headline}
             </h1>
@@ -239,7 +251,7 @@ export default function HeroSection() {
           <button
             type="button"
             onClick={prevSlide}
-            aria-label="Previous slide"
+            aria-label={locale === 'id' ? 'Slide sebelumnya' : 'Previous slide'}
             className="pointer-events-auto inline-flex h-[48px] w-[48px] items-center justify-center rounded-[8px] border border-white/30 bg-black/15 text-[#F7F7F7] transition-[border-color,background-color] duration-200 hover:border-white/70 hover:bg-white/[0.10] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A] max-[767px]:h-[42px] max-[767px]:w-[42px]"
           >
             <ArrowIcon direction="left" />
@@ -248,7 +260,7 @@ export default function HeroSection() {
           <button
             type="button"
             onClick={nextSlide}
-            aria-label="Next slide"
+            aria-label={locale === 'id' ? 'Slide berikutnya' : 'Next slide'}
             className="pointer-events-auto inline-flex h-[48px] w-[48px] items-center justify-center rounded-[8px] border border-white/30 bg-black/15 text-[#F7F7F7] transition-[border-color,background-color] duration-200 hover:border-white/70 hover:bg-white/[0.10] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6FF2A] max-[767px]:h-[42px] max-[767px]:w-[42px]"
           >
             <ArrowIcon direction="right" />
@@ -260,9 +272,9 @@ export default function HeroSection() {
         <div
           className="absolute bottom-[52px] left-[6%] z-[6] flex h-[8px] items-center gap-2 max-[768px]:bottom-[100px] max-[768px]:left-[4%]"
           role="tablist"
-          aria-label="Hero slides"
+          aria-label={locale === 'id' ? 'Slide hero' : 'Hero slides'}
         >
-          {HERO_SLIDES.map((item, index) => {
+          {slides.map((item, index) => {
             const isActive = index === currentSlide;
 
             return (
@@ -271,7 +283,7 @@ export default function HeroSection() {
                 type="button"
                 role="tab"
                 aria-selected={isActive}
-                aria-label={`Go to slide ${index + 1}`}
+                aria-label={locale === 'id' ? `Ke slide ${index + 1}` : `Go to slide ${index + 1}`}
                 onClick={() => goToSlide(index)}
                 className={`relative h-[5px] overflow-hidden rounded-full border-0 p-0 transition-[width,background-color] duration-300 ${
                   isActive

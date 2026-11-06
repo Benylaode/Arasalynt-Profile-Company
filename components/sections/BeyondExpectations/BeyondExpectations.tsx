@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 const ArrowRight = () => (
   <svg
@@ -22,10 +23,13 @@ const ArrowRight = () => (
 );
 
 export default function BeyondExpectations() {
+  const { locale } = useLanguage();
+  const isId = locale === 'id';
+
   return (
     <section
       id="beyond-expectations"
-      aria-label="Beyond Expectations CTA"
+      aria-label={isId ? 'Ajakan Melampaui Ekspektasi' : 'Beyond Expectations CTA'}
       className="relative isolate flex min-h-[clamp(450px,32vw,615px)] w-full items-center justify-center overflow-hidden bg-[#101010] px-[6vw] py-[clamp(80px,6.563vw,126px)] text-center max-[1199px]:px-[4vw]"
     >
       {/* SVG Background Layer */}
@@ -49,8 +53,8 @@ export default function BeyondExpectations() {
               fontFamily: '"Switzer", Arial, sans-serif',
             }}
           >
-            <span className="block">We Build Beyond</span>
-            <span className="block">Your Expectations</span>
+            <span className="block">{isId ? 'Kami Membangun Melampaui' : 'We Build Beyond'}</span>
+            <span className="block">{isId ? 'Ekspektasi Anda' : 'Your Expectations'}</span>
           </h2>
 
           <p
@@ -59,8 +63,9 @@ export default function BeyondExpectations() {
               fontFamily: '"Manrope", Arial, sans-serif',
             }}
           >
-            Connect with Arsalynk and explore how integrated expertise creates
-            measurable impact across every opportunity.
+            {isId
+              ? 'Terhubung dengan Arsalynk dan jelajahi bagaimana keahlian terintegrasi menciptakan dampak terukur di setiap peluang.'
+              : 'Connect with Arsalynk and explore how integrated expertise creates measurable impact across every opportunity.'}
           </p>
         </div>
 
@@ -72,7 +77,7 @@ export default function BeyondExpectations() {
               fontFamily: '"Manrope", Arial, sans-serif',
             }}
           >
-            <span>GET IN TOUCH</span>
+            <span>{isId ? 'HUBUNGI KAMI' : 'GET IN TOUCH'}</span>
 
             <span className="flex h-[16px] w-[12px] scale-[0.85] items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
               <ArrowRight />
@@ -86,7 +91,7 @@ export default function BeyondExpectations() {
               fontFamily: '"Manrope", Arial, sans-serif',
             }}
           >
-            EXPLORE SOLUTIONS
+            {isId ? 'JELAJAHI SOLUSI' : 'EXPLORE SOLUTIONS'}
           </Link>
         </div>
       </div>

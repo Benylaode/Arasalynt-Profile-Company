@@ -11,80 +11,84 @@ import Testimonials from '@/components/sections/Testimonials/Testimonials';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
-import { BRAND } from '@/lib/seo/brand';
 import {
   SITE_NAVIGATION_ITEMS,
-  buildSiteNavigationElementJsonLd,
-  buildWebSiteJsonLd,
   buildBreadcrumbJsonLd,
 } from '@/lib/seo';
-import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
+import { getServerLocale, buildLocalizedAlternates } from '@/lib/i18n/server';
+import { getDictionary } from '@/lib/i18n/dictionaries';
 
-export const metadata: Metadata = {
-  title: { absolute: `${SITE_NAME} — Enterprise Technology Ecosystem & Solutions` },
-  description:
-    'Arsalynk (PT Sinergi Muda Arsa) delivers integrated enterprise technology solutions: custom ERP architecture, deep learning infrastructure, smart IoT telemetry, and digital engineering. Solusi teknologi enterprise dan software house di Indonesia.',
-  keywords: [
-    // Bilingual High-Impact Keywords
-    'Arsalynk',
-    'PT Sinergi Muda Arsa',
-    'software house indonesia',
-    'solusi teknologi enterprise',
-    'konsultan ERP indonesia',
-    'sistem ERP custom enterprise',
-    'integrasi IoT industri',
-    'enterprise software development',
-    'custom ERP architecture',
-    'deep learning infrastructure',
-    'smart IoT telemetry',
-    'predictive data analytics',
-    'transformasi digital bisnis',
-    'digital transformation indonesia',
-    'enterprise HRMS',
-    'retail POS systems',
-  ],
-  alternates: { canonical: '/' },
-  openGraph: {
-    type: 'website',
-    title: `${SITE_NAME} — Enterprise Technology Ecosystem & Solutions`,
-    description:
-      'Integrated enterprise technology solutions: custom ERP architecture, IoT telemetry, deep learning infrastructure, and custom digital development.',
-    url: '/',
-    images: [
-      {
-        url: '/images/about-us/corporate-profile-hero.webp',
-        width: 1200,
-        height: 630,
-        alt: 'Arsalynk enterprise technology ecosystem',
-      },
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+  const dict = getDictionary(locale);
+  const alternates = buildLocalizedAlternates('/', locale);
+
+  return {
+    title: { absolute: dict.seo.homeTitle },
+    description: dict.seo.homeDescription,
+    keywords: [
+      'Arsalynk',
+      'PT Sinergi Muda Arsa',
+      'software house indonesia',
+      'solusi teknologi enterprise',
+      'konsultan ERP indonesia',
+      'sistem ERP custom enterprise',
+      'integrasi IoT industri',
+      'enterprise software development',
+      'custom ERP architecture',
+      'deep learning infrastructure',
+      'smart IoT telemetry',
+      'predictive data analytics',
+      'transformasi digital bisnis',
+      'digital transformation indonesia',
+      'enterprise HRMS',
+      'retail POS systems',
     ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `${SITE_NAME} | Enterprise Technology Ecosystem`,
-    description:
-      'Integrated enterprise technology solutions: ERP, IoT, Data Intelligence, and Scalable Digital Development.',
-    images: ['/images/about-us/corporate-profile-hero.webp'],
-  },
-};
+    alternates,
+    openGraph: {
+      type: 'website',
+      title: dict.seo.homeTitle,
+      description: dict.seo.homeDescription,
+      url: alternates.canonical,
+      locale: locale === 'id' ? 'id_ID' : 'en_US',
+      alternateLocale: locale === 'id' ? ['en_US'] : ['id_ID'],
+      images: [
+        {
+          url: '/images/about-us/corporate-profile-hero.webp',
+          width: 1200,
+          height: 630,
+          alt: dict.seo.homeTitle,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: dict.seo.homeTitle,
+      description: dict.seo.homeDescription,
+      images: ['/images/about-us/corporate-profile-hero.webp'],
+    },
+  };
+}
 
-export default function Home() {
+export default async function Home() {
+  const locale = await getServerLocale();
+  const dict = getDictionary(locale);
+
   const homeSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     '@id': `${SITE_URL}/#webpage`,
     url: `${SITE_URL}/`,
-    name: 'Arsalynk — Enterprise Technology Ecosystem & Solutions',
+    name: dict.seo.homeTitle,
     isPartOf: { '@id': `${SITE_URL}/#website` },
     about: { '@id': `${SITE_URL}/#organization` },
     mainEntity: { '@id': `${SITE_URL}/#organization` },
-    description:
-      'Arsalynk provides integrated enterprise technology solutions: custom ERP systems, IoT device connectivity, deep learning pipelines, and digital development. Solusi teknologi enterprise & software house di Indonesia.',
+    description: dict.seo.homeDescription,
     breadcrumb: {
       '@id': `${SITE_URL}/#breadcrumb`,
-      ...buildBreadcrumbJsonLd([{ name: 'Home', url: `${SITE_URL}/` }]),
+      ...buildBreadcrumbJsonLd([{ name: dict.common.home, url: `${SITE_URL}/` }]),
     },
-    inLanguage: ['en-US', 'id-ID'],
+    inLanguage: locale === 'id' ? 'id-ID' : 'en-US',
   };
 
   return (
@@ -100,16 +104,16 @@ export default function Home() {
         <div className="mx-auto flex max-w-[1600px] flex-col gap-8">
           <div className="max-w-[860px]">
             <p className="mb-2 font-body text-[11px] font-bold uppercase tracking-[0.12em] text-[#1A3E9E]">
-              Arsalynk Ecosystem
+              {SITE_NAME} Ecosystem
             </p>
             <h2
               id="arsalynk-brand-overview"
               className="font-heading text-[clamp(26px,2.2vw,38px)] font-medium leading-[1.18] tracking-[-0.02em] text-[#101010]"
             >
-              Enterprise technology solutions, connected through one ecosystem.
+              {dict.seo.homeTitle}
             </h2>
             <p className="mt-3 font-body text-[14px] leading-[1.75] text-[#555] md:text-[15px]">
-              Arsalynk is an integrated enterprise technology ecosystem connecting custom ERP platforms, IoT telemetry, deep learning intelligence, web development, and strategic research for measurable digital transformation.
+              {dict.seo.homeDescription}
             </p>
           </div>
 

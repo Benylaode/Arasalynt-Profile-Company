@@ -176,6 +176,7 @@
   grid-template-columns: 36.8272% 63.1728%;
 
   width: 100%;
+  min-height: clamp(320px, 26.912vw, 380px);
   aspect-ratio: 1412 / 380;
 
   overflow: hidden;

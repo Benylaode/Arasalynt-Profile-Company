@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState, useEffect, useRef, memo, useCallback } from 'react';
+import React, { useState, useEffect, useRef, memo, useCallback, useMemo } from 'react';
 import { ChatMessage, QuickActionItem } from '@/types/chatbot';
 import {
   MARBOT_QUICK_ACTIONS,
   streamChatCompletion,
 } from '@/lib/chatbot.service';
 import { AI_SWITCH_CS_PHONE_DISPLAY } from '@/lib/constants';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { MarBotIcon } from './MarBotTrigger';
 import { MarkdownRenderer } from './MarkdownRenderer';
 import styles from './MarBotDrawer.module.css';
@@ -87,14 +88,12 @@ function formatCurrentTime(): string {
   return `${hours}.${minutes}`;
 }
 
-// Escalation keywords & phrases to transfer chat from AI to WhatsApp Customer Service.
-// Only triggers when the user explicitly requests to speak with CS, customer service, a real person, or human.
 const ESCALATION_PHRASES = [
   'customer service',
   'cust service',
   'berbicara dengan cs',
   'bicara dengan cs',
-  'berbicra dengan cs', // common typo
+  'berbicra dengan cs',
   'bicra dengan cs',
   'berbicara sama cs',
   'bicara sama cs',
@@ -146,19 +145,12 @@ const ESCALATION_PHRASES = [
 ];
 
 const ESCALATION_REGEXES = [
-  // "berbicara / bicara / berbicra / ngomong / ngobrol / hubungi / kontak / sambungkan / chat" + optional "dengan/sama/ke" + "cs"
   /\b(?:berbicara|bicara|berbicra|bicra|ngomong|ngobrol|hubungi|kontak|sambungkan|chat)\s+(?:dengan\s+|sama\s+|ke\s+)?cs\b/i,
-  // "customer service" / "cust service"
   /\b(?:customer\s+service|cust(?:\.|\s+)?service)\b/i,
-  // "berbicara / bicara / berbicra / ngomong / ngobrol / chat" + optional "dengan/sama/ke" + "orang"
   /\b(?:berbicara|bicara|berbicra|bicra|ngomong|ngobrol|chat)\s+(?:dengan\s+|sama\s+|ke\s+)?orang\b/i,
-  // "berbicara / bicara / berbicra / ngomong / ngobrol / chat / butuh / mau / sambungkan" + optional "dengan/sama/ke" + "manusia"
   /\b(?:berbicara|bicara|berbicra|bicra|ngomong|ngobrol|chat|butuh|mau|sambungkan)\s+(?:dengan\s+|sama\s+|ke\s+)?manusia\b/i,
-  // "operator manusia" / "cs manusia" / "staf manusia" / "agen manusia"
   /\b(?:operator|cs|staf|staff|agen|agent)\s+manusia\b/i,
-  // Standalone single word intent: user sends just "cs", "manusia", or "human"
   /^(?:cs|manusia|human)$/i,
-  // English: talk/speak/chat with human/person/agent
   /\b(?:talk\s+to|speak\s+with|chat\s+with)\s+(?:a\s+)?(?:human|person|agent)\b/i,
 ];
 
@@ -166,12 +158,10 @@ function isEscalationKeyword(text: string): boolean {
   const lower = text.toLowerCase().trim();
   if (!lower) return false;
 
-  // 1. Direct phrase matching
   if (ESCALATION_PHRASES.some((phrase) => lower.includes(phrase))) {
     return true;
   }
 
-  // 2. Regex pattern matching
   return ESCALATION_REGEXES.some((regex) => regex.test(lower));
 }
 
@@ -179,19 +169,12 @@ function createNewSessionId(): string {
   return `guest_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 6)}`;
 }
 
-const INITIAL_MESSAGE: ChatMessage = {
-  id: 'initial-greeting',
-  role: 'assistant',
-  content:
-    'Hello! I am Arsalynk Plus, the intelligent assistant for Arsalynk. I can help you explore our enterprise technology solutions, company background, or connect you directly with our Customer Support team. How can I assist you today?',
-  timestamp: formatCurrentTime(),
-};
-
-// Memoized Message Item
 const MessageBubble = memo(function MessageBubble({
   msg,
+  isId,
 }: {
   msg: ChatMessage;
+  isId: boolean;
 }) {
   const isAssistant = msg.role === 'assistant';
   const isHumanCS = msg.role === 'human_cs';
@@ -217,7 +200,13 @@ const MessageBubble = memo(function MessageBubble({
           </div>
         )}
         <span className={isHumanCS ? styles.csSenderName : styles.senderName}>
-          {isHumanCS ? 'Customer Service' : isAssistant ? 'Arsalynk Plus' : 'You'}
+          {isHumanCS
+            ? 'Customer Service'
+            : isAssistant
+              ? 'Arsalynk Plus'
+              : isId
+                ? 'Anda'
+                : 'You'}
         </span>
         {isHumanCS && <span className={styles.csVerified}>WhatsApp</span>}
         <span className={styles.messageTimestamp}>· {msg.timestamp}</span>
@@ -236,7 +225,7 @@ const MessageBubble = memo(function MessageBubble({
 
         {msg.sources && msg.sources.length > 0 && (
           <div className={styles.sourcesContainer}>
-            <span className={styles.sourcesLabel}>Sumber:</span>
+            <span className={styles.sourcesLabel}>{isId ? 'Sumber:' : 'Sources:'}</span>
             {msg.sources.map((src, i) => (
               <span key={`src-${i}`} className={styles.sourceBadge}>
                 {src}
@@ -250,7 +239,55 @@ const MessageBubble = memo(function MessageBubble({
 });
 
 export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
+  const { locale, t } = useLanguage();
+  const isId = locale === 'id';
+
+  const initialGreetingContent = t.chatbot.welcomeMessage;
+
+  const [messages, setMessages] = useState<ChatMessage[]>(() => [
+    {
+      id: 'initial-greeting',
+      role: 'assistant',
+      content: initialGreetingContent,
+      timestamp: formatCurrentTime(),
+    },
+  ]);
+
+  // Keep the initial greeting synchronized when switching EN/ID if no user messages yet
+  useEffect(() => {
+    setMessages((prev) =>
+      prev.map((m) =>
+        m.id === 'initial-greeting' ? { ...m, content: initialGreetingContent } : m
+      )
+    );
+  }, [initialGreetingContent]);
+
+  const quickActions = useMemo<QuickActionItem[]>(() => {
+    if (!isId) return MARBOT_QUICK_ACTIONS;
+    return [
+      {
+        id: 'qa-company',
+        label: 'Profil & Visi Perusahaan',
+        prompt: 'Ceritakan tentang profil perusahaan Arsalynk, visi, dan struktur kepemimpinannya.',
+      },
+      {
+        id: 'qa-solutions',
+        label: 'Solusi & Layanan Enterprise',
+        prompt: 'Apa saja solusi teknologi enterprise dan layanan yang ditawarkan oleh Arsalynk?',
+      },
+      {
+        id: 'qa-cases',
+        label: 'Studi Kasus Proyek',
+        prompt: 'Tunjukkan studi kasus proyek Arsalynk seperti Marka ERP, MarkaPlus, dan MyBOS.',
+      },
+      {
+        id: 'qa-contact-cs',
+        label: 'Hubungi Tim Support (WhatsApp)',
+        prompt: 'Saya ingin berbicara dengan Customer Service.',
+      },
+    ];
+  }, [isId]);
+
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [chatMode, setChatMode] = useState<ChatMode>('ai');
@@ -264,11 +301,9 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
   const chatBodyRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  // Buffer state for high-performance streaming updates
   const streamBufferRef = useRef<string>('');
   const rafIdRef = useRef<number | null>(null);
 
-  // Initialize unique session ID for this conversation
   useEffect(() => {
     setIsMounted(true);
     const newId = createNewSessionId();
@@ -276,7 +311,6 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
     sessionStartTimeRef.current = Date.now();
   }, []);
 
-  // Smooth scroll handler
   const scrollChatToBottom = useCallback(() => {
     if (chatBodyRef.current) {
       chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
@@ -289,7 +323,6 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
     }
   }, [isOpen, isMounted, messages.length, scrollChatToBottom]);
 
-  // Focus input when opened
   useEffect(() => {
     if (isOpen && isMounted) {
       const timer = setTimeout(() => {
@@ -299,7 +332,6 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
     }
   }, [isOpen, isMounted]);
 
-  // Handle escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
@@ -310,8 +342,6 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  // 2-Way WhatsApp Polling: Active ONLY when chatMode === 'human_cs'.
-  // Healthy state polls every 3s; failures back off up to 30s to avoid log/request storms.
   useEffect(() => {
     if (!isOpen || !sessionId || chatMode !== 'human_cs') return;
 
@@ -408,7 +438,6 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
       timestamp: formatCurrentTime(),
     };
 
-    // Auto-Switching Check: only enter Human CS mode after durable handoff is accepted.
     if (chatMode === 'ai' && isEscalationKeyword(messageContent)) {
       setInputValue('');
 
@@ -430,7 +459,6 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
         setChatMode('human_cs');
         sessionStartTimeRef.current = Date.now();
 
-        // Also synchronize to Marka CRM inbox
         fetch('/api/chat/send', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -442,11 +470,17 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
           }),
         }).catch(() => null);
 
-        const ticketTag = activeCode ? ` (Ticket Code: **#${activeCode}**)` : '';
+        const ticketTag = activeCode
+          ? isId
+            ? ` (Kode Tiket: **#${activeCode}**)`
+            : ` (Ticket Code: **#${activeCode}**)`
+          : '';
         const autoHandoverMessage: ChatMessage = {
           id: `bot-handover-${Date.now()}`,
           role: 'assistant',
-          content: `Your inquiry has been routed to our Customer Service team${ticketTag}. You are now connected with a representative and can continue chatting here.`,
+          content: isId
+            ? `Pertanyaan Anda telah diteruskan ke tim Customer Service kami${ticketTag}. Anda kini terhubung dengan perwakilan kami dan dapat melanjutkan percakapan di sini.`
+            : `Your inquiry has been routed to our Customer Service team${ticketTag}. You are now connected with a representative and can continue chatting here.`,
           timestamp: formatCurrentTime(),
         };
         setMessages((prev) => [...prev, userMessage, autoHandoverMessage]);
@@ -455,7 +489,9 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
         const failureMessage: ChatMessage = {
           id: `bot-handover-error-${Date.now()}`,
           role: 'assistant',
-          content: 'Connection to Customer Service is currently establishing. Your message could not be delivered yet. Please try again in a moment.',
+          content: isId
+            ? 'Koneksi ke Customer Service sedang disiapkan. Pesan Anda belum dapat terkirim saat ini. Silakan coba lagi sesaat lagi.'
+            : 'Connection to Customer Service is currently establishing. Your message could not be delivered yet. Please try again in a moment.',
           timestamp: formatCurrentTime(),
           isError: true,
         };
@@ -464,18 +500,16 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
       return;
     }
 
-    // When already in Human CS mode, each message must be durably accepted by the gateway.
     if (chatMode === 'human_cs') {
       setMessages((prev) => [...prev, userMessage]);
       setInputValue('');
 
-      // Dispatch to Marka CRM inbox
       fetch('/api/chat/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           visitorId: sessionId,
-          visitorName: 'Pengunjung Website',
+          visitorName: isId ? 'Pengunjung Website' : 'Website Visitor',
           messageId: userMessage.id,
           messageText: messageContent,
         }),
@@ -498,7 +532,9 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
           {
             id: `cs-send-error-${Date.now()}`,
             role: 'assistant',
-            content: 'Your last message could not reach the Customer Service queue. Please re-send.',
+            content: isId
+              ? 'Pesan terakhir Anda belum dapat mencapai antrean Customer Service. Silakan kirim ulang.'
+              : 'Your last message could not reach the Customer Service queue. Please re-send.',
             timestamp: formatCurrentTime(),
             isError: true,
           },
@@ -507,7 +543,6 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
       return;
     }
 
-    // Default: Regular AI Stream Completion
     const assistantPlaceholderId = `bot-${Date.now()}`;
     const assistantPlaceholder: ChatMessage = {
       id: assistantPlaceholderId,
@@ -585,7 +620,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
             cancelAnimationFrame(rafIdRef.current);
             rafIdRef.current = null;
           }
-          console.error('[ArsAI Stream Error]', err);
+          console.error('[Arsalynk Plus Stream Error]', err);
           setMessages((prev) =>
             prev.map((msg) =>
               msg.id === assistantPlaceholderId
@@ -594,7 +629,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
                     content:
                       streamBufferRef.current ||
                       msg.content ||
-                      'We are experiencing a temporary connection issue with the AI engine. Please try again shortly or reach out directly to our team via WhatsApp.',
+                      t.chatbot.errorFallback,
                     isStreaming: false,
                     isError: !msg.content && !streamBufferRef.current,
                   }
@@ -629,7 +664,6 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
 
   const handleSwitchToAI = () => {
     setChatMode('ai');
-    // Generate fresh session ID for future clean sessions
     const freshSessionId = createNewSessionId();
     setSessionId(freshSessionId);
     sessionStartTimeRef.current = Date.now();
@@ -637,7 +671,9 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
     const returnMsg: ChatMessage = {
       id: `system-return-${Date.now()}`,
       role: 'assistant',
-      content: 'Conversation mode returned to **Arsalynk Plus**.',
+      content: isId
+        ? 'Mode percakapan dikembalikan ke **Arsalynk Plus**.'
+        : 'Conversation mode returned to **Arsalynk Plus**.',
       timestamp: formatCurrentTime(),
     };
     setMessages((prev) => [...prev, returnMsg]);
@@ -679,13 +715,13 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
             </div>
             <div className={styles.botText}>
               <span className={styles.botName}>
-                {chatMode === 'human_cs' ? 'Customer Service' : 'Arsalynk Plus'}
+                {chatMode === 'human_cs' ? 'Customer Service' : t.chatbot.assistantName}
               </span>
               <span className={styles.botStatus}>
                 <span className={styles.statusDot} />
                 {chatMode === 'human_cs'
                   ? 'Live WhatsApp'
-                  : 'Online & CS Ready'}
+                  : t.chatbot.statusOnline}
               </span>
             </div>
           </div>
@@ -696,16 +732,16 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
                 type="button"
                 className={styles.switchModeBtn}
                 onClick={handleSwitchToAI}
-                title="Kembali ke mode Arsalynk Plus"
+                title={isId ? 'Kembali ke mode Arsalynk Plus' : 'Return to Arsalynk Plus mode'}
               >
-                ← Mode Arsalynk Plus
+                {isId ? '← Mode Arsalynk Plus' : '← Arsalynk Plus Mode'}
               </button>
             )}
             <button
               type="button"
               className={styles.closeButton}
               onClick={onClose}
-              aria-label="Tutup jendela chat"
+              aria-label={t.chatbot.closeAriaLabel}
             >
               <CloseIcon />
             </button>
@@ -719,7 +755,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
               return null;
             }
 
-            return <MessageBubble key={msg.id} msg={msg} />;
+            return <MessageBubble key={msg.id} msg={msg} isId={isId} />;
           })}
 
           {isLoading && !messages[messages.length - 1]?.content && (
@@ -732,7 +768,9 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
                   <MarBotIcon className={styles.miniAvatarIcon} />
                 </div>
                 <span className={styles.senderName}>Arsalynk Plus</span>
-                <span className={styles.messageTimestamp}>· sedang mengetik</span>
+                <span className={styles.messageTimestamp}>
+                  · {isId ? 'sedang mengetik' : 'typing'}
+                </span>
               </div>
               <div className={styles.typingContainer}>
                 <span className={styles.typingDot} />
@@ -745,8 +783,10 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
           {/* Quick Actions */}
           {messages.length <= 1 && chatMode === 'ai' && (
             <div key="quick-actions-section" className={styles.quickActionsSection}>
-              <span className={styles.quickActionsTitle}>Quick Actions</span>
-              {MARBOT_QUICK_ACTIONS.map((action) => (
+              <span className={styles.quickActionsTitle}>
+                {isId ? 'Aksi Cepat' : 'Quick Actions'}
+              </span>
+              {quickActions.map((action) => (
                 <button
                   key={`qa-${action.id}`}
                   type="button"
@@ -772,20 +812,22 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
               onKeyDown={handleInputKeyDown}
               placeholder={
                 chatMode === 'human_cs'
-                  ? 'Type a message for Customer Service...'
-                  : 'Ask Arsalynk Plus anything..'
+                  ? isId
+                    ? 'Ketik pesan untuk Customer Service...'
+                    : 'Type a message for Customer Service...'
+                  : t.chatbot.inputPlaceholder
               }
               className={styles.inputField}
               disabled={isLoading}
-              aria-label="Type message"
+              aria-label={t.chatbot.sendAriaLabel}
             />
             {isLoading ? (
               <button
                 type="button"
                 onClick={handleStopGeneration}
                 className={styles.sendButton}
-                aria-label="Stop generation"
-                title="Stop"
+                aria-label={isId ? 'Hentikan respons' : 'Stop generation'}
+                title={isId ? 'Hentikan' : 'Stop'}
               >
                 <StopIcon className={styles.sendIcon} />
               </button>
@@ -795,7 +837,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
                 onClick={() => handleSendMessage()}
                 disabled={!inputValue.trim()}
                 className={styles.sendButton}
-                aria-label="Send message"
+                aria-label={t.chatbot.sendAriaLabel}
               >
                 <SendArrowIcon className={styles.sendIcon} />
               </button>
@@ -803,8 +845,14 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
           </div>
           <p className={styles.disclaimer}>
             {chatMode === 'human_cs'
-              ? (shortCode ? `Connected directly to WhatsApp CS (Ticket #${shortCode}).` : `Terkoneksi langsung ke WhatsApp CS (${AI_SWITCH_CS_PHONE_DISPLAY}).`)
-              : 'Arsalynk Plus powered by Enterprise AI & Live WhatsApp CS.'}
+              ? shortCode
+                ? isId
+                  ? `Terkoneksi langsung ke WhatsApp CS (Tiket #${shortCode}).`
+                  : `Connected directly to WhatsApp CS (Ticket #${shortCode}).`
+                : isId
+                  ? `Terkoneksi langsung ke WhatsApp CS (${AI_SWITCH_CS_PHONE_DISPLAY}).`
+                  : `Connected directly to WhatsApp CS (${AI_SWITCH_CS_PHONE_DISPLAY}).`
+              : t.chatbot.footerNote}
           </p>
         </footer>
       </section>
