@@ -52,3 +52,5 @@ next-env.d.ts
 /crm wa/chatbot_conversations.json
 
 
+
+*.pdf

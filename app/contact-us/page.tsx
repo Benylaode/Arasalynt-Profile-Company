@@ -395,7 +395,7 @@ export default function ContactUsPage() {
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 font-body text-[12px] font-extrabold uppercase leading-[1.3] tracking-[0.06em] text-[#1A3E9E] md:text-[13px]">
                     <span className="h-1.5 w-1.5 shrink-0 bg-[#1A3E9E]" />
-                    <span>SEMARANG HQ</span>
+                    <span>SEMARANG OFFICE</span>
                   </div>
 
                   <p className="font-body text-[14px] leading-[1.5] tracking-[0.02em] text-[#717171] md:text-[15px]">

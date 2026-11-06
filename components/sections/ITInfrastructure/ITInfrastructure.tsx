@@ -65,46 +65,46 @@ const ASSET_ROOT = '/images/services/it-motion';
 
 const SCENE_HREFS: Record<number, string> = {
   0: '/our-solution/enterprise-solution',
-  1: '/our-solution/smart-iot-system',
-  2: '/our-solution',
+  1: '/our-solution/data-ai-integration',
+  2: '/our-solution/smart-iot-system',
 };
 
 const SCENES: Scene[] = [
   {
     id: 0,
     number: '01',
-    title: 'Connected Infrastructure',
+    title: 'Enterprise Solution',
     titleLines: (
       <>
-        Connected<br />Infrastructure
+        Enterprise<br />Solution
       </>
     ),
-    tags: ['DEVICES', 'DATA', 'SOFTWARE'],
-    description: 'Bringing devices, data, and software together under one roof.',
+    tags: ['ENTERPRISE ERP', 'WORKFLOWS', 'SCALABILITY'],
+    description: 'Centralized enterprise management unifying operational workflows and resource governance.',
   },
   {
     id: 1,
     number: '02',
-    title: 'System Convergence',
+    title: 'Data & AI Integration',
     titleLines: (
       <>
-        System<br />Convergence
+        Data &amp; AI<br />Integration
       </>
     ),
-    tags: ['AUTOMATION', 'INTELLIGENCE', 'INTEGRATION'],
-    description: 'Turning data and hardware into automated, actionable intelligence.',
+    tags: ['AGENTIC AI', 'MACHINE LEARNING', 'DATA PIPELINES'],
+    description: 'Advanced data engineering transforming raw enterprise data into actionable intelligence.',
   },
   {
     id: 2,
     number: '03',
-    title: 'Enterprise Scalability',
+    title: 'Smart IoT System',
     titleLines: (
       <>
-        Enterprise<br />Scalability
+        Smart IoT<br />System
       </>
     ),
-    tags: ['HIGH AVAILABILITY', 'SECURITY', 'GROWTH'],
-    description: 'Ensuring systems grow seamlessly with high availability and security.',
+    tags: ['INDUSTRIAL IOT', 'SMART SENSORS', 'ASSET TELEMETRY'],
+    description: 'Bridging physical hardware with enterprise software for real-time asset control.',
   },
 ];
 
@@ -642,7 +642,7 @@ export default function ITInfrastructure() {
         </div>
 
         <Link
-          href={SCENE_HREFS[targetScene] ?? '/our-works'}
+          href={SCENE_HREFS[targetScene] ?? '/our-solution'}
           className={styles.desktopLearnMore}
           aria-label={`Learn more about ${currentScene.title}`}
         >
@@ -717,7 +717,7 @@ export default function ITInfrastructure() {
             )}
           </div>
 
-          <Link href={SCENE_HREFS[targetScene] ?? '/our-works'} className={styles.mobileLearnMore}>
+          <Link href={SCENE_HREFS[targetScene] ?? '/our-solution'} className={styles.mobileLearnMore}>
             LEARN MORE
           </Link>
         </div>

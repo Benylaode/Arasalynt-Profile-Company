@@ -19,12 +19,17 @@ export type SolutionService = {
   serviceSectionSvg?: string;
   whatItIs: string;
   challenge: string;
+  modulesSectionTag?: string;
+  modulesSectionTitle?: string;
+  modulesSectionDescription?: string;
   challengeCards?: ChallengeCard[];
   approach: string[];
   outcomes: string[];
   integration: string[];
   partnerIntegration?: {
     partnerName: string;
+    heading?: string;
+    badge?: string;
     logo?: string;
     text: string;
   };
@@ -74,7 +79,7 @@ export const OUR_SOLUTION_CHALLENGES = [
     title: 'Stuck Software & Fragmented ERP',
     description:
       'Disconnected platforms create data silos, manual workarounds, and redundant enterprise tasks.',
-    image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
+    image: '/images/our-solution/projects/enterprise/marka-project-manager.svg',
   },
   {
     number: '03',
@@ -101,7 +106,7 @@ export const CORE_SOLUTIONS = [
     heroHeadline: 'Streamline Enterprise Operations with Centralized System Management',
     description:
       'Integrate corporate workflows into a single system for real-time visibility and scalable growth.',
-    image: '/images/our-solution/projects/enterprise/marka-sales.png',
+    image: '/images/our-solution/projects/enterprise/marka-sales.svg',
     cardBg: '#090D16',
     cardBorder: 'rgba(77, 139, 255, 0.28)',
     glowStart: '#3B82F6',
@@ -175,7 +180,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     heroHeadline: 'Streamline Enterprise Operations with Centralized System Management',
     description:
       'Integrate operational workflows across divisions into a unified ecosystem with real-time visibility and sustainable enterprise scalability.',
-    image: '/images/our-solution/projects/enterprise/marka-finance.png',
+    image: '/images/our-solution/projects/enterprise/marka-finance.svg',
     heroSvg: '/images/our-solution/hero-enterprise-solution.svg',
     serviceSectionSvg: '/images/our-solution/service-section-enterprise-solution.svg',
     whatItIs:
@@ -187,46 +192,50 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     valuePropIcon: '/images/our-solution/icon-highlight-enterprise.svg',
     challenge:
       'Operating on disjointed platforms creates data silos, forces manual workarounds, and leads to expensive duplicate tasks across enterprise departments.',
+    modulesSectionTag: 'ENTERPRISE MODULES & SERVICES',
+    modulesSectionTitle: 'Core Enterprise Modules & Services',
+    modulesSectionDescription:
+      'A complete suite of integrated enterprise modules engineered to centralize operations, automate workflows, and provide end-to-end visibility across corporate divisions.',
     challengeCards: [
       {
         number: '01',
-        badge: 'Financial Consolidation',
-        title: 'MARKA Finance — Ledger Disconnect & Cashflow Latency',
+        badge: 'Finance & Accounting',
+        title: 'Financial Accounting & Consolidation',
         description:
-          'Operating across multi-entity branches with fragmented accounting tools causes delayed financial statements, tax discrepancies, and poor executive cashflow visibility.',
-        image: '/images/our-solution/projects/enterprise/marka-finance.png',
+          'Multi-entity general ledger, automated real-time cashflow management, tax compliance reporting, and executive balance sheets.',
+        image: '/images/our-solution/projects/enterprise/marka-finance.svg',
       },
       {
         number: '02',
-        badge: 'Human Capital',
-        title: 'MARKA HRMS — Siloed Personnel Data & Payroll Gaps',
+        badge: 'HR & Payroll',
+        title: 'HR Management & Automated Payroll',
         description:
-          'Disjointed employee records, manual leave approvals, and disconnected attendance systems lead to payroll calculation errors and regulatory audit exposure.',
-        image: '/images/our-solution/projects/enterprise/marka-hrms.png',
+          'Centralized employee records, automated payroll calculation, KPI & attendance tracking, digital leave approvals, and talent management.',
+        image: '/images/our-solution/projects/enterprise/marka-hrms.svg',
       },
       {
         number: '03',
         badge: 'Project Governance',
-        title: 'MARKA Project Manager — Milestone Slippage & Silos',
+        title: 'Project Management & Governance',
         description:
-          'Lack of unified milestone tracking between operational and engineering teams leads to communication silos, unexpected project delays, and budget overruns.',
-        image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
+          'Cross-department milestone tracking, task scheduling, resource allocation, real-time budget burn-down monitoring, and operational team collaboration.',
+        image: '/images/our-solution/projects/enterprise/marka-project-manager.svg',
       },
       {
         number: '04',
-        badge: 'Supply Chain & Assets',
-        title: 'MARKA Resource — Unsynchronized Warehouse Stocks',
+        badge: 'Supply Chain & Inventory',
+        title: 'Inventory & Supply Chain Management',
         description:
-          'Inaccurate inventory counts and isolated procurement workflows cause stockouts, excessive warehouse holding costs, and material supply chain bottlenecks.',
-        image: '/images/our-solution/projects/enterprise/marka-resource.png',
+          'Multi-warehouse stock control, automated procurement reorder points, asset lifecycle tracking, vendor logistics, and material dispatch.',
+        image: '/images/our-solution/projects/enterprise/marka-resource.svg',
       },
       {
         number: '05',
-        badge: 'Commercial Pipeline',
-        title: 'MARKA Sales — Pipeline Friction & Fulfillment Delays',
+        badge: 'Sales & CRM',
+        title: 'Sales Pipeline & CRM Automation',
         description:
-          'Disconnected quotation-to-cash workflows create friction between commercial reps and fulfillment teams, resulting in lost deals and delayed billing.',
-        image: '/images/our-solution/projects/enterprise/marka-sales.png',
+          'End-to-end quotation-to-cash workflows, lead capture, customer relationship management, deal pipeline forecasting, and automated billing.',
+        image: '/images/our-solution/projects/enterprise/marka-sales.svg',
       },
     ],
     approach: [
@@ -262,7 +271,7 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     relatedWork: {
       slug: 'sinau-print-erp',
       title: 'Sinau Print ERP & Centralized System Management',
-      image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
+      image: '/images/our-solution/projects/enterprise/marka-project-manager.svg',
       relationship: 'direct',
     },
     caseStudySlug: 'sinau-print-pos-system',
@@ -295,22 +304,26 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     valuePropIcon: '/images/our-solution/icon-highlight-data-ai.svg',
     challenge:
       'Corporate information trapped in disconnected databases leaves leadership with delayed reports, blind spots, and reactive rather than proactive decisions.',
+    modulesSectionTag: 'DATA & AI SERVICES',
+    modulesSectionTitle: 'Agentic AI & Machine Learning Services',
+    modulesSectionDescription:
+      'Specialized enterprise AI architectures designed for autonomous agentic task execution and end-to-end machine learning data management.',
     challengeCards: [
       {
         number: '01',
-        badge: 'Campus Intelligence',
-        title: 'Civitas Analytic — Academic Data Silos & Retention Blind Spots',
+        badge: 'Agentic AI Management',
+        title: 'Agentic AI Management & Enterprise Assistants',
         description:
-          'Educational institutions struggle with disconnected student information systems, hindering predictive intervention for student retention, academic tracking, and institutional resource allocation.',
-        image: '/images/our-solution/projects/data-ai/civitas-analytic.svg',
+          'Autonomous conversational AI agents connected directly to ERP and enterprise databases to assist teams, query real-time project metrics, and execute role-based operational tasks.',
+        image: '/images/our-solution/projects/data-ai/agentic-ai-management.svg',
       },
       {
         number: '02',
-        badge: 'Predictive Business AI',
-        title: 'MarkaPlus — Static Historical Reports & Decision Lag',
+        badge: 'Machine Learning & Data',
+        title: 'Machine Learning & Enterprise Data Management',
         description:
-          'Traditional enterprise reporting only reflects backward-looking records. MarkaPlus embeds predictive AI algorithms into core workflows to forecast market demands and automate business insights.',
-        image: '/images/our-solution/projects/data-ai/markaplus.svg',
+          'End-to-end data pipeline orchestration, multi-source data consolidation, and predictive machine learning models to forecast trends and optimize institutional decision making.',
+        image: '/images/our-solution/projects/data-ai/machine-learning-data-management.svg',
       },
     ],
     approach: [
@@ -327,8 +340,9 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     ],
     partnerIntegration: {
       partnerName: 'Artic Analytica',
-      logo: '/images/our-business/artic-analytica/logo.svg',
-      text: 'Backed by advanced AI technology, we help you analyze trends, predict market demands, and automate business insights with precision across all corporate information sources.',
+      heading: 'Client Portfolio Collaboration: Artic Analytica',
+      logo: '/images/client-logos/artic-analytica.png',
+      text: 'Artic Analytica is one of our key client portfolios. As their trusted technology partner, we collaborate extensively in enterprise data management, advanced AI pipeline architecture, and predictive intelligence modeling to power their data-driven research and strategic institutional decision making.',
     },
     integration: [
       'Real-time streaming pipelines connecting ERP, CRM, and cloud databases',
@@ -379,30 +393,34 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     valuePropIcon: '/images/our-solution/icon-highlight-smart-iot.svg',
     challenge:
       'Physical devices and remote operational assets operate without real-time connectivity, resulting in unexpected equipment failure, delayed maintenance, and security vulnerabilities.',
+    modulesSectionTag: 'SMART IOT SERVICES',
+    modulesSectionTitle: 'Core Enterprise IoT & Automation Services',
+    modulesSectionDescription:
+      'Enterprise-grade IoT solutions bridging physical equipment with digital platforms through industrial edge computing, facility sensor networks, and remote asset telemetry.',
     challengeCards: [
       {
         number: '01',
-        badge: 'Fleet & Hardware Telemetry',
-        title: 'MyBOS — Unconnected Fleet Assets & Unplanned Downtime',
+        badge: 'Industrial Automation',
+        title: 'Industrial Automation & Edge Computing',
         description:
-          'Distributed commercial vehicles and industrial field equipment lack real-time telemetry, leaving operations blind to live engine diagnostics and fuel efficiency.',
-        image: '/images/our-solution/projects/iot/mybos-iot.svg',
+          'Connecting plant machinery, industrial PLCs, and edge gateways to automate manufacturing workflows, monitor equipment status in real-time, and prevent unplanned downtime.',
+        image: '/images/our-solution/projects/iot/industrial-automation-edge.svg',
       },
       {
         number: '02',
-        badge: 'Smart Shopfloor IoT',
-        title: 'Sinau Print — Production Queue Bottlenecks & Idle Machines',
+        badge: 'Facility & Energy',
+        title: 'Smart Facility & Energy Management',
         description:
-          'High-volume printing and fabrication facilities struggle with manual job routing and unmonitored equipment, causing queue bottlenecks and delayed client dispatch.',
-        image: '/images/our-solution/projects/iot/sinau-print-iot.svg',
+          'Multi-sensor environmental telemetry, automated power and energy consumption tracking, ambient climate monitoring, and digital facility safety compliance.',
+        image: '/images/our-solution/projects/iot/smart-facility-energy.svg',
       },
       {
         number: '03',
-        badge: 'Connected Hardware Hub',
-        title: 'ASPOO Marketplace — Fragmented Industrial Hardware Commerce',
+        badge: 'GPS Fleet Tracking',
+        title: 'Connected Asset & Fleet Telemetry',
         description:
-          'Suppliers and facility operators lack a synchronized marketplace ecosystem to monitor, trade, and automate device hardware procurement and smart sensor deployment.',
-        image: '/images/our-solution/projects/iot/aspoo-marketplace.svg',
+          'Real-time GPS vehicle tracking powered by MyBOS, continuous fleet telemetry, engine diagnostics, fuel theft detection, and instant geofencing alerts.',
+        image: '/images/our-solution/projects/iot/mybos-fleet-tracking.svg',
       },
     ],
     approach: [
@@ -463,54 +481,58 @@ export const SOLUTION_SERVICES: SolutionService[] = [
     heroSvg: '/images/our-solution/hero-digital-development.svg',
     serviceSectionSvg: '/images/our-solution/service-section-digital-development.svg',
     whatItIs:
-      'High-performance web development services focused on building secure, responsive, and custom web applications that elevate user engagement and streamline digital operations.',
-    whatServiceTitle: 'Scalable Digital Application Development',
+      'Full-cycle modern web engineering focused on building dynamic, responsive, and brand-aligned digital platforms with intuitive content management and technical SEO excellence.',
+    whatServiceTitle: 'Dynamic, Responsive & SEO-Driven Web Architecture',
     valuePropTitle: 'Beyond Template Builds',
     valuePropDescription:
       'We reject cookie-cutter templates. Every digital platform is custom-coded from the ground up to guarantee optimal performance, robust security, and seamless brand alignment.',
     valuePropIcon: '/images/our-solution/icon-highlight-digital-dev.svg',
     challenge:
       'Slow, rigid, or outdated websites compromise user trust, suffer from security risks, and fail to convert visitors into loyal customers in a competitive digital landscape.',
+    modulesSectionTag: 'DIGITAL APPLICATION SERVICES',
+    modulesSectionTitle: 'Modern Web Development & Digital Platforms',
+    modulesSectionDescription:
+      'Dynamic, responsive, and SEO-engineered web platforms designed to showcase contemporary brand identity with seamless enterprise content management.',
     challengeCards: [
       {
         number: '01',
-        badge: 'Digital Advertising',
-        title: 'Adsvar — Ad Yield Drop & Multi-Channel Distribution Lag',
+        badge: 'Dynamic & Responsive Web',
+        title: 'Dynamic & Responsive Web Engineering',
         description:
-          'Digital media and advertising networks struggle to deliver high-converting, lightning-fast dynamic ad units that capture user attention across diverse devices.',
-        image: '/images/our-solution/projects/digital/adsvar.svg',
+          'Building fast, fluid, and mobile-responsive websites that adapt seamlessly across every screen size, powered by modern frameworks with interactive real-time capabilities.',
+        image: '/images/our-solution/projects/digital/dynamic-responsive-web.svg',
       },
       {
         number: '02',
-        badge: 'Research & Policy Hub',
-        title: 'Artic Analytica — High-Latency Data Presentation & UX Friction',
+        badge: 'Content Management',
+        title: 'Enterprise Content Management & CMS',
         description:
-          'Complex policy research and public data portals often overwhelm users with slow loading times, rigid navigation, and non-responsive visualization architectures.',
-        image: '/images/our-solution/projects/digital/artic-analytica.svg',
+          'Intuitive headless CMS architectures and publishing workflows that give corporate teams effortless control over digital content, instant updates, and multi-channel publishing.',
+        image: '/images/our-solution/projects/digital/enterprise-content-cms.svg',
       },
       {
         number: '03',
-        badge: 'Creative Brand Commerce',
-        title: 'Craftivation — Clunky Catalog UX & Lost Brand Storytelling',
+        badge: 'Brand Identity & UX',
+        title: 'Modern Brand Identity & UI/UX Design',
         description:
-          'Artisan and creative enterprise brands require immersive visual storytelling and fluid web interactions without sacrificing mobile performance or e-commerce conversion rates.',
-        image: '/images/our-solution/projects/digital/craftivation.svg',
+          'Contemporary visual aesthetics crafted to mirror your corporate identity, creating immersive digital storytelling, engaging interactive elements, and high-converting user journeys.',
+        image: '/images/our-solution/projects/digital/modern-brand-identity.svg',
       },
       {
         number: '04',
-        badge: 'Digital Media & Press',
-        title: 'Presstis — Traffic Spikes & Publishing Infrastructure Crashes',
+        badge: 'SEO & Performance',
+        title: 'Advanced SEO Engineering & Optimization',
         description:
-          'High-volume journalism and digital publication platforms risk downtime during breaking news spikes, requiring resilient serverless architecture and instant article indexing.',
-        image: '/images/our-solution/projects/digital/presstis.svg',
+          'Technical search engine optimization, semantic HTML structure, schema markup, and Core Web Vitals optimization engineered to achieve top search rankings and organic visibility.',
+        image: '/images/our-solution/projects/digital/advanced-seo-engineering.svg',
       },
       {
         number: '05',
-        badge: 'Automotive Digital Retail',
-        title: 'X1 Tire — Complex Fitment Filtering & High Mobile Bounce',
+        badge: 'Custom Web Applications',
+        title: 'Custom Web Applications & Portal Systems',
         description:
-          'Automotive aftermarket retailers struggle with multi-tier tyre sizing and fitment filters, leading to customer drop-offs and abandoned booking pipelines.',
-        image: '/images/our-solution/projects/digital/x1-tire.svg',
+          'Tailored enterprise web applications with complex interactive filtering, secure authentication, and seamless third-party API and database integrations.',
+        image: '/images/our-solution/projects/digital/custom-web-applications.svg',
       },
     ],
     approach: [

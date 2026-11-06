@@ -18,6 +18,12 @@ const COMPANY_LINKS = [
   { name: 'Privacy Policy', href: '/privacy-policy' },
 ];
 
+const USER_LINKS = [
+  { name: 'Client Portal', href: '/portal' },
+  { name: 'General CRM Hub', href: '/crm' },
+  { name: 'Feedback & Rating', href: '/feedback' },
+];
+
 const SOLUTION_LINKS = [
   { name: 'Enterprise Solution', href: '/our-solution/enterprise-solution' },
   { name: 'Data & AI Integration', href: '/our-solution/data-ai-integration' },
@@ -159,6 +165,17 @@ export default function Footer() {
                   ))}
                 </ul>
               </div>
+
+              <div className="flex flex-col gap-3.5">
+                <FooterTitle href="/portal">USER &amp; CLIENT</FooterTitle>
+                <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
+                  {USER_LINKS.map((link) => (
+                    <li key={link.href}>
+                      <FooterLink href={link.href}>{link.name}</FooterLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             {/* Column 2: SOLUTIONS */}
@@ -199,8 +216,8 @@ export default function Footer() {
                 </a>
               </div>
 
-              {/* <div className="flex flex-col gap-3">
-                <FooterTitle>SEMARANG HQ</FooterTitle>
+              <div className="flex flex-col gap-3">
+                <FooterTitle>SEMARANG OFFICE</FooterTitle>
                 <a
                   href="https://www.google.com/maps/search/?api=1&query=MG+Setos+Semarang+Indonesia"
                   target="_blank"
@@ -211,7 +228,7 @@ export default function Footer() {
                   <span className="block max-[1799px]:inline">Semarang Tengah District, Semarang City, Central Java</span>{' '}
                   <span className="block max-[1799px]:inline">50133, Indonesia →</span>
                 </a>
-              </div> */}
+              </div>
 
               <div className="flex flex-col gap-3">
                 <FooterTitle>CONTACT</FooterTitle>

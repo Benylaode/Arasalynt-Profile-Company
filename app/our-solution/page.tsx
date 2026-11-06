@@ -207,7 +207,7 @@ export default function OurSolutionPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A0D14] via-[#0A0D14]/75 to-[#0A0D14]/35" />
                 </div>
 
-                {/* Background Stylized Arsalynt Geometric Brand Graphic */}
+                {/* Background Stylized Arsalynk Geometric Brand Graphic */}
                 <div className="pointer-events-none absolute inset-0 overflow-hidden">
                   <svg
                     viewBox="0 0 402 278"

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import { ServiceHighlightCardSvg } from '@/components/our-solution/ServiceHighlightCardSvg';
+import ChallengeCardsSection from '@/components/our-solution/ChallengeCardsSection';
 import JsonLd from '@/components/seo/JsonLd';
 import { getSolutionService, SOLUTION_SERVICES } from '@/lib/our-solution.data';
 import { SITE_URL } from '@/lib/constants';
@@ -228,89 +229,15 @@ export default async function SolutionServicePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* ── SECTION 2: PROBLEMS IT SOLVES (THE CHALLENGE) ── */}
-      <section className="bg-[#F6FBFF] px-[6vw] py-[clamp(70px,6.5vw,120px)] max-[1199px]:px-[4vw]">
-        <div className="mx-auto flex max-w-[1600px] flex-col gap-10">
-          <div className="flex max-w-[900px] flex-col gap-4">
-            <div className="flex items-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.08em] text-[#1A3E9E]">
-              <span className="h-2 w-2 bg-[#1A3E9E]" />
-              <span>THE CHALLENGE</span>
-            </div>
-            <h2 className="font-heading text-[clamp(32px,3.2vw,56px)] font-medium leading-[1.12]">
-              Real Challenges We Solve
-            </h2>
-            <p className="font-body text-[clamp(15px,1vw,18px)] leading-[1.65] text-[#424242]">
-              {service.challenge}
-            </p>
-          </div>
-
-          <div
-            className={`grid grid-cols-1 gap-6 ${
-              (service.challengeCards?.length ?? 3) === 2
-                ? 'md:grid-cols-2 max-w-[1100px] mx-auto w-full'
-                : 'md:grid-cols-2 lg:grid-cols-3'
-            }`}
-          >
-            {(service.challengeCards ?? [
-              {
-                number: '01',
-                badge: 'Data Disconnect',
-                title: 'Information Fragmentation',
-                description: 'Corporate data trapped across disconnected databases and spreadsheets prevents teams from achieving a single source of operational truth.',
-                image: '/images/projects/altatic-analytic/1.webp',
-              },
-              {
-                number: '02',
-                badge: 'Decision Lag',
-                title: 'Data Lag & Reactive Decisions',
-                description: 'Delayed batch reports leave leadership reacting after problems happen instead of proactively forecasting market trends and demands.',
-                image: '/images/projects/altatic-analytic/2.webp',
-              },
-              {
-                number: '03',
-                badge: 'Resource Drain',
-                title: 'Manual Administrative Burden',
-                description: 'Valuable workforce hours are consumed by repetitive data cleaning, manual reconciliations, and error-prone reporting pipelines.',
-                image: '/images/projects/altatic-analytic/3.webp',
-              },
-            ]).map((card) => (
-              <div
-                key={card.number}
-                className="group flex flex-col overflow-hidden rounded-[26px] border border-[#E4E4E4] bg-white shadow-[0_12px_36px_rgba(26,62,158,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#7F9CFF] hover:shadow-[0_22px_50px_rgba(26,62,158,0.16)]"
-              >
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#101010]/5">
-                  <img
-                    src={card.image}
-                    alt={card.title}
-                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-                </div>
-
-                <div className="flex flex-1 flex-col justify-between bg-gradient-to-b from-[#101010] to-[#155A99] p-6 text-white sm:p-7">
-                  <div>
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="inline-flex items-center rounded-full bg-[#E6FF2A] px-3 py-1 font-body text-[11px] font-bold uppercase tracking-wider text-[#101010] shadow-sm">
-                        {card.badge}
-                      </span>
-                      <span className="font-body text-[13px] font-bold tracking-widest text-[#E6FF2A]">
-                        {card.number}
-                      </span>
-                    </div>
-
-                    <h3 className="mt-4 font-heading text-[21px] font-medium leading-snug text-[#F7F7F7]">
-                      {card.title}
-                    </h3>
-                    <p className="mt-2.5 font-body text-[13.5px] leading-[1.65] text-white/85">
-                      {card.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── SECTION 2: PROBLEMS IT SOLVES (THE CHALLENGE & DETAILS POPUP) ── */}
+      <ChallengeCardsSection
+        cards={service.challengeCards ?? []}
+        modulesSectionTag={service.modulesSectionTag}
+        modulesSectionTitle={service.modulesSectionTitle}
+        modulesSectionDescription={service.modulesSectionDescription}
+        challengeFallback={service.challenge}
+        solutionTitle={service.title}
+      />
 
       {/* ── COMBINED SECTION: REAL IMPACTS & INTEGRATION ARCHITECTURE ── */}
       <section className="bg-[#101010] px-[6vw] py-[clamp(80px,7vw,130px)] text-white max-[1199px]:px-[4vw]">
@@ -320,7 +247,7 @@ export default async function SolutionServicePage({ params }: PageProps) {
             <div className="flex flex-col justify-between rounded-[32px] border border-black/40 bg-[#3B3A3A]/40 p-7 shadow-2xl backdrop-blur-sm sm:p-9 lg:col-span-5 lg:p-11">
               <div>
                 <div className="font-body text-[12px] font-bold uppercase tracking-[0.14em] text-[#E6FF2A] sm:text-[13px]">
-                  ARSALYNT IMPACTS
+                  ARSALYNK IMPACTS
                 </div>
                 <h2 className="mt-3 font-heading text-[clamp(32px,3vw,52px)] font-medium leading-[1.1] text-white">
                   Real Impacts
@@ -367,9 +294,12 @@ export default async function SolutionServicePage({ params }: PageProps) {
                       />
                     </div>
                   )}
-                  <h3 className="font-heading text-[clamp(26px,2.4vw,40px)] font-bold leading-tight text-[#101010]">
-                    Integration with {service.partnerIntegration?.partnerName ?? 'Ecosystem'}
-                  </h3>
+                  <div className="flex flex-col gap-1.5">
+                    <h3 className="font-heading text-[clamp(26px,2.4vw,40px)] font-bold leading-tight text-[#101010]">
+                      {service.partnerIntegration?.heading ??
+                        `Integration with ${service.partnerIntegration?.partnerName ?? 'Ecosystem'}`}
+                    </h3>
+                  </div>
                 </div>
 
                 <div className="mt-6 rounded-2xl border border-[#0072BE]/10 bg-[#F2FCFF] p-5 sm:mt-8 sm:p-6">

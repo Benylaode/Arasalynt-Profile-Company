@@ -8,6 +8,7 @@ import {
   type CSSProperties,
 } from 'react';
 import Link from 'next/link';
+import { SOLUTION_SERVICES } from '@/lib/our-solution.data';
 
 /* =========================================================
    CONFIGURATION
@@ -36,138 +37,36 @@ type Project = {
   image: string;
 };
 
-const MOCK_PROJECTS: Project[] = [
-  {
-    id: 1,
-    slug: 'enterprise-solution',
-    client: 'ENTERPRISE SYSTEM MANAGEMENT',
-    title: 'Unified Operational Governance & System Synthesis',
-    category: 'ENTERPRISE SOLUTION • MARKA ERP',
-    tabCategory: 'ENTERPRISE SOLUTION',
-    image: '/images/our-solution/projects/enterprise/marka-finance.png',
-  },
-  {
-    id: 2,
-    slug: 'enterprise-solution',
-    client: 'CROSS-DIVISION WORKFLOW',
-    title: 'Autonomous Modules, Cohesive Enterprise Core',
-    category: 'ENTERPRISE SOLUTION • WORKFLOW ARCHITECTURE',
-    tabCategory: 'ENTERPRISE SOLUTION',
-    image: '/images/our-solution/projects/enterprise/marka-project-manager.png',
-  },
-  {
-    id: 3,
-    slug: 'enterprise-solution',
-    client: 'PEOPLE & RESOURCE ECOSYSTEM',
-    title: 'Continuous Workflow Synchronization Across Divisions',
-    category: 'ENTERPRISE SOLUTION • HRMS & TALENT',
-    tabCategory: 'ENTERPRISE SOLUTION',
-    image: '/images/our-solution/projects/enterprise/marka-hrms.png',
-  },
-  {
-    id: 4,
-    slug: 'enterprise-solution',
-    client: 'SUPPLY CHAIN HARMONY',
-    title: 'End-to-End Enterprise Resource Balance',
-    category: 'ENTERPRISE SOLUTION • ASSET MANAGEMENT',
-    tabCategory: 'ENTERPRISE SOLUTION',
-    image: '/images/our-solution/projects/enterprise/marka-resource.png',
-  },
-  {
-    id: 5,
-    slug: 'data-ai-integration',
-    client: 'PREDICTIVE REASONING',
-    title: 'Transforming Raw Operational Entropy into Strategic Foresight',
-    category: 'DATA & AI • PREDICTIVE DEMAND',
-    tabCategory: 'DATA & AI INTEGRATION',
-    image: '/images/our-solution/projects/data-ai/markaplus.svg',
-  },
-  {
-    id: 6,
-    slug: 'data-ai-integration',
-    client: 'INSTITUTIONAL INTELLIGENCE',
-    title: 'Unified Data Harmonization & Strategic Decision Engineering',
-    category: 'DATA & AI • UNIFIED INTELLIGENCE',
-    tabCategory: 'DATA & AI INTEGRATION',
-    image: '/images/our-solution/projects/data-ai/civitas-analytic.svg',
-  },
-  {
-    id: 7,
-    slug: 'smart-iot-system',
-    client: 'CONNECTED TELEMETRY',
-    title: 'Bridging Physical Assets & Digital Realities in Real-Time',
-    category: 'SMART IOT • INDUSTRIAL TELEMETRY',
-    tabCategory: 'SMART IOT SYSTEM',
-    image: '/images/our-solution/projects/iot/mybos-iot.svg',
-  },
-  {
-    id: 8,
-    slug: 'smart-iot-system',
-    client: 'EDGE AUTOMATION',
-    title: 'Intelligent Edge Telemetry & Hardware Workflow Automation',
-    category: 'SMART IOT • SMART SHOPFLOOR',
-    tabCategory: 'SMART IOT SYSTEM',
-    image: '/images/our-solution/projects/iot/sinau-print-iot.svg',
-  },
-  {
-    id: 9,
-    slug: 'smart-iot-system',
-    client: 'DEVICE ECOSYSTEM',
-    title: 'Synchronized Connected Infrastructure for Resilient Scale',
-    category: 'SMART IOT • HARDWARE HUB',
-    tabCategory: 'SMART IOT SYSTEM',
-    image: '/images/our-solution/projects/iot/aspoo-marketplace.svg',
-  },
-  {
-    id: 10,
-    slug: 'digital-development',
-    client: 'DIGITAL PERFORMANCE',
-    title: 'Architectural Excellence & Conversion-Driven Digital Experiences',
-    category: 'DIGITAL DEVELOPMENT • ARCHITECTURAL UX',
-    tabCategory: 'DIGITAL DEVELOPMENT',
-    image: '/images/our-solution/projects/digital/adsvar.svg',
-  },
-  {
-    id: 11,
-    slug: 'digital-development',
-    client: 'RESILIENT PLATFORMS',
-    title: 'High-Density Cloud Architectures Engineered for Scale',
-    category: 'DIGITAL DEVELOPMENT • CLOUD RESILIENCE',
-    tabCategory: 'DIGITAL DEVELOPMENT',
-    image: '/images/our-solution/projects/digital/presstis.svg',
-  },
-  {
-    id: 12,
-    slug: 'digital-development',
-    client: 'IMMERSIVE STORYTELLING',
-    title: 'Fluid Visual Aesthetics Balanced with High-Speed Precision',
-    category: 'DIGITAL DEVELOPMENT • CREATIVE COMMERCE',
-    tabCategory: 'DIGITAL DEVELOPMENT',
-    image: '/images/our-solution/projects/digital/craftivation.svg',
-  },
-  {
-    id: 13,
-    slug: 'digital-development',
-    client: 'SCALABLE PORTALS',
-    title: 'Complex Enterprise Interfaces Crafted for Effortless Clarity',
-    category: 'DIGITAL DEVELOPMENT • ENTERPRISE PORTALS',
-    tabCategory: 'DIGITAL DEVELOPMENT',
-    image: '/images/our-solution/projects/digital/artic-analytica.svg',
-  },
-];
+const CATEGORY_MAP: Record<string, ProjectCategory> = {
+  'enterprise-solution': 'ENTERPRISE SOLUTION',
+  'data-ai-integration': 'DATA & AI INTEGRATION',
+  'smart-iot-system': 'SMART IOT SYSTEM',
+  'digital-development': 'DIGITAL DEVELOPMENT',
+};
+
+/**
+ * Projects are dynamically linked directly from the single source of truth in
+ * `lib/our-solution.data.ts` (SOLUTION_SERVICES).
+ * Any change to services or modules in Our Solution will automatically sync here.
+ */
+const MOCK_PROJECTS: Project[] = SOLUTION_SERVICES.flatMap((service, sIdx) => {
+  const tabCategory = CATEGORY_MAP[service.slug] ?? 'ENTERPRISE SOLUTION';
+  return (service.challengeCards ?? []).map((card, cIdx) => ({
+    id: sIdx * 10 + cIdx + 1,
+    slug: service.slug,
+    client: card.badge,
+    title: card.title,
+    category: `${tabCategory} • ${card.badge}`,
+    tabCategory,
+    image: card.image,
+  }));
+});
 
 const CATEGORY_WIDTH: Record<ProjectCategory, string> = {
   'ENTERPRISE SOLUTION': 'w-auto px-[14px]',
   'DATA & AI INTEGRATION': 'w-auto px-[14px]',
   'SMART IOT SYSTEM': 'w-auto px-[14px]',
   'DIGITAL DEVELOPMENT': 'w-auto px-[14px]',
-};
-
-const SERVICE_CATEGORY_LABELS: Record<string, string> = {
-  'enterprise-solution': 'ENTERPRISE SOLUTION • MARKA ERP',
-  'data-ai-integration': 'DATA & AI • ARTIFICIAL INTELLIGENCE',
-  'smart-iot-system': 'SMART IOT • KALUNA TECHNOLOGY',
-  'digital-development': 'DIGITAL DEVELOPMENT • WEB2UP',
 };
 
 /* =========================================================
@@ -395,7 +294,7 @@ export default function ProjectShowcase() {
 
           {/* View All Works */}
           <Link
-            href="/our-works"
+            href="/our-solution"
             className="
               inline-flex h-[38px]
               shrink-0 items-center justify-center
@@ -532,7 +431,7 @@ export default function ProjectShowcase() {
               </span>
 
               <ProjectCategoryLabel
-                category={SERVICE_CATEGORY_LABELS[project.slug] ?? project.category}
+                category={project.category}
                 className="mt-[10px] text-[9px]"
               />
             </span>
@@ -895,23 +794,30 @@ function ProjectCarouselTrack({ projects }: { projects: Project[] }) {
                   bottom-[clamp(32px,3.021vw,58px)]
                 "
               >
-                <h3
-                  className="
-                    max-w-[1236px]
-
-                    font-heading
-                    text-[clamp(38px,3.333vw,64px)]
-                    font-medium
-                    leading-[1.2]
-                    tracking-[-0.02em]
-                    text-[#F7F7F7]
-                  "
+                <Link
+                  href={`/our-solution/${project.slug}`}
+                  className="pointer-events-auto inline-block group/link"
                 >
-                  {project.title}
-                </h3>
+                  <h3
+                    className="
+                      max-w-[1236px]
+
+                      font-heading
+                      text-[clamp(38px,3.333vw,64px)]
+                      font-medium
+                      leading-[1.2]
+                      tracking-[-0.02em]
+                      text-[#F7F7F7]
+                      transition-colors
+                      group-hover/link:text-[#E6FF2A]
+                    "
+                  >
+                    {project.title}
+                  </h3>
+                </Link>
 
                 <ProjectCategoryLabel
-                  category={SERVICE_CATEGORY_LABELS[project.slug] ?? project.category}
+                  category={project.category}
                   className="
                     mt-[clamp(7px,0.365vw,10px)]
                     text-[clamp(11.8px,0.854vw,16.4px)]

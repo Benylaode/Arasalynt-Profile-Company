@@ -183,7 +183,7 @@ const INITIAL_MESSAGE: ChatMessage = {
   id: 'initial-greeting',
   role: 'assistant',
   content:
-    'Hello! I am ArsAI, the intelligent assistant for Arsalynk. I can help you explore our enterprise technology solutions, company background, or connect you directly with our Customer Support team. How can I assist you today?',
+    'Hello! I am Arsalynk Plus, the intelligent assistant for Arsalynk. I can help you explore our enterprise technology solutions, company background, or connect you directly with our Customer Support team. How can I assist you today?',
   timestamp: formatCurrentTime(),
 };
 
@@ -217,7 +217,7 @@ const MessageBubble = memo(function MessageBubble({
           </div>
         )}
         <span className={isHumanCS ? styles.csSenderName : styles.senderName}>
-          {isHumanCS ? 'Customer Service' : isAssistant ? 'ArsAI' : 'You'}
+          {isHumanCS ? 'Customer Service' : isAssistant ? 'Arsalynk Plus' : 'You'}
         </span>
         {isHumanCS && <span className={styles.csVerified}>WhatsApp</span>}
         <span className={styles.messageTimestamp}>· {msg.timestamp}</span>
@@ -637,7 +637,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
     const returnMsg: ChatMessage = {
       id: `system-return-${Date.now()}`,
       role: 'assistant',
-      content: 'Conversation mode returned to **ArsAI**.',
+      content: 'Conversation mode returned to **Arsalynk Plus**.',
       timestamp: formatCurrentTime(),
     };
     setMessages((prev) => [...prev, returnMsg]);
@@ -657,7 +657,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
         key="arsai-drawer-section"
         className={styles.drawer}
         role="dialog"
-        aria-label="ArsAI Chat Assistant"
+        aria-label="Arsalynk Plus Assistant"
         aria-modal="true"
       >
         {/* Header */}
@@ -679,7 +679,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
             </div>
             <div className={styles.botText}>
               <span className={styles.botName}>
-                {chatMode === 'human_cs' ? 'Customer Service' : 'ArsAI'}
+                {chatMode === 'human_cs' ? 'Customer Service' : 'Arsalynk Plus'}
               </span>
               <span className={styles.botStatus}>
                 <span className={styles.statusDot} />
@@ -696,9 +696,9 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
                 type="button"
                 className={styles.switchModeBtn}
                 onClick={handleSwitchToAI}
-                title="Kembali ke mode ArsAI"
+                title="Kembali ke mode Arsalynk Plus"
               >
-                ← Mode ArsAI
+                ← Mode Arsalynk Plus
               </button>
             )}
             <button
@@ -731,7 +731,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
                 <div className={styles.miniAvatar}>
                   <MarBotIcon className={styles.miniAvatarIcon} />
                 </div>
-                <span className={styles.senderName}>ArsAI</span>
+                <span className={styles.senderName}>Arsalynk Plus</span>
                 <span className={styles.messageTimestamp}>· sedang mengetik</span>
               </div>
               <div className={styles.typingContainer}>
@@ -773,7 +773,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
               placeholder={
                 chatMode === 'human_cs'
                   ? 'Type a message for Customer Service...'
-                  : 'Ask ArsAI anything..'
+                  : 'Ask Arsalynk Plus anything..'
               }
               className={styles.inputField}
               disabled={isLoading}
@@ -804,7 +804,7 @@ export default function MarBotDrawer({ isOpen, onClose }: MarBotDrawerProps) {
           <p className={styles.disclaimer}>
             {chatMode === 'human_cs'
               ? (shortCode ? `Connected directly to WhatsApp CS (Ticket #${shortCode}).` : `Terkoneksi langsung ke WhatsApp CS (${AI_SWITCH_CS_PHONE_DISPLAY}).`)
-              : 'ArsAI powered by Enterprise AI & Live WhatsApp CS.'}
+              : 'Arsalynk Plus powered by Enterprise AI & Live WhatsApp CS.'}
           </p>
         </footer>
       </section>

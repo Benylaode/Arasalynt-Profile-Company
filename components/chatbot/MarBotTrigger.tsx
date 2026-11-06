@@ -31,12 +31,12 @@ export default function MarBotTrigger({ isOpen, onClick }: MarBotTriggerProps) {
       type="button"
       className={styles.trigger}
       onClick={onClick}
-      aria-label={isOpen ? 'Tutup ArsAI' : 'Buka ArsAI Assistant'}
-      title="Tanya ArsAI Arsalynk"
+      aria-label={isOpen ? 'Tutup Arsalynk Plus' : 'Buka Arsalynk Plus Assistant'}
+      title="Tanya Arsalynk Plus"
       aria-expanded={isOpen}
     >
       <MarBotIcon className={styles.icon} />
-      <span className={styles.tooltip}>Tanya ArsAI</span>
+      <span className={styles.tooltip}>Tanya Arsalynk Plus</span>
     </button>
   );
 }
