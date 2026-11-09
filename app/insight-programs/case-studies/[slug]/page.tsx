@@ -14,7 +14,12 @@ type PageProps = {
 };
 
 export function generateStaticParams() {
-  return ALL_CASE_STUDIES.map(({ slug }) => ({ slug }));
+  const slugs = ALL_CASE_STUDIES.map(({ slug }) => ({ slug }));
+  slugs.push({ slug: 'myboss-logistics-fleet-management' });
+  slugs.push({ slug: 'markaplus-ai-assistant' });
+  slugs.push({ slug: 'marka-project-manager' });
+  slugs.push({ slug: 'marka-finance-accounting' });
+  return slugs;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

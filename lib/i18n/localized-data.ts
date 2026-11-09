@@ -1045,437 +1045,738 @@ export function getLocalizedServiceCardDetail(
 // 4. CASE STUDIES (CaseStudyArticle[])
 // ============================================================================
 const CASE_STUDIES_ID_MAP: Record<string, Partial<CaseStudyArticle>> = {
-  'sinau-print-pos-system': {
-    title: 'Sinau Print',
-    category: 'SOLUSI ENTERPRISE',
-    tags: ['POINT OF SALE', 'ARSITEKTUR ERP', 'OTOMASI RITEL'],
-    dateLabel: 'APRIL 2026',
-    description:
-      'Solusi ERP operasional ritel dan Point of Sale terpusat yang dirancang untuk menyederhanakan penjualan multi-cabang, alur pesanan, penanganan pembayaran, serta pengiriman faktur WhatsApp otomatis.',
-    coverImageAlt: 'Sistem Manajemen Operasional dan Point of Sale Sinau Print',
-    sections: [
-      {
-        eyebrow: 'TANTANGAN',
-        mainTitle: 'Mengelola Pesanan Bervolume Tinggi Lintas Tim Tanpa Alur Operasional Terpadu',
-        paragraphs: [
-          'Mengelola pesanan ritel kustom, produksi cetak, dan pemenuhan pesanan pelanggan di berbagai tim cabang menciptakan hambatan ketika transaksi melibatkan uang muka bervariasi, jadwal cicilan, dan produksi bertahap.',
-          'Tanpa arsitektur terpusat, bisnis mengalami silo data antar-kasir, keterlambatan pengiriman faktur, selisih pelacakan pembayaran, dan keterbatasan visibilitas terhadap pendapatan operasional harian.',
-        ],
-      },
-      {
-        mainTitle: 'Menghubungkan Penjualan, Pemrosesan Pesanan, dan Produksi ke Dalam Satu Ekosistem',
-        paragraphs: [
-          'Kami merekayasa sistem manajemen alur kerja dan POS enterprise khusus yang menyinkronkan meja kasir depan, antrean produksi, rekonsiliasi akuntansi, dan komunikasi pelanggan ke dalam satu platform terpadu.',
-        ],
-        image: {
-          src: '/images/case-studies/sinau-print.svg',
-          alt: 'Platform POS terpusat yang menghubungkan tim penjualan, pembayaran, dan produksi',
-        },
-      },
-      {
-        eyebrow: 'SOLUSI KAMI',
-        mainTitle: 'Arsitektur Terintegrasi yang Dirancang di Setiap Tahapan Alur Kerja Ritel',
-        subsections: [
-          {
-            subtitle: '01',
-            content:
-              'Dasbor Penjualan & Transaksi Real-Time: Menyajikan performa penjualan multi-kasir, kecepatan transaksi, dan analitik pendapatan langsung untuk visibilitas kepemimpinan instan.',
-          },
-          {
-            subtitle: '02',
-            content:
-              'Pengiriman & Pelacakan Pesanan Langsung: Tim penjualan dan layanan pelanggan mencatat, memperbarui, serta meneruskan pesanan cetak kustom dengan pencatatan status terperinci.',
-          },
-          {
-            subtitle: '03',
-            content:
-              'Pemrosesan Split Bill & Pembayaran Bertahap: Dukungan bawaan untuk uang muka parsial, jadwal termin, dan rekonsiliasi pelunasan akhir.',
-          },
-          {
-            subtitle: '04',
-            content:
-              'Integrasi Payment Gateway Midtrans Otomatis: Pembayaran digital mulus melalui virtual account, QRIS, dan e-wallet dengan pembaruan status instan.',
-          },
-          {
-            subtitle: '05',
-            content:
-              'Kontrol Akses Operasional Berbasis Peran: Memisahkan secara ketat wewenang kasir, staf produksi, pengelola inventaris, dan manajer cabang.',
-          },
-          {
-            subtitle: '06',
-            content:
-              'Pengiriman Faktur Otomatis via WhatsApp API: Mengirimkan tanda terima PDF digital dan pengingat pembayaran langsung ke pelanggan saat checkout, memangkas waktu tunggu di kasir.',
-          },
-        ],
-      },
-      {
-        eyebrow: 'HASIL AKHIR',
-        mainTitle: 'Operasional Toko yang Transparan, Efisien, dan Lebih Cepat',
-        paragraphs: [
-          'Penerapan sistem Sinau Print menghilangkan penanganan nota manual, memangkas waktu siklus transaksi lebih dari 45%, dan memberikan visibilitas penuh kepada manajemen atas pendapatan cabang harian serta hambatan produksi.',
-        ],
-      },
+  'mybos-fondasi-pelacakan-armada': {
+    title:
+      'Bagaimana MyBOS Menyiapkan Fondasi Pelacakan Armada yang Mencatat Setiap Akses dan Menolak Token Tidak Sah dalam ±7 Milidetik',
+    category: 'SMART IOT SYSTEM',
+    tags: [
+      'PELACAKAN ARMADA',
+      'SISTEM LOGISTIK',
+      'AUDIT TRAIL',
+      'API APLIKASI DRIVER',
+      'KONTROL AKSES',
     ],
-  },
-  'presstis-digital-platform': {
-    title: 'Presstis',
-    category: 'PENGEMBANGAN DIGITAL',
-    tags: ['WEB DEVELOPMENT', 'PLATFORM DIGITAL', 'ARSITEKTUR MEDIA'],
-    dateLabel: 'MEI 2026',
+    dateLabel: 'NOVEMBER 2026',
     description:
-      'Platform penerbitan digital dan distribusi media berkinerja tinggi yang direkayasa untuk jaringan multi-publikasi, kolaborasi editorial, dan interaksi pembaca berkonkurensi tinggi.',
-    coverImageAlt: 'Platform Web dan Media Digital Berskala Tinggi Presstis',
+      'Studi kasus MyBOS: fondasi platform pelacakan armada dengan akses per peran, API aman untuk aplikasi lapangan, dan jejak audit di setiap akses.',
+    coverImageAlt:
+      'Halaman Admin Log MyBOS menampilkan riwayat akses dengan pengguna, waktu, dan platform',
     sections: [
       {
-        eyebrow: 'TANTANGAN',
-        mainTitle: 'Pipeline Editorial Terfragmentasi dan Pengiriman Lambat Saat Lonjakan Trafik',
+        eyebrow: 'RINGKASAN EKSEKUTIF (AT-A-GLANCE)',
+        mainTitle:
+          'Fondasi Identitas, Hak Akses, dan Jejak Audit Sebelum Modul Armada',
         paragraphs: [
-          'Jaringan media modern yang beroperasi di berbagai publikasi menghadapi kendala teknis berulang: kecepatan muat halaman lambat yang menurunkan peringkat pencarian, sistem manajemen konten yang terpisah bagi tim editorial, serta kerentanan keamanan saat lonjakan trafik berita utama.',
-          'Framework web monolitik lama terbukti terlalu kaku untuk mendukung sindikasi real-time lintas domain sembari mempertahankan standar UX modern.',
+          'Klien & Skenario: MyBOS (Marka Logistik / BSP Tracking Web), platform pelacakan armada untuk operasional logistik. Studi kasus ini membahas tahap fondasi: identitas, hak akses, API untuk aplikasi lapangan, dan jejak audit.',
+          'Fokus Masalah: Sebelum telemetri kendaraan bisa dipakai, setiap orang dan setiap aplikasi yang mengakses data armada harus punya identitas sendiri, hak yang jelas, dan jejak yang bisa ditelusuri.',
+          'Solusi Produk: Web admin (Laravel 9, Vue 3, Inertia.js) dan API v1 berbasis JWT untuk aplikasi mobile, dengan manajemen peran dan izin, pembatasan laju permintaan, serta log audit terpisah untuk panel admin dan API.',
+          'Durasi Implementasi: Tahap fondasi selesai dan tercatat di repositori pada 18 Mei 2024. Modul armada (kendaraan, GPS, rute, delivery order) adalah tahap berikutnya.',
+        ],
+        metrics: [
+          {
+            value: '±7 ms',
+            label: 'Penolakan Token',
+            detail:
+              'Permintaan tanpa token (403) atau token rusak (401) ditolak dalam ±7 milidetik (Uji Lab)',
+          },
+          {
+            value: '81 ms',
+            label: 'Median Login API',
+            detail:
+              'Tetap di bawah 0,6 detik saat 10 klien login bersamaan (Uji Lab)',
+          },
+          {
+            value: '94%',
+            label: 'Hemat Waktu Penelusuran',
+            detail:
+              'Menelusuri satu kejadian akses: ±47 menit → ±2,6 menit (Simulasi)',
+          },
         ],
       },
       {
-        mainTitle: 'Arsitektur Web Kustom yang Dibangun untuk Kecepatan dan Skalabilitas Tanpa Kompromi',
+        eyebrow: '1. SKENARIO MASALAH',
+        mainTitle: 'Ketika Data Armada Dibuka sebelum Pintunya Dikunci',
         paragraphs: [
-          'Kami merancang dan mengodekan platform digital modern dari awal, memanfaatkan teknologi web edge-rendered, caching CDN terdistribusi, dan backend ruang redaksi terpadu yang intuitif untuk operasional editorial berkecepatan tinggi.',
+          'Operasional logistik melibatkan dispatcher, admin kantor, manajer, dan pengemudi di lapangan. Tanpa telemetri, kondisi mesin dan efisiensi bahan bakar armada sulit dipantau. Namun sebelum data kendaraan dan lokasi dialirkan ke sistem, ada pertanyaan yang harus dijawab lebih dulu: siapa boleh melihat apa, dan bagaimana setiap akses bisa dibuktikan.',
+          'Tanpa fondasi itu, sistem pelacakan yang baru dibangun akan mewarisi kebiasaan lama: satu akun dipakai bersama tanpa akuntabilitas, perubahan hak akses tanpa jejak di percakapan chat, dan aplikasi lapangan yang tidak terhubung dengan aman.',
+        ],
+        subsections: [
+          {
+            subtitle: 'Satu Akun untuk Banyak Orang',
+            content:
+              'Dispatcher dan admin berbagi satu login supaya praktis. Setiap perubahan data tercatat atas nama akun yang sama. Akibatnya, saat ada data yang salah, tidak ada yang bisa menunjukkan siapa yang mengubahnya.',
+          },
+          {
+            subtitle: 'Perubahan Hak Akses Tanpa Jejak',
+            content:
+              'Hak akses ditambah atau dicabut lewat permintaan di chat. Riwayatnya tersebar di percakapan. Akibatnya, penelusuran sengketa atau audit internal memakan waktu berjam-jam dan bergantung pada ingatan orang.',
+          },
+          {
+            subtitle: 'Aplikasi Lapangan yang Tidak Terhubung dengan Aman',
+            content:
+              'Aplikasi pengemudi butuh jalur API sendiri, terpisah dari panel admin. Tanpa token yang kedaluwarsa dan pembatasan permintaan, satu aplikasi yang bocor kredensialnya bisa dipakai terus-menerus. Akibatnya, data armada terbuka bagi siapa pun yang memegang kredensial itu.',
+          },
         ],
         image: {
-          src: '/images/case-studies/presstis.svg',
-          alt: 'Arsitektur platform media digital berkinerja tinggi Presstis',
+          src: '/images/case-studies/mybos/workflow-comparison.png',
+          alt: 'Transformasi akses dari akun bersama tanpa jejak menjadi identitas per orang dengan catatan di setiap akses',
         },
       },
       {
-        eyebrow: 'SOLUSI KAMI',
-        mainTitle: 'Skalabilitas Headless, Akselerasi Edge, dan Tata Kelola Editorial Terpadu',
+        eyebrow: '2. SOLUSI PRODUK',
+        mainTitle:
+          'Menghubungkan Panel Admin dan Aplikasi Lapangan dalam Satu Lapisan Akses yang Tercatat',
+        paragraphs: [
+          'MyBOS dibangun dengan urutan yang sengaja dibalik: lapisan akses dan audit diselesaikan sebelum modul armada. Alih-alih menambahkan keamanan setelah data GPS mengalir, setiap fitur berikutnya tinggal memakai identitas, peran, dan pencatatan yang sudah ada.',
+          'Platform ini memisahkan dua pintu masuk: panel admin web untuk dispatcher dan manajer, dan API v1 untuk aplikasi mobile di lapangan. Keduanya dicatat di log yang terpisah.',
+        ],
         subsections: [
           {
-            subtitle: '01',
+            subtitle:
+              'A. API untuk Aplikasi Lapangan dengan Token dan Pembatasan Laju',
             content:
-              'Pengiriman Konten Berlatensi Sangat Rendah: Distribusi berbasis edge-cache yang menjamin waktu muat halaman sub-detik bagi puluhan ribu pembaca serentak.',
+              'Saat aplikasi mobile login lewat API, sistem memeriksa email dan kata sandi lalu menerbitkan token JWT yang berlaku 60 menit (bisa di-refresh hingga 14 hari). Middleware JWT menolak permintaan tanpa token (HTTP 403) dan token rusak (HTTP 401) dalam ±7 milidetik, serta membatasi 60 permintaan per menit per pengguna atau alamat IP.',
           },
           {
-            subtitle: '02',
+            subtitle: 'B. Peran dan Izin per Pengguna',
             content:
-              'Ruang Kerja Editorial Multi-Publikasi: CMS penerbitan terpusat yang memungkinkan jurnalis dan editor menyusun, meninjau, serta menyindikasikan konten di berbagai domain brand.',
+              'Izin dikelola dengan Spatie Laravel-Permission per peran (melihat dashboard, log admin, log API, kelola pengguna & peran). Begitu izin peran diubah, perubahan langsung berlaku ke seluruh pengguna pemegang peran dan dicatat sebagai kejadian audit.',
           },
           {
-            subtitle: '03',
+            subtitle: 'C. Jejak Audit Terpisah untuk Panel Admin dan API',
             content:
-              'Telemetri Interaksi Real-Time: Analitik interaksi audiens terintegrasi yang mengukur durasi baca, kedalaman gulir, dan artikel populer untuk memandu strategi redaksi.',
+              'Sistem mencatat entri audit berisi pengguna, waktu, alamat IP, user agent, URL, platform (panel admin atau API), kode status, serta isi permintaan dan respons. Entri ditampilkan di menu terpisah Admin Log dan API Log yang dapat dicari dan ditelusuri detailnya.',
           },
-          {
-            subtitle: '04',
-            content:
-              'Protokol Keamanan Kelas Enterprise: Perlindungan DDoS proaktif, rotasi SSL otomatis, dan izin peran terperinci yang memastikan ketersediaan platform tanpa henti.',
-          },
-          {
-            subtitle: '05',
-            content:
-              'Monetisasi Dinamis & Penempatan Iklan: Slot sponsor dan iklan bawaan yang tidak mengganggu kenyamanan baca guna memaksimalkan pendapatan tanpa mengorbankan Core Web Vitals.',
-          },
-          {
-            subtitle: '06',
-            content:
-              'Arsitektur Semantik Berorientasi SEO: Skema JSON-LD terstruktur, sitemap XML otomatis, dan metadata Open Graph teroptimasi yang mendorong dominasi pencarian organik.',
-          },
-        ],
-      },
-      {
-        eyebrow: 'HASIL AKHIR',
-        mainTitle: 'Retensi Pembaca Istimewa dan Ketersediaan 100% di Tengah Lonjakan Trafik',
-        paragraphs: [
-          'Presstis menghadirkan peningkatan performa Core Web Vitals sebesar 300%, memangkas biaya operasional infrastruktur hingga 40%, dan memberdayakan staf editorial untuk menerbitkan serta menyindikasikan berita utama dalam hitungan detik.',
-        ],
-      },
-    ],
-  },
-  'markaplus-ai-assistant': {
-    title: 'MarkaPlus',
-    category: 'INTEGRASI DATA & AI',
-    tags: ['ASISTEN AI ERP', 'DEEP LEARNING', 'PIPELINE DATA'],
-    dateLabel: 'JUNI 2026',
-    description:
-      'Asisten cerdas AI deep learning yang terintegrasi langsung ke dalam perangkat lunak ERP enterprise, mengubah kueri multi-database kompleks menjadi panduan operasional instan dan keputusan terotomatisasi.',
-    coverImageAlt: 'Asisten Chat AI Cerdas dan Infrastruktur Deep Learning ERP MarkaPlus',
-    sections: [
-      {
-        eyebrow: 'TANTANGAN',
-        mainTitle: 'Latensi Data dan Beban Informasi Berlebih di Dalam Sistem Korporat Kompleks',
-        paragraphs: [
-          'Basis data ERP enterprise menyimpan jutaan catatan transaksi di bagian keuangan, inventaris, logistik, dan personalia. Namun ketika para pemimpin dan staf operasional membutuhkan jawaban cepat, mereka harus menghadapi pelaporan SQL yang rumit, unduhan spreadsheet manual, dan penundaan berjam-jam.',
-          'Tanpa kecerdasan percakapan real-time, eksekutif mengambil keputusan berdasarkan ringkasan yang sudah usang sementara tim lapangan kesulitan menavigasi menu perangkat lunak yang kompleks.',
-        ],
-      },
-      {
-        mainTitle: 'Menanamkan AI Sadar-Konteks Langsung ke Dalam Alur Kerja Operasional Harian',
-        paragraphs: [
-          'Kami membangun MarkaPlus—mesin percakapan deep learning aman yang tertanam langsung di dalam platform enterprise. Beroperasi di atas pipeline pengambilan data kustom, MarkaPlus mengubah relasi multi-tabel ERP yang rumit menjadi dialog alami dan instan.',
         ],
         image: {
-          src: '/images/case-studies/markaplus.svg',
-          alt: 'Asisten AI MarkaPlus tertanam di dalam ERP enterprise',
+          src: '/images/case-studies/mybos/token-flow.png',
+          alt: 'Aplikasi lapangan masuk lewat token yang kedaluwarsa dan jalur yang dibatasi lajunya',
         },
       },
       {
-        eyebrow: 'SOLUSI KAMI',
-        mainTitle: 'Dari Basis Data Pasif Menuju Intelijen Operasional Proaktif',
-        subsections: [
-          {
-            subtitle: '01',
-            content:
-              'Kueri Bisnis Bahasa Alami: Karyawan dapat mengajukan pertanyaan sehari-hari—seperti "Rangkum persetujuan yang tertunda hari ini" atau "Proyeksikan pengisian ulang stok minggu depan"—dan menerima data terverifikasi dalam hitungan detik.',
-          },
-          {
-            subtitle: '02',
-            content:
-              'Prediksi Permintaan & Deteksi Anomali: Model deep learning terus menganalisis konsumsi historis dan pola pesanan untuk memperingatkan manajer akan ketidakteraturan pasokan.',
-          },
-          {
-            subtitle: '03',
-            content:
-              'Ringkasan Eksekutif Otomatis: Menyintesis metrik lintas departemen menjadi intisari eksekutif pagi hari yang dikirimkan melalui obrolan enterprise yang aman.',
-          },
-          {
-            subtitle: '04',
-            content:
-              'Keamanan Peran Tanpa Kebocoran: Filter izin bawaan menjamin AI menghormati hierarki akses korporat, mengisolasi catatan keuangan dan eksekutif yang sensitif secara ketat.',
-          },
-          {
-            subtitle: '05',
-            content:
-              'Eksekusi Tugas Interaktif: Selain menjawab pertanyaan, MarkaPlus membantu pengguna yang berwenang dalam memulai permintaan persetujuan, menjadwalkan tugas, dan mengirimkan notifikasi.',
-          },
-          {
-            subtitle: '06',
-            content:
-              'Intelijen Kueri yang Mengoptimalkan Diri: Belajar dari umpan balik berkelanjutan dan kosakata domain untuk terus meningkatkan presisi semantik di seluruh divisi bisnis.',
-          },
-        ],
-      },
-      {
-        eyebrow: 'HASIL AKHIR',
-        mainTitle: 'Akses Data Tanpa Hambatan dan Kecepatan Operasional Otonom',
+        eyebrow: '3. DI BALIK LAYAR',
+        mainTitle: 'Arsitektur yang Terpisah, Terbatas, dan Tercatat',
         paragraphs: [
-          'MarkaPlus memangkas waktu kueri operasional rutin sebesar 85%, menghilangkan ketergantungan pada staf TI untuk pembuatan laporan khusus, dan mendorong pengambilan keputusan berbasis data di seluruh tingkatan manajerial.',
-        ],
-      },
-    ],
-  },
-  'marka-finance-accounting': {
-    title: 'MARKA - Finance',
-    category: 'SOLUSI ENTERPRISE',
-    tags: ['ERP KEUANGAN', 'AKUNTANSI KORPORAT', 'TATA KELOLA ARUS KAS'],
-    dateLabel: 'JULI 2026',
-    description:
-      'Arsitektur manajemen keuangan terintegrasi yang dirancang untuk menyatukan perbankan korporat, buku besar multi-cabang, pencairan massal, dan tata kelola arus kas secara real-time.',
-    coverImageAlt: 'Platform Keuangan dan Akuntansi Korporat MARKA oleh Arsalynk',
-    sections: [
-      {
-        eyebrow: 'TANTANGAN',
-        mainTitle: 'Catatan Keuangan Terfragmentasi dan Siklus Rekonsiliasi Akhir Bulan yang Lambat',
-        paragraphs: [
-          'Seiring berkembangnya perusahaan menengah hingga besar di berbagai anak perusahaan dan entitas proyek, tata kelola keuangan menjadi rentan terhadap fragmentasi data. Perangkat akuntansi yang terpisah menyebabkan keterlambatan pencatatan jurnal, rekonsiliasi bank manual, dan penutupan buku akhir bulan yang lambat.',
-          'Tanpa pusat komando keuangan terintegrasi, CFO dan pengendali keuangan tidak dapat memproyeksikan likuiditas secara akurat atau menegakkan disiplin anggaran yang ketat di seluruh operasional terdistribusi.',
-        ],
-      },
-      {
-        mainTitle: 'Menyatukan Perbankan, Buku Besar, dan Kontrol Pengeluaran ke Dalam Satu Inti Keuangan',
-        paragraphs: [
-          'Kami merekayasa MARKA - Finance sebagai platform manajemen keuangan kelas enterprise yang mengotomatiskan penjurnalan transaksi, merekonsiliasi mutasi perbankan secara real-time, dan menyajikan laporan siap audit di seluruh unit bisnis.',
+          'Untuk memastikan modul armada nanti bisa ditambahkan tanpa membongkar lapisan akses, fondasi MyBOS dibangun di atas komponen berikut:',
+          'Terpisah antara web dan mobile: panel admin memakai Laravel 9 dengan sesi web, Vue 3, Inertia.js, dan Tailwind CSS. Aplikasi mobile memakai API v1 dengan otentikasi JWT dan guard tersendiri. Kode memuat 39 rute: 28 untuk panel admin, 6 untuk API, dan 5 lainnya.',
+          'Terbatas lewat peran dan laju permintaan: izin dikelola dengan Spatie Laravel-Permission, dan API dibatasi 60 permintaan per menit per pengguna atau alamat IP.',
+          'Tercatat di setiap akses: jejak audit memakai Laravel-Auditing dengan resolver tambahan untuk platform (admin_dashboard vs api), isi permintaan, isi respons, serta kode status di setiap entri.',
+          'Siap dipasang di mana saja: basis data bawaan SQLite dan aset frontend yang sudah dikompilasi (Vite) membuat fondasi ini bisa dijalankan di laptop tim untuk uji coba, lalu dipindahkan ke basis data server saat produksi.',
         ],
         image: {
-          src: '/images/case-studies/marka-finance.svg',
-          alt: 'Dasbor Keuangan dan Akuntansi Korporat MARKA',
+          src: '/images/case-studies/mybos/technical-architecture.png',
+          alt: 'Panel admin dan aplikasi lapangan berbagi satu lapisan akses dan audit, tempat modul armada akan dipasang',
         },
       },
       {
-        eyebrow: 'SOLUSI KAMI',
-        mainTitle: 'Rekayasa Keuangan Presisi dengan Tata Kelola Arus Kas Real-Time',
-        subsections: [
-          {
-            subtitle: '01',
-            content:
-              'Integrasi Perbankan Korporat Multi-Akun: Menghubungkan mutasi bank langsung ke buku besar, menyinkronkan transaksi masuk dan keluar secara otomatis.',
-          },
-          {
-            subtitle: '02',
-            content:
-              'Buku Besar & Penjurnalan Otomatis: Mesin berbasis aturan menghasilkan catatan jurnal pembukuan berpasangan saat transaksi selesai, menghilangkan entri spreadsheet manual.',
-          },
-          {
-            subtitle: '03',
-            content:
-              'Alur Kerja Persetujuan Berlapis: Protokol otorisasi berjenjang untuk pengeluaran dan pencairan dana menegakkan kepatuhan terhadap anggaran dasar tata kelola korporat.',
-          },
-          {
-            subtitle: '04',
-            content:
-              'Pencairan Pembayaran Massal & Penggajian: Menyederhanakan pembayaran vendor massal dan jadwal penggajian karyawan ke dalam satu batch transaksi terverifikasi.',
-          },
-          {
-            subtitle: '05',
-            content:
-              'Analitik Arus Kas & Likuiditas Real-Time: Dasbor visual langsung memantau ketahanan kas operasi, umur piutang usaha, dan laju belanja modal.',
-          },
-          {
-            subtitle: '06',
-            content:
-              'Kesiapan Kepatuhan Pajak & Audit: Mesin perhitungan pajak bawaan dan catatan audit yang tidak dapat diubah memastikan pelaporan pajak akhir tahun dan verifikasi audit berjalan mulus.',
-          },
-        ],
-      },
-      {
-        eyebrow: 'HASIL AKHIR',
-        mainTitle: 'Kendali Keuangan Sempurna, Penutupan Buku Lebih Cepat, dan Transparansi Total',
+        eyebrow: '4. PERJALANAN IMPLEMENTASI',
+        mainTitle: 'Fondasi Dulu, Armada Kemudian',
         paragraphs: [
-          'Implementasi MARKA - Finance memangkas waktu penutupan buku akhir bulan dari 14 hari menjadi hanya 3 hari, menghilangkan selisih rekonsiliasi, dan memberikan visibilitas likuiditas real-time kepada jajaran eksekutif.',
+          'Repositori yang dianalisis berisi satu tahap yang sudah selesai, yaitu fondasi platform, yang tercatat pada 18 Mei 2024. Modul armada (data kendaraan, pelacakan GPS, rute, delivery order, notifikasi ke pengemudi) disiapkan pada tahap berikutnya.',
         ],
-      },
-    ],
-  },
-  'marka-project-manager': {
-    title: 'MARKA - Project Manager',
-    category: 'SOLUSI ENTERPRISE',
-    tags: ['MANAJEMEN PROYEK', 'TATA KELOLA ALUR KERJA', 'PENJADWALAN SUMBER DAYA'],
-    dateLabel: 'AGUSTUS 2026',
-    description:
-      'Platform manajemen operasional menyeluruh yang mengoordinasikan milestone proyek berlapis, alokasi sumber daya, ketergantungan tugas, dan kepatuhan anggaran di seluruh tim enterprise.',
-    coverImageAlt: 'Platform Manajemen Proyek dan Operasional MARKA oleh Arsalynk',
-    sections: [
-      {
-        eyebrow: 'TANTANGAN',
-        mainTitle: 'Keterlambatan Proyek, Hambatan Sumber Daya, dan Pipeline Eksekusi yang Kurang Transparan',
-        paragraphs: [
-          'Mengeksekusi inisiatif korporat berskala besar di berbagai tim yang tersebar sering kali terkendala oleh manajemen tugas yang terfragmentasi. Tenggat waktu meleset ketika ketergantungan tugas tidak dipetakan dengan jelas, beban kerja tim menjadi tidak seimbang, dan manajemen kekurangan wawasan real-time atas progres proyek.',
-          'Mengandalkan papan tugas generik gagal memperhitungkan milestone kontrak, tenggat pengadaan, dan pelacakan anggaran yang dibutuhkan dalam proyek enterprise berisiko tinggi.',
-        ],
-      },
-      {
-        mainTitle: 'Lapisan Komando Terstruktur yang Menyelaraskan Strategi, Tenggat Waktu, dan Eksekusi Tim',
-        paragraphs: [
-          'Kami merancang MARKA - Project Manager untuk menjembatani ekspektasi kepemimpinan korporat dengan pelaksanaan operasional di lapangan, menghadirkan pemetaan ketergantungan yang jelas, perencanaan kapasitas, dan verifikasi milestone otomatis.',
-        ],
-        image: {
-          src: '/images/case-studies/marka-project-manager.svg',
-          alt: 'Antarmuka MARKA Project Manager dan penjadwalan sumber daya',
+        table: {
+          caption: 'Tahapan Pengembangan MyBOS: Fondasi vs Modul Armada',
+          headers: ['Tahap', 'Status', 'Keluaran', 'Cara Diuji'],
+          rows: [
+            [
+              'Fondasi platform',
+              'Selesai (18 Mei 2024)',
+              'Login web dan API, reset kata sandi, manajemen pengguna dan peran, Admin Log dan API Log, pembatasan laju API',
+              'Uji Lab lokal pada 6 November 2026: waktu respons, penolakan token, pembatasan laju, pencatatan audit',
+            ],
+            [
+              'Modul armada',
+              'Tahap berikutnya',
+              'Data kendaraan, pelacakan GPS, rute, delivery order, notifikasi ke pengemudi',
+              'Dijadwalkan pada rilis berikutnya',
+            ],
+          ],
         },
       },
       {
-        eyebrow: 'SOLUSI KAMI',
-        mainTitle: 'Kendali Operasional Menyeluruh dari Inisiasi Milestone hingga Serah Terima Akhir',
+        eyebrow: '5. DAMPAK & BENCHMARK PERFORMA',
+        mainTitle: 'Hasil Pengujian Kinerja dan Efisiensi Operasional',
+        paragraphs: [
+          'Berdasarkan uji lokal pada 6 November 2026 (server Laravel dengan 4 worker, PHP 8.3, basis data SQLite berisi data contoh), penghitungan dari kode, serta simulasi 10.000 iterasi untuk penelusuran akses, berikut hasilnya:',
+        ],
+        table: {
+          caption: 'Tabel Benchmark Kinerja dan Verifikasi Lapangan MyBOS',
+          headers: ['Indikator', 'Sebelum', 'Dengan MyBOS', 'Hasil', 'Status'],
+          rows: [
+            ['Penolakan permintaan tanpa token', '—', 'HTTP 403, median 7,0 ms', '25 dari 25 ditolak', 'Uji Lab'],
+            ['Penolakan token rusak', '—', 'HTTP 401, median 6,5 ms', '25 dari 25 ditolak', 'Uji Lab'],
+            ['Login API (berurutan)', '—', 'median 81 ms, P95 89 ms', '50 dari 50 berhasil', 'Uji Lab'],
+            ['Login API (10 klien bersamaan)', '—', 'median 396 ms, maks 561 ms', '50 dari 50 berhasil', 'Uji Lab'],
+            ['Pembatasan laju API', '—', '60 permintaan/menit', 'Permintaan ke-61 ditolak (429)', 'Uji Lab'],
+            ['Pencatatan login API di audit log', '—', 'Setiap login tercatat', 'Platform "api" terisi', 'Uji Lab'],
+            ['Menelusuri satu kejadian akses', '±47 menit (chat + riwayat pesan)', '±2,6 menit (Admin/API Log)', 'Hemat ±94%', 'Simulasi'],
+          ],
+        },
+        image: {
+          src: '/images/case-studies/mybos/response-times.png',
+          alt: 'Penolakan token dan halaman login selesai dalam ±7 milidetik, sementara login tetap di bawah 0,6 detik saat 10 klien login bersamaan',
+        },
         subsections: [
           {
-            subtitle: '01',
+            subtitle: 'Penolakan dalam ±7 Milidetik',
             content:
-              'Pemetaan Ketergantungan Milestone & Gantt Dinamis: Pemodelan lini masa visual yang menyoroti jalur kritis dan memperingatkan manajer proyek akan potensi risiko keterlambatan.',
+              'Middleware JWT memeriksa token sebelum permintaan menyentuh logika bisnis atau basis data. Karena itu, permintaan yang tidak sah dihentikan hampir secepat halaman statis dimuat.',
           },
           {
-            subtitle: '02',
+            subtitle: 'Login 81 Milidetik, 396 Milidetik saat Ramai',
             content:
-              'Alokasi Kapasitas & Beban Kerja: Penyeimbangan sumber daya real-time mencegah kelelahan karyawan dan memastikan keahlian khusus ditugaskan pada prioritas tertinggi.',
+              'Sebagian besar waktu login dipakai untuk memeriksa hash kata sandi yang dirancang aman dari brute force. Saat 10 klien login bersamaan, permintaan mengantre di 4 worker server uji sehingga median naik menjadi 396 ms tetapi 100% berhasil.',
           },
           {
-            subtitle: '03',
+            subtitle: 'Hemat ±94% Waktu Penelusuran Insiden',
             content:
-              'Pelacakan Anggaran & Biaya Proyek Terintegrasi: Menghubungkan jam kerja tertagih, lisensi perangkat lunak, dan biaya vendor eksternal langsung ke pusat biaya proyek.',
+              'Angka penghematan ini datang dari penghapusan proses manual: bertanya di grup chat dan menunggu jawaban (tipikal 15–60 menit). Dengan Admin Log dan API Log, admin cukup mencari aksi dan membuka detail entri.',
           },
           {
-            subtitle: '04',
+            subtitle: 'Batas Pengukuran & Catatan Pengujian',
             content:
-              'Alur Kerja Persetujuan Serah Terima Otomatis: Daftar periksa serah terima digital dan persetujuan tinjauan klien membangun akuntabilitas yang jelas atas penyelesaian milestone.',
-          },
-          {
-            subtitle: '05',
-            content:
-              'Pusat Kolaborasi Lintas Departemen: Memusatkan dokumentasi proyek, diskusi tugas, dan versi dokumen di dalam utas proyek yang kaya konteks.',
-          },
-          {
-            subtitle: '06',
-            content:
-              'Dasbor Progres Eksekutif & SLA: Ringkasan eksekutif terkonsolidasi yang menampilkan tingkat penyelesaian tepat waktu, varians anggaran, dan performa departemen.',
+              'Yang diukur adalah tahap fondasi platform. Fitur telemetri armada GPS disiapkan pada tahap berikutnya. Uji coba dijalankan di server lokal dengan SQLite dan dapat bervariasi pada server produksi.',
           },
         ],
       },
       {
-        eyebrow: 'HASIL AKHIR',
-        mainTitle: 'Penyelesaian Terukur, Utilisasi Sumber Daya Optimal, dan Eksekusi Berskala Tinggi',
+        eyebrow: '6. METODOLOGI & REFERENSI',
+        mainTitle: 'Catatan Pengukuran dan Simulasi Monte Carlo',
         paragraphs: [
-          'Penerapan MARKA - Project Manager meningkatkan tingkat penyelesaian proyek tepat waktu hingga 96%, memangkas rapat status administratif hingga separuhnya, dan memberdayakan tim dengan disiplin alur kerja yang transparan serta akuntabel.',
+          'Definisi indikator: Waktu penolakan dan login adalah waktu dari permintaan dikirim sampai respons diterima, diukur di mesin yang sama dengan server (tanpa latensi jaringan). Penelusuran akses adalah waktu admin untuk mengetahui siapa, kapan, dan dari platform mana sebuah login atau perubahan izin terjadi.',
+          'Simulasi penelusuran akses (per kejadian, distribusi segitiga min/tipikal/maks dalam menit, 10.000 iterasi): Alur manual: bertanya di grup chat (5/15/60 mnt), memeriksa riwayat (5/10/30 mnt), konfirmasi (2/5/15 mnt) — median 47,4 menit. Alur MyBOS: membuka Admin/API Log (0,5/1/3 mnt), membuka detail entri (0,5/1/2 mnt) — median 2,6 menit, menghasilkan penghematan waktu median 94%.',
         ],
+        image: {
+          src: '/images/case-studies/mybos/trace-time-simulation.png',
+          alt: 'Median dan rentang P10–P90 waktu menelusuri satu kejadian akses, sebelum dan sesudah ada Admin Log dan API Log',
+        },
       },
     ],
   },
   'myboss-logistics-fleet-management': {
-    title: 'MyBOS',
-    category: 'SISTEM SMART IOT',
-    tags: ['TELEMETRI IOT', 'LOGISTIK ARMADA', 'INTEGRASI PERANGKAT'],
-    dateLabel: 'SEPTEMBER 2026',
+    title:
+      'Bagaimana MyBOS Menyiapkan Fondasi Pelacakan Armada yang Mencatat Setiap Akses dan Menolak Token Tidak Sah dalam ±7 Milidetik',
+    category: 'SMART IOT SYSTEM',
+    tags: [
+      'PELACAKAN ARMADA',
+      'SISTEM LOGISTIK',
+      'AUDIT TRAIL',
+      'API APLIKASI DRIVER',
+      'KONTROL AKSES',
+    ],
+    dateLabel: 'NOVEMBER 2026',
     description:
-      'Perangkat keras IoT terhubung dan telemetri komando yang menjembatani armada kendaraan komersial, sensor jarak jauh, dan pusat logistik menjadi intelijen transportasi operasional secara real-time.',
-    coverImageAlt: 'Ekosistem Operasional IoT Terhubung dan Telemetri Armada MyBOS',
+      'Studi kasus MyBOS: fondasi platform pelacakan armada dengan akses per peran, API aman untuk aplikasi lapangan, dan jejak audit di setiap akses.',
+    coverImageAlt:
+      'Halaman Admin Log MyBOS menampilkan riwayat akses dengan pengguna, waktu, dan platform',
+  },
+  'marka-plus-asisten-ai-erp': {
+    title:
+      'Bagaimana Marka Plus Mengubah Pertanyaan Sehari-hari Menjadi Jawaban dari Data ERP, Lolos 15 dari 15 Skenario Uji Akurasi dan Hak Akses',
+    category: 'INTEGRASI DATA & AI',
+    tags: [
+      'ASISTEN AI ERP',
+      'AI UNTUK DATA PERUSAHAAN',
+      'CHATBOT ERP',
+      'MARKAPLUS',
+      'MARKASUITE',
+      'HAK AKSES',
+    ],
+    dateLabel: 'NOVEMBER 2026',
+    description:
+      'Studi kasus Marka Plus: asisten AI di MarkaSuite yang menjawab pertanyaan dari data ERP sesuai hak akses, lolos 15 dari 15 skenario uji.',
+    coverImageAlt:
+      'Panel asisten AI Marka Plus menampilkan jawaban berbentuk tabel dari data proyek ERP',
     sections: [
       {
-        eyebrow: 'TANTANGAN',
-        mainTitle: 'Titik Buta Operasional Antara Ruang Kontrol, Pengemudi, dan Aset Lapangan',
+        eyebrow: 'RINGKASAN EKSEKUTIF (AT-A-GLANCE)',
+        mainTitle:
+          'Asisten AI Enterprise Terverifikasi Berbasis Hak Akses ERP',
         paragraphs: [
-          'Mengelola armada logistik komersial di rute regional yang luas tanpa integrasi IoT membuat petugas pengatur kehilangan informasi mengenai lokasi aktual kendaraan, waktu mesin menyala diam (idling), keterlambatan transit, dan kehilangan bahan bakar.',
-          'Manifes kertas lama dan panggilan telepon manual menunda konfirmasi pengiriman, memicu sengketa pelanggan, serta menghambat respons darurat tepat waktu terhadap kerusakan mekanis di jalan.',
+          'Klien & Skenario: Asisten AI di dalam MarkaSuite (Marka+ ERP), dikembangkan Arsalynk untuk operasional internalnya dan untuk perusahaan pengguna MarkaSuite.',
+          'Fokus Masalah: Pertanyaan status proyek dan cara pakai aplikasi menumpuk di chat project manager, sementara chatbot umum terlalu berisiko dihubungkan ke data inti perusahaan.',
+          'Solusi Produk: Marka Plus, asisten AI yang memetakan bahasa sehari-hari ke 202 sumber data ERP, membaca data hanya sesuai hak akses pengguna, dan meminta konfirmasi sebelum mengubah data.',
+          'Durasi Implementasi: ±6 minggu (15 September – 28 Oktober 2026) dalam empat fase, masing-masing dikunci oleh pengujian.',
+        ],
+        metrics: [
+          {
+            value: '15 / 15',
+            label: 'Skenario Uji Lulus',
+            detail:
+              'Skenario uji akurasi dan hak akses memiliki bukti eksekusi yang lulus (Uji Lab)',
+          },
+          {
+            value: '0 / 1',
+            label: 'Integritas Mutasi Data',
+            detail:
+              'Konfirmasi aksi yang dibatalkan menghasilkan 0 penulisan; yang diterima menghasilkan tepat 1 penulisan (Uji Lab)',
+          },
+          {
+            value: '79%',
+            label: 'Waktu PM Dihemat',
+            detail:
+              'Waktu kerja PM per pertanyaan status: ±13 menit → ±2,8 menit (Simulasi Monte Carlo)',
+          },
         ],
       },
       {
-        mainTitle: 'Menjembatani Kendaraan Fisik dengan Perangkat Lunak Enterprise Cerdas',
+        eyebrow: '1. SKENARIO MASALAH',
+        mainTitle:
+          'Ketika Setiap Pertanyaan tentang Data Harus Lewat Satu Orang',
         paragraphs: [
-          'Kami menerapkan ekosistem IoT MyBOS—mengintegrasikan sensor telematika kendaraan, unit pelacak GPS, dan pusat komando pengiriman otomatis yang memantau setiap pergerakan kendaraan secara real-time.',
+          'Setelah proyek, tugas, permintaan, dan keuangan Arsalynk masuk ke MarkaSuite, datanya lengkap. Masalah berikutnya adalah cara orang mengambil jawaban dari data itu. MarkaSuite berkembang cepat: 533 commit dalam tiga bulan pertama, dengan 202 sumber data di 15 modul. Tidak semua pengguna hafal di mana tiap informasi berada.',
+          'Sebelum Marka Plus, jalur tercepat untuk mendapat jawaban adalah bertanya ke orang yang paling paham sistem:',
+        ],
+        subsections: [
+          {
+            subtitle: 'Pertanyaan yang Antre di Chat PM',
+            content:
+              'Staf bertanya "berapa Weekly Task saya yang masih pending?", pimpinan bertanya "proyek mana yang sedang berjalan?". Project manager (PM) harus membuka ERP, memfilter, menghitung, lalu membalas satu per satu. Akibatnya, PM terus terpotong dari pekerjaannya sendiri, dan penanya menunggu sampai PM sempat membalas.',
+          },
+          {
+            subtitle: 'Panduan yang Tertinggal dari Aplikasi',
+            content:
+              'Alur kerja berubah seiring rilis. Contohnya, Weekly Target harus disetujui PM sebelum bisa dipakai sebagai dasar Daily Task. Pengguna baru yang mengikuti panduan lama mengajukan dengan urutan yang salah. Akibatnya, pengajuan ditolak sistem dan pertanyaan yang sama kembali ke PM.',
+          },
+          {
+            subtitle: 'AI yang Terlalu Percaya Diri',
+            content:
+              'Chatbot umum yang disambungkan ke basis data bisa menampilkan data di luar hak pengguna, mengarang angka, atau mengubah data tanpa konfirmasi. Dalam laporan HSBC Voices of Treasury 2025, 48% dari 29 responden korporasi Indonesia menyebut keamanan siber sebagai hambatan utama adopsi otomasi dan AI, tertinggi di Asia Pasifik.',
+          },
         ],
         image: {
-          src: '/images/case-studies/mybos.svg',
-          alt: 'Pusat Komando dan Telemetri Armada IoT MyBOS',
+          src: '/images/case-studies/markaplus/workflow-comparison.png',
+          alt: 'Transformasi jalur informasi dari pertanyaan yang antre di satu orang menjadi jawaban langsung dari data ERP, dengan batas akses yang sama seperti aplikasi',
         },
       },
       {
-        eyebrow: 'SOLUSI KAMI',
-        mainTitle: 'Telemetri Perangkat Keras Real-Time, Pengaturan Cerdas, dan Bukti Pengiriman Digital',
+        eyebrow: '2. SOLUSI PRODUK',
+        mainTitle:
+          'Menghubungkan Bahasa Sehari-hari dan Data ERP dalam Satu Jalur yang Terkendali',
+        paragraphs: [
+          'Marka Plus dirancang agar setiap orang bisa bertanya langsung ke data ERP tanpa memberi AI akses bebas ke basis data. Alih-alih membiarkan model AI menulis query sendiri, model hanya memilih apa yang ditanyakan. ERP yang memutuskan apakah pertanyaan itu boleh dijawab, lalu membaca datanya lewat API yang sama dengan aplikasi.',
+          'Alur eksekusi: Kata-kata pengguna → Maksud dan entitas bisnis → Modul dan sumber data → Tabel dan kolom → Pembacaan lewat API yang divalidasi → Jawaban yang bersumber dari baris data hasil bacaan itu.',
+        ],
         subsections: [
           {
-            subtitle: '01',
+            subtitle:
+              'A. Pertanyaan Sehari-hari yang Dipetakan ke Data yang Tepat',
             content:
-              'Telemetri IoT Langsung & Pelacakan GPS: Penentuan posisi satelit real-time dan umpan sensor kendaraan menghadirkan visibilitas rute berkelanjutan ke ruang kontrol pusat.',
+              'Saat pengguna bertanya, Marka Plus mencari padanan istilah di glosarium bisnis, lalu menyusun rencana baca berbentuk JSON (sumber data, kolom, filter, batas baris). Backend memeriksa rencana terhadap katalog 202 sumber data. Pertanyaan lanjutan seperti "kalau bulan lalu?" tetap mempertahankan jenis tugas dan kepemilikan sebelumnya.',
           },
           {
-            subtitle: '02',
+            subtitle: 'B. Hak Akses yang Ikut di Setiap Jawaban',
             content:
-              'Surat Jalan Digital Otomatis: Menghilangkan manifes kertas dengan meneruskan tugas pengiriman digital langsung ke pengemudi lengkap dengan instruksi navigasi.',
+              'Saat percakapan dimulai, ERP membuat snapshot identitas, perusahaan, peran aktif, modul, izin, dan cakupan proyek pengguna yang ditandatangani server dan kedaluwarsa dalam 120 detik. Data hanya dibaca dari lima tampilan khusus melalui akun basis data read-only (maksimal 100 baris, 30 kolom, 256 KiB, timeout 5 detik).',
           },
           {
-            subtitle: '03',
+            subtitle:
+              'C. Aksi dengan Tiket, Konfirmasi, dan Pembacaan Ulang',
             content:
-              'Optimasi Rute & Bahan Bakar Cerdas: Merekomendasikan rute optimal berdasarkan kepadatan lalu lintas dan beban kargo, secara substansial mengurangi konsumsi BBM armada.',
+              'Saat pengguna meminta tindakan (seperti membuat Daily Task), Marka Plus menerbitkan tiket aksi berlaku 15 menit dan menampilkan ringkasan perubahan untuk dikonfirmasi. Tiket diklaim secara atomik, ERP menjalankan aksi via API resmi, dan membaca ulang hasilnya sebelum melabeli "Terverifikasi".',
           },
           {
-            subtitle: '04',
+            subtitle: 'D. Panduan yang Mengikuti Kode Terbaru',
             content:
-              'Pemantauan Perilaku & Keselamatan Pengemudi: Melacak pengereman mendadak, waktu idle berlebih, dan jam operasional untuk membangun disiplin keselamatan serta menjadwalkan perawatan preventif.',
+              'Knowledge Engine memindai repositori (skema Prisma, kode TypeScript, halaman frontend), menyaring rahasia, dan membandingkan panduan dengan sistem terbaru (skor keyakinan 0–1). Bila panduan di bawah skor 0,6 atau tidak berlaku, Marka Plus menahan jawaban secara transparan.',
+          },
+        ],
+        image: {
+          src: '/images/case-studies/markaplus/question-to-table.png',
+          alt: 'Pertanyaan dalam bahasa sehari-hari diterjemahkan menjadi pembacaan data yang tervalidasi, lengkap dengan jumlah dan periodenya',
+        },
+      },
+      {
+        eyebrow: '3. DI BALIK LAYAR',
+        mainTitle:
+          'Arsitektur yang Terbatas, Terverifikasi, dan Bisa Ditelusuri',
+        paragraphs: [
+          'Untuk memastikan AI tetap berguna tanpa menjadi pintu belakang ke data perusahaan, Marka Plus dibangun di atas empat pilar arsitektur:',
+          'Terbatas di sisi data: akun basis data khusus hanya diberi hak CONNECT, USAGE, dan SELECT pada lima tampilan ai_* (ai_projects, ai_project_tasks, ai_project_financials, ai_company_financials, dan ai_crm_deals). Setiap tampilan wajib memuat kolom perusahaan untuk penyaringan tenant, dan tabel inti tidak pernah dibuka.',
+          'Terverifikasi lewat katalog dan MCP: endpoint MCP Streamable HTTP (protokol 2025-11-25) menyediakan alat untuk mengenali sumber data yang diizinkan, membaca skema aktual, serta menjalankan pembacaan bertipe. Katalog 202 sumber data di 15 modul dibangkitkan dari kode dan dicocokkan dengan hash sumbernya di CI.',
+          'Bisa ditelusuri di setiap pemanggilan: setiap callback eksternal ditandatangani HMAC dari 13 komponen (metode, path, waktu, nonce, hash isi, tenant, pengguna, peran, alat, ID request, perusahaan, izin, dan cakupan proyek) dengan penolakan nonce replay dan enkripsi AES-256-GCM.',
+          'Tidak bergantung pada satu penyedia AI: model bahasa (melalui OpenRouter) hanya dipakai untuk memahami kalimat bebas. Query terstruktur, pemeriksaan izin, MCP, dan seluruh aksi tulis tetap berjalan tanpa penyedia AI.',
+        ],
+        image: {
+          src: '/images/case-studies/markaplus/technical-architecture.png',
+          alt: 'Model bahasa hanya menyusun rencana; ERP yang memvalidasi, membaca data, dan menegakkan hak akses',
+        },
+      },
+      {
+        eyebrow: '4. PERJALANAN IMPLEMENTASI',
+        mainTitle: 'Empat Fase dalam Enam Minggu',
+        paragraphs: [
+          'Marka Plus dibangun di atas MarkaSuite yang sudah berjalan, sehingga setiap fase bisa langsung diuji terhadap peran, proyek, dan modul yang nyata. Tim menambahkan 34 file uji khusus asisten AI selama periode ini.',
+        ],
+        table: {
+          caption: 'Tahapan Pengembangan Marka Plus & Gerbang Validasi',
+          headers: ['Fase', 'Periode', 'Keluaran', 'Cara Diuji'],
+          rows: [
+            [
+              'Integrasi awal',
+              '15–21 September 2026',
+              'Tabel permintaan AI, provisioning tenant, tampilan data read-only ai_*',
+              'Gerbang migrasi basis data',
+            ],
+            [
+              'Kontrak V2 & runtime native',
+              '21–30 September 2026',
+              'Snapshot otoritas bertanda tangan, penyelarasan tampilan, eksekusi native di dalam ERP',
+              'Suite tanda tangan, tenant, runtime V2, HMAC V2, control plane',
+            ],
+            [
+              'Audit & perbaikan',
+              '2–9 Oktober 2026',
+              'Audit 15 skenario, perbaikan 6 kelompok temuan, katalog dikunci di CI',
+              '16 suite baseline, tes regresi alur kerja, query PostgreSQL terisolasi, 2 suite browser',
+            ],
+            [
+              'Knowledge Engine & MCP',
+              '15–28 Oktober 2026',
+              'Crawler kode, skor keyakinan, penahanan jawaban, definisi ulang koneksi MCP',
+              'Suite Knowledge Engine, pemahaman bahasa, dan schema linking',
+            ],
+          ],
+        },
+      },
+      {
+        eyebrow: '5. DAMPAK & BENCHMARK PERFORMA',
+        mainTitle:
+          'Hasil Pengujian Akurasi, Keamanan, dan Efisiensi Operasional',
+        paragraphs: [
+          'Berdasarkan laporan audit tim pengembang pada 2 dan 7 Oktober 2026 (source lokal, basis data PostgreSQL terisolasi, dan browser Edge), penghitungan langsung dari kode, serta simulasi 10.000 iterasi untuk waktu kerja PM, berikut hasilnya:',
+        ],
+        table: {
+          caption: 'Matriks Benchmark Kinerja dan Verifikasi Lapangan Marka Plus',
+          headers: ['Indikator', 'Sebelum', 'Dengan Marka Plus', 'Hasil', 'Status'],
+          rows: [
+            ['Skenario uji akurasi dan hak akses dengan bukti eksekusi', '—', '15 dari 15', 'Seluruhnya lulus', 'Uji Lab'],
+            ['Suite uji baseline (izin, validasi, injeksi, kegagalan provider, dll)', '—', '16 suite', 'Seluruhnya lulus', 'Uji Lab'],
+            ['Temuan audit jawaban tidak sesuai alur', '6 kelompok', '0 tersisa pada skenario yang diuji', 'Dikunci tes regresi', 'Uji Lab'],
+            ['Penulisan data saat konfirmasi dibatalkan / diterima', '—', '0 / tepat 1', 'Sesuai desain', 'Uji Lab'],
+            ['Jumlah proyek berjalan: jawaban asisten vs hitungan basis data', '—', 'Sama', 'Lulus uji baca langsung', 'Uji Lab'],
+            ['Cakupan sumber data yang dipahami', '—', '202 sumber data, 15 modul', 'Dicocokkan di CI', 'Aktual'],
+            ['Waktu kerja PM per pertanyaan status', '±13 menit', '±2,8 menit', 'Hemat ±79%', 'Simulasi'],
+            ['Waktu PM yang kembali per minggu', '—', '±3,8 jam (2,4–5,8)', 'Untuk 10–40 pertanyaan/minggu', 'Proyeksi'],
+          ],
+        },
+        image: {
+          src: '/images/case-studies/markaplus/pm-time-simulation.png',
+          alt: 'Waktu kerja PM per pertanyaan status turun dari median ±13 menit menjadi ±2,8 menit (hemat ±79%, P10–P90: 71–85%) pada simulasi 10.000 iterasi',
+        },
+        subsections: [
+          {
+            subtitle: '15 dari 15 Skenario Uji',
+            content:
+              'Mencakup informasi umum, pertanyaan fitur dan peran, query satu tabel, data berelasi, filter dan agregasi, data kosong, akses ditolak, pembuatan dan pembaruan data, input tidak valid, kegagalan basis data/MCP/penyedia AI, dan respons error.',
           },
           {
-            subtitle: '05',
+            subtitle: 'Enam Temuan Audit dan Tes Regresi',
             content:
-              'Bukti Pengiriman Digital (e-POD): Menangkap tanda tangan digital, koordinat GPS berstempel waktu, dan foto penerima saat barang tiba untuk rekonsiliasi penagihan instan.',
+              'Audit 7 Oktober menguji kasus batas (seperti pertanyaan Weekly yang sempat membaca Daily Task). Keenam temuan direproduksi dengan tes yang gagal, diperbaiki, dan dikunci dalam tes regresi.',
           },
           {
-            subtitle: '06',
+            subtitle: '0 dan 1 Penulisan Data Atomik',
             content:
-              'Telemetri Pemeliharaan & Diagnostik Armada: Telemetri mesin real-time memperingatkan manajer bengkel akan keausan komponen sebelum terjadi mogok mendadak di perjalanan.',
+              'Uji browser membuktikan konfirmasi yang dibatalkan menghasilkan 0 penulisan, sedangkan konfirmasi yang diterima menghasilkan tepat satu penulisan terverifikasi.',
+          },
+          {
+            subtitle: 'Hemat ±79% Waktu PM (3,8 Jam/Minggu)',
+            content:
+              'Simulasi 10.000 iterasi dengan tingkat eskalasi 10–35% membuktikan penghapusan pencarian manual mengembalikan rata-rata 3,8 jam kerja per minggu bagi setiap project manager.',
           },
         ],
       },
       {
-        eyebrow: 'HASIL AKHIR',
-        mainTitle: 'Kendali Operasional Penuh, Biaya Transit Lebih Rendah, dan Keandalan Terjamin',
+        eyebrow: '6. METODOLOGI & REFERENSI',
+        mainTitle: 'Catatan Pengukuran dan Simulasi Monte Carlo',
         paragraphs: [
-          'MyBOS menghasilkan penurunan belanja bahan bakar armada sebesar 22%, memangkas sengketa pengiriman hingga nol berkat e-POD, dan memberdayakan pengatur logistik dengan kendali real-time penuh atas aset transit terdistribusi.',
+          'Definisi indikator: Skenario uji dengan bukti eksekusi adalah tes otomatis yang bisa dijalankan ulang dan lulus menurut audit 2 Oktober 2026. Waktu kerja PM per pertanyaan adalah waktu yang dipakai PM untuk membaca, mencari data di ERP, merangkum, dan membalas.',
+          'Simulasi waktu PM (10.000 iterasi, distribusi segitiga min/tipikal/maks): Alur manual: membaca pertanyaan (0,5/1/2 mnt), mencari di ERP/spreadsheet (2/5/10 mnt), merangkum (1/3/8 mnt), membalas (1/2/4 mnt) — median 13,1 menit. Alur Marka Plus: waktu manual dikalikan tingkat eskalasi PM (10%/20%/35%) — median 2,8 menit, hemat 79% (71–85%), menghemat median 3,8 jam per minggu.',
         ],
+        image: {
+          src: '/images/case-studies/markaplus/role-scope-comparison.png',
+          alt: 'Marka Plus mewarisi cakupan data dari peran aktif pengguna, bukan dari isi pertanyaannya',
+        },
       },
     ],
+  },
+  'markaplus-ai-assistant': {
+    title:
+      'Bagaimana Marka Plus Mengubah Pertanyaan Sehari-hari Menjadi Jawaban dari Data ERP, Lolos 15 dari 15 Skenario Uji Akurasi dan Hak Akses',
+    category: 'INTEGRASI DATA & AI',
+    tags: [
+      'ASISTEN AI ERP',
+      'AI UNTUK DATA PERUSAHAAN',
+      'CHATBOT ERP',
+      'MARKAPLUS',
+      'MARKASUITE',
+      'HAK AKSES',
+    ],
+    dateLabel: 'NOVEMBER 2026',
+    description:
+      'Studi kasus Marka Plus: asisten AI di MarkaSuite yang menjawab pertanyaan dari data ERP sesuai hak akses, lolos 15 dari 15 skenario uji.',
+    coverImageAlt:
+      'Panel asisten AI Marka Plus menampilkan jawaban berbentuk tabel dari data proyek ERP',
+  },
+  'markasuite-erp-terpadu-arsalynk': {
+    title:
+      'Bagaimana MarkaSuite Memangkas Waktu Muat Dashboard Eksekutif hingga 89% dalam Satu ERP untuk Proyek, Keuangan, dan CRM',
+    category: 'SOLUSI ENTERPRISE',
+    tags: [
+      'ERP TERINTEGRASI',
+      'ERP INDONESIA',
+      'MANAJEMEN PROYEK',
+      'ERP DENGAN AI',
+      'MARKASUITE',
+      'TATA KELOLA KEUANGAN',
+    ],
+    dateLabel: 'NOVEMBER 2026',
+    description:
+      'Studi kasus MarkaSuite: ERP terpadu Arsalynk untuk proyek, keuangan, dan CRM, dengan dashboard eksekutif 89% lebih cepat pada pengujian internal.',
+    coverImageAlt:
+      'Dashboard eksekutif MarkaSuite menampilkan progres proyek, ringkasan keuangan, dan Request Card dalam satu layar',
+    sections: [
+      {
+        eyebrow: 'RINGKASAN EKSEKUTIF (AT-A-GLANCE)',
+        mainTitle:
+          'ERP Terpadu Proyek, Keuangan, dan CRM dengan Waktu Respons Sub-Detik',
+        paragraphs: [
+          'Klien & Skenario: Implementasi internal di PT Sinergi Muda Arsa (Arsalynk), perusahaan jasa teknologi dengan banyak proyek klien yang berjalan bersamaan.',
+          'Fokus Masalah: Progres proyek, pengajuan dana, dan data keuangan tersebar di spreadsheet dan percakapan chat, sehingga pimpinan harus menunggu rekap manual untuk melihat kondisi perusahaan.',
+          'Solusi Produk: MarkaSuite (Marka+ ERP), dengan modul Project & Task, Request, Finance & Accounting, CRM, dan Reporting, ditambah asisten AI yang membaca data ERP sesuai hak akses.',
+          'Durasi Implementasi: ±3 bulan (3 Agustus – 5 November 2026) dalam empat fase, masing-masing ditutup dengan pengujian otomatis.',
+        ],
+        metrics: [
+          {
+            value: '89%',
+            label: 'Waktu Muat Turun',
+            detail:
+              'Login sampai dashboard eksekutif lengkap: 18,0 detik → 2,0 detik (Uji Lab)',
+          },
+          {
+            value: '95%',
+            label: 'Rute Baca Sub-Detik',
+            detail:
+              '742 dari 783 rute baca merespons di bawah 1 detik dengan median 715 ms (Uji Lab)',
+          },
+          {
+            value: '78%',
+            label: 'Waktu Rekap Dihemat',
+            detail:
+              'Rekap progres mingguan per proyek: ±88 menit → ±20 menit (Simulasi Monte Carlo)',
+          },
+        ],
+      },
+      {
+        eyebrow: '1. SKENARIO MASALAH',
+        mainTitle:
+          'Ketika Laporan Proyek Bergantung pada Siapa yang Sempat Mengisi Spreadsheet',
+        paragraphs: [
+          'Arsalynk mengerjakan proyek IT untuk klien dari berbagai sektor. Setiap proyek melibatkan project manager (PM), staf pelaksana, tim keuangan, dan pimpinan, dan beberapa proyek berjalan pada minggu yang sama.',
+          'Sebelum MarkaSuite, alur operasional harian bergantung pada kombinasi Google Sheets, bot Telegram untuk memperbarui isinya, dan percakapan chat untuk semua yang tidak muat di spreadsheet:',
+        ],
+        subsections: [
+          {
+            subtitle: 'Progres yang Selalu Terlambat Sehari',
+            content:
+              'PM harus menagih update satu per satu lewat chat sebelum bisa mengisi persentase progres. Status di spreadsheet hanya sebaik kiriman terakhir anggota tim. Akibatnya, pimpinan melihat kondisi proyek yang sudah tertinggal dari kenyataan.',
+          },
+          {
+            subtitle: 'Pengajuan Dana Tanpa Jejak',
+            content:
+              'Permintaan dana proyek dan penggantian biaya diajukan lewat pesan, lalu disetujui secara lisan atau lewat balasan singkat. Tim keuangan harus merekonstruksi siapa menyetujui apa ketika menyusun laporan pertanggungjawaban (LPJ).',
+          },
+          {
+            subtitle: 'Laporan Keuangan yang Dirakit Tangan',
+            content:
+              'Biaya proyek, tagihan ke klien, dan pembayaran ke vendor dicatat di tempat berbeda. Laporan Lark yang dikutip JPNN mencatat 48% responden harus membuka beberapa aplikasi setiap jam untuk memantau pekerjaan, dan 58% kehilangan sedikitnya 3 jam kerja per pekan karena inefisiensi koordinasi.',
+          },
+        ],
+        image: {
+          src: '/images/case-studies/marka/workflow-comparison.png',
+          alt: 'Transformasi alur informasi dari pencatatan yang tersebar di spreadsheet dan chat menjadi satu sumber data untuk seluruh peran',
+        },
+      },
+      {
+        eyebrow: '2. SOLUSI PRODUK',
+        mainTitle:
+          'Menghubungkan Lapangan, Manajemen, dan Keuangan dalam Satu Sumber Data',
+        paragraphs: [
+          'MarkaSuite dirancang untuk menghapus jarak antara orang yang mengerjakan proyek, orang yang mengelolanya, dan orang yang membiayainya. Seluruh aktivitas dicatat sebagai transaksi di satu basis data multi-tenant terpadu, lalu ditampilkan kembali sesuai peran aktif pengguna: Staff, Project Manager, Operations Manager, Finance, atau Director.',
+        ],
+        subsections: [
+          {
+            subtitle:
+              'A. Daily Task dan Weekly Target yang Menghitung Progres Sendiri',
+            content:
+              'Saat staf mengisi Daily Task, checklist pekerjaan dihitung otomatis oleh backend menjadi persentase progres, sehingga staf tidak bisa mengetik angka secara manual. Progres naik berjenjang ke Weekly Target, tugas proyek, dan dashboard PM tanpa rekap manual tambahan.',
+          },
+          {
+            subtitle: 'B. Request Card dengan Persetujuan Berjenjang',
+            content:
+              'Pengajuan dana proyek dan penggantian biaya dikirim ke antrean peninjau sesuai peran, mencatat setiap persetujuan dan tampil sebagai Request Card. Begitu disetujui, Finance memproses pencairan yang otomatis membentuk jurnal hingga pelampiran LPJ.',
+          },
+          {
+            subtitle: 'C. Keuangan Transaksional dengan Prinsip Maker–Checker',
+            content:
+              'Biaya proyek diposting ke akun Work in Progress (WIP) melalui jurnal. Proposal penagihan menerbitkan tagihan berskema pajak tersimpan, dan pembayaran vendor memerlukan pencocokan pesanan. Pembuat transaksi tidak dapat menyetujui transaksinya sendiri.',
+          },
+          {
+            subtitle: 'D. Asisten AI yang Membaca Data Sesuai Hak Akses',
+            content:
+              'Asisten AI MarkaSuite menjawab pertanyaan dari data ERP pengguna via snapshot otoritas bertanda tangan server (kedaluwarsa 120 detik), hanya membaca 5 tampilan data khusus berbatas 100 baris/5 detik, dan mewajibkan konfirmasi sebelum mengeksekusi aksi.',
+          },
+        ],
+        image: {
+          src: '/images/case-studies/marka/daily-task-progress.png',
+          alt: 'Progres dihitung dari checklist pekerjaan, bukan diketik manual, lalu naik otomatis ke tingkat proyek',
+        },
+      },
+      {
+        eyebrow: '3. DI BALIK LAYAR',
+        mainTitle: 'Arsitektur yang Cepat, Tersekat, dan Bisa Diaudit',
+        paragraphs: [
+          'Untuk memastikan sistem tetap responsif meski banyak peran membaca satu basis data yang sama, MarkaSuite dibangun di atas fondasi berikut:',
+          'Fondasi modern dan modular: backend Node.js, Express, dan TypeScript dengan Prisma di atas PostgreSQL (Supabase), serta frontend Next.js App Router. 2.616 rute API melayani 21 modul backend.',
+          'Cepat lewat proyeksi dan cache: data proyek dan keuangan diambil dalam satu kueri JSON per bagian. Cache read-through berbasis perusahaan, pengguna, peran, dan modul menurunkan waktu muat dashboard berulang dari 1.033 ms menjadi 118 ms.',
+          'Tersekat dengan kontrol akses empat lapis: token JWT, peran aktif, hak modul per perusahaan, dan cakupan baris data per proyek. Header perusahaan yang dipalsukan ditolak HTTP 403.',
+          'Bisa diaudit di setiap transaksi: setiap mutasi membawa Idempotency-Key untuk mencegah transaksi ganda, header X-Request-ID untuk penelusuran, dan seluruh mutasi tercatat di audit trail dengan penyensoran data sensitif.',
+        ],
+        image: {
+          src: '/images/case-studies/marka/technical-architecture.png',
+          alt: 'Setiap permintaan melewati empat lapis pemeriksaan akses sebelum menyentuh data, dan asisten AI hanya membaca tampilan khusus yang dibatasi',
+        },
+      },
+      {
+        eyebrow: '4. PERJALANAN IMPLEMENTASI',
+        mainTitle: 'Empat Fase dalam Tiga Bulan',
+        paragraphs: [
+          'MarkaSuite dibangun selama ±3 bulan dengan 533 commit tercatat. Setiap fase baru dimulai setelah fase sebelumnya lolos pengujian otomatis:',
+        ],
+        table: {
+          caption: 'Tahapan Pengembangan MarkaSuite & Validasi Teknis',
+          headers: ['Fase', 'Periode', 'Keluaran', 'Cara Diuji'],
+          rows: [
+            [
+              'Fondasi & model data',
+              '3–25 Agustus 2026',
+              'Prototipe Django dan model data untuk proyek, CRM, penjualan, keuangan, inventori, manufaktur',
+              'Uji unit per modul',
+            ],
+            [
+              'Migrasi arsitektur',
+              '26 Agustus – awal September 2026',
+              'Backend pindah ke Node.js/Express/TypeScript dengan Prisma; frontend Next.js',
+              'Kompilasi TypeScript backend dan frontend; inventaris 2.616 rute',
+            ],
+            [
+              'Pengerasan & performa',
+              'September 2026',
+              'Kontrol akses berlapis, alur keuangan transaksional, cache dashboard, deploy produksi 22–24 September',
+              '783 rute baca, 1.833 rute tulis non-destruktif, 9 skenario login, 9 pagar sistem (Q11)',
+            ],
+            [
+              'Asisten AI & penyempurnaan',
+              'September – November 2026',
+              'Asisten AI berbasis data ERP, audit chatbot 7 Oktober, revisi tampilan per peran',
+              '16 suite uji chatbot dan 2 suite browser (mobile dan desktop)',
+            ],
+          ],
+        },
+      },
+      {
+        eyebrow: '5. DAMPAK & BENCHMARK PERFORMA',
+        mainTitle:
+          'Hasil Pengukuran Waktu Muat, Throughput Rute, dan Efisiensi Mingguan',
+        paragraphs: [
+          'Berdasarkan benchmark tim pengembang pada stack Express dan PostgreSQL (Supabase) produksi pada September 2026, dengan pembanding build awal sistem, serta simulasi 10.000 iterasi untuk alur rekap mingguan, berikut hasilnya:',
+        ],
+        table: {
+          caption: 'Tabel Benchmark Kinerja dan Efisiensi Operasional MarkaSuite',
+          headers: ['Indikator Operasional', 'Sebelum', 'Dengan MarkaSuite', 'Selisih', 'Status'],
+          rows: [
+            ['Login sampai dashboard eksekutif lengkap', '18,0 detik (build awal)', '2,0 detik', 'Turun 89%', 'Uji Lab'],
+            ['Respons login (9 skenario)', '7,5–11,4 detik', '0,35–1,3 detik', '9/9 di bawah 3 detik', 'Uji Lab'],
+            ['Laporan neraca saldo', '4,6 detik', '1,3 detik', 'Turun 72%', 'Uji Lab'],
+            ['Dashboard berulang (dari cache)', '1.033 ms', '118 ms', '±9x lebih cepat', 'Uji Lab'],
+            ['Feed Request Card (dari cache)', '1.388 ms', '394 ms', '±3,5x lebih cepat', 'Uji Lab'],
+            ['Rute baca di bawah 1 detik', '—', '742 dari 783 (95%)', 'Median 715 ms', 'Uji Lab'],
+            ['Rute tulis lolos uji non-destruktif', '—', '1.833 dari 1.833', 'Tanpa mutasi data bisnis', 'Uji Lab'],
+            ['Rekap progres mingguan per proyek', '±88 menit (spreadsheet + chat)', '±20 menit (dashboard)', 'Hemat ±78%', 'Simulasi'],
+          ],
+        },
+        image: {
+          src: '/images/case-studies/marka/load-time-benchmarks.png',
+          alt: 'Dashboard eksekutif turun dari 18,0 detik menjadi 2,0 detik; laporan neraca saldo dari 4,6 menjadi 1,3 detik',
+        },
+        subsections: [
+          {
+            subtitle: 'Dashboard 18 Detik Menjadi 2 Detik',
+            content:
+              'Penyatuan 12 kueri proyek dan 13 kueri keuangan ke dalam satu proyeksi JSON terpadu per perusahaan menghilangkan jeda buatan dan latensi berulang.',
+          },
+          {
+            subtitle: 'Neraca Saldo 4,6 Detik Menjadi 1,3 Detik',
+            content:
+              'Perhitungan debit dan kredit dipindahkan ke kueri agregat basis data, menghilangkan inisialisasi akun satu per satu.',
+          },
+          {
+            subtitle: 'Rekap Mingguan Hemat ±78%',
+            content:
+              'Penagihan update manual dan pencocokan spreadsheet hilang karena progres terisi langsung dari Daily Task yang dicentang staf sendiri.',
+          },
+          {
+            subtitle: 'Penanganan Downtime Sub-33ms',
+            content:
+              'Saat koneksi basis data terputus, sistem langsung mengembalikan HTTP 503 dalam ±33 ms agar tim support dapat segera membedakan gangguan basis data dari kesalahan aplikasi.',
+          },
+        ],
+      },
+      {
+        eyebrow: '6. METODOLOGI & REFERENSI',
+        mainTitle: 'Catatan Pengukuran dan Simulasi Monte Carlo',
+        paragraphs: [
+          'Definisi indikator: Login sampai dashboard eksekutif lengkap diukur dari klik login hingga seluruh bagian kartu dashboard dan Request Card tampil pada build produksi Next.js, backend Express, dan Supabase.',
+          'Simulasi rekap progres mingguan (10.000 iterasi, distribusi segitiga min/tipikal/maks): Alur manual: menagih update (15/25/45 mnt), mencocokkan spreadsheet (10/20/40 mnt), menghitung progres (10/20/30 mnt), tanya jawab pimpinan (5/15/30 mnt) — median 88 menit. Alur MarkaSuite: memeriksa dashboard (5/10/20 mnt), menindaklanjuti hambatan (2/5/10 mnt), tanya jawab (0/2/5 mnt) — median 20 menit, menghasilkan penghematan median 78%.',
+        ],
+        image: {
+          src: '/images/case-studies/marka/weekly-recap-simulation.png',
+          alt: 'Rekap progres mingguan per proyek turun dari median ±88 menit menjadi ±20 menit (hemat ±78%) pada simulasi 10.000 iterasi',
+        },
+      },
+    ],
+  },
+  'marka-project-manager': {
+    title:
+      'Bagaimana MarkaSuite Memangkas Waktu Muat Dashboard Eksekutif hingga 89% dalam Satu ERP untuk Proyek, Keuangan, dan CRM',
+    category: 'SOLUSI ENTERPRISE',
+    tags: [
+      'ERP TERINTEGRASI',
+      'ERP INDONESIA',
+      'MANAJEMEN PROYEK',
+      'MARKASUITE',
+    ],
+    dateLabel: 'NOVEMBER 2026',
+    description:
+      'Studi kasus MarkaSuite: ERP terpadu Arsalynk untuk proyek, keuangan, dan CRM, dengan dashboard eksekutif 89% lebih cepat pada pengujian internal.',
+    coverImageAlt:
+      'Dashboard eksekutif MarkaSuite menampilkan progres proyek, ringkasan keuangan, dan Request Card dalam satu layar',
+  },
+  'marka-finance-accounting': {
+    title:
+      'Bagaimana MarkaSuite Memangkas Waktu Muat Dashboard Eksekutif hingga 89% dalam Satu ERP untuk Proyek, Keuangan, dan CRM',
+    category: 'SOLUSI ENTERPRISE',
+    tags: [
+      'ERP KEUANGAN',
+      'AKUNTANSI KORPORAT',
+      'TATA KELOLA ARUS KAS',
+    ],
+    dateLabel: 'NOVEMBER 2026',
+    description:
+      'Studi kasus MarkaSuite: ERP terpadu Arsalynk untuk proyek, keuangan, dan CRM, dengan dashboard eksekutif 89% lebih cepat pada pengujian internal.',
+    coverImageAlt:
+      'Dashboard eksekutif MarkaSuite menampilkan progres proyek, ringkasan keuangan, dan Request Card dalam satu layar',
   },
 };
 
@@ -1502,7 +1803,25 @@ export function getLocalizedCaseStudy(
   slug: string,
   locale: Locale
 ): CaseStudyArticle | undefined {
-  return getLocalizedCaseStudies(locale).find((s) => s.slug === slug);
+  const studies = getLocalizedCaseStudies(locale);
+  return (
+    studies.find((s) => s.slug === slug) ||
+    studies.find(
+      (s) =>
+        (slug === 'myboss-logistics-fleet-management' &&
+          s.slug === 'mybos-fondasi-pelacakan-armada') ||
+        (slug === 'mybos-fondasi-pelacakan-armada' &&
+          s.slug === 'myboss-logistics-fleet-management') ||
+        (slug === 'markaplus-ai-assistant' &&
+          s.slug === 'marka-plus-asisten-ai-erp') ||
+        (slug === 'marka-plus-asisten-ai-erp' &&
+          s.slug === 'markaplus-ai-assistant') ||
+        ((slug === 'marka-project-manager' || slug === 'marka-finance-accounting') &&
+          s.slug === 'markasuite-erp-terpadu-arsalynk') ||
+        (slug === 'markasuite-erp-terpadu-arsalynk' &&
+          (s.slug === 'marka-project-manager' || s.slug === 'marka-finance-accounting'))
+    )
+  );
 }
 
 // ============================================================================

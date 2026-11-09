@@ -81,6 +81,18 @@ export interface ArticleSubsection {
   content: string;
 }
 
+export interface ArticleTable {
+  headers: string[];
+  rows: string[][];
+  caption?: string;
+}
+
+export interface ArticleMetric {
+  value: string;
+  label: string;
+  detail?: string;
+}
+
 export interface ArticleSection {
   eyebrow?: string;
   mainTitle: string;
@@ -90,6 +102,8 @@ export interface ArticleSection {
     alt: string;
   };
   subsections?: ArticleSubsection[];
+  table?: ArticleTable;
+  metrics?: ArticleMetric[];
 }
 
 export interface CaseStudyArticle {
