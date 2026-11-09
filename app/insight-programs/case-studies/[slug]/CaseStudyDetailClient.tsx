@@ -118,11 +118,68 @@ export default function CaseStudyDetailClient({ slug }: { slug: string }) {
                   {section.mainTitle}
                 </h2>
 
+                {section.metrics?.length ? (
+                  <div className="my-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {section.metrics.map((metric, idx) => (
+                      <div
+                        key={idx}
+                        className="flex flex-col gap-2 rounded-[20px] border border-[#1A3E9E]/20 bg-[rgba(153,166,231,0.08)] p-6 transition-all hover:border-[#1A3E9E]/40 hover:bg-[rgba(153,166,231,0.14)]"
+                      >
+                        <div className="font-heading text-[clamp(28px,2.5vw,46px)] font-bold tracking-tight text-[#1A3E9E]">
+                          {metric.value}
+                        </div>
+                        <div className="font-body text-[13px] font-bold uppercase tracking-wider text-[#101010] sm:text-[14px]">
+                          {metric.label}
+                        </div>
+                        {metric.detail && (
+                          <div className="font-body text-[13px] leading-relaxed text-[#555]">
+                            {metric.detail}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+
                 {section.paragraphs?.length ? (
                   <div className="flex flex-col gap-4 font-body text-[15px] leading-[1.7] tracking-[0.01em] text-[#292929] sm:text-[17px] xl:text-[20px] xl:leading-[1.6]">
                     {section.paragraphs.map((paragraph, paragraphIndex) => (
                       <p key={paragraphIndex}>{paragraph}</p>
                     ))}
+                  </div>
+                ) : null}
+
+                {section.table ? (
+                  <div className="my-3 w-full overflow-hidden rounded-[18px] border border-[#E5E7EB] bg-white shadow-sm">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[620px] text-left font-body text-[14px] sm:text-[15px]">
+                        {section.table.caption && (
+                          <caption className="border-b border-[#E5E7EB] bg-[#F8F9FD] px-5 py-3 text-left font-body text-[13px] font-semibold text-[#1A3E9E]">
+                            {section.table.caption}
+                          </caption>
+                        )}
+                        <thead className="border-b border-[#E5E7EB] bg-[#F3F4F8] text-[12px] font-bold uppercase tracking-wider text-[#101010] sm:text-[13px]">
+                          <tr>
+                            {section.table.headers.map((h, i) => (
+                              <th key={i} className="px-5 py-3.5">
+                                {h}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-[#E5E7EB]">
+                          {section.table.rows.map((row, rIdx) => (
+                            <tr key={rIdx} className="hover:bg-[#F9FAFC] transition-colors">
+                              {row.map((cell, cIdx) => (
+                                <td key={cIdx} className="px-5 py-3.5 text-[#292929]">
+                                  {cell}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 ) : null}
 

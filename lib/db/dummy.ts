@@ -1090,302 +1090,603 @@ const LEGACY_TESTIMONIALS_DUMMY_DATA = [
    CASE STUDIES DUMMY DATA (6 Articles aligned 1-to-1 with Our Solution)
    ───────────────────────────────────────────────────────────────────────── */
 export const CASE_STUDIES_DUMMY_DATA: CaseStudyArticle[] = [
-  /* ── 1. Sinau Print ── */
+  /* ── 1. MyBOS — Fleet Tracking Platform Foundation ── */
   {
     id: 1,
-    slug: 'sinau-print-pos-system',
-    title: 'Sinau Print',
-    category: 'ENTERPRISE SOLUTION',
-    tags: ['POINT OF SALE', 'ERP ARCHITECTURE', 'RETAIL AUTOMATION'],
-    dateLabel: 'APRIL 2026',
-    dateValue: '2026-04-22',
-    description: 'A centralized Point of Sale and retail operations ERP solution designed to streamline multi-branch sales, order flows, payment handling, and automated WhatsApp invoice dispatch.',
-    coverImage: '/images/case-studies/sinau-print.svg',
-    coverImageAlt: 'Sinau Print Point of Sale and Operations Management System',
+    slug: 'mybos-fondasi-pelacakan-armada',
+    title: 'How MyBOS Engineered a Fleet Tracking Foundation Logging Every Access and Rejecting Unauthorized Tokens in ±7 Milliseconds',
+    category: 'SMART IOT SYSTEM',
+    tags: ['FLEET PLATFORM', 'ACCESS CONTROL', 'AUDIT TRAIL', 'DRIVER API', 'LOGISTICS IOT'],
+    dateLabel: 'NOVEMBER 2026',
+    dateValue: '2026-11-06',
+    description: 'MyBOS case study: fleet tracking platform foundation featuring role-based access, secured field APIs, and verifiable audit trails for every access event.',
+    coverImage: '/images/case-studies/mybos/cover.png',
+    coverImageAlt: 'MyBOS Admin Log dashboard displaying access history with user identities, timestamps, and platform origin',
     sections: [
       {
-        eyebrow: 'THE CHALLENGE',
-        mainTitle: 'Managing High-Volume Orders Across Teams Without Unified Operational Flow',
+        eyebrow: 'EXECUTIVE SUMMARY',
+        mainTitle: 'Identity, Access Governance, and Audit Trails Before Fleet Deployment',
         paragraphs: [
-          'Managing custom retail orders, print production, and customer fulfillment across multiple branch teams creates friction when transactions involve variable down payments, installment schedules, and multi-stage production.',
-          'Without a centralized architecture, businesses experience data silos between counters, delayed invoice delivery, payment tracking discrepancies, and limited visibility into daily operational revenue.',
+          'Client & Scenario: MyBOS (Marka Logistik / BSP Tracking Web), an enterprise fleet tracking platform for logistics operations. This case study focuses on the foundation phase: identity governance, role permissions, field application APIs, and audit trails.',
+          'Problem Focus: Before streaming live vehicle telemetry, every stakeholder and field application accessing fleet data must possess an isolated identity, defined permissions, and verifiable access logs.',
+          'Product Architecture: Web admin console (Laravel 9, Vue 3, Inertia.js) and JWT-authenticated v1 API for field mobile apps, featuring role-based access control, request rate limiting, and segregated audit logging for admin and API channels.',
+          'Implementation Timeline: Foundation phase finalized and recorded in the repository on May 18, 2024. Fleet modules (vehicles, GPS telemetry, route tracking, delivery orders) follow in the subsequent deployment phase.',
+        ],
+        metrics: [
+          {
+            value: '±7 ms',
+            label: 'Token Rejection',
+            detail: 'Requests without tokens (403) or corrupted tokens (401) rejected in ±7 ms (Lab Tested)',
+          },
+          {
+            value: '81 ms',
+            label: 'API Login Median',
+            detail: 'Remains under 0.6s even under 10 concurrent client authentications (Lab Tested)',
+          },
+          {
+            value: '94%',
+            label: 'Trace Time Saved',
+            detail: 'Incident lookup reduced from ±47 mins to ±2.6 mins via centralized audit logs (Simulation)',
+          },
         ],
       },
       {
-        mainTitle: 'Connecting Sales, Order Processing, and Fulfillment into One Ecosystem',
+        eyebrow: 'THE PROBLEM SCENARIO',
+        mainTitle: 'When Fleet Telemetry Is Exposed Before Securing the Gateway',
         paragraphs: [
-          'We engineered a tailored enterprise POS and workflow management system that synchronizes front-counter cashier desks, production queues, accounting reconciliations, and customer communication into a unified platform.',
+          'Logistics operations involve dispatchers, office administrators, operations managers, and field drivers. Without telemetry, engine health and fuel efficiency remain difficult to monitor. However, before streaming vehicle location and operational data into the system, an essential question must be answered: who is authorized to access what, and how can every transaction be definitively proven?',
+          'Without that structural foundation, newly built tracking systems inherit legacy vulnerabilities: shared credentials across teams, untracked permission modifications, and insecure driver applications where credential leaks expose critical fleet assets indefinitely.',
         ],
-        image: { src: '/images/case-studies/sinau-print.svg', alt: 'Centralized POS platform connecting sales, payments, and production teams' },
-      },
-      {
-        eyebrow: 'OUR SOLUTION',
-        mainTitle: 'An Integrated Architecture Designed Around Every Stage of the Retail Workflow',
         subsections: [
-          { subtitle: '01', content: 'Real-Time Sales & Transaction Dashboard: Delivers live multi-counter sales performance, transaction velocity, and revenue analytics for instant leadership visibility.' },
-          { subtitle: '02', content: 'Direct Order Dispatch & Tracking: Sales and customer service teams register, update, and route custom print orders with granular status logging.' },
-          { subtitle: '03', content: 'Split Bill & Multi-Stage Payment Processing: Native support for partial deposits, installment schedules, and final settlement reconciliations.' },
-          { subtitle: '04', content: 'Automated Midtrans Payment Gateway Integration: Seamless digital payments via virtual accounts, QRIS, and e-wallets with instant status callbacks.' },
-          { subtitle: '05', content: 'Role-Based Operational Access Control: Strictly isolates counter cashiers, production staff, inventory handlers, and branch managers with assigned permission boundaries.' },
-          { subtitle: '06', content: 'Automated Invoice Delivery via WhatsApp API: Dispatches digital PDF receipts and payment reminders directly to customers upon checkout, reducing counter wait times.' },
+          {
+            subtitle: 'Shared Accounts Across Teams',
+            content: 'Dispatchers and administrators frequently shared single logins for convenience. Every database mutation was recorded under identical credentials, preventing accountability when erroneous data was entered.',
+          },
+          {
+            subtitle: 'Untracked Permission Changes',
+            content: 'Access privileges were modified via informal chat requests. Audit histories were scattered across messaging apps, requiring hours of manual searching during operational disputes.',
+          },
+          {
+            subtitle: 'Insecure Field Applications',
+            content: 'Driver mobile apps require dedicated API endpoints separated from the admin panel. Without expiring tokens and rate limits, compromised credentials allowed unrestricted data exfiltration.',
+          },
+        ],
+        image: {
+          src: '/images/case-studies/mybos/workflow-comparison.png',
+          alt: 'Workflow Comparison Diagram: Shared unlogged access transformed into verified role-based identities with persistent audit trails',
+        },
+      },
+      {
+        eyebrow: 'PRODUCT SOLUTION',
+        mainTitle: 'Unifying Admin Panels and Field Apps in a Single Audited Access Layer',
+        paragraphs: [
+          'MyBOS was architected in a deliberate order: the security and audit access layer was completed before building out fleet telemetry modules. Instead of bolting on security after GPS coordinates begin streaming, subsequent tracking features seamlessly inherit existing authentication, role boundaries, and audit logging.',
+          'The platform establishes two isolated entry doors: a web admin panel for dispatchers and managers, and an API v1 for driver mobile apps. Both stream telemetry into segregated audit logs.',
+        ],
+        subsections: [
+          {
+            subtitle: 'A. Field App API with Expiring JWT & Rate Limiting',
+            content: 'When mobile apps authenticate via API, credentials generate a 60-minute JWT token with refresh capabilities up to 14 days. Dedicated JWT middleware rejects unauthenticated requests (HTTP 403) and corrupted tokens (HTTP 401) in ±7 ms, while enforcing a strict 60 requests/minute rate limit per user or IP address.',
+          },
+          {
+            subtitle: 'B. Granular User Roles & Instant Permission Inheritance',
+            content: 'Administrators define permissions per role (dashboard viewing, admin logs, API logs, user management). Any adjustment to role permissions immediately updates all associated users and logs an independent audit record.',
+          },
+          {
+            subtitle: 'C. Segregated Audit Trails for Web and API Traffic',
+            content: 'Every authentication, logout, and permission change writes an immutable audit record capturing user identity, timestamp, IP address, user agent, URL, platform origin, status code, and request/response payloads across Admin Log and API Log interfaces.',
+          },
+        ],
+        image: {
+          src: '/images/case-studies/mybos/token-flow.png',
+          alt: 'Field Application Token Lifecycle: Expiring JWT validation, refresh cycle, and rate limiting',
+        },
+      },
+      {
+        eyebrow: 'TECHNICAL ARCHITECTURE',
+        mainTitle: 'An Isolated, Rate-Limited, and Verifiable Architecture',
+        paragraphs: [
+          'To ensure subsequent fleet tracking modules can be integrated without refactoring authentication, the MyBOS foundation was engineered on robust enterprise components:',
+          'Isolated Web and Mobile Interfaces: Web admin console built on Laravel 9, Vue 3, Inertia.js, and Tailwind CSS using session security. Mobile driver apps consume API v1 authenticated via JWT guards. The codebase incorporates 39 defined routes: 28 admin routes, 6 API routes, and 5 auxiliary handlers.',
+          'Enforced Boundaries via Roles & Rate Limiting: Permissions managed via Spatie Laravel-Permission, while API endpoints enforce a 60 requests/minute rate limit per IP or authenticated user.',
+          'Comprehensive Access Auditing: Powered by Laravel-Auditing with custom resolvers for platform origin (admin_dashboard vs api), request/response payloads, and HTTP status codes.',
+          'Flexible Deployment Portability: Built-in SQLite support and precompiled Vite frontend assets enable local deployment for testing before migration to production server databases.',
+        ],
+        image: {
+          src: '/images/case-studies/mybos/technical-architecture.png',
+          alt: 'Technical Architecture & Data Flow Diagram connecting admin console and field driver apps',
+        },
+      },
+      {
+        eyebrow: 'IMPLEMENTATION ROADMAP',
+        mainTitle: 'Foundation First, Fleet Modules Second',
+        paragraphs: [
+          'The repository establishes the completed foundation phase committed on May 18, 2024. Fleet modules (vehicles, GPS tracking, dispatch routing, digital proof of delivery) follow in the subsequent deployment stage.',
+        ],
+        table: {
+          caption: 'MyBOS Engineering Roadmap: Foundation Stage vs Fleet Tracking Modules',
+          headers: ['Phase', 'Status', 'Deliverables', 'Validation Method'],
+          rows: [
+            [
+              'Platform Foundation',
+              'Completed (May 18, 2024)',
+              'Web & API auth, password reset, user/role management, Admin Log & API Log, API rate limiting',
+              'Local Lab Benchmarking (Nov 6, 2026): response times, token rejection, rate limit, audit trails',
+            ],
+            [
+              'Fleet Operations Module',
+              'Next Phase',
+              'Vehicle master data, live GPS tracking, delivery orders, driver notifications',
+              'Scheduled for upcoming release',
+            ],
+          ],
+        },
+      },
+      {
+        eyebrow: 'BENCHMARK & RESULTS',
+        mainTitle: 'Lab Performance Benchmarks and Measurable Operational Impact',
+        paragraphs: [
+          'Benchmarked on November 6, 2026 (Laravel server with 4 workers, PHP 8.3, SQLite sample dataset) alongside a 10,000-iteration Monte Carlo simulation for access trace time:',
+        ],
+        table: {
+          caption: 'Performance Verification & Operational Impact Matrix',
+          headers: ['Indicator', 'Before MyBOS', 'With MyBOS', 'Validation Result', 'Verification Status'],
+          rows: [
+            ['Missing Token Rejection', '—', 'HTTP 403, median 7.0 ms', '25 of 25 rejected', 'Lab Tested'],
+            ['Corrupted Token Rejection', '—', 'HTTP 401, median 6.5 ms', '25 of 25 rejected', 'Lab Tested'],
+            ['API Login (Sequential)', '—', 'Median 81 ms, P95 89 ms', '50 of 50 successful', 'Lab Tested'],
+            ['API Login (10 Concurrent Clients)', '—', 'Median 396 ms, Max 561 ms', '50 of 50 successful', 'Lab Tested'],
+            ['API Rate Limiting', '—', '60 requests/minute', '61st request rejected (HTTP 429)', 'Lab Tested'],
+            ['API Login Audit Logging', '—', 'Every login captured', 'Platform "api" populated', 'Lab Tested'],
+            ['Access Incident Lookup Time', '±47 mins (chat & history)', '±2.6 mins (Admin/API Log)', '±94% time reduction', 'Simulation'],
+          ],
+        },
+        image: {
+          src: '/images/case-studies/mybos/response-times.png',
+          alt: 'Response times across request types: Token rejections complete in ±7ms while concurrent logins remain under 0.6s',
+        },
+        subsections: [
+          {
+            subtitle: 'Sub-7 Millisecond Rejection Speed',
+            content: 'JWT middleware inspects tokens before requests touch business logic or database queries. Unauthorized requests are stopped almost as fast as serving static assets.',
+          },
+          {
+            subtitle: '81 ms Median Login Under Concurrency',
+            content: 'Password hashing deliberately consumes compute cycles for brute-force resistance. When 10 clients authenticate simultaneously, requests queue across 4 worker threads, completing under 0.6 seconds with 100% success.',
+          },
+          {
+            subtitle: '94% Time Reduction in Incident Lookups',
+            content: 'Replacing informal team chat queries (typically 15 to 60 minutes) with searchable Admin Log and API Log interfaces allows instant verification of who accessed or modified permissions.',
+          },
+          {
+            subtitle: 'Measurement Scope & Limitations',
+            content: 'Evaluated on the platform foundation. Live fleet telemetry (GPS hardware, route telematics) belongs to the upcoming release. Lab benchmarks reflect local server performance and will vary on production clusters.',
+          },
         ],
       },
       {
-        eyebrow: 'THE OUTCOME',
-        mainTitle: 'Transparent, Efficient, and Accelerated Store Operations',
+        eyebrow: 'TESTING METHODOLOGY',
+        mainTitle: 'Benchmarking Environment and Monte Carlo Simulation Model',
         paragraphs: [
-          'The Sinau Print deployment eliminated manual receipt handling, reduced transaction cycle times by over 45%, and gave management absolute visibility into daily branch revenue and production bottlenecks.',
+          'Benchmark metrics measure total round-trip duration from request transmission to response receipt on the test host (excluding external network latency).',
+          'Access Incident Simulation: 10,000 iterations modeled via triangular distribution (min / typical / max in minutes). Manual workflow: asking team in chat (5/15/60 min), checking message history (5/10/30 min), confirming with stakeholder (2/5/15 min) — median 47.4 mins. MyBOS workflow: searching Admin/API Log (0.5/1/3 min), reviewing event modal (0.5/1/2 min) — median 2.6 mins, yielding 94% median time savings.',
         ],
+        image: {
+          src: '/images/case-studies/mybos/trace-time-simulation.png',
+          alt: 'Monte Carlo simulation comparing access lookup duration before and after MyBOS audit implementation',
+        },
       },
     ],
   },
 
-  /* ── 2. Presstis ── */
+  /* ── 2. Marka Plus — Enterprise ERP AI Assistant ── */
   {
     id: 2,
-    slug: 'presstis-digital-platform',
-    title: 'Presstis',
-    category: 'DIGITAL DEVELOPMENT',
-    tags: ['WEB DEVELOPMENT', 'DIGITAL PLATFORM', 'MEDIA ARCHITECTURE'],
-    dateLabel: 'MAY 2026',
-    dateValue: '2026-05-15',
-    description: 'A high-performance digital publishing and media distribution platform engineered for multi-publication networks, editorial collaboration, and high-concurrency reader engagement.',
-    coverImage: '/images/case-studies/presstis.svg',
-    coverImageAlt: 'Presstis Scalable Digital Media and Web Platform',
+    slug: 'marka-plus-asisten-ai-erp',
+    title: 'How Marka Plus Transforms Everyday Questions into ERP Data Insights, Passing 15 of 15 Accuracy and Access Control Test Scenarios',
+    category: 'DATA & AI INTEGRATION',
+    tags: ['ERP AI ASSISTANT', 'ENTERPRISE AI', 'ERP CHATBOT', 'MARKAPLUS', 'ACCESS CONTROL', 'DATA PIPELINE'],
+    dateLabel: 'NOVEMBER 2026',
+    dateValue: '2026-11-06',
+    description: 'Marka Plus case study: an enterprise AI assistant embedded in MarkaSuite querying ERP data within role permissions, passing 15 of 15 test scenarios.',
+    coverImage: '/images/case-studies/markaplus/cover.png',
+    coverImageAlt: 'Marka Plus AI Assistant console presenting verified tabular responses directly from ERP project data',
     sections: [
       {
-        eyebrow: 'THE CHALLENGE',
-        mainTitle: 'Fragmented Editorial Pipelines and Sluggish Delivery Under Traffic Surges',
+        eyebrow: 'EXECUTIVE SUMMARY',
+        mainTitle: 'Verified Enterprise AI Assistant Operating Within ERP Access Boundaries',
         paragraphs: [
-          'Modern media networks operating across diverse niche publications face recurring technical hurdles: slow page render speeds that hurt search ranking, disjointed content management systems for editorial teams, and security vulnerabilities during breaking-news traffic spikes.',
-          'Legacy monolithic web frameworks proved too rigid to support real-time syndication across multiple domain properties while maintaining modern UX standards.',
+          'Client & Scenario: Embedded AI assistant within MarkaSuite (Marka+ ERP), engineered by Arsalynk for internal operations and enterprise clients utilizing MarkaSuite.',
+          'Problem Focus: Project status questions and operational software guidance continually backlogged project manager chat channels, while off-the-shelf chatbots carry substantial data leak risks when connected to core enterprise records.',
+          'Product Solution: Marka Plus—an enterprise AI assistant that maps conversational language to 202 ERP data sources, queries data strictly within signed user role permissions, and mandates explicit confirmation before executing data mutations.',
+          'Implementation Timeline: ±6 weeks (September 15 – October 28, 2026) across four structured phases, each verified by rigorous test suites.',
+        ],
+        metrics: [
+          {
+            value: '15 / 15',
+            label: 'Test Scenarios Passed',
+            detail: 'Accuracy and role-based access control scenarios backed by repeatable execution proofs (Lab Tested)',
+          },
+          {
+            value: '0 / 1',
+            label: 'Data Mutation Integrity',
+            detail: 'Cancelled action proposals produce 0 writes; approved confirmations execute exactly 1 verified write (Lab Tested)',
+          },
+          {
+            value: '79%',
+            label: 'PM Time Saved',
+            detail: 'PM operational time per status inquiry: ±13 mins → ±2.8 mins (Monte Carlo Simulation)',
+          },
         ],
       },
       {
-        mainTitle: 'A Custom Engineered Web Architecture Built for Speed and Uncompromising Scalability',
+        eyebrow: 'THE PROBLEM SCENARIO',
+        mainTitle: 'When Every Data Inquiry Depends on a Single Individual',
         paragraphs: [
-          'We designed and coded a modern digital platform from the ground up, utilizing edge-rendered web technologies, distributed CDN caching, and an intuitive unified newsroom backend tailored to high-velocity editorial operations.',
+          'Once Arsalynk unified projects, tasks, requests, and financials into MarkaSuite, organizational data became complete. The resulting bottleneck was data accessibility: MarkaSuite expanded rapidly, logging 533 commits in its first three months across 202 data sources and 15 business modules. Not all staff memorized where specific reports resided.',
+          'Prior to Marka Plus, obtaining answers required querying key personnel who understood database structures intimately, creating cascading operational delays:',
         ],
-        image: { src: '/images/case-studies/presstis.svg', alt: 'Presstis high-performance digital media platform architecture' },
-      },
-      {
-        eyebrow: 'OUR SOLUTION',
-        mainTitle: 'Headless Scalability, Edge Acceleration, and Unified Editorial Governance',
         subsections: [
-          { subtitle: '01', content: 'Ultra-Low Latency Content Delivery: Edge-cached distribution guaranteeing sub-second page load times across tens of thousands of concurrent readers.' },
-          { subtitle: '02', content: 'Multi-Publication Editorial Workspace: A centralized publishing CMS enabling journalists and editors to draft, review, and syndicate content across multiple brand domains.' },
-          { subtitle: '03', content: 'Real-Time Engagement Telemetry: Integrated audience interaction analytics measuring dwell time, scroll depth, and trending articles to guide editorial strategy.' },
-          { subtitle: '04', content: 'Enterprise-Grade Security Protocols: Proactive DDoS shielding, automated SSL rotation, and granular role permissions ensuring continuous platform availability.' },
-          { subtitle: '05', content: 'Dynamic Monetization & Ad Placement: Native, non-intrusive sponsor and ad slots engineered to maximize revenue yield without sacrificing Core Web Vitals.' },
-          { subtitle: '06', content: 'SEO-First Semantic Architecture: Structured JSON-LD schemas, automated XML sitemaps, and optimized open-graph metadata driving organic search prominence.' },
+          {
+            subtitle: 'Queued Inquiries in PM Chats',
+            content: 'Team members asked "how many pending weekly tasks do I have?", while leadership inquired "which projects are actively progressing?". Project managers repeatedly interrupted core work to filter ERP grids, calculate aggregates, and reply manually.',
+          },
+          {
+            subtitle: 'Documentation Outpaced by Rapid Releases',
+            content: 'Operating procedures evolved with each release. For example, Weekly Targets required PM sign-off before becoming eligible as Daily Task baselines. Staff following outdated guides faced system rejections, cycling questions back to the PM.',
+          },
+          {
+            subtitle: 'Overconfident AI & Security Concerns',
+            content: 'Generic AI chatbots connected to enterprise databases frequently hallucinate numbers or expose cross-departmental records. According to the HSBC Voices of Treasury 2025 survey, 48% of Indonesian corporate respondents cite cybersecurity as their primary barrier to automation and AI adoption.',
+          },
+        ],
+        image: {
+          src: '/images/case-studies/markaplus/workflow-comparison.png',
+          alt: 'Workflow Comparison Diagram: Transitioning from PM-dependent chat bottlenecks to controlled, role-scoped ERP AI answers',
+        },
+      },
+      {
+        eyebrow: 'PRODUCT SOLUTION',
+        mainTitle: 'Bridging Natural Language and ERP Data via a Controlled Execution Pipeline',
+        paragraphs: [
+          'Marka Plus was architected to enable natural language inquiries without granting generative AI arbitrary database access. Instead of letting the language model construct raw SQL, the model solely interprets intent. The ERP platform validates permissions and fetches records via certified application APIs.',
+          'Execution Pipeline: User Prompt → Business Intent & Entity Extraction → Module & Data Source Mapping → Tables & Columns → Validated API Read → Grounded Tabular Response.',
+        ],
+        subsections: [
+          {
+            subtitle: 'A. Natural Language Mapped to 202 Verified Data Sources',
+            content: 'Prompts match against a business glossary to compile a JSON read plan: data source, columns, filters, and row bounds. Backend guards validate against the 202 data source catalog, ensuring follow-up queries retain task and ownership context.',
+          },
+          {
+            subtitle: 'B. 120-Second Signed Authority Snapshots',
+            content: 'Conversations initialize a signed 120-second snapshot of tenant, user, active role, module permissions, and project scopes. Read-only database views restrict execution to 100 rows, 30 columns, 256 KiB, and a 5-second timeout.',
+          },
+          {
+            subtitle: 'C. 15-Minute Action Tickets with Readback Verification',
+            content: 'Action proposals (e.g., creating Daily Tasks) issue 15-minute action tickets displaying change summaries. Upon confirmation, tickets claim atomically, execute via official ERP APIs, and perform readback validation before assigning a "Verified" label.',
+          },
+          {
+            subtitle: 'D. Knowledge Engine Synchronized to Latest Codebase',
+            content: 'The Knowledge Engine crawls Prisma schemas, TypeScript code, and frontend views, scoring documentation confidence 0–1. When guidance is outdated or scores below 0.6, Marka Plus halts answers with transparent disclaimers.',
+          },
+        ],
+        image: {
+          src: '/images/case-studies/markaplus/question-to-table.png',
+          alt: 'Question to Verified Tabular Response: Natural language translated into bounded, catalog-validated ERP records',
+        },
+      },
+      {
+        eyebrow: 'TECHNICAL ARCHITECTURE',
+        mainTitle: 'An Isolated, Verified, and Auditable Architecture',
+        paragraphs: [
+          'To ensure AI capabilities remain secure without exposing corporate data structures, Marka Plus is built upon four protective technical pillars:',
+          'Data-Level Isolation: Dedicated database accounts possess only CONNECT, USAGE, and SELECT privileges restricted to five specialized views (ai_projects, ai_project_tasks, ai_project_financials, ai_company_financials, ai_crm_deals). Every view enforces tenant company column filtering, with zero raw SQL endpoints.',
+          'Catalog Verification & MCP Protocol: MCP Streamable HTTP (2025-11-25 protocol) provides typed tool endpoints for discovering permitted data sources and schemas. The 202-source catalog is compiled from code and hash-verified in CI, breaking builds on stale definitions.',
+          'Cryptographic HMAC Callbacks: External callbacks require 13-component HMAC signatures (method, path, timestamp, nonce, payload hash, tenant, user, role, tool, request ID, company, permissions, project scope) with instant nonce replay rejection and AES-256-GCM encrypted secrets.',
+          'Model Provider Decoupling: Large language models (via OpenRouter) strictly interpret natural language. Structured querying, permission enforcement, MCP tooling, and write actions execute autonomously without AI provider dependencies.',
+        ],
+        image: {
+          src: '/images/case-studies/markaplus/technical-architecture.png',
+          alt: 'Technical Architecture & Data Flow Diagram: Language models plan queries while ERP runtime validates permissions and executes APIs',
+        },
+      },
+      {
+        eyebrow: 'IMPLEMENTATION ROADMAP',
+        mainTitle: 'Four Structured Phases Across Six Weeks',
+        paragraphs: [
+          'Built directly on production-grade MarkaSuite code, allowing immediate validation against live business roles, project records, and operational workflows. 34 dedicated test suites were implemented during development.',
+        ],
+        table: {
+          caption: 'Marka Plus Engineering Roadmap & Validation Gates',
+          headers: ['Phase', 'Timeline', 'Deliverables', 'Validation Method'],
+          rows: [
+            [
+              'Initial Integration',
+              'Sep 15–21, 2026',
+              'AI request tables, tenant provisioning, read-only ai_* views',
+              'Database migration verification gates',
+            ],
+            [
+              'Contract V2 & Native Runtime',
+              'Sep 21–30, 2026',
+              'Signed authority snapshots, view alignment, native ERP runtime execution',
+              'Signature suites, tenant isolation, runtime V2, HMAC V2, control plane',
+            ],
+            [
+              'Audit & Remediation',
+              'Oct 2–9, 2026',
+              '15-scenario audit, remediation of 6 finding categories, CI catalog locking',
+              '16 baseline suites, workflow regression tests, isolated PostgreSQL queries, 2 browser suites',
+            ],
+            [
+              'Knowledge Engine & MCP',
+              'Oct 15–28, 2026',
+              'Code crawler, confidence scoring, answer suppression, MCP connection refactoring',
+              'Knowledge Engine suite, natural language interpretation, schema linking',
+            ],
+          ],
+        },
+      },
+      {
+        eyebrow: 'BENCHMARK & RESULTS',
+        mainTitle: 'Audit Verification, Security Integrity, and Operational Efficiency',
+        paragraphs: [
+          'Benchmarked across October 2 and October 7, 2026 development audit reports (local runtime, isolated PostgreSQL database, Edge browser) alongside a 10,000-iteration Monte Carlo simulation for project manager inquiry time:',
+        ],
+        table: {
+          caption: 'Marka Plus Benchmark Verification Matrix',
+          headers: ['Indicator', 'Before Marka Plus', 'With Marka Plus', 'Validation Result', 'Verification Status'],
+          rows: [
+            ['Accuracy & Role Access Scenarios with Execution Proof', '—', '15 of 15', '100% Passed', 'Lab Tested'],
+            ['Baseline Test Suites (Permissions, Injections, Provider Failures)', '—', '16 suites', '100% Passed', 'Lab Tested'],
+            ['Audit Findings on Workflow Divergence', '6 categories', '0 remaining on tested paths', 'Locked via regression tests', 'Lab Tested'],
+            ['Data Mutation on Cancelled / Confirmed Proposals', '—', '0 / Exactly 1', 'As designed', 'Lab Tested'],
+            ['Active Project Count: Assistant vs Direct Database Query', '—', 'Identical', 'Direct read test passed', 'Lab Tested'],
+            ['Catalog Coverage of Business Data Sources', '—', '202 data sources, 15 modules', 'CI hash verified', 'Actual Codebase'],
+            ['PM Work Time per Status Inquiry', '±13 minutes', '±2.8 minutes', '±79% time saved', 'Simulation'],
+            ['Reclaimed PM Working Hours per Week', '—', '±3.8 hours (2.4–5.8)', 'Modeled for 10–40 inquiries/wk', 'Projection'],
+          ],
+        },
+        image: {
+          src: '/images/case-studies/markaplus/pm-time-simulation.png',
+          alt: 'Monte Carlo simulation: PM working time per status inquiry drops from median ±13 mins to ±2.8 mins (saving ±79%)',
+        },
+        subsections: [
+          {
+            subtitle: '15 of 15 Test Scenarios Verified',
+            content: 'Covering general information, role queries, single-table lookups, relational data, filters, empty datasets, access denials, record mutations, invalid inputs, system failure recovery, and long-tail responses.',
+          },
+          {
+            subtitle: 'Six Audit Findings Remediated',
+            content: 'The October 7 audit deliberately surfaced edge cases (such as Weekly inquiries querying Daily Tasks). All six findings were reproduced with failing tests, repaired, and locked into regression suites.',
+          },
+          {
+            subtitle: '0 and 1 Atomic Data Mutations',
+            content: 'Browser test verification confirmed that cancelling proposals produces zero database writes, while confirming claims tickets atomically and produces exactly one verified write.',
+          },
+          {
+            subtitle: '79% PM Time Saved (3.8 Hours/Week)',
+            content: 'Simulation models 10,000 iterations factoring escalation rates of 10–35%. Eliminating manual ERP navigation reclaims 2.4 to 5.8 working hours per week per project manager.',
+          },
         ],
       },
       {
-        eyebrow: 'THE OUTCOME',
-        mainTitle: 'Exceptional Reader Retention and 100% Availability Under Surge Conditions',
+        eyebrow: 'TESTING METHODOLOGY',
+        mainTitle: 'Testing Methodology and Monte Carlo Simulation Model',
         paragraphs: [
-          'Presstis delivered a 300% improvement in Core Web Vitals performance, slashed infrastructure operating costs by 40%, and empowered editorial staff to publish and syndicate breaking stories in seconds.',
+          'Indicator Definitions: Execution proof denotes automated, repeatable tests passing within the October 2, 2026 audit framework. PM inquiry time measures minutes spent reading, querying, synthesizing, and responding (excluding requester queue delays).',
+          'Monte Carlo Simulation (10,000 iterations, triangular distribution): Manual workflow modeled reading inquiries (0.5/1/2 min), searching ERP/spreadsheets (2/5/10 min), computing aggregates (1/3/8 min), and writing replies (1/2/4 min)—yielding median 13.1 minutes. Marka Plus scales manual time by realistic PM escalation rates (10%/20%/35%)—yielding median 2.8 minutes and 79% median time savings.',
         ],
+        image: {
+          src: '/images/case-studies/markaplus/role-scope-comparison.png',
+          alt: 'Role Scope Comparison: Marka Plus inherits data boundaries from the active user role, rejecting forged tenant headers',
+        },
       },
     ],
   },
 
-  /* ── 3. MarkaPlus ── */
+  /* ── 3. MarkaSuite — Enterprise ERP Architecture ── */
   {
     id: 3,
-    slug: 'markaplus-ai-assistant',
-    title: 'MarkaPlus',
-    category: 'DATA & AI INTEGRATION',
-    tags: ['AI ERP ASSISTANT', 'DEEP LEARNING', 'DATA PIPELINES'],
-    dateLabel: 'JUNE 2026',
-    dateValue: '2026-06-20',
-    description: 'An intelligent AI deep learning assistant integrated directly into enterprise ERP software, converting complex multi-database queries into instant operational guidance and automated decisions.',
-    coverImage: '/images/case-studies/markaplus.svg',
-    coverImageAlt: 'MarkaPlus Intelligent AI Chat Assistant and ERP Deep Learning Infrastructure',
-    sections: [
-      {
-        eyebrow: 'THE CHALLENGE',
-        mainTitle: 'Data Latency and Information Overload in Complex Corporate Systems',
-        paragraphs: [
-          'Enterprise ERP databases store millions of transactional records across finance, inventory, logistics, and personnel. Yet, when leaders and operational staff need critical answers, they face cumbersome SQL reporting, manual spreadsheet downloads, and hour-long delays.',
-          'Without real-time conversational intelligence, executives make decisions on outdated summaries while front-line teams struggle to navigate complicated software menus.',
-        ],
-      },
-      {
-        mainTitle: 'Embedding Context-Aware AI Directly into Daily Operational Workflows',
-        paragraphs: [
-          'We built MarkaPlus—a secure deep learning conversational engine embedded natively within the enterprise platform. Operating on custom retrieval pipelines, MarkaPlus transforms complex multi-table ERP relationships into natural, instant dialogue.',
-        ],
-        image: { src: '/images/case-studies/markaplus.svg', alt: 'MarkaPlus AI Assistant embedded in enterprise ERP' },
-      },
-      {
-        eyebrow: 'OUR SOLUTION',
-        mainTitle: 'From Passive Databases to Proactive Operational Intelligence',
-        subsections: [
-          { subtitle: '01', content: 'Natural Language Business Queries: Employees ask everyday questions—such as "Summarize today’s pending approvals" or "Forecast stock replenishment for next week"—and receive verified live data in seconds.' },
-          { subtitle: '02', content: 'Predictive Demand & Anomaly Detection: Deep learning models continuously analyze historical consumption and order patterns to alert managers of supply irregularities.' },
-          { subtitle: '03', content: 'Automated Executive Briefings: Synthesizes multi-department metrics into concise morning executive digests delivered via secure enterprise chat.' },
-          { subtitle: '04', content: 'Zero-Leakage Role Security: Built-in permission filters guarantee the AI respects corporate access hierarchies, strictly isolating sensitive financial and executive records.' },
-          { subtitle: '05', content: 'Interactive Task Execution: Beyond answering questions, MarkaPlus assists authorized users in initiating approval requests, scheduling tasks, and dispatching notifications.' },
-          { subtitle: '06', content: 'Self-Optimizing Query Intelligence: Learns from ongoing user feedback and domain vocabulary to continually enhance semantic precision across business divisions.' },
-        ],
-      },
-      {
-        eyebrow: 'THE OUTCOME',
-        mainTitle: 'Frictionless Data Access and Autonomous Operational Speed',
-        paragraphs: [
-          'MarkaPlus reduced routine operational query time by 85%, eliminated dependence on IT staff for custom reporting, and fostered data-driven decision-making across all managerial tiers.',
-        ],
-      },
-    ],
-  },
-
-  /* ── 4. MARKA - Finance ── */
-  {
-    id: 4,
-    slug: 'marka-finance-accounting',
-    title: 'MARKA - Finance',
+    slug: 'markasuite-erp-terpadu-arsalynk',
+    title: 'How MarkaSuite Slashed Executive Dashboard Load Times by 89% in a Unified ERP for Projects, Finance, and CRM',
     category: 'ENTERPRISE SOLUTION',
-    tags: ['FINANCE ERP', 'CORPORATE ACCOUNTING', 'CASH FLOW GOVERNANCE'],
-    dateLabel: 'JULY 2026',
-    dateValue: '2026-07-08',
-    description: 'An integrated financial management architecture designed to unify corporate banking, multi-branch general ledgers, batch disbursements, and real-time cash flow governance.',
-    coverImage: '/images/case-studies/marka-finance.svg',
-    coverImageAlt: 'MARKA Corporate Finance and Accounting Platform by Arsalynk',
+    tags: ['INTEGRATED ERP', 'ENTERPRISE ERP', 'PROJECT GOVERNANCE', 'FINANCIAL CONTROL', 'MARKASUITE', 'AI INTEGRATION'],
+    dateLabel: 'NOVEMBER 2026',
+    dateValue: '2026-11-06',
+    description: 'MarkaSuite case study: Arsalynk’s unified enterprise ERP for projects, finance, and CRM, delivering 89% faster executive dashboard loads in lab benchmarks.',
+    coverImage: '/images/case-studies/marka/cover.png',
+    coverImageAlt: 'MarkaSuite executive dashboard displaying project progress, financial summaries, and Request Cards on a single unified canvas',
     sections: [
       {
-        eyebrow: 'THE CHALLENGE',
-        mainTitle: 'Fragmented Financial Records and Slow Month-End Reconciliation Cycles',
+        eyebrow: 'EXECUTIVE SUMMARY',
+        mainTitle: 'Unified ERP for Projects, Finance, and CRM with Sub-Second Response Times',
         paragraphs: [
-          'As mid-to-large enterprises scale across multiple subsidiaries and project entities, financial governance becomes vulnerable to data fragmentation. Disjointed accounting tools lead to delayed journal entries, manual bank reconciliations, and slow month-end closures.',
-          'Without an integrated financial command center, CFOs and finance controllers cannot forecast liquidity accurately or enforce rigorous budget discipline across distributed operations.',
+          'Client & Scenario: Internal implementation at PT Sinergi Muda Arsa (Arsalynk), an enterprise technology services firm managing concurrent multi-client engineering engagements.',
+          'Problem Focus: Project delivery milestones, disbursement requests, and financial ledgers were dispersed across spreadsheets and chat channels, forcing executive leadership to rely on delayed manual recaps.',
+          'Product Solution: MarkaSuite (Marka+ ERP), integrating Project & Task Governance, Multi-tier Requests, Finance & Accounting, Sales CRM, and Executive Reporting, coupled with an embedded role-scoped AI assistant.',
+          'Implementation Timeline: ±3 months (August 3 – November 5, 2026) across four structured phases, each validated by automated testing suites.',
+        ],
+        metrics: [
+          {
+            value: '89%',
+            label: 'Load Time Slashed',
+            detail: 'Login to complete executive dashboard: 18.0s → 2.0s (Lab Tested)',
+          },
+          {
+            value: '95%',
+            label: 'Sub-Second Reads',
+            detail: '742 of 783 read endpoints respond under 1 second with a 715 ms median (Lab Tested)',
+          },
+          {
+            value: '78%',
+            label: 'Recap Time Saved',
+            detail: 'Weekly progress recap per project: ±88 mins → ±20 mins (Monte Carlo Simulation)',
+          },
         ],
       },
       {
-        mainTitle: 'Unifying Banking, Ledgering, and Expense Controls into One Financial Core',
+        eyebrow: 'THE PROBLEM SCENARIO',
+        mainTitle: 'When Project Reporting Relies on Whoever Has Time to Fill Out Spreadsheets',
         paragraphs: [
-          'We engineered MARKA - Finance as an enterprise-grade financial management platform that automates transaction journalizing, reconciles banking feeds in real-time, and provides audit-ready reporting across all business units.',
+          'Arsalynk executes multi-sector digital transformation engagements. Each engagement involves project managers, engineering personnel, financial controllers, and executive directors, with multiple projects progressing concurrently.',
+          'Prior to MarkaSuite, daily operations relied on an ad-hoc combination of Google Sheets, Telegram bots, and fragmented messaging threads:',
         ],
-        image: { src: '/images/case-studies/marka-finance.svg', alt: 'MARKA Finance and Corporate Accounting dashboard' },
-      },
-      {
-        eyebrow: 'OUR SOLUTION',
-        mainTitle: 'Precision Financial Engineering with Real-Time Cash Flow Governance',
         subsections: [
-          { subtitle: '01', content: 'Multi-Account Corporate Banking Integration: Connects bank feeds directly to the general ledger, synchronizing incoming and outgoing transactions automatically.' },
-          { subtitle: '02', content: 'Automated General Ledger & Journalizing: Rules-based engines generate double-entry journal records upon transaction completion, eliminating manual spreadsheet entry.' },
-          { subtitle: '03', content: 'Multi-Level Approval Workflows: Tiered authorization protocols for expenditures and disbursements enforce compliance with corporate governance bylaws.' },
-          { subtitle: '04', content: 'Batch Payment & Payroll Disbursement: Streamlines mass vendor payouts and employee payroll schedules into single, verified transaction batches.' },
-          { subtitle: '05', content: 'Real-Time Cash Flow & Liquidity Analytics: Live visual dashboards monitor operating runway, accounts receivable aging, and capital expenditure burn rates.' },
-          { subtitle: '06', content: 'Tax & Audit Compliance Readiness: Built-in tax calculation engines and immutable audit logs ensure seamless year-end tax filings and audit verifications.' },
+          {
+            subtitle: 'Progress Forever Lagging by a Day',
+            content: 'PMs continually chased team members across chats before manually calculating progress percentages. Spreadsheets only reflected the most recent message, leaving leadership blind to emerging roadblocks.',
+          },
+          {
+            subtitle: 'Untracked Disbursement Requests',
+            content: 'Project funding and expense claims were approved verbally or via informal chat messages. Finance teams were forced to reconstruct audit trails retrospectively when compiling accountability reports (LPJ).',
+          },
+          {
+            subtitle: 'Hand-Assembled Financial Ledgers',
+            content: 'Project costs, client invoices, and vendor payouts were recorded in disjointed files. According to a Lark report cited by JPNN, 48% of enterprise workers switch apps hourly and 58% lose >=3 hours weekly to coordination friction.',
+          },
         ],
+        image: {
+          src: '/images/case-studies/marka/workflow-comparison.png',
+          alt: 'Workflow Comparison Diagram: Transitioning from fragmented spreadsheets and chat to a unified single source of truth in MarkaSuite',
+        },
       },
       {
-        eyebrow: 'THE OUTCOME',
-        mainTitle: 'Flawless Financial Control, Accelerated Closures, and Total Transparency',
+        eyebrow: 'PRODUCT SOLUTION',
+        mainTitle: 'Connecting Field Operations, Management, and Finance in a Single Source of Truth',
         paragraphs: [
-          'Implementing MARKA - Finance reduced month-end closing times from 14 days to just 3 days, eliminated reconciliation discrepancies, and provided executive leadership with real-time liquidity visibility.',
+          'MarkaSuite was designed to bridge the operational gap between team execution, management oversight, and financial governance. Every operational activity is captured as an immutable transaction within a unified multi-tenant database.',
+          'Views automatically adapt to active organizational roles: Staff, Project Manager, Operations Manager, Finance, or Executive Director.',
         ],
-      },
-    ],
-  },
-
-  /* ── 5. MARKA - Project Manager ── */
-  {
-    id: 5,
-    slug: 'marka-project-manager',
-    title: 'MARKA - Project Manager',
-    category: 'ENTERPRISE SOLUTION',
-    tags: ['PROJECT MANAGEMENT', 'WORKFLOW GOVERNANCE', 'RESOURCE SCHEDULING'],
-    dateLabel: 'AUGUST 2026',
-    dateValue: '2026-08-12',
-    description: 'A comprehensive operational management platform coordinating multi-tier project milestones, resource allocation, task dependencies, and budget compliance across enterprise teams.',
-    coverImage: '/images/case-studies/marka-project-manager.svg',
-    coverImageAlt: 'MARKA Project Management and Operations Platform by Arsalynk',
-    sections: [
-      {
-        eyebrow: 'THE CHALLENGE',
-        mainTitle: 'Project Delays, Resource Bottlenecks, and Opaque Execution Pipelines',
-        paragraphs: [
-          'Executing large-scale corporate initiatives across dispersed teams often suffers from fragmented task management. Deadlines slip when dependencies are not clearly mapped, team workloads become imbalanced, and management lacks real-time insight into project progress.',
-          'Relying on generic task boards fails to account for contract milestones, procurement deadlines, and budget tracking required in high-stakes enterprise projects.',
-        ],
-      },
-      {
-        mainTitle: 'A Structured Command Layer Aligning Strategy, Deadlines, and Team Execution',
-        paragraphs: [
-          'We architected MARKA - Project Manager to bridge corporate leadership expectations with on-the-ground operational delivery, providing clear dependency mapping, capacity planning, and automated milestone verification.',
-        ],
-        image: { src: '/images/case-studies/marka-project-manager.svg', alt: 'MARKA Project Manager and resource scheduling interface' },
-      },
-      {
-        eyebrow: 'OUR SOLUTION',
-        mainTitle: 'End-to-End Operational Control from Milestone Inception to Final Handover',
         subsections: [
-          { subtitle: '01', content: 'Dynamic Gantt & Milestone Dependency Mapping: Visual timeline modeling that highlights critical paths and alerts project managers to emerging delivery risks.' },
-          { subtitle: '02', content: 'Capacity & Workload Allocation: Real-time resource balancing prevents employee burnout and ensures specialized skills are assigned to high-priority deliverables.' },
-          { subtitle: '03', content: 'Integrated Project Budget & Cost Tracking: Links billable hours, software licenses, and external vendor expenses directly against project cost centers.' },
-          { subtitle: '04', content: 'Automated Deliverable Sign-Off Workflows: Digital handoff checklists and client review approvals establish clear accountability for milestone completion.' },
-          { subtitle: '05', content: 'Cross-Department Collaboration Hub: Centralizes project documentation, task discussions, and file versions within context-rich project threads.' },
-          { subtitle: '06', content: 'Executive Progress & SLA Dashboards: Consolidated executive overviews summarizing on-time delivery rates, budget variance, and department performance.' },
+          {
+            subtitle: 'A. Automated Checklist-Driven Progress Aggregation',
+            content: 'Staff log Daily Tasks by completing deliverables and flagging impediments. Backend engines compute percentage progress directly from verified checklist outputs, rolling aggregates upward to Weekly Targets and project milestones without manual data entry.',
+          },
+          {
+            subtitle: 'B. Request Cards with Multi-Tier Approval Workflows',
+            content: 'Expense and resource requests route through role-governed reviewer queues. Approvals display as real-time Request Cards, allowing Finance to execute disbursements that generate automated journal entries linked directly to final LPJ reconciliations.',
+          },
+          {
+            subtitle: 'C. Transactional Financial Control with Maker-Checker Discipline',
+            content: 'Project costs post to Work in Progress (WIP) accounts via verified journals. Invoices issue under predefined tax configurations, while vendor payouts require 3-way matching. Strict segregation of duties prevents makers from approving their own entries.',
+          },
+          {
+            subtitle: 'D. Role-Scoped AI Assistant Embedded into Dashboards',
+            content: 'Users query enterprise records in natural language. Each session utilizes signed 120-second authority snapshots to read strictly from 5 sanitized database views (100-row / 5-second limits), requiring explicit human confirmation before executing write proposals.',
+          },
         ],
+        image: {
+          src: '/images/case-studies/marka/daily-task-progress.png',
+          alt: 'Daily Task and Project Progress Interface: Output-driven completion metrics eliminating manual progress estimation',
+        },
       },
       {
-        eyebrow: 'THE OUTCOME',
-        mainTitle: 'Predictable Delivery, Optimized Resource Utilization, and Scalable Execution',
+        eyebrow: 'TECHNICAL ARCHITECTURE',
+        mainTitle: 'A Fast, Isolated, and Auditable Architecture',
         paragraphs: [
-          'Deploying MARKA - Project Manager elevated on-time project completion rates to 96%, reduced administrative status meetings by half, and empowered teams with transparent, accountable workflow discipline.',
+          'To ensure concurrent multi-role responsiveness without data bleed, MarkaSuite was engineered upon resilient architectural foundations:',
+          'Modern Modular Core: Node.js, Express, and TypeScript with Prisma ORM atop PostgreSQL (Supabase), complemented by a Next.js App Router frontend. 2,616 registered API endpoints serve 21 backend modules.',
+          'Query Projection & Multi-Tier Caching: Dashboard components compile via unified single-query JSON projections rather than dozens of waterfall requests. Read-through caching by tenant, user, role, and module slashes repeated dashboard loads from 1,033 ms to 118 ms.',
+          'Four-Layer Security Model: JWT authentication, active role boundaries, company-level module entitlement, and project-level row filtering. Forged tenant headers reject with HTTP 403, and unauthorized requests abort in-browser.',
+          'Strict Auditability: Every write mutation requires an Idempotency-Key preventing duplicate transactions, accompanied by X-Request-ID telemetry and sanitized audit logging.',
         ],
+        image: {
+          src: '/images/case-studies/marka/technical-architecture.png',
+          alt: 'Technical Architecture & Data Flow Diagram: Multi-tenant Express API gateway enforcing 4-layer access controls across PostgreSQL',
+        },
       },
-    ],
-  },
-
-  /* ── 6. MyBOS ── */
-  {
-    id: 6,
-    slug: 'myboss-logistics-fleet-management',
-    title: 'MyBOS',
-    category: 'SMART IOT SYSTEM',
-    tags: ['IOT TELEMETRY', 'FLEET LOGISTICS', 'DEVICE INTEGRATION'],
-    dateLabel: 'SEPTEMBER 2026',
-    dateValue: '2026-09-24',
-    description: 'Connected IoT hardware and command telemetry bridging commercial vehicle fleets, remote sensors, and logistics hubs into real-time operational transport intelligence.',
-    coverImage: '/images/case-studies/mybos.svg',
-    coverImageAlt: 'MyBOS Connected Operational IoT Ecosystem and Fleet Telemetry',
-    sections: [
       {
-        eyebrow: 'THE CHALLENGE',
-        mainTitle: 'Operational Blind Spots Between Control Rooms, Drivers, and Field Assets',
+        eyebrow: 'IMPLEMENTATION ROADMAP',
+        mainTitle: 'Four Phases Across Three Months',
         paragraphs: [
-          'Managing commercial logistics fleets across vast regional routes without IoT integration leaves dispatchers in the dark regarding actual vehicle locations, driver idling, transit delays, and fuel loss.',
-          'Legacy paper manifests and manual phone calls delay delivery confirmations, cause customer disputes, and prevent timely emergency response to unexpected mechanical breakdowns.',
+          'Developed over ±3 months across 533 recorded commits. Each phase commenced only after its predecessor passed automated validation suites, preventing legacy technical debt from propagating.',
         ],
+        table: {
+          caption: 'MarkaSuite Engineering Milestones & Validation Gates',
+          headers: ['Phase', 'Timeline', 'Deliverables', 'Validation Method'],
+          rows: [
+            [
+              'Foundation & Data Modeling',
+              'Aug 3–25, 2026',
+              'Django prototype and entity data models for projects, CRM, finance, inventory, manufacturing',
+              'Unit testing per business module',
+            ],
+            [
+              'Architecture Migration',
+              'Aug 26 – early Sep 2026',
+              'Backend migration to Node.js/Express/TypeScript with Prisma; Next.js frontend rebuild',
+              'TypeScript compilation across stacks; 2,616 endpoint route inventory',
+            ],
+            [
+              'Hardening & Performance Tuning',
+              'Sep 2026',
+              'Tiered access controls, transactional finance workflows, dashboard cache, production launch Sep 22–24',
+              '783 read endpoints, 1,833 non-destructive write tests, 9 login scenarios, Q11 guardrails',
+            ],
+            [
+              'AI Assistant & UX Refinement',
+              'Sep – Nov 2026',
+              'ERP-grounded AI assistant, Oct 7 chatbot audit, role-tailored dashboard refactoring',
+              '16 chatbot test suites, 2 browser automation suites (desktop & mobile)',
+            ],
+          ],
+        },
       },
       {
-        mainTitle: 'Bridging Physical Vehicles with Intelligent Enterprise Software',
+        eyebrow: 'BENCHMARK & RESULTS',
+        mainTitle: 'Load Time Reductions, Route Throughput, and Weekly Efficiency Benchmarks',
         paragraphs: [
-          'We deployed the MyBOS IoT ecosystem—integrating onboard telematics sensors, GPS tracking units, and an automated central dispatch command center that monitors every vehicle movement in real time.',
+          'Benchmarked across the production Express and PostgreSQL runtime in September 2026 compared against the initial build, alongside a 10,000-iteration Monte Carlo simulation for weekly project coordination:',
         ],
-        image: { src: '/images/case-studies/mybos.svg', alt: 'MyBOS IoT Fleet Telemetry and Command Center' },
-      },
-      {
-        eyebrow: 'OUR SOLUTION',
-        mainTitle: 'Real-Time Hardware Telemetry, Smart Dispatch, and Digital Proof of Delivery',
+        table: {
+          caption: 'MarkaSuite Performance Verification & Efficiency Matrix',
+          headers: ['Operational Indicator', 'Initial Build', 'With MarkaSuite', 'Difference', 'Verification Status'],
+          rows: [
+            ['Login to Complete Executive Dashboard', '18.0 seconds', '2.0 seconds', '89% Reduction', 'Lab Tested'],
+            ['Login Endpoint Response (9 Scenarios)', '7.5–11.4 seconds', '0.35–1.3 seconds', '9 of 9 < 3 seconds', 'Lab Tested'],
+            ['Trial Balance Financial Statement Generation', '4.6 seconds', '1.3 seconds', '72% Reduction', 'Lab Tested'],
+            ['Repeated Dashboard Load (Cached)', '1,033 ms', '118 ms', '±9x Faster', 'Lab Tested'],
+            ['Request Card Activity Feed (Cached)', '1,388 ms', '394 ms', '±3.5x Faster', 'Lab Tested'],
+            ['Read Endpoints Responding Under 1s', '—', '742 of 783 (95%)', 'Median 715 ms', 'Lab Tested'],
+            ['Non-Destructive Write Tests Passed', '—', '1,833 of 1,833', 'Zero business records mutated', 'Lab Tested'],
+            ['Weekly Progress Recap per Project', '±88 minutes (sheets + chat)', '±20 minutes (dashboard)', '±78% Time Saved', 'Simulation'],
+          ],
+        },
+        image: {
+          src: '/images/case-studies/marka/load-time-benchmarks.png',
+          alt: 'Load Time Optimization Benchmark: Executive dashboard dropped from 18s to 2s, and trial balance generation slashed by 72%',
+        },
         subsections: [
-          { subtitle: '01', content: 'Live IoT Telemetry & GPS Tracking: Real-time satellite positioning and vehicle sensor feeds deliver continuous route visibility to central dispatch controllers.' },
-          { subtitle: '02', content: 'Automated Digital Delivery Orders: Eliminates paper manifests by routing digital delivery tasks directly to drivers with navigation instructions.' },
-          { subtitle: '03', content: 'Intelligent Route & Fuel Optimization: Recommends optimal routes based on traffic density and cargo load, substantially reducing fleet fuel consumption.' },
-          { subtitle: '04', content: 'Driver Behavior & Safety Monitoring: Tracks harsh braking, excessive idling, and operating hours to foster safety discipline and schedule preventive maintenance.' },
-          { subtitle: '05', content: 'Digital Proof of Delivery (e-POD): Captures digital signatures, timestamped GPS coordinates, and recipient photos upon delivery for instant billing reconciliation.' },
-          { subtitle: '06', content: 'Fleet Maintenance & Diagnostic Telemetry: Real-time engine telemetry alerts workshop managers to impending component wear before sudden roadside breakdowns.' },
+          {
+            subtitle: 'Executive Dashboard: 18s to 2s',
+            content: 'Consolidating 12 project queries and 13 financial calls into unified, tenant-filtered JSON projections eliminated round-trip latency and removed artificial delays.',
+          },
+          {
+            subtitle: 'Trial Balance: 4.6s to 1.3s',
+            content: 'Migrated debit and credit balance computations to aggregate database queries, eliminating sequential account initialization.',
+          },
+          {
+            subtitle: 'Weekly Coordination: 78% Time Saved',
+            content: 'Automated Daily Task check-offs eliminated manual chasing and spreadsheet reconciliation, shifting PM focus to unblocking tasks.',
+          },
+          {
+            subtitle: 'Sub-33ms Database Downtime Handling',
+            content: 'Engineered explicit HTTP 503 error handlers responding in ±33 ms during connection drops, allowing instant differentiation from application faults.',
+          },
         ],
       },
       {
-        eyebrow: 'THE OUTCOME',
-        mainTitle: 'Full Operational Control, Lower Transit Costs, and Guaranteed Reliability',
+        eyebrow: 'TESTING METHODOLOGY',
+        mainTitle: 'Testing Methodology and Monte Carlo Simulation Model',
         paragraphs: [
-          'MyBOS delivered a 22% reduction in fleet fuel expenditure, cut delivery dispute resolutions to zero with e-POD, and empowered logistics dispatchers with complete real-time command over distributed transit assets.',
+          'Indicator Definitions: Complete dashboard load measures duration from login button click until all dashboard cards and Request feeds render completely in Next.js production builds. Write route verification utilizes Prisma firewalls preventing actual database mutation.',
+          'Monte Carlo Simulation (10,000 iterations, triangular distribution): Manual workflow: chasing updates (15/25/45 min), reconciling spreadsheets (10/20/40 min), calculating progress (10/20/30 min), answering leadership inquiries (5/15/30 min)—median 88 mins. MarkaSuite workflow: reviewing dashboard (5/10/20 min), following up impediments (2/5/10 min), leadership follow-ups (0/2/5 min)—median 20 mins, achieving 78% median time savings.',
         ],
+        image: {
+          src: '/images/case-studies/marka/weekly-recap-simulation.png',
+          alt: 'Monte Carlo Simulation: Weekly project progress recap drops from median ±88 mins to ±20 mins (saving ±78%)',
+        },
       },
     ],
   },
