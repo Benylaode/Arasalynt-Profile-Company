@@ -110,6 +110,7 @@ export async function generateMetadata(): Promise<Metadata> {
         { url: '/favicon.ico', sizes: 'any' },
         { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
         { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+        { url: '/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
         { url: '/icon.svg', type: 'image/svg+xml' },
         { url: '/icon.png', sizes: '512x512', type: 'image/png' },
         { url: '/images/logos/arsalynk-mark-512.png', sizes: '512x512', type: 'image/png' },
