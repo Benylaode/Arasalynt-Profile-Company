@@ -1690,6 +1690,513 @@ export const CASE_STUDIES_DUMMY_DATA: CaseStudyArticle[] = [
       },
     ],
   },
+  /* ── 4. AdsVar — Performance Marketing Agency Single-Page CRM ── */
+  {
+    "id": 4,
+    "slug": "adsvar-website-crm-terintegrasi",
+    "title": "How AdsVar Connected a Single Offer Page to CRM: 30 of 30 Test Leads Ingested with Cryptographically Valid Signatures",
+    "category": "DIGITAL DEVELOPMENT",
+    "tags": [
+        "DIGITAL DEVELOPMENT",
+        "LANDING PAGE",
+        "CRM INTEGRATION",
+        "LEAD MANAGEMENT",
+        "ADSVAR",
+        "ARSALYNK"
+    ],
+    "dateLabel": "NOVEMBER 2026",
+    "dateValue": "2026-11-10",
+    "description": "AdsVar case study: high-performance single-page agency website dispatching every lead, live chat, and support ticket directly to MarkaSuite CRM with cryptographically signed payloads.",
+    "coverImage": "/images/case-studies/adsvar/cover.png",
+    "coverImageAlt": "AdsVar main landing page showcasing performance advertising solutions, track catalogs, and consultation workflows",
+    "sections": [
+        {
+            "eyebrow": "EXECUTIVE SUMMARY (AT-A-GLANCE)",
+            "mainTitle": "Bridging a High-Velocity Offer Page Directly to Enterprise CRM",
+            "paragraphs": [
+                "Client & Scenario: AdsVar, a performance marketing agency within the Arsalynk group managing Meta Ads, Google Ads, TikTok Ads, TikTok Shop GMV Max, and Shopee Ads for enterprise brands and SMEs.",
+                "Problem Focus: Prospective clients arrived across disconnected channels. Critical inquiry context (ad network, tier, budget) arrived fragmented and required manual copy-pasting before sales teams could respond.",
+                "Product Solution: A high-performance single-page application (Next.js 16) featuring per-channel package catalogs, context-carrying consultation forms, integrated live chat, support tickets, and an internal lead dashboard. Every interaction dispatches signed cryptographic events to MarkaSuite CRM.",
+                "Implementation Timeline: ~3 weeks (October 15 – November 3, 2026), 30 production commits.",
+                "Measured Impact: 30 of 30 test leads ingested and forwarded to CRM endpoint with valid HMAC-SHA256 signatures at a median response time of 6.4 ms (Lab Tested); Desktop Lighthouse Performance 100 & SEO 100 (Lab Tested); Admin handling time per lead reduced from ~17 mins to ~3 mins, saving ~83% effort (10,000 Iteration Simulation)."
+            ],
+            "metrics": [
+                {
+                    "value": "30/30",
+                    "label": "Valid Test Leads",
+                    "detail": "30 of 30 leads ingested and forwarded to CRM endpoint with valid HMAC-SHA256 signature, 6.4 ms median response (Lab Tested)"
+                },
+                {
+                    "value": "100/100",
+                    "label": "Desktop Lighthouse",
+                    "detail": "Desktop Lighthouse Performance 100 and SEO 100, LCP 0.79 seconds (Lab Tested)"
+                },
+                {
+                    "value": "83%",
+                    "label": "Admin Time Saved",
+                    "detail": "Admin manual handling per lead reduced from ~17 mins to ~3 mins (10,000 Iteration Simulation)"
+                }
+            ]
+        },
+        {
+            "eyebrow": "PROBLEM SCENARIO",
+            "mainTitle": "When Leads Are Complete in the Prospect's Mind but Fragmented in the Inbox",
+            "paragraphs": [
+                "AdsVar sells outcome-driven advertising services. Its prospective clients range from online merchants scaling Shopee Ads to consumer brands requiring full-scale TikTok marketing and enterprises seeking blended ads and content packages. Prospective clients typically know their target channels and budget tiers when they first reach out.",
+                "However, that vital context rarely arrived intact to the sales team due to three operational barriers:",
+                "Speed in this intake window directly determines conversion outcomes. A landmark Harvard Business Review study of 2,241 U.S. enterprises revealed that firms contacting prospects within one hour were nearly seven times more likely to qualify leads than those waiting longer."
+            ],
+            "subsections": [
+                {
+                    "subtitle": "Scattered Inquiries Across Fragmented Channels",
+                    "content": "Prospects contacted the agency via WhatsApp, Instagram DM, and email, each with unstructured formatting. Administrators manually parsed messages and copied contact info and project scope into spreadsheets. Inquiries were frequently logged hours later or overlooked."
+                },
+                {
+                    "subtitle": "Repetitive Clarifications Delaying Response Time",
+                    "content": "Initial messages often stated vague inquiries like 'inquire ad packages'. Admin staff had to ask multiple follow-up questions regarding channel, desired tier, and budget, requiring several conversational rounds before sales could formulate a relevant proposal."
+                },
+                {
+                    "subtitle": "Commercial History Disconnected from Core CRM",
+                    "content": "Live chat conversations, support issues, and proposal decisions remained isolated in siloed messaging apps. When sales representatives followed up, they lacked a unified timeline of prospect interactions."
+                }
+            ],
+            "image": {
+                "src": "/images/case-studies/adsvar/workflow-comparison.png",
+                "alt": "Lead Workflow Comparison: Manual fragmented inbox copying versus unified cryptographically signed CRM ingestion"
+            }
+        },
+        {
+            "eyebrow": "PRODUCT SOLUTION",
+            "mainTitle": "Unifying the Offer Experience and Enterprise CRM into a Single Data Pipeline",
+            "paragraphs": [
+                "AdsVar was architected as a high-velocity single-page web platform serving as the primary commercial gateway to MarkaSuite CRM. Rather than dumping traffic into unstructured WhatsApp chats, every interactive element on the page produces structured, cryptographically signed telemetry that populates both the web database and the enterprise CRM.",
+                "The single page encapsulates the entire client evaluation journey: channel catalogs, pricing breakdowns, deliverables, portfolio proofs, and instant consultation modals. Supporting the frontend are 15 dedicated API routes handling leads, real-time chat, tickets, feedback, and bidirectional CRM synchronization."
+            ],
+            "subsections": [
+                {
+                    "subtitle": "A. Per-Channel Package Catalog Injecting Context into Inquiries",
+                    "content": "When prospects select an advertising track (Meta, Google, TikTok, TikTok Shop GMV Max, or Shopee), the interface displays corresponding tiers, monthly retainers, and comparative deliverables. Clicking 'Choose this package' launches a consultation modal with package name, billing cycle, and pricing pre-populated. In lab tests, 20 of 20 modal inquiries were recorded with complete package context."
+                },
+                {
+                    "subtitle": "B. Triplicate Lead Ingestion in a Single Transmission",
+                    "content": "Upon form submission, the system validates contact inputs and executes three atomic actions: persists the lead to SQLite, triggers instant email alerts to sales, and dispatches a signed 'inquiry.submitted' event to MarkaSuite CRM. Payloads include HMAC-SHA256 signatures, timestamps, and nonces, with automatic 3x exponential retry on network failures."
+                },
+                {
+                    "subtitle": "C. Unified Ingestion for Live Chat, Support Tickets, and Ratings",
+                    "content": "When visitors initiate live chat, open support tickets, or submit service ratings, the system dispatches corresponding 'message.received', 'ticket.created', or 'feedback.submitted' events to the same CRM timeline. Webhook endpoints verify inbound signatures and reject tampered payloads with HTTP 401."
+                },
+                {
+                    "subtitle": "D. Executive Lead Dashboard for Operational Teams",
+                    "content": "An internal dashboard aggregates inquiries from all contact points into a searchable, filterable interface with live lead counts, pipeline status toggles, direct WhatsApp deep-links, and one-click CSV export."
+                }
+            ],
+            "image": {
+                "src": "/images/case-studies/adsvar/form-to-crm-flow.png",
+                "alt": "Form to CRM Flow Diagram: One submission produces records in database, email notification, and cryptographically signed CRM event"
+            }
+        },
+        {
+            "eyebrow": "TECHNICAL ARCHITECTURE",
+            "mainTitle": "Engineered for Extreme Speed, System Interoperability, and Complete Traceability",
+            "paragraphs": [
+                "To maintain instantaneous page delivery while embedding robust CRM integration, AdsVar leverages a resilient architectural foundation:",
+                "Lightweight Client Delivery: Next.js 16 featuring static pre-rendering, local optimized typography, and dynamic catalog hydration. Desktop payload is kept under 475 KB, with production builds executing in ~13 seconds.",
+                "Cryptographic Event Pipeline: Webhook integrations with MarkaSuite CRM implement HMAC-SHA256 signatures, microsecond timestamps, cryptographic nonces, and strict 8-second execution timeouts across five distinct business event types.",
+                "End-to-End Auditability: Every outbound CRM dispatch—successful or failed—is archived in a local SQLite event log alongside payload bodies, status codes, and latency metrics, guaranteeing zero data loss during external CRM outages.",
+                "Enterprise Search Readiness: Complete metadata automation, XML sitemaps, robots.txt directives, JSON-LD Schema (Organization, OfferCatalog, BreadcrumbList), and 308 permanent canonical redirects from legacy domains."
+            ],
+            "image": {
+                "src": "/images/case-studies/adsvar/technical-architecture.png",
+                "alt": "Technical Architecture Diagram: Next.js frontend, 15 API routes, SQLite event logging, and bidirectional HMAC webhook integration with MarkaSuite CRM"
+            }
+        },
+        {
+            "eyebrow": "IMPLEMENTATION TIMELINE",
+            "mainTitle": "From Static Profile to Dynamic CRM Gateway in Three Weeks",
+            "paragraphs": [
+                "AdsVar was delivered across four structured sprints, each built atop the live running application to validate real visitor workflows from day one."
+            ],
+            "table": {
+                "caption": "AdsVar Four-Phase Engineering Roadmap",
+                "headers": [
+                    "Sprint Phase",
+                    "Execution Period",
+                    "Core Deliverables",
+                    "Validation Methodology"
+                ],
+                "rows": [
+                    [
+                        "Page Foundation",
+                        "Oct 15–20, 2026",
+                        "Single-page structure, SVG components, SQLite schema for services, tiers, and portfolios",
+                        "Production build and cross-device visual audit"
+                    ],
+                    [
+                        "Packages & Content",
+                        "Oct 21–28, 2026",
+                        "Per-channel package catalogs, comparison matrices, package modals, English copy",
+                        "Interactive package selection and modal pre-fill testing"
+                    ],
+                    [
+                        "CRM Integration",
+                        "Oct 29, 2026",
+                        "HMAC signed events to MarkaSuite CRM, email dispatch, internal lead dashboard",
+                        "End-to-end CRM mock test suite and webhook validation"
+                    ],
+                    [
+                        "SEO & Domain Migration",
+                        "Oct 22 – Nov 3, 2026",
+                        "Metadata, schema markup, dynamic sitemap, 308 redirects to adsvar.id",
+                        "Lighthouse 12 audits and redirect chain verification"
+                    ]
+                ]
+            }
+        },
+        {
+            "eyebrow": "BENCHMARKS & IMPACT",
+            "mainTitle": "Laboratory Performance Evidence and Admin Efficiency Simulation",
+            "paragraphs": [
+                "Based on rigorous local test suites conducted on November 9, 2026 (production build, isolated test database, mock CRM endpoint with strict HMAC verification), Lighthouse 12 audits, and a 10,000-iteration triangular distribution simulation of admin handling time:"
+            ],
+            "table": {
+                "caption": "AdsVar Performance, Ingestion, and Efficiency Benchmarks",
+                "headers": [
+                    "Performance Indicator",
+                    "Baseline (Manual)",
+                    "With AdsVar",
+                    "Measured Outcome",
+                    "Validation Status"
+                ],
+                "rows": [
+                    [
+                        "Contact Form Lead Intake",
+                        "–",
+                        "Median 6.4 ms, P95 10.9 ms",
+                        "30 of 30 Succeeded",
+                        "Lab Tested"
+                    ],
+                    [
+                        "CRM Ingestion with Valid Signature",
+                        "–",
+                        "HMAC-SHA256 + timestamp + nonce",
+                        "30 of 30 Verified",
+                        "Lab Tested"
+                    ],
+                    [
+                        "Modal Package Ingestion with Context",
+                        "–",
+                        "Median 4.8 ms",
+                        "20 of 20 Succeeded",
+                        "Lab Tested"
+                    ],
+                    [
+                        "Inbound Webhook Signature Verification",
+                        "–",
+                        "HTTP 401 Unauthorized",
+                        "Tampered Rejected",
+                        "Lab Tested"
+                    ],
+                    [
+                        "Lighthouse Desktop (Performance / SEO)",
+                        "–",
+                        "100 / 100",
+                        "LCP 0.79s",
+                        "Lab Tested"
+                    ],
+                    [
+                        "Lighthouse Mobile (Performance / SEO)",
+                        "–",
+                        "82 / 100",
+                        "LCP 3.13s",
+                        "Lab Tested"
+                    ],
+                    [
+                        "Admin Manual Effort per Inbound Lead",
+                        "~17 minutes",
+                        "~3 minutes",
+                        "~83% Time Saved",
+                        "Simulation"
+                    ]
+                ]
+            },
+            "subsections": [
+                {
+                    "subtitle": "Interpreting the Lab Benchmarks",
+                    "content": "Sub-7ms intake latency covers validation, local SQLite persistence, and HMAC event dispatch in local environments. Desktop 100 Performance demonstrates the speed of pre-rendered static assets. The 83% reduction in admin effort results directly from capturing complete package and budget parameters upfront."
+                },
+                {
+                    "subtitle": "Measurement Boundaries",
+                    "content": "Intake benchmarks were evaluated on local environments without public internet latency. Outbound SMTP email delivery was not included in network latency calculations. Admin handling metrics represent statistical simulation across 10,000 iterations."
+                }
+            ],
+            "image": {
+                "src": "/images/case-studies/adsvar/admin-time-simulation.png",
+                "alt": "Admin Time Simulation Chart: Effort per lead drops from 17 minutes to 3 minutes, achieving 83% median efficiency gain"
+            }
+        },
+        {
+            "eyebrow": "NEXT STEPS & ENTERPRISE ADOPTION",
+            "mainTitle": "Ready to Deploy Connected Commercial Gateways in Your Enterprise?",
+            "paragraphs": [
+                "Every professional service business maintains distinct commercial onboarding workflows. The architectural pattern proven by AdsVar applies seamlessly to digital agencies, management consultancies, B2B SaaS providers, and educational institutions requiring high-converting websites directly integrated into enterprise CRMs.",
+                "The Arsalynk engineering team stands ready to architect your prospect journeys, construct high-performance single-page offer platforms, and bridge your web infrastructure to enterprise CRM backends with cryptographic reliability."
+            ]
+        }
+    ]
+},
+  /* ── 5. Craftivation — Exhibition Booth Contractor Platform ── */
+  {
+    "id": 5,
+    "slug": "craftivation-website-kontraktor-booth",
+    "title": "How Craftivation Structured a Four-Page Exhibition Booth Journey: 100 SEO Scores Across All Pages and Database-Driven Service Packages",
+    "category": "DIGITAL DEVELOPMENT",
+    "tags": [
+        "BOOTH CONTRACTOR",
+        "COMPANY PROFILE",
+        "EXHIBITION BOOTH",
+        "DATABASE CMS",
+        "CRAFTIVATION",
+        "ARSALYNK"
+    ],
+    "dateLabel": "NOVEMBER 2026",
+    "dateValue": "2026-11-10",
+    "description": "Craftivation case study: four-page exhibition booth contractor website featuring database-driven service packages, centralized consultation card, and 100 SEO scores across all pages.",
+    "coverImage": "/images/case-studies/craftivation/cover.png",
+    "coverImageAlt": "Craftivation homepage showcasing exhibition booths, modular packages, and consultation workflows",
+    "sections": [
+        {
+            "eyebrow": "EXECUTIVE SUMMARY (AT-A-GLANCE)",
+            "mainTitle": "Structuring the Exhibition Booth Journey with Database-Driven Packages",
+            "paragraphs": [
+                "Client & Scenario: Craftivation, an exhibition booth contractor in the Arsalynk ecosystem handling end-to-end concept design, structural fabrication, and on-site installation for brand showcases and retail activations.",
+                "Problem Focus: Prospective clients sought to understand methodology and package options before initiating contact, but critical information was scattered across social media and messaging channels with fragmented inquiry routing.",
+                "Product Solution: A structured four-page web application (Home, About Us, Approach, Contact) featuring database-driven service tiers and a unified consultation card anchoring every call to action.",
+                "Implementation Timeline: ~1 month (October 7 – November 5, 2026), 123 production commits.",
+                "Measured Impact: Lighthouse SEO 100 & Best Practices 100 across all 4 pages on mobile and desktop (Lab Tested); Package updates persist in 2.5 ms median and reflect immediately without rebuilding (Lab Tested); Effort required to update a service tier reduced from ~72 mins to ~23 mins, saving ~67% time (10,000 Iteration Simulation)."
+            ],
+            "metrics": [
+                {
+                    "value": "100/100",
+                    "label": "SEO & Best Practices",
+                    "detail": "Lighthouse SEO 100 and Best Practices 100 across all 4 pages on mobile and desktop (Lab Tested)"
+                },
+                {
+                    "value": "2.5 ms",
+                    "label": "Package Update Speed",
+                    "detail": "Package record changes persist in 2.5 ms median and reflect immediately without rebuilding (Lab Tested)"
+                },
+                {
+                    "value": "67%",
+                    "label": "Update Effort Saved",
+                    "detail": "Work updating one service tier drops from ~72 mins to ~23 mins, saving ~67% effort (10,000 Iteration Simulation)"
+                }
+            ]
+        },
+        {
+            "eyebrow": "PROBLEM SCENARIO",
+            "mainTitle": "When Prospective Clients Must Ask Questions First Just to Learn the Process",
+            "paragraphs": [
+                "Craftivation builds bespoke booths for trade expos, product launches, and experiential brand activations. Exhibition dates cannot be postponed, forcing clients to evaluate contractors under tight timelines. Before reaching out, buyers need three answers: who Craftivation is, how the process works, and what packages are available.",
+                "Without a structured website answering these sequentially, operations suffered from three structural bottlenecks:",
+                "B2B buyers evaluate vendors predominantly through independent research. Gartner research into B2B buying journeys reveals that buyers spend only ~17% of total evaluation time meeting prospective suppliers, dedicating the remaining time to self-directed research, including analyzing vendor websites."
+            ],
+            "subsections": [
+                {
+                    "subtitle": "Methodology Residing Solely in the Team's Memory",
+                    "content": "Work phases—from consultation, 3D modeling, fabrication, to on-site assembly—were explained manually via chat for every inquiry. Explanations varied depending on the responder, making it difficult for clients to compare Craftivation against competing vendors."
+                },
+                {
+                    "subtitle": "Packages Buried Inside Static Quotation PDFs",
+                    "content": "Package specifications were only revealed after generating formal quotation PDFs. If hardcoded into static website markup, every price change required developers, rebuilds, and redeployments, leaving offerings outdated."
+                },
+                {
+                    "subtitle": "Scattered and Unmonitored Contact Channels",
+                    "content": "WhatsApp numbers, direct emails, business offices, and factory workshop coordinates were scattered across social bios, business cards, and chat archives, causing lost inquiries and visits to outdated addresses."
+                }
+            ],
+            "image": {
+                "src": "/images/case-studies/craftivation/workflow-comparison.png",
+                "alt": "Client Journey Comparison: Fragmented multi-channel inquiries versus unified four-page sequence with centralized contact card"
+            }
+        },
+        {
+            "eyebrow": "PRODUCT SOLUTION",
+            "mainTitle": "Unifying Brand Story, Service Packages, and Consultation Channels into One Cohesive Web Platform",
+            "paragraphs": [
+                "Craftivation was architected as a structured multi-page platform mirroring the client's decision-making sequence: discover the brand, comprehend process and packages, then initiate consultation. Rather than hardcoding offerings, service tiers are stored in a database and queried dynamically upon page load, allowing instantaneous updates without rebuilding.",
+                "Behind the scenes, content is managed via normalized database tables for services, projects, and corporate statistics served by five dedicated API routes. In the frontend, every consultation trigger converges into a single modal card and verified contact numbers."
+            ],
+            "subsections": [
+                {
+                    "subtitle": "A. Four Dedicated Pages Matching the Evaluation Journey",
+                    "content": "Home introduces three work phases: Understand, Create, Implement. Navigation flows smoothly to About Us for team credentials, Approach for detailed methodology and packages, and Contact for consultation routing. Breadcrumbs orient visitors across all sub-pages, maintaining zero layout shift (CLS 0)."
+                },
+                {
+                    "subtitle": "B. Database-Driven Service Packages (No Rebuilds Required)",
+                    "content": "When Approach loads, three booth tiers (Modular, Versatile, Enterprise) are retrieved dynamically from the service table: title, description, imagery, display order, and active state. In lab tests, 10 of 10 package edits persisted in 2.5 ms median and reflected instantly."
+                },
+                {
+                    "subtitle": "C. Unified Consultation Card Anchoring Every Call to Action",
+                    "content": "Triggering 'Consult Now' launches a focused contact modal featuring three direct actions: WhatsApp, email, and Google Maps workshop coordinates. Contact expands this into three clear channels: Direct Consultation, Jakarta Business Office, and Bogor Workshop."
+                },
+                {
+                    "subtitle": "D. Search Engine Ready with Complete Schema Markup",
+                    "content": "Each page incorporates dedicated metadata, canonical tags, and structured JSON-LD (Organization, WebSite, 3 Service records in OfferCatalog, and dual physical location schemas with coordinates and opening hours), achieving Lighthouse SEO 100 across all routes."
+                }
+            ],
+            "image": {
+                "src": "/images/case-studies/craftivation/service-packages.png",
+                "alt": "Approach Page Service Packages: Modular, Versatile, and Enterprise packages retrieved dynamically from database"
+            }
+        },
+        {
+            "eyebrow": "TECHNICAL ARCHITECTURE",
+            "mainTitle": "Under the Hood: Static-Rendered Core, Selectively Dynamic Data, and Low-Maintenance Engineering",
+            "paragraphs": [
+                "To ensure instantaneous page delivery while maintaining effortless content maintenance, Craftivation implements a modern hybrid architecture:",
+                "Pre-rendered Static Pages: Next.js 16 renders all four core routes statically at build time, eliminating layout shifts (CLS 0) and serving complete markup instantly.",
+                "Dynamic Content Layer: Service tiers, project showcases, and company statistics reside in SQLite and are served via five API routes with median response times of 1.6–1.9 ms. Schema fallbacks guarantee flawless rendering if database queries stall.",
+                "Maintainable Modular Structure: Component isolation per section, data access via repository pattern, and structured schema contracts ensure easy expansion for future project galleries."
+            ],
+            "image": {
+                "src": "/images/case-studies/craftivation/technical-architecture.png",
+                "alt": "Technical Architecture Diagram: Next.js pre-rendered pages, content APIs, SQLite database, and centralized contact card routing"
+            }
+        },
+        {
+            "eyebrow": "IMPLEMENTATION TIMELINE",
+            "mainTitle": "Four Enterprise Pages Delivered in One Month",
+            "paragraphs": [
+                "Craftivation was engineered across four focused phases by two core contributors, incorporating design iterations from the leadership team at each milestone."
+            ],
+            "table": {
+                "caption": "Craftivation Implementation Roadmap",
+                "headers": [
+                    "Sprint Phase",
+                    "Execution Period",
+                    "Core Deliverables",
+                    "Validation Methodology"
+                ],
+                "rows": [
+                    [
+                        "Foundation & Data Schema",
+                        "Oct 7–9, 2026",
+                        "Page structure, SQLite schema for services, projects, and statistics, Approach page",
+                        "Production build and API endpoint verification"
+                    ],
+                    [
+                        "Design & Responsive UI",
+                        "Oct 12–15, 2026",
+                        "Typography, animations, responsive layouts across desktop, tablet, and mobile",
+                        "Cross-breakpoint layout verification"
+                    ],
+                    [
+                        "SEO & Geo-Locations",
+                        "Oct 19–23, 2026",
+                        "Per-page metadata, JSON-LD schemas, office and workshop map integrations",
+                        "Metadata validation and Google Maps link audits"
+                    ],
+                    [
+                        "Homepage Redesign",
+                        "Nov 2–5, 2026",
+                        "Section-changer service panel, unified contact card, mobile navigation polish",
+                        "Interactive and responsive audit"
+                    ]
+                ]
+            }
+        },
+        {
+            "eyebrow": "BENCHMARKS & IMPACT",
+            "mainTitle": "Laboratory Performance Evidence and Content Maintenance Simulation",
+            "paragraphs": [
+                "Based on local laboratory test suites conducted on November 9, 2026 (production build, default database), Lighthouse 12 audits across all 4 pages, and a 10,000-iteration triangular distribution simulation of package update workflows:"
+            ],
+            "table": {
+                "caption": "Craftivation Performance and Content Agility Benchmarks",
+                "headers": [
+                    "Performance Indicator",
+                    "Baseline (Hardcoded)",
+                    "With Craftivation",
+                    "Measured Outcome",
+                    "Validation Status"
+                ],
+                "rows": [
+                    [
+                        "Lighthouse SEO Score",
+                        "–",
+                        "100 across 4 of 4 pages",
+                        "Mobile & Desktop",
+                        "Lab Tested"
+                    ],
+                    [
+                        "Lighthouse Best Practices",
+                        "–",
+                        "100 across 4 of 4 pages",
+                        "Mobile & Desktop",
+                        "Lab Tested"
+                    ],
+                    [
+                        "Cumulative Layout Shift (CLS)",
+                        "–",
+                        "0",
+                        "All Pages",
+                        "Lab Tested"
+                    ],
+                    [
+                        "Desktop Performance Score",
+                        "–",
+                        "80–99",
+                        "About Us & Contact 99",
+                        "Lab Tested"
+                    ],
+                    [
+                        "Content API Response Time",
+                        "–",
+                        "Median 1.6–1.9 ms",
+                        "50 Requests/Endpoint",
+                        "Lab Tested"
+                    ],
+                    [
+                        "Service Package Mutation",
+                        "Code edit, rebuild, deploy",
+                        "Median 2.5 ms, 10 of 10 persisted",
+                        "No Rebuild Needed",
+                        "Lab Tested"
+                    ],
+                    [
+                        "Time to Update One Service Tier",
+                        "~72 minutes",
+                        "~23 minutes",
+                        "~67% Time Saved",
+                        "Simulation"
+                    ]
+                ]
+            },
+            "subsections": [
+                {
+                    "subtitle": "Interpreting the Lab Benchmarks",
+                    "content": "Perfect 100 SEO scores stem from automated metadata, breadcrumbs, schema markup, and sitemaps. 2.5 ms database persistence decouples content maintenance from CI/CD deployment pipelines. The 67% reduction in update effort eliminates developer dependencies for routine pricing and tier adjustments."
+                },
+                {
+                    "subtitle": "Measurement Boundaries",
+                    "content": "Testing was conducted on local production builds without public CDN latency. Content APIs currently require backend authentication before public admin exposure. Update workflow reductions reflect statistical simulations across 10,000 iterations."
+                }
+            ],
+            "image": {
+                "src": "/images/case-studies/craftivation/package-update-simulation.png",
+                "alt": "Package Update Workflow Simulation: Maintenance effort reduced from 72 minutes to 23 minutes, achieving 67% median time savings"
+            }
+        },
+        {
+            "eyebrow": "NEXT STEPS & ENTERPRISE ADOPTION",
+            "mainTitle": "Ready to Deploy Structured Commercial Experiences in Your Business?",
+            "paragraphs": [
+                "Every project-based business must articulate its process with precision. The architectural pattern established by Craftivation applies directly to interior contractors, event organizers, architectural practices, and custom manufacturers seeking to qualify prospects before initial contact.",
+                "The Arsalynk engineering team is ready to structure your multi-page customer journey, architect dynamic database-driven service catalogs, and unify inbound inquiry routing into your commercial teams."
+            ]
+        }
+    ]
+},
 ];
 
 export const LEADERSHIP_THOUGHTS_DUMMY_DATA: LeadershipThoughtArticle[] = [

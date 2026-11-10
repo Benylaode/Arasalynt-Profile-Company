@@ -1778,6 +1778,503 @@ const CASE_STUDIES_ID_MAP: Record<string, Partial<CaseStudyArticle>> = {
     coverImageAlt:
       'Dashboard eksekutif MarkaSuite menampilkan progres proyek, ringkasan keuangan, dan Request Card dalam satu layar',
   },
+  'adsvar-website-crm-terintegrasi': {
+    "title": "Bagaimana AdsVar Menyambungkan Satu Halaman Penawaran ke CRM hingga 30 dari 30 Lead Uji Tercatat dengan Tanda Tangan Valid",
+    "category": "DIGITAL DEVELOPMENT",
+    "tags": [
+        "WEBSITE AGENSI IKLAN",
+        "LANDING PAGE CRM",
+        "INTEGRASI CRM WEBSITE",
+        "LEAD MANAGEMENT",
+        "ADSVAR",
+        "ARSALYNK"
+    ],
+    "dateLabel": "NOVEMBER 2026",
+    "description": "Studi kasus AdsVar: website satu halaman untuk agensi iklan performa yang mengirim setiap lead, chat, dan tiket langsung ke CRM MarkaSuite secara aman.",
+    "coverImageAlt": "Halaman utama AdsVar dengan penawaran layanan iklan performa dan tombol konsultasi",
+    "sections": [
+        {
+            "eyebrow": "RINGKASAN EKSEKUTIF (AT-A-GLANCE)",
+            "mainTitle": "Menghubungkan Satu Halaman Penawaran Langsung ke CRM Perusahaan",
+            "paragraphs": [
+                "Klien & Skenario: AdsVar, agensi iklan performa di grup Arsalynk yang menangani Meta Ads, Google Ads, TikTok Ads, TikTok Shop GMV Max, dan Shopee Ads untuk brand dan UMKM.",
+                "Fokus Masalah: Calon klien datang dari banyak kanal, tetapi kebutuhan mereka (kanal iklan, paket, budget) tiba tidak lengkap dan harus disalin manual sebelum tim sales bisa menindaklanjuti.",
+                "Solusi Produk: Website satu halaman (Next.js 16) dengan katalog paket per kanal, formulir yang membawa konteks paket, live chat, tiket support, dan dashboard lead internal. Setiap interaksi dikirim ke CRM MarkaSuite sebagai event yang ditandatangani.",
+                "Durasi Implementasi: ±3 minggu (15 Oktober – 3 November 2026), 30 commit.",
+                "Dampak Terukur: 30 dari 30 lead uji diterima dan diteruskan ke endpoint CRM dengan tanda tangan HMAC valid, median respons 6,4 milidetik (Uji Lab); Skor Lighthouse desktop Performance 100 dan SEO 100 (Uji Lab); Kerja admin per lead turun dari ±17 menit menjadi ±3 menit, hemat ±83% (Simulasi 10.000 iterasi)."
+            ],
+            "metrics": [
+                {
+                    "value": "30/30",
+                    "label": "Lead Uji Valid",
+                    "detail": "30 dari 30 lead uji diterima dan diteruskan ke endpoint CRM dengan tanda tangan HMAC valid, median 6,4 ms (Uji Lab)"
+                },
+                {
+                    "value": "100/100",
+                    "label": "Lighthouse Desktop",
+                    "detail": "Skor Lighthouse desktop Performance 100 dan SEO 100, LCP 0,79 detik (Uji Lab)"
+                },
+                {
+                    "value": "83%",
+                    "label": "Hemat Waktu Admin",
+                    "detail": "Kerja admin per lead turun dari ±17 menit menjadi ±3 menit, hemat ±83% (Simulasi 10.000 iterasi)"
+                }
+            ]
+        },
+        {
+            "eyebrow": "SKENARIO MASALAH",
+            "mainTitle": "Ketika Lead Datang Lengkap di Kepala Calon Klien, tetapi Terpotong di Kotak Masuk",
+            "paragraphs": [
+                "AdsVar menjual layanan iklan berbasis hasil. Calon kliennya beragam: pemilik toko online yang ingin mencoba Shopee Ads, brand yang butuh kampanye TikTok, hingga perusahaan yang mencari paket iklan dan konten sekaligus. Mereka biasanya sudah tahu kanal dan kisaran budgetnya saat pertama kali menghubungi.",
+                "Masalahnya, informasi itu jarang sampai utuh ke tim sales karena tiga kendala operasional:",
+                "Kecepatan di tahap ini menentukan hasil. Audit Harvard Business Review terhadap 2.241 perusahaan di Amerika Serikat menemukan bahwa perusahaan yang menghubungi lead dalam satu jam hampir tujuh kali lebih mungkin melakukan kualifikasi dibanding yang menunggu lebih lama."
+            ],
+            "subsections": [
+                {
+                    "subtitle": "Kebutuhan yang Tercecer di Banyak Pintu",
+                    "content": "Calon klien menghubungi lewat WhatsApp, DM Instagram, atau email, masing-masing dengan format bebas. Admin harus membaca satu per satu lalu menyalin nama, kontak, dan kebutuhan ke spreadsheet. Akibatnya, sebagian lead baru tercatat berjam-jam kemudian, dan sebagian lagi terlewat."
+                },
+                {
+                    "subtitle": "Pertanyaan Ulang yang Memperlambat Respons",
+                    "content": "Pesan pertama sering hanya berbunyi 'mau tanya paket iklan'. Admin lalu bertanya kanal apa, paket yang mana, dan berapa budgetnya. Akibatnya, percakapan butuh beberapa putaran sebelum sales bisa memberi penawaran yang tepat."
+                },
+                {
+                    "subtitle": "Data Penjualan yang Terpisah dari Website",
+                    "content": "Riwayat chat, keluhan, dan keputusan penawaran tersimpan di aplikasi yang berbeda dari CRM. Akibatnya, sales tidak melihat riwayat lengkap seorang calon klien saat menindaklanjuti."
+                }
+            ],
+            "image": {
+                "src": "/images/case-studies/adsvar/workflow-comparison.png",
+                "alt": "Diagram Perbandingan Alur Lead: Transformasi dari pesan bebas yang disalin manual menjadi data terstruktur yang langsung tercatat di CRM"
+            }
+        },
+        {
+            "eyebrow": "SOLUSI PRODUK",
+            "mainTitle": "Menghubungkan Halaman Penawaran dan CRM dalam Satu Jalur Data",
+            "paragraphs": [
+                "AdsVar dibangun sebagai website satu halaman yang bekerja seperti pintu depan CRM. Alih-alih mengarahkan semua pengunjung ke WhatsApp dan membiarkan admin merapikan datanya, setiap tombol di halaman menghasilkan data terstruktur yang langsung masuk ke basis data website dan ke CRM MarkaSuite.",
+                "Satu halaman memuat seluruh perjalanan calon klien: layanan per kanal, paket dan harga, portofolio, lalu formulir konsultasi. Di belakang halaman itu ada 15 rute API yang menangani lead, chat, tiket, feedback, dan sinkronisasi dengan CRM."
+            ],
+            "subsections": [
+                {
+                    "subtitle": "A. Katalog Paket per Kanal yang Membawa Konteks ke Formulir",
+                    "content": "Saat pengunjung memilih kanal (Meta, Google, TikTok, TikTok Shop GMV Max, atau Shopee), halaman menampilkan paket yang sesuai beserta harga bulanan dan tabel perbandingan. Begitu pengunjung menekan 'Choose this package', formulir terbuka dengan nama paket, siklus tagihan, dan harga yang sudah terisi. Pada uji lokal, 20 dari 20 lead dari modal paket tersimpan lengkap bersama detail paketnya."
+                },
+                {
+                    "subtitle": "B. Lead yang Tercatat Tiga Kali dalam Satu Kiriman",
+                    "content": "Saat formulir dikirim, sistem memvalidasi nama, email, dan subjek, lalu melakukan tiga hal: menyimpan lead ke basis data website, mengirim email notifikasi ke tim, dan mengirim event inquiry.submitted ke CRM MarkaSuite. Event ditandatangani HMAC-SHA256 dengan timestamp dan nonce, dicoba ulang hingga tiga kali bila gagal, dan dicatat di log event."
+                },
+                {
+                    "subtitle": "C. Chat, Tiket, dan Feedback yang Masuk ke CRM yang Sama",
+                    "content": "Saat pengunjung membuka live chat, mengirim tiket support, atau memberi penilaian layanan, website mengirim event message.received, ticket.created, atau feedback.submitted ke CRM. Widget chat memeriksa balasan setiap 5 detik. Arah sebaliknya juga diverifikasi: webhook dari CRM dengan tanda tangan tidak cocok langsung ditolak dengan HTTP 401."
+                },
+                {
+                    "subtitle": "D. Dashboard Lead untuk Tim Internal",
+                    "content": "Semua lead dari formulir kontak dan modal paket tampil dalam satu daftar: nama, kontak, layanan, paket, siklus tagihan, harga, dan sumber formulir, dengan ringkasan jumlah lead di bagian atas. Tim bisa mencari, menyaring status, membuka chat WhatsApp lead dengan satu klik, dan mengekspor data ke CSV."
+                }
+            ],
+            "image": {
+                "src": "/images/case-studies/adsvar/form-to-crm-flow.png",
+                "alt": "Alur Lead dari Formulir ke CRM: Satu kiriman formulir menghasilkan tiga catatan terverifikasi di website, email tim, dan CRM"
+            }
+        },
+        {
+            "eyebrow": "ARSITEKTUR TEKNIS",
+            "mainTitle": "Di Balik Layar: Arsitektur yang Ringan, Tersambung, dan Bisa Ditelusuri",
+            "paragraphs": [
+                "Untuk memastikan halaman tetap cepat dibuka meski membawa banyak fungsi CRM, AdsVar dibangun di atas fondasi berikut:",
+                "Ringan untuk pengunjung: Next.js 16 dengan halaman utama yang dirender statis saat build, font lokal, dan data paket yang dimuat dari API. Bobot halaman desktop 475 KB, dan build produksi selesai dalam 13 detik.",
+                "Tersambung lewat event bertanda tangan: integrasi ke CRM MarkaSuite memakai webhook dengan tanda tangan HMAC-SHA256, timestamp, nonce, dan batas waktu 8 detik per percobaan untuk lima jenis event bisnis.",
+                "Bisa ditelusuri di setiap event: setiap kiriman ke CRM disimpan di tabel log event di SQLite beserta payload, kode status, dan responsnya, sehingga data aman meski CRM offline.",
+                "Siap dicari mesin pencari: metadata, sitemap, robots.txt, data terstruktur (Organization, OfferCatalog, BreadcrumbList), dan pengalihan 308 permanen untuk domain lama."
+            ],
+            "image": {
+                "src": "/images/case-studies/adsvar/technical-architecture.png",
+                "alt": "Diagram Arsitektur Teknis & Aliran Data: Halaman statis untuk pengunjung, 15 rute API, dan jalur event bertanda tangan ke CRM MarkaSuite"
+            }
+        },
+        {
+            "eyebrow": "PERJALANAN IMPLEMENTASI",
+            "mainTitle": "Dari Halaman Profil ke Pintu Depan CRM dalam Tiga Minggu",
+            "paragraphs": [
+                "AdsVar dikerjakan dalam empat fase terstruktur. Setiap fase dibangun di atas halaman yang sudah berjalan, sehingga pengujian dilakukan langsung pada alur pengunjung yang nyata."
+            ],
+            "table": {
+                "caption": "Peta Jalan Implementasi Rekayasa AdsVar Empat Fase",
+                "headers": [
+                    "Fase",
+                    "Periode",
+                    "Keluaran",
+                    "Cara Diuji"
+                ],
+                "rows": [
+                    [
+                        "Fondasi halaman",
+                        "15–20 Oktober 2026",
+                        "Struktur satu halaman, desain SVG, basis data SQLite untuk layanan, paket, portofolio",
+                        "Build produksi dan pemeriksaan tampilan"
+                    ],
+                    [
+                        "Paket & konten",
+                        "21–28 Oktober 2026",
+                        "Katalog paket per kanal, tabel perbandingan, detail paket, konten berbahasa Inggris",
+                        "Pemeriksaan alur pilih paket"
+                    ],
+                    [
+                        "Integrasi CRM",
+                        "29 Oktober 2026",
+                        "Event bertanda tangan ke MarkaSuite, email notifikasi, dashboard lead",
+                        "Suite uji integrasi CRM internal"
+                    ],
+                    [
+                        "SEO & domain",
+                        "22 Oktober – 3 November 2026",
+                        "Metadata, data terstruktur, sitemap, pengalihan 308 ke adsvar.id",
+                        "Lighthouse dan pemeriksaan pengalihan"
+                    ]
+                ]
+            }
+        },
+        {
+            "eyebrow": "BENCHMARK & DAMPAK",
+            "mainTitle": "Bukti Kinerja Laboratorium dan Simulasi Efisiensi Admin",
+            "paragraphs": [
+                "Berdasarkan uji lokal pada 9 November 2026 (build produksi, basis data uji, endpoint CRM server tiruan yang memverifikasi tanda tangan HMAC), pengukuran Lighthouse 12, serta simulasi distribusi segitiga 10.000 iterasi untuk kerja admin:"
+            ],
+            "table": {
+                "caption": "Tabel Pengukuran Performa, Integritas Event, dan Simulasi Efisiensi",
+                "headers": [
+                    "Indikator",
+                    "Sebelum",
+                    "Dengan AdsVar",
+                    "Hasil",
+                    "Status"
+                ],
+                "rows": [
+                    [
+                        "Lead formulir kontak diterima",
+                        "–",
+                        "median 6,4 ms, P95 10,9 ms",
+                        "30 dari 30",
+                        "Uji Lab"
+                    ],
+                    [
+                        "Event lead sampai ke CRM dengan tanda tangan valid",
+                        "–",
+                        "HMAC-SHA256 + timestamp + nonce",
+                        "30 dari 30",
+                        "Uji Lab"
+                    ],
+                    [
+                        "Lead dari modal paket tersimpan dengan detail paket",
+                        "–",
+                        "median 4,8 ms",
+                        "20 dari 20",
+                        "Uji Lab"
+                    ],
+                    [
+                        "Webhook dari CRM dengan tanda tangan salah",
+                        "–",
+                        "HTTP 401",
+                        "Ditolak",
+                        "Uji Lab"
+                    ],
+                    [
+                        "Lighthouse desktop (Performance / SEO)",
+                        "–",
+                        "100 / 100",
+                        "LCP 0,79 detik",
+                        "Uji Lab"
+                    ],
+                    [
+                        "Lighthouse mobile (Performance / SEO)",
+                        "–",
+                        "82 / 100",
+                        "LCP 3,13 detik",
+                        "Uji Lab"
+                    ],
+                    [
+                        "Kerja admin per lead",
+                        "±17 menit",
+                        "±3 menit",
+                        "Hemat ±83%",
+                        "Simulasi"
+                    ]
+                ]
+            },
+            "subsections": [
+                {
+                    "subtitle": "Membaca Angka Ini",
+                    "content": "Waktu 6,4 ms mencakup validasi, penyimpanan lokal SQLite, dan pengiriman event ke CRM. Keberhasilan validasi tanda tangan memastikan CRM menolak event yang dimanipulasi pihak ketiga. Penghematan kerja admin 83% didapat karena data kanal dan budget sudah terisi otomatis sejak formulir dikirim."
+                },
+                {
+                    "subtitle": "Batas Pengukuran",
+                    "content": "Uji lab dilakukan di lingkungan lokal tanpa latensi internet. Pengiriman email SMTP tidak diuji di lingkungan lokal. Simulasi kerja admin memakai pemodelan statistik 10.000 iterasi."
+                }
+            ],
+            "image": {
+                "src": "/images/case-studies/adsvar/admin-time-simulation.png",
+                "alt": "Grafik Simulasi Kerja Admin per Lead: Kerja admin turun dari median 17 menit menjadi 3 menit, menghemat 83% waktu penanganan"
+            }
+        },
+        {
+            "eyebrow": "REKOMENDASI & IMPLEMENTASI",
+            "mainTitle": "Siap Menguji Skenario Ini di Perusahaan Anda?",
+            "paragraphs": [
+                "Setiap bisnis jasa profesional memiliki pola unik dalam menerima calon klien. Arsitektur yang diterapkan pada AdsVar dapat diadaptasi untuk agensi, konsultan bisnis, penyedia B2B SaaS, hingga lembaga pendidikan yang menginginkan setiap interaksi penawaran website langsung tercatat rapi di CRM.",
+                "Tim rekayasa teknologi Arsalynk siap menganalisis alur konversi calon klien Anda, merancang halaman penawaran berkecepatan tinggi dengan konteks paket otomatis, dan mengintegrasikannya ke sistem CRM perusahaan Anda secara aman."
+            ]
+        }
+    ]
+},
+  'craftivation-website-kontraktor-booth': {
+    "title": "Bagaimana Craftivation Menyusun Perjalanan Calon Klien Booth dalam Empat Halaman hingga Skor SEO 100 di Setiap Halaman",
+    "category": "DIGITAL DEVELOPMENT",
+    "tags": [
+        "WEBSITE KONTRAKTOR BOOTH",
+        "WEBSITE COMPANY PROFILE",
+        "BOOTH PAMERAN",
+        "KONTEN DARI BASIS DATA",
+        "CRAFTIVATION",
+        "ARSALYNK"
+    ],
+    "dateLabel": "NOVEMBER 2026",
+    "description": "Studi kasus Craftivation: website empat halaman kontraktor booth pameran dengan paket layanan dari basis data, kartu kontak terpusat, dan skor SEO 100.",
+    "coverImageAlt": "Halaman utama Craftivation dengan foto booth pameran di pusat perbelanjaan",
+    "sections": [
+        {
+            "eyebrow": "RINGKASAN EKSEKUTIF (AT-A-GLANCE)",
+            "mainTitle": "Menyusun Perjalanan Calon Klien dan Paket Booth yang Mudah Diperbarui",
+            "paragraphs": [
+                "Klien & Skenario: Craftivation, kontraktor booth pameran di grup Arsalynk yang menangani konsep, fabrikasi, dan instalasi booth untuk brand di pameran dan aktivasi.",
+                "Fokus Masalah: Calon klien ingin memahami cara kerja dan pilihan paket sebelum menghubungi, tetapi informasinya tersebar di media sosial dan chat, dan setiap pertanyaan masuk lewat jalur yang berbeda.",
+                "Solusi Produk: Website empat halaman (Beranda, Tentang Kami, Pendekatan, Kontak) dengan paket layanan yang dibaca dari basis data dan satu kartu kontak yang muncul dari setiap ajakan konsultasi.",
+                "Durasi Implementasi: ±1 bulan (7 Oktober – 5 November 2026), 123 commit.",
+                "Dampak Terukur: Skor Lighthouse SEO 100 dan Best Practices 100 di keempat halaman, mobile maupun desktop (Uji Lab); Perubahan paket layanan tersimpan dalam median 2,5 milidetik dan terbaca tanpa build ulang (Uji Lab); Kerja memperbarui satu paket layanan turun dari ±72 menit menjadi ±23 menit, hemat ±67% (Simulasi 10.000 iterasi)."
+            ],
+            "metrics": [
+                {
+                    "value": "100/100",
+                    "label": "SEO & Best Practices",
+                    "detail": "Skor Lighthouse SEO 100 dan Best Practices 100 di keempat halaman, mobile maupun desktop (Uji Lab)"
+                },
+                {
+                    "value": "2,5 ms",
+                    "label": "Update Paket Layanan",
+                    "detail": "Perubahan paket layanan tersimpan dalam median 2,5 ms dan langsung terbaca tanpa build ulang (Uji Lab)"
+                },
+                {
+                    "value": "67%",
+                    "label": "Hemat Waktu Update",
+                    "detail": "Kerja memperbarui satu paket layanan: ±72 menit → ±23 menit, hemat ±67% (Simulasi 10.000 iterasi)"
+                }
+            ]
+        },
+        {
+            "eyebrow": "SKENARIO MASALAH",
+            "mainTitle": "Ketika Calon Klien Harus Bertanya Dulu untuk Tahu Cara Kerja",
+            "paragraphs": [
+                "Craftivation membangun booth untuk pameran, peluncuran produk, dan aktivasi brand. Tanggal pameran tidak bisa digeser, jadi calon klien biasanya datang dengan waktu yang sempit. Sebelum menghubungi, mereka ingin tahu tiga hal: siapa Craftivation, bagaimana prosesnya, dan paket apa yang tersedia.",
+                "Tanpa website yang menjawab tiga hal itu secara berurutan, situasinya mengalami tiga hambatan operasional:",
+                "Pembeli B2B menilai vendor sebagian besar secara mandiri. Riset Gartner tentang perjalanan pembelian B2B mencatat pembeli hanya menghabiskan sekitar 17% waktu pembeliannya untuk bertemu calon pemasok, sehingga sisanya dipakai untuk riset sendiri, termasuk membaca website vendor."
+            ],
+            "subsections": [
+                {
+                    "subtitle": "Cara Kerja yang Hanya Ada di Kepala Tim",
+                    "content": "Tahapan dari konsultasi, desain, fabrikasi, sampai instalasi dijelaskan ulang oleh tim lewat chat setiap kali ada calon klien baru. Akibatnya, penjelasan berbeda-beda tergantung siapa yang membalas, dan calon klien sulit membandingkan Craftivation dengan vendor lain."
+                },
+                {
+                    "subtitle": "Paket yang Tersimpan di Dokumen Penawaran",
+                    "content": "Pilihan paket booth baru terlihat setelah tim mengirim penawaran. Bila informasi paket ditulis langsung di kode website, setiap perubahan butuh programmer, build ulang, dan unggah ulang. Akibatnya, informasi paket jarang diperbarui dan calon klien bertanya hal yang sama berulang kali."
+                },
+                {
+                    "subtitle": "Jalur Kontak yang Tercecer",
+                    "content": "Nomor WhatsApp, email, alamat kantor, dan lokasi workshop tersebar di bio media sosial, kartu nama, dan pesan lama. Akibatnya, sebagian calon klien menghubungi kanal yang jarang dipantau, atau datang ke alamat yang salah."
+                }
+            ],
+            "image": {
+                "src": "/images/case-studies/craftivation/workflow-comparison.png",
+                "alt": "Diagram Perbandingan Perjalanan Calon Klien: Bertanya ke banyak kanal vs membaca empat halaman berurutan dengan satu titik kontak"
+            }
+        },
+        {
+            "eyebrow": "SOLUSI PRODUK",
+            "mainTitle": "Menghubungkan Cerita Merek, Paket Layanan, dan Jalur Konsultasi dalam Satu Website",
+            "paragraphs": [
+                "Craftivation dibangun sebagai website multi-halaman yang mengikuti urutan pertimbangan calon klien: mengenal perusahaan, memahami cara kerja dan paket, lalu menghubungi tim. Alih-alih menulis paket layanan langsung di kode, paket disimpan di basis data dan dibaca halaman setiap kali dimuat, sehingga tim bisa memperbaruinya tanpa membangun ulang website.",
+                "Di belakang halaman, website memakai pengelolaan data sederhana: tabel paket layanan, proyek, dan statistik perusahaan yang dikelola lewat lima rute API. Di depan, semua ajakan konsultasi bermuara ke satu kartu kontak dan satu nomor tim."
+            ],
+            "subsections": [
+                {
+                    "subtitle": "A. Empat Halaman yang Mengikuti Urutan Pertimbangan",
+                    "content": "Saat calon klien membuka Beranda, panel layanan dan bagian 'Bagaimana cara kami bekerja?' langsung menjelaskan tiga tahap kerja: Kenali, Kreasi, Implikasi. Dari sana, menu mengarahkan ke Tentang Kami, Pendekatan, dan Kontak. Tiga halaman turunan memuat breadcrumb, dengan stabilitas tata letak penuh (CLS 0)."
+                },
+                {
+                    "subtitle": "B. Paket Layanan yang Dibaca dari Basis Data",
+                    "content": "Saat halaman Pendekatan dimuat, tiga paket booth (Modular, Versatile, Enterprise) diambil dari tabel layanan: nama, deskripsi, gambar, urutan tampil, dan status aktif. Pada uji lokal, 10 dari 10 perubahan deskripsi paket tersimpan dalam median 2,5 milidetik dan langsung terbaca tanpa build ulang."
+                },
+                {
+                    "subtitle": "C. Satu Kartu Kontak untuk Setiap Ajakan Konsultasi",
+                    "content": "Saat calon klien menekan 'Konsultasi Sekarang' di Beranda atau 'Hubungi Kami' di menu ponsel, sebuah kartu kontak muncul dengan tiga tombol: WhatsApp, email, dan lokasi workshop di Google Maps. Halaman Kontak memperluas kartu ini menjadi tiga jalur: Konsultasi Langsung, Business Office di Jakarta, dan Production Workshop di Bogor."
+                },
+                {
+                    "subtitle": "D. Halaman yang Siap Ditemukan Mesin Pencari",
+                    "content": "Setiap halaman memiliki metadata unik, canonical tags, dan data terstruktur JSON-LD lengkap (Organization, WebSite, 3 layanan dalam OfferCatalog, serta dua lokasi fisik beserta koordinat dan jam operasional), mengantarkan skor SEO 100 di semua halaman."
+                }
+            ],
+            "image": {
+                "src": "/images/case-studies/craftivation/service-packages.png",
+                "alt": "Paket Layanan di Halaman Pendekatan: Tiga paket booth dibaca dari basis data setiap kali halaman dimuat"
+            }
+        },
+        {
+            "eyebrow": "ARSITEKTUR TEKNIS",
+            "mainTitle": "Di Balik Layar: Arsitektur yang Statis, Dinamis di Tempat yang Perlu, dan Mudah Dirawat",
+            "paragraphs": [
+                "Untuk memastikan halaman tetap cepat dan isinya mudah diperbarui, Craftivation dibangun di atas fondasi berikut:",
+                "Statis untuk halaman: Next.js 16 merender keempat halaman sebagai halaman statis saat build, sehingga isi dan tata letak langsung tersedia ketika halaman dibuka. Pergeseran tata letak (CLS) bernilai 0 di semua halaman.",
+                "Dinamis untuk data: paket layanan, proyek, dan statistik disimpan di SQLite dan dilayani lima rute API dengan respons median 1,6–1,9 milidetik pada uji lokal. Setiap tabel punya data cadangan, sehingga tampilan tetap utuh saat data belum siap.",
+                "Mudah dirawat: komponen dipisah per bagian halaman, data diakses lewat pola repository, dan kontrak data ditulis di dokumentasi repo. Tabel proyek dan statistik sudah siap dipakai untuk galeri portofolio berikutnya."
+            ],
+            "image": {
+                "src": "/images/case-studies/craftivation/technical-architecture.png",
+                "alt": "Diagram Arsitektur Teknis & Aliran Data: Halaman dirender statis, paket layanan dibaca dari basis data, dan semua ajakan konsultasi menuju kanal tim yang sama"
+            }
+        },
+        {
+            "eyebrow": "PERJALANAN IMPLEMENTASI",
+            "mainTitle": "Empat Halaman dalam Satu Bulan",
+            "paragraphs": [
+                "Craftivation dikerjakan dalam empat fase terstruktur oleh dua kontributor, dengan revisi desain dari tim internal di setiap fase."
+            ],
+            "table": {
+                "caption": "Peta Jalan Implementasi Rekayasa Craftivation Empat Fase",
+                "headers": [
+                    "Fase",
+                    "Periode",
+                    "Keluaran",
+                    "Cara Diuji"
+                ],
+                "rows": [
+                    [
+                        "Fondasi & data",
+                        "7–9 Oktober 2026",
+                        "Struktur halaman, basis data paket, proyek, dan statistik, halaman Pendekatan",
+                        "Build produksi dan pemeriksaan API"
+                    ],
+                    [
+                        "Desain & responsif",
+                        "12–15 Oktober 2026",
+                        "Font, animasi, tata letak responsif desktop, tablet, dan ponsel",
+                        "Pemeriksaan tampilan per ukuran layar"
+                    ],
+                    [
+                        "SEO & lokasi",
+                        "19–23 Oktober 2026",
+                        "Metadata per halaman, data terstruktur, alamat dan peta kantor serta workshop",
+                        "Pemeriksaan metadata dan tautan peta"
+                    ],
+                    [
+                        "Beranda baru",
+                        "2–5 November 2026",
+                        "Panel layanan bergaya section changer, kartu kontak, penyesuaian mobile dan tablet",
+                        "Pemeriksaan responsif"
+                    ]
+                ]
+            }
+        },
+        {
+            "eyebrow": "BENCHMARK & DAMPAK",
+            "mainTitle": "Bukti Kinerja Laboratorium dan Simulasi Efisiensi Pembaruan Konten",
+            "paragraphs": [
+                "Berdasarkan uji lokal pada 9 November 2026 (build produksi, basis data bawaan), pengukuran Lighthouse 12 untuk keempat halaman, serta simulasi distribusi segitiga 10.000 iterasi untuk pembaruan paket layanan:"
+            ],
+            "table": {
+                "caption": "Tabel Pengukuran Performa Lighthouse, Kecepatan API, dan Simulasi Waktu Update",
+                "headers": [
+                    "Indikator",
+                    "Sebelum",
+                    "Dengan Craftivation",
+                    "Hasil",
+                    "Status"
+                ],
+                "rows": [
+                    [
+                        "Skor SEO Lighthouse",
+                        "–",
+                        "100 di 4 dari 4 halaman",
+                        "Mobile dan desktop",
+                        "Uji Lab"
+                    ],
+                    [
+                        "Skor Best Practices Lighthouse",
+                        "–",
+                        "100 di 4 dari 4 halaman",
+                        "Mobile dan desktop",
+                        "Uji Lab"
+                    ],
+                    [
+                        "Pergeseran tata letak (CLS)",
+                        "–",
+                        "0",
+                        "Semua halaman",
+                        "Uji Lab"
+                    ],
+                    [
+                        "Performance desktop",
+                        "–",
+                        "80–99",
+                        "Tentang Kami dan Kontak 99",
+                        "Uji Lab"
+                    ],
+                    [
+                        "Respons API konten",
+                        "–",
+                        "median 1,6–1,9 ms",
+                        "50 permintaan per API",
+                        "Uji Lab"
+                    ],
+                    [
+                        "Perubahan paket layanan",
+                        "Ubah kode, build, deploy",
+                        "median 2,5 ms, 10 dari 10 tersimpan",
+                        "Tanpa build ulang",
+                        "Uji Lab"
+                    ],
+                    [
+                        "Kerja memperbarui satu paket layanan",
+                        "±72 menit",
+                        "±23 menit",
+                        "Hemat ±67%",
+                        "Simulasi"
+                    ]
+                ]
+            },
+            "subsections": [
+                {
+                    "subtitle": "Membaca Angka Ini",
+                    "content": "SEO 100 di semua halaman didapat dari metadata unik, breadcrumbs, data terstruktur, sitemap, dan arsitektur crawlable. Paket tersimpan dalam 2,5 ms langsung di database SQLite tanpa siklus build dan deploy. Penghematan kerja 67% didapat dari penghapusan ketergantungan programmer untuk pembaruan paket rutin."
+                },
+                {
+                    "subtitle": "Batas Pengukuran",
+                    "content": "Uji lab dilakukan di server lokal tanpa latensi CDN. Pengelolaan data saat ini melalui API internal sebelum dashboard admin publik dirilis. Simulasi kerja pembaruan memakai pemodelan 10.000 iterasi."
+                }
+            ],
+            "image": {
+                "src": "/images/case-studies/craftivation/package-update-simulation.png",
+                "alt": "Grafik Simulasi Kerja Memperbarui Paket Layanan: Kerja pembaruan turun dari median 72 menit menjadi 23 menit, menghemat 67% waktu tim"
+            }
+        },
+        {
+            "eyebrow": "REKOMENDASI & IMPLEMENTASI",
+            "mainTitle": "Siap Menguji Skenario Ini di Perusahaan Anda?",
+            "paragraphs": [
+                "Setiap bisnis proyek memiliki cara tersendiri dalam mempresentasikan prosesnya. Pola yang diterapkan pada Craftivation relevan untuk kontraktor interior, event organizer, studio arsitektur, hingga manufaktur kustom yang ingin calon klien memahami alur kerja sebelum menghubungi tim sales.",
+                "Tim rekayasa teknologi Arsalynk siap menyusun struktur navigasi berorientasi konversi, mengimplementasikan katalog layanan berbasis basis data dinamis, dan menghubungkan seluruh titik kontak ke kanal komunikasi tim Anda secara terpusat."
+            ]
+        }
+    ]
+},
 };
 
 export function localizeCaseStudies(

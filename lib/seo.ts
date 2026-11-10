@@ -29,7 +29,7 @@ export const SITE_NAVIGATION_ITEMS = [
     name: 'Case Studies',
     href: '/insight-programs/case-studies',
     description:
-      'Studi kasus implementasi: Sinau Print POS, Presstis media, MarkaPlus AI, MARKA finance, dan MyBOS IoT.',
+      'Studi kasus implementasi: MarkaSuite ERP, MarkaPlus AI, MyBOS fleet IoT, AdsVar, dan Craftivation.',
   },
   {
     name: 'Leadership Thoughts',
