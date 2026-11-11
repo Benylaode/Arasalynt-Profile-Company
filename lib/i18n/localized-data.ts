@@ -26,7 +26,7 @@ import type { TeamMember } from '@/lib/team.data';
 // ============================================================================
 const HERO_SLIDES_ID_MAP: Record<string, Partial<HeroSlide>> = {
   'unified-enterprise-ecosystem': {
-    headline: 'Arsalynk\nTeknologi Enterprise',
+    headline: 'Teknologi Enterprise\nArsalynk',
     body: 'Kami mendorong transformasi modern melalui solusi ERP berskala tinggi dan IoT terkini,\nmengintegrasikan operasional Anda sepenuhnya untuk meningkatkan kinerja perusahaan.',
     primaryCta: {
       label: 'SOLUSI KAMI',
@@ -145,7 +145,7 @@ const CORE_SOLUTIONS_ID_MAP: Record<
     title: 'Solusi Enterprise',
     titleLine1: 'Solusi',
     titleLine2: 'Enterprise',
-    heroHeadline: 'Sederhanakan Operasional Enterprise dengan Manajemen Sistem Terpusat',
+    heroHeadline: 'Simplifikasi operasional bisnis dengan sistem tersentralisasi',
     description:
       'Integrasikan alur kerja korporat ke dalam satu sistem tunggal untuk visibilitas real-time dan pertumbuhan berskala tinggi.',
   },
@@ -153,7 +153,7 @@ const CORE_SOLUTIONS_ID_MAP: Record<
     title: 'Integrasi Data & AI',
     titleLine1: 'Integrasi',
     titleLine2: 'Data & AI',
-    heroHeadline: 'Ubah Data Mentah Menjadi Keputusan Bisnis Strategis Berbasis AI',
+    heroHeadline: 'Konversi data menjadi keputusan strategis terintegrasi AI',
     description:
       'Konsolidasikan data korporat dan manfaatkan AI untuk mengotomatiskan wawasan, memprediksi tren, serta memandu keputusan cerdas.',
   },
@@ -168,7 +168,7 @@ const CORE_SOLUTIONS_ID_MAP: Record<
     title: 'Pengembangan Digital',
     titleLine1: 'Pengembangan',
     titleLine2: 'Digital',
-    heroHeadline: 'Bangun Situs Web Berkinerja Tinggi dan Aplikasi Web Enterprise',
+    heroHeadline: 'Bangun website dan aplikasi web berkinerja tinggi',
     description: 'Bangun situs web berkinerja tinggi dan solusi digital modern.',
   },
 };
@@ -177,13 +177,13 @@ const SOLUTION_SERVICES_ID_MAP: Record<string, Partial<SolutionService>> = {
   'enterprise-solution': {
     title: 'Enterprise Solution',
     shortTitle: 'Enterprise Solution',
-    heroHeadline: 'Sederhanakan Operasional Enterprise dengan Manajemen Sistem Terpusat',
+    heroHeadline: 'Simplifikasi operasional bisnis dengan sistem tersentralisasi',
     description:
       'Integrasikan alur kerja operasional lintas divisi ke dalam satu ekosistem terpadu dengan visibilitas real-time dan skalabilitas enterprise yang berkelanjutan.',
     whatItIs:
       'Layanan manajemen enterprise terstruktur yang dirancang untuk menyatukan alur kerja operasional kompleks, mengoptimalkan alokasi sumber daya, dan memastikan skalabilitas bisnis jangka panjang.',
     whatServiceTitle: 'Arsitektur Enterprise Terintegrasi',
-    valuePropTitle: 'Melampaui Solusi Generik',
+    valuePropTitle: 'Lebih dari solusi biasa',
     valuePropDescription:
       'Kami menghindari platform kaku yang seragam untuk semua. Setiap modul ERP direkayasa secara khusus agar selaras dengan tata kelola korporat, alur kerja internal, dan target ekspansi jangka panjang Anda.',
     challenge:
@@ -269,13 +269,13 @@ const SOLUTION_SERVICES_ID_MAP: Record<string, Partial<SolutionService>> = {
   'data-ai-integration': {
     title: 'Data & AI Integration',
     shortTitle: 'Data & AI Integration',
-    heroHeadline: 'Ubah Data Mentah Menjadi Keputusan Bisnis Strategis Berbasis AI',
+    heroHeadline: 'Konversi data menjadi keputusan strategis terintegrasi AI',
     description:
       'Konsolidasikan data korporat multi-sumber ke dalam satu ekosistem terpadu dengan pemodelan AI prediktif, proyeksi permintaan, dan wawasan otomatis.',
     whatItIs:
       'Layanan rekayasa data tingkat lanjut dan integrasi AI yang dirancang untuk mengubah data mentah perusahaan menjadi intelijen yang dapat ditindaklanjuti, analitik prediktif, dan pengambilan keputusan otomatis.',
     whatServiceTitle: 'Infrastruktur Data Cerdas & Deep Learning',
-    valuePropTitle: 'Melampaui Analitik Statis',
+    valuePropTitle: 'Analitik dinamis yang unggul',
     valuePropDescription:
       'Kami melangkah lebih jauh dari sekadar dasbor dasar. Model deep learning dan pipeline data kustom kami dibangun khusus untuk beradaptasi dengan logika bisnis dan ekosistem industri unik Anda.',
     challenge:
@@ -316,7 +316,7 @@ const SOLUTION_SERVICES_ID_MAP: Record<string, Partial<SolutionService>> = {
     ],
     partnerIntegration: {
       partnerName: 'Artic Analytica',
-      heading: 'Kolaborasi Portofolio Klien: Artic Analytica',
+      heading: 'Kolaborasi dengan Artic Analytica',
       logo: '/images/client-logos/artic-analytica.png',
       text: 'Artic Analytica merupakan salah satu portofolio klien utama kami. Sebagai mitra teknologi tepercaya mereka, kami berkolaborasi secara ekstensif dalam manajemen data enterprise, arsitektur pipeline AI tingkat lanjut, dan pemodelan intelijen prediktif untuk mendukung riset berbasis data serta pengambilan keputusan strategis institusional mereka.',
     },
@@ -344,7 +344,7 @@ const SOLUTION_SERVICES_ID_MAP: Record<string, Partial<SolutionService>> = {
     whatItIs:
       'Layanan integrasi IoT menyeluruh yang dirancang untuk menjembatani perangkat keras fisik dengan perangkat lunak enterprise, memungkinkan telemetri real-time, pemantauan jarak jauh, dan kendali aset otomatis.',
     whatServiceTitle: 'Ekosistem Operasional IoT Terhubung',
-    valuePropTitle: 'Melampaui Otomasi Standar',
+    valuePropTitle: 'Otomasi sistem berstandar tinggi',
     valuePropDescription:
       'Kami tidak menggunakan perangkat plug-and-play generik. Setiap arsitektur perangkat disesuaikan secara aman dengan infrastruktur fisik, protokol keamanan, dan kebutuhan operasional Anda.',
     challenge:
@@ -414,13 +414,13 @@ const SOLUTION_SERVICES_ID_MAP: Record<string, Partial<SolutionService>> = {
   'digital-development': {
     title: 'Digital Development',
     shortTitle: 'Digital Development',
-    heroHeadline: 'Bangun Situs Web Berkinerja Tinggi dan Aplikasi Web Enterprise',
+    heroHeadline: 'Bangun website dan aplikasi web berkinerja tinggi',
     description:
       'Direkayasa untuk UX unggul, performa sangat cepat, dan keamanan kelas enterprise guna mempercepat konversi serta pertumbuhan digital.',
     whatItIs:
       'Rekayasa web modern siklus penuh yang berfokus pada pembangunan platform digital dinamis, responsif, dan selaras dengan identitas brand melalui manajemen konten intuitif serta keunggulan SEO teknis.',
     whatServiceTitle: 'Arsitektur Web Dinamis, Responsif & Berorientasi SEO',
-    valuePropTitle: 'Melampaui Pembuatan Berbasis Template',
+    valuePropTitle: 'Lebih dari sekedar template',
     valuePropDescription:
       'Kami menolak penggunaan template instan yang seragam. Setiap platform digital dikodekan secara khusus dari awal untuk menjamin performa optimal, keamanan tangguh, dan keselarasan identitas brand.',
     challenge:
@@ -2325,414 +2325,455 @@ export function getLocalizedCaseStudy(
 // 5. LEADERSHIP THOUGHTS (LeadershipThoughtArticle[])
 // ============================================================================
 const LEADERSHIP_THOUGHTS_ID_MAP: Record<string, Partial<LeadershipThoughtArticle>> = {
-  'why-transformation-must-start-with-the-real-workflow': {
-    title: 'Mengapa Transformasi Harus Dimulai dari Alur Kerja Nyata',
-    category: 'KEPEMIMPINAN OPERASIONAL',
-    tags: ['TRANSFORMASI', 'DESAIN PROSES', 'TEKNOLOGI'],
-    author: 'Tim Eksekutif Arsalynk',
-    readTime: '6 menit baca',
-    date: 'Juli 2026',
-    language: 'id-ID',
-    description:
-      'Pelajaran dari membangun platform terintegrasi: transformasi berkelanjutan dimulai dengan memahami bagaimana pekerjaan benar-benar bergerak sebelum memilih teknologinya.',
-    coverImageAlt: 'Para pemimpin lintas fungsi memetakan alur kerja operasional nyata',
-    sections: [
-      {
-        eyebrow: 'GAGASAN UTAMA',
-        mainTitle: 'Teknologi Tidak Dapat Memperbaiki Proses yang Belum Terdefinisi',
-        paragraphs: [
-          'Platform Sinau Print mempertegas pelajaran yang terus berulang: perangkat lunak baru menjadi bermanfaat setelah tim menyepakati kepemilikan tugas, serah terima, pengecualian, dan definisi penyelesaian.',
-          'Para pemimpin menciptakan momentum dengan membuat alur kerja nyata terlihat jelas, termasuk langkah-langkah informal yang jarang muncul di dalam prosedur operasi standar (SOP). Peta proses bernilai bukan karena terlihat rapi, melainkan karena membuat perbedaan pandangan dapat didiskusikan secara terbuka.',
-        ],
-        image: {
-          src: '/images/projects/sinau-print-erp/case-study-angle-02.webp',
-          alt: 'Pemesanan digital yang terhubung dengan alur kerja produksi',
-        },
-      },
-      {
-        eyebrow: 'MENGAPA TRANSFORMASI TERHAMBAT',
-        mainTitle: 'Organisasi Sering Mengotomatiskan Versi Pekerjaan di Atas Kertas',
-        paragraphs: [
-          'Prosedur formal menjelaskan jalur yang diharapkan. Namun pekerjaan sehari-hari juga mencakup jalan pintas, pertimbangan situasional, informasi yang kurang, serta ketergantungan yang ditopang oleh individu berpengalaman.',
-          'Ketika realitas tersebut tetap tersembunyi, otomatisasi justru mengunci ambiguitas ke dalam sistem. Tim kemudian menyalahkan perangkat lunak atas keputusan yang sebenarnya belum pernah diperjelas oleh manajemen.',
-        ],
-      },
-      {
-        eyebrow: 'KERANGKA KERJA PRAKTIS',
-        mainTitle: 'Memimpin Melalui Model Operasi',
-        subsections: [
-          {
-            subtitle: 'Amati Sebelum Menstandarkan',
-            content:
-              'Ikuti alur pekerjaan nyata lintas peran dan catat pengecualian, pengerjaan ulang, waktu tunggu, serta koordinasi informal.',
-          },
-          {
-            subtitle: 'Perjelas Kepemilikan',
-            content:
-              'Setiap keputusan kritis dan serah terima membutuhkan peran yang bertanggung jawab, respons yang diharapkan, serta jalur eskalasi yang jelas.',
-          },
-          {
-            subtitle: 'Sederhanakan Sebelum Mengotomatiskan',
-            content:
-              'Hilangkan persetujuan berulang dan entri data ganda sebelum menerjemahkan alur kerja tersebut ke dalam perangkat lunak.',
-          },
-          {
-            subtitle: 'Ukur Perilaku, Bukan Sekadar Instalasi',
-            content:
-              'Keberhasilan tercermin dari tingkat adopsi, waktu siklus, pengurangan kesalahan, dan kualitas keputusan—bukan sekadar apakah platform sudah diluncurkan.',
-          },
-        ],
-      },
-      {
-        eyebrow: 'PERTANYAAN KEPEMIMPINAN',
-        mainTitle: 'Apa yang Harus Ditanyakan Pemimpin Sebelum Menyetujui Pembangunan Sistem',
-        paragraphs: [
-          'Di titik mana pekerjaan paling sering menunggu, dan informasi apa yang biasanya belum tersedia pada saat itu? Pengecualian mana yang membutuhkan pertimbangan manusia ketimbang otomatisasi? Siapa yang bertanggung jawab atas hasil akhir lintas batas departemen?',
-          'Pertanyaan-pertanyaan ini menggeser transformasi dari sekadar pembelian teknologi menuju perancangan ulang yang eksplisit atas cara organisasi beroperasi.',
-        ],
-      },
+  "silent-clients-are-not-always-satisfied": {
+    "title": "Hati-hati, senyum heningnya klien belum tentu tanda puas. Owner perlu tahu tanda-tandanya",
+    "category": "KEPEMIMPINAN PELANGGAN",
+    "tags": [
+      "PENGALAMAN PELANGGAN",
+      "UMPAN BALIK",
+      "RETENSI",
+      "DATA PELANGGAN"
     ],
+    "author": "Kepemimpinan Artic Analytica",
+    "readTime": "6 menit baca",
+    "date": "November 2026",
+    "language": "id-ID",
+    "description": "Klien yang komplain masih memberi kesempatan. Klien yang diam sering sudah memutuskan pergi. Cara owner membaca tanda-tandanya sebelum omzet bicara.",
+    "coverImageAlt": "Kotak masuk yang sepi bisa berarti klien puas, bisa juga berarti mereka sudah berhenti berharap.",
+    "sections": [
+      {
+        "eyebrow": "RINGKASAN GAGASAN",
+        "mainTitle": "Mendeteksi Keputusan Sebelum Terlambat",
+        "paragraphs": [
+          "Gagasan: Klien yang komplain masih memberi Anda kesempatan memperbaiki. Klien yang diam sering sudah memutuskan, hanya belum memberi tahu.",
+          "Kenapa penting sekarang: Survei Qualtrics XM Institute terhadap 28.400 konsumen di 26 negara, termasuk Indonesia, mencatat hanya sepertiga yang memberi masukan langsung setiap kali mengalami pengalaman buruk. Sementara itu, 51% mengurangi atau berhenti belanja di merek tersebut.",
+          "Yang bisa dilakukan pemimpin: Berhenti menjadikan 'nol komplain' sebagai target, buat komplain semudah memesan, dan baca tanda menjauh dari perilaku klien."
+        ]
+      },
+      {
+        "eyebrow": "GAGASAN UTAMA",
+        "mainTitle": "Bulan tanpa komplain belum tentu bulan yang baik",
+        "paragraphs": [
+          "Rapat bulanan dibuka dengan kabar yang enak didengar: tidak ada keluhan masuk sama sekali. Kepala layanan pelanggan tersenyum, direksi mengangguk, rapat pindah ke agenda berikutnya. Dua bulan kemudian, tiga klien lama tidak memperpanjang kontrak. Tidak ada yang bisa menjawab sejak kapan mereka mulai menjauh.",
+          "Komplain itu repot bagi klien. Mereka harus meluangkan waktu, menjelaskan masalah dari awal, dan menanggung rasa tidak enak. Orang mau repot kalau masih berharap hubungannya berlanjut. Klien yang berhenti bicara biasanya sudah menghitung bahwa memperbaiki keadaan tidak sebanding dengan tenaganya.",
+          "Diam sering kali adalah keputusan yang belum diumumkan.",
+          "Artic Analytica sampai pada pandangan ini dari pekerjaan menyatukan data pelanggan di grup Arsalynk. Di proyek AdsVar, setiap chat, tiket, dan masukan dari website masuk ke satu CRM sebagai lima jenis peristiwa (Aktual, dari kode). Begitu semua suara klien berkumpul di satu tempat, terlihat juga siapa yang tiba-tiba berhenti terdengar."
+        ],
+        "image": {
+          "src": "/images/leadership-thoughts/silent-clients-are-not-always-satisfied/image1.png",
+          "alt": "Diagram dua panel: Membaca diam sebagai puas vs membaca diam sebagai sinyal."
+        }
+      },
+      {
+        "eyebrow": "KENAPA MASALAH INI BERTAHAN",
+        "mainTitle": "Organisasi sering diajari takut pada komplain",
+        "paragraphs": [
+          "Komplain dijadikan nilai rapor. Saat jumlah keluhan masuk ke target kinerja, tim terdorong menekan angkanya, bukan mendengarkan isinya. Tim dengan keluhan paling sedikit terlihat paling baik. Bisa jadi pelanggannya hanya sudah malas bicara.",
+          "Kebanyakan pelanggan memang tidak bicara langsung. Survei Qualtrics XM Institute yang dirilis Februari 2024 menemukan hanya sepertiga konsumen yang memberi masukan langsung ke perusahaan setiap kali pengalamannya buruk. Sisanya menyampaikan lewat jalur yang lebih tidak langsung: percakapan dengan pusat layanan, chat, ulasan produk, atau media sosial. Di survei yang sama, 51% konsumen mengurangi atau berhenti belanja setelah pengalaman buruk.",
+          "Dua angka itu kalau dibaca bersama cukup mengganggu. Banyak orang kecewa, sedikit yang bilang langsung, dan separuh diam-diam mengurangi belanja.",
+          "Sinyalnya tercecer. Keluhan kecil masuk ke WhatsApp sales, email admin, komentar Instagram, atau sekadar ingatan account manager. Tidak ada yang melihat gambarnya utuh. Gejalanya mudah dikenali: rapat menyimpulkan 'klien X aman' hanya dari obrolan santai, sementara tiket terakhirnya sudah enam bulan lalu dan frekuensi ordernya turun separuh."
+        ]
+      },
+      {
+        "eyebrow": "PELAJARAN DARI LAPANGAN",
+        "mainTitle": "Saat semua suara klien masuk ke satu tempat",
+        "paragraphs": [
+          "AdsVar, brand iklan berbayar di grup kami, menerima calon klien dari banyak pintu: formulir kontak, pilihan paket harga, live chat, tiket bantuan, dan formulir masukan. Kalau masing-masing disimpan sendiri, tim hanya melihat potongan cerita. Admin tahu ada tiket, sales tahu ada penawaran, tapi tidak ada yang tahu bahwa klien yang sama baru saja menolak penawaran lalu membuka tiket keluhan.",
+          "Keputusan kami sederhana: setiap jenis suara klien punya tempat yang sama. Website AdsVar mengirim lima jenis peristiwa ke CRM MarkaSuite, yaitu pertanyaan masuk, pesan chat, tiket, masukan, dan keputusan atas penawaran (Aktual, dari kode). Keputusan penawaran ikut dicatat, termasuk yang ditolak, karena penolakan juga sinyal. Kalau CRM sedang tidak bisa dihubungi, datanya tetap tersimpan di website dan kegagalannya tercatat (Uji Lab).",
+          "Di uji lab, live chat, tiket, dan masukan masing-masing diterima dan diteruskan ke CRM (3 dari 3, Uji Lab). Widget chat memeriksa balasan baru setiap 5 detik (Aktual, dari kode), jadi percakapan tidak menggantung menunggu admin membuka halaman lain.",
+          "Pelajarannya, teknologi justru bagian yang paling mudah. Yang membuat diam bisa terbaca adalah keputusan bahwa semua sinyal, termasuk yang tidak enak didengar, dikumpulkan di satu catatan per klien. Satu catatan jujur: angka di atas berasal dari uji lab, bukan data klien sungguhan, jadi belum ada klaim soal retensi. Cerita lengkapnya ada di case study AdsVar."
+        ],
+        "image": {
+          "src": "/images/leadership-thoughts/silent-clients-are-not-always-satisfied/image3.png",
+          "alt": "Diagram alur: Di AdsVar, lima jenis interaksi klien dikirim ke satu CRM."
+        }
+      },
+      {
+        "eyebrow": "KERANGKA KERJA",
+        "mainTitle": "Dengarkan diamnya klien, bukan hanya suaranya",
+        "subsections": [
+          {
+            "subtitle": "Hapus 'nol komplain' dari target",
+            "content": "Ganti target jumlah keluhan dengan sesuatu yang bisa dikendalikan tim: seberapa cepat keluhan dijawab dan berapa yang benar-benar selesai. Tim yang berani mengangkat keluhan perlu dihargai, bukan dihukum lewat angka. Tanda di organisasi Anda: tim merayakan bulan tanpa keluhan, tapi tidak ada yang mengecek angka order ulang di bulan yang sama. Langkah pertama: minggu ini, ganti satu indikator 'jumlah komplain' di laporan Anda dengan 'waktu sampai keluhan selesai'."
+          },
+          {
+            "subtitle": "Buat komplain semudah memesan",
+            "content": "Kalau klien harus mencari nomor yang tepat, menunggu jam kerja, lalu menjelaskan ulang ke tiga orang, kebanyakan akan memilih diam. Sediakan jalur yang singkat di tempat klien sudah berada, misalnya formulir atau chat di website, dan pastikan ada orang yang membalas. Coba sendiri: menyamar jadi klien, lalu hitung berapa langkah sampai keluhan Anda diterima."
+          },
+          {
+            "subtitle": "Kumpulkan sinyal di satu tempat",
+            "content": "Chat sales, email admin, tiket, ulasan, dan penawaran yang ditolak sebaiknya bermuara di satu catatan per klien. Anda tidak perlu sistem besar untuk memulai. Satu tabel bersama yang diisi setiap minggu sudah lebih baik daripada lima kepala yang menyimpan potongan berbeda."
+          },
+          {
+            "subtitle": "Pantau perubahan perilaku",
+            "content": "Klien jarang mengumumkan bahwa mereka akan pergi, tapi perilakunya berubah lebih dulu. Balasan pesan makin singkat. Order ulang makin jarang. Permintaan revisi berhenti, padahal dulu mereka rewel. Pertanyaan yang biasanya rutin tiba-tiba hilang, dan rapat evaluasi terus ditunda. Ambil sepuluh klien terbesar Anda, lalu bandingkan tiga bulan terakhir dengan tiga bulan sebelumnya."
+          }
+        ],
+        "image": {
+          "src": "/images/leadership-thoughts/silent-clients-are-not-always-satisfied/image2.png",
+          "alt": "Daftar visual lima tanda yang bisa dicek owner ketika klien mulai menjauh."
+        }
+      },
+      {
+        "eyebrow": "PERTANYAAN UNTUK PEMIMPIN",
+        "mainTitle": "Kapan terakhir Anda menghubungi klien yang tidak pernah mengeluh?",
+        "paragraphs": [
+          "Apakah jumlah komplain masih masuk ke penilaian kinerja tim Anda?",
+          "Berapa langkah yang harus dilalui klien untuk menyampaikan keluhan, dan sudahkah Anda mencobanya sendiri?",
+          "Di berapa tempat berbeda suara klien Anda tersimpan hari ini?",
+          "Klien mana yang order ulangnya turun dalam tiga bulan terakhir, dan apakah sudah ada yang bertanya kenapa?",
+          "Kalau besok klien terbesar Anda pergi, data apa yang seharusnya sudah memberi tahu Anda sebulan sebelumnya?",
+          "Klien yang komplain sedang berusaha mempertahankan hubungan dengan Anda. Keheningan yang tidak pernah dicek jauh lebih mahal."
+        ]
+      },
+      {
+        "eyebrow": "CATATAN & REFERENSI",
+        "mainTitle": "Definisi, Bukti Internal & Rujukan",
+        "paragraphs": [
+          "Definisi Sinyal Klien: Setiap jejak interaksi klien yang bisa dicatat, termasuk chat, tiket, masukan, ulasan, penawaran yang diterima atau ditolak, dan pola order.",
+          "Sumber Data Internal: Lembar fakta Case Study AdsVar: A6 (data tetap tersimpan saat CRM tidak bisa dihubungi, Uji Lab), A7 (lima jenis peristiwa ke CRM, Aktual dari kode), A8 (live chat, tiket, dan masukan diteruskan ke CRM, 3/3, Uji Lab), A12 (pemeriksaan balasan chat tiap 5 detik, Aktual dari kode). Uji lab memakai server CRM tiruan; tidak ada data klien sungguhan.",
+          "Rujukan Eksternal: Qualtrics XM Institute (2024). Bad customer service threatens $3.7 trillion annually as frontline workers reach a breaking point. Rilis 1 Februari 2024; survei 28.400 konsumen di 26 negara, data Q3 2023."
+        ]
+      }
+    ]
   },
-  'data-leadership-is-the-discipline-of-defining-what-matters': {
-    title: 'Kepemimpinan Data Adalah Disiplin dalam Mendefinisikan Apa yang Penting',
-    category: 'KEPEMIMPINAN DATA',
-    tags: ['STRATEGI DATA', 'PENGAMBILAN KEPUTUSAN', 'TATA KELOLA'],
-    author: 'Kepemimpinan Artic Analytica',
-    readTime: '5 menit baca',
-    date: 'Juni 2026',
-    language: 'id-ID',
-    description:
-      'Dasbor tidak menciptakan keselarasan dengan sendirinya. Para pemimpin harus menetapkan definisi bersama dan menghubungkan setiap metrik dengan sebuah keputusan.',
-    coverImageAlt: 'Tim kepemimpinan mendiskusikan makna dari metrik kinerja',
-    sections: [
-      {
-        eyebrow: 'GAGASAN UTAMA',
-        mainTitle: 'Lebih Banyak Data Tidak Sama Dengan Lebih Banyak Kejelasan',
-        paragraphs: [
-          'Pengembangan dasbor analitik menunjukkan bahwa sistem analitik terkuat selalu dimulai dari pertanyaan manajemen. Ketika indikator tidak terhubung dengan keputusan apa pun, indikator tersebut hanya menambah kebisingan, bukan keyakinan.',
-          'Sebuah dasbor dapat menampilkan angka yang tampak presisi sembari menyembunyikan ketidakpastian dalam definisi, kualitas sumber, atau waktu pembaruan. Kepemimpinan data dimulai ketika eksekutif memperlakukan asumsi-asumsi tersebut sebagai bagian dari keputusan.',
-        ],
-        image: {
-          src: '/images/projects/altatic-analytic/case-study-angle-02.webp',
-          alt: 'Tim eksekutif meninjau indikator kinerja yang dikelola dengan ketat',
-        },
-      },
-      {
-        eyebrow: 'RISIKO KEPEMIMPINAN',
-        mainTitle: 'Ledakan Jumlah Metrik Dapat Menggantikan Akuntabilitas',
-        paragraphs: [
-          'Ketika setiap tim membawa ukuran keberhasilannya sendiri, rapat berubah menjadi negosiasi tentang angka siapa yang paling benar. Diskusi pun menjauh dari akar masalah, pilihan strategis, dan tanggung jawab.',
-          'Para pemimpin harus menahan diri untuk tidak menambah indikator baru sampai organisasi menyepakati apa arti sebuah metrik, keputusan apa yang didukungnya, dan siapa yang bertanggung jawab untuk meresponsnya.',
-        ],
-      },
-      {
-        eyebrow: 'DISIPLIN TATA KELOLA',
-        mainTitle: 'Menciptakan Bahasa Bersama untuk Kinerja',
-        subsections: [
-          {
-            subtitle: 'Mulai dari Keputusan',
-            content:
-              'Tetapkan keputusan berulang terlebih dahulu, lalu identifikasi bukti minimum yang diperlukan untuk mengambil keputusan tersebut secara bertanggung jawab.',
-          },
-          {
-            subtitle: 'Tetapkan Pemilik Metrik',
-            content:
-              'Kepemilikan mencakup definisi, sumber data, pemeriksaan kualitas, frekuensi pembaruan, dan penjelasan atas perubahan signifikan.',
-          },
-          {
-            subtitle: 'Tampilkan Konteks dan Konsekuensi',
-            content:
-              'Target harus dibaca berdampingan dengan kapasitas, kualitas, risiko, dan dampak pelanggan, bukan secara terpisah.',
-          },
-          {
-            subtitle: 'Tinjau Kembali Metrik Itu Sendiri',
-            content:
-              'Hentikan indikator yang tidak lagi memengaruhi tindakan atau yang justru mendorong perilaku yang bertentangan dengan tujuan utama.',
-          },
-        ],
-      },
-      {
-        eyebrow: 'PERTANYAAN KEPEMIMPINAN',
-        mainTitle: 'Dapatkah Tim Menjelaskan Apa yang Terjadi Ketika Angka Ini Berubah?',
-        paragraphs: [
-          'Jika sebuah metrik naik atau turun, para pemimpin harus mengetahui hipotesis mana yang perlu diuji, peran mana yang menyelidiki, dan rentang perubahan mana yang memerlukan intervensi.',
-          'Kejelasan itulah yang membedakan antara dasbor yang sekadar melaporkan masa lalu dan sistem manajemen yang meningkatkan kualitas keputusan.',
-        ],
-      },
+  "the-shadow-team-behind-slow-projects": {
+    "title": "Proyek sering lambat bukan karena klien, tapi karena tim bayangan Anda. Siapa mereka, dan kenapa bisa menghambat?",
+    "category": "KEPEMIMPINAN DIGITAL",
+    "tags": [
+      "PROYEK DIGITAL",
+      "DEVELOPER",
+      "VENDOR",
+      "TATA KELOLA PROYEK"
     ],
+    "author": "Kepemimpinan Web2Up",
+    "readTime": "6 menit baca",
+    "date": "November 2026",
+    "language": "id-ID",
+    "description": "Banyak proyek website dan aplikasi molor di tempat yang tidak dilihat owner: developer di balik layar. Siapa mereka, kenapa menghambat, dan apa yang bisa dilakukan pemimpin.",
+    "coverImageAlt": "Yang hadir di rapat sering bukan orang yang mengerjakan proyeknya.",
+    "sections": [
+      {
+        "eyebrow": "RINGKASAN GAGASAN",
+        "mainTitle": "Mengurai Kemacetan Proyek yang Tak Terlihat",
+        "paragraphs": [
+          "Gagasan: Proyek digital sering molor bukan di meja klien, tapi di tim bayangan, yaitu orang-orang yang mengerjakan proyek tetapi tidak terlihat dan tidak bisa dihubungi langsung oleh owner.",
+          "Kenapa penting sekarang: Studi atas 133 proyek populer di GitHub menemukan 65% bisa lumpuh bila satu atau dua developer kunci berhenti (truck factor). Di tempat kerja umum, 45% developer menghadapi silo pengetahuan setiap minggu.",
+          "Yang bisa dilakukan pemimpin: Tanyakan siapa yang menulis kodenya, minta progres yang bisa dilihat sendiri, pastikan kode dan akses milik perusahaan, dan jangan biarkan sistem bergantung pada satu orang."
+        ]
+      },
+      {
+        "eyebrow": "GAGASAN UTAMA",
+        "mainTitle": "Antrean proyek Anda ada di tempat yang tidak Anda lihat",
+        "paragraphs": [
+          "Proyek website sudah molor tiga minggu. Di rapat, owner mulai menyalahkan dirinya sendiri karena terlalu banyak revisi, sementara manajer vendor tersenyum sopan dan berkata 'sedang dalam proses'. Begitu rapat selesai, pekerjaannya masuk ke antrean seseorang yang tidak pernah hadir di ruangan itu.",
+          "Itulah tim bayangan. Mereka tidak jahat dan sering kali sangat terampil. Masalahnya, mereka tidak terlihat, tidak bisa dihubungi langsung, dan sedang memegang empat proyek lain dari klien yang berbeda.",
+          "Proyek jarang lambat karena kodenya susah. Lebih sering lambat karena orang yang menulis kodenya sedang menunggu klarifikasi, bekerja paruh waktu, atau harus menebak-nebak apa yang dimaksud di dokumen revisi.",
+          "Web2Up melihat pola ini dari dua sisi: saat mengambil alih proyek yang telantar dari pihak lain, dan saat menyusun tim kami sendiri agar tidak mengulangi kesalahan yang sama."
+        ],
+        "image": {
+          "src": "/images/leadership-thoughts/the-shadow-team-behind-slow-projects/image3.png",
+          "alt": "Diagram dua lapis: Yang dilihat owner vs yang sebenarnya berjalan di balik layar."
+        }
+      },
+      {
+        "eyebrow": "KENAPA MASALAH INI BERTAHAN",
+        "mainTitle": "Proyek dikelola lewat perantara, bukan lewat pekerjaannya",
+        "paragraphs": [
+          "Pekerjaannya tidak terlihat. Owner berbicara dengan account manager, bukan dengan yang menulis kode. Pesan diteruskan lewat dua atau tiga kepala sebelum sampai ke developer. Setiap perantara menambah kemungkinan salah paham dan waktu tunggu.",
+          "Prioritasnya bersaing. Developer freelance dan vendor kecil memegang banyak klien sekaligus. Saat proyek Anda tertahan oleh satu pertanyaan kecil, developer beralih ke proyek lain. Kembali ke proyek Anda butuh waktu lagi untuk membaca ulang konteksnya.",
+          "Pengetahuannya ada di kepala satu orang. Akses server, cara deploy, alasan di balik keputusan teknis, semuanya sering hanya dipegang satu developer. Avelino dan rekan (2016) mengukur 'truck factor', yaitu berapa developer yang kalau berhenti akan melumpuhkan proyek. Dari 133 proyek populer di GitHub, 65% punya truck factor hanya satu atau dua orang.",
+          "Kalau proyek terbuka yang dikerjakan banyak orang saja seperti itu, proyek tertutup di vendor klien jauh lebih rentan."
+        ]
+      },
+      {
+        "eyebrow": "PELAJARAN DARI LAPANGAN",
+        "mainTitle": "Satu developer, tiga minggu, dan apa yang membuatnya tetap bisa dialihkan",
+        "paragraphs": [
+          "Website AdsVar, brand iklan berbayar di grup kami, dibangun cepat: 30 commit dalam tiga minggu oleh satu kontributor utama (Aktual, dari data git).",
+          "Kami sadar kecepatan itu punya harga. Kalau developer tersebut berhalangan, apakah orang lain bisa langsung melanjutkan, atau proyeknya akan berhenti seperti kasus tim bayangan? Jawabannya bukan menambah orang di rapat, melainkan menulis 'kontrak' di dalam kodenya sendiri.",
+          "Setiap bentuk data, cara pemanggilan API, dan status formulir ditulis dengan definisi tipe yang ketat (TypeScript) serta validasi otomatis (Zod). Developer baru yang membuka kode itu tidak perlu menebak apa yang dimaksud, karena aturannya tertulis di sana.",
+          "Pelajarannya, tim kecil tidak otomatis berisiko. Yang berisiko adalah tim kecil yang bekerja tanpa catatan dan tanpa standar yang bisa dibaca orang lain. Cerita lengkapnya ada di case study AdsVar."
+        ],
+        "image": {
+          "src": "/images/leadership-thoughts/the-shadow-team-behind-slow-projects/image1.png",
+          "alt": "Alur horizontal: Dari 1 kontributor 30 commit ke kontrak arsitektur yang tertulis di kode."
+        }
+      },
+      {
+        "eyebrow": "KERANGKA KERJA",
+        "mainTitle": "Keluarkan tim bayangan ke tempat terang",
+        "subsections": [
+          {
+            "subtitle": "Tanyakan siapa yang benar-benar menulis kodenya",
+            "content": "Di awal proyek, minta vendor menyebut nama orang yang mengerjakan, status kepegawaiannya (karyawan tetap, freelance, atau subkontraktor), dan berapa proyek lain yang sedang ia pegang. Tanda di organisasi Anda: Anda kenal account manager vendor dengan baik, tapi tidak pernah tahu siapa yang menulis kodenya. Langkah pertama: kirim satu email hari ini yang menanyakan siapa saja developer yang dialokasikan untuk proyek Anda minggu ini."
+          },
+          {
+            "subtitle": "Minta progres yang bisa Anda buka sendiri",
+            "content": "Laporan mingguan berisi persentase mudah dibuat dan sulit dicek. Minta tautan ke server staging atau repositori yang diperbarui minimal seminggu sekali, sehingga Anda bisa melihat sendiri apa yang sudah jalan."
+          },
+          {
+            "subtitle": "Pastikan kode dan aksesnya milik perusahaan Anda",
+            "content": "Repositori kode, akun hosting, domain, dan akun layanan pihak ketiga sebaiknya terdaftar atas nama perusahaan, dengan developer diberi akses, bukan sebaliknya. Dokumentasi minimal berisi cara menjalankan, cara deploy, dan daftar sistem yang terhubung. Kalau hubungan dengan vendor berakhir, Anda tidak perlu mulai dari nol. Tanda di organisasi Anda: untuk mengubah satu teks di website, Anda harus menunggu satu orang tertentu yang memegang semua akses."
+          },
+          {
+            "subtitle": "Jangan biarkan sistem bergantung pada satu orang",
+            "content": "Tim kecil boleh, ketergantungan tunggal jangan. Minta minimal dua orang di pihak vendor yang memahami arsitektur proyek, atau pastikan kodenya ditulis dengan standar yang cukup jelas sehingga developer baru bisa masuk tanpa harus membaca pikiran orang lain."
+          }
+        ],
+        "image": {
+          "src": "/images/leadership-thoughts/the-shadow-team-behind-slow-projects/image4.jpg",
+          "alt": "Foto laptop menampilkan kode: pekerjaan yang paling menentukan jadwal proyek sering terjadi di layar yang tidak pernah dilihat owner."
+        }
+      },
+      {
+        "eyebrow": "PERTANYAAN UNTUK PEMIMPIN",
+        "mainTitle": "Siapa nama orang yang sedang menulis kode proyek Anda minggu ini?",
+        "paragraphs": [
+          "Apakah Anda tahu status developer di proyek Anda: karyawan vendor, freelance, atau subkontraktor?",
+          "Berapa proyek lain yang sedang dipegang orang yang sama?",
+          "Bisakah Anda membuka versi terbaru proyek Anda sekarang juga, tanpa meminta siapa pun?",
+          "Atas nama siapa repositori, hosting, dan domain proyek Anda terdaftar?",
+          "Kalau developer utama berhenti besok, berapa lama sampai orang lain bisa melanjutkan?",
+          "Proyek yang molor jarang disebabkan satu keputusan buruk. Biasanya karena terlalu banyak bagian penting yang bekerja di tempat yang tidak terlihat."
+        ]
+      },
+      {
+        "eyebrow": "CATATAN & REFERENSI",
+        "mainTitle": "Definisi, Bukti Internal & Rujukan",
+        "paragraphs": [
+          "Definisi Tim Bayangan: Orang-orang yang mengerjakan proyek digital tetapi tidak terlihat dan tidak bisa dihubungi langsung oleh owner, misalnya subkontraktor pihak ketiga atau developer freelance di balik vendor.",
+          "Definisi Truck Factor: Jumlah minimum developer yang bila berhenti akan melumpuhkan kelanjutan proyek.",
+          "Sumber Data Internal: Lembar fakta Case Study AdsVar: 30 commit, 15 Oktober sampai 3 November 2026, 1 kontributor utama.",
+          "Rujukan Eksternal: Avelino, G., Passos, L., Hora, A., & Valente, M. T. (2016). A Novel Approach for Estimating Truck Factors. IEEE SANER. Stack Overflow (2024). Developer Survey: 45,1% developer profesional menghadapi silo pengetahuan mingguan."
+        ]
+      }
+    ]
   },
-  'designing-organisations-that-can-operate-through-uncertainty': {
-    title: 'Merancang Organisasi yang Mampu Beroperasi di Tengah Ketidakpastian',
-    category: 'KEPEMIMPINAN TANGGUH',
-    tags: ['KETANGGUHAN', 'IOT', 'VISIBILITAS OPERASIONAL'],
-    author: 'Kepemimpinan Kaluna Technology',
-    readTime: '7 menit baca',
-    date: 'Mei 2026',
-    language: 'id-ID',
-    description:
-      'Apa yang diajarkan oleh operasional terhubung kepada para pemimpin tentang visibilitas, eskalasi, dan pembangunan sistem yang tetap andal saat kondisi berubah.',
-    coverImageAlt: 'Pemimpin operasional mengoordinasikan respons ketangguhan dengan tenang',
-    sections: [
-      {
-        eyebrow: 'GAGASAN UTAMA',
-        mainTitle: 'Visibilitas Adalah Kapabilitas Kepemimpinan',
-        paragraphs: [
-          'MyBoss membuktikan bahwa ketangguhan bergantung pada sinyal yang tepat waktu dan jalur eskalasi yang jelas. Prinsip yang sama berlaku bagi organisasi: setiap orang perlu mengetahui apa yang berubah, apa yang penting, dan siapa yang berwenang bertindak.',
-          'Visibilitas bukanlah pengawasan terus-menerus. Visibilitas adalah gambaran bersama yang dirancang secara sadar mengenai kondisi saat ini, potensi risiko yang muncul, dan kepemilikan keputusan.',
-        ],
-        image: {
-          src: '/images/projects/myboss-iot-system/case-study-angle-02.webp',
-          alt: 'Visibilitas operasional terhubung dari lapangan ke ruang kontrol',
-        },
-      },
-      {
-        eyebrow: 'MELAMPAUI KEBERLANGSUNGAN BISNIS',
-        mainTitle: 'Ketangguhan Dibangun melalui Keputusan Operasional Sehari-hari',
-        paragraphs: [
-          'Organisasi sering kali bersiap menghadapi insiden besar namun menoleransi titik kegagalan tunggal (single point of failure) dalam keseharian: satu pakar, satu spreadsheet, satu jalur persetujuan, atau satu saluran komunikasi.',
-          'Upaya ketangguhan terbaik mengidentifikasi ketergantungan ini sebelum gangguan terjadi dan memberi tim cara yang aman untuk tetap beroperasi ketika proses utama sedang tidak tersedia.',
-        ],
-      },
-      {
-        eyebrow: 'PRINSIP DESAIN',
-        mainTitle: 'Merancang untuk Kondisi Terbatas',
-        subsections: [
-          {
-            subtitle: 'Pertahankan Konteks Kritis',
-            content:
-              'Tim harus tetap memiliki informasi yang cukup untuk mengambil keputusan tepat ketika aliran data ideal terganggu.',
-          },
-          {
-            subtitle: 'Buat Eskalasi Menjadi Eksplisit',
-            content:
-              'Ambang batas intervensi yang jelas mencegah terjadinya keterlambatan tindakan maupun kendali eksekutif yang berlebihan.',
-          },
-          {
-            subtitle: 'Distribusikan Kapabilitas Keputusan',
-            content:
-              'Orang-orang yang paling dekat dengan situasi lapangan membutuhkan wewenang terukur, prioritas jelas, dan akses ke gambaran operasi yang sama.',
-          },
-          {
-            subtitle: 'Latih Pemulihan Secara Berkala',
-            content:
-              'Simulasi mengungkap ketidakjelasan peran dan ketergantungan tersembunyi jauh lebih efektif dibandingkan dokumen semata.',
-          },
-        ],
-      },
-      {
-        eyebrow: 'PERTANYAAN KEPEMIMPINAN',
-        mainTitle: 'Apa yang Berhenti Bekerja Ketika Satu Orang atau Sistem Tidak Tersedia?',
-        paragraphs: [
-          'Tinjauan ketangguhan yang bermanfaat menelusuri dampak ketidakhadiran tersebut terhadap pelanggan, operasional, informasi, dan kewenangan.',
-          'Tujuannya bukan menghilangkan setiap gangguan, melainkan memastikan organisasi dapat mengenali perubahan, mengoordinasikan tindakan, dan pulih tanpa kehilangan kepercayaan.',
-        ],
-      },
+  "expensive-software-only-three-people-use": {
+    "title": "Software mahal yang akhirnya hanya dipakai tiga orang: Kenapa sistem baru sering ditinggal dan bagaimana mencegahnya",
+    "category": "KEPEMIMPINAN OPERASIONAL",
+    "tags": [
+      "ADOPSI SISTEM",
+      "ERP",
+      "TRANSFORMASI DIGITAL",
+      "PRODUKTIVITAS"
     ],
+    "author": "Kepemimpinan MarkaSuites",
+    "readTime": "6 menit baca",
+    "date": "November 2026",
+    "language": "id-ID",
+    "description": "Sistem baru sering dipilih dari demo yang memukau, lalu tim diam-diam kembali ke spreadsheet. Kenapa sistem ditinggal pelan-pelan dan cara memilih dari hari kerja biasa.",
+    "coverImageAlt": "Lisensi dibeli untuk semua orang. Yang benar-benar membuka sistemnya bisa dihitung dengan jari.",
+    "sections": [
+      {
+        "eyebrow": "RINGKASAN GAGASAN",
+        "mainTitle": "Kenapa Sistem Baru Ditinggal Pelan-pelan",
+        "paragraphs": [
+          "Gagasan: Sistem baru jarang gagal karena ditolak. Lebih sering ia ditinggal pelan-pelan, karena dipilih dari demo yang memukau, bukan dari hari kerja biasa tim yang memakainya.",
+          "Kenapa penting sekarang: SaaS Management Index 2026 dari Zylo, yang menganalisis lebih dari 40 juta lisensi, mencatat rata-rata organisasi hanya memanfaatkan 52% dari lisensi software yang mereka bayar. Artinya, hampir separuh uang software terbuang untuk alat yang tidak dipakai.",
+          "Yang bisa dilakukan pemimpin: Ikuti satu hari kerja tim sebelum menonton demo, libatkan pemakai sejak memilih, pastikan sistem baru lebih cepat dari cara lama, dan ukur siapa yang membuka sistem, bukan berapa lisensi yang dibeli."
+        ]
+      },
+      {
+        "eyebrow": "GAGASAN UTAMA",
+        "mainTitle": "Tim jarang menolak sistem baru, mereka hanya tidak pernah ditanya",
+        "paragraphs": [
+          "Demo berjalan mulus. Dasbornya rapi, grafiknya bergerak, presenter vendor menjawab semua pertanyaan direksi. Kontrak ditandatangani, lisensi dibeli untuk satu divisi, pelatihan diadakan satu hari. Tiga bulan kemudian, yang membuka sistem setiap hari hanya staf admin yang wajib memasukkan laporan ke direksi. Anggota tim lain kembali mencatat di spreadsheet sendiri.",
+          "Tidak ada yang secara resmi menolak sistem itu. Tim hanya memilih alat yang lebih cepat untuk pekerjaan mereka hari itu. Kalau membuka satu data di sistem baru butuh lima klik dan sepuluh detik, sementara spreadsheet langsung ada di depan mata, orang akan memilih spreadsheet setiap kali.",
+          "Cara pandang ini datang dari pekerjaan MarkaSuites membangun Marka+ ERP. Versi awal sistem ini butuh 18.046 milidetik, sekitar 18 detik, dari saat login sampai dasbor eksekutif tampil lengkap (Uji Lab). Waktu itu terasa wajar di ruang uji coba, tapi tidak akan bertahan di hari kerja biasa: staf yang terburu-buru akan langsung beralih ke kertas.",
+          "Yang menentukan sebuah sistem dipakai atau ditinggal adalah hari kerja biasa, bukan hari demo."
+        ],
+        "image": {
+          "src": "/images/leadership-thoughts/expensive-software-only-three-people-use/image1.png",
+          "alt": "Diagram dua panel: Dipilih dari demo vs dipilih dari hari kerja."
+        }
+      },
+      {
+        "eyebrow": "KENAPA MASALAH INI BERTAHAN",
+        "mainTitle": "Yang memutuskan membeli bukan yang memakai setiap hari",
+        "paragraphs": [
+          "Yang membeli melihat fitur, yang memakai merasakan gesekan. Direksi terkesan oleh dasbor analitik dan grafik prediktif. Staf administrasi hanya ingin memasukkan faktur tanpa kursornya tersendat. Ketika sistem dipilih dari fitur yang terlihat keren di presentasi, kebutuhan harian yang membosankan sering terlewat.",
+          "Sistem baru menambah pekerjaan sebelum mengurangi beban. Sebelum otomatisasi memberi manfaat, tim harus memasukkan data awal, menyesuaikan kebiasaan, dan sering kali tetap menjalankan sistem lama secara paralel. Kalau fase transisi ini tidak didampingi, tim akan merasa sistem baru hanya beban tambahan.",
+          "Kecepatan sistem kalah dari spreadsheet. Spreadsheet punya kelemahan besar dalam hal keamanan dan integrasi, tapi punya satu keunggulan tak tertandingi: ia instan. Kalau software enterprise terasa lebih lambat walau hanya beberapa detik per transaksi, gesekan kecil itu terakumulasi menjadi alasan kuat untuk meninggalkannya.",
+          "Angka Zylo 2026 menunjukkan pemborosan lisensi terjadi secara massal: dengan rata-rata utilisasi hanya 52%, hampir separuh anggaran software terbuang percuma."
+        ]
+      },
+      {
+        "eyebrow": "PELAJARAN DARI LAPANGAN",
+        "mainTitle": "Membuat sistem lebih cepat dari spreadsheet",
+        "paragraphs": [
+          "Saat MarkaSuites membangun Marka+ ERP, prioritas utama rekayasa sistem diarahkan pada pengurangan latensi di setiap alur kerja operasional. Kami tahu staf akuntansi dan gudang tidak akan bertahan memakai sistem yang lambat.",
+          "Di uji benchmark, waktu dari login sampai dasbor eksekutif terpangkas dari 18.046 ms menjadi 2.009 ms, penurunan latensi 89% (Uji Lab, benchmark tim pengembang). Panggilan data neraca saldo dioptimalkan dari 4.617,9 ms menjadi 1.306,7 ms (Uji Lab).",
+          "Simulasi kami memperkirakan rekapitulasi progres proyek mingguan turun dari sekitar 88 menit menjadi sekitar 20 menit per proyek (Simulasi 10.000 iterasi). Penghematan waktu itu yang membuat staf dengan sukarela meninggalkan spreadsheet.",
+          "Pelajarannya: adopsi sistem tidak ditentukan oleh instruksi direksi, melainkan oleh apakah hari kerja staf menjadi lebih ringan atau lebih berat saat memakai sistem tersebut. Cerita lengkapnya ada di case study MarkaSuite."
+        ],
+        "image": {
+          "src": "/images/leadership-thoughts/expensive-software-only-three-people-use/image4.png",
+          "alt": "Perbandingan benchmark waktu Marka+ ERP: login ke dasbor eksekutif 18.046 ms vs 2.009 ms."
+        }
+      },
+      {
+        "eyebrow": "KERANGKA KERJA",
+        "mainTitle": "Pilih sistem dari hari kerja, bukan dari hari demo",
+        "subsections": [
+          {
+            "subtitle": "Ikuti satu hari kerja tim sebelum menonton demo",
+            "content": "Duduklah di samping staf administrasi atau operasional selama setengah hari. Lihat bagaimana mereka menerima pesanan, mencatat inventaris, dan menyelesaikan masalah harian. Catat alat apa yang benar-benar mereka gunakan dan di mana mereka paling banyak membuang waktu."
+          },
+          {
+            "subtitle": "Libatkan pemakai sejak memilih",
+            "content": "Bawa perwakilan staf yang akan memakai sistem setiap hari ke sesi demo vendor. Minta mereka mencoba memasukkan data transaksi nyata mereka sendiri, bukan data contoh yang sudah disiapkan vendor. Tanda di organisasi Anda: sistem baru diumumkan kepada tim lewat email pengumuman tanpa ada staf yang pernah melihatnya sebelumnya."
+          },
+          {
+            "subtitle": "Pastikan sistem baru lebih cepat dari cara lama",
+            "content": "Ukur waktu transaksi dasar sebelum membeli. Memasukkan satu pesanan di cara lama butuh berapa menit? Di sistem baru butuh berapa menit? Kalau sistem baru ternyata lebih lambat walau lebih canggih, tim akan diam-diam mencari jalan pintas."
+          },
+          {
+            "subtitle": "Ukur siapa yang membuka, bukan berapa lisensi",
+            "content": "Jangan nilai keberhasilan sistem dari berapa lisensi yang aktif atau berapa modul yang terpasang. Ukur aktivitas pengguna mingguan dan periksa pekerjaan apa yang masih berjalan di luar sistem. Lakukan peninjauan 30 hari setelah peluncuran: hentikan lisensi yang menganggur atau perbaiki alur kerjanya."
+          }
+        ],
+        "image": {
+          "src": "/images/leadership-thoughts/expensive-software-only-three-people-use/image2.jpg",
+          "alt": "Foto kertas spreadsheet penuh angka: saat sistem baru terasa lambat, tim kembali ke spreadsheet manual."
+        }
+      },
+      {
+        "eyebrow": "PERTANYAAN UNTUK PEMIMPIN",
+        "mainTitle": "Berapa orang yang benar-benar membuka sistem Anda minggu lalu?",
+        "paragraphs": [
+          "Siapa yang menulis kebutuhan sistem terakhir yang Anda beli, dan apakah pemakai hariannya ikut?",
+          "Pernahkah vendor mendemokan pekerjaan nyata tim Anda, bukan skenario contoh mereka?",
+          "Berapa detik yang dibutuhkan staf Anda untuk menemukan satu angka di sistem, dibanding di spreadsheet?",
+          "Masih adakah data yang diisi dua kali, di sistem dan di luar sistem?",
+          "Berapa lisensi yang Anda bayar bulan ini, dan berapa yang login dalam 30 hari terakhir?",
+          "Sistem yang baik tidak perlu dipaksakan. Tim akan memakainya karena hari kerja mereka jadi lebih ringan."
+        ]
+      },
+      {
+        "eyebrow": "CATATAN & REFERENSI",
+        "mainTitle": "Definisi, Bukti Internal & Rujukan",
+        "paragraphs": [
+          "Definisi Adopsi Sistem: Seberapa banyak pemakai yang benar-benar menjalankan pekerjaan hariannya di sistem, diukur dari login aktif dan aktivitas nyata, bukan dari jumlah akun berbayar.",
+          "Sumber Data Internal: Lembar fakta Case Study MarkaSuite: F1 (login sampai dasbor eksekutif 18.046 ms → 2.009 ms, turun 89%, Uji Lab), F3 (neraca saldo 4.617,9 ms → 1.306,7 ms, Uji Lab), F8 (rekap progres mingguan ±88 → ±20 menit per proyek, Simulasi 10.000 iterasi), F9 (periode 3 Agustus sampai 5 November 2026, 533 commit, Aktual).",
+          "Rujukan Eksternal: Zylo (2026). SaaS Management Index 2026. Analisis lebih dari 40 juta lisensi SaaS dan belanja $75 miliar. Rilis 29 Januari 2026."
+        ]
+      }
+    ]
   },
-  'credible-strategy-requires-evidence-and-a-path-to-action': {
-    title: 'Strategi yang Kredibel Membutuhkan Bukti dan Jalur Menuju Tindakan',
-    category: 'PEMIKIRAN STRATEGIS',
-    tags: ['KELAYAKAN', 'RISET', 'STRATEGI'],
-    author: 'Kepemimpinan Artic Analytica',
-    readTime: '6 menit baca',
-    date: 'April 2026',
-    language: 'id-ID',
-    description:
-      'Sebuah studi kelayakan hanya bernilai ketika bukti, asumsi, dan pilihan implementasi dihubungkan ke dalam satu kerangka pengambilan keputusan.',
-    coverImageAlt: 'Para pengambil keputusan membandingkan bukti dan skenario pengembangan',
-    sections: [
-      {
-        eyebrow: 'GAGASAN UTAMA',
-        mainTitle: 'Melangkah Melampaui Proyeksi Tunggal',
-        paragraphs: [
-          'Studi GIK mengharuskan permintaan pasar, perilaku pengunjung, peluang spasial, dan asumsi operasional dipertimbangkan secara bersama-sama. Strategi menjadi kredibel ketika para pemimpin dapat melihat bagaimana faktor-faktor tersebut saling berinteraksi.',
-          'Sebuah proyeksi hanyalah satu ekspresi dari serangkaian asumsi. Tanggung jawab kepemimpinan adalah memahami asumsi tersebut, memutuskan risiko mana yang dapat diterima, dan menciptakan cara untuk belajar sebelum mengambil komitmen yang tidak dapat diubah.',
-        ],
-        image: {
-          src: '/images/projects/kajian-kelayakan-gik/case-study-angle-02.webp',
-          alt: 'Bukti lapangan yang mendukung strategi pengembangan di Semarang',
-        },
-      },
-      {
-        eyebrow: 'KENYAMANAN SEMU DARI KEPASTIAN',
-        mainTitle: 'Angka yang Presisi Tetap Bisa Menjadi Keputusan yang Lemah',
-        paragraphs: [
-          'Inisiatif jangka panjang memadukan ketidakpastian permintaan, kapasitas institusional, batasan finansial, dan perubahan perilaku publik. Memadatkan semua hal tersebut ke dalam satu angka imbal hasil dapat menyembunyikan pilihan-pilihan yang paling krusial.',
-          'Strategi yang lebih bermanfaat membandingkan berbagai skenario, menyebutkan asumsi kritis secara terbuka, dan mengidentifikasi bukti apa yang harus memicu penyesuaian jalur.',
-        ],
-      },
-      {
-        eyebrow: 'DARI STUDI MENUJU TINDAKAN',
-        mainTitle: 'Rekomendasi Membutuhkan Pemilik dan Sinyal',
-        subsections: [
-          {
-            subtitle: 'Pisahkan Fakta dari Asumsi',
-            content:
-              'Perjelas klaim mana yang berasal dari bukti teramati dan mana yang bergantung pada perilaku di masa depan.',
-          },
-          {
-            subtitle: 'Bertahap dalam Komitmen Besar',
-            content:
-              'Gunakan uji coba (pilot) dan investasi bertahap untuk mempelajari respons pasar sebelum mengunci keputusan yang paling mahal.',
-          },
-          {
-            subtitle: 'Tunjuk Pemilik Keputusan',
-            content:
-              'Setiap rekomendasi harus mengidentifikasi siapa yang bertindak, siapa yang memberi masukan, dan siapa yang menyelesaikan perbedaan pendapat.',
-          },
-          {
-            subtitle: 'Tetapkan Sinyal Penyesuaian',
-            content:
-              'Sepakati sejak awal perubahan permintaan, biaya, kapasitas, atau kebijakan mana yang mengharuskan strategi ditinjau kembali.',
-          },
-        ],
-      },
-      {
-        eyebrow: 'PERTANYAAN KEPEMIMPINAN',
-        mainTitle: 'Apa yang Harus Terbukti Benar Agar Strategi Ini Berhasil?',
-        paragraphs: [
-          'Pertanyaan ini membuka ketergantungan yang sering kali dibiarkan tersirat oleh rencana yang terlalu optimis. Pertanyaan ini juga membuat perbedaan pendapat menjadi produktif karena tim dapat menguji asumsi alih-alih mempertahankan preferensi pribadi.',
-          'Strategi yang kredibel bukanlah janji bahwa masa depan akan selalu mengikuti rencana, melainkan cara disiplin untuk bertindak, belajar, dan menyesuaikan diri sembari melindungi hasil yang dituju.',
-        ],
-      },
+  "a-beautiful-website-nobody-contacts": {
+    "title": "Website pertama kami bagus, dan tidak ada yang menghubungi kami",
+    "category": "PERTUMBUHAN DIGITAL",
+    "tags": [
+      "WEBSITE",
+      "KONVERSI",
+      "LEAD",
+      "CRM"
     ],
-  },
-  'communication-design-is-part-of-public-impact': {
-    title: 'Desain Komunikasi Adalah Bagian dari Dampak Publik',
-    category: 'DAMPAK SOSIAL',
-    tags: ['PERUBAHAN PERILAKU', 'KOMUNIKASI', 'LAYANAN PUBLIK'],
-    author: 'Kepemimpinan Artic Analytica',
-    readTime: '5 menit baca',
-    date: 'Maret 2026',
-    language: 'id-ID',
-    description:
-      'Bukti ilmiah hanya menciptakan dampak ketika masyarakat dapat memahami, mempercayai, dan menggunakannya di dalam realitas kehidupan sehari-hari.',
-    coverImageAlt: 'Fasilitator lapangan dan keluarga merancang bersama materi komunikasi',
-    sections: [
+    "author": "Kepemimpinan Web2Up",
+    "readTime": "6 menit baca",
+    "date": "November 2026",
+    "language": "id-ID",
+    "description": "Banyak website dinilai dari selera rapat, bukan dari apa yang dicari pelanggan. Kenapa website yang cantik bisa sepi, dan cara pemimpin mengubahnya jadi jalur percakapan.",
+    "coverImageAlt": "Website biasanya disetujui di layar besar. Calon pelanggan membukanya di ponsel.",
+    "sections": [
       {
-        eyebrow: 'GAGASAN UTAMA',
-        mainTitle: 'Akurasi dan Kemudahan Akses Harus Berjalan Beriringan',
-        paragraphs: [
-          'Penyusunan panduan penurunan risiko stunting menunjukkan mengapa komunikasi publik tidak boleh diperlakukan sekadar sebagai tahap pemformatan akhir. Bahasa, urutan penyampaian, contoh nyata, dan panduan fasilitator menentukan apakah pengetahuan benar-benar berubah menjadi tindakan.',
-          'Para pemimpin bertanggung jawab bukan hanya atas kebenaran informasi, tetapi juga apakah informasi tersebut dapat dipahami dan diterapkan oleh masyarakat yang menghadapi berbagai keterbatasan.',
-        ],
-        image: {
-          src: '/images/projects/panduan-perubahan-perilaku-stunting/case-study-angle-02.webp',
-          alt: 'Komunikasi gizi keluarga praktis di lingkungan masyarakat',
-        },
+        "eyebrow": "RINGKASAN GAGASAN",
+        "mainTitle": "Mengubah Website Cantik Menjadi Jalur Percakapan",
+        "paragraphs": [
+          "Gagasan: 'Website kami bagus, tapi tidak ada yang menghubungi' adalah keluhan yang sering didengar dari pemilik bisnis. Masalahnya biasanya bukan desain. Website dinilai dari selera orang di ruang rapat, bukan dari apa yang dicari dan dialami calon pelanggan.",
+          "Kenapa penting sekarang: Audit atas 2.241 perusahaan di Amerika Serikat yang dilaporkan Harvard Business Review menemukan hanya 37% yang membalas lead dari web dalam satu jam, dan 23% tidak pernah membalas sama sekali. Padahal menghubungi dalam satu jam hampir 7 kali lebih mungkin mengkualifikasi lead itu.",
+          "Yang bisa dilakukan pemimpin: Rancang dari pertanyaan pelanggan, uji di ponsel, sambungkan formulir langsung ke orang yang membalas, dan ukur lead yang dibalas, bukan jumlah pengunjung."
+        ]
       },
       {
-        eyebrow: 'KESENJANGAN IMPLEMENTASI',
-        mainTitle: 'Pesan Gagal Ketika Mengabaikan Kondisi Tindakan',
-        paragraphs: [
-          'Seseorang mungkin memahami sebuah rekomendasi namun tetap tidak dapat menjalankannya karena faktor biaya, waktu, dinamika rumah tangga, kepercayaan diri, atau akses terhadap dukungan.',
-          'Komunikasi yang menganggap pengetahuan sebagai satu-satunya penghambat dapat secara tidak sengaja membebankan tanggung jawab penuh pada audiens sembari membiarkan hambatan struktural tidak tersentuh.',
+        "eyebrow": "GAGASAN UTAMA",
+        "mainTitle": "Website dinilai dari selera rapat, bukan dari apa yang dicari pelanggan",
+        "paragraphs": [
+          "Peluncurannya terasa seperti perayaan. Website baru ditampilkan di layar besar ruang direksi, animasinya halus, foto kantornya terlihat mahal. Semua yang hadir puas. Tiga bulan kemudian, kotak masuk formulir kontak hampir kosong, dan pertanyaan di rapat berubah jadi 'apa perlu kita pasang iklan?'",
+          "Kalimat 'website kami bagus, tapi tidak ada yang menghubungi' sering kami dengar dari pemilik bisnis yang datang ke Web2Up. Hampir selalu, website itu memang bagus di mata orang yang menyetujuinya. Yang jarang ditanyakan adalah apa yang dicari calon pelanggan saat membukanya, dan apa yang terjadi setelah mereka mengisi formulir.",
+          "Website yang cantik hanya separuh pekerjaan.",
+          "Separuh lainnya ada di jalur setelah klik. Di proyek AdsVar, setiap formulir dari website langsung tercatat di CRM dalam hitungan milidetik, lengkap dengan paket yang diminati (Uji Lab). Tim sales tidak perlu menunggu orang membuka email untuk tahu ada calon klien yang bertanya."
         ],
+        "image": {
+          "src": "/images/leadership-thoughts/a-beautiful-website-nobody-contacts/image4.png",
+          "alt": "Diagram dua panel: Website sebagai brosur vs website sebagai jalur percakapan."
+        }
       },
       {
-        eyebrow: 'PRAKTIK KO-DESAIN',
-        mainTitle: 'Merancang Bersama Mereka yang Menyampaikan dan Menerima Pesan',
-        subsections: [
-          {
-            subtitle: 'Dengarkan Hambatan Nyata',
-            content:
-              'Percakapan di garis depan mengungkap momen ketika panduan terasa membingungkan, tidak praktis, atau sulit diterapkan secara sosial.',
-          },
-          {
-            subtitle: 'Gunakan Pilihan Konkret',
-            content:
-              'Contoh nyata, skenario harian, dan langkah kecil berikutnya jauh lebih mudah diterapkan dibandingkan instruksi abstrak.',
-          },
-          {
-            subtitle: 'Dukung Peran Fasilitator',
-            content:
-              'Panduan percakapan, urutan visual, dan alat tindak lanjut membantu menjaga konsistensi tanpa membuat interaksi terasa kaku.',
-          },
-          {
-            subtitle: 'Bangun Umpan Balik dalam Pelaksanaan',
-            content:
-              'Para pemimpin membutuhkan jalur pembelajaran lokal untuk terus menyempurnakan konten program, sumber daya, dan kebijakan.',
-          },
-        ],
+        "eyebrow": "KENAPA MASALAH INI BERTAHAN",
+        "mainTitle": "Pekerjaan dianggap selesai saat website tayang",
+        "paragraphs": [
+          "Yang menyetujui bukan yang mencari. Website dinilai di layar besar oleh orang yang sudah tahu perusahaannya. Calon pelanggan datang dengan pertanyaan sederhana: berapa harganya, bisa dikerjakan kapan, siapa yang bisa dihubungi. Kalau jawabannya tersembunyi di balik halaman 'Tentang Kami' yang panjang, mereka pergi.",
+          "Website dilihat di desktop, dibuka di ponsel. Ini mudah terlewat. Di proyek AdsVar, skor performa Lighthouse untuk versi desktop mencapai 100, sedangkan versi mobile 82, dengan elemen terbesar tampil dalam 3,13 detik (Uji Lab). Website yang sama bisa terasa mulus di ruang rapat dan lambat di tangan pelanggan.",
+          "Tidak ada yang memegang lead. Formulir masuk ke email umum yang dibuka admin sesekali. Gejalanya: tidak ada yang bisa menjawab berapa lama rata-rata calon klien menunggu balasan. Audit Harvard Business Review menunjukkan rata-rata waktu balas mencapai 42 jam, dan hampir seperempatnya tidak membalas sama sekali.",
+          "Polanya jelas: lead dari web cepat dingin. Calon klien yang tidak mendapatkan balasan cepat akan langsung beralih ke pilihan lain."
+        ]
       },
       {
-        eyebrow: 'PERTANYAAN KEPEMIMPINAN',
-        mainTitle: 'Realitas Siapa yang Masih Belum Terwakili di Dalam Pesan Ini?',
-        paragraphs: [
-          'Sebelum menyetujui komunikasi publik, para pemimpin perlu menanyakan siapa yang telah mengujinya, dalam kondisi apa, dan tindakan realistis apa yang diharapkan dari audiens selanjutnya.',
-          'Dampak akan meningkat secara nyata ketika komunikasi diperlakukan sebagai bagian inti dari desain layanan, bukan sekadar lapisan kampanye di tahap akhir.',
+        "eyebrow": "PELAJARAN DARI LAPANGAN",
+        "mainTitle": "Website yang langsung tersambung ke orang yang membalas",
+        "paragraphs": [
+          "AdsVar, brand iklan berbayar di grup kami, butuh website yang menghasilkan percakapan, bukan sekadar terlihat profesional. Kondisi awalnya umum: calon klien bisa bertanya lewat beberapa pintu, dan admin harus menyalin data dari email ke catatan sales.",
+          "Kami memutuskan website ini tersambung langsung ke CRM MarkaSuite. Di uji lab, 30 dari 30 formulir kontak diterima dengan waktu respons median 6,4 milidetik (Uji Lab). Saat calon klien memilih paket harga, nama paket, siklus tagihan, dan harganya ikut tersimpan, 20 dari 20 (Uji Lab), jadi sales tahu apa yang ditanyakan sebelum menelepon. Kalau CRM sedang tidak bisa dihubungi, lead tetap tersimpan di website (Uji Lab).",
+          "Simulasi kami memperkirakan kerja admin per lead turun dari sekitar 17 menit menjadi sekitar 3 menit, hemat sekitar 83% (Simulasi; rentang P10 sampai P90: 74% sampai 89%). Waktu itu bisa dipakai untuk membalas lebih cepat.",
+          "Pelajarannya, kualitas website diukur dari apa yang terjadi setelah klik. Catatan jujur: skor mobile 82 menunjukkan versi ponsel masih punya ruang perbaikan, dan angka di atas berasal dari uji lab serta simulasi, bukan lead sungguhan. Cerita lengkapnya ada di case study AdsVar."
         ],
-      },
-    ],
-  },
-  'brand-trust-is-built-through-consistent-experience': {
-    title: 'Kepercayaan Brand Dibangun Melalui Pengalaman yang Konsisten',
-    category: 'KEPEMIMPINAN BRAND',
-    tags: ['BRAND', 'MEDIA', 'PENGALAMAN'],
-    author: 'Tim Eksekutif Arsalynk',
-    readTime: '4 menit baca',
-    date: 'Februari 2026',
-    language: 'id-ID',
-    description:
-      'Mulai dari platform korporat hingga produksi media olahraga, kepercayaan tumbuh ketika setiap titik interaksi audiens mengekspresikan janji yang sama dengan kejelasan.',
-    coverImageAlt: 'Pimpinan brand, video, dan digital meninjau konsistensi pengalaman pengguna',
-    sections: [
-      {
-        eyebrow: 'GAGASAN UTAMA',
-        mainTitle: 'Konsistensi Lebih dari Sekadar Pengulangan Visual',
-        paragraphs: [
-          'Proyek Padel Arena dan Web Media menunjukkan bahwa konsistensi brand adalah keselarasan antara cerita, antarmuka, ekspektasi layanan, dan kualitas hasil kerja.',
-          'Audiens tidak merasakan buku panduan brand. Mereka merasakan janji di berbagai momen: sebuah artikel, proposal, platform digital, interaksi dukungan, atau acara yang diselenggarakan. Kepercayaan tumbuh ketika seluruh momen tersebut saling menguatkan.',
-        ],
-        image: {
-          src: '/images/projects/web-media-profile/case-study-angle-02.webp',
-          alt: 'Tim editorial meninjau pengalaman brand responsif yang konsisten',
-        },
+        "image": {
+          "src": "/images/leadership-thoughts/a-beautiful-website-nobody-contacts/image3.png",
+          "alt": "Alur horizontal: Perjalanan satu lead di website AdsVar langsung masuk ke CRM."
+        }
       },
       {
-        eyebrow: 'TANGGUNG JAWAB KEPEMIMPINAN',
-        mainTitle: 'Pergeseran Brand Sering Kali Merupakan Masalah Sistem Operasi',
-        paragraphs: [
-          'Inkonsistensi jarang disebabkan semata-mata oleh penilaian desain yang kurang baik. Tim mungkin kekurangan prioritas bersama, aset yang dapat digunakan kembali, batas persetujuan yang jelas, atau waktu yang cukup untuk menerjemahkan panduan abstrak.',
-          'Kepemimpinan harus membuat konsistensi lebih mudah diwujudkan dengan menghubungkan prinsip-prinsip brand ke dalam perangkat kerja harian, peran, dan pengambilan keputusan.',
+        "eyebrow": "KERANGKA KERJA",
+        "mainTitle": "Ukur website dari percakapan yang dihasilkan",
+        "subsections": [
+          {
+            "subtitle": "Rancang dari pertanyaan pelanggan",
+            "content": "Kumpulkan sepuluh pertanyaan yang paling sering diajukan calon klien lewat telepon atau chat, lalu pastikan jawabannya bisa ditemukan dalam dua kali gulir. Halaman tentang sejarah perusahaan boleh tetap ada, asalkan tidak menghalangi harga, layanan, dan cara menghubungi. Tanda di organisasi Anda: sales masih menjawab pertanyaan yang sama berulang kali, padahal semuanya 'sudah ada di website'. Langkah pertama: minta tim sales menuliskan lima pertanyaan calon klien yang paling sering mereka terima bulan ini."
+          },
+          {
+            "subtitle": "Uji di ponsel, bukan di monitor ruang direksi",
+            "content": "Setujui website lewat ponsel biasa dengan koneksi biasa, bukan lewat layar besar dan internet kantor. Coba isi formulirnya sendiri dengan satu tangan. Kalau terasa merepotkan bagi Anda, calon pelanggan akan merasakan hal yang sama."
+          },
+          {
+            "subtitle": "Sambungkan formulir ke orang yang membalas",
+            "content": "Lead yang masuk ke email umum adalah lead yang menunggu. Sambungkan formulir ke CRM atau setidaknya ke satu orang yang bertanggung jawab, dengan batas waktu balas yang jelas. Ikutkan konteksnya, misalnya paket atau layanan yang diminati, supaya balasan pertama langsung relevan. Tanda di organisasi Anda: tidak ada yang tahu siapa yang seharusnya membalas formulir yang masuk Sabtu sore."
+          },
+          {
+            "subtitle": "Ukur lead yang dibalas, bukan jumlah pengunjung",
+            "content": "Pengunjung yang banyak enak dilaporkan, tapi tidak membayar tagihan. Laporkan setiap minggu berapa lead yang masuk, berapa yang dibalas dalam satu jam, dan berapa yang jadi percakapan lanjutan. Angka itu langsung memberi tahu di mana jalurnya macet."
+          }
         ],
+        "image": {
+          "src": "/images/leadership-thoughts/a-beautiful-website-nobody-contacts/image1.jpg",
+          "alt": "Foto laptop dengan dashboard angka: yang perlu dilaporkan adalah lead yang dibalas, bukan hanya grafik pengunjung."
+        }
       },
       {
-        eyebrow: 'SISTEM YANG BERKELANJUTAN',
-        mainTitle: 'Membangun Tata Kelola yang Mendukung Pertimbangan Tepat',
-        subsections: [
-          {
-            subtitle: 'Tetapkan Janji Utama',
-            content:
-              'Sejumlah kecil prinsip pengalaman yang jelas membantu tim mengevaluasi pilihan melampaui tampilan visual semata.',
-          },
-          {
-            subtitle: 'Sediakan Fondasi yang Dapat Digunakan Kembali',
-            content:
-              'Komponen, templat, panduan nada komunikasi, dan pustaka aset mengurangi pembuatan ulang yang tidak perlu.',
-          },
-          {
-            subtitle: 'Tetapkan Batas Keputusan',
-            content:
-              'Tim perlu mengetahui apa yang dapat mereka sesuaikan secara mandiri dan apa yang memerlukan tinjauan lebih luas.',
-          },
-          {
-            subtitle: 'Audit Pengalaman Secara Menyeluruh',
-            content:
-              'Tinjau perjalanan pelanggan dan momen serah terima layanan—bukan hanya materi kampanye—untuk memastikan keselarasan dengan janji brand.',
-          },
-        ],
+        "eyebrow": "PERTANYAAN UNTUK PEMIMPIN",
+        "mainTitle": "Berapa lama calon klien Anda menunggu balasan minggu lalu?",
+        "paragraphs": [
+          "Bisakah calon pelanggan menemukan harga atau cara menghubungi Anda dalam dua kali gulir?",
+          "Kapan terakhir Anda membuka website sendiri lewat ponsel dan mengisi formulirnya?",
+          "Ke mana formulir website Anda masuk, dan siapa yang wajib membalasnya?",
+          "Berapa lead yang masuk bulan lalu, dan berapa yang dibalas dalam satu jam?",
+          "Angka apa yang dilaporkan tim tentang website setiap bulan: pengunjung, atau percakapan?",
+          "Website yang bagus membuat orang mau bertanya. Yang membuat mereka jadi klien adalah balasan yang datang cepat."
+        ]
       },
       {
-        eyebrow: 'PERTANYAAN KEPEMIMPINAN',
-        mainTitle: 'Apakah Audiens Mengenali Organisasi yang Sama di Setiap Titik Sentuh?',
-        paragraphs: [
-          'Pertanyaannya bukanlah apakah setiap keluaran terlihat identik, melainkan apakah nada bicara, kejelasan, kualitas, dan perilaku mengekspresikan janji yang utuh.',
-          'Kepemimpinan brand yang kuat menciptakan struktur yang cukup untuk menjaga konsistensi sekaligus ruang gerak yang cukup bagi tim untuk merespons konteks secara cerdas.',
-        ],
-      },
-    ],
-  },
+        "eyebrow": "CATATAN & REFERENSI",
+        "mainTitle": "Definisi, Bukti Internal & Rujukan",
+        "paragraphs": [
+          "Definisi Lead: Calon klien yang meninggalkan kontak atau pertanyaan lewat website. Mengkualifikasi lead: memastikan calon klien punya kebutuhan dan kemampuan yang sesuai.",
+          "Sumber Data Internal: Lembar fakta Case Study AdsVar: A1 (30/30 formulir kontak diterima, median 6,4 ms, Uji Lab), A3 (paket, siklus tagihan, dan harga tersimpan, 20/20, Uji Lab), A6 (lead tetap tersimpan saat CRM tidak bisa dihubungi, Uji Lab), A9 dan A10 (Lighthouse desktop 100, mobile 82, LCP mobile 3,13 detik, Uji Lab), A13 (kerja admin per lead ±17 → ±3 menit, hemat ±83%, Simulasi).",
+          "Rujukan Eksternal: Oldroyd, J. B., McElheran, K., & Elkington, D. (2011). The Short Life of Online Sales Leads. Harvard Business Review, 89(3), 28. Audit terhadap 2.241 perusahaan di Amerika Serikat."
+        ]
+      }
+    ]
+  }
 };
 
 export function localizeLeadershipThoughts(

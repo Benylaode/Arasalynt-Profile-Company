@@ -457,7 +457,8 @@ function seedIfEmpty(db: Database.Database): void {
     db.prepare('SELECT COUNT(*) as cnt FROM leadership_thoughts').get() as { cnt: number }
   ).cnt;
 
-  if (thoughtsCount < LEADERSHIP_THOUGHTS_DUMMY_DATA.length) {
+  if (thoughtsCount !== LEADERSHIP_THOUGHTS_DUMMY_DATA.length) {
+    db.prepare('DELETE FROM leadership_thoughts').run();
     const insertThought = db.prepare(`
       INSERT OR REPLACE INTO leadership_thoughts
         (id, slug, title, category, tags, author, read_time, date, description, cover_image, cover_image_alt, sections)

@@ -104,8 +104,8 @@ export default function Footer() {
 
   const aboutLinks = [
     { name: isId ? 'Tentang Arsalynk' : 'About Arsalynk', href: '/about-us' },
-    { name: isId ? 'Profil Korporat' : 'Corporate Profile', href: '/about-us/corporate-profile' },
-    { name: isId ? 'Kepemimpinan Perusahaan' : 'Company Leadership', href: '/about-us/company-leadership' },
+    { name: isId ? 'Profil Perusahaan' : 'Corporate Profile', href: '/about-us/corporate-profile' },
+    { name: isId ? 'Prinsip Kepemimpinan' : 'Company Leadership', href: '/about-us/company-leadership' },
     { name: isId ? 'Filosofi Ekosistem' : 'Ecosystem Philosophy', href: '/about-us/ecosystem-philosophy' },
   ];
 
@@ -130,7 +130,7 @@ export default function Footer() {
 
   const insightLinks = [
     { name: isId ? 'Studi Kasus' : 'Case Studies', href: '/insight-programs/case-studies' },
-    { name: isId ? 'Pemikiran Kepemimpinan' : 'Leadership Thoughts', href: '/insight-programs/leadership-thoughts' },
+    { name: isId ? 'Artikel' : 'Leadership Thoughts', href: '/insight-programs/leadership-thoughts' },
   ];
 
   return (

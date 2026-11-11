@@ -52,7 +52,7 @@ const HUB_SECTIONS_ID = [
   {
     slug: 'corporate-profile',
     href: '/about-us/corporate-profile',
-    title: 'Profil Korporat',
+    title: 'Profil Perusahaan',
     eyebrow: '01 · FONDASI & VISI',
     image: '/images/about-us/cards/corporate-profile-card.webp',
     summary:
@@ -62,8 +62,8 @@ const HUB_SECTIONS_ID = [
   {
     slug: 'company-leadership',
     href: '/about-us/company-leadership',
-    title: 'Kepemimpinan Perusahaan',
-    eyebrow: '02 · TATA KELOLA VISIONER',
+    title: 'Prinsip Kepemimpinan',
+    eyebrow: '02 · MANAJEMEN VISIONER',
     image: '/images/about-us/company-leadership-hero.webp',
     summary:
       'Kepemimpinan eksekutif yang memadukan keahlian industri, wawasan komersial, dan standar tata kelola modern untuk memandu transformasi digital perusahaan.',

@@ -867,7 +867,7 @@ export default function Navbar() {
   const insightLinks = useMemo<NavItem[]>(
     () => [
       {
-        name: isId ? 'Pemikiran Kepemimpinan' : 'Leadership Thoughts',
+        name: isId ? 'Artikel' : 'Leadership Thoughts',
         href: '/insight-programs/leadership-thoughts',
       },
       {
