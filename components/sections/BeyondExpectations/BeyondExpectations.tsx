@@ -53,8 +53,8 @@ export default function BeyondExpectations() {
               fontFamily: '"Switzer", Arial, sans-serif',
             }}
           >
-            <span className="block">{isId ? 'Kami Membangun Melampaui' : 'We Build Beyond'}</span>
-            <span className="block">{isId ? 'Ekspektasi Anda' : 'Your Expectations'}</span>
+            <span className="block">{isId ? 'Membangun Melampaui' : 'We Build Beyond'}</span>
+            <span className="block">{isId ? 'Ekspektasi' : 'Your Expectations'}</span>
           </h2>
 
           <p

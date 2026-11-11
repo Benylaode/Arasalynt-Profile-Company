@@ -20,13 +20,18 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 function ArticleImage({ src, alt }: { src: string; alt: string }) {
   return (
-    <figure className="m-0 flex w-full items-center justify-center overflow-hidden rounded-[14px] bg-[#101010] sm:rounded-[18px] xl:rounded-[24px]">
+    <figure className="m-0 flex w-full flex-col items-center justify-center overflow-hidden rounded-[14px] bg-[#101010] p-3 sm:rounded-[18px] sm:p-5 xl:rounded-[24px]">
       <img
         src={src}
         alt={alt}
         loading="lazy"
         className="max-h-[760px] min-h-[280px] w-full object-contain object-center sm:min-h-[420px]"
       />
+      {alt && (
+        <figcaption className="mt-3.5 max-w-[92%] text-center font-body text-[13px] leading-relaxed text-[#A5B0CF] sm:text-[14px]">
+          {alt}
+        </figcaption>
+      )}
     </figure>
   );
 }

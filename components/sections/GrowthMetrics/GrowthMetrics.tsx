@@ -170,7 +170,7 @@ export default function GrowthMetrics() {
                 </p>
 
                 <Link href="/insight-programs/leadership-thoughts" className="mt-[8px] inline-flex h-[40px] items-center gap-[10px] rounded-full bg-[#E6FF2A] px-[16px] text-[12px] font-bold tracking-[-0.015em] text-[#101010] no-underline transition-[background-color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:bg-[#FBFCDC]">
-                  {isId ? 'PEMIKIRAN KEPEMIMPINAN' : 'LEADERSHIP THOUGHTS'}
+                  {isId ? 'ARTIKEL' : 'LEADERSHIP THOUGHTS'}
                   <ArrowIcon />
                 </Link>
               </div>
@@ -186,7 +186,7 @@ export default function GrowthMetrics() {
               
               <div className="relative z-10 flex flex-col items-start pr-[60px] min-[768px]:pr-[70px]">
                 <h3 className="text-[clamp(24px,1.8vw,32px)] font-medium leading-tight tracking-[-0.025em] text-[#F5F5F5] transition-colors duration-300 group-hover:text-[#E6FF2A]">
-                  {isId ? 'Baca Karya Terbukti Kami' : 'Read Our Proven Work'}
+                  {isId ? 'Baca tentang Karya Kami' : 'Read About Our Work'}
                 </h3>
 
                 <p className="mt-[8px] text-[13px] font-extralight leading-[18px] text-[#F7F7F7]">

@@ -1459,12 +1459,12 @@ export const DICTIONARIES = {
       dropdowns: {
         aboutUs: [
           {
-            label: 'Profil Korporat',
+            label: 'Profil Perusahaan',
             sub: 'Siapa kami, visi, misi & nilai utama',
             href: '/about-us/corporate-profile',
           },
           {
-            label: 'Kepemimpinan Perusahaan',
+            label: 'Prinsip Kepemimpinan',
             sub: 'Tim eksekutif & personel kunci',
             href: '/about-us/company-leadership',
           },
@@ -1503,7 +1503,7 @@ export const DICTIONARIES = {
             href: '/insight-programs/case-studies',
           },
           {
-            label: 'Pemikiran Kepemimpinan',
+            label: 'Artikel',
             sub: 'Perspektif tentang teknologi, AI & strategi digital',
             href: '/insight-programs/leadership-thoughts',
           },
@@ -1530,11 +1530,11 @@ export const DICTIONARIES = {
         iotSystems: 'IoT & Connected Systems',
         dataAi: 'Data & AI',
         webDevelopment: 'Web Development',
-        corporateProfile: 'Profil Korporat',
-        companyLeadership: 'Kepemimpinan Perusahaan',
+        corporateProfile: 'Profil Perusahaan',
+        companyLeadership: 'Prinsip Kepemimpinan',
         ecosystemPhilosophy: 'Filosofi Ekosistem',
         caseStudies: 'Studi Kasus',
-        leadershipThoughts: 'Pemikiran Kepemimpinan',
+        leadershipThoughts: 'Artikel',
         privacyPolicy: 'Kebijakan Privasi',
       },
       headOffice: 'Kantor Pusat',
@@ -1986,11 +1986,11 @@ export const DICTIONARIES = {
       pillar1Cta: 'Jelajahi Semua Studi Kasus',
       pillar2Eyebrow: '02 / PERSPEKTIF EKSEKUTIF',
       pillar2CountSuffix: 'Artikel',
-      pillar2Title: 'Pemikiran Kepemimpinan',
+      pillar2Title: 'Artikel',
       pillar2Description:
         'Esai strategis, analisis arsitektur, dan wawasan masa depan yang ditulis oleh jajaran eksekutif serta engineer utama Arsalynk.',
       pillar2FeaturedLabel: 'Perspektif Terbaru',
-      pillar2Cta: 'Baca Pemikiran Kepemimpinan',
+      pillar2Cta: 'Baca Artikel',
       caseStudiesHeroTitle: 'Studi Kasus',
       caseStudiesHeroDescription:
         'Eksekusi rekayasa yang terbukti dan hasil operasional terukur di berbagai implementasi enterprise kami.',
@@ -2003,7 +2003,7 @@ export const DICTIONARIES = {
       caseStudyDetailContinueExploring: 'LANJUTKAN MENJELAJAH',
       caseStudyDetailOtherCaseStudies: 'Studi Kasus Lainnya',
       caseStudyDetailViewAll: 'Lihat Semua Studi Kasus',
-      leadershipThoughtsHeroTitle: 'Pemikiran Kepemimpinan',
+      leadershipThoughtsHeroTitle: 'Artikel',
       leadershipThoughtsHeroDescription:
         'Perspektif strategis, catatan arsitektur, dan pandangan dari jajaran eksekutif serta engineer utama Arsalynk.',
       leadershipThoughtsFeaturedEyebrow: 'PERSPEKTIF UNGGULAN',
@@ -2013,7 +2013,7 @@ export const DICTIONARIES = {
       leadershipThoughtsSortAriaLabel: 'Urutkan artikel',
       leadershipThoughtsNoMatch: 'Tidak ada artikel yang sesuai dengan pencarian Anda.',
       leadershipThoughtDetailByPrefix: 'Oleh',
-      leadershipThoughtDetailOtherThoughts: 'Pemikiran Kepemimpinan Lainnya',
+      leadershipThoughtDetailOtherThoughts: 'Artikel Lainnya',
       hub: {
         badge: 'WAWASAN & PROGRAM',
         heroTitle: 'Studi Kasus Rekayasa & Perspektif Eksekutif',
@@ -2023,7 +2023,7 @@ export const DICTIONARIES = {
         caseStudiesSectionSub: 'Implementasi nyata dan hasil bisnis yang terukur.',
         viewAllCaseStudies: 'Lihat Semua Studi Kasus',
         readCaseStudy: 'Baca Studi Kasus',
-        leadershipSectionTitle: 'Pemikiran Kepemimpinan',
+        leadershipSectionTitle: 'Artikel',
         leadershipSectionSub: 'Perspektif teknis seputar AI, arsitektur ERP, dan strategi digital.',
         viewAllThoughts: 'Lihat Semua Artikel',
         readArticle: 'Baca Artikel',
@@ -2056,7 +2056,7 @@ export const DICTIONARIES = {
         heroSubtitle:
           'Esai, catatan arsitektur, dan pandangan dari jajaran eksekutif serta engineer utama Arsalynk.',
         readArticle: 'Baca Artikel Lengkap',
-        backToArticles: 'Kembali ke Pemikiran Kepemimpinan',
+        backToArticles: 'Kembali ke Artikel',
         publishedOn: 'Diterbitkan pada',
         readTime: 'baca',
         shareArticle: 'Bagikan atau Diskusikan Perspektif Ini',

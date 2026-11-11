@@ -34,17 +34,17 @@ const PILLARS_ID = [
   {
     label: 'TEKNOLOGI',
     title: ['KAMI MEMBANGUN SISTEM', 'TI YANG LEBIH BAIK'],
-    description: 'Membangun infrastruktur teknologi & IoT menyeluruh yang tangguh',
+    description: 'Membangun Sistem TI yang lebih baik',
   },
   {
     label: 'DATA & SURVEI',
     title: ['KAMI MENGUNGKAP DATA', 'TERUKUR BERWAWASAN'],
-    description: 'Mengubah data berwawasan menjadi keputusan bisnis strategis',
+    description: 'Mengungkap data terverifikasi dengan terukur',
   },
   {
     label: 'MEDIA',
     title: ['KAMI MENGHADIRKAN EKSEKUSI', 'KREATIF UNGGULAN'],
-    description: 'Menghadirkan ide dan konten kreatif dengan dampak yang terukur',
+    description: 'Mewujudkan eksekusi kreatif berkualitas',
   },
 ];
 
@@ -228,7 +228,7 @@ export default function EcosystemPhilosophyPage() {
 
             <h2 className="font-heading text-[clamp(12px,2.917vw,28px)] font-normal leading-[110%] tracking-[-0.01em] text-[#F7F7F7]">
               {isId
-                ? 'Ini bukan sekadar kumpulan vendor terpisah—melainkan ekosistem korporat yang tersinkronisasi untuk memperkuat operasional, mengoptimalkan aset, dan membantu bisnis mengeksekusi dengan penuh keyakinan.'
+                ? 'Kami bukan sekumpulan vendor yang terpisah. Kami adalah ekosistem yang tersinkronisasi untuk mengoptimalkan aset, operasional dan membantu setiap langkah diambil dengan keyakinan.'
                 : 'This is not a collection of individual vendors—it is a synchronized corporate ecosystem designed to strengthen operations, optimize assets, and help businesses execute with confidence.'}
             </h2>
           </div>
