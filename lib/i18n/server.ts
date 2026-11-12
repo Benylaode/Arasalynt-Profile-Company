@@ -1,5 +1,6 @@
 import { cookies, headers } from 'next/headers';
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/constants';
 import {
   DEFAULT_LOCALE,
   isValidLocale,
@@ -43,8 +44,6 @@ export async function getServerLocale(): Promise<Locale> {
   return DEFAULT_LOCALE;
 }
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://arsalynk.com';
-
 export function buildLocalizedAlternates(pathname: string, activeLocale: Locale): {
   canonical: string;
   languages: {
@@ -54,17 +53,16 @@ export function buildLocalizedAlternates(pathname: string, activeLocale: Locale)
   };
 } {
   const cleanPath = pathname === '/' ? '' : pathname.startsWith('/') ? pathname : `/${pathname}`;
-  const canonicalUrl =
-    activeLocale === 'id'
-      ? `${SITE_URL}/id${cleanPath}`
-      : `${SITE_URL}${cleanPath || '/'}`;
+  const defaultUrl = `${SITE_URL}${cleanPath || '/'}`;
+  const idUrl = `${SITE_URL}/id${cleanPath}`;
+  const canonicalUrl = activeLocale === 'id' ? idUrl : defaultUrl;
 
   return {
     canonical: canonicalUrl,
     languages: {
-      en: `${SITE_URL}/en${cleanPath}`,
-      id: `${SITE_URL}/id${cleanPath}`,
-      'x-default': `${SITE_URL}${cleanPath || '/'}`,
+      en: defaultUrl,
+      id: idUrl,
+      'x-default': defaultUrl,
     },
   };
 }
