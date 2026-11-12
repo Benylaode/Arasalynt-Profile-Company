@@ -228,8 +228,8 @@ export default function CaseStudyDetailClient({ slug }: { slug: string }) {
                     <span className="flex min-w-0 items-center gap-2"><span aria-hidden="true" className="h-2 w-2 shrink-0 bg-[#1A3E9E]" /><span className="truncate">{related.category}</span></span>
                     <span className="shrink-0">{related.dateLabel}</span>
                   </div>
-                  <h3 className="font-heading text-[clamp(26px,2.188vw,42px)] font-medium leading-[1.1] tracking-[-0.01em] transition-colors group-hover:text-[#1A3E9E]">{related.title}</h3>
-                  <p className="line-clamp-3 font-body text-[14px] leading-[1.6] text-[#292929] xl:text-[16px]">{related.description}</p>
+                  <h3 className="line-clamp-2 font-heading text-[clamp(26px,2.188vw,42px)] font-medium leading-[1.1] tracking-[-0.01em] transition-colors group-hover:text-[#1A3E9E]">{related.title}</h3>
+                  <p className="line-clamp-2 font-body text-[14px] leading-[1.6] text-[#292929] xl:text-[16px]">{related.description}</p>
                 </div>
               </Link>
             ))}

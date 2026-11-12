@@ -201,7 +201,7 @@ export default function LeadershipThoughtDetailClient({ slug }: { slug: string }
                     <span className="shrink-0">{other.date}</span>
                   </div>
 
-                  <h3 className="font-heading text-[clamp(27px,2.188vw,42px)] font-medium leading-[1.1] tracking-[-0.01em] text-[#101010] transition-colors group-hover:text-[#1A3E9E]">
+                  <h3 className="line-clamp-2 font-heading text-[clamp(27px,2.188vw,42px)] font-medium leading-[1.1] tracking-[-0.01em] text-[#101010] transition-colors group-hover:text-[#1A3E9E]">
                     {other.title}
                   </h3>
 

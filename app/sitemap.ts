@@ -32,13 +32,12 @@ function buildBilingualEntries(
   changeFrequency?: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
 ): MetadataRoute.Sitemap {
   const cleanPath = path === '/' ? '' : path;
-  const enUrl = `${SITE_URL}/en${cleanPath}`;
   const idUrl = `${SITE_URL}/id${cleanPath}`;
   const canonicalUrl = `${SITE_URL}${path}`;
 
   const alternates = {
     languages: {
-      en: enUrl,
+      en: canonicalUrl,
       id: idUrl,
       'x-default': canonicalUrl,
     },
@@ -58,7 +57,6 @@ function buildBilingualEntries(
 
   return [
     { url: canonicalUrl, ...baseProps },
-    { url: enUrl, ...baseProps },
     { url: idUrl, ...baseProps },
   ];
 }

@@ -74,11 +74,12 @@ export default async function Home() {
   const locale = await getServerLocale();
   const dict = getDictionary(locale);
 
+  const homeUrl = locale === 'id' ? `${SITE_URL}/id` : `${SITE_URL}/`;
   const homeSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    '@id': `${SITE_URL}/#webpage`,
-    url: `${SITE_URL}/`,
+    '@id': `${homeUrl}#webpage`,
+    url: homeUrl,
     name: dict.seo.homeTitle,
     isPartOf: { '@id': `${SITE_URL}/#website` },
     about: { '@id': `${SITE_URL}/#organization` },
@@ -86,7 +87,7 @@ export default async function Home() {
     description: dict.seo.homeDescription,
     breadcrumb: {
       '@id': `${SITE_URL}/#breadcrumb`,
-      ...buildBreadcrumbJsonLd([{ name: dict.common.home, url: `${SITE_URL}/` }]),
+      ...buildBreadcrumbJsonLd([{ name: dict.common.home, url: homeUrl }]),
     },
     inLanguage: locale === 'id' ? 'id-ID' : 'en-US',
   };

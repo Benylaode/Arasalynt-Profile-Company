@@ -52,9 +52,19 @@ export function proxy(request: NextRequest) {
 
   // Priority 1: Manual query parameter (?lang=en|id)
   const queryLang = searchParams.get('lang')?.toLowerCase();
+  const userAgent = request.headers.get('user-agent') || '';
+  const isSearchCrawler =
+    /googlebot|bingbot|yandex|baiduspider|duckduckbot|slurp|applebot|adsbot-google/i.test(
+      userAgent
+    );
+
   if (isValidLocale(queryLang)) {
     detectedLocale = queryLang;
     shouldPersistCookie = true;
+  } else if (isSearchCrawler) {
+    // Keep unprefixed URLs deterministically on DEFAULT_LOCALE for search bots
+    // so canonical tags stay self-referencing and never flip via GeoIP.
+    detectedLocale = DEFAULT_LOCALE;
   } else {
     // Priority 2: Saved language preference cookie
     const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value;
