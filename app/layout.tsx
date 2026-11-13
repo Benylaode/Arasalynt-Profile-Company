@@ -161,8 +161,8 @@ export default async function RootLayout({
     '@context': 'https://schema.org',
     '@graph': [
       buildOrganizationJsonLd(),
-      buildWebSiteJsonLd(),
-      ...buildSiteNavigationElementJsonLd(),
+      buildWebSiteJsonLd(locale),
+      ...buildSiteNavigationElementJsonLd(locale),
     ],
   };
 

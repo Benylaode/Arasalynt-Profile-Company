@@ -11,10 +11,7 @@ import Testimonials from '@/components/sections/Testimonials/Testimonials';
 import BeyondExpectations from '@/components/sections/BeyondExpectations/BeyondExpectations';
 import JsonLd from '@/components/seo/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
-import {
-  SITE_NAVIGATION_ITEMS,
-  buildBreadcrumbJsonLd,
-} from '@/lib/seo';
+import { buildBreadcrumbJsonLd } from '@/lib/seo';
 import { getServerLocale, buildLocalizedAlternates } from '@/lib/i18n/server';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 
@@ -97,57 +94,6 @@ export default async function Home() {
       <JsonLd id="home-webpage-schema" data={homeSchema} />
 
       <HeroSection />
-
-      <section
-        aria-labelledby="arsalynk-brand-overview"
-        className="sr-only"
-      >
-        <div className="mx-auto flex max-w-[1600px] flex-col gap-8">
-          <div className="max-w-[860px]">
-            <p className="mb-2 font-body text-[11px] font-bold uppercase tracking-[0.12em] text-[#1A3E9E]">
-              {SITE_NAME} Ecosystem
-            </p>
-            <h2
-              id="arsalynk-brand-overview"
-              className="font-heading text-[clamp(26px,2.2vw,38px)] font-medium leading-[1.18] tracking-[-0.02em] text-[#101010]"
-            >
-              {dict.seo.homeTitle}
-            </h2>
-            <p className="mt-3 font-body text-[14px] leading-[1.75] text-[#555] md:text-[15px]">
-              {dict.seo.homeDescription}
-            </p>
-          </div>
-
-          <nav
-            aria-label="Explore Arsalynk Sitelinks"
-            className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {SITE_NAVIGATION_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                itemProp="url"
-                itemScope
-                itemType="https://schema.org/SiteNavigationElement"
-                className="group flex flex-col justify-between rounded-xl border border-black/10 bg-white p-4 font-body no-underline transition-all duration-200 hover:border-[#1A3E9E] hover:shadow-md"
-              >
-                <div>
-                  <div className="flex items-center justify-between text-[14px] font-semibold text-[#101010] transition-colors group-hover:text-[#1A3E9E]">
-                    <span itemProp="name">{item.name}</span>
-                    <span className="text-[12px] opacity-0 transition-opacity group-hover:opacity-100">→</span>
-                  </div>
-                  <p
-                    itemProp="description"
-                    className="mt-1.5 text-[12px] leading-[1.5] text-[#666]"
-                  >
-                    {item.description}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </nav>
-        </div>
-      </section>
       <ClientLogoBar />
       <ITInfrastructure />
       <BridgePossibility />

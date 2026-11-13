@@ -1,49 +1,95 @@
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 import { BRAND } from '@/lib/seo/brand';
+import type { Locale } from '@/lib/i18n/config';
 
 /**
  * 6 Pilar Utama Navigasi Sitelinks Arsalynk (Target 6-Pack Sitelinks Google SERP)
  * Deskripsi ditulis ringkas (110–140 karakter) agar Google dapat menampilkannya
  * secara utuh sebagai snippet 2-baris di bawah judul sitelink tanpa terpotong (...).
  */
-export const SITE_NAVIGATION_ITEMS = [
+export const SITE_NAVIGATION_ITEMS_EN = [
   {
     name: 'Our Solution',
     href: '/our-solution',
     description:
-      'Layanan ERP, IoT, data intelligence, dan solusi digital enterprise terintegrasi Arsalynk.',
+      'Integrated enterprise ERP, smart IoT systems, AI data intelligence, and custom digital software development.',
   },
   {
     name: 'About Us',
     href: '/about-us',
     description:
-      'Mengenal profil, visi, jajaran kepemimpinan, dan ekosistem bisnis teknologi Arsalynk.',
+      'Corporate profile, executive leadership, and unified ecosystem philosophy of Arsalynk.',
   },
   {
     name: 'Insight & Programs',
     href: '/insight-programs',
     description:
-      'Pusat wawasan, studi kasus implementasi proyek, dan pemikiran kepemimpinan teknologi.',
+      'Strategic insights, case study implementations, and technology leadership thoughts.',
   },
   {
     name: 'Case Studies',
     href: '/insight-programs/case-studies',
     description:
-      'Studi kasus implementasi: MarkaSuite ERP, MarkaPlus AI, MyBOS fleet IoT, AdsVar, dan Craftivation.',
+      'Enterprise implementations: MarkaSuite ERP, MarkaPlus AI, MyBOS fleet IoT, AdsVar, and Craftivation.',
   },
   {
     name: 'Leadership Thoughts',
     href: '/insight-programs/leadership-thoughts',
     description:
-      'Pandangan kepemimpinan tentang arsitektur alur kerja, integrasi data, dan tata kelola organisasi.',
+      'Executive perspectives on digital architecture, data integration, and enterprise governance.',
   },
   {
     name: 'Contact Us',
     href: '/contact-us',
     description:
+      'Consult enterprise digital transformation and custom software engineering with Arsalynk architects.',
+  },
+];
+
+export const SITE_NAVIGATION_ITEMS_ID = [
+  {
+    name: 'Solusi Kami',
+    href: '/id/our-solution',
+    description:
+      'Layanan ERP, IoT, data intelligence, dan solusi digital enterprise terintegrasi Arsalynk.',
+  },
+  {
+    name: 'Tentang Kami',
+    href: '/id/about-us',
+    description:
+      'Mengenal profil perusahaan, visi, jajaran kepemimpinan, dan ekosistem bisnis teknologi Arsalynk.',
+  },
+  {
+    name: 'Wawasan & Program',
+    href: '/id/insight-programs',
+    description:
+      'Pusat wawasan, studi kasus implementasi proyek, dan pemikiran kepemimpinan teknologi enterprise.',
+  },
+  {
+    name: 'Studi Kasus',
+    href: '/id/insight-programs/case-studies',
+    description:
+      'Studi kasus implementasi: MarkaSuite ERP, MarkaPlus AI, MyBOS fleet IoT, AdsVar, dan Craftivation.',
+  },
+  {
+    name: 'Artikel Kepemimpinan',
+    href: '/id/insight-programs/leadership-thoughts',
+    description:
+      'Pandangan kepemimpinan tentang arsitektur alur kerja, integrasi data, dan tata kelola organisasi.',
+  },
+  {
+    name: 'Hubungi Kami',
+    href: '/id/contact-us',
+    description:
       'Konsultasikan kebutuhan transformasi digital dan arsitektur sistem enterprise Anda bersama Arsalynk.',
   },
 ];
+
+export function getSiteNavigationItems(locale?: Locale) {
+  return locale === 'id' ? SITE_NAVIGATION_ITEMS_ID : SITE_NAVIGATION_ITEMS_EN;
+}
+
+export const SITE_NAVIGATION_ITEMS = SITE_NAVIGATION_ITEMS_EN;
 
 /**
  * Membangun Schema BreadcrumbList terstandar untuk Google Search Console & SERP.
@@ -74,8 +120,9 @@ export function buildBreadcrumbJsonLd(
  * Membangun Schema SiteNavigationElement khusus untuk memandu Googlebot
  * membentuk tampilan 6-Pack Sitelinks secara terstruktur dan teratur.
  */
-export function buildSiteNavigationElementJsonLd() {
-  return SITE_NAVIGATION_ITEMS.map((item) => ({
+export function buildSiteNavigationElementJsonLd(locale?: Locale) {
+  const items = getSiteNavigationItems(locale);
+  return items.map((item) => ({
     '@type': 'SiteNavigationElement',
     '@id': `${SITE_URL}${item.href}#navigation`,
     name: item.name,
@@ -87,18 +134,20 @@ export function buildSiteNavigationElementJsonLd() {
 /**
  * Membangun Schema WebSite lengkap dengan publisher & deklarasi hasPart sitelinks.
  */
-export function buildWebSiteJsonLd() {
+export function buildWebSiteJsonLd(locale?: Locale) {
+  const items = getSiteNavigationItems(locale);
+  const homeUrl = locale === 'id' ? `${SITE_URL}/id` : `${SITE_URL}/`;
   return {
     '@type': 'WebSite',
     '@id': `${SITE_URL}/#website`,
-    url: `${SITE_URL}/`,
+    url: homeUrl,
     name: BRAND.name,
     alternateName: BRAND.alternateNames,
     description:
       'Arsalynk (PT Sinergi Muda Arsa) provides integrated enterprise technology solutions: custom ERP architecture, deep learning AI, connected IoT ecosystems, and scalable web development. Solusi teknologi enterprise dan software house terpercaya di Indonesia.',
     publisher: { '@id': `${SITE_URL}/#organization` },
     about: { '@id': `${SITE_URL}/#organization` },
-    inLanguage: ['en-US', 'id-ID'],
+    inLanguage: locale === 'id' ? ['id-ID', 'en-US'] : ['en-US', 'id-ID'],
     potentialAction: {
       '@type': 'SearchAction',
       target: {
@@ -107,7 +156,7 @@ export function buildWebSiteJsonLd() {
       },
       'query-input': 'required name=search_term_string',
     },
-    hasPart: SITE_NAVIGATION_ITEMS.map((item) => ({
+    hasPart: items.map((item) => ({
       '@type': 'WebPage',
       '@id': `${SITE_URL}${item.href}#webpage`,
       name: item.name,
